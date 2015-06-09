@@ -40,7 +40,7 @@ This is much like you would define a stylesheet in [React Native](https://facebo
 > Note: We will add a detailed guide on how to use our media queries since they differ a bit of what you might know from CSS.
 
 ```javascript
-var styles = stylesheet.create({
+var styles = Stylesheet.create({
 	header : {
 		color: '#fff',
 		padding: 20,
