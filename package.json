@@ -9,7 +9,7 @@
     "src/"
   ],
   "scripts": {
-    "start": "watchify -o example/bundle.js -v -d example/app.js"
+    "start": "watchify -o example/bundle.js -v -d example/app.js | node livereload/app.js /../example /../example/bundle.js"
   },
   "repository": {
     "type": "git",
