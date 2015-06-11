@@ -5,22 +5,24 @@ It extends inline-styles with automated vendor prefixing, browser states and med
 > Note: Obscene Stylesheet is a core library & former part of [Obscene Layout](http://github.com/obscene/Obscene-Layout) which now remains *only* as a set of layouting components
 
 ## About
-Inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) with the idea of putting styling completely into javascript, we started building our own library to do so.    
-There are plenty of implementations that do this job according to this [comparison](https://github.com/MicheleBertoli/css-in-js).
-### Why this is not just another one
-While most of them seem to handle those more complex CSS abilities quite well, none of them really go without CSS in the background.    
-Most of the validate your given styles object, generate CSS code and add it via `<style></style>`-within your document.    
-This might be the very first library to do all of this stuff truly with pure javascript!
+Inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) with the idea of putting styling completely into javascript, I started building our own library to do so. First I was overwhelmed by how much I can achieve with just plain javascript. Such as media queries and `mouseover`-state was not even a problem. But while I started adding more and more there came a point when it was no longer acceptable (EventListeners everywhere) to go with plain javascript and I had to think of something new.    
+This is where I found about [Pete Hunt's Approach](https://github.com/petehunt/jsxstyle) with jsxstyles and I thought it would be create to have some kind of JS to CSS compiler.    
+
 
 ## Roadmap
 - [x] automated vendor-prefixing (flexbox included)
 - [x] media queries
-- [ ] :pseudo-classes `:hover`, `:focus`, `:active`, `:checked`, `:disabled` & `:enabled`
-- [ ] CSS-export for non-React use
-- [ ] multiple styles
+- [ ] :pseudo-classes such as `:hover`, `:focus`, `:active` or `:checked`
+- [ ] nesting
+- [ ] extending
+- [ ] optional CSS-export
+- [ ] user options to keep it flexible
+- [ ] merging styles
 - [ ] global styles
 
 ## Usage
+> Warning: Do not use this in production. It is still at its beginning
+
 Install via `npm`. Use `-save` if you'd like to add it to your *package.json*.    
 ```sh
 npm install obscene-stylesheet
@@ -34,7 +36,7 @@ var Stylesheet = require('obscene-stylesheet').Stylesheet;
 
 ### Stylesheet.create(styles *[, options]*)
 Use this function to define your styles.    
-It adds vendor prefixes if needed and resolves `@media` queries.    
+You don't need to worry about vendor prefixing. Obscene-Stylesheet adds exactly those needed. 
 This is much like you would define a stylesheet in [React Native](https://facebook.github.io/react-native/) too. e.g.    
 
 > Note: We will add a detailed guide on how to use our media queries since they differ a bit of what you might know from CSS.
@@ -53,10 +55,7 @@ var styles = Stylesheet.create({
 		backgroundColor : 'blue'
 	}
 });
-```
-
-### Media Queries & Browser States
-Detailed information on how to use media queries (mixin) and browser states as `:hover` is coming soon.    
+``` 
 
 ### Knowledge Source
 Information according the need of vendor prefixes were taken from [Richard Bradshaw's Guide](http://css3.bradshawenterprises.com/which-vendor-prefixes-are-needed/) and [CanIUse](http://caniuse.com/).    

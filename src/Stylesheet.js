@@ -54,7 +54,7 @@ var Stylesheet = {
    },
 
    /*
-      generates a new styles object with added prefixes, resolved media queries and hover styles
+      Generates a new styles object with added prefixes, resolved media queries and hover styles
    */
    generateStyles: function(styles, options) {
       var requiredPrefixProperties = this.prefixProperties[options.vendor.toLowerCase()];
@@ -73,7 +73,13 @@ var Stylesheet = {
       }
       return styles;
    },
-
+   
+   /* 
+      Generates the correct className string for direct use
+   */
+   generateClassName : function(style, pattern){
+      
+   },
    /*
      Main function to create a new stylesheet
      This returns a totally generated style object with prefixes, media queries and browser state
