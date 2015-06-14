@@ -5,10 +5,12 @@ var generatedStyles.counter;
 //tools
 var Prefixer = require('./tools/Prefixer');
 var Validator = require('./tools/Validator');
+var DebugHelper = require('./tools/DebugHelper');
 var unitlessProperties = require('./tools/Unitless');
 
 var Stylesheet = {
 	output: undefined,
+	debugMode: false,
 	/*
      Main function to create a new stylesheet
      This returns a totally generated style object with prefixes, media queries and browser state
@@ -18,6 +20,10 @@ var Stylesheet = {
 	//userAgent, vendorPrefix, unit, debugMode, selectorPrefix, autoApply, counter
 	create: function(styles, options) {
 		options = (options ? options : {});
+
+		this.debugMode = (options.debugMode ? options.debugMode : false);
+		this.debugMode && DebugHelper.start();
+
 
 		options.unit = (options.unit ? options.unit : 'px');
 		options.vendorPrefix = (options.vendorPrefix ? options.vendorPrefix : Prefixer.getVendorPrefix(options.userAgent));
@@ -36,6 +42,11 @@ var Stylesheet = {
 			this.output += selector + '{' + generatedStyles[selector] + '}';
 		}
 
+		if (this.debugMode) {
+			DebugHelper.selectorInformation(generatedStyles);
+			DebugHelper.outputStored(this.output);
+			!options.autoApply && this.stop();
+		}
 		options.autoApply && this.apply();
 
 		return styles;
@@ -46,15 +57,16 @@ var Stylesheet = {
 		CSS = (CSS ? CSS : this.output);
 
 		if (!CSS) {
-			console.warn("no style to apply")
+			this.debugMode && DebugHelper.noStylesheetWarning();
 		} else {
 			var style = document.createElement('style');
 			style.type = "text/css";
 			style.innerHTML = CSS;
 
 			document.head.appendChild(style);
+			this.debugMode && DebugHelper.stylesheetApplied();
 		}
-
+		this.debugMode && DebugHelper.stop()
 		return CSS;
 	},
 
@@ -135,8 +147,11 @@ var Stylesheet = {
 	   Checks the selectors type and generates CSS valid selectors
 	*/
 	generateClassName: function(selector) {
-		selector = 'c' + counter.toString(36);
-		++counter;
+		if (!this.debugMode) {
+			selector = 'c' + counter.toString(36);
+			++counter;
+		}
+		selector = '.' + selector;
 		return selector;
 	}
 };
