@@ -1,96 +1,117 @@
+var paramCase = require('param-case');
+
+var generatedStyles;
+var unitlessProperties = [
+	'boxFlex', 'boxFlexGroup', 'columnCount', 'flex', 'flexGrow', 'flexPositive', 'flexNegative', 'flexShrink', 'fontWeight', 'lineClamp', 'lineHeight', 'opacity', 'order', 'orphans', 'tabSize', 'widows', 'zIndex', 'zoom', 'fillOpacity', 'strokeDashoffest', 'strokeOpacity', 'strokeWidth'
+];
 var Stylesheet = {
-
-   /*
-      All style properties that need vendor prefixes
-      Sort by prefix value
-   */
-   prefixProperties: {
-      'webkit': ['appearance', 'userSelect', 'alignContent', 'alignItems', 'alignSelf', 'flex', 'flexBasis', 'flexDirection', 'flexGrow', 'flexFlow', 'flexShrink', 'flexWrap', 'justifyContent', 'order', 'transition', 'transitionDelay', 'transitionDuration', 'transitionProperty', 'transitionTimingFunction', 'perspective', 'perspectiveOrigin', 'transform', 'transformOrigin', 'transformStyle', 'animation', 'animationDelay', 'animationDirection', 'animationFillMode', 'animationDuration', 'anmationIterationCount', 'animationName', 'animationPlayState', 'animationTimingFunction', 'backfaceVisibility', 'calc'],
-      'ms': ['userSelect', 'flex', 'flexBasis', 'flexDirection', 'flexGrow', 'flexFlow', 'flexShrink', 'flexWrap', 'transform', 'transformOrigin', 'transformStyle'],
-      'moz': ['appearance', 'userSelect', 'boxSizing'],
-      'o': []
-   },
-
-   /*
-      Capitalizes the first char of a property string to add a vendor prefix
-   */
-   caplitalizeString: function(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-   },
-
-   /* 
-      Adds additional prefixProperties if needed
-   */
-   addPrefixProperty: function(prefix, property) {
-      if (!this.prefixProperties[prefix][property]) {
-         this.prefixProperties[prefix].push(property)
-      }
-   },
-
-   /*
-      Parse the navigator.userAgent to get the used browser or rather the needed vendor prefix
-   */
-   getVendorPrefix: function(userAgent) {
-      var vendorPrefixes = {
-         firefox: 'Moz',
-         chrome: 'Webkit',
-         safari: 'Webkit',
-         opera: 'O',
-         msie: 'ms'
-      };
-      if (!userAgent) {
-         userAgent = navigator.userAgent.toLowerCase();
-      }
-      var browserMatch = userAgent.match('opera') || userAgent.match('msie') || userAgent.match('firefox') || userAgent.match("safari|chrome");
-
-      return vendorPrefixes[browserMatch[0]];
-   },
-
-   /*
-     Returns a prefixed style property
-   */
-   getVendorStyle: function(vendor, style, equivalent) {
-      return vendor + this.caplitalizeString(style);
-   },
-
-   /*
-      Generates a new styles object with added prefixes, resolved media queries and hover styles
-   */
-   generateStyles: function(styles, options) {
-      var requiredPrefixProperties = this.prefixProperties[options.vendor.toLowerCase()];
-
-      var style;
-      for (style in styles) {
-         if (style instanceof Object) {
-            //if a property is a object with inner styles this calls generateStyles for the innerStyle, this allows nested styles
-            styles[style] = this.generateStyles(styles[style], options);
-         } else {
-            //adds additional vendor prefxied properties
-            if (requiredPrefixProperties.indexOf(style) > -1) {
-               styles[this.getVendorStyle(vendor, style)] = styles[style];
-            }
-         }
-      }
-      return styles;
-   },
-   
-   /* 
-      Generates the correct className string for direct use
-   */
-   generateClassName : function(style, pattern){
-      
-   },
-   /*
+	output: undefined,
+	/*
      Main function to create a new stylesheet
      This returns a totally generated style object with prefixes, media queries and browser state
+     Check the README for detailed information on the options
   */
-   create: function(styles, options) {
-      options = (options ? options : {});
+	//userAgent, vendor, unit, debugMode, selectorPrefix, 
+	create: function(styles, options) {
+		options = (options ? options : {});
 
-      options.vendor = this.getVendorPrefix(options.userAgent);
-      
-      return this.generateStyles(styles, options);
-   }
+		options.unit = (options.unit ? options.unit : 'px');
+		options.autoApply = (options.autoApply ? options.autoApply : true);
+
+		generatedStyles = {};
+
+		this.generateSelectors(styles, options);
+
+
+		this.output = '';
+		var selector;
+		for (selector in generatedStyles) {
+			this.output += selector + '{' + generatedStyles[selector] + '}';
+		}
+
+		options.autoApply && this.apply();
+
+		return styles;
+	},
+
+
+	apply: function(CSS)  {
+		CSS = (CSS ? CSS : this.output);
+
+		if (!CSS) {
+			console.warn("no style to apply")
+		} else {
+			var style = document.createElement('style');
+			style.type = "text/css";
+			style.innerHTML = CSS;
+
+			document.head.appendChild(style);
+		}
+
+		return CSS;
+	},
+
+	/*
+		Generates an object with selectors as key and a CSS string as value for a given styles object
+	*/
+	generateSelectors: function(styles, options, parent) {
+		options.selectorPrefix = (options.selectorPrefix ? options.selectorPrefix.trim() + ' ' : '');
+		parent = (parent ? parent : '');
+
+		var selector;
+		for (selector in styles) {
+			if (styles[selector] instanceof Object) {
+				this.handleClass(selector, parent, styles, options);
+			} else {
+				this.handleProperty(selector, parent, styles[selector], options);
+			}
+		}
+	},
+
+	/*
+		Generates a new class selector and calls for its properties
+	*/
+	handleClass: function(selector, className, styles, options) {
+		className = this.generateClassName(selector);
+		generatedStyles[className] = '';
+		this.generateSelectors(styles[selector], options, className);
+		styles[selector] = className;
+		className = '';
+	},
+
+	/*
+		Validates properties for vendor prefixes and assigns to a given selector
+	*/
+	handleProperty: function(property, selector, style, options) {
+		var value = this.addUnits(selector, style, options.unit);
+		this.addCSSProperty(selector, paramCase(selector), value)
+	},
+
+	/*
+		Adds a property to a given selector
+	*/
+	addCSSProperty: function(selector, property, value) {
+		generatedStyles[selector] && (generatedStyles[selector] += ';')
+		generatedStyles[selector] += property + ':' + value;
+	},
+
+	/*
+	  checks if a value needs a unit
+	*/
+	addUnits: function(selector, value, unit) {
+		if (!isNaN(value) && unitlessProperties.indexOf(selector) == -1) {
+			value += unit;
+		}
+		return value;
+	},
+
+	/* 
+	   Checks the selectors type and generates CSS valid selectors
+	*/
+	generateClassName: function(selector) {
+		selector = '.' + selector;
+		return selector;
+	}
 };
 
 
