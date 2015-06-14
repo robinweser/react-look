@@ -1,4 +1,5 @@
 var paramCase = require('param-case');
+var objectAssign = require('object-assign');
 
 //tools
 var Prefixer = require('./tools/Prefixer');
@@ -11,7 +12,7 @@ var counter, generatedStyles;
 var Stylesheet = {
 	output: undefined,
 	debugMode: false,
-	
+
 	/*
      Main function to create a new stylesheet
      This returns a totally generated style object with prefixes, media queries and browser state
@@ -23,6 +24,7 @@ var Stylesheet = {
 		this.debugMode = (options.debugMode ? options.debugMode : false);
 		this.debugMode && DebugHelper.start();
 
+		options.minify = (options.minify ? options.minify : true);
 		options.unit = (options.unit ? options.unit : 'px');
 		options.vendorPrefix = (options.vendorPrefix ? options.vendorPrefix : Prefixer.getVendorPrefix(options.userAgent));
 		options.autoApply = (options.autoApply ? options.autoApply : true);
@@ -41,7 +43,7 @@ var Stylesheet = {
 
 		if (this.debugMode) {
 			DebugHelper.selectorInformation(generatedStyles);
-			DebugHelper.outputStored(this.output);
+			DebugHelper.outputInformation(this.output);
 			!options.autoApply && this.stop();
 		}
 		options.autoApply && this.apply();
@@ -89,7 +91,9 @@ var Stylesheet = {
 				} else {
 					//check for extends
 					if (Validator.isExtend(selector)) {
-						//TODO: handle extend
+						styles = this.handleExtend(styles, selector, parent);
+						this.generateSelectors(styles, options, parent);
+						return;
 					}
 					//check for media queries
 					if (Validator.isMediaQuery(selector)) {
@@ -111,14 +115,30 @@ var Stylesheet = {
 		Generates a new class selector and calls for its properties
 	*/
 	handleClass: function(selector, className, styles, options) {
-		className = this.generateClassName(selector, options.selectorPrefix);
+		className = this.generateClassName(selector, options.selectorPrefix, options.minify);
 		if (options)
-		generatedStyles[className] = '';
+			generatedStyles[className] = '';
 		this.generateSelectors(styles[selector], options, className);
 		styles[selector] = className;
 		className = '';
 	},
 
+	handleExtend: function(base, selector, className) {
+		var extension = base[selector];
+		
+		if (!extension.styles instanceof Array) {
+			extension.styles = [extension.styles];
+		}
+		extension.styles.forEach(function(item) {
+			if (extension.overwrite) {
+				objectAssign(base, item);
+			} else {
+				objectAssign(item, base);
+			}
+		});
+		delete base[selector];
+		return base;
+	},
 	/*
 		Validates properties for vendor prefixes and assigns to a given selector
 	*/
@@ -152,8 +172,8 @@ var Stylesheet = {
 	/* 
 	   Checks the selectors type and generates CSS valid selectors
 	*/
-	generateClassName: function(selector, prefix) {
-		if (!this.debugMode) {
+	generateClassName: function(selector, prefix, minify) {
+		if (minify) {
 			selector = 'c' + counter.toString(36);
 			++counter;
 		}
