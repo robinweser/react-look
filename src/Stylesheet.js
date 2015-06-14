@@ -2,6 +2,9 @@ var paramCase = require('param-case');
 
 var generatedStyles.counter;
 
+//tools
+var Validator = require('./tools/Validator');
+
 var unitlessProperties = [
 	'boxFlex', 'boxFlexGroup', 'columnCount', 'flex', 'flexGrow', 'flexPositive', 'flexNegative', 'flexShrink', 'fontWeight', 'lineClamp', 'lineHeight', 'opacity', 'order', 'orphans', 'tabSize', 'widows', 'zIndex', 'zoom', 'fillOpacity', 'strokeDashoffest', 'strokeOpacity', 'strokeWidth'
 ];
@@ -64,7 +67,22 @@ var Stylesheet = {
 		var selector;
 		for (selector in styles) {
 			if (styles[selector] instanceof Object) {
-				this.handleClass(selector, parent, styles, options);
+				if (Validator.isClass(selector)) {
+					this.handleClass(selector, parent, styles, options);
+				} else {
+					//check for extends
+					if (Validator.isExtend(selector)) {
+						//TODO: handle extend
+					}
+					//check for media queries
+					if (Validator.isMediaQuery(selector)) {
+						//TODO: handle media queries
+					}
+					//check for pseudo classes
+					if (Validator.isPseudoClass(selector)) {
+						//TODO: handle pseudo classes
+					}
+				}
 			} else {
 				this.handleProperty(selector, parent, styles[selector], options);
 			}
