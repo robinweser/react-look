@@ -1,7 +1,7 @@
 {
   "name": "obscene-stylesheet",
-  "version": "0.1.1",
-  "description": "Styling library for React.js which handles inline-styles",
+  "version": "0.1.2",
+  "description": "Styling library for web applications especially React.js",
   "main": "src/Stylesheet.js",
   "files": [
     "LICENSE",
@@ -20,24 +20,12 @@
     "styling",
     "flex",
     "vendor",
+    "stylesheet",
     "media query"
   ],
   "author": "Robin Frischmann",
   "license": "MIT",
   "dependencies": {
-    "object-assign": "^3.0.0",
-    "param-case": "^1.1.1",
-    "react": "^0.13.3"
-  },
-  "devDependencies": {
-    "browserify": "^6.2.0",
-    "reactify": "^0.15.2",
-    "uglify-js": "~2.4.15",
-    "watchify": "^2.1.1"
-  },
-  "browserify": {
-    "transform": [
-      "reactify"
-    ]
+    "param-case": "^1.1.1"
   }
 }
