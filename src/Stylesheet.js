@@ -3,6 +3,7 @@ var paramCase = require('param-case');
 var generatedStyles.counter;
 
 //tools
+var Prefixer = require('./tools/Prefixer');
 var Validator = require('./tools/Validator');
 
 var unitlessProperties = [
@@ -15,11 +16,13 @@ var Stylesheet = {
      This returns a totally generated style object with prefixes, media queries and browser state
      Check the README for detailed information on the options
   */
-	//userAgent, vendor, unit, debugMode, selectorPrefix, 
+
+	//userAgent, vendorPrefix, unit, debugMode, selectorPrefix, autoApply, counter
 	create: function(styles, options) {
 		options = (options ? options : {});
 
 		options.unit = (options.unit ? options.unit : 'px');
+		options.vendorPrefix = (options.vendorPrefix ? options.vendorPrefix : Prefixer.getVendorPrefix(options.userAgent));
 		options.autoApply = (options.autoApply ? options.autoApply : true);
 
 		counter = (options.counter ? options.counter : 0);
@@ -105,6 +108,10 @@ var Stylesheet = {
 	*/
 	handleProperty: function(property, selector, style, options) {
 		var value = this.addUnits(selector, style, options.unit);
+		//adds additional vendor prefxied properties
+		if (Prefixer.isPrefixProperty(property, options.vendorPrefix)) {
+			this.addCSSProperty(selector, paramCase(Prefixer.getPrefixedProperty(selector, options.vendorPrefix)), value);
+		}
 		this.addCSSProperty(selector, paramCase(selector), value)
 	},
 
