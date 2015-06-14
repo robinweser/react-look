@@ -153,6 +153,16 @@ var Stylesheet = {
 		}
 		selector = '.' + selector;
 		return selector;
+	},
+
+	/* 
+	Generates a html attribute valid className string for direct use
+*/
+	mergeClassNames: function(classNames) {
+		if (classNames instanceof Array) {
+			classNames = classNames.join(' ');
+		}
+		return classNames;
 	}
 };
 
