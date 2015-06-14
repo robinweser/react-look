@@ -10,20 +10,22 @@ This is where I found about [Pete Hunt](https://twitter.com/floydophone)'s Appro
 
 
 ## Roadmap
-- [x] automated vendor-prefixing
+- [x] automated **vendor-prefixing**
+- [x] useable for **server-side rendering**
 - [x] merging styles
 - [x] global styles
 - [x] minifying
-- [x] debugMode & DebugHelper
-- [x] :pseudo-classes such as `:hover`, `:focus`, `:active` or `:checked`
+- [x] **debugMode** & DebugHelper
+- [x] **:pseudo-classes** such as `:hover`, `:focus`, `:active` or `:checked`
 - [x] nested :pseudo-classes
 - [x] user options to keep it flexible
 - [ ] extending
-- [ ] flexbox support (also old specs)
-- [ ] media queries
-- [ ] examples
+- [ ] **flexbox support** (also old specs)
+- [ ] **media queries**
+- [ ] **examples**
 - [ ] tests
 - [ ] ES6 version
+- [ ] dependency-free
 
 ## Usage
 > Warning: This is still in production and some things might change 
@@ -40,7 +42,7 @@ var Stylesheet = require('obscene-stylesheet');
 
 ## Stylesheet.create(styles *[, options]*)
 Use this function to define your styles.    
-You don't need to worry about vendor prefixing. Obscene-Stylesheet adds exactly those needed. It supports all kind of [pseudo-classes](http://www.w3schools.com/css/css_pseudo_classes.asp) such as `:hover`, `:active` & `:checked` as well as specific ones such as ``::-webkit-scrollbar`.     
+You don't need to worry about vendor prefixing. Obscene-Stylesheet adds exactly those needed. It supports all kind of [pseudo-classes](http://www.w3schools.com/css/css_pseudo_classes.asp) such as `:hover`, `:active` & `:checked` as well as specific ones such as `::-webkit-scrollbar`.     
 This is much like you would define a stylesheet in [React Native](https://facebook.github.io/react-native/) too. e.g.    
 
 ```javascript
