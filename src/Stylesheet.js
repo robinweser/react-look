@@ -1,29 +1,27 @@
 var paramCase = require('param-case');
 
-var generatedStyles.counter;
-
 //tools
 var Prefixer = require('./tools/Prefixer');
 var Validator = require('./tools/Validator');
 var DebugHelper = require('./tools/DebugHelper');
 var unitlessProperties = require('./tools/Unitless');
 
+var counter, generatedStyles;
+
 var Stylesheet = {
 	output: undefined,
 	debugMode: false,
+	
 	/*
      Main function to create a new stylesheet
      This returns a totally generated style object with prefixes, media queries and browser state
-     Check the README for detailed information on the options
+     See README.md file for further information on options
   */
-
-	//userAgent, vendorPrefix, unit, debugMode, selectorPrefix, autoApply, counter
 	create: function(styles, options) {
 		options = (options ? options : {});
 
 		this.debugMode = (options.debugMode ? options.debugMode : false);
 		this.debugMode && DebugHelper.start();
-
 
 		options.unit = (options.unit ? options.unit : 'px');
 		options.vendorPrefix = (options.vendorPrefix ? options.vendorPrefix : Prefixer.getVendorPrefix(options.userAgent));
@@ -34,7 +32,6 @@ var Stylesheet = {
 		generatedStyles = {};
 
 		this.generateSelectors(styles, options);
-
 
 		this.output = '';
 		var selector;
@@ -74,7 +71,7 @@ var Stylesheet = {
 		Generates an object with selectors as key and a CSS string as value for a given styles object
 	*/
 	generateSelectors: function(styles, options, parent) {
-		options.selectorPrefix = (options.selectorPrefix ? options.selectorPrefix.trim() + ' ' : '');
+		options.selectorPrefix = (options.selectorPrefix ? options.selectorPrefix : '.');
 		parent = (parent ? parent : '');
 
 		var selector;
@@ -114,7 +111,8 @@ var Stylesheet = {
 		Generates a new class selector and calls for its properties
 	*/
 	handleClass: function(selector, className, styles, options) {
-		className = this.generateClassName(selector);
+		className = this.generateClassName(selector, options.selectorPrefix);
+		if (options)
 		generatedStyles[className] = '';
 		this.generateSelectors(styles[selector], options, className);
 		styles[selector] = className;
@@ -124,13 +122,13 @@ var Stylesheet = {
 	/*
 		Validates properties for vendor prefixes and assigns to a given selector
 	*/
-	handleProperty: function(property, selector, style, options) {
-		var value = this.addUnits(selector, style, options.unit);
+	handleProperty: function(property, selector, value, options) {
+		value = this.addUnits(property, value, options.unit);
 		//adds additional vendor prefxied properties
 		if (Prefixer.isPrefixProperty(property, options.vendorPrefix)) {
-			this.addCSSProperty(selector, paramCase(Prefixer.getPrefixedProperty(selector, options.vendorPrefix)), value);
+			this.addCSSProperty(selector, '-' + paramCase(Prefixer.getPrefixedProperty(property, options.vendorPrefix)), value);
 		}
-		this.addCSSProperty(selector, paramCase(selector), value)
+		this.addCSSProperty(selector, paramCase(property), value)
 	},
 
 	/*
@@ -154,12 +152,12 @@ var Stylesheet = {
 	/* 
 	   Checks the selectors type and generates CSS valid selectors
 	*/
-	generateClassName: function(selector) {
+	generateClassName: function(selector, prefix) {
 		if (!this.debugMode) {
 			selector = 'c' + counter.toString(36);
 			++counter;
 		}
-		selector = '.' + selector;
+		selector = prefix + selector;
 		return selector;
 	},
 

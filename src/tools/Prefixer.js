@@ -35,7 +35,7 @@ var Prefixer = {
 	Returns a prefixed style property
 	*/
 	getPrefixedProperty: function(style, prefix) {
-		return '-' + prefix + '-' + style;
+		return prefix + '-' + style;
 	},
 
 	isPrefixProperty: function(style, prefix) {
