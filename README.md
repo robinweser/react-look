@@ -9,7 +9,7 @@ Inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentat
 This is where I found about [Pete Hunt](https://twitter.com/floydophone)'s Approach with [jsxstyles](https://github.com/petehunt/jsxstyle) and I thought it would be create to have some kind of JS to CSS compiler.    
 
 
-## Roadmap for 1.0
+## Roadmap
 - [x] automated vendor-prefixing
 - [x] merging styles
 - [x] global styles
@@ -21,13 +21,15 @@ This is where I found about [Pete Hunt](https://twitter.com/floydophone)'s Appro
 - [ ] extending
 - [ ] flexbox support (also old specs)
 - [ ] media queries
+- [ ] examples
+- [ ] tests
+- [ ] ES6 version
 
 ## Usage
-> Warning: Do not use this in production. It is still at its beginning
-
-Install via `npm`. Use `-save` if you'd like to add it to your *package.json*.    
+> Warning: This is still in production and some things might change 
+ 
 ```sh
-npm install obscene-stylesheet
+npm install obscene-stylesheet -save
 ```
 
 
@@ -38,7 +40,7 @@ var Stylesheet = require('obscene-stylesheet');
 
 ## Stylesheet.create(styles *[, options]*)
 Use this function to define your styles.    
-You don't need to worry about vendor prefixing. Obscene-Stylesheet adds exactly those needed. 
+You don't need to worry about vendor prefixing. Obscene-Stylesheet adds exactly those needed. It supports all kind of [pseudo-classes](http://www.w3schools.com/css/css_pseudo_classes.asp) such as `:hover`, `:active` & `:checked` as well as specific ones such as ``::-webkit-scrollbar`.     
 This is much like you would define a stylesheet in [React Native](https://facebook.github.io/react-native/) too. e.g.    
 
 ```javascript
@@ -67,7 +69,7 @@ var styles = Stylesheet.create({
 ```
 
 It now generates a minified string of CSS selectors and applies them to your page. By calling your styles you will get the minified selector as reference.
-e.g. `styles.header` would output 'c0' and `styles.box` would be `c1`.      
+e.g. `styles.header` would output `c0` and `styles.box` would be `c1`.      
 Your generated CSS would look like this (but minified)
 ```CSS
 .c0 {
@@ -89,33 +91,31 @@ Your generated CSS would look like this (but minified)
     background-color: blue
 }
 ```
-
-> Note: If you need to access your CSS output manually you can get it with Stylesheet.output after you've created one with Stylesheet.create
+If you need to access your CSS output manually you can get it with Stylesheet.output after you've created one with Stylesheet.create
 
 ### options
-//userAgent, vendorPrefix, unit, debugMode, selectorPrefix, autoApply, counter
 There is a set of options which should help you to customize the stylesheet generation process to your needs.
 
 #### `userAgent`
-*default: navigator.userAgent*
+*default: navigator.userAgent*    
 Set a specific userAgent instead of the browsers one.    
 This can be useful for server-side rendering.
 
 #### `vendorPrefix`
-Set a specific vendorPrefix instead of the automatically identified.
+Set a specific vendorPrefix instead of the automatically identified.    
 Valid values are `moz`, `webkit`, `ms` and `o`.
 
-#### unit
-*default: 'px'*
+#### `unit`
+*default: `px`*    
 Set a unit you'd like to be automatically added to properties that require one.
-Valid values are 'px', 'pt', 'pc', 'mm', 'in', 'cm', 'em', 'rem', 'ex', 'vh', 'vw' and '%'.
+Valid values are `px`, `pt`, `pc`, `mm`, `in`, `cm`, `em`, `rem`, `ex`, `vh`, `vw` and `%`.
 > Beware browser support issues with some of these values
 
-#### debugMode
-*default: false*
+#### `debugMode`
+*default: false*    
 Set `true` if you'd like to have none minified class selectors and some helpful browser logs.
 
-#### selectorPrefix
+#### `selectorPrefix`
 Set a string which acts as a prefix to all generated selectors. e.g. `selectorPrefix = .MyComponent-`     
 Your generated CSS would look like this    
 ```CSS
@@ -130,13 +130,13 @@ Your generated CSS would look like this
 }
 ```
 
-### autoApply
-*default: true*
+#### `autoApply`
+*default: true*    
 Set to `false` if you don't want to apply your CSS instantly.
 > Beware that you will need to add it later to get it working. To do so use `Stylesheet.apply()` 
 
-### counter
-*default: 0*
+#### `counter`
+*default: 0*    
 A counter is used to generated minified selectors.     
 Set this value to use your own e.g. if you are using a global counter for all your Stylesheets.
 

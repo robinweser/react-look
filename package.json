@@ -1,6 +1,6 @@
 {
   "name": "obscene-stylesheet",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Styling library for web applications especially React.js",
   "main": "src/Stylesheet.js",
   "files": [
