@@ -20,12 +20,11 @@ This is where I found about [Pete Hunt](https://twitter.com/floydophone)'s Appro
 - [x] nested :pseudo-classes
 - [x] user options to keep it flexible
 - [x] **extending**
-- [ ] **flexbox support** (also old specs)
+- [x] **flexbox support** (also old specs)
 - [ ] **media queries**
 - [ ] **examples**
 - [ ] tests
 - [ ] ES6 version
-- [ ] dependency-free
 
 # Usage
 > Warning: This is still in production and some things might change 

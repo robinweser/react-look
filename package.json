@@ -1,6 +1,6 @@
 {
   "name": "obscene-stylesheet",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Styling library for web applications especially React.js",
   "main": "src/Stylesheet.js",
   "files": [
@@ -26,7 +26,7 @@
   "author": "Robin Frischmann",
   "license": "MIT",
   "dependencies": {
-    "object-assign": "^3.0.0",
-    "param-case": "^1.1.1"
+	"object-assign": "3.0.0",
+    "param-case": "1.1.1"
   }
 }

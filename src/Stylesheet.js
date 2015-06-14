@@ -4,6 +4,7 @@ var objectAssign = require('object-assign');
 //tools
 var Prefixer = require('./tools/Prefixer');
 var Validator = require('./tools/Validator');
+var Flexbox = require('./tools/Flexbox');
 var DebugHelper = require('./tools/DebugHelper');
 var unitlessProperties = require('./tools/Unitless');
 
@@ -24,13 +25,16 @@ var Stylesheet = {
 		this.debugMode = (options.debugMode ? options.debugMode : false);
 		this.debugMode && DebugHelper.start();
 
-		options.minify = (options.minify ? options.minify : true);
+		options.minify = (options.minify != undefined ? options.minify : true);
+
 		options.unit = (options.unit ? options.unit : 'px');
+		options.userAgent = (options.userAgent ? options.userAgent : navigator.userAgent);
 		options.vendorPrefix = (options.vendorPrefix ? options.vendorPrefix : Prefixer.getVendorPrefix(options.userAgent));
 		options.autoApply = (options.autoApply ? options.autoApply : true);
+		options.flexbox = Flexbox.getFlexboxSpecification(options.userAgent);
 
 		counter = (options.counter ? options.counter : 0);
-
+		
 		generatedStyles = {};
 
 		this.generateSelectors(styles, options);
@@ -42,6 +46,7 @@ var Stylesheet = {
 		}
 
 		if (this.debugMode) {
+			DebugHelper.flexboxInformation(options.flexbox);
 			DebugHelper.selectorInformation(generatedStyles);
 			DebugHelper.outputInformation(this.output);
 			!options.autoApply && this.stop();
@@ -116,16 +121,15 @@ var Stylesheet = {
 	*/
 	handleClass: function(selector, className, styles, options) {
 		className = this.generateClassName(selector, options.selectorPrefix, options.minify);
-		if (options)
-			generatedStyles[className] = '';
+		generatedStyles[className] = '';
 		this.generateSelectors(styles[selector], options, className);
-		styles[selector] = className;
+		styles[selector] = className.slice(1);
 		className = '';
 	},
 
 	handleExtend: function(base, selector, className) {
 		var extension = base[selector];
-		
+
 		if (!extension.styles instanceof Array) {
 			extension.styles = [extension.styles];
 		}
@@ -143,6 +147,14 @@ var Stylesheet = {
 		Validates properties for vendor prefixes and assigns to a given selector
 	*/
 	handleProperty: function(property, selector, value, options) {
+		//Handle flexbox properties
+		if (property == 'display' && value.indexOf('flex') > -1) {
+			this.handleFlexboxDisplay(property, selector, value, options);
+		}
+		if (Flexbox.isFlexboxProperty(property, options.flexbox)) {
+			this.handleFlexbox(selector, property, value, options.flexbox);
+		}
+		
 		value = this.addUnits(property, value, options.unit);
 		//adds additional vendor prefxied properties
 		if (Prefixer.isPrefixProperty(property, options.vendorPrefix)) {
@@ -151,6 +163,31 @@ var Stylesheet = {
 		this.addCSSProperty(selector, paramCase(property), value)
 	},
 
+	/* 
+		Validates flexobx properties and adds additional specification properties if needed
+	*/
+	handleFlexbox: function(selector, property, value, spec) {
+		var flexValue = Flexbox.getFlexboxPropertyBySpec(property, value, spec);
+		flexValue.forEach(function(item) {
+			Stylesheet.addCSSProperty(selector, item.property, item.value);
+		});
+	},
+
+	/*
+		Handles flexbox display issues with older specifications
+	*/
+	handleFlexboxDisplay: function(proprety, selector, value, options) {
+		var flexValue = (value.indexOf('inline') > -1 ? 'inline-flex' : 'flex');
+		if (options.flexbox == 2012) {
+			this.addCSSProperty(selector, 'display', '-ms-' + flexValue + 'box');
+		} else if (options.flexbox == 2009) {
+			this.addCSSProperty(selector, 'display', '-webkit-box');
+		} else {
+			if (options.vendorPrefix == 'webkit') {
+				this.addCSSProperty(selector, 'display', '-webkit-' + flexValue);
+			}
+		}
+	},
 	/*
 		Adds a property to a given selector
 	*/

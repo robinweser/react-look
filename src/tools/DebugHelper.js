@@ -7,7 +7,7 @@ var DebugHelper = {
 	start: function() {
 		start = Date.now();
 	},
-	
+
 	/*
 		Stops the timer
 	*/
@@ -19,14 +19,22 @@ var DebugHelper = {
 			console.info(consolePrefix + "Timer already stopped.");
 		}
 	},
-	
+
+	/* 
+		Shows the supported flexbox specification
+	*/
+	flexboxInformation: function(spec) {
+		(spec == 2009) && (spec = spec + ' (Android < 4.4)');
+		(spec == 2012) && (spec = spec + ' (IE 10)');
+		console.info(consolePrefix + "Supported flexbox specification: " + (spec ? spec : 'up-to-date'));
+	},
 	/*
 		Throws a warning that nested selectors are not supported and references the concerned key
 	*/
 	nestedSelectorWarning: function(selector) {
 		console.warn(consolePrefix + "Nesting classes are no more supported and skipped. [key=" + selector + "]")
 	},
-	
+
 	/*
 		Shows the output and its size
 	*/
@@ -38,7 +46,7 @@ var DebugHelper = {
 		console.log(consolePrefix + "Generated CSS is now stored within Stylesheet.ouput");
 		console.log(output);
 	},
-	
+
 	/*
 		Show all selectors and their count
 	*/
@@ -54,7 +62,7 @@ var DebugHelper = {
 		console.log(consolePrefix + "Generated " + count + " selectors:");
 		console.log(styles);
 	},
-	
+
 	/*
 		Shows the elapsed time needed to compile the stylesheet
 	*/
@@ -63,14 +71,14 @@ var DebugHelper = {
 		start = undefined;
 		end = undefined;
 	},
-	
+
 	/*
 		Informs that the stylesheet successfully has been applied to your document
 	*/
 	stylesheetApplied: function() {
 		console.log(consolePrefix + "Stylesheet was applied to this pages <head>");
 	},
-	
+
 	/*
 		Warns that there is no stylesheet to apply
 	*/
