@@ -81,6 +81,10 @@ var Stylesheet = {
 		for (selector in styles) {
 			if (styles[selector] instanceof Object) {
 				if (Validator.isClass(selector)) {
+					if (parent) {
+						this.debugMode && DebugHelper.nestedSelectorWarning(selector);
+						continue;
+					};
 					this.handleClass(selector, parent, styles, options);
 				} else {
 					//check for extends
