@@ -10,7 +10,7 @@ var Validator = {
 		Checks if the selector is a extend object
 	*/
 	isExtend: function(selector) {
-		return selector.trim() == 'extend';
+		return selector.trim().charAt(0) == '+';
 	},
 
 	/* 
