@@ -79,6 +79,9 @@ var Stylesheet = {
 
 		var selector;
 		for (selector in styles) {
+			//resolve functions
+			(styles[selector] instanceof Function) && (styles[selector] = styles[selector]());
+
 			if (styles[selector] instanceof Object) {
 				if (Validator.isClass(selector)) {
 					if (parent) {
@@ -161,8 +164,8 @@ var Stylesheet = {
 	},
 
 	/* 
-	Generates a html attribute valid className string for direct use
-*/
+		Generates a html attribute valid className string for direct use
+	*/
 	mergeClassNames: function(classNames) {
 		if (classNames instanceof Array) {
 			classNames = classNames.join(' ');
