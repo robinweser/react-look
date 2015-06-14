@@ -97,7 +97,8 @@ var Stylesheet = {
 					}
 					//check for pseudo classes
 					if (Validator.isPseudoClass(selector)) {
-						//TODO: handle pseudo classes
+						generatedStyles[parent + selector] = '';
+						this.generateSelectors(styles[selector], options, parent + selector);
 					}
 				}
 			} else {
