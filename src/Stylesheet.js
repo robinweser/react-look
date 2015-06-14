@@ -1,6 +1,7 @@
 var paramCase = require('param-case');
 
-var generatedStyles;
+var generatedStyles.counter;
+
 var unitlessProperties = [
 	'boxFlex', 'boxFlexGroup', 'columnCount', 'flex', 'flexGrow', 'flexPositive', 'flexNegative', 'flexShrink', 'fontWeight', 'lineClamp', 'lineHeight', 'opacity', 'order', 'orphans', 'tabSize', 'widows', 'zIndex', 'zoom', 'fillOpacity', 'strokeDashoffest', 'strokeOpacity', 'strokeWidth'
 ];
@@ -17,6 +18,8 @@ var Stylesheet = {
 
 		options.unit = (options.unit ? options.unit : 'px');
 		options.autoApply = (options.autoApply ? options.autoApply : true);
+
+		counter = (options.counter ? options.counter : 0);
 
 		generatedStyles = {};
 
@@ -109,7 +112,8 @@ var Stylesheet = {
 	   Checks the selectors type and generates CSS valid selectors
 	*/
 	generateClassName: function(selector) {
-		selector = '.' + selector;
+		selector = 'c' + counter.toString(36);
+		++counter;
 		return selector;
 	}
 };
