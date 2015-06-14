@@ -5,10 +5,8 @@ var generatedStyles.counter;
 //tools
 var Prefixer = require('./tools/Prefixer');
 var Validator = require('./tools/Validator');
+var unitlessProperties = require('./tools/Unitless');
 
-var unitlessProperties = [
-	'boxFlex', 'boxFlexGroup', 'columnCount', 'flex', 'flexGrow', 'flexPositive', 'flexNegative', 'flexShrink', 'fontWeight', 'lineClamp', 'lineHeight', 'opacity', 'order', 'orphans', 'tabSize', 'widows', 'zIndex', 'zoom', 'fillOpacity', 'strokeDashoffest', 'strokeOpacity', 'strokeWidth'
-];
 var Stylesheet = {
 	output: undefined,
 	/*
