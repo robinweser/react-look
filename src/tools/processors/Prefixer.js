@@ -22,9 +22,9 @@ var Prefixer = {
 	*/
 	getVendorPrefix: function(userAgent) {
 		userAgent = userAgent.toLowerCase();
-		var browserMatch = userAgent.match('opera') || userAgent.match('msie') || userAgent.match('firefox') || userAgent.match("safari|chrome");
+		var browserMatch = userAgent.match('opera') || userAgent.match('msie') || userAgent.match('firefox') || userAgent.match("webkit|safari|chrome");
 
-		return vendorPrefixes[browserMatch[0]];
+		return browserMatch && vendorPrefixes[browserMatch[0]];
 	},
 
 	/*
