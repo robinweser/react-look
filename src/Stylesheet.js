@@ -81,6 +81,13 @@ export default {
 						sheet.set(parent, new Map());
 						generateSelectors(styles, options, parent);
 
+
+						/*
+							You might have set a selectorPrefix which is not a valid class selector (starting with a '.')
+							Checks if there's a antecedent '.' and removes it since you are refer to a className without the class selector dot.
+						*/
+						Util.isClass(parent) && parent.slice(1);
+
 						styles = parent.slice(1);
 						parent = '';
 					}
