@@ -3,7 +3,7 @@ import * as Util from './util/Utils';
 
 const defaultOptions = {
 	minfy: true,
-	autoApply: true,
+	autoApply: false,
 	prefix: ''
 }
 
