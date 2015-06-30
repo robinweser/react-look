@@ -5,12 +5,12 @@ import Flexbox from './processors/Flexbox';
 import Prefixer from './processors/Prefixer';
 
 
-export DevTools = {
+export let DevTools = {
 	DebugHelper: DebugHelper,
 	Validator: Validator
 }
 
-export Processors = {
+export let Processors = {
 	Flexbox: Flexbox,
 	Prefixer: Prefixer
 }
