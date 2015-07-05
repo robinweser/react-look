@@ -8,6 +8,12 @@ import Stylesheet from './Stylesheet';
 
 export default class UniversalSheet extends Sheet {
 	constructor(styles, options) {
+		let state;
+		if (styles.hasOwnProperty('_state')) {
+			state = styles['_state'];
+			delete styles['_state'];
+		}
+
 		let selectors = {};
 		let media = {};
 
@@ -25,9 +31,11 @@ export default class UniversalSheet extends Sheet {
 			}
 		}
 		this.ref = reference;
+		this.state = state;
 	}
 
 	process(processors, register, ...args) {
+		let state = this.state;
 		let media = this.media;
 
 		if (processors)  {
@@ -45,6 +53,7 @@ export default class UniversalSheet extends Sheet {
 		let length = processors.length;
 		for (i = 0; i < length; ++i) {
 			super.process(processors[i], ...args);
+			processors[i].process(state, ...args);
 
 			let query;
 			for (query in media) {
