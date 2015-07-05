@@ -3,3 +3,6 @@ npm-debug.log
 livereload
 example/bundle.js
 test/
+example/
+Gruntfile.js
+

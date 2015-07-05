@@ -1,89 +1,94 @@
 let counter = 0;
 let reference = {};
-/*
-	A list of all unitless values
-*/
+/**
+ * A list of all unitless values
+ */
 export let unitlessProperties = [
 	'boxFlex', 'boxFlexGroup', 'columnCount', 'flex', 'flexGrow', 'flexPositive', 'flexNegative', 'flexShrink', 'fontWeight', 'lineClamp', 'lineHeight', 'opacity', 'order', 'orphans', 'tabSize', 'widows', 'zIndex', 'zoom', 'fillOpacity', 'strokeDashoffest', 'strokeOpacity', 'strokeWidth'
 ];
 
-/*
-	Core algorithm which seperates all your styles and resolves all special objects
-	Recursively resolves pseudo-classes, extensions and media queries
-*/
-export function generateSelectors(styles, stylesheet, options, parent = '') {
+/**
+ * Core algorithm which seperates all your styles and resolves all special objects
+ * Recursively resolves pseudo-classes, extensions and media queries
+ */
+export function generateSelectors(styles, stylesheet, media, options, parent = '') {
 	let selector;
 
 	for (selector in styles) {
 		let current = styles[selector];
-		/*
-			Resolves functions if they're not executed directly
-		*/
+		/**
+		 * Resolves functions if they're not executed directly
+		 */
 		if (current instanceof Function) {
 			current = current();
 		}
 
 		if (current instanceof Object) {
-			/*
-				Checks if the current object is perhaps empty
-				Benefit: Prevents empty selectors since those affect your rendering performance
-			*/
+			/**
+			 * Checks if the current object is perhaps empty
+			 * Benefit: Prevents empty selectors since those affect your rendering performance
+			 */
 			if (!isEmpty(current)) {
 
-				/*
-					Resolves extended styles which can be added by using '+' as your property key
-				*/
+				/**
+				 * Resolves extended styles which can be added by using '+' as your property key
+				 */
 				if (isExtend(selector)) {
 					styles = extendStyle(styles, selector);
-					generateSelectors(styles, stylesheet, options, parent);
+					generateSelectors(styles, stylesheet, media, options, parent);
 					return;
 				}
 
-				/*
-					Resolves media queries and automatically adds them to same queries if existing
-					*/
+				/**
+				 * Resolves media queries and automatically adds them to same queries if existing
+				 */
 				if (isMediaQuery(selector)) {
-					//TODO: handle media queries
+					let query = selector.replace('@media', '').trim();
+					media[query] = {};
+					if (parent) {
+						media[query][parent] = {};
+					}
+					generateSelectors(current, media[query], '', options, parent);
 					return;
 				}
 
-				/*
-					Resolves pseudo classes, also works with nested ones
-				*/
+				/**
+				 * Resolves pseudo classes, also works with nested ones
+				 */
 				if (isPseudo(selector)) {
 					let pseudo = parent + selector;
-					stylesheet.set(pseudo, new Map());
-					generateSelectors(current, stylesheet, options, pseudo);
+					stylesheet[pseudo] = {};
+					generateSelectors(current, stylesheet, media, options, pseudo);
 					return;
 				}
 
-				/*
-					Prevents nested style objects
-					Benefit: You won't create too specific selectors since they're not performant at all
-				*/
+				/**
+				 * Prevents nested style objects
+				 * Benefit: You won't create too specific selectors since they're not performant at all
+				 */
 				if (!parent) {
 					parent = generateClassName(selector, options.minify);
 
-					stylesheet.set(parent, new Map());
-					generateSelectors(current, stylesheet, options, parent);
+					stylesheet[parent] = {};
+					generateSelectors(current, stylesheet, media, options, parent);
 
 					reference[selector] = parent.slice(1);
 					parent = '';
 				}
 			}
 		} else {
-			/*
-				Resolves and adds simple properties-value pairs to the global stylesheet
-			*/
+			/**
+			 * Resolves and adds simple properties-value pairs to the global stylesheet
+			 */
 			let value = addUnit(selector, current, options.unit);
-			stylesheet.get(parent).set(selector, value);
+			stylesheet[parent][selector] = value;
 		}
 	}
 	return reference;
 }
-/*
-	Resolves an extend object
-*/
+/**
+ * Resolves an extend object
+ */
 export function extendStyle(base, selector) {
 	let extension = base[selector];
 
@@ -105,9 +110,9 @@ export function extendStyle(base, selector) {
 	return base;
 }
 
-/* 
-	Generates an unique class selector based on a counter
-*/
+/** 
+ * Generates an unique class selector based on a counter
+ */
 export function generateClassName(selector, minify) {
 	if (minify) {
 		selector = '.c' + counter.toString(36);
@@ -116,19 +121,9 @@ export function generateClassName(selector, minify) {
 	return selector;
 }
 
-/* 
-	Merges an array of className strings into one string for html use
-*/
-export function mergeClassNames(classNames) {
-	if (classNames instanceof Array) {
-		classNames = classNames.join(' ');
-	}
-	return classNames;
-}
-
-/* 
-	returns a value with a given unit if needed
-*/
+/** 
+ * Returns a value with a given unit if needed
+ */
 export function addUnit(property, value, unit) {
 	if (isNumber(value) && !isUnitless(property)) {
 		value += unit;
@@ -136,51 +131,51 @@ export function addUnit(property, value, unit) {
 	return value;
 }
 
-/* 
-	Checks if the selector is a media query
-*/
+/** 
+ *	Checks if the selector is a media query
+ */
 export function isMediaQuery(selector) {
 	return selector.trim().charAt(0) == '@';
 };
 
-/* 
-	Checks if the selector is a extend object
-*/
+/** 
+ * Checks if the selector is a extend object
+ */
 export function isExtend(selector) {
 	return selector.trim().charAt(0) == '+';
 };
 
-/* 
-	Checks if the selector is a pseudo class
-*/
+/** 
+ * Checks if the selector is a pseudo class
+ */
 export function isPseudo(selector) {
 	return selector.trim().charAt(0) == ':';
 }
 
-/* 
-	Checks if the selector is a pseudo class
-*/
+/** 
+ * Checks if the selector is a pseudo class
+ */
 export function isClass(selector) {
 	return selector.trim().charAt(0) == '.';
 }
 
-/* 
-	Checks if a property is an unitless property
-*/
+/** 
+ * Checks if a property is an unitless property
+ */
 export function isUnitless(property) {
 	return unitlessProperties.indexOf(property) > -1;
 }
 
-/* 
-	Checks if a value really is a number
-*/
+/** 
+ * Checks if a value really is a number
+ */
 export function isNumber(value) {
 	return !isNaN(parseFloat(value)) && isFinite(value);
 }
 
-/* 
-	Checks if an object is empty
-*/
+/** 
+ * Checks if an object is empty
+ */
 export function isEmpty(object) {
 	return !Object.keys(object).length;
 }
@@ -190,4 +185,11 @@ export function resetCounter() {
 }
 export function clearReference() {
 	reference = {};
+}
+
+export function toArray(value) {
+	if (value instanceof Array == false) {
+		value = [value];
+	}
+	return value;
 }
