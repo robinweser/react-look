@@ -1,51 +1,51 @@
-import paramCase from 'param-case';
-import * as Util from './util/Util';
-import DynamicStyleSheet from 'dynamic-style-sheets';
+import * as Util from './Util';
+import UniversalSheet from './UniversalSheet';
 
-let themes = new Map();
-let Theme, options;
-
-const defaultOptions = {
+const defaultOpts = {
 	minify: true,
-	autoApply: false,
-	applyDirty: true,
+	unit: 'px',
 	id: undefined,
-	unit: 'px'
-}
-
-
-export class ObsceneStyleSheet extends DynamicStyleSheet {
-	constructor(styles, opts) {
-		if (!opts) {
-			opts = (options ? options : defaultOptions);
-		}
-		let sheet = new Map();
-
-		Util.clearReference();
-		this.reference = Util.generateSelectors(styles, sheet, options);
-
-		super(sheet, options.id);
-
-		if (options.autoApply) {
-			this.apply(options.applyDirty);
-		}
-	}
-
-	clear() {
-		this.removeAll();
-	}
-}
-
-export function registerTheme(theme, variables) {
-	themes.set(theme, variables);
+	autoApply: false
 };
+let opts = defaultOpts;
+let procs = new Set();
 
-export function applyTheme(theme) {
-	Theme = themes.get(theme);
+export default {
+	create(styles, options = defaultOpts) {
+			if (options) {
+				this.setOptions(options);
+			}
+			return new UniversalSheet(styles, opts);
+		},
+
+		setOptions(options) {
+			opts = options;
+		},
+
+		getOptions() {
+			return opts;
+		},
+
+		registerProcessor(processor) {
+			procs.add(processor);
+		},
+
+		deregisterProcessor(processor) {
+			procs.remove(processor);
+		},
+		
+		getProcessors(){
+			return procs;
+		},
+
+		/**
+		 *	Merges an array of className strings into one string for html use
+		 * @param {Array} classNames - an array of classNames that should be merged
+		 */
+		mergeClassNames(classNames) {
+			if (classNames instanceof Array) {
+				classNames = classNames.join(' ');
+			}
+			return classNames;
+		}
 }
-
-export function setOptions(opts = defaultOptions) {
-	options = opts;
-}
-
-export Theme;

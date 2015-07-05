@@ -1,32 +1,38 @@
 {
-  "name": "obscene-stylesheet",
-  "version": "0.1.6",
-  "description": "Styling Library for React using Dynamic Style Sheets",
-  "main": "src/Stylesheet.js",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "src/"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/obscene/Obscene-Stylesheet/"
-  },
-  "keywords": [
-    "react-component",
-    "react",
-    "layout",
-    "flexbox",
-    "styling",
-    "flex",
-    "vendor",
-    "stylesheet",
-    "media query"
-  ],
-  "author": "Robin Frischmann",
-  "license": "MIT",
-  "dependencies": {
-    "dynamic-style-sheets": "0.0.2",
-    "param-case": "1.1.1"
-  }
+	"name": "obscene-stylesheet",
+	"version": "0.1.7",
+	"description": "Styling Library for React using Dynamic Style Sheets",
+	"main": "src/Stylesheet.js",
+	"files": [
+		"LICENSE",
+		"README.md",
+		"src/"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/obscene/Obscene-Stylesheet/"
+	},
+	"keywords": [
+		"react-component",
+		"react",
+		"layout",
+		"flexbox",
+		"styling",
+		"flex",
+		"vendor",
+		"stylesheet",
+		"media query",
+    "inline styles",
+    "stateful styles"
+	],
+	"author": "Robin Frischmann",
+	"license": "MIT",
+	"dependencies": {
+		"dynamic-style-sheets": "0.0.9"
+	},
+	"browserify": {
+		"transform": [
+			"babelify"
+		]
+	}
 }
