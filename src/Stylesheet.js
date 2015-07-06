@@ -1,11 +1,13 @@
 import * as Util from './Util';
 import UniversalSheet from './UniversalSheet';
+import objectAssign from 'object-assign';
 
 const defaultOpts = {
 	minify: true,
 	unit: 'px',
 	id: undefined,
-	autoApply: false
+	autoApply: false,
+	autoProcess : false
 };
 let opts = defaultOpts;
 let procs = new Set();
@@ -19,7 +21,7 @@ export default {
 		},
 
 		setOptions(options) {
-			opts = options;
+			opts = objectAssign({}, opts, options);
 		},
 
 		getOptions() {

@@ -1,5 +1,6 @@
 let counter = 0;
 let reference = {};
+let ref;
 /**
  * A list of all unitless values
  */
@@ -8,10 +9,19 @@ export let unitlessProperties = [
 ];
 
 /**
+ * Navigates selector generator
+ */
+export function generateClasses(styles, stylesheet, media, condition, options) {
+	reference = {};
+
+	return generateSelectors(styles, stylesheet, media, condition, options);
+}
+
+/**
  * Core algorithm which seperates all your styles and resolves all special objects
  * Recursively resolves pseudo-classes, extensions and media queries
  */
-export function generateSelectors(styles, stylesheet, media, options, parent = '') {
+export function generateSelectors(styles, stylesheet, media, condition, options, parent = '') {
 	let selector;
 
 	for (selector in styles) {
@@ -35,7 +45,7 @@ export function generateSelectors(styles, stylesheet, media, options, parent = '
 				 */
 				if (isExtend(selector)) {
 					styles = extendStyle(styles, selector);
-					generateSelectors(styles, stylesheet, media, options, parent);
+					generateSelectors(styles, stylesheet, media, condition, options, parent);
 					return;
 				}
 
@@ -48,8 +58,7 @@ export function generateSelectors(styles, stylesheet, media, options, parent = '
 					if (parent) {
 						media[query][parent] = {};
 					}
-					generateSelectors(current, media[query], '', options, parent);
-					return;
+					generateSelectors(current, media[query], '', condition, options, parent);
 				}
 
 				/**
@@ -58,19 +67,30 @@ export function generateSelectors(styles, stylesheet, media, options, parent = '
 				if (isPseudo(selector)) {
 					let pseudo = parent + selector;
 					stylesheet[pseudo] = {};
-					generateSelectors(current, stylesheet, media, options, pseudo);
-					return;
+					generateSelectors(current, stylesheet, media, condition, options, pseudo);
 				}
 
+				/**
+				 * Resolves conditioned stateful styles
+				 */
+				if (isCondition(selector)) {
+					if (parent) {
+						if (!condition[ref]) {
+							condition[ref] = {};
+						}
+						condition[ref][selector] = current;
+					}
+				}
 				/**
 				 * Prevents nested style objects
 				 * Benefit: You won't create too specific selectors since they're not performant at all
 				 */
 				if (!parent) {
+					ref = selector;
 					parent = generateClassName(selector, options.minify);
 
 					stylesheet[parent] = {};
-					generateSelectors(current, stylesheet, media, options, parent);
+					generateSelectors(current, stylesheet, media, condition, options, parent);
 
 					reference[selector] = parent.slice(1);
 					parent = '';
@@ -132,10 +152,17 @@ export function addUnit(property, value, unit) {
 }
 
 /** 
- *	Checks if the selector is a media query
+ * Checks if the selector is a media query
  */
 export function isMediaQuery(selector) {
 	return selector.trim().charAt(0) == '@';
+};
+
+/** 
+ * Checks if the selector is stateful (treated as inline style)
+ */
+export function isCondition(selector) {
+	return selector.trim().indexOf('=') > -1;
 };
 
 /** 
@@ -183,10 +210,11 @@ export function isEmpty(object) {
 export function resetCounter() {
 	counter = 0;
 }
-export function clearReference() {
-	reference = {};
-}
 
+/**
+ * Converts an value to an Array
+ * @param {string|number|boolean|Object}
+ */
 export function toArray(value) {
 	if (value instanceof Array == false) {
 		value = [value];

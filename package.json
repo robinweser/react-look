@@ -22,13 +22,14 @@
 		"vendor",
 		"stylesheet",
 		"media query",
-    "inline styles",
-    "stateful styles"
+		"inline styles",
+		"stateful styles"
 	],
 	"author": "Robin Frischmann",
 	"license": "MIT",
 	"dependencies": {
-		"dynamic-style-sheets": "0.0.9"
+		"dynamic-style-sheets": "0.0.9",
+		"object-assign": "^3.0.0"
 	},
 	"browserify": {
 		"transform": [
