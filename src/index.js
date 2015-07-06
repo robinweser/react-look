@@ -1,5 +1,6 @@
 import * as Util from './Util';
-import UniversalSheet from './UniversalSheet';
+import UniversalSheet from './sheets/UniversalSheet';
+import InlineSheet from './sheets/InlineSheet';
 import objectAssign from 'object-assign';
 
 const defaultOpts = {
@@ -7,10 +8,12 @@ const defaultOpts = {
 	unit: 'px',
 	id: undefined,
 	autoApply: false,
-	autoProcess : false
+	autoProcess: false
 };
 let opts = defaultOpts;
 let procs = new Set();
+let themes = new Map();
+let Theme;
 
 export default {
 	create(styles, options = defaultOpts) {
@@ -18,6 +21,10 @@ export default {
 				this.setOptions(options);
 			}
 			return new UniversalSheet(styles, opts);
+		},
+
+		createInline(styles, autoProcess) {
+			return new InlineSheet(styles, autoProcess);
 		},
 
 		setOptions(options) {
@@ -35,10 +42,27 @@ export default {
 		deregisterProcessor(processor) {
 			procs.remove(processor);
 		},
-		
-		getProcessors(){
+
+		getProcessors() {
 			return procs;
 		},
+
+		registerTheme(name, theme) {
+			themes.set(name, theme);
+			this.useTheme(name);
+		},
+
+		useTheme(name) {
+			Theme = themes.get(name);
+			this.Theme = Theme;
+		},
+
+		getThemes() {
+			return themes;
+		},
+
+		Theme : Theme,
+
 
 		/**
 		 *	Merges an array of className strings into one string for html use

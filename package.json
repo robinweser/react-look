@@ -1,6 +1,6 @@
 {
 	"name": "obscene-stylesheet",
-	"version": "0.1.9",
+	"version": "0.1.10",
 	"description": "Styling Library for React using Dynamic Style Sheets",
 	"main": "src/Stylesheet.js",
 	"files": [
@@ -28,7 +28,7 @@
 	"author": "Robin Frischmann",
 	"license": "MIT",
 	"dependencies": {
-		"dynamic-style-sheets": "0.0.9",
+		"dynamic-style-sheets": "0.1.1",
 		"object-assign": "^3.0.0"
 	},
 	"browserify": {

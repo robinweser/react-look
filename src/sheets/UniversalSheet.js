@@ -1,16 +1,16 @@
 import {
-	Sheet
+	CSSSheet
 }
 from 'dynamic-style-sheets';
+import * as Util from '../Util';
+import Stylesheet from '../index';
+import InlineSheet from './InlineSheet';
 import objectAssign from 'object-assign';
-
-import * as Util from './Util';
-import Stylesheet from './Stylesheet';
 
 /*
  *  An universal StyleSheet that both handles true CSS Style Sheets as well as inlines Styles 
  */
-export default class UniversalSheet extends Sheet {
+export default class UniversalSheet extends CSSSheet {
 
 	/*
 	 * @param {Object} styles - A key-value map with css rules
@@ -20,28 +20,39 @@ export default class UniversalSheet extends Sheet {
 		let condition = {};
 		let selectors = {};
 		let media = {};
+
+		/**
+		 * Seperating inline styles
+		 */
 		let inline = {};
 
 		if (styles.hasOwnProperty('_inline')) {
-			inline = styles['_inline'];
+			inline = new InlineSheet(styles['_inline']);
 			delete styles['_inline'];
 		}
 
+		/** 
+		 * Generating CSS Classes, media queries, pseudo classes and conditioned styles
+		 */
 		let classes = Util.generateClasses(styles, selectors, media, condition, options);
 
 		super(selectors);
 
+		this.classes = classes;
+		this._inline = inline;
+		this.inline = this._inline.getSelectors();
+		this._condition = new InlineSheet(condition);
+		this.condition = this._condition.getSelectors();
+
 		if (media) {
-			this.media = {};
+			this.mediaQueries = {};
 			let query;
 			let i = 0;
 			for (query in media) {
-				this.media[query] = new Sheet(media[query], query, this.id + '-media-' + ++i);
+				this.mediaQueries[query] = new CSSSheet(media[query], query, this.id + '-media-' + ++i);
 			}
 		}
-		this.classes = classes;
-		this.inline = inline;
-		this.condition = condition;
+
 
 		if (options.autoProcess) {
 			this.process();
@@ -52,8 +63,12 @@ export default class UniversalSheet extends Sheet {
 	}
 
 	process(processors, register, ...args) {
-		let media = this.media;
-
+		let media = this.mediaQueries;
+		let inline = this._inline;
+		let condition = this._condition;
+		/**
+		 * Registering missing processors
+		 */
 		if (processors)  {
 			processors = Util.toArray(processors);
 			if (register) {
@@ -65,21 +80,23 @@ export default class UniversalSheet extends Sheet {
 			processors = Stylesheet.getProcessors();
 		}
 
-		let i;
-		let length = processors.length;
-		for (i = 0; i < length; ++i) {
-			super.process(processors[i], ...args);
-			processors[i].process(this.condition, ...args);
-			processors[i].process(this.inline, ...args);
+		processors.forEach(function (item) {
+			super.process(item, ...args);
+			if (inline.process instanceof Function) {
+				inline.process(item, ...args);
+			}
+			if (condition.process instanceof Function) {
+				condition.process(item, ...args);
+			}
 			let query;
 			for (query in media) {
-				media[query].process(processors[i], ...args);
+				media[query].process(item, ...args);
 			}
-		}
+		})
 	}
 
 	apply() {
-		let media = this.media;
+		let media = this.mediaQueries;
 
 		super.apply();
 
@@ -108,5 +125,13 @@ export default class UniversalSheet extends Sheet {
 			}
 		}
 		return conditionStyles;
+	}
+
+	getInlineSheet() {
+		return this._inline;
+	}
+
+	getMediaSheet(query) {
+		return this.mediaQueries[query];
 	}
 }

@@ -10,13 +10,13 @@ This is where I found about [Pete Hunt](https://twitter.com/floydophone)'s Appro
 Using both compiled CSS as well as inline styles combines CSS and JavaScript to a powerful tool that capable of almost anything.  
 
 ### In a nutshell
-* CSS and inline styles
+* CSS and inline styles logically combined
 * modern (ES6)
 * no mixins/wrappers
 * pseudo-classes
 * nested pseudo-classes
 * media queries
-* processors (prefixing, flexbox support)
+* processors (prefixing, flexbox support, ...)
 * conditioned styles
 * dynamic style manipulation
 * theming
@@ -25,14 +25,14 @@ Using both compiled CSS as well as inline styles combines CSS and JavaScript to 
 ### Dynamic Style Sheets 
 Under the hood it is based on **[Dynamic Style Sheets](https://github.com/dynamicstylesheets)** which is an awesome interface working with style sheets since it does all the background stuff including diffing and DOM manipulation bringing as much performance as possible.     
 *(Check the organisation for more information)*.
-     
+     ˘
 #### Processors
-DSS (Dynamic Style Sheets) is **customizable** with processors e.g. [Vendor Prefixing](https://github.com/dynamicstylesheets/DSS-Prefixer). Using those you can do what ever you want with your styles object before it gets applied.     
+DSS (Dynamic Style Sheets) is **hackable** and allows processors e.g. [Vendor Prefixing](https://github.com/dynamicstylesheets/DSS-Prefixer) modifying its selectors. Using those you can do what ever you want with your styles object before it gets applied. You may use processors with any object as every processor must at least have a `.process()`-method, but it's recommended to [register](#settings) them and use them directly with `sheet.process()`.    
 *(For further information on how to use processors please check the DSS repository)*
 
 ### Universal Style Sheets
 Since DSS is primary made for static style sheets (CSS) we had to extend it to support a more **universal** and **abstract** approach which we call Universal Style Sheets.    
-Those combine CSS and inline styles and allow **pseudo-classes, media queries** and **stateful conditions**. 
+Those combine CSS and inline styles *(via [InlineSheet](#stylesheetcreateinlinestyles-autoprocess))* and allow **pseudo-classes, media queries** and **stateful conditions**. 
 
 # Usage
 > Warning: This is still in construction and some things might change 
@@ -42,7 +42,7 @@ npm install obscene-stylesheet -save
 ```
 
 
-## Creating a new Sheet
+## Create new universal Sheet
 ### `Stylesheet.create(styles [,options])`
 
 | option      | default    | description                                |
@@ -122,15 +122,23 @@ export class Header extends React.Component {
 }
 ```
 
-### `sheet.classes`
+#### `sheet.classes`
 Contains all references to your minified CSS classes. 
 e.g. `{header: '.c0', title: '.c1'}`
 
 
-### `sheet.matchCondition(obj)`
+#### `sheet.matchCondition(obj)`
 Evaluates fulfilled conditions using values in `obj`. Made especially for use with `props` and `state`. 
 e.g. if state.status == active.    
  `{box : {backgroundColor: green}}`
+
+### `Stylesheet.createInline(styles [,autoProcess})`
+| option      | default    | description                                |
+|-------------|------------|---------------------------------------------|
+| autoProcess | `false`    | automatically [process](#processors) styles |
+Creates a new `InlineSheet`. You can use `.process()` to do your usual processing as well, but there's no `.apply()` since you can not apply inline styles to the DOM. Use `.getSelectors()` to get your blank styles object.     
+
+> **Note**: Even if I don't recommend using this you might sometimes be just happy using direct inline styles e.g. if you're sure there's no pseudo-class, media-query or if you need to create a sheet based on `props`-values, but want to use processors without additional effort. 
 
 ## Settings
 You probably will use the same options/processors in every component. That's why you can set your global options and register processors.
@@ -156,6 +164,7 @@ Stylesheet.setOptions({autoProcess: true});
 - [ ] nested media queries
 - [ ] examples
 - [ ] additional processors (devTools)
+- [ ] GlobalSheet for global styles
 
 # License
 Obscene including Obscene Stylesheet is licensed under the [MIT License](http://opensource.org/licenses/MIT).    
