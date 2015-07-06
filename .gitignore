@@ -1,5 +1,8 @@
 /node_modules/
 npm-debug.log
 livereload
-example/
+example/bundle.js
 test/
+example/
+Gruntfile.js
+

@@ -1,198 +1,164 @@
 ![Obscene Logo](https://raw.githubusercontent.com/obscene/obscene.github.io/master/res/obscene.png)
 **Obscene Stylesheet** is a lightweight styling library built for use with [React.js](https://facebook.github.io/react/) but also works fine without.       
-It lets you handle all your styling just directly within your javascript and acts as some kind of preprocessor in the background as it generates valid & minified CSS code.
+It lets you handle all your styling just directly within your Components and acts as some kind of preprocessor in the background as it generates valid & minified CSS code as well as inline styles.
 
-> Note: Obscene Stylesheet is a core library & former part of [Obscene Layout](http://github.com/obscene/Obscene-Layout) which now remains *only* as a set of layouting components
-
-# About
-Inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) with the idea of putting styling completely into javascript, So I started building my own library to achieve that. At first I was overwhelmed by how much I can achieve with just plain javascript. Such as media queries and `mouseover`-state were no problem at all. But while I started adding more and more there came a point where it was no longer acceptable to go with only inline styles and EventListeners javascript and I had to rethink all of my work anew.    
+# Disclamer
+> Inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) with the idea of putting styling completely into javascript, So I started building my own library to achieve that. At first I was overwhelmed by how much I can achieve with just plain javascript. Such as media queries and `mouseover`-state were no problem at all. But while I started adding more and more there came a point where it was no longer acceptable to go with only inline styles and EventListeners javascript and I had to rethink all of my work anew.    
 This is where I found about [Pete Hunt](https://twitter.com/floydophone)'s Approach with [jsxstyles](https://github.com/petehunt/jsxstyle) and I thought it would be create to have some kind of JS to CSS compiler.    
 
+# About
+Using both compiled CSS as well as inline styles combines CSS and JavaScript to a powerful tool that capable of almost anything.  
 
-# Roadmap
-- [x] automated **vendor-prefixing**
-- [x] useable for **server-side rendering**
-- [x] merging styles
-- [x] global styles
-- [x] minifying
-- [x] **debugMode** & DebugHelper
-- [x] **:pseudo-classes** such as `:hover`, `:focus`, `:active` or `:checked`
-- [x] nested :pseudo-classes
-- [x] user options to keep it flexible
-- [x] **extending**
-- [x] **flexbox support** (also old specs)
-- [ ] **media queries**
-- [ ] **examples**
-- [ ] tests
-- [ ] ES6 version
+### In a nutshell
+* CSS and inline styles
+* modern (ES6)
+* no mixins/wrappers
+* pseudo-classes
+* nested pseudo-classes
+* media queries
+* processors (prefixing, flexbox support)
+* conditioned styles
+* dynamic style manipulation
+* theming
+
+
+### Dynamic Style Sheets 
+Under the hood it is based on **[Dynamic Style Sheets](https://github.com/dynamicstylesheets)** which is an awesome interface working with style sheets since it does all the background stuff including diffing and DOM manipulation bringing as much performance as possible.     
+*(Check the organisation for more information)*.
+     
+#### Processors
+DSS (Dynamic Style Sheets) is **customizable** with processors e.g. [Vendor Prefixing](https://github.com/dynamicstylesheets/DSS-Prefixer). Using those you can do what ever you want with your styles object before it gets applied.     
+*(For further information on how to use processors please check the DSS repository)*
+
+### Universal Style Sheets
+Since DSS is primary made for static style sheets (CSS) we had to extend it to support a more **universal** and **abstract** approach which we call Universal Style Sheets.    
+Those combine CSS and inline styles and allow **pseudo-classes, media queries** and **stateful conditions**. 
 
 # Usage
-> Warning: This is still in production and some things might change 
+> Warning: This is still in construction and some things might change 
  
 ```sh
 npm install obscene-stylesheet -save
 ```
 
 
-Now you can *require* it within your code.    
-```javascript
-var Stylesheet = require('obscene-stylesheet');
-```
+## Creating a new Sheet
+### `Stylesheet.create(styles [,options])`
 
-# Stylesheet.create(styles *[, options]*)
-Use this function to define your styles.    
-You don't need to worry about vendor prefixing. Obscene-Stylesheet adds exactly those needed. It supports all kind of [pseudo-classes](http://www.w3schools.com/css/css_pseudo_classes.asp) such as `:hover`, `:active` & `:checked` as well as specific ones such as `::-webkit-scrollbar`.     
-This is much like you would define a stylesheet in [React Native](https://facebook.github.io/react-native/) too. e.g.    
+| option      | default    | description                                |
+|-------------|------------|---------------------------------------------|
+| minify      | `true`     | minified CSS                                |
+| unit        | `px`       | applied unit                                |
+| autoApply   | `false`    | automatically apply CSS to DOM              |
+| autoProcess | `false`    | automatically [process](#processors) styles |
 
 ```javascript
-var styles = Stylesheet.create({
+import Stylesheet from 'obscene-stylesheet';
+
+function custom(value){
+  return value * 2 + 10
+}
+
+let sheet = Stylesheet.create({
 	header : {
-		color: '#fff',
-		padding: 20,
-		fontSize : 12,
-		color: 'black',
-		fontSize: 20,
-		':hover' : {
-			fontSize: 15
+		padding: custom(5),               // use benefit of javascript
+		fontSize: 20,                     // gets `options.unit` added 
+    color: '#fff',
+    transition: '200ms all linear',
+		':hover' : {                      // pseudo-classes
+			fontSize: 15,
+      ':checked' : {                  // also nested
+  			color: 'red'
 		},
-		':checked' : {
-			color: 'red',
-			':hover' : {
-				color: 'blue'
-			}
-		}
+    
+    '@media (min-height: 800px)' : {  // media queries
+      fontSize: 13
+    },
+    
+    'status=active' : {               // conditioned styles
+      backgroundColor: 'green'
+    },
+    'status=warning' : {
+      backgroundColor: 'red'
+    }
 	},
-	box : {
-		boxSizing: 'border-box',
-		backgroundColor : 'blue'
+  
+	title : {
+		fontWeight: 800
 	}
 })
 ```
+This now creates a new universal Sheet including 2 CSS classes (header & title) as well as 2 inline style conditions (status=active & status = warning).    
+Use `sheet.process()` and `sheet.apply()` to go on.
+> **Note**: Once applied you need to use `sheet.update()` if you want to apply changes later on.
 
-It now generates a minified string of CSS selectors and applies them to your page. By calling your styles you will get the minified selector as reference.
-e.g. `styles.header` would output `c0` and `styles.box` would be `c1`.      
-Your generated CSS would look like this (but minified)
-```CSS
-.c0 {
-    color: black;
-    padding: 20px;
-    font-size: 20px
-}
-.c0:hover {
-    font-size: 15px
-}
-.c0:checked {
-    color: red
-}
-.c0:checked:hover {
-    color: blue
-}
-.c1 {
-    box-sizing: border-box;
-    background-color: blue
-}
-```
-If you need to access your CSS output manually you can get it with Stylesheet.output after you've created one with Stylesheet.create
-## extending 
-You might probably know `@extend` from some other CSS preprocessor. This is quite similar to it.     
-**Note**: Mind that you can't extend styles within the same object.
-With `overwrite: true` all equal properties will be overwritten. e.g.
+## Component
 ```javascript
-var base = {
-	box: {
-		fontSize: 15,
-		color: red
+import React from 'react';
+
+let classes = sheet.classes;
+
+export class Header extends React.Component {
+	constructor(props) {
+		super(props);
+		this.onClick = this.onClick.bind(this);
+	}
+
+	onClick() {
+		let state = this.state.status;
+		this.setState({
+			status: (state == 'active' ? 'disabled' : 'active')
+		})
+	}
+	render() {
+		var styles = sheet.matchCondition(this.state);
+
+		return (
+			<div className={classes.header} onClick={this.onClick} style={styles.header}>
+				<h1 className={classes.title}>{this.props.title}</h1>
+			</div>
+		)
 	}
 }
-
-var styles = Stylesheet.create({
-	box : {
-		backgroundColor : 'blue',
-		fontSize: 10,
-		'+' : {
-			styles : base.box,    //use an array for multiple styles
-			overwrite: true
-		}
-	}
-})
-```
-This will output the following:
-```CSS
-.c0 {
-	background-color: blue;
-	font-size: 15px;
-	color: red;
-}
 ```
 
-## options
-There is a set of options which should help you to customize the stylesheet generation process to your needs.
+### `sheet.classes`
+Contains all references to your minified CSS classes. 
+e.g. `{header: '.c0', title: '.c1'}`
 
-### `userAgent`
-*default: navigator.userAgent*    
-Set a specific userAgent instead of the browsers one.    
-This can be useful for server-side rendering.
 
-### `vendorPrefix`
-Set a specific vendorPrefix instead of the automatically identified.    
-Valid values are `moz`, `webkit`, `ms` and `o`.
+### `sheet.matchCondition(obj)`
+Evaluates fulfilled conditions using values in `obj`. Made especially for use with `props` and `state`. 
+e.g. if state.status == active.    
+ `{box : {backgroundColor: green}}`
 
-### `unit`
-*default: `px`*    
-Set a unit you'd like to be automatically added to properties that require one.
-Valid values are `px`, `pt`, `pc`, `mm`, `in`, `cm`, `em`, `rem`, `ex`, `vh`, `vw` and `%`.
-> Beware browser support issues with some of these values
+## Settings
+You probably will use the same options/processors in every component. That's why you can set your global options and register processors.
 
-### `debugMode`
-*default: false*    
-Set `true` if you'd like to have some helpful browser logs such as CSS size, rendering time or selector count.
+#### `Stylesheet.setOptions(opts)`
+Sets global options and uses defaults for unset values.
 
-### `selectorPrefix`
-Set a string which acts as a prefix to all generated selectors. e.g. `selectorPrefix = .MyComponent-`     
-Your generated CSS would look like this    
-```CSS
-.MyComponent-c0 {
-    color: black;
-}
-.MyComponent-c0:hover {
-    font-size: 15px
-}
-.MyComponent-c1 {
-	padding: 10px
-}
+#### `Stylesheet.registerProcessor(processors)`
+Registers all `processors` which can either be a single one or an array of processors.    
+A list of avaible processors can be found here [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
+Most common are [Prefixer](https://github.com/dynamicstylesheets/DSS-Prefixer) and [Flexbox](https://github.com/dynamicstylesheets/DSS-Flexbox).
+
+```javascript
+import Prefixer from 'dss-prefixer';
+import Flexbox from 'dss-flexbox';
+
+Stylesheet.registerProcessor([Prefixer, Flexbox]);
+Stylesheet.setOptions({autoProcess: true});
 ```
 
-### `autoApply`
-*default: true*    
-Set to `false` if you don't want to apply your CSS instantly.
-> Beware that you will need to add it later to get it working. To do so use `Stylesheet.apply()` 
-
-### `counter`
-*default: 0*    
-A counter is used to generated minified selectors.     
-Set this value to use your own e.g. if you are using a global counter for all your Stylesheets.
-
-### `minify`
-*default: true*    
-Set to `false` if you like to have non minified selectors e.g. for debugging purpose.
-
-# Knowledge Source
-Information according the need of vendor prefixes were taken from [Richard Bradshaw's Guide](http://css3.bradshawenterprises.com/which-vendor-prefixes-are-needed/) and [CanIUse](http://caniuse.com/).    
-For further information about Flexbox check [Flexbox.md](Flexbox.md).    
-This implementation is based on [Flexy Boxes](http://the-echoplex.net/flexyboxes/) according browser support and vendor prefixes.      
-Default values were taken from [Guide to Flexbox  (css-tricks.com)](https://css-tricks.com/snippets/css/a-guide-to-flexbox/).    
-It automatically transforms properties to older specs properties such as `msFlexAlign` or `display: -webkit-box` if needed.
-
-> **Warning**: If you've never used flexbox before please be sure to check both links above to properly understand it.
-
-# Repositories
-* [[React] Obscene Layout (set of useful layout components)](https://github.com/unverschaemt/Obscene)
-* [[React] Obscene (full-featured, responsive UI library)](https://github.com/unverschaemt/Obscene)
-* [[Sass] Obscene UI (Template for custom app themes)](http://unverschaemt.github.io/Obscene-UI)
-* [[Sass] Obscene Core (layouting & uselful classes / mixins based on flexbox)](https://github.com/unverschaemt/Obscene-Core)
+#Roadmap
+- [ ] documentation
+- [ ] nested media queries
+- [ ] examples
+- [ ] additional processors (devTools)
 
 # License
-Obscene including all repositories listed above is licensed under the [MIT License](http://opensource.org/licenses/MIT).    
+Obscene including Obscene Stylesheet is licensed under the [MIT License](http://opensource.org/licenses/MIT).    
 Created with &hearts; by [@rofrischmann](http://rofrischmann.de) at [Unverschämt](http://unverschaemt.net).
 
 # Contributing
