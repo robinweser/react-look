@@ -81,6 +81,7 @@ export function generateSelectors(styles, stylesheet, media, condition, options,
 						condition[ref][selector] = current;
 					}
 				}
+				
 				/**
 				 * Prevents nested style objects
 				 * Benefit: You won't create too specific selectors since they're not performant at all

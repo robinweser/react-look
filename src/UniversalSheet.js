@@ -20,6 +20,12 @@ export default class UniversalSheet extends Sheet {
 		let condition = {};
 		let selectors = {};
 		let media = {};
+		let inline = {};
+
+		if (styles.hasOwnProperty('_inline')) {
+			inline = styles['_inline'];
+			delete styles['_inline'];
+		}
 
 		let classes = Util.generateClasses(styles, selectors, media, condition, options);
 
@@ -34,6 +40,7 @@ export default class UniversalSheet extends Sheet {
 			}
 		}
 		this.classes = classes;
+		this.inline = inline;
 		this.condition = condition;
 
 		if (options.autoProcess) {
@@ -45,7 +52,6 @@ export default class UniversalSheet extends Sheet {
 	}
 
 	process(processors, register, ...args) {
-		let condition = this.condition;
 		let media = this.media;
 
 		if (processors)  {
@@ -63,8 +69,8 @@ export default class UniversalSheet extends Sheet {
 		let length = processors.length;
 		for (i = 0; i < length; ++i) {
 			super.process(processors[i], ...args);
-			processors[i].process(condition, ...args);
-
+			processors[i].process(this.condition, ...args);
+			processors[i].process(this.inline, ...args);
 			let query;
 			for (query in media) {
 				media[query].process(processors[i], ...args);
