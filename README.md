@@ -63,24 +63,24 @@ let sheet = Stylesheet.create({
 	header : {
 		padding: custom(5),               // use benefit of javascript
 		fontSize: 20,                     // gets `options.unit` added 
-    color: '#fff',
-    transition: '200ms all linear',
+    	color: '#fff',
+    	transition: '200ms all linear',
 		':hover' : {                      // pseudo-classes
 			fontSize: 15,
-      ':checked' : {                  // also nested
-  			color: 'red'
-		},
+      		':checked' : {                // also nested
+  				color: 'red'
+			},
+    	},
+    	'@media (min-height: 800px)' : {  // media queries
+    		fontSize: 13
+    	},
     
-    '@media (min-height: 800px)' : {  // media queries
-      fontSize: 13
-    },
-    
-    'status=active' : {               // conditioned styles
-      backgroundColor: 'green'
-    },
-    'status=warning' : {
-      backgroundColor: 'red'
-    }
+    	'status=active' : {               // conditioned styles
+      		backgroundColor: 'green'
+    	},
+    	'status=warning' : {
+    		backgroundColor: 'red'
+    	}
 	},
   
 	title : {
@@ -111,7 +111,7 @@ export class Header extends React.Component {
 		})
 	}
 	render() {
-		var styles = sheet.matchCondition(this.state);
+		let styles = sheet.matchCondition(this.state);
 
 		return (
 			<div className={classes.header} onClick={this.onClick} style={styles.header}>
