@@ -78,8 +78,8 @@ let sheet = Stylesheet.create({
     	'status=active' : {               // conditioned styles
       		backgroundColor: 'green'
     	},
-    	'status=warning' : {
-    		backgroundColor: 'red'
+    	'status=disabled' : {
+    		backgroundColor: 'gray'
     	}
 	},
   
