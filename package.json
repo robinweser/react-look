@@ -1,8 +1,8 @@
 {
 	"name": "obscene-stylesheet",
-	"version": "0.1.10",
+	"version": "0.1.13",
 	"description": "Styling Library for React using Dynamic Style Sheets",
-	"main": "src/Stylesheet.js",
+	"main": "src/index.js",
 	"files": [
 		"LICENSE",
 		"README.md",

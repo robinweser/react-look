@@ -163,6 +163,7 @@ Stylesheet.setOptions({autoProcess: true});
 - [ ] documentation
 - [ ] nested media queries
 - [ ] examples
+- [ ] `@keyframe` support
 - [ ] additional processors (devTools)
 - [ ] GlobalSheet for global styles
 

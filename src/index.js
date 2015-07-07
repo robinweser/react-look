@@ -26,6 +26,10 @@ export default {
 		createInline(styles, autoProcess) {
 			return new InlineSheet(styles, autoProcess);
 		},
+		
+		createExtern(CSSFile){
+			//TODO
+		},
 
 		setOptions(options) {
 			opts = objectAssign({}, opts, options);
@@ -62,7 +66,6 @@ export default {
 		},
 
 		Theme : Theme,
-
 
 		/**
 		 *	Merges an array of className strings into one string for html use
