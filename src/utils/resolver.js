@@ -3,21 +3,40 @@ import * as Validator from './validator';
 import React from 'react';
 import assign from 'object-assign';
 import evaluateExpression from './evaluator';
+import StateMap from './map/state';
+import pseudoMap from './map/pseudo';
 
 /*
- * Replacing all el.look with their respective inline styles and CSS classes
- * @param {Object} el - component props that get validated and resolved
+ * Resolves styling for an element and returns the modified one.
+ * @param {ObsceneComponent} wrapper - the outer React Component to determine state and props
+ * @param {}
  */
 export default function resolveLook(wrapper, el, selectors) {
 	if (el && el.props) {
+		if (!StateMap.has(wrapper.state, el)) {
+			StateMap.set(wrapper.state, el);
+		}
 		let props = el.props;
-		/*
-		 * Recursively resolve look for child elements
-		 */
+
+		//Recursively resolve look for child elements
 		let children = [];
 		if (props.children && props.children instanceof Array) {
-			props.children.forEach((item, a, b, c) => {
-				debugger;
+
+			//Determine if any child needs index sensitive pseudo class check
+			let indexSensitive;
+			props.children.forEach(item => {
+				if (item.props.look) {
+					if (selectors[item.props.look] && selectors[item.props.look].indexSensitive) {
+						indexSensitive = true;
+					}
+				}
+			});
+
+			StateMap.setState(wrapper.state, el, 'index', pseudoMap(el, indexSensitive));
+
+			debugger;
+
+			props.children.forEach((item, index) => {
 				if (React.isValidElement(item)) {
 					children.push(resolveLook(wrapper, item, selectors));
 				}
@@ -46,6 +65,11 @@ export default function resolveLook(wrapper, el, selectors) {
 	}
 }
 
+
+/**
+ * Interates every condition and valuates the expressions. 
+ * This returns the final styles object. 
+ */
 function resolveStyle(styles, state) {
 	let newStyle = styles.style;
 

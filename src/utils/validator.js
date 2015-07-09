@@ -1,22 +1,8 @@
-/**
- * A list of all unitless values
- */
-let unitlessProperties = [
-	'boxFlex', 'boxFlexGroup', 'columnCount', 'flex', 'flexGrow', 'flexPositive', 'flexNegative', 'flexShrink', 'fontWeight', 'lineClamp', 'lineHeight', 'opacity', 'order', 'orphans', 'tabSize', 'widows', 'zIndex', 'zoom', 'fillOpacity', 'strokeDashoffest', 'strokeOpacity', 'strokeWidth'
-];
-
 /** 
  * Checks if the selector is a media query
  */
 export function isMediaQuery(selector) {
 	return selector.trim().charAt(0) == '@';
-};
-
-/** 
- * Checks if the selector is stateful (treated as inline style)
- */
-export function isCondition(selector) {
-	return selector.trim().indexOf('=') > -1;
 };
 
 /** 
@@ -26,27 +12,27 @@ export function isPseudo(selector) {
 	return selector.trim().charAt(0) == ':';
 }
 
-/** 
- * Checks if the selector is a pseudo class
- */
-export function isClass(selector) {
-	return selector.trim().charAt(0) == '.';
+
+
+export function isExpression(selector) {
+	return selector.includes('=');
 }
 
 export function isAdvanced(selector) {
 	return this.isExpression(selector) || this.isMediaQuery(selector) || this.isPseudo(selector);
 }
 
-export function isExpression(selector) {
-	return selector.includes('=');
-}
-/** 
- * Checks if a property is an unitless property
- */
-export function isUnitless(property) {
-	return unitlessProperties.indexOf(property) > -1;
-}
+export function isIndexSensitive(selector) {
+	let sensitivePseudos = [':last-child', ':first-child', ':nth-child', ':nth-last-child', ':nth-of-type', ':first-of-type'];
 
+	let i;
+	let length = sensitivePseudos.length;
+	for (i = 0; i < length; ++i)
+		if (selector.indexOf(sensitivePseudos[i]) > -1) {
+			return true;
+		}
+	return false;
+}
 /** 
  * Checks if a value really is a number
  */

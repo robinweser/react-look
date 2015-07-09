@@ -10,7 +10,7 @@ export default {
 			constructor() {
 				super(...arguments);
 				this.state = this.state ||  {};
-				this.state._obscene = {};
+				this.state._obscene = new Map();
 
 
 				if (mediaQueryListener) {

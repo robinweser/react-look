@@ -20,5 +20,18 @@ export default function evaluateExpression(expr, state) {
 			return true;
 		}
 	}
+
+	//eval pseudos 
+	if (Validator.isPseudo(expr)) {
+
+	}
 	return false;
+}
+
+function evaluateLang(expr, lang) {
+	return expr.includes(lang);
+}
+
+function evaluateIndexSensitive(expr, pseudoMap) {
+	
 }

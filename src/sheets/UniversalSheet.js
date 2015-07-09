@@ -3,10 +3,7 @@ import {
 }
 from 'dynamic-style-sheets';
 import * as Misc from '../utils/misc';
-import {
-	splitStyles
-}
-from '../utils/splitter';
+import splitStyles from '../utils/splitter';
 import Obscene from '../index';
 
 /*
@@ -21,7 +18,6 @@ export default class UniversalSheet extends Sheet {
 	constructor(styles, options) {
 		let selectors = {};
 		selectors = splitStyles(styles, selectors);
-
 
 		super(selectors);
 		if (options.autoProcess) {
