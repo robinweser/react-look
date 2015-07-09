@@ -21,15 +21,16 @@ export default {
 					});
 				}
 			}
-
+			
 			_onResizeListener() {
 				this.forceUpdate();
 			}
 
 			render() {
 				let el = super.render();
-				let split = {};
+
 				el = resolveLook(this, el, sheet.selectors);
+
 				return el;
 			}
 		}

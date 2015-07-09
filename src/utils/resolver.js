@@ -28,8 +28,6 @@ export default function resolveLook(wrapper, el, selectors) {
 			children = props.children;
 		}
 
-		debugger;
-
 		let newProps = ({}, props);
 
 
@@ -37,7 +35,13 @@ export default function resolveLook(wrapper, el, selectors) {
 		if (props.hasOwnProperty('look') && selectors.hasOwnProperty(props.look)) {
 			let styles = selectors[props.look];
 
-			newStyle = resolveStyle(Misc.cloneObject(styles), wrapper.state)
+			let key = el.key || el.ref || 'root';
+
+			if (!StateMap.has(wrapper, key)) {
+				StateMap.set(wrapper, key, new Map());
+			}
+			Listener.addRequiredListeners(wrapper, el, key, newProps);
+			newStyle = resolveStyle(Misc.cloneObject(styles), wrapper, el, key)
 			delete props.look;
 		}
 
@@ -46,7 +50,9 @@ export default function resolveLook(wrapper, el, selectors) {
 		}
 		newProps.style = newStyle;
 
-		return React.cloneElement(el, newProps, children)
+		let newEl = React.cloneElement(el, newProps, children);
+		return newEl;
+
 	} else {
 		return el;
 	}
@@ -57,14 +63,15 @@ export default function resolveLook(wrapper, el, selectors) {
  * Interates every condition and valuates the expressions. 
  * This returns the final styles object. 
  */
-function resolveStyle(styles, state) {
+function resolveStyle(styles, wrapper, el, key) {
 	let newStyle = styles.style;
+	let state = wrapper.state;
 
 	if (styles.condition) {
 		let expr;
 		for (expr in styles.condition) {
-			if (evaluateExpression(expr, state)) {
-				newStyle = assign(newStyle, resolveStyle(styles.condition[expr], state));
+			if (evaluateExpression(expr, wrapper, el, key)) {
+				newStyle = assign(newStyle, resolveStyle(styles.condition[expr], wrapper, el, key));
 			}
 		}
 	}

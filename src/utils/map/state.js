@@ -1,24 +1,27 @@
+import assign from 'object-assign';
+
 export default {
-	set(state, el, prop) {
-			return state._obscene.set(el, prop);
+	set(wrapper, el, prop) {
+			wrapper.state._obscene.set(el, prop);
 		},
-		setState(state, el, prop, value) {
-			return state._obscene.get(el).set(prop, value);
-		},
-
-		get(state, el, prop) {
-			return state._obscene.get(el);
+		setState(wrapper, el, prop, value) {
+			wrapper.state._obscene.get(el).set(prop, value);
+			wrapper.setState(wrapper.state._obscene);
 		},
 
-		getState(state, el, prop) {
-			return state._obscene.get(el).get(prop);
+		get(wrapper, el) {
+			return wrapper.state._obscene.get(el);
 		},
 
-		has(el) {
-			return state._obscene.has(el);
+		getState(wrapper, el, prop) {
+			return wrapper.state._obscene.get(el).get(prop);
 		},
-		
-		hasState(el, state){
-			return state._obscene.has(el).has(state);
+
+		has(wrapper, el) {
+			return wrapper.state._obscene.has(el);
+		},
+
+		hasState(wrapper, state) {
+			return wrapper.state._obscene.has(el).has(state);
 		}
 }

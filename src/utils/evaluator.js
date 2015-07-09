@@ -1,7 +1,8 @@
 import * as Validator from './validator';
+import StateMap from './map/state';
 
-export default function evaluateExpression(expr, state) {
-
+export default function evaluateExpression(expr, wrapper, el, key) {
+	let state = wrapper.state;
 	//eval media queries
 	if (Validator.isMediaQuery(expr)) {
 		if (window.matchMedia) {
@@ -26,8 +27,13 @@ export default function evaluateExpression(expr, state) {
 		if (Validator.isPseudoLang(expr) && state.lang) {
 			return evaluateLang(expr, state.lang)
 		}
+		if (Validator.isPseudoHover(expr)) {
+			if (StateMap.get(wrapper, key).get('hovered') == true) {
+			return true;
+		}
 	}
-	return false;
+}
+return false;
 }
 
 function evaluateLang(expr, lang) {
