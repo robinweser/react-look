@@ -5,6 +5,7 @@ import assign from 'object-assign';
 import evaluateExpression from './evaluator';
 import StateMap from './map/state';
 import pseudoMap from './map/pseudo';
+import * as Listener from './listener';
 
 /*
  * Resolves styling for an element and returns the modified one.
@@ -13,29 +14,11 @@ import pseudoMap from './map/pseudo';
  */
 export default function resolveLook(wrapper, el, selectors) {
 	if (el && el.props) {
-		if (!StateMap.has(wrapper.state, el)) {
-			StateMap.set(wrapper.state, el);
-		}
 		let props = el.props;
 
 		//Recursively resolve look for child elements
 		let children = [];
 		if (props.children && props.children instanceof Array) {
-
-			//Determine if any child needs index sensitive pseudo class check
-			let indexSensitive;
-			props.children.forEach(item => {
-				if (item.props.look) {
-					if (selectors[item.props.look] && selectors[item.props.look].indexSensitive) {
-						indexSensitive = true;
-					}
-				}
-			});
-
-			StateMap.setState(wrapper.state, el, 'index', pseudoMap(el, indexSensitive));
-
-			debugger;
-
 			props.children.forEach((item, index) => {
 				if (React.isValidElement(item)) {
 					children.push(resolveLook(wrapper, item, selectors));
@@ -44,6 +27,11 @@ export default function resolveLook(wrapper, el, selectors) {
 		} else {
 			children = props.children;
 		}
+
+		debugger;
+
+		let newProps = ({}, props);
+
 
 		let newStyle = {};
 		if (props.hasOwnProperty('look') && selectors.hasOwnProperty(props.look)) {
@@ -56,7 +44,6 @@ export default function resolveLook(wrapper, el, selectors) {
 		if (props.style) {
 			newStyle = assign(newStyle, props.style);
 		}
-		let newProps = ({}, props);
 		newProps.style = newStyle;
 
 		return React.cloneElement(el, newProps, children)

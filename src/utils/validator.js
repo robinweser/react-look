@@ -12,7 +12,19 @@ export function isPseudo(selector) {
 	return selector.trim().charAt(0) == ':';
 }
 
+export function isPseudoLang(selector) {
+	return selector.trim().indexOf(':lang') == 0;
+}
 
+export function isPseudoActive(selector) {
+	return selector.trim().indexOf(':active') == 0;
+}
+export function isPseudoHover(selector) {
+	return selector.trim().indexOf(':hover') == 0;
+}
+export function isPseudoFocus(selector) {
+	return selector.trim().indexOf(':focus') == 0;
+}
 
 export function isExpression(selector) {
 	return selector.includes('=');

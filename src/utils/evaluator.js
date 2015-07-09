@@ -23,7 +23,9 @@ export default function evaluateExpression(expr, state) {
 
 	//eval pseudos 
 	if (Validator.isPseudo(expr)) {
-
+		if (Validator.isPseudoLang(expr) && state.lang) {
+			return evaluateLang(expr, state.lang)
+		}
 	}
 	return false;
 }
@@ -33,5 +35,5 @@ function evaluateLang(expr, lang) {
 }
 
 function evaluateIndexSensitive(expr, pseudoMap) {
-	
+
 }

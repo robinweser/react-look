@@ -17,9 +17,13 @@ export default class UniversalSheet extends Sheet {
 	 */
 	constructor(styles, options) {
 		let selectors = {};
-		selectors = splitStyles(styles, selectors);
+		let pseudoMap = new Map();
+		selectors = splitStyles(styles, selectors, pseudoMap);
 
 		super(selectors);
+
+		this._pseudoMap = pseudoMap;
+
 		if (options.autoProcess) {
 			this.process();
 		}
@@ -42,5 +46,9 @@ export default class UniversalSheet extends Sheet {
 
 	compile() {
 		return this.selectors;
+	}
+
+	_getPseudoMap() {
+		return this._pseudoMap;
 	}
 }

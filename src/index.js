@@ -12,6 +12,7 @@ const defaultOpts = {
 };
 
 let stylesheet;
+let pseudoMap;
 
 let opts = defaultOpts;
 let procs = new Set();
@@ -23,7 +24,10 @@ export default {
 			if (options) {
 				this.setOptions(options);
 			}
-			return stylesheet = new UniversalSheet(styles, opts);
+			stylesheet = new UniversalSheet(styles, opts);
+			pseudoMap = stylesheet._getPseudoMap();
+
+			return stylesheet;
 		},
 
 		createGlobal(styles, process) {
@@ -72,7 +76,7 @@ export default {
 
 		enhance(component, resizeListener) {
 			if (stylesheet) {
-				return Enhancer.enhance(component, stylesheet, resizeListener)
+				return Enhancer.enhance(component, stylesheet, pseudoMap, resizeListener)
 			} else {
 				console.warn('You have not specified any stylesheet.');
 				return component;

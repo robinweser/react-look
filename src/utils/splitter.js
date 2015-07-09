@@ -5,6 +5,7 @@ import {
 from './misc';
 import assign from 'object-assign';
 
+let ref = '';
 let blankStyle = {
 		style: {},
 		condition: {}
@@ -13,7 +14,7 @@ let blankStyle = {
 	 * Core algorithm which seperates all your styles and resolves all special objects
 	 * Recursively resolves pseudo-classes, extensions and media queries
 	 */
-export default function splitStyles(styles, sheet, parent = '') {
+export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 	let selector;
 	for (selector in styles) {
 		let current = styles[selector];
@@ -30,14 +31,15 @@ export default function splitStyles(styles, sheet, parent = '') {
 				if (Validator.isAdvanced(selector)) {
 					sheet[parent].condition[selector] = cloneObject(blankStyle, true);
 
-					if (Validator.isIndexSensitive(selector)) {
-						sheet[parent].indexSensitive = true;
-					}
+					generatePseudoMap(pseudoMap, ref, selector);
 
-					splitStyles(current, sheet[parent].condition, selector);
+					splitStyles(current, sheet[parent].condition, pseudoMap, selector);
 				} else {
 					sheet[selector] = cloneObject(blankStyle, true);
-					splitStyles(current, sheet, selector);
+					if (!parent) {
+						ref = selector;
+					}
+					splitStyles(current, sheet, pseudoMap, selector);
 				}
 			}
 		} else {
@@ -45,4 +47,25 @@ export default function splitStyles(styles, sheet, parent = '') {
 		}
 	}
 	return sheet;
+}
+
+function generatePseudoMap(pseudoMap, parent, selector) {
+	if (!pseudoMap.has(parent)) {
+		pseudoMap.set(parent, new Map());
+	}
+	if (Validator.isIndexSensitive(selector)) {
+		pseudoMap.get(parent).set('indexSensitive', true);
+	}
+
+	if (Validator.isPseudoActive(selector)) {
+		pseudoMap.get(parent).set('active', true);
+	}
+
+	if (Validator.isPseudoFocus(selector)) {
+		rpseudoMap.get(parent).set('focus', true);
+	}
+
+	if (Validator.isPseudoHover(selector)) {
+		pseudoMap.get(parent).set('hover', true);
+	}
 }

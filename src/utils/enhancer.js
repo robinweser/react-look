@@ -5,13 +5,13 @@ import {
 }
 from './splitter';
 export default {
-	enhance(Component, sheet, mediaQueryListener, matchState) {
+	enhance(Component, sheet, pseudoMap, mediaQueryListener, matchState) {
 		class ObsceneComponent extends Component {
 			constructor() {
 				super(...arguments);
 				this.state = this.state ||  {};
 				this.state._obscene = new Map();
-
+				this.state._obscene.set('pseudoMap', pseudoMap);
 
 				if (mediaQueryListener) {
 					let me = this;
