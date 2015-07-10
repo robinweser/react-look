@@ -47,7 +47,6 @@ function custom(value){
 let sheet = new Look({
   header : {
     padding: custom(5),               // use benefit of javascript
-    fontSize: 20,                     // gets `options.unit` added 
     color: '#fff',
     transition: '200ms all linear',
     ':hover' : {                      // pseudo-classes
@@ -88,21 +87,14 @@ sheet.process([Prefixer, Flexbox])    // process your styles to add vendor prefi
 import React from 'react';
 
 export class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-  }
-
-  onClick() {
-    let state = this.state.status;
-    this.setState({
-      status: (state == 'active' ? 'disabled' : 'active')
-    })
+  constructor() {
+    super(...arguments);
+    this.state = {
+      status: 'active'
+    }
   }
 
   render() {
-    let styles = sheet.matchCondition(this.state);
-
     return (
       <header look="header" onClick={this.onClick}>
         <h1 look="title">
