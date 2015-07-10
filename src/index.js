@@ -1,8 +1,8 @@
 import * as Misc from './utils/misc';
 import Enhancer from './utils/enhancer';
 
-import UniversalSheet from './sheets/UniversalSheet';
-import GlobalSheet from './sheets/GlobalSheet';
+import Look from './class/Look';
+import Global from './class/Global';
 
 import assign from 'object-assign';
 
@@ -12,7 +12,6 @@ const defaultOpts = {
 };
 
 let stylesheet;
-let pseudoMap;
 
 let opts = defaultOpts;
 let procs = new Set();
@@ -24,14 +23,13 @@ export default {
 			if (options) {
 				this.setOptions(options);
 			}
-			stylesheet = new UniversalSheet(styles, opts);
-			pseudoMap = stylesheet._getPseudoMap();
+			stylesheet = new Look(styles, opts);
 
 			return stylesheet;
 		},
 
 		createGlobal(styles, process) {
-			return new GlobalSheet(styles, process);
+			return new Globa(styles, process);
 		},
 
 		setOptions(options) {
@@ -76,7 +74,7 @@ export default {
 
 		enhance(component, resizeListener) {
 			if (stylesheet) {
-				return Enhancer.enhance(component, stylesheet, pseudoMap, resizeListener)
+				return Enhancer.apply(component, stylesheet, resizeListener)
 			} else {
 				console.warn('You have not specified any stylesheet.');
 				return component;

@@ -1,5 +1,5 @@
 import * as Validator from './validator';
-import StateMap from './map/state';
+import StateMap from '../map/state';
 
 export default function evaluateExpression(expr, wrapper, el, key) {
 	let state = wrapper.state;
@@ -29,11 +29,21 @@ export default function evaluateExpression(expr, wrapper, el, key) {
 		}
 		if (Validator.isPseudoHover(expr)) {
 			if (StateMap.get(wrapper, key).get('hovered') == true) {
-			return true;
+				return true;
+			}
+		}
+		if (Validator.isPseudoFocus(expr)) {
+			if (StateMap.get(wrapper, key).get('focused') == true) {
+				return true;
+			}
+		}
+		if (Validator.isPseudoActive(expr)) {
+			if (StateMap.get(wrapper, key).get('active') == true) {
+				return true;
+			}
 		}
 	}
-}
-return false;
+	return false;
 }
 
 function evaluateLang(expr, lang) {

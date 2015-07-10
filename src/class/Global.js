@@ -4,7 +4,7 @@ import Stylesheet from '../index';
 /*
  *  A global StyleSheet that directly applies to your DOM.
  */
-export default class GlobalSheet extends CSSSheet {
+export default class Global extends CSSSheet {
 
 	/*
 	 * @param {Object} styles - A key-value map with valid CSS Rules

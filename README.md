@@ -36,6 +36,7 @@ npm install react-look
 ```
 
 ```javascript
+import React from 'react';
 import {Look} from 'react-look';
 import {Processors} from 'dynamic-style-sheets';
 let {Prefixer, Flexbox} = Processors;
@@ -84,9 +85,7 @@ sheet.process([Prefixer, Flexbox])    // process your styles to add vendor prefi
 ## Component
 
 ```javascript
-import React from 'react';
-
-export class Header extends React.Component {
+class Header extends React.Component {
   constructor() {
     super(...arguments);
     this.state = {
@@ -104,6 +103,8 @@ export class Header extends React.Component {
     )
   }
 }
+
+export default Look.apply(Header);
 ```
 
 # Roadmap

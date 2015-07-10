@@ -1,4 +1,4 @@
-import StateMap from './map/state';
+import StateMap from '../map/state';
 import assign from 'object-assign';
 
 export function addRequiredListeners(wrapper, el, key, props) {
@@ -43,7 +43,8 @@ export function addActiveListener(wrapper, el, key) {
 	var existingOnMouseDown = props.onMouseDown;
 	newProps.onMouseDown = function (e) {
 		existingOnMouseDown && existingOnMouseDown(e);
-		component._lastMouseDown = Date.now();
+		wrapper._lastActive = key;
+		console.log('activated (' + Date.now() + ')', el);
 		StateMap.setState(wrapper, key, 'active', true);
 	}
 	return newProps;
@@ -55,13 +56,15 @@ export function addFocusListener(wrapper, el, key) {
 	var existingOnFocus = props.onFocus;
 	newProps.onFocus = function (e) {
 		existingOnFocus && existingOnFocus(e);
-		StateMap.setState(wrapper, key, 'focus', true);
+		console.log('focused: ', el);
+		StateMap.setState(wrapper, key, 'focused', true);
 	};
 
 	var existingOnBlur = props.onBlur;
 	newProps.onBlur = function (e) {
 		existingOnBlur && existingOnBlur(e);
-		StateMap.setState(wrapper, key, 'focus', false)
+		console.log('lost focus: ', el);
+		StateMap.setState(wrapper, key, 'focused', false)
 	}
 	return newProps;
 }

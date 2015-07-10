@@ -5,11 +5,11 @@ from 'dynamic-style-sheets';
 import * as Misc from '../utils/misc';
 import splitStyles from '../utils/splitter';
 import Obscene from '../index';
-
+import PseudoMap from '../map/pseudo';
 /*
  *  An universal StyleSheet that both handles true CSS Style Sheets as well as inlines Styles 
  */
-export default class UniversalSheet extends Sheet {
+export default class Look extends Sheet {
 
 	/*
 	 * @param {Object} styles - A key-value map with css rules
@@ -17,12 +17,13 @@ export default class UniversalSheet extends Sheet {
 	 */
 	constructor(styles, options) {
 		let selectors = {};
-		let pseudoMap = new Map();
-		selectors = splitStyles(styles, selectors, pseudoMap);
+
+		let pseudo = PseudoMap.create();
+		selectors = splitStyles(styles, selectors, pseudo);
 
 		super(selectors);
 
-		this._pseudoMap = pseudoMap;
+		this._pseudoMap = pseudo;
 
 		if (options.autoProcess) {
 			this.process();

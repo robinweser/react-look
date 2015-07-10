@@ -3,8 +3,8 @@ import * as Validator from './validator';
 import React from 'react';
 import assign from 'object-assign';
 import evaluateExpression from './evaluator';
-import StateMap from './map/state';
-import pseudoMap from './map/pseudo';
+import StateMap from '../map/state';
+import pseudoMap from '../map/pseudo';
 import * as Listener from './listener';
 
 /*
@@ -24,6 +24,7 @@ export default function resolveLook(wrapper, el, selectors) {
 					children.push(resolveLook(wrapper, item, selectors));
 				}
 			});
+			children = children.reverse();
 		} else {
 			children = props.children;
 		}
@@ -57,7 +58,6 @@ export default function resolveLook(wrapper, el, selectors) {
 		return el;
 	}
 }
-
 
 /**
  * Interates every condition and valuates the expressions. 
