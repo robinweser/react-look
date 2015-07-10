@@ -1,7 +1,7 @@
 {
-	"name": "obscene-stylesheet",
-	"version": "0.1.13",
-	"description": "Styling Library for React using Dynamic Style Sheets",
+	"name": "react-look",
+	"version": "0.0.1",
+	"description": "Dynamic & stateful React component styling",
 	"main": "src/index.js",
 	"files": [
 		"LICENSE",
@@ -10,7 +10,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/obscene/Obscene-Stylesheet/"
+		"url": "https://github.com/rofrischmann/react-look/"
 	},
 	"keywords": [
 		"react-component",
@@ -28,7 +28,7 @@
 	"author": "Robin Frischmann",
 	"license": "MIT",
 	"dependencies": {
-		"dynamic-style-sheets": "0.1.1",
+		"dynamic-style-sheets": "0.1.2",
 		"object-assign": "^3.0.0"
 	},
 	"browserify": {
