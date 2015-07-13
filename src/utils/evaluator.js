@@ -57,8 +57,10 @@ export default function evaluateExpression(expr, wrapper, el, key) {
 				return (evaluateRange(el.props) == 'out' ? true : false);
 			} else if (Validator.isPseudoReadOnly(expr)) {
 				return (el.props.hasOwnProperty('readonly') && el.props.readonly == true)
-			} else if (Validator.isPseudoReadOnly(expr)) {
+			} else if (Validator.isPseudoReadWrite(expr)) {
 				return (!el.props.hasOwnProperty('readonly') || el.props.readonly == false)
+			}else if (Validator.isPseudoIndeterminate(expr)) {
+				return (el.props.hasOwnProperty('indeterminate') && el.props.indeterminate == true)
 			}
 		}
 
