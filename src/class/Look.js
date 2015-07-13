@@ -1,21 +1,15 @@
-import {
-	Sheet
-}
-from 'dynamic-style-sheets';
-import * as Misc from '../utils/misc';
+import { Sheet } from 'dynamic-style-sheets';
 import splitStyles from '../utils/splitter';
-import Obscene from '../index';
 import PseudoMap from '../map/pseudo';
-/*
- *  An universal StyleSheet that both handles true CSS Style Sheets as well as inlines Styles 
- */
+import Enhancer from '../utils/enhancer';
+
+
 export default class Look extends Sheet {
 
 	/*
-	 * @param {Object} styles - A key-value map with css rules
-	 * @param {Object} options - A set of options
+	 * @param {Object} styles - A key-value map with style rules
 	 */
-	constructor(styles, options) {
+	constructor(styles) {
 		let selectors = {};
 
 		let pseudo = PseudoMap.create();
@@ -24,22 +18,9 @@ export default class Look extends Sheet {
 		super(selectors);
 
 		this._pseudoMap = pseudo;
-
-		if (options.autoProcess) {
-			this.process();
-		}
 	}
 
 	process(processors, ...args) {
-		/**
-		 * Registering missing processors
-		 */
-		if (processors)  {
-			processors = Misc.toArray(processors);
-		} else {
-			processors = Obscene.getProcessors();
-		}
-
 		processors.forEach(item => {
 			super.process(item, ...args);
 		})
@@ -51,5 +32,13 @@ export default class Look extends Sheet {
 
 	_getPseudoMap() {
 		return this._pseudoMap;
+	}
+
+	applyTo(component, matchValues, resizeListener = false) {
+		if (this.selectors) {
+			return Enhancer.extend(component, this.selectors, matchValues, resizeListener)
+		} else {
+			return component;
+		}
 	}
 }

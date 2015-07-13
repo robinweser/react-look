@@ -1,19 +1,18 @@
 import resolveLook from './resolver';
 import StateMap from '../map/state';
 import assign from 'object-assign';
-import {
-	splitStyles
-}
-from './splitter';
 
 export default {
-	apply(Component, look, mediaQueryListener, matchState) {
+	extend(Component, look, matchState, mediaQueryListener) {
 		class LookComponent extends Component {
 			constructor() {
 				super(...arguments);
 				this.state = this.state ||  {};
-				this.state._obscene = new Map();
-				this.state._obscene.set('pseudoMap', look._pseudoMap);
+				this.state._look = new Map([
+					['pseudoMap', look._pseudoMap]
+				]);
+				å
+				this._lastActive = []
 				let me = this;
 
 				if (mediaQueryListener) {
@@ -28,11 +27,14 @@ export default {
 					me._onMouseUp();
 				});
 			}
+
 			_onMouseUp() {
 				if (this._lastActive) {
-					if (StateMap.has(this, this._lastActive)) {
-						StateMap.setState(this, this._lastActive, 'active', false);
-					}
+					this._lastActive.forEach(key => {
+						if (StateMap.has(this, key)) {
+							StateMap.setState(this, key, 'active', false);
+						}
+					})
 				}
 			}
 
@@ -42,9 +44,7 @@ export default {
 
 			render() {
 				let el = super.render();
-
 				el = resolveLook(this, el, look.selectors);
-
 				return el;
 			}
 		}

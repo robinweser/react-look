@@ -2,8 +2,8 @@ import StateMap from '../map/state';
 import assign from 'object-assign';
 
 export function addRequiredListeners(wrapper, el, key, props) {
-	if (wrapper.state._obscene.get('pseudoMap').get(el.props.look).size > 0) {
-		let pseudoMap = wrapper.state._obscene.get('pseudoMap').get(el.props.look);
+	if (StateMap.get(wrapper, 'pseudoMap').get(el.props.look).size > 0) {
+		let pseudoMap = StateMap.get(wrapper, 'pseudoMap').get(el.props.look);
 
 		if (pseudoMap.get('active')) {
 			props = assign(props, addActiveListener(wrapper, el, key));
@@ -43,7 +43,7 @@ export function addActiveListener(wrapper, el, key) {
 	var existingOnMouseDown = props.onMouseDown;
 	newProps.onMouseDown = function (e) {
 		existingOnMouseDown && existingOnMouseDown(e);
-		wrapper._lastActive = key;
+		wrapper._lastActive.push(key);
 		console.log('activated (' + Date.now() + ')', el);
 		StateMap.setState(wrapper, key, 'active', true);
 	}
