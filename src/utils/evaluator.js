@@ -13,7 +13,7 @@ export default function evaluateExpression(expr, wrapper, el, key) {
 	}
 
 	//eval conditions
-	if (Validator.isExpression(expr)) {
+	else if (Validator.isExpression(expr)) {
 		let [
 			property, value
 		] = expr.split('=');
@@ -23,31 +23,24 @@ export default function evaluateExpression(expr, wrapper, el, key) {
 	}
 
 	//eval pseudos 
-	if (Validator.isPseudo(expr)) {
+	else if (Validator.isPseudo(expr)) {
 		if (Validator.isPseudoLang(expr) && state.lang) {
-			return evaluateLang(expr, state.lang)
-		}
-		if (Validator.isPseudoHover(expr)) {
+			return expr.includes(lang);
+		} else if (Validator.isPseudoHover(expr)) {
 			if (StateMap.get(wrapper, key).get('hovered') == true) {
 				return true;
 			}
-		}
-		if (Validator.isPseudoFocus(expr)) {
+		} else if (Validator.isPseudoFocus(expr)) {
 			if (StateMap.get(wrapper, key).get('focused') == true) {
 				return true;
 			}
-		}
-		if (Validator.isPseudoActive(expr)) {
+		} else if (Validator.isPseudoActive(expr)) {
 			if (StateMap.get(wrapper, key).get('active') == true) {
 				return true;
 			}
 		}
 	}
 	return false;
-}
-
-function evaluateLang(expr, lang) {
-	return expr.includes(lang);
 }
 
 function evaluateIndexSensitive(expr, pseudoMap) {

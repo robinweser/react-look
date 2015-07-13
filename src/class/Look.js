@@ -34,9 +34,9 @@ export default class Look extends Sheet {
 		return this._pseudoMap;
 	}
 
-	applyTo(component, matchValues, resizeListener = false) {
+	applyTo(component, resizeListener = false, matchValues) {
 		if (this.selectors) {
-			return Enhancer.extend(component, this.selectors, matchValues, resizeListener)
+			return Enhancer.extend(component, this, matchValues, resizeListener)
 		} else {
 			return component;
 		}

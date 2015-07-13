@@ -44,7 +44,7 @@ export function addActiveListener(wrapper, el, key) {
 	newProps.onMouseDown = function (e) {
 		existingOnMouseDown && existingOnMouseDown(e);
 		wrapper._lastActive.push(key);
-		console.log('activated (' + Date.now() + ')', el);
+		console.log('activated:', el);
 		StateMap.setState(wrapper, key, 'active', true);
 	}
 	return newProps;

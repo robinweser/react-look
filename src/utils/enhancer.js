@@ -11,7 +11,6 @@ export default {
 				this.state._look = new Map([
 					['pseudoMap', look._pseudoMap]
 				]);
-				å
 				this._lastActive = []
 				let me = this;
 
@@ -29,12 +28,14 @@ export default {
 			}
 
 			_onMouseUp() {
-				if (this._lastActive) {
+				if (this._lastActive.length > 0) {
 					this._lastActive.forEach(key => {
 						if (StateMap.has(this, key)) {
 							StateMap.setState(this, key, 'active', false);
+							console.log('Deactivated:', key);
 						}
 					})
+					this._lastActive.length = 0;
 				}
 			}
 
