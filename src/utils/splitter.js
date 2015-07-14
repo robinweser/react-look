@@ -1,9 +1,7 @@
-import * as Validator from './validator';
-import {
-	cloneObject
-}
-from './misc';
 import assign from 'object-assign';
+
+import * as Validator from './validator';
+import cloneObject from './cloner';
 import PseudoMap from '../map/pseudo';
 
 let ref = '';
