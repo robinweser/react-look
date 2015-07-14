@@ -10,7 +10,7 @@ export function isCondition(selector) {
 }
 
 export function isAdvanced(selector) {
-	return this.isExpression(selector) || this.isMediaQuery(selector) || this.isPseudo(selector);
+	return this.isCondition(selector) || this.isMediaQuery(selector) || this.isPseudo(selector);
 }
 
 export function isIndexSensitive(selector) {

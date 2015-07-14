@@ -14,6 +14,9 @@ export function addRequiredListeners(wrapper, el, key, props) {
 		if (pseudoMap.get('focus') && el.type == 'input') {
 			props = assign(props, addFocusListener(wrapper, el, key));
 		}
+		if (pseudoMap.get('change') && el.type == 'input' && props.type == 'url' || props.type == 'range' ||  props.type == 'number' ||  props.type == 'tel' || props.type == 'email') {
+			props = assign(props, addChangeListener(wrapper, el, key));
+		}
 	}
 }
 export function addHoverListener(wrapper, el, key) {
@@ -66,5 +69,17 @@ export function addFocusListener(wrapper, el, key) {
 		console.log('lost focus: ', el);
 		StateMap.setState(wrapper, key, 'focused', false)
 	}
+	return newProps;
+}
+
+export function addChangeListener(wrapper, el, key) {
+	let newProps = {};
+	let props = el.props;
+	var existingOnChange = props.onChange;
+	newProps.onChange = function (e) {
+		existingOnChange && existingOnChange(e);
+		console.log('changed: ', el);
+		StateMap.setState(wrapper, key, 'changed', e.target.value);
+	};
 	return newProps;
 }

@@ -40,5 +40,9 @@ export default {
 			if (Validator.isPseudoHover(selector)) {
 				pseudoMap.get(parent).set('hover', true);
 			}
+
+			if (Validator.isPseudoValid(selector) || Validator.isPseudoInvalid(selector)) {
+				pseudoMap.get(parent).set('change', true);
+			}
 		}
 }
