@@ -1,6 +1,4 @@
 import { CSSSheet } from 'dynamic-style-sheets';
-import * as Misc from '../utils/misc';
-import Stylesheet from '../index';
 /*
  *  A global StyleSheet that directly applies to your DOM.
  */
@@ -21,12 +19,6 @@ export default class Global extends CSSSheet {
 	}
 
 	process(processors, register, ...args) {
-		if (processors)  {
-			processors = Misc.toArray(processors);
-		} else {
-			processors = Stylesheet.getProcessors();
-		}
-
 		processors.forEach(item => {
 			super.process(item, ...args);
 		})
