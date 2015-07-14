@@ -9,7 +9,8 @@ import PseudoMap from '../map/pseudo';
 let ref = '';
 let blankStyle = {
 		style: {},
-		condition: {}
+		condition: {},
+		css: ''
 	}
 	/**
 	 * Core algorithm which seperates all your styles and resolves all special objects
@@ -44,6 +45,11 @@ export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 				}
 			}
 		} else {
+			if (Validator.isCSS(selector)) {
+				sheet[parent].css = current;
+				delete styles[selector];
+				continue;
+			}
 			sheet[parent].style[selector] = current;
 		}
 	}

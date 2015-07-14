@@ -50,9 +50,9 @@ export default function resolveLook(wrapper, el, selectors, childProps) {
 			} else {
 				console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
 			}
-			
+
 			Listener.addRequiredListeners(wrapper, el, key, newProps);
-			newStyle = resolveStyle(Misc.cloneObject(styles), wrapper, el, key, childProps)
+			newStyle = resolveStyle(Misc.cloneObject(styles), newProps, wrapper, el, key, childProps)
 			delete props.look;
 		}
 
@@ -73,15 +73,22 @@ export default function resolveLook(wrapper, el, selectors, childProps) {
  * Interates every condition and valuates the expressions. 
  * This returns the final styles object. 
  */
-function resolveStyle(styles, wrapper, el, key, childProps) {
+function resolveStyle(styles, newProps, wrapper, el, key, childProps) {
 	let newStyle = styles.style;
 	let state = wrapper.state;
+
+	if (styles.css) {
+		if (!newProps.className) {
+			newProps.className = '';
+		}
+		newProps.className += styles.css
+	}
 
 	if (styles.condition) {
 		let expr;
 		for (expr in styles.condition) {
 			if (evaluateExpression(expr, wrapper, el, key, childProps)) {
-				newStyle = assign(newStyle, resolveStyle(styles.condition[expr], wrapper, el, key, childProps));
+				newStyle = assign(newStyle, resolveStyle(styles.condition[expr], newProps, wrapper, el, key, childProps));
 			}
 		}
 	}

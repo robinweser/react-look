@@ -14,9 +14,8 @@ export default class Look extends Sheet {
 
 		let pseudo = PseudoMap.create();
 		selectors = splitStyles(styles, selectors, pseudo);
-
+		
 		super(selectors);
-
 		this._pseudoMap = pseudo;
 	}
 

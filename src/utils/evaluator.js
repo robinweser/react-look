@@ -112,7 +112,6 @@ export default function evaluateExpression(expr, wrapper, el, key, childProps) {
 function evaluateNthChild(expr, index, reverse) {
 	let split = (reverse ? expr.split(':nth-last-child(') : expr.split(':nth-child('));
 	let value = split[1].substr(0, split[1].length - 1);
-	debugger;
 	if (value == 'odd') {
 		return index % 2 == 0;
 	} else if (value == 'even') {

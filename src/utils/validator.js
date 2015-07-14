@@ -49,6 +49,10 @@ export function isNumber(value) {
 export function isEmpty(object) {
 	return !Object.keys(object).length;
 }
+
+export function isCSS(selector) {
+	return selector.trim().indexOf('_css') == 0;
+}
 /** 
  * Checks if the selector is a pseudo class
  */
