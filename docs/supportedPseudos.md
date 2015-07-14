@@ -20,7 +20,7 @@
 * nth-last-child
 * only-child
 
-## type-specific child-index (in progress)
+## type-specific child-index
 * first-of-type˘
 * last-of-type
 * nth-of-type

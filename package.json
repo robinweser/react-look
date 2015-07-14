@@ -12,13 +12,15 @@
 		"type": "git",
 		"url": "https://github.com/rofrischmann/react-look/"
 	},
+	"scripts": {
+		"build": "browserify ./examples/index.jsx -t babelify --outfile ./examples/bundle.js"
+	},
 	"keywords": [
 		"react-component",
 		"react",
 		"layout",
-		"flexbox",
+		"component styling",
 		"styling",
-		"flex",
 		"vendor",
 		"stylesheet",
 		"media query",
@@ -35,5 +37,11 @@
 		"transform": [
 			"babelify"
 		]
+	},
+	"devDependencies": {
+		"babelify": "^6.1.3",
+		"browserify": "^10.2.6",
+		"react": "^0.13.3",
+		"react-router": "^0.13.3"
 	}
 }

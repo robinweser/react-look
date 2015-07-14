@@ -1,5 +1,5 @@
 # Look
-**Look** is a feature-rich styling library for [React.js](https://facebook.github.io/react/) that supports lots of CSS features as well as **stateful** styles. It extends your inline styles and still remains hackable and processable since it is based on [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
+**Look** is a **feature-rich** styling library for [React.js](https://facebook.github.io/react/) that supports lots of CSS features as well as **stateful** styles. It extends your inline styles and still remains hackable and processable since it is based on [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
 
 > It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
 
@@ -14,7 +14,7 @@ Look tries to keep your `render` function clean of validations such as `this.sta
 > **Warning:** Avoid using stateful conditions with data-sensitive states as this would mix logic and styles.
 
 # Features
-Look is as far as I know the **feature richest** styling library for React. Supporting [27 pseudo-classes](pseudoClasses.md) and **stateful styles** which is an awesome shortcut if you need some styles depending on your current `state` and/or `props`.
+Look is as far as I know the **feature richest** styling library for React. Supporting [27 pseudo-classes](docs/supportedPseudos.md) and **stateful styles** which is an awesome shortcut if you need some styles depending on your current `state` and/or `props`.
 - ES6 classes
 - _(nested)_ media-queries
 - _(nested)_ pseudo-classes
@@ -22,7 +22,7 @@ Look is as far as I know the **feature richest** styling library for React. Supp
 - processors (prefixing, flexbox support, ...)
 - dynamic style manipulation
 
-### [Supported pseudo-classes](pseudoClasses.md)
+### [Supported pseudo-classes](docs/supportedPseudos.md)
 _(Check here to get detail information on supported pseudo-classes)_
 
 # Under the hood
@@ -101,7 +101,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header look="header" onClick={this.onClick}>
+      <header look="header" onClick={this.onClick}>   //Just use the `look` prop to apply styles
         <h1 look="title">
           {this.props.title}
         </h1>
@@ -110,7 +110,7 @@ class Header extends React.Component {
   }
 }
 
-export default Look.applyTo(Header);
+export default Look.applyTo(Header);                  //Your styles get applied here
 ```
 
 # Roadmap
@@ -120,7 +120,7 @@ export default Look.applyTo(Header);
 - [ ] **>, <, >=, <= support for conditions**
 - [ ] GlobalSheet for global CSS styles
 
-## react-look-tools
+## [react-look-tools (coming soon)](https://github.com/rofrischmann/react-look-tools)
 - [ ] `@keyframe` support
 - [ ] extend functionality
 - [ ] special pseudos (:placeholder, :webkit-scrollbar)
