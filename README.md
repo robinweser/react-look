@@ -122,9 +122,9 @@ export default Look.applyTo(Header);                  //Your styles get applied 
 
 ## [react-look-tools (coming soon)](https://github.com/rofrischmann/react-look-tools)
 - [ ] `@keyframe` support
-- [ ] extend functionality
+- [ ] **extend functionality**
 - [ ] special pseudos (:placeholder, :webkit-scrollbar)
-- [ ] **dev processor for better DX (for stateful styles)**
+- [ ] **dev tools for better DX (inspired by [Dan Abramov](https://github.com/gaearon))
 
 # License
 **Look** (react-look) is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>Created with ♥ by [@rofrischmann](http://rofrischmann.de) at [Unverschämt](http://unverschaemt.net).
