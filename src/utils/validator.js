@@ -14,7 +14,19 @@ export function isAdvanced(selector) {
 }
 
 export function isIndexSensitive(selector) {
-	let sensitivePseudos = [':last-child', ':first-child', ':nth-child', ':nth-last-child', ':nth-of-type', ':first-of-type'];
+	const sensitivePseudos = [':last-child', ':first-child', ':nth-child', ':only-child', ':nth-last-child'];
+
+	let i;
+	let length = sensitivePseudos.length;
+	for (i = 0; i < length; ++i)
+		if (selector.indexOf(sensitivePseudos[i]) > -1) {
+			return true;
+		}
+	return false;
+}
+
+export function isTypeSensitive(selector) {
+	const sensitivePseudos = [':nth-of-type', ':first-of-type', ':last-of-type', ':nth-last-of-type', ':only-of-type'];
 
 	let i;
 	let length = sensitivePseudos.length;
@@ -48,6 +60,9 @@ export function isPseudo(selector) {
 export function isPseudoLang(selector) {
 	return selector.trim().indexOf(':lang') == 0;
 }
+export function isPseudoEmpty(selector) {
+	return selector.trim().indexOf(':empty') == 0;
+}
 
 //Action Pseudos
 export function isPseudoActive(selector) {
@@ -58,6 +73,23 @@ export function isPseudoHover(selector) {
 }
 export function isPseudoFocus(selector) {
 	return selector.trim().indexOf(':focus') == 0;
+}
+
+//Index Sensitive Pseudos
+export function isPseudoFirstChild(selector) {
+	return selector.trim().indexOf(':first-child') == 0;
+}
+export function isPseudoLastChild(selector) {
+	return selector.trim().indexOf(':last-child') == 0;
+}
+export function isPseudoNthChild(selector) {
+	return selector.trim().indexOf(':nth-child') == 0;
+}
+export function isPseudoOnlyChild(selector) {
+	return selector.trim().indexOf(':only-child') == 0;
+}
+export function isPseudoNthLastChild(selector) {
+	return selector.trim().indexOf(':nth-last-child') == 0;
 }
 
 //Input Pseudos

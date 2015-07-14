@@ -1,7 +1,7 @@
 import * as Validator from './validator';
 import StateMap from '../map/state';
 
-export default function evaluateExpression(expr, wrapper, el, key) {
+export default function evaluateExpression(expr, wrapper, el, key, childProps) {
 	let state = wrapper.state;
 	//eval media queries
 	if (Validator.isMediaQuery(expr)) {
@@ -71,13 +71,74 @@ export default function evaluateExpression(expr, wrapper, el, key) {
 		//other
 		else if (Validator.isPseudoLang(expr) && state.lang) {
 			return expr.includes(lang);
+		} else if (Validator.isPseudoEmpty(expr)) {
+			return (!el.props.children || el.props.children.length < 1);
 		}
+
+		//index-sensitive
+		if (Validator.isPseudoFirstChild(expr)) {
+			if (childProps.hasOwnProperty('index')) {
+				return childProps.index == 0;
+			}
+			return false;
+		} else if (Validator.isPseudoLastChild(expr)) {
+			if (childProps.hasOwnProperty('index') && childProps.hasOwnProperty('length')) {
+				return childProps.index == childProps.length - 1;
+			}
+			return false;
+		} else if (Validator.isPseudoOnlyChild(expr)) {
+			if (childProps.hasOwnProperty('length')) {
+				return childProps.length == 1;
+			}
+			return false;
+		} else if (Validator.isPseudoNthChild(expr)) {
+			if (childProps.hasOwnProperty('index')) {
+				return evaluateNthChild(expr.replace(/ /g, ''), childProps.index);
+			}
+			return false;
+		} else if (Validator.isPseudoNthLastChild(expr)) {
+			if (childProps.hasOwnProperty('index') && childProps.hasOwnProperty('length')) {
+				return evaluateNthChild(expr.replace(/ /g, ''), (childProps.length - 1) - childProps.index, true);
+			}
+			return false;
+		}
+
+		//TODO: type-sensitive
 	}
 	return false;
 }
 
-function evaluateIndexSensitive(expr, pseudoMap) {
+//TODO: drunk => dirty, fix later
+function evaluateNthChild(expr, index, reverse) {
+	let split = (reverse ? expr.split(':nth-last-child(') : expr.split(':nth-child('));
+	let value = split[1].substr(0, split[1].length - 1);
+	debugger;
+	if (value == 'odd') {
+		return index % 2 == 0;
+	} else if (value == 'even') {
+		return index % 2 != 0;
+	} else {
+		if (value.includes('n')) {
+			let termSplit = value.split('n');
+			let mult = termSplit[0];
+			mult = (mult == '-' ? '-1' : mult);
 
+			let add = termSplit[1];
+			add = parseInt(add);
+			mult = parseInt(mult);
+			++index;
+
+			if (isNaN(mult)) {
+				return index >= add;
+			} else if (mult == -1) {
+				return index <= add;
+			} else {
+				return (index - add) % mult == 0;
+			}
+		} else {
+			return index == parseInt(value);
+		}
+	}
 }
 
 function validateValue(value, type) {

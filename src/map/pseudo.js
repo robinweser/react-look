@@ -6,42 +6,21 @@ export default {
 			return pseudoMap;
 		},
 
-		addIndexSensitivePseudo(pseudoMap, el, styles) {
-			pseudoMap.set('empty', (el.props.children));
-
-			//Determine if any child needs index sensitive pseudo class check
-			let indexSensitive;
-			el.props.children.forEach(item => {
-				if (item.props.look) {
-					if (styles.hasOwnProperty(item.props.look) && styles[item.props.look].indexSensitive) {
-						indexSensitive = true;
-					}
-				}
-			});
-			pseudoMap.set('indexSensitive', indexSensitive);
-		},
-
 		addEventPseudo(pseudoMap, parent, selector) {
 			if (!pseudoMap.has(parent)) {
 				pseudoMap.set(parent, new Map());
 			}
 			if (Validator.isIndexSensitive(selector)) {
 				pseudoMap.get(parent).set('indexSensitive', true);
-			}
-
-			if (Validator.isPseudoActive(selector)) {
+			} else if (Validator.isTypeSensitive(selector)) {
+				pseudoMap.get(parent).set('typeSensitive', true);
+			} else if (Validator.isPseudoActive(selector)) {
 				pseudoMap.get(parent).set('active', true);
-			}
-
-			if (Validator.isPseudoFocus(selector)) {
+			} else if (Validator.isPseudoFocus(selector)) {
 				pseudoMap.get(parent).set('focus', true);
-			}
-
-			if (Validator.isPseudoHover(selector)) {
+			} else if (Validator.isPseudoHover(selector)) {
 				pseudoMap.get(parent).set('hover', true);
-			}
-
-			if (Validator.isPseudoValid(selector) || Validator.isPseudoInvalid(selector)) {
+			} else if (Validator.isPseudoValid(selector) || Validator.isPseudoInvalid(selector)) {
 				pseudoMap.get(parent).set('change', true);
 			}
 		}
