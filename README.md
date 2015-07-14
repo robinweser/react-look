@@ -14,7 +14,7 @@ Look tries to keep your `render` function clean of validations such as `this.sta
 > **Warning:** Avoid using stateful conditions with data-sensitive states as this would mix logic and styles.
 
 # Features
-Look is as far as I know the feature richest styling library for React. Supporting [27 pseudo-classes](pseudoClasses.md) and **stateful styles** which is an awesome shortcut if you need some styles depending on your current `state` and/or `props`.
+Look is as far as I know the **feature richest** styling library for React. Supporting [27 pseudo-classes](pseudoClasses.md) and **stateful styles** which is an awesome shortcut if you need some styles depending on your current `state` and/or `props`.
 - ES6 classes
 - _(nested)_ media-queries
 - _(nested)_ pseudo-classes
@@ -43,7 +43,7 @@ npm install react-look
 
 ```javascript
 import React from 'react';
-import {Look} from 'react-look';
+import Look from 'react-look';
 import {Processors} from 'dynamic-style-sheets';
 let {Prefixer, Flexbox} = Processors;
 
@@ -110,7 +110,7 @@ class Header extends React.Component {
   }
 }
 
-export default Look.apply(Header);
+export default Look.applyTo(Header);
 ```
 
 # Roadmap
@@ -118,7 +118,6 @@ export default Look.apply(Header);
 - [ ] **use-case examples**
 - [ ] clean up / readability improvement + code documentation
 - [ ] **>, <, >=, <= support for conditions**
-- [ ] type-sensitive (:nth-of-type, :first-of-type, :last-of-type, :nth-last-of-type, :only-of-type)
 - [ ] GlobalSheet for global CSS styles
 
 ## react-look-tools
