@@ -20,11 +20,35 @@ export default function resolveLook(wrapper, el, selectors, childProps) {
 		let children = [];
 
 		if (props.children && props.children instanceof Array) {
+			let typeIndex = {};
+			let typeMap = {};
+
 			props.children.forEach((item, index) => {
+				if (typeMap.hasOwnProperty(item.type)) {
+					++typeMap[item.type];
+				} else {
+					typeMap[item.type] = 1;
+				}
+			})
+
+			props.children.forEach((item, index) => {
+				if (typeIndex.hasOwnProperty(item.type)) {
+					++typeIndex[item.type];
+				} else {
+					typeIndex[item.type] = 1;
+				}
+
 				let child = {};
-				if (item.props.look && StateMap.get(wrapper, 'pseudoMap').get(item.props.look).get('indexSensitive')) {
-					child['index'] = index;
+				if (item.props.look) {
+					let pseudoMap = StateMap.get(wrapper, 'pseudoMap').get(item.props.look);
 					child['length'] = props.children.length;
+					if (pseudoMap.get('indexSensitive')) {
+						child['index'] = index;
+					}
+					if (pseudoMap.get('typeSensitive')) {
+						child['indexType'] = typeIndex[item.type];
+						child['indexTypeLength'] = typeMap[item.type];
+					}
 				}
 
 				if (React.isValidElement(item)) {

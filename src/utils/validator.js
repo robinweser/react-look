@@ -1,14 +1,3 @@
-/** 
- * Checks if the selector is a media query
- */
-export function isMediaQuery(selector) {
-	return selector.trim().charAt(0) == '@';
-};
-
-export function isCondition(selector) {
-	return selector.includes('=');
-}
-
 export function isAdvanced(selector) {
 	return this.isCondition(selector) || this.isMediaQuery(selector) || this.isPseudo(selector);
 }
@@ -60,6 +49,17 @@ export function isPseudo(selector) {
 	return selector.trim().charAt(0) == ':';
 }
 
+/** 
+ * Checks if the selector is a media query
+ */
+export function isMediaQuery(selector) {
+	return selector.trim().charAt(0) == '@';
+};
+
+export function isCondition(selector) {
+	return selector.includes('=');
+}
+
 //Other Pseudos
 export function isPseudoLang(selector) {
 	return selector.trim().indexOf(':lang') == 0;
@@ -94,6 +94,23 @@ export function isPseudoOnlyChild(selector) {
 }
 export function isPseudoNthLastChild(selector) {
 	return selector.trim().indexOf(':nth-last-child') == 0;
+}
+
+//Type-Specific Index Sensitive Pseudos
+export function isPseudoFirstOfType(selector) {
+	return selector.trim().indexOf(':first-of-type') == 0;
+}
+export function isPseudoLastOfType(selector) {
+	return selector.trim().indexOf(':last-of-type') == 0;
+}
+export function isPseudoNthOfType(selector) {
+	return selector.trim().indexOf(':nth-of-type') == 0;
+}
+export function isPseudoOnlyOfType(selector) {
+	return selector.trim().indexOf(':only-of-type') == 0;
+}
+export function isPseudoNthLastOfType(selector) {
+	return selector.trim().indexOf(':nth-last-of-type') == 0;
 }
 
 //Input Pseudos

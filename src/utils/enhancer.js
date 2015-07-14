@@ -11,6 +11,11 @@ export default {
 				this.state._look = new Map([
 					['pseudoMap', look._pseudoMap]
 				]);
+				if (matchState){
+					this._matchValues = assign(this.state, this.props);
+				} else {
+					this._matchValues = this.props;
+				}
 				this._lastActive = []
 				let me = this;
 
