@@ -1,9 +1,8 @@
 # Look
 **Look** is a feature-rich styling library for [React.js](https://facebook.github.io/react/) that supports lots of CSS features as well as **stateful** styles.     
-
 It extends your inline styles and still remains hackable and processable since it is based on [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
 
-It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
+> It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
 
 # Benefit
 Using inline styles instead of static CSS files has a lot of positive side-effects. The most important one is **dynamic behavoir**.<br>Remember you're using JavaScript now. You're styles no longer belong to a static file but are mapped to an Object that can be manipulated in any given way.
@@ -19,6 +18,8 @@ It encourages you to define your styles scoped to your Component which helps to 
 - processors (prefixing, flexbox support, ...)
 - dynamic style manipulation
 
+### [Supported pseudo-classes](pseudoClasses.md)
+*(Check here to get detail information on supported pseudo-classes)*
 # Under the hood
 ### Dynamic Style Sheets
 Under the hood Look is based on **[Dynamic Style Sheets](https://github.com/dynamicstylesheets)** which is an lightweight interface for style object manipulation. It also ship an interface for dynamic CSS sheet interaction that automatically diffs changes to your DOM which might be used in an early stage to add unsupported CSS-features.  _(Check the organisation for more information)_.
@@ -111,17 +112,18 @@ export default Look.apply(Header);
 - [ ] **docs (in progress)**
 - [ ] **clean up / readability improvement**
 - [ ] **>, <, >=, <= support for conditions**
-- [x] :hover, :active
-- [ ] index-sensitive (:first-child, :last-child, :nth-child, :nth-last-child)
-- [ ] type-sensitive (:nth-of-type, :first-of-type)
-- [x] :empty, :lang
-- [ ] input-pseudos (:focus, :checked, :disabled, :enabled, :in-range, :read-only, :read-write, :required, :valid, :invalid)
-- [ ] `@keyframe` support
-- [ ] **dev processor for better DX (for stateful styles)**
+- [ ] type-sensitive (:nth-of-type, :first-of-type, :last-of-type, :nth-last-of-type, :only-of-type)
 - [ ] GlobalSheet for global CSS styles
+
+### react-look-tools
+- [ ] `@keyframe` support
+- [ ] extend functionality
+- [ ] special pseudos (:placeholder, :webkit-scrollbar)
+- [ ] **dev processor for better DX (for stateful styles)**
 
 # License
 **Look** (react-look) is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>Created with ♥ by [@rofrischmann](http://rofrischmann.de) at [Unverschämt](http://unverschaemt.net).
 
 # Issue / Contributing
-Got any issues or need a great feature that is not (yet) supported? Feel free to create an issue/request and I will handle that as fast as possible.
+Got any issues or need a great feature that is not (yet) supported?     
+Feel free to create an issue/request and I will handle that as fast as possible.
