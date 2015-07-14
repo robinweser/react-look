@@ -2,29 +2,6 @@ export function isAdvanced(selector) {
 	return this.isCondition(selector) || this.isMediaQuery(selector) || this.isPseudo(selector);
 }
 
-export function isIndexSensitive(selector) {
-	const sensitivePseudos = [':last-child', ':first-child', ':nth-child', ':only-child', ':nth-last-child'];
-
-	let i;
-	let length = sensitivePseudos.length;
-	for (i = 0; i < length; ++i)
-		if (selector.indexOf(sensitivePseudos[i]) > -1) {
-			return true;
-		}
-	return false;
-}
-
-export function isTypeSensitive(selector) {
-	const sensitivePseudos = [':nth-of-type', ':first-of-type', ':last-of-type', ':nth-last-of-type', ':only-of-type'];
-
-	let i;
-	let length = sensitivePseudos.length;
-	for (i = 0; i < length; ++i)
-		if (selector.indexOf(sensitivePseudos[i]) > -1) {
-			return true;
-		}
-	return false;
-}
 /** 
  * Checks if a value really is a number
  */
