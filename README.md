@@ -1,4 +1,7 @@
 # Look
+```sh
+npm install react-look
+```
 **Look** is a **feature-rich** styling library for [React.js](https://facebook.github.io/react/) that supports lots of CSS features as well as **stateful** styles. It extends your inline styles and still remains hackable and processable since it is based on [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
 
 > It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
@@ -27,10 +30,6 @@ Look tries to keep your `render` function clean of validations such as `this.sta
 > **Warning:** Avoid using stateful conditions with data-sensitive states as this would mix logic and styles.
 
 # Usage
-
-```sh
-npm install react-look
-```
 
 ```javascript
 import React from 'react';
