@@ -1,5 +1,5 @@
 import * as Validator from './validator';
-import StateMap from '../map/state';
+import State from '../map/state';
 
 export default function evaluateExpression(expr, wrapper, el, key, childProps) {
 	let state = wrapper.state;
@@ -26,15 +26,15 @@ export default function evaluateExpression(expr, wrapper, el, key, childProps) {
 	else if (Validator.isPseudo(expr)) {
 		//mouse pseudos
 		if (Validator.isPseudoHover(expr)) {
-			if (StateMap.get(wrapper, key).get('hovered') == true) {
+			if (State.get(wrapper, key).get('hovered') == true) {
 				return true;
 			}
 		} else if (Validator.isPseudoFocus(expr)) {
-			if (StateMap.get(wrapper, key).get('focused') == true) {
+			if (State.get(wrapper, key).get('focused') == true) {
 				return true;
 			}
 		} else if (Validator.isPseudoActive(expr)) {
-			if (StateMap.get(wrapper, key).get('active') == true) {
+			if (State.get(wrapper, key).get('active') == true) {
 				return true;
 			}
 		}
@@ -126,9 +126,9 @@ export default function evaluateExpression(expr, wrapper, el, key, childProps) {
 			} else if (Validator.isPseudoIndeterminate(expr)) {
 				return (el.props.hasOwnProperty('indeterminate') && el.props.indeterminate == true)
 			} else if (Validator.isPseudoValid(expr)) {
-				return validateValue(StateMap.get(wrapper, key).get('changed'), el.props.type);
+				return validateValue(State.get(wrapper, key).get('changed'), el.props.type);
 			} else if (Validator.isPseudoInvalid(expr)) {
-				return !validateValue(StateMap.get(wrapper, key).get('changed'), el.props.type);
+				return !validateValue(State.get(wrapper, key).get('changed'), el.props.type);
 			}
 		}
 

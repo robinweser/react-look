@@ -1,5 +1,5 @@
 import resolveLook from './resolver';
-import StateMap from '../map/state';
+import State from '../map/state';
 import assign from 'object-assign';
 
 export default {
@@ -47,8 +47,8 @@ export default {
 			_onMouseUp() {
 				if (this._lastActive.length > 0) {
 					this._lastActive.forEach(key => {
-						if (StateMap.has(this, key)) {
-							StateMap.setState(this, key, 'active', false);
+						if (State.has(this, key)) {
+							State.setState('active', false, this, key);
 							//console.log('Deactivated:', key);
 						}
 					})

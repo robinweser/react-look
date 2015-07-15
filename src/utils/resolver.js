@@ -3,7 +3,7 @@ import * as Validator from './validator';
 import React from 'react';
 import assign from 'object-assign';
 import evaluateExpression from './evaluator';
-import StateMap from '../map/state';
+import State from '../map/state';
 import pseudoMap from '../map/pseudo';
 import * as Listener from './listener';
 
@@ -54,7 +54,7 @@ export default function resolveLook(wrapper, el, selectors, childProps) {
 
 				let child = {};
 				if (item.props.look) {
-					let pseudoMap = StateMap.get(wrapper, 'pseudoMap').get(item.props.look);
+					let pseudoMap = State.get(wrapper, 'pseudoMap').get(item.props.look);
 					child['length'] = props.children.length;
 					child['index'] = index;
 					child['indexType'] = typeIndex[item.type];
@@ -79,8 +79,8 @@ export default function resolveLook(wrapper, el, selectors, childProps) {
 
 			let key = el.key || el.ref || 'root';
 
-			if (!StateMap.has(wrapper, key)) {
-				StateMap.set(wrapper, key, new Map());
+			if (!State.has(wrapper, key)) {
+				State.add(wrapper, key);
 			} else {
 				console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
 			}

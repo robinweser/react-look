@@ -1,27 +1,27 @@
-import StateMap from '../map/state';
+import State from '../map/state';
 import assign from 'object-assign';
 
 /*
-* Adds additional event listeners to target some special pseudo-classes
-* Only get applied if actually needed
-* NOTE: This has been heavily copied from Radium. Great thanks for providing this nice stuff.
-*/
+ * Adds additional event listeners to target some special pseudo-classes
+ * Only get applied if actually needed
+ * NOTE: This has been heavily copied from Radium. Great thanks for providing this nice stuff.
+ */
 export function addRequiredListeners(wrapper, el, key, props) {
-	if (StateMap.get(wrapper, 'pseudoMap').get(el.props.look).size > 0) {
-		let pseudoMap = StateMap.get(wrapper, 'pseudoMap').get(el.props.look);
+	if (State.get(wrapper, 'pseudoMap').get(el.props.look).size > 0) {
+		let pseudoMap = State.get(wrapper, 'pseudoMap').get(el.props.look);
 
 		if (pseudoMap.get('active')) {
 			props = assign(props, addActiveListener(wrapper, el, key));
 		}
-		
+
 		if (pseudoMap.get('hover')) {
 			props = assign(props, addHoverListener(wrapper, el, key));
 		}
-		
+
 		if (pseudoMap.get('focus') && el.type == 'input') {
 			props = assign(props, addFocusListener(wrapper, el, key));
 		}
-		
+
 		//TODO: iterate array to check type for more readability
 		if (pseudoMap.get('change') && el.type == 'input' && props.type == 'url' || props.type == 'range' ||  props.type == 'number' ||  props.type == 'tel' || props.type == 'email') {
 			props = assign(props, addChangeListener(wrapper, el, key));
@@ -41,14 +41,14 @@ export function addHoverListener(wrapper, el, key) {
 	newProps.onMouseEnter = function (e) {
 		existingOnMouseEnter && existingOnMouseEnter(e);
 		//console.log('entered:', el);
-		StateMap.setState(wrapper, key, 'hovered', true);
+		State.setState('hovered', true, wrapper, key);
 	};
 
 	let existingOnMouseLeave = props.onMouseLeave;
 	newProps.onMouseLeave = function (e) {
 		//console.log('left:', el);
 		existingOnMouseLeave && existingOnMouseLeave(e);
-		StateMap.setState(wrapper, key, 'hovered', false);
+		State.setState('hovered', false, wrapper, key);
 	}
 	return newProps;
 }
@@ -67,7 +67,7 @@ export function addActiveListener(wrapper, el, key) {
 		existingOnMouseDown && existingOnMouseDown(e);
 		wrapper._lastActive.push(key);
 		//console.log('activated:', el);
-		StateMap.setState(wrapper, key, 'active', true);
+		State.setState('active', true, wrapper, key);
 	}
 	return newProps;
 }
@@ -85,14 +85,14 @@ export function addFocusListener(wrapper, el, key) {
 	newProps.onFocus = function (e) {
 		existingOnFocus && existingOnFocus(e);
 		//console.log('focused: ', el);
-		StateMap.setState(wrapper, key, 'focused', true);
+		State.setState('focused', true, wrapper, key);
 	};
 
 	var existingOnBlur = props.onBlur;
 	newProps.onBlur = function (e) {
 		existingOnBlur && existingOnBlur(e);
 		//console.log('lost focus: ', el);
-		StateMap.setState(wrapper, key, 'focused', false)
+		State.setState('focused', false, wrapper, key)
 	}
 	return newProps;
 }
@@ -110,7 +110,7 @@ export function addChangeListener(wrapper, el, key) {
 	newProps.onChange = function (e) {
 		existingOnChange && existingOnChange(e);
 		//console.log('changed: ', el);
-		StateMap.setState(wrapper, key, 'changed', e.target.value);
+		State.setState('changed', e.target.value, wrapper, key);
 	};
 	return newProps;
 }

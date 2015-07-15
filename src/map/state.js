@@ -7,42 +7,43 @@ export default {
 	/*
 	 * Set/Add a new key with some new object
 	 */
-	set(wrapper, key, prop) {
-			return wrapper.state._look.set(key, prop);
-		},
-		/*
-		 * Set a key's state
-		 */
-		setState(wrapper, key, prop, value) {
-			wrapper.state._look.get(key).set(prop, value);
-			return wrapper.setState(wrapper.state._look);
+	add(container, key) {
+			return container.state._look.set(key, new Map());
 		},
 
 		/*
 		 * Get all states/information about a key
 		 */
-		get(wrapper, key) {
-			return wrapper.state._look.get(key);
-		},
-
-		/*
-		 * Get a specific state of a key
-		 */
-		getState(wrapper, key, prop) {
-			return wrapper.state._look.get(key).get(prop);
+		get(container, key) {
+			return container.state._look.get(key);
 		},
 
 		/*
 		 * Check if there's already information about a key
 		 */
-		has(wrapper, key) {
-			return wrapper.state._look.has(key);
+		has(container, key) {
+			return container.state._look.has(key);
+		},
+
+		/*
+		 * Get a specific state of a key
+		 */
+		getState(state, container, key) {
+			return container.state._look.get(key).get(state);
+		},
+
+		/*
+		 * Set a key's state
+		 */
+		setState(state, value, container, key) {
+			container.state._look.get(key).set(state, value);
+			return container.setState(container.state._look);
 		},
 
 		/*
 		 * Check if a key has a specific state
 		 */
-		hasState(wrapper, state) {
-			return wrapper.state._look.has(key).has(state);
+		hasState(state, container, key) {
+			return container.state._look.has(key).has(state);
 		}
 }

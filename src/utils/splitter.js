@@ -5,13 +5,13 @@ import cloneObject from './cloner';
 import PseudoMap from '../map/pseudo';
 
 let ref = '';
-let blankStyle = {
+const blankStyle = {
 		style: {},
 		condition: {},
 		css: ''
 	}
 	/**
-	 * Core algorithm which seperates all your styles and resolves all special objects
+	 * Core algorithm which separates all your styles and resolves all special objects
 	 * Recursively resolves pseudo-classes, extensions and media queries
 	 */
 export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
