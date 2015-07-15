@@ -3,16 +3,6 @@
 
 > It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
 
-# Benefit
-Using inline styles instead of static CSS files has a lot of positive side-effects. The most important one is **dynamic behavoir**.<br>Remember you're using JavaScript now. You're styles no longer belong to a static file but are mapped to an Object that can be manipulated in any given way.
-
-### Component-scoped
-It encourages you to define your styles scoped to your Component which helps to improve your app structure and keeps together all Component-relevant data.<br>It also avoids specificity or namespacing conflicts and eliminates dead code this it get's never applied to your DOM actively.
-
-### Seperation of Concerns
-Look tries to keep your `render` function clean of validations such as `this.state.checked && styles.checked` which often gets encouraged by other styling library. This keeps some kind of component-based seperation of concerns as long as your state **only** exists to change styles.    
-> **Warning:** Avoid using stateful conditions with data-sensitive states as this would mix logic and styles.
-
 # Features
 Look is as far as I know the **feature richest** styling library for React. Supporting [27 pseudo-classes](docs/supportedPseudos.md) and **stateful styles** which is an awesome shortcut if you need some styles depending on your current `state` and/or `props`.
 - ES6 classes
@@ -25,17 +15,18 @@ Look is as far as I know the **feature richest** styling library for React. Supp
 ### [Supported pseudo-classes](docs/supportedPseudos.md)
 _(Check here to get detail information on supported pseudo-classes)_
 
-# Under the hood
-## Dynamic Style Sheets
-Under the hood Look is based on **[Dynamic Style Sheets](https://github.com/dynamicstylesheets)** which is an lightweight interface for style object manipulation. It also ships an interface for dynamic CSS sheet interaction that automatically diffs changes to your DOM which might be used in an early stage to add unsupported CSS-features.  _(Check the organisation for more information)_.
+# Benefit
+Using inline styles instead of static CSS files has a lot of positive side-effects. The most important one is **dynamic behavior**.<br>Remember you're using JavaScript now. Your styles no longer belong to a static file but are mapped to an Object that can be manipulated in any given way.
 
-### Processors
-DSS (Dynamic Style Sheets) inlcude a processor interface that let's you apply any valid processor e.g. [Vendor Prefixing](https://github.com/dynamicstylesheets/DSS-Prefixer). See this frequently updated  [list](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets#available-processors) for all available processors I've done so far. 
+### Component-scoped
+It encourages you to define your styles scoped to your Component which helps to improve your app structure and keeps together all Component-relevant data.<br>It also avoids specificity or namespacing conflicts and eliminates dead code this it get's never applied to your DOM actively.
 
-**Power up your styles for your own custom needs!**
+### Seperation of Concerns
+Look tries to keep your `render` function clean of validations such as `this.state.checked && styles.checked` which often gets encouraged by other styling library. This keeps some kind of component-based seperation of concerns as long as your state **only** exists to change styles.    
+
+> **Warning:** Avoid using stateful conditions with data-sensitive states as this would mix logic and styles.
 
 # Usage
-> Warning: Still in early stage. Heavy changes could (hope not) occur.
 
 ```sh
 npm install react-look
@@ -112,6 +103,18 @@ class Header extends React.Component {
 
 export default Look.applyTo(Header);                  //Your styles get applied here
 ```
+
+# Under the hood
+## Dynamic Style Sheets
+Under the hood Look is based on **[Dynamic Style Sheets](https://github.com/dynamicstylesheets)** which is an lightweight interface for style object manipulation. It also ships an interface for dynamic CSS sheet interaction that automatically diffs changes to your DOM which might be used in an early stage to add unsupported CSS-features.  _(Check the organisation for more information)_.
+
+### Processors
+DSS (Dynamic Style Sheets) inlcude a processor interface that let's you apply any valid processor e.g. [Vendor Prefixing](https://github.com/dynamicstylesheets/DSS-Prefixer). See this frequently updated  [list](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets#available-processors) for all available processors I've done so far. 
+
+**Power up your styles for your own custom needs!**
+
+### Workflow
+![Look Workflow](docs/res/workflow.png)
 
 # Roadmap
 - [ ] **docs (in progress)**
