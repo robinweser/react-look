@@ -21,7 +21,7 @@
 * only-child
 
 ## type-specific child-index
-* first-of-type˘
+* first-of-type
 * last-of-type
 * nth-of-type
 * nth-last-of-type

@@ -1,7 +1,9 @@
 # Look
+
 ```sh
 npm install react-look
 ```
+
 **Look** is a **feature-rich** styling library for [React.js](https://facebook.github.io/react/) that supports lots of CSS features as well as **stateful** styles. It extends your inline styles and still remains hackable and processable since it is based on [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
 
 > It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
@@ -24,8 +26,8 @@ Using inline styles instead of static CSS files has a lot of positive side-effec
 ### Component-scoped
 It encourages you to define your styles scoped to your Component which helps to improve your app structure and keeps together all Component-relevant data.<br>It also avoids specificity or namespacing conflicts and eliminates dead code this it get's never applied to your DOM actively.
 
-### Seperation of Concerns
-Look tries to keep your `render` function clean of validations such as `this.state.checked && styles.checked` which often gets encouraged by other styling library. This keeps some kind of component-based seperation of concerns as long as your state **only** exists to change styles.    
+### Separation of Concerns
+Look tries to keep your `render` function clean of validations such as `this.state.checked && styles.checked` which often gets encouraged by other styling library. This keeps some kind of component-based separation of concerns as long as your state **only** exists to change styles.    
 
 > **Warning:** Avoid using stateful conditions with data-sensitive states as this would mix logic and styles.
 
@@ -91,7 +93,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header look="header" onClick={this.onClick}>   //Just use the `look` prop to apply styles
+      <header look="header">            //Just use the `look` prop to apply styles
         <h1 look="title">
           {this.props.title}
         </h1>
@@ -100,7 +102,7 @@ class Header extends React.Component {
   }
 }
 
-export default Look.applyTo(Header);                  //Your styles get applied here
+  export default Look.applyTo(Header);  //Your styles get applied here
 ```
 
 # Under the hood
@@ -112,8 +114,9 @@ DSS (Dynamic Style Sheets) inlcude a processor interface that let's you apply an
 
 **Power up your styles for your own custom needs!**
 
-### Workflow
-![Look Workflow](docs/res/workflow.png)
+## Life cycle
+Similar to Radium, Look wraps the `render` function and modifies applied styles while iterating recursive over all children. It adds missing event listeners to match `:hover`, `:active`, `:focus` and `:valid`, `:invalid`. Those action states get saved within your wrapping component (You can adress those with the [State API](docs/api/State.md)).<br> It also counts (type-specific) indexes to validate index-specific pseudo-classes such as `:nth-child` or `` `:nth-type-of``.
+![Life cycle](docs/res/lifecycle.png)
 
 # Roadmap
 - [ ] **docs (in progress)**
