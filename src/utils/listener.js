@@ -6,111 +6,111 @@ import assign from 'object-assign';
  * Only get applied if actually needed
  * NOTE: This has been heavily copied from Radium. Great thanks for providing this nice stuff.
  */
-export function addRequiredListeners(wrapper, el, key, props) {
-	if (State.get(wrapper, 'pseudoMap').get(el.props.look).size > 0) {
-		let pseudoMap = State.get(wrapper, 'pseudoMap').get(el.props.look);
+export default function addRequiredEventListeners(container, element, key, newProps) {
+  /*
+   * This checks if there are any needed pseudo-classes that need an event listener by checking the pseudo map for this element
+   */
+  if (State.get(container, 'pseudoMap').get(element.props.look).size > 0) {
+    let pseud = State.get(container, 'pseudoMap').get(element.props.look);
 
-		if (pseudoMap.get('active')) {
-			props = assign(props, addActiveListener(wrapper, el, key));
-		}
+    if (pseudo.get('active')) {
+      newProps = assign(newProps, addActiveListener(container, element, key));
+    }
 
-		if (pseudoMap.get('hover')) {
-			props = assign(props, addHoverListener(wrapper, el, key));
-		}
+    if (pseudo.get('hover')) {
+      newProps = assign(newProps, addHoverListener(container, element, key));
+    }
 
-		if (pseudoMap.get('focus') && el.type == 'input') {
-			props = assign(props, addFocusListener(wrapper, el, key));
-		}
+    if (pseudo.get('focus') && element.type == 'input') {
+      newProps = assign(newProps, addFocusListener(container, element, key));
+    }
 
-		//TODO: iterate array to check type for more readability
-		if (pseudoMap.get('change') && el.type == 'input' && props.type == 'url' || props.type == 'range' ||  props.type == 'number' ||  props.type == 'tel' || props.type == 'email') {
-			props = assign(props, addChangeListener(wrapper, el, key));
-		}
-	}
+
+    let validTypes = ['url', 'email', 'tel', 'range', 'number'];
+
+    if (pseudo.get('change') && element.type == 'input' && validTypes.indexOf(newProps.type) != -1) {
+      newProps = assign(newProps, addChangeListener(container, element, key));
+    }
+  }
 }
 
 /*
  * Adds a mouse-hover listener to target :hover pseudo-classes
- * This only gets applied if an el acutally got :hover-specific styles
+ * This only gets applied if an element acutally got :hover-specific styles
  */
-export function addHoverListener(wrapper, el, key) {
-	let newProps = {};
-	let props = el.props;
+function addHoverListener(container, element, key) {
+  let newProps = element.props;
+  let existingOnMouseEnter = newProps.onMouseEnter;
+  let existingOnMouseLeave = newProps.onMouseLeave;
 
-	let existingOnMouseEnter = props.onMouseEnter;
-	newProps.onMouseEnter = function (e) {
-		existingOnMouseEnter && existingOnMouseEnter(e);
-		//console.log('entered:', el);
-		State.setState('hovered', true, wrapper, key);
-	};
+  newProps.onMouseEnter = function(e) {
+    existingOnMouseEnter && existingOnMouseEnter(e);
+    State.setState('hovered', true, container, key);
+  };
 
-	let existingOnMouseLeave = props.onMouseLeave;
-	newProps.onMouseLeave = function (e) {
-		//console.log('left:', el);
-		existingOnMouseLeave && existingOnMouseLeave(e);
-		State.setState('hovered', false, wrapper, key);
-	}
-	return newProps;
+  newProps.onMouseLeave = function(e) {
+    existingOnMouseLeave && existingOnMouseLeave(e);
+    State.setState('hovered', false, container, key);
+  }
+  return newProps;
 }
 
 
 
 /*
  * Adds a mouse-down listener to target :active pseudo-classes
- * This only gets applied if an el acutally got :active-specific styles
+ * This only gets applied if an element acutally got :active-specific styles
  */
-export function addActiveListener(wrapper, el, key) {
-	let newProps = {};
-	let props = el.props;
-	var existingOnMouseDown = props.onMouseDown;
-	newProps.onMouseDown = function (e) {
-		existingOnMouseDown && existingOnMouseDown(e);
-		wrapper._lastActive.push(key);
-		//console.log('activated:', el);
-		State.setState('active', true, wrapper, key);
-	}
-	return newProps;
+function addActiveListener(container, element, key) {
+  let newProps = element.props;
+  let existingOnMouseDown = newProps.onMouseDown;
+
+  newProps.onMouseDown = function(e) {
+    existingOnMouseDown && existingOnMouseDown(e);
+
+		//adds current element key to a active list which gets cleaned on mouseUp again (see enhancer)
+    container._lastActive.push(key);
+    State.setState('active', true, container, key);
+  }
+  return newProps;
 }
 
 
 /*
  * Adds a input-focus listener to target :focus pseudo-classes
- * This only gets applied if an el acutally got :focus-specific styles
- * Also el's type needs to be input
+ * This only gets applied if an element acutally got :focus-specific styles
+ * Also element's type needs to be input
  */
-export function addFocusListener(wrapper, el, key) {
-	let newProps = {};
-	let props = el.props;
-	var existingOnFocus = props.onFocus;
-	newProps.onFocus = function (e) {
-		existingOnFocus && existingOnFocus(e);
-		//console.log('focused: ', el);
-		State.setState('focused', true, wrapper, key);
-	};
+function addFocusListener(container, element, key) {
+  let newProps = element.props;
+  let existingOnFocus = newProps.onFocus;
+  let existingOnBlur = newProps.onBlur;
 
-	var existingOnBlur = props.onBlur;
-	newProps.onBlur = function (e) {
-		existingOnBlur && existingOnBlur(e);
-		//console.log('lost focus: ', el);
-		State.setState('focused', false, wrapper, key)
-	}
-	return newProps;
+  newProps.onFocus = function(e) {
+    existingOnFocus && existingOnFocus(e);
+    State.setState('focused', true, container, key);
+  };
+
+  newProps.onBlur = function(e) {
+    existingOnBlur && existingOnBlur(e);
+    State.setState('focused', false, container, key)
+  }
+  return newProps;
 }
 
 /*
  * Adds a change listener to validate :valid and :invalid pseudo-classes
- * Only gets applied if the current el is an input element.
- * Also it needs to be of type: url, tel, email or range, number
+ * Only gets applied if the current element is an input elementement.
+ * Also it needs to be of type: url, telement, email or range, number
  * TODO: Add a new pseudoMap entry called validation to target needed listeners more accurate
  */
-export function addChangeListener(wrapper, el, key) {
-	let newProps = {};
-	let props = el.props;
-	var existingOnChange = props.onChange;
-	newProps.onChange = function (e) {
-		existingOnChange && existingOnChange(e);
-		//console.log('changed: ', el);
-		State.setState('changed', e.target.value, wrapper, key);
-	};
-	return newProps;
+function addChangeListener(container, element, key) {
+  let newProps = element.props;
+  let existingOnChange = newProps.onChange;
+
+  newProps.onChange = function(e) {
+    existingOnChange && existingOnChange(e);
+    State.setState('changed', e.target.value, container, key);
+  };
+  return newProps;
 }

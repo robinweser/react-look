@@ -5,7 +5,7 @@ import assign from 'object-assign';
 import evaluateExpression from './evaluator';
 import State from '../map/state';
 import pseudoMap from '../map/pseudo';
-import * as Listener from './listener';
+import addRequiredEventListeners from './listener';
 
 /*
  * Resolves styling for an element and returns the modified one.
@@ -38,7 +38,7 @@ export default function resolveLook(wrapper, el, selectors, childProps) {
 			})
 
 			/*
-			 * Recursively resolve look for child elements first 
+			 * Recursively resolve look for child elements first
 			 */
 			props.children.forEach((item, index) => {
 				/*
@@ -85,7 +85,7 @@ export default function resolveLook(wrapper, el, selectors, childProps) {
 				console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
 			}
 
-			Listener.addRequiredListeners(wrapper, el, key, newProps);
+			addRequiredEventListeners(wrapper, el, key, newProps);
 			newStyle = resolveStyle(cloneObject(styles), newProps, wrapper, el, key, childProps)
 			delete props.look;
 		}

@@ -1,7 +1,7 @@
 # State
 Using State you can get/set special states for specific components.<br>
 
-> **Warning**: This only applies to elements that provide an explicit `key` or `ref`.<br>
+> **Warning**: This only applies to elements that provide an explicit `key` or `ref` expect the root node which gets `root` applied if there's no `key` or `ref` set.<br>
 
 ## Usage
 
@@ -30,19 +30,19 @@ State.get(extendedHeader)
 State.getState('hover', extendedHeader, 'second')
 ```
 
-##Valid actions states are
+## react-look specific action states
 * hovered
 * focused
 * changed (returns newest value)
 * active
 
 ## Methods
-- [add](#addcontainer-key)
-- [get](#getcontainer-key)
-- [set](#setstates-container-key)
-- [has](#hascontainer-key)
-- [getState](#getstatestate-container-key)
-- [setState](#setstatestate-value-container-key)
+- [add](#addcontainer--key)
+- [get](#getcontainer--key)
+- [set](#setstates-container--key)
+- [has](#hascontainer--key)
+- [getState](#getstatestate-container--key)
+- [setState](#setstatestate-value-container--key)
 - [hasState](#hasstatecontainer-state)
 
 

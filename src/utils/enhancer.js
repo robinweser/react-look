@@ -11,7 +11,7 @@ export default {
 				this.state._look = new Map([
 					['pseudoMap', look._pseudoMap]
 				]);
-				
+
 				/*
 				* If matchState is set all stateful conditions will both math this.state and this.props
 				* Otherwise only this.props get checked
@@ -40,7 +40,7 @@ export default {
 					me._onMouseUp();
 				});
 			}
-			
+
 			/*
 			* Removes all active styles applied to elements by mouse down before
 			*/
