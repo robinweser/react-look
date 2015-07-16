@@ -2,7 +2,6 @@ import * as Validator from './validator';
 import State from '../map/state';
 
 export default function evaluateExpression(expr, wrapper, el, key, childProps) {
-	let state = wrapper.state;
 	//eval media queries
 	if (Validator.isMediaQuery(expr)) {
 		if (window.matchMedia) {
@@ -13,16 +12,17 @@ export default function evaluateExpression(expr, wrapper, el, key, childProps) {
 	}
 
 	//eval conditions
+	let matchValues = wrapper._matchValues
 	else if (Validator.isCondition(expr)) {
 		let [
 			property, value
 		] = expr.split('=');
-		if (state[property] == value) {
+		if (matchValues[property] == value) {
 			return true;
 		}
 	}
 
-	//eval pseudos 
+	//eval pseudos
 	else if (Validator.isPseudo(expr)) {
 		//mouse pseudos
 		if (Validator.isPseudoHover(expr)) {

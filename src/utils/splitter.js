@@ -31,7 +31,7 @@ export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 				if (Validator.isAdvanced(selector)) {
 					sheet[parent].condition[selector] = cloneObject(blankStyle, true);
 
-					PseudoMap.addEventPseudo(pseudoMap, ref, selector);
+					PseudoMap.addRequiredEventPseudos(pseudoMap, ref, selector);
 
 					splitStyles(current, sheet[parent].condition, pseudoMap, selector);
 				} else {

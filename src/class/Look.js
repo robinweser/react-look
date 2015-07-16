@@ -26,6 +26,7 @@ export default class Look extends Sheet {
 
 	/*
 	 * Processes your styles with any processor provided
+	 * @param {Array|Object} processors - processor(s) you want to run against your styles
 	 */
 	process(processors, ...args) {
 		if (processors instanceof Array == false) {
