@@ -27,7 +27,7 @@ Using inline styles instead of static CSS files has a lot of positive side-effec
 It encourages you to define your styles scoped to your Component which helps to improve your app structure and keeps together all Component-relevant data.<br>It also avoids specificity or namespacing conflicts and eliminates dead code this it get's never applied to your DOM actively.
 
 ### Separation of Concerns
-Look tries to keep your `render` function clean of validations such as `this.state.checked && styles.checked` which often gets encouraged by other styling library. This keeps some kind of component-based separation of concerns as long as your state **only** exists to change styles.    
+Look tries to keep your `render` function clean of validations such as `this.state.checked && styles.checked` which often gets encouraged by other styling library. This keeps some kind of component-based separation of concerns as long as your state **only** exists to change styles.
 
 > **Warning:** Avoid using stateful conditions with data-sensitive states as this would mix logic and styles.
 
@@ -110,26 +110,25 @@ class Header extends React.Component {
 Under the hood Look is based on **[Dynamic Style Sheets](https://github.com/dynamicstylesheets)** which is an lightweight interface for style object manipulation. It also ships an interface for dynamic CSS sheet interaction that automatically diffs changes to your DOM which might be used in an early stage to add unsupported CSS-features.  _(Check the organisation for more information)_.
 
 ### Processors
-DSS (Dynamic Style Sheets) inlcude a processor interface that let's you apply any valid processor e.g. [Vendor Prefixing](https://github.com/dynamicstylesheets/DSS-Prefixer). See this frequently updated  [list](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets#available-processors) for all available processors I've done so far. 
+DSS (Dynamic Style Sheets) inlcude a processor interface that let's you apply any valid processor e.g. [Vendor Prefixing](https://github.com/dynamicstylesheets/DSS-Prefixer). See this frequently updated  [list](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets#available-processors) for all available processors I've done so far.
 
 **Power up your styles for your own custom needs!**
 
 ## Life cycle
-Similar to Radium, Look wraps the `render` function and modifies applied styles while iterating recursive over all children. It adds missing event listeners to match `:hover`, `:active`, `:focus` and `:valid`, `:invalid`. Those action states get saved within your wrapping component (You can adress those with the [State API](docs/api/State.md)).<br> It also counts (type-specific) indexes to validate index-specific pseudo-classes such as `:nth-child` or `` `:nth-type-of``.
+Similar to Radium, Look wraps the `render` function and modifies applied styles while iterating recursive over all children. It adds missing event listeners to match `:hover`, `:active`, `:focus` and `:valid`, `:invalid`. Those action states get saved within your wrapping component *(You can adress those with the [State API](docs/api/State.md))*.<br> It also counts (type-specific) indexes to validate index-specific pseudo-classes such as `:nth-child` or `` `:nth-type-of``.
 ![Life cycle](docs/res/lifecycle.png)
 
 # Roadmap
-- [ ] **docs (in progress)**
 - [ ] **use-case examples**
-- [ ] clean up / readability improvement + code documentation
+- [ ] clean up / readability improvement
 - [ ] **>, <, >=, <= support for conditions**
 - [ ] GlobalSheet for global CSS styles
 
 ## [react-look-tools (coming soon)](https://github.com/rofrischmann/react-look-tools)
-- [ ] `@keyframe` support
+- [ ] `@keyframe`, `linear-gradient` support
 - [ ] **extend functionality**
 - [ ] special pseudos (:placeholder, :webkit-scrollbar)
-- [ ] **dev tools for better DX (inspired by [Dan Abramov](https://github.com/gaearon))
+- [ ] **dev tools for better DX (inspired by [Dan Abramov](https://github.com/gaearon))**
 
 # License
 **Look** (react-look) is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>Created with ♥ by [@rofrischmann](http://rofrischmann.de) at [Unverschämt](http://unverschaemt.net).

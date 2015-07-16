@@ -1,20 +1,20 @@
 # Look
-Look is a class that extends [Sheet](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md) from [Dynamic Style Sheets](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets).    
+Look is a class that extends [Sheet](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md) from [Dynamic Style Sheets](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets).
 Core functionality has been adopted, including the following methods:
-- [process](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdhttps://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdprocessprocessor-args)
-- [add](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdaddselectors--overwrite--false)
-- [addSelector](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdaddselectorselector--overwrite--false)
-- [addRule](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdaddruleselector-property-value--overwrite--false)
-- [remove](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdremoveselectors)
-- [removeSelector](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdremoveselectorselector)
-- [removeRule](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdremoveruleselector-rule)
-- [removeRules](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdremoverulesselector-rules)
-- [removeAll](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdremoveall)
-- [modify](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdmodifyselector)
-- [modifySelector](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdmodifyselectorselector-rules)
-- [modifyRule](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdmodifyselector-property-value)
-- [replace](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdreplaceselectors)
-- [replaceSelector](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.mdreplaceselector-rules)
+- [process](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#processprocessor-args)
+- [add](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#addselectors--overwrite--false)
+- [addSelector](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#addselectorselector--overwrite--false)
+- [addRule](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#addruleselector-property-value--overwrite--false)
+- [remove](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#removeselectors)
+- [removeSelector](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#removeselectorselector)
+- [removeRule](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#removeruleselector-rule)
+- [removeRules](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#removerulesselector-rules)
+- [removeAll](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#removeall)
+- [modify](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#modifyselector)
+- [modifySelector](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#modifyselectorselector-rules)
+- [modifyRule](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#modifyselector-property-value)
+- [replace](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#replaceselectors)
+- [replaceSelector](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md#replaceselector-rules)
 
 For detailed information check the [Sheet API documentation](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md) or directly click a function.
 
