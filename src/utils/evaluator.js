@@ -26,11 +26,11 @@ export default function evaluateExpression(expr, wrapper, el, key, childProps) {
 	else if (Validator.isPseudo(expr)) {
 		//mouse pseudos
 		if (Validator.isPseudoHover(expr)) {
-			if (State.get(wrapper, key).get('hovered') == true) {
+			if (State.get(wrapper, key).get('hover') == true) {
 				return true;
 			}
 		} else if (Validator.isPseudoFocus(expr)) {
-			if (State.get(wrapper, key).get('focused') == true) {
+			if (State.get(wrapper, key).get('focus') == true) {
 				return true;
 			}
 		} else if (Validator.isPseudoActive(expr)) {
