@@ -17,6 +17,7 @@ const blankStyle = {
 export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 	let selector;
 	for (selector in styles) {
+		selector = selector.trim();
 		let current = styles[selector];
 
 		if (current instanceof Object) {
