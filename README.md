@@ -46,32 +46,23 @@ function custom(value){
 let sheet = new Look({
   header : {
     padding: custom(5),               // use benefit of javascript
-    color: '#fff',
     transition: '200ms all linear',
-    ':hover' : {                      // pseudo-classes
-        fontSize: 15,
-        ':checked' : {                // also nested
-            color: 'red'
-        },
-    },
     '@media (min-height: 800px)' : {  // media queries
       fontSize: 13,
-      ':hover' : {
-        color: green
+      ':hover' : {                    // pseudo-classes
+        fontSize: 15,
+        ':checked' : {                // also nested
+          color: 'red'
+        }
       }
     },
-
     'status=active' : {               // conditioned styles
       backgroundColor: 'green',
       'theme=pink' : {
         backgroundColor: 'pink'       // nested conditions
       }
-    },
-    'status=disabled' : {
-      backgroundColor: 'gray',
     }
   },
-
   title : {
     fontWeight: 800
   }
@@ -120,15 +111,14 @@ Similar to Radium, Look wraps the `render` function and modifies applied styles 
 
 # Roadmap
 - [ ] **use-case examples**
-- [ ] clean up / readability improvement
-- [ ] **>, <, >=, <= support for conditions**
-- [ ] GlobalSheet for global CSS styles
+- [ ] Global (Sheet extension) for global CSS styles
 
 ## [react-look-tools (coming soon)](https://github.com/rofrischmann/react-look-tools)
-- [ ] `@keyframe`, `linear-gradient` support
-- [ ] **extend functionality**
-- [ ] special pseudos (:placeholder, :webkit-scrollbar)
-- [ ] **dev tools for better DX (inspired by [Dan Abramov](https://github.com/gaearon))**
+- `@keyframe`, `linear-gradient` support
+- **extend functionality**
+- separate input validation
+-  special pseudos (:placeholder, :webkit-scrollbar)
+-  **dev tools for better DX (inspired by [Dan Abramov](https://github.com/gaearon))**
 
 # License
 **Look** (react-look) is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>Created with ♥ by [@rofrischmann](http://rofrischmann.de) at [Unverschämt](http://unverschaemt.net).
