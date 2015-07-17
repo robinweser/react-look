@@ -1,37 +1,40 @@
 import * as Validator from '../utils/validator';
+const eventPseudos = [':active', ':focus', ':hover', ':valid', ':invalid'];
 
 export default {
-  /*
-   * Adds pseudo-class information concerning a style selector
-   * This helps to purposeful handle only needed pseudo-classes
-   * @param {Map} pseudo - a map to store event pseudos
-   * @param {string} selector - a selector which those event pseudos belong to
-   * @param {string} event - pseudo-class that represents an event
-   */
-  addRequiredEventPseudos(pseudo, selector, event) {
-      if (!pseudo.has(selector)) {
-        pseudo.set(selector, new Map());
-      }
+	/*
+	 * Adds pseudo-class information concerning a style selector
+	 * This helps to purposeful handle only needed pseudo-classes
+	 * @param {Map} pseudo - a map to store event pseudos
+	 * @param {string} selector - a selector which those event pseudos belong to
+	 * @param {string} event - pseudo-class that represents an event
+	 */
+	addRequiredEventPseudos(pseudo, selector, event) {
+			let eventIndex = eventPseudo.indexOf(selector);
+			if (eventIndex > -1) {
 
-      //Validates current selectors and analogous sets event reference
-      if (Validator.isPseudoActive(event)) {
-        this.setEventPseudo(pseudo, selector, 'active')
-      } else if (Validator.isPseudoFocus(event)) {
-        this.setEventPseudo(pseudo, selector, 'focus')
-      } else if (Validator.isPseudoHover(event)) {
-        this.setEventPseudo(pseudo, selector, 'hover')
+				//Creates a new pseudo map if it doesn't exist before
+				if (!pseudo.has(selector)) {
+					pseudo.set(selector, new Map());
+				}
 
-        //only needed for inputs that need to be validated
-        //Idea: Perhaps separate this from styles since it better fits the logic part, see https://github.com/rofrischmann/react-look/issues/25
-      } else if (Validator.isPseudoValid(event) || Validator.isPseudoInvalid(event)) {
-        this.setEventPseudo(pseudo, selector, 'change')
-      }
-    },
+				//Validates current selectors and analogous sets event reference
+				if (eventIndex > 2) {
+					this.setEventPseudo(pseudo, selector, 'change')
+				} else {
+					let event = eventPseudos[isEvent];
+					this.setEventPseudo(pseudo, selector, event.substr(1, --event.length))
+				}
+			}
+		},
 
-    /*
-     * Sets a specific event for a given selector
-     */
-    setEventPseudo(pseudo, selector, event) {
-      pseudo.get(selector).set(event, true);
-    }
+		/*
+		 * Sets a specific event for a given selector
+		 * @param {Map} pseudo - a map to store event pseudos
+		 * @param {string} selector - a selector which those event pseudos belong to
+		 * @param {string} event - pseudo-class that represents an event
+		 */
+		setEventPseudo(pseudo, selector, event) {
+			pseudo.get(selector).set(event, true);
+		}
 }

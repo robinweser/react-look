@@ -23,7 +23,6 @@ export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 		if (current instanceof Object) {
 			/**
 			 * Checks if the current object is perhaps empty
-			 * Benefit: Prevents empty selectors since those affect your rendering performance
 			 */
 			if (!Validator.isEmpty(current)) {
 				/**
@@ -37,14 +36,15 @@ export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 					splitStyles(current, sheet[parent].condition, pseudoMap, selector);
 				} else {
 					sheet[selector] = cloneObject(blankStyle, true);
-					if (!parent) {
-						ref = selector;
-					}
+					!parent && (ref = selector);
 					splitStyles(current, sheet, pseudoMap, selector);
 				}
 			}
 		} else {
-			if (Validator.isCSS(selector)) {
+			/*
+			* Small hack to add additional classNames
+			*/
+			if (Validator.validateSelector(selector, '_css')) {
 				sheet[parent].css = current;
 				delete styles[selector];
 				continue;

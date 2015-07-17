@@ -1,9 +1,5 @@
 export function validateSelector(selector, value) {
-	if (selector.indexOf(value) == 0) {
-		return true;
-	} else {
-		return false;
-	}
+	return selector.indexOf(value) == 0;
 }
 
 export function isPseudo(selector) {

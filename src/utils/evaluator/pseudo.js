@@ -23,7 +23,7 @@ const pseudoGrouping = {
 export default function evaluatePseudoClass(pseudo, container, element, key, childProps) {
 	let keyState = State.get(container, key);
 
-	let evaluation = createEvaluationMap(pseudo, keyState, element.props, childProps)
+	let evaluation = generateEvaluationMap(pseudo, keyState, element.props, childProps)
 
 	/*
 	 * Iterate all validation keys and check which pseudo pseudo matches
@@ -58,7 +58,7 @@ function splitNthExpression(pseudo, expression) {
  * @param {Object} props - element properties
  * @param {Object} childProps - a map with (type-specific) indexes to validate index-sensitive pseudos
  */
-function createEvaluationMap(pseudo, keyState, props, childProps) {
+function generateEvaluationMap(pseudo, keyState, props, childProps) {
 	let pseudoGroup = getPseudoGroup(pseudo);
 	let evalMap;
 
