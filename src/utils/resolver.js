@@ -23,25 +23,35 @@ export default function resolveLook(container, element, selectors, childProps) {
 		if (props.children && props.children instanceof Array) {
 
 			let typeMap = generateTypeMap(props.children);
+			let indexMap = {};
+
 			/**
 			 * Recursively resolve look for child elements first
+			 * Generate index-maps to resolve child-index-sensitive pseudo-classes
 			 */
-			props.children.forEach((item, index) => {
-				/**
-				 * Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
-				 */
-				let childProps = {};
-				if (item.props.look) {
-					childProps['length'] = props.children.length;
-					childProps['index'] = index;
-					childProps['typeIndex'] = typeIndex[item.type];
-					childProps['typeIndexLength'] = typeMap[item.type];
-				}
+			props.children.forEach((child, index) => {
 
-				if (React.isValidElement(item)) {
-					children.push(resolveLook(container, item, selectors, child));
+				//Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
+				generateIndexMap(children, indexMap);
+				let childProps;
+				if (child.props.look) {
+
+					childProps = {
+						'index': index,
+						'length': props.children.length,
+						'typeIndex': indexMap[item.type],
+						'typeIndexLength': typeMap[item.type].length
+					}
+
+					//only add child if it actually is a valid react element
+					if (React.isValidElement(item)) {
+						children.push(resolveLook(container, child, selectors, childProps));
+					}
 				}
 			});
+
+			//Flip children since they somehow come out wrong way arround
+			//TODO: research why this actually happens
 			children = children.reverse();
 		} else {
 			children = props.children;
@@ -49,6 +59,8 @@ export default function resolveLook(container, element, selectors, childProps) {
 
 		let newProps = ({}, props);
 		let newStyle = {};
+
+		//TODO: add multiple look support, see #14
 		if (props.hasOwnProperty('look') && selectors.hasOwnProperty(props.look)) {
 			let styles = selectors[props.look];
 
@@ -70,9 +82,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 		}
 		newProps.style = newStyle;
 
-		let newEl = React.cloneElement(element, newProps, children);
-		return newEl;
-
+		return React.cloneElement(element, newProps, children);
 	} else {
 		return element;
 	}
@@ -113,12 +123,17 @@ function resolveStyle(styles, newProps, container, element, key, childProps) {
  * @param {Array} children - an array of children
  */
 function generateTypeMap(children) {
-	let typeSensitiveMap = {};
+	let indexMap = {};
+	return generateIndexMap(children, indexMap);
+}
+
+function generateIndexMap(children, indexMap) {
 	children.forEach((child, index) => {
-		if (typeSensitiveMap.hasOwnProperty(child.type)) {
-			++typeSensitiveMap[child.type];
+		if (indexMap.hasOwnProperty(child.type)) {
+			++indexMap[child.type];
 		} else {
-			typeSensitiveMap[child.type] = 1;
+			indexMap[child.type] = 1;
 		}
 	});
+	return indexMap;
 }
