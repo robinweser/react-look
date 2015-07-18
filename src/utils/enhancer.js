@@ -13,10 +13,10 @@ export default {
 				]);
 
 				/*
-				* If matchState is set all stateful conditions will both math this.state and this.props
-				* Otherwise only this.props get checked
-				*/
-				if (matchState){
+				 * If matchState is set all stateful conditions will both math this.state and this.props
+				 * Otherwise only this.props get checked
+				 */
+				if (matchState) {
 					this._matchValues = assign(this.state, this.props);
 				} else {
 					this._matchValues = this.props;
@@ -25,48 +25,27 @@ export default {
 				let me = this;
 
 				/*
-				* Adds a resize listener to instantly recheck all media queries
-				* NOTE: It is assumend that a user won't resize an application too often
-				*/
+				 * Adds a resize listener to instantly recheck all media queries
+				 * NOTE: It is assumend that a user won't resize an application too often
+				 */
 				if (mediaQueryListener) {
-					this._onResizeListener = this._onResizeListener.bind(this);
 					window.addEventListener('resize', function () {
-						me._onResizeListener();
+						me.forceUpdate();
 					});
 				}
-
-				this._onMouseUp = this._onMouseUp.bind(this);
-				window.addEventListener('mouseup', function () {
-					me._onMouseUp();
-				});
 			}
 
-			/*
-			* Removes all active styles applied to elements by mouse down before
-			*/
-			_onMouseUp() {
-				if (this._lastActive.length > 0) {
-					this._lastActive.forEach(key => {
-						if (State.has(this, key)) {
-							State.setState('active', false, this, key);
-							//console.log('Deactivated:', key);
-						}
-					})
-					this._lastActive.length = 0;
+			componentWillUnmount() {
+					if (this._onMouseUp) {
+						window.removeEventListener('mouseup', this._onMouseUp)
+					}
 				}
-			}
-
-			_onResizeListener() {
-				this.forceUpdate();
-			}
-
-			/*
-			* Similar to Radium, Look wraps the render function and resolves styles on its own
-			*/
+				/*
+				 * Similar to Radium, Look wraps the render function and resolves styles on its own
+				 */
 			render() {
-				let el = super.render();
-				el = resolveLook(this, el, look.selectors);
-				return el;
+				let element = super.render();
+				return resolveLook(this, element, look.selectors);
 			}
 		}
 		return LookComponent;
