@@ -3,6 +3,10 @@ import {evalValue, evalRange, evalNth} from './eval.js';
 import Regex from '../deprecated/regex.js';
 import State from '../../map/state';
 
+
+/**
+ * Pseudo-class groups that include associated pseudos
+ */
 const pseudoGrouping = {
 	userAction: [':action', ':focus', ':hover'],
 	indexSensitive: [':first-child', ':last-child', ':only-child', ':nth-child', ':nth-last-child'],
@@ -12,7 +16,7 @@ const pseudoGrouping = {
 	other: [':lang', ':empty'],
 }
 
-/*
+/**
  * Evaluates if a pseudo class fullfils its condition
  * @param {string} pseudo - pseudo-class that gets evaluated
  * @param {Object} container - React-Component that wraps these elements
@@ -25,7 +29,7 @@ export default function evaluatePseudoClass(pseudo, container, element, key, chi
 
 	let evaluation = generateEvaluationMap(pseudo, keyState, element.props, childProps)
 
-	/*
+	/**
 	 * Iterate all validation keys and check which pseudo pseudo matches
 	 */
 	let pseudoClass;
@@ -36,6 +40,10 @@ export default function evaluatePseudoClass(pseudo, container, element, key, chi
 	}
 }
 
+/**
+ * Identifies selectors pseudo group
+ * @param {string} selector - selector that gets checked
+ */
 function getPseudoGroup(selector) {
 	let group;
 	for (group in pseudoGrouping) {
@@ -45,13 +53,18 @@ function getPseudoGroup(selector) {
 	}
 }
 
+/**
+ * Extracts only the mathematical expression out an pseudo-class string 
+ * @param {string} pseudo - pseudo-class selector that includes a mathmactical expression
+ * @param {string} expression - defines which index-sensitive pseudo-class your pseudo is, e.g: nth-child, first-of-type 
+ */
 function splitNthExpression(pseudo, expression) {
 	let split = pseudo.replace(/ /g, '').split(expression + '(');
 	return split[1].substr(0, split[1].length - 1);
 }
 
 
-/*
+/**
  * Creates a map with evaluated pseudo classes for each pseudo group
  * @param {string} pseudo - current pseudo-class string
  * @param {string} keyState - action states for the current element

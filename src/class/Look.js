@@ -5,16 +5,16 @@ import Enhancer from '../utils/enhancer';
 
 export default class Look extends Sheet {
 
-	/*
+	/**
 	 * Creates a new Look instance which extends Dynamic Style Sheets' Sheet
 	 * For further information check the Sheet class
 	 * @param {Object} styles - A key-value map with style rules
 	 */
 	constructor(styles) {
 		let selectors = {};
-
 		let pseudo = new Map();
-		/*
+
+		/**
 		 * Splits your selectors into styles, conditions (pseudo, media, stateful) & css
 		 * Also creates a pseudoMap with information on used pseudo-classes
 		 */
@@ -24,20 +24,21 @@ export default class Look extends Sheet {
 		this._pseudoMap = pseudo;
 	}
 
-	/*
+	/**
 	 * Processes your styles with any processor provided
 	 * @param {Array|Object} processors - processor(s) you want to run against your styles
 	 */
 	process(processors, ...args) {
 		if (processors instanceof Array == false) {
-			processors = [processors]
+			super.process(processor, ...args);
+		} else {
+			processors.forEach(item => {
+				super.process(item, ...args);
+			})
 		}
-		processors.forEach(item => {
-			super.process(item, ...args);
-		})
 	}
 
-	/*
+	/**
 	 * Applies your styles to a React Component
 	 * @param {Component} component - a valid React component that get'S styles applied
 	 * @param {Boolean} matchState - if also this.state (in addition to this.props) values are used while validatiing stateful conditions

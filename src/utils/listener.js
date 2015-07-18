@@ -14,7 +14,8 @@ const events = {
 		onBlur: false
 	}
 };
-/*
+
+/**
  * Adds additional event listeners to target some special pseudo-classes
  * Only get applied if actually needed
  * NOTE: This has been heavily copied from Radium. Great thanks for providing this nice stuff.
@@ -24,11 +25,11 @@ const events = {
  * @param {Object} newProps - Props object that gets the listeners added
  */
 export default function addRequiredEventListeners(container, element, key, newProps) {
-	/*
+	/**
 	 * This checks if there are any needed pseudo-classes that need an event listener by checking the pseudo map for this element
 	 */
-	if (State.get(container, 'pseudoMap').get(element.props.look).size > 0) {
-		let pseudo = State.get(container, 'pseudoMap').get(element.props.look);
+	if (container._pseudoMap.get(element.props.look).size > 0) {
+		let pseudo = container._pseudoMap.get(element.props.look);
 
 		let event;
 		for (event in events) {
@@ -46,7 +47,7 @@ export default function addRequiredEventListeners(container, element, key, newPr
 }
 
 
-/*
+/**
  * Adds an event listener to target pseudo-classes
  * This only gets applied if an element acutally got action-pseudo-class-specific styles
  * @param {Component} container - React Component that gets enhanced by Look
@@ -74,7 +75,7 @@ function addEventListener(container, props, key, state, listener) {
 	return newProps;
 }
 
-/*
+/**
  * Removes all active styles applied to elements by mouse down before
  * @param {Component} container - React Component that gets enhanced by Look
  */
@@ -90,7 +91,7 @@ function onMouseUp(container) {
 }
 }
 
-/*
+/**
  * Adds a mosue up listener to delete :active styles
  * @param {Component} container - React Component that gets enhanced by Look
  */
@@ -99,7 +100,7 @@ function addMouseUpListener(container) {
 	let mouseUpListener = window.addEventListener('mouseup', container._onMouseUp);
 }
 
-/*
+/**
  * Adds a change listener to validate :valid and :invalid pseudo-classes
  * Only gets applied if the current element is an input elementement.
  * Also it needs to be of type: url, telement, email or range, number

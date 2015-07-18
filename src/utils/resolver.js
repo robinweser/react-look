@@ -7,7 +7,7 @@ import State from '../map/state';
 import pseudoMap from '../map/pseudo';
 import addRequiredEventListeners from './listener';
 
-/*
+/**
  * Resolves styling for an element and returns the modified one.
  * @param {ObsceneComponent} container - the outer React Component to determine state and props
  * @param {ReactElement} element - current element that gets modified
@@ -23,12 +23,11 @@ export default function resolveLook(container, element, selectors, childProps) {
 		if (props.children && props.children instanceof Array) {
 
 			let typeMap = generateTypeMap(props.children);
-			/*
+			/**
 			 * Recursively resolve look for child elements first
 			 */
 			props.children.forEach((item, index) => {
-
-				/*
+				/**
 				 * Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
 				 */
 				let childProps = {};
@@ -49,8 +48,6 @@ export default function resolveLook(container, element, selectors, childProps) {
 		}
 
 		let newProps = ({}, props);
-
-
 		let newStyle = {};
 		if (props.hasOwnProperty('look') && selectors.hasOwnProperty(props.look)) {
 			let styles = selectors[props.look];
@@ -92,9 +89,10 @@ function resolveStyle(styles, newProps, container, element, key, childProps) {
 
 	if (styles.css) {
 		if (!newProps.className) {
-			newProps.className = '';
+			newProps.className = styles.css;
+		} else {
+			newProps.className += ' ' + styles.css
 		}
-		newProps.className += styles.css
 	}
 
 	if (styles.condition) {
@@ -108,10 +106,11 @@ function resolveStyle(styles, newProps, container, element, key, childProps) {
 	return newStyle;
 }
 
-/*
+/**
  * Iterate through all children and create a map with type/index information
  * This is needed to validate type-specific index-sensitive pseudo-classes
  * e.g. :last-type-of
+ * @param {Array} children - an array of children
  */
 function generateTypeMap(children) {
 	let typeSensitiveMap = {};

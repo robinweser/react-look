@@ -8,23 +8,16 @@ export default {
 			constructor() {
 				super(...arguments);
 				this.state = this.state ||  {};
-				this.state._look = new Map([
-					['pseudoMap', look._pseudoMap]
-				]);
-
-				/*
+				/**
 				 * If matchState is set all stateful conditions will both math this.state and this.props
 				 * Otherwise only this.props get checked
 				 */
-				if (matchState) {
-					this._matchValues = assign(this.state, this.props);
-				} else {
-					this._matchValues = this.props;
-				}
-				this._lastActive = []
+				this._matchValues = (MatchState ? assign(this.state, this.props) : this.props);
+				this._lastActive = [];
+				this._pseudoMap = look._pseudoMap;
 				let me = this;
 
-				/*
+				/**
 				 * Adds a resize listener to instantly recheck all media queries
 				 * NOTE: It is assumend that a user won't resize an application too often
 				 */
@@ -36,11 +29,14 @@ export default {
 			}
 
 			componentWillUnmount() {
+					if (super.componentWillUnmount) {
+						super.componentWillUnmount();
+					}
 					if (this._onMouseUp) {
 						window.removeEventListener('mouseup', this._onMouseUp)
 					}
 				}
-				/*
+				/**
 				 * Similar to Radium, Look wraps the render function and resolves styles on its own
 				 */
 			render() {

@@ -1,5 +1,6 @@
 const operators = ['>=', '<=', '=', '>', '<'];
-/*
+
+/**
  * Evaluates if a condition is fullfiled by checking a given set of values
  * NOTE: Those values always include this.props and optionally this.state
  * @param {string} condition - Condition that gets evaluateCondition
@@ -22,6 +23,10 @@ export default function evaluateCondition(condition, matchValues) {
 	}
 }
 
+/*
+ * Returns used operator within a condition
+ * @param {string} condition - condition which contains an operator
+ */
 function evaluateOperator(condition) {
 	operators.forEach(op => {
 		if (condition.includes(op)) {

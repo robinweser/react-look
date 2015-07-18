@@ -2,18 +2,23 @@ import assign from 'object-assign';
 
 import * as Validator from './validator';
 import cloneObject from './cloner';
-import PseudoMap from '../map/pseudo';
+import addRequiredEventPseudos from '../map/pseudo';
 
 let ref = '';
 const blankStyle = {
-		style: {},
-		condition: {},
-		css: ''
-	}
-	/**
-	 * Core algorithm which separates all your styles and resolves all special objects
-	 * Recursively resolves pseudo-classes, extensions and media queries
-	 */
+	style: {},
+	condition: {},
+	css: ''
+}
+
+/**
+ * Splits/Separates your styles into 3 groups: style, advanced and css
+ * Recursively resolves pseudo-classes, extensions and media queries
+ * @param {Object} styles - an object with selectors that contain style key-value pairs
+ * @param {Object} sheet - a sheet you want to apply the splitted styles
+ * @param {Map} map - a map that gets information about sepcial pseudo-classes added
+ * @param {string} parent - represents the current selector if iterating inner objects
+ */
 export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 	let selector;
 	for (selector in styles) {
@@ -29,9 +34,9 @@ export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 				 * Resolves media queries and pseudo classes
 				 */
 				if (Validator.isAdvanced(selector)) {
-					sheet[parent].condition[selector] = cloneObject(blankStyle, true);
+					sheet[parent].advanced[selector] = cloneObject(blankStyle, true);
 
-					PseudoMap.addRequiredEventPseudos(pseudoMap, ref, selector);
+					addRequiredEventPseudos(pseudoMap, ref, selector);
 
 					splitStyles(current, sheet[parent].condition, pseudoMap, selector);
 				} else {
@@ -41,9 +46,9 @@ export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 				}
 			}
 		} else {
-			/*
-			* Small hack to add additional classNames
-			*/
+			/**
+			 * Small hack to add additional classNames
+			 */
 			if (Validator.validateSelector(selector, '_css')) {
 				sheet[parent].css = current;
 				delete styles[selector];
