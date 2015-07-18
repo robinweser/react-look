@@ -9,60 +9,38 @@ import addRequiredEventListeners from './listener';
 
 /*
  * Resolves styling for an element and returns the modified one.
- * @param {ObsceneComponent} wrapper - the outer React Component to determine state and props
- * @param {ReactElement} el - current element that gets modified
+ * @param {ObsceneComponent} container - the outer React Component to determine state and props
+ * @param {ReactElement} element - current element that gets modified
  * @param {object} selectors - all selectors with styles, conditions and extra css classNames
  * @param {Object} childProps - information on child-indexes for index-sensitive pseudo-classes
  */
-export default function resolveLook(wrapper, el, selectors, childProps) {
-	if (el && el.props) {
-		let props = el.props;
+export default function resolveLook(container, element, selectors, childProps) {
+	if (element && element.props) {
+		let props = element.props;
 
 		let children = [];
 
 		if (props.children && props.children instanceof Array) {
-			let typeIndex = {};
-			let typeMap = {};
 
-			/*
-			 * Iterate through all children and create a map with type/index information
-			 * This is needed to validate type-specific index-sensitive pseudo-classes
-			 * e.g. :last-type-of
-			 */
-			props.children.forEach((item, index) => {
-				if (typeMap.hasOwnProperty(item.type)) {
-					++typeMap[item.type];
-				} else {
-					typeMap[item.type] = 1;
-				}
-			})
-
+			let typeMap = generateTypeMap(props.children);
 			/*
 			 * Recursively resolve look for child elements first
 			 */
 			props.children.forEach((item, index) => {
-				/*
-				 * Creates a map with index informtations
-				 * This is needed to validate index-senstive pseudo-classes
-				 * e.g. :first-child, :nth-child
-				 */
-				if (typeIndex.hasOwnProperty(item.type)) {
-					++typeIndex[item.type];
-				} else {
-					typeIndex[item.type] = 1;
-				}
 
-				let child = {};
+				/*
+				 * Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
+				 */
+				let childProps = {};
 				if (item.props.look) {
-					let pseudoMap = State.get(wrapper, 'pseudoMap').get(item.props.look);
-					child['length'] = props.children.length;
-					child['index'] = index;
-					child['indexType'] = typeIndex[item.type];
-					child['indexTypeLength'] = typeMap[item.type];
+					childProps['length'] = props.children.length;
+					childProps['index'] = index;
+					childProps['typeIndex'] = typeIndex[item.type];
+					childProps['typeIndexLength'] = typeMap[item.type];
 				}
 
 				if (React.isValidElement(item)) {
-					children.push(resolveLook(wrapper, item, selectors, child));
+					children.push(resolveLook(container, item, selectors, child));
 				}
 			});
 			children = children.reverse();
@@ -77,16 +55,16 @@ export default function resolveLook(wrapper, el, selectors, childProps) {
 		if (props.hasOwnProperty('look') && selectors.hasOwnProperty(props.look)) {
 			let styles = selectors[props.look];
 
-			let key = el.key || el.ref || 'root';
+			let key = element.key || element.ref || 'root';
 
-			if (!State.has(wrapper, key)) {
-				State.add(wrapper, key);
+			if (!State.has(container, key)) {
+				State.add(container, key);
 			} else {
 				console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
 			}
 
-			addRequiredEventListeners(wrapper, el, key, newProps);
-			newStyle = resolveStyle(cloneObject(styles), newProps, wrapper, el, key, childProps)
+			addRequiredEventListeners(container, element, key, newProps);
+			newStyle = resolveStyle(cloneObject(styles), newProps, container, element, key, childProps)
 			delete props.look;
 		}
 
@@ -95,11 +73,11 @@ export default function resolveLook(wrapper, el, selectors, childProps) {
 		}
 		newProps.style = newStyle;
 
-		let newEl = React.cloneElement(el, newProps, children);
+		let newEl = React.cloneElement(element, newProps, children);
 		return newEl;
 
 	} else {
-		return el;
+		return element;
 	}
 }
 
@@ -108,9 +86,9 @@ export default function resolveLook(wrapper, el, selectors, childProps) {
  * Also applies additional classNames if specified (This helps if you're using extern CSS-libraries)
  * This returns the final styles object
  */
-function resolveStyle(styles, newProps, wrapper, el, key, childProps) {
+function resolveStyle(styles, newProps, container, element, key, childProps) {
 	let newStyle = styles.style;
-	let state = wrapper.state;
+	let state = container.state;
 
 	if (styles.css) {
 		if (!newProps.className) {
@@ -122,10 +100,26 @@ function resolveStyle(styles, newProps, wrapper, el, key, childProps) {
 	if (styles.condition) {
 		let expr;
 		for (expr in styles.condition) {
-			if (evaluateExpression(expr, wrapper, el, key, childProps)) {
-				newStyle = assign(newStyle, resolveStyle(styles.condition[expr], newProps, wrapper, el, key, childProps));
+			if (evaluateExpression(expr, container, element, key, childProps)) {
+				newStyle = assign(newStyle, resolveStyle(styles.condition[expr], newProps, container, element, key, childProps));
 			}
 		}
 	}
 	return newStyle;
+}
+
+/*
+ * Iterate through all children and create a map with type/index information
+ * This is needed to validate type-specific index-sensitive pseudo-classes
+ * e.g. :last-type-of
+ */
+function generateTypeMap(children) {
+	let typeSensitiveMap = {};
+	children.forEach((child, index) => {
+		if (typeSensitiveMap.hasOwnProperty(child.type)) {
+			++typeSensitiveMap[child.type];
+		} else {
+			typeSensitiveMap[child.type] = 1;
+		}
+	});
 }
