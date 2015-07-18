@@ -1,4 +1,4 @@
-import * as Validator from './validator'
+import {isEmpty} from './validator'
 
 /**
  * Clones a Object
@@ -11,8 +11,8 @@ export default function cloneObject(obj, deep = true) {
 
   for (i in obj) {
     let temp = obj[i];
-    if (temp instanceof Object) {
-      clone[i] = cloneObject(temp, true);
+    if (deep && temp instanceof Object && !isEmpty(temp)) {
+      clone[i] = cloneObject(temp, deep);
     } else {
       clone[i] = temp;
     }

@@ -1,5 +1,3 @@
-import assign from 'object-assign';
-
 import * as Validator from './validator';
 import cloneObject from './cloner';
 import addRequiredEventPseudos from '../map/pseudo';
@@ -7,7 +5,7 @@ import addRequiredEventPseudos from '../map/pseudo';
 let ref = '';
 const blankStyle = {
 	style: {},
-	condition: {},
+	advanced: {},
 	css: ''
 }
 
@@ -19,7 +17,7 @@ const blankStyle = {
  * @param {Map} map - a map that gets information about sepcial pseudo-classes added
  * @param {string} parent - represents the current selector if iterating inner objects
  */
-export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
+export default function splitStyles(styles, sheet, pseudoMap, parent, wrapper) {
 	let selector;
 	for (selector in styles) {
 		selector = selector.trim();
@@ -34,14 +32,33 @@ export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 				 * Resolves media queries and pseudo classes
 				 */
 				if (Validator.isAdvanced(selector)) {
-					sheet[parent].advanced[selector] = cloneObject(blankStyle, true);
+
+					//Resolve outer advanced wrapper 
+					if (!parent)  { 
+						splitStyles(current, sheet, pseudoMap, '', selector);
+						wrapper = '';
+						continue;
+					}
+
+					sheet[parent].advanced[selector] = cloneObject(blankStyle);
 
 					addRequiredEventPseudos(pseudoMap, ref, selector);
 
-					splitStyles(current, sheet[parent].condition, pseudoMap, selector);
+					splitStyles(current, sheet[parent].advanced, pseudoMap, selector);
 				} else {
-					sheet[selector] = cloneObject(blankStyle, true);
+					if (!sheet[selector]) {
+						sheet[selector] = cloneObject(blankStyle);
+					}
+
 					!parent && (ref = selector);
+
+					//Resolve outer advanced wrapper 
+					if (wrapper) {
+						sheet[selector].advanced[wrapper] = cloneObject(blankStyle, true);
+						splitStyles(current, sheet, pseudoMap, selector, wrapper);
+						continue;
+					}
+
 					splitStyles(current, sheet, pseudoMap, selector);
 				}
 			}
@@ -54,7 +71,13 @@ export default function splitStyles(styles, sheet, pseudoMap, parent = '') {
 				delete styles[selector];
 				continue;
 			}
-			sheet[parent].style[selector] = current;
+
+			//Resolve outer advanced wrapper 
+			if (wrapper) {
+				sheet[parent].advanced[wrapper].style[selector] = current;
+			} else {
+				sheet[parent].style[selector] = current;
+			}
 		}
 	}
 	return sheet;
