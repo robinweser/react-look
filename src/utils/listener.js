@@ -16,7 +16,7 @@ const events = {
 };
 
 /**
- * Adds additional event listeners to target some special pseudo-classes
+ * Adds additional event listeners to target some special pseudo classes
  * Only get applied if actually needed
  * NOTE: This has been heavily copied from Radium. Great thanks for providing this nice stuff.
  * @param {Component} container - React Component that gets enhanced by Look
@@ -26,7 +26,7 @@ const events = {
  */
 export default function addRequiredEventListeners(container, element, key, newProps) {
 	/**
-	 * This checks if there are any needed pseudo-classes that need an event listener by checking the pseudo map for this element
+	 * This checks if there are any needed pseudo classes that need an event listener by checking the pseudo map for this element
 	 */
 	if (container._pseudoMap.get(element.props.look).size > 0) {
 		let pseudo = container._pseudoMap.get(element.props.look);
@@ -48,7 +48,7 @@ export default function addRequiredEventListeners(container, element, key, newPr
 
 
 /**
- * Adds an event listener to target pseudo-classes
+ * Adds an event listener to target pseudo classes
  * This only gets applied if an element acutally got action-pseudo-class-specific styles
  * @param {Component} container - React Component that gets enhanced by Look
  * @param {Object} props - current elements properties
@@ -101,7 +101,7 @@ function addMouseUpListener(container) {
 }
 
 /**
- * Adds a change listener to validate :valid and :invalid pseudo-classes
+ * Adds a change listener to validate :valid and :invalid pseudo classes
  * Only gets applied if the current element is an input elementement.
  * Also it needs to be of type: url, telement, email or range, number
  * @param {Component} container - React Component that gets enhanced by Look

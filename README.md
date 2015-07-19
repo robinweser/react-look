@@ -9,16 +9,16 @@ npm install react-look
 > It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
 
 # Features
-Look is as far as I know the **feature richest** styling library for React. Supporting [27 pseudo-classes](docs/supportedPseudos.md) and **stateful styles** which is an awesome shortcut if you need some styles depending on your current `state` and/or `props`.
+Look is as far as I know the **feature richest** styling library for React. Supporting [27 pseudo classes](docs/supportedPseudos.md) and **stateful styles** which is an awesome shortcut if you need some styles depending on your current `state` and/or `props`.
 - ES6 classes
 - _(nested)_ media-queries
-- _(nested)_ pseudo-classes
+- _(nested)_ pseudo classes
 - _(nested)_ stateful styles (condition based)
 - processors (prefixing, flexbox support, ...)
 - dynamic style manipulation
 
-### [Supported pseudo-classes](docs/supportedPseudos.md)
-_(Check here to get detail information on supported pseudo-classes)_
+### [Supported pseudo classes](docs/supportedPseudos.md)
+_(Check here to get detail information on supported pseudo classes)_
 
 # Benefit
 Using inline styles instead of static CSS files has a lot of positive side-effects. The most important one is **dynamic behavior**.<br>Remember you're using JavaScript now. Your styles no longer belong to a static file but are mapped to an Object that can be manipulated in any given way.
@@ -49,17 +49,17 @@ let sheet = new Look({
     transition: '200ms all linear',
     '@media (min-height: 800px)' : {  // media queries
       fontSize: 13,
-      ':hover' : {                    // pseudo-classes
+      ':hover' : {                    // pseudo classes
         fontSize: 15,
-        ':checked' : {                // also nested
+        ':checked' : {                // can be nested
           color: 'red'
         }
       }
     },
     'status=active' : {               // conditioned styles
       backgroundColor: 'green',
-      'theme=pink' : {
-        backgroundColor: 'pink'       // nested conditions
+      'theme=pink' : {                // nested conditions
+        backgroundColor: 'pink'       
       }
     }
   },
@@ -106,9 +106,12 @@ DSS (Dynamic Style Sheets) inlcude a processor interface that let's you apply an
 **Power up your styles for your own custom needs!**
 
 ## Life cycle
-Similar to Radium, Look wraps the `render` function and modifies applied styles while iterating recursive over all children. It adds missing event listeners to match `:hover`, `:active`, `:focus` and `:valid`, `:invalid`. Those action states get saved within your wrapping component *(You can adress those with the [State API](docs/api/State.md))*.<br> It also counts (type-specific) indexes to validate index-specific pseudo-classes such as `:nth-child` or `` `:nth-type-of``.
+Similar to Radium, Look wraps the `render` function and modifies applied styles while iterating recursive over all children. It adds missing event listeners to match `:hover`, `:active`, `:focus` and `:valid`, `:invalid`. Those action states get saved within your wrapping component *(You can adress those with the [State API](docs/api/State.md))*.<br> It also counts (type-specific) indexes to validate index-specific pseudo classes such as `:nth-child` or `` `:nth-type-of``.
 ![Life cycle](docs/res/lifecycle.png)
 
+# Docs 
+I tried to write as much helpful documentation as possible. Before asking any question or creating an issue please be sure to read all the documentation. <br><br>
+Check out the [table of contents](docs/Docs.md#tableofcontents) for a quick overiew. 
 # Roadmap
 - [ ] **use-case examples**
 - [ ] Global (Sheet extension) for global CSS styles

@@ -16,7 +16,7 @@ export default class Look extends Sheet {
 
 		/**
 		 * Splits your selectors into styles, conditions (pseudo, media, stateful) & css
-		 * Also creates a pseudoMap with information on used pseudo-classes
+		 * Also creates a pseudoMap with information on used pseudo classes
 		 */
 		selectors = splitStyles(styles, selectors, pseudo);
 

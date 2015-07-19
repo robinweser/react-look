@@ -11,10 +11,10 @@ const blankStyle = {
 
 /**
  * Splits/Separates your styles into 3 groups: style, advanced and css
- * Recursively resolves pseudo-classes, extensions and media queries
+ * Recursively resolves pseudo classes, extensions and media queries
  * @param {Object} styles - an object with selectors that contain style key-value pairs
  * @param {Object} sheet - a sheet you want to apply the splitted styles
- * @param {Map} map - a map that gets information about sepcial pseudo-classes added
+ * @param {Map} map - a map that gets information about sepcial pseudo classes added
  * @param {string} parent - represents the current selector if iterating inner objects
  * TODO: refactor wrapping resolver, this is kind of dirty and only allows single-stage
  */

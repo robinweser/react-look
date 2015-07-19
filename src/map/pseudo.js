@@ -3,7 +3,7 @@ const eventPseudos = [':active', ':focus', ':hover', ':valid', ':invalid'];
 
 /**
  * Adds pseudo-class information concerning a style selector
- * This helps to purposeful handle only needed pseudo-classes
+ * This helps to purposeful handle only needed pseudo classes
  * @param {Map} pseudo - a map to store event pseudos
  * @param {string} selector - a selector which those event pseudos belong to
  * @param {string} event - pseudo-class that represents an event
