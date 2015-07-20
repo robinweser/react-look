@@ -26,3 +26,7 @@ The process method has been extended to also accept an array of `processors` as 
 applyTo needs to be called in order to apply your styles to a `component`.<br>
 Set `matchState` if you want stateful conditions such as `status=active` to also match `this.state` in addition to `this.props`.<br>
 Set `resizeListener` if you want a resize listener to be added to your containing `component` in order to enable instant media query rematching.
+
+
+## Usage
+Please check out [README Usage](../../README.md#usage) for information about Look's usage.
