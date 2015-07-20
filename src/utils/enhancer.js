@@ -12,8 +12,9 @@ export default {
 				 * If matchState is set all stateful conditions will both math this.state and this.props
 				 * Otherwise only this.props get checked
 				 */
-				this._matchValues = (MatchState ? assign(this.state, this.props) : this.props);
+				this._matchValues = (matchState ? assign(this.state, this.props) : this.props);
 				this._lastActive = [];
+				this.state._look = new Map();
 				this._pseudoMap = look._pseudoMap;
 				let me = this;
 

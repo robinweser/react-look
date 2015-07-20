@@ -28,7 +28,7 @@ export default function addRequiredEventListeners(container, element, key, newPr
 	/**
 	 * This checks if there are any needed pseudo classes that need an event listener by checking the pseudo map for this element
 	 */
-	if (container._pseudoMap.get(element.props.look).size > 0) {
+	if (container._pseudoMap.has(element.props.look)) {
 		let pseudo = container._pseudoMap.get(element.props.look);
 
 		let event;
@@ -88,7 +88,6 @@ function onMouseUp(container) {
 		})
 		this._lastActive.length = 0;
 	}
-}
 }
 
 /**

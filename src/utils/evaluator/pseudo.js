@@ -1,4 +1,4 @@
-import {validateSelector, isNumber} from './validator';
+import {validateSelector, isNumber} from '../validator';
 import {evalValue, evalRange, evalNth} from './eval.js';
 import Regex from '../deprecated/regex.js';
 import State from '../../map/state';
