@@ -3,7 +3,7 @@ I try my best to keep all docs updated. If you have any recommendations or impro
 
 ## Table of Contents
 1. [Getting started](GettingStarted.md)
-2. [Pseudo classes](PseduoClasses.md)
+2. [Pseudo classes](PseudoClasses.md)
 3. [Media queries](MediaQueries.md)
 4. [Stateful conditions](StatefulConditions.md)
 5. [Processors](Processors.md)
