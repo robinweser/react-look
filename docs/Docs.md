@@ -11,8 +11,9 @@ I try my best to keep all docs updated. If you have any recommendations or impro
 
 ### [API](api/API.md)
 1. [Look](api/Look.md)
-2. [State](api/State.md)
-3. [matchMedia](api/matchMedia.md)
+2. [Global](api/Global.md)
+3. [State](api/State.md)
+4. [matchMedia](api/matchMedia.md)
 
 ## License
 Full documentation of react-look is licensed under Creative Common License.<br>

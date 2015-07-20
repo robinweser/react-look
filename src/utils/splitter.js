@@ -55,7 +55,7 @@ export default function splitStyles(styles, sheet, pseudoMap, parent, wrapper) {
 
 					//Resolve outer advanced wrapper 
 					if (wrapper) {
-						sheet[selector].advanced[wrapper] = cloneObject(blankStyle, true);
+						sheet[selector].advanced[wrapper] = cloneObject(blankStyle);
 						splitStyles(currentStyles, sheet, pseudoMap, selector, wrapper);
 						continue;
 					}

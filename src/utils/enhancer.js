@@ -16,6 +16,7 @@ export default {
 				this._lastActive = [];
 				this.state._look = new Map();
 				this._pseudoMap = look._pseudoMap;
+
 				let me = this;
 
 				/**

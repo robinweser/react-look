@@ -6,8 +6,8 @@ const events = {
 		onMouseDown: true
 	},
 	'hover': {
-		mouseEnter: true,
-		mouseLeave: false
+		onMouseEnter: true,
+		onMouseLeave: false
 	},
 	'focus': {
 		onFocus: true,
@@ -24,24 +24,27 @@ const events = {
  * @param {string} key - Unique key to identify each element with special event listeners
  * @param {Object} newProps - Props object that gets the listeners added
  */
-export default function addRequiredEventListeners(container, element, key, newProps) {
+export default function addRequiredEventListeners(container, element, look, key, newProps) {
 	/**
 	 * This checks if there are any needed pseudo classes that need an event listener by checking the pseudo map for this element
 	 */
-	if (container._pseudoMap.has(element.props.look)) {
-		let pseudo = container._pseudoMap.get(element.props.look);
-
+	 
+	if (container._pseudoMap.has(look)) {
+		let pseudo = container._pseudoMap.get(look);
+		
 		let event;
 		for (event in events) {
 			if (pseudo.get(event)) {
-				newProps = assign(newProps, addEventListener(container, element.props, key, event, events[event]));
+				let eventListener = addEventListener(container, element.props, key, event, events[event])
+				newProps = assign(newProps, eventListener);
 			}
 		}
 
 		//deprecated
 		let validTypes = ['url', 'email', 'tel', 'range', 'number'];
 		if (pseudo.get('change') && element.type == 'input' && validTypes.indexOf(newProps.type) != -1) {
-			newProps = assign(newProps, addChangeListener(container, element, key));
+			let changeListener = addChangeListener(container, element, key);
+			newProps = assign(newProps, changeListener);
 		}
 	}
 }
@@ -63,7 +66,7 @@ function addEventListener(container, props, key, state, listener) {
 		let existing = newProps[event];
 		newProps[event] = e => {
 			existing && existing(e);
-			State.setState(state, listener[event], container, key)
+			State.setState(state, listener[e.dispatchConfig.registrationName], container, key)
 		}
 	}
 	if (state == 'active') {

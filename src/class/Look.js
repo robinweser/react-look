@@ -19,7 +19,6 @@ export default class Look extends Sheet {
 		 * Also creates a pseudoMap with information on used pseudo classes
 		 */
 		selectors = splitStyles(styles, selectors, pseudo);
-
 		super(selectors);
 		this._pseudoMap = pseudo;
 	}
