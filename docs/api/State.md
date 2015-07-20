@@ -33,7 +33,7 @@ State.getState('hover', extendedHeader, 'second')
 ## react-look specific action states
 * hover
 * focus
-* chang (returns newest value)
+* change (returns newest value)
 * active
 
 ## Methods

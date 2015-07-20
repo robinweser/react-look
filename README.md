@@ -9,7 +9,7 @@ npm install react-look
 > It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
 
 # Features
-Look is as far as I know the **feature richest** styling library for React. Supporting [27 pseudo classes](docs/supportedPseudos.md) and **stateful styles** which is an awesome shortcut if you need some styles depending on your current `state` and/or `props`.
+Look is as far as I know the **feature richest** styling library for React. Supporting [27 pseudo classes](docs/PseudoClasses.md) and **stateful styles** which is an awesome shortcut if you need some styles depending on your current `state` and/or `props`.
 - ES6 classes
 - _(nested)_ media-queries
 - _(nested)_ pseudo classes
@@ -17,8 +17,7 @@ Look is as far as I know the **feature richest** styling library for React. Supp
 - processors (prefixing, flexbox support, ...)
 - dynamic style manipulation
 
-### [Supported pseudo classes](docs/supportedPseudos.md)
-_(Check here to get detail information on supported pseudo classes)_
+### [Supported pseudo classes](docs/PseudoClasses.md#supportedpseudoclasses)
 
 # Benefit
 Using inline styles instead of static CSS files has a lot of positive side-effects. The most important one is **dynamic behavior**.<br>Remember you're using JavaScript now. Your styles no longer belong to a static file but are mapped to an Object that can be manipulated in any given way.
@@ -112,16 +111,15 @@ Similar to Radium, Look wraps the `render` function and modifies applied styles 
 # Docs 
 I tried to write as much helpful documentation as possible. Before asking any question or creating an issue please be sure to read all the documentation. <br><br>
 Check out the [table of contents](docs/Docs.md#tableofcontents) for a quick overiew. 
+
+# [react-look-tools](https://github.com/rofrischmann/react-look-tools)
+react-look-tools is a toolchain of useful **helper** and **mixins**.
+It adds support for **extending**, **keyframes** and a lot of css hacks that can't be achieved with pure javascript.
+It also provides an useful **developer tool** to improve **DX (developer experience)**.
+
 # Roadmap
 - [ ] **use-case examples**
 - [ ] Global (Sheet extension) for global CSS styles
-
-## [react-look-tools (coming soon)](https://github.com/rofrischmann/react-look-tools)
-- `@keyframe`, `linear-gradient` support
-- **extend functionality**
-- separate input validation
--  special pseudos (:placeholder, :webkit-scrollbar)
--  **dev tools for better DX (inspired by [Dan Abramov](https://github.com/gaearon))**
 
 # License
 **Look** (react-look) is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>Created with ♥ by [@rofrischmann](http://rofrischmann.de) at [Unverschämt](http://unverschaemt.net).
