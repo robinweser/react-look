@@ -65,9 +65,8 @@ export default function resolveLook(container, element, selectors, childProps) {
 		let newStyle = {};
 
 		//TODO: add multiple look support, see #14
-		if (props.hasOwnProperty('look') && selectors.hasOwnProperty(props.look)) {
-			let styles = selectors[props.look];
-
+		if (props.hasOwnProperty('look')) {
+			let looks = props.look.split(' ');
 			let key = element.key || element.ref || 'root';
 
 			if (!State.has(container, key)) {
@@ -76,8 +75,15 @@ export default function resolveLook(container, element, selectors, childProps) {
 				console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
 			}
 
-			addRequiredEventListeners(container, element, key, newProps);
-			newStyle = resolveStyle(cloneObject(styles), newProps, container, element, key, childProps)
+			looks.forEach(look => {
+				if (selectors.hasOwnProperty(look)) {
+					let styles = cloneObject(selectors[look]);
+
+					addRequiredEventListeners(container, element, look, key, newProps);
+					let resolvedStyle = resolveStyle(styles, newProps, container, element, key, childProps);
+					newStyle = assign(newStyle, resolvedStyle);
+				}
+			})
 			delete props.look;
 		}
 
@@ -115,11 +121,11 @@ function resolveStyle(styles, newProps, container, element, key, childProps) {
 		resolveClassName(styles.css, newProps);
 	}
 
-	if (styles.condition) {
+	if (styles.advanced) {
 		let expr;
-		for (expr in styles.condition) {
+		for (expr in styles.advanced) {
 			if (evaluateExpression(expr, container, element, key, childProps)) {
-				let resolvedStyle = resolveStyle(styles.condition[expr], newProps, container, element, key, childProps);
+				let resolvedStyle = resolveStyle(styles.advanced[expr], newProps, container, element, key, childProps);
 				newStyle = assign(newStyle, resolvedStyle);
 			}
 		}
