@@ -10,7 +10,7 @@ export default function evaluateExpression(expression, container, element, key, 
 	}
 	//eval conditions
 	else if (Validator.isCondition(expression)) {
-		let matchValues = container._matchValues
+		let matchValues = container._matchValues;
 		return evaluateCondition(expression, matchValues);
 	}
 	//eval pseudos

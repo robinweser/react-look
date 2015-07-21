@@ -21,43 +21,49 @@ export default function resolveLook(container, element, selectors, childProps) {
 		let children = [];
 
 		//If there are more than one child, iterate over them
-		if (props.children && props.children instanceof Array) {
+		if (props.children) {
+			if (props.children instanceof Array) {
 
-			let typeMap = generateTypeMap(props.children);
-			let indexMap = {};
-			/**
-			 * Recursively resolve look for child elements first
-			 * Generate index-maps to resolve child-index-sensitive pseudo-classes
-			 */
-			props.children.forEach((child, index) => {
+				let typeMap = generateTypeMap(props.children);
+				let indexMap = {};
+				/**
+				 * Recursively resolve look for child elements first
+				 * Generate index-maps to resolve child-index-sensitive pseudo-classes
+				 */
+				props.children.forEach((child, index) => {
 
-				//Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
-				generateIndexMap(children, indexMap);
+					//only resolve child if it actually is a valid react element
+					if (child && React.isValidElement(child)) {
+						//Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
+						generateIndexMap(children, indexMap);
 
-				let childProps;
+						let type = getChildType(child);
 
-				//only resolve child if it actually is a valid react element and has a look property
-				if (child.props.look && React.isValidElement(child)) {
+						let childProps = {
+							'index': index,
+							'length': props.children.length,
+							'typeIndex': indexMap[type],
+							'typeIndexLength': typeMap[type].length
+						}
 
-					let type = getChildType(child);
+						children.push(resolveLook(container, child, selectors, childProps));
 
-					childProps = {
-						'index': index,
-						'length': props.children.length,
-						'typeIndex': indexMap[type],
-						'typeIndexLength': typeMap[type].length
+					} else {
+						if (child == undefined) {
+							console.warn('There are children which are either undefined, empty or invalid React Elements: ', props.children);
+							console.warn('Look removed 1 child while validating (look="' + props.look + '"): child ', child);
+						} else {
+							children.push(child);
+						}
 					}
-					children.push(resolveLook(container, child, selectors, childProps));
-				} else {
-					children.push(child);
-				}
-			});
-		} else {
-			//if it's only one child which is not a primitive type its look gets 
-			if (typeof props.children != 'number' && typeof props.children != 'string' && props.children.props.hasOwnProperty('look')) {
-				children = resolveLook(container, props.children, selectors);
+				});
 			} else {
-				children = props.children;
+				//if it's only one child which is not a primitive type its look gets 
+				if (typeof props.children != 'number' && typeof props.children != 'string' && props.children.props && props.children.props.hasOwnProperty('look')) {
+					children = resolveLook(container, props.children, selectors);
+				} else {
+					children = props.children;
+				}
 			}
 		}
 
@@ -95,7 +101,6 @@ export default function resolveLook(container, element, selectors, childProps) {
 			newStyle = assign(newStyle, props.style);
 		}
 		newProps.style = newStyle;
-
 		return React.cloneElement(element, newProps, children);
 	} else {
 		return element;
@@ -184,7 +189,7 @@ function generateTypeMap(children) {
  */
 function getChildType(child) {
 	let type;
-	if (child.type == 'function') {
+	if (child.type instanceof Function) {
 		type = (child.type.hasOwnProperty('name') ? child.type.name : child.type);
 	} else {
 		type = child.type;

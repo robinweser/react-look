@@ -1,5 +1,3 @@
-const operators = ['>=', '<=', '=', '>', '<'];
-
 /**
  * Evaluates if a condition is fullfiled by checking a given set of values
  * NOTE: Those values always include this.props and optionally this.state
@@ -8,18 +6,26 @@ const operators = ['>=', '<=', '=', '>', '<'];
  */
 export default function evaluateCondition(condition, matchValues) {
 	let operator = evaluateOperator(condition);
-	let [property, value] = expression.split(operator);
+	let [property, value] = condition.split(operator);
 
-	if (operator == '>=') {
-		return matchValues[property] >= value;
-	} else if (operator == '<=') {
-		return matchValues[property] <= value;
-	} else if (operator == '=') {
-		return matchValues[property] == value;
-	} else if (operator == '>') {
-		return matchValues[property] > value;
-	} else if (operator == '<') {
-		return matchValues[property] < value;
+	if (matchValues[property]) {
+		let match = matchValues[property].toString();
+
+		if (operator == '>=') {
+			return match >= value;
+		} else if (operator == '<=') {
+			return match <= value;
+		} else if (operator == '!=') {
+			return match != value;
+		} else if (operator == '=') {
+			return match == value;
+		} else if (operator == '>') {
+			return match > value;
+		} else if (operator == '<') {
+			return match < value;
+		}
+	} else {
+		return false;
 	}
 }
 
@@ -28,9 +34,14 @@ export default function evaluateCondition(condition, matchValues) {
  * @param {string} condition - condition which contains an operator
  */
 function evaluateOperator(condition) {
-	operators.forEach(op => {
-		if (condition.includes(op)) {
+	const operators = ['>=', '<=', '!=', '=', '>', '<'];
+
+	let i;
+	let length = operators.length;
+	for (i = 0; i < length; ++i) {
+		let op = operators[i];
+		if (condition.indexOf(op) > -1) {
 			return op;
 		}
-	})
+	}
 }

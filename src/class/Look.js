@@ -29,7 +29,7 @@ export default class Look extends Sheet {
 	 */
 	process(processors, ...args) {
 		if (processors instanceof Array == false) {
-			super.process(processor, ...args);
+			super.process(processors, ...args);
 		} else {
 			processors.forEach(item => {
 				super.process(item, ...args);

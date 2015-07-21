@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Dynamic & stateful React component styling",
   "main": "src/index.js",
   "files": [
@@ -30,7 +30,8 @@
   "author": "Robin Frischmann",
   "license": "MIT",
   "dependencies": {
-    "dynamic-style-sheets": "0.1.4",
+    "color": "^0.10.1",
+    "dynamic-style-sheets": "0.1.5",
     "object-assign": "^3.0.0"
   },
   "browserify": {
