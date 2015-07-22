@@ -57,7 +57,7 @@ let sheet = new Look({
     },
     'status=active' : {               // conditioned styles
       backgroundColor: 'green',
-      'theme=pink' : {                // nested conditions
+      'clicks>20' : {                 // nested conditions
         backgroundColor: 'pink'       
       }
     }
