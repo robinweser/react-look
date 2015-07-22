@@ -34,6 +34,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 
 					//only resolve child if it actually is a valid react element
 					if (child) {
+
 						//Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
 						generateIndexMap(child, indexMap);
 
@@ -50,6 +51,11 @@ export default function resolveLook(container, element, selectors, childProps) {
 						children.push(resolveLook(container, child, selectors, childProps));
 
 					} else {
+						/*
+						 * This clears undefined childs as they would fail to render
+						 * e.g. if you're trying to map {this.props.title} but it is not defined
+						 * It also fires a warning so that you may remove them on your own
+						 */
 						if (child == undefined) {
 							console.warn('There are children which are either undefined, empty or invalid React Elements: ', props.children);
 							console.warn('Look removed 1 child while validating (look="' + props.look + '"): child ', child);
@@ -59,7 +65,6 @@ export default function resolveLook(container, element, selectors, childProps) {
 					}
 				});
 			} else {
-				//if it's only one child which is not a primitive type its look gets 
 				if (props.hasOwnProperty('look')) {
 					children = resolveLook(container, props.children, selectors);
 				} else {
@@ -76,16 +81,25 @@ export default function resolveLook(container, element, selectors, childProps) {
 			let looks = props.look.split(' ');
 			let key = element.key || element.ref || 'root';
 
-			if (!State.has(container, key)) {
-				State.add(container, key);
-			} else {
-				console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
-			}
+			/*
+			 * Splits look to resolve multiple looks
+			 * Adds required event listeners and resolves all styles
+			 * addEventListener might be improved since this one might add double listeners of multiple looks require one
+			 */
 			looks.forEach(look => {
+				if (container._pseudoMap.has(look)) {
+					if (!State.has(container, key)) {
+						State.add(container, key);
+					} else {
+						console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
+					}
+				}
+
 				if (selectors.hasOwnProperty(look)) {
 					let styles = cloneObject(selectors[look]);
 
 					addRequiredEventListeners(container, element, look, key, newProps);
+
 					let resolvedStyle = resolveStyle(styles, newProps, container, element, key, childProps);
 					newStyle = assign(newStyle, resolvedStyle);
 				}

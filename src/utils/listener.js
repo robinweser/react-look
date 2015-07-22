@@ -64,9 +64,10 @@ function addEventListener(container, props, key, state, listener) {
 	let event;
 	for (event in listener) {
 		let existing = newProps[event];
-		newProps[event] = function (e) {
+		newProps[event] = e => {
 			existing && existing(e);
-			State.setState(state, listener[event], container, key)
+			let name = (e.dispatchConfig.registrationName ? e.dispatchConfig.registrationName : e.dispatchConfig.phasedRegistrationNames.bubbled);
+			State.setState(state, listener[name], container, key)
 		}
 	}
 	if (state == 'active') {
@@ -89,7 +90,7 @@ function onMouseUp(container) {
 				State.setState('active', false, container, key);
 			}
 		})
-		container._lastActive.length = 0;
+		this._lastActive.length = 0;
 	}
 }
 
