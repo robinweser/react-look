@@ -1,7 +1,7 @@
 {
   "name": "react-look",
-  "version": "0.2.1",
-  "description": "Dynamic & stateful React component styling",
+  "version": "0.2.3",
+  "description": "Feature-rich, dynamic & stateful Component Styling for React (CSS in JS)",
   "main": "src/index.js",
   "files": [
     "LICENSE",
@@ -13,7 +13,7 @@
     "url": "https://github.com/rofrischmann/react-look"
   },
   "scripts": {
-    "build": "browserify ./examples/index.jsx -t babelify --outfile ./examples/bundle.js"
+    "build": "browserify ./examples/app.jsx -t babelify --outfile ./examples/bundle.js"
   },
   "keywords": [
     "react-component",

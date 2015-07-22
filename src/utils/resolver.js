@@ -33,18 +33,19 @@ export default function resolveLook(container, element, selectors, childProps) {
 				props.children.forEach((child, index) => {
 
 					//only resolve child if it actually is a valid react element
-					if (child && React.isValidElement(child)) {
+					if (child) {
 						//Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
-						generateIndexMap(children, indexMap);
+						generateIndexMap(child, indexMap);
 
 						let type = getChildType(child);
 
 						let childProps = {
-							'index': index,
+							'index': index + 1,
 							'length': props.children.length,
 							'typeIndex': indexMap[type],
-							'typeIndexLength': typeMap[type].length
+							'typeIndexLength': typeMap[type]
 						}
+						console.log(child.type, childProps);
 
 						children.push(resolveLook(container, child, selectors, childProps));
 
@@ -59,7 +60,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 				});
 			} else {
 				//if it's only one child which is not a primitive type its look gets 
-				if (typeof props.children != 'number' && typeof props.children != 'string' && props.children.props && props.children.props.hasOwnProperty('look')) {
+				if (props.hasOwnProperty('look')) {
 					children = resolveLook(container, props.children, selectors);
 				} else {
 					children = props.children;
@@ -80,7 +81,6 @@ export default function resolveLook(container, element, selectors, childProps) {
 			} else {
 				console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
 			}
-
 			looks.forEach(look => {
 				if (selectors.hasOwnProperty(look)) {
 					let styles = cloneObject(selectors[look]);
@@ -157,18 +157,17 @@ function resolveClassName(css, newProps) {
  * @param {Array} children - an array of children
  * @pararam {Object} indexMap - an object which stores the information
  */
-function generateIndexMap(children, indexMap) {
-	children.forEach((child, index) => {
+function generateIndexMap(child, indexMap) {
 
-		// use component displayName if child is a function (ES6 component)
-		let type = getChildType(child);
+	// use component displayName if child is a function (ES6 component)
+	let type = getChildType(child);
 
-		if (indexMap.hasOwnProperty(type)) {
-			++indexMap[type];
-		} else {
-			indexMap[type] = 1;
-		}
-	});
+	if (indexMap.hasOwnProperty(type)) {
+		++indexMap[type];
+	} else {
+		indexMap[type] = 1;
+	}
+
 	return indexMap;
 }
 
@@ -178,7 +177,10 @@ function generateIndexMap(children, indexMap) {
  */
 function generateTypeMap(children) {
 	let indexMap = {};
-	return generateIndexMap(children, indexMap);
+	children.forEach((child, index) => {
+		generateIndexMap(child, indexMap);
+	});
+	return indexMap;
 }
 
 

@@ -28,10 +28,10 @@ export default function addRequiredEventListeners(container, element, look, key,
 	/**
 	 * This checks if there are any needed pseudo classes that need an event listener by checking the pseudo map for this element
 	 */
-	 
+
 	if (container._pseudoMap.has(look)) {
 		let pseudo = container._pseudoMap.get(look);
-		
+
 		let event;
 		for (event in events) {
 			if (pseudo.get(event)) {
@@ -64,9 +64,9 @@ function addEventListener(container, props, key, state, listener) {
 	let event;
 	for (event in listener) {
 		let existing = newProps[event];
-		newProps[event] = e => {
+		newProps[event] = function (e) {
 			existing && existing(e);
-			State.setState(state, listener[e.dispatchConfig.registrationName], container, key)
+			State.setState(state, listener[event], container, key)
 		}
 	}
 	if (state == 'active') {
@@ -84,12 +84,12 @@ function addEventListener(container, props, key, state, listener) {
  */
 function onMouseUp(container) {
 	if (container._lastActive.length > 0) {
-		this._lastActive.forEach(key => {
+		container._lastActive.forEach(key => {
 			if (State.has(container, key)) {
 				State.setState('active', false, container, key);
 			}
 		})
-		this._lastActive.length = 0;
+		container._lastActive.length = 0;
 	}
 }
 
@@ -98,7 +98,9 @@ function onMouseUp(container) {
  * @param {Component} container - React Component that gets enhanced by Look
  */
 function addMouseUpListener(container) {
-	container._onMouseUp = onMouseUp(container).bind(this);
+	container._onMouseUp = function () {
+		onMouseUp(container);
+	};
 	let mouseUpListener = window.addEventListener('mouseup', container._onMouseUp);
 }
 
