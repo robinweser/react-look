@@ -30,17 +30,21 @@ export default {
 				}
 			}
 
+			/*
+			 * Remove mouseup listener if component unmounts to keep listeners clean
+			 */
 			componentWillUnmount() {
-					if (super.componentWillUnmount) {
-						super.componentWillUnmount();
-					}
-					if (this._onMouseUp) {
-						window.removeEventListener('mouseup', this._onMouseUp)
-					}
+				if (super.componentWillUnmount) {
+					super.componentWillUnmount();
 				}
-				/**
-				 * Similar to Radium, Look wraps the render function and resolves styles on its own
-				 */
+				if (this._onMouseUp) {
+					window.removeEventListener('mouseup', this._onMouseUp)
+				}
+			}
+
+			/**
+			 * Similar to Radium, Look wraps the render function and resolves styles on its own
+			 */
 			render() {
 				let element = super.render();
 				return resolveLook(this, element, look.selectors);

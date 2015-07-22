@@ -51,7 +51,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 						children.push(resolveLook(container, child, selectors, childProps));
 
 					} else {
-						/*
+						/**
 						 * This clears undefined childs as they would fail to render
 						 * e.g. if you're trying to map {this.props.title} but it is not defined
 						 * It also fires a warning so that you may remove them on your own
@@ -81,7 +81,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 			let looks = props.look.split(' ');
 			let key = element.key || element.ref || 'root';
 
-			/*
+			/**
 			 * Splits look to resolve multiple looks
 			 * Adds required event listeners and resolves all styles
 			 * addEventListener might be improved since this one might add double listeners of multiple looks require one
@@ -152,7 +152,7 @@ function resolveStyle(styles, newProps, container, element, key, childProps) {
 	return newStyle;
 }
 
-/*
+/**
  * Adds additional CSS classes to the className list
  * @param {string} css - a string containing (a) valid className(s)
  */

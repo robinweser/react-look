@@ -29,7 +29,7 @@ export default function evaluateCondition(condition, matchValues) {
 	}
 }
 
-/*
+/**
  * Returns used operator within a condition
  * @param {string} condition - condition which contains an operator
  */

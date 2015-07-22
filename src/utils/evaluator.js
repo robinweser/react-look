@@ -3,6 +3,14 @@ import evaluateMediaQuery from './evaluator/media'
 import evaluateCondition from './evaluator/condition'
 import evaluatePseudoClass from './evaluator/pseudo'
 
+/**
+ * Evaluates any advanced expression which are pseudo classes, media queries or stateful conditions
+ * @param {string} expression - expression that gets evaluated
+ * @param {Component} container - the outer react component
+ * @param {Object} element - current element thats style gets resolved
+ * @param {string} key - current element's unique key to resolve user-action pseudos
+ * @param {Object} childProps - information on children index/type 
+ */
 export default function evaluateExpression(expression, container, element, key, childProps) {
 	//eval media queries
 	if (Validator.isMediaQuery(expression)) {
