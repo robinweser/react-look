@@ -90,7 +90,7 @@ function onMouseUp(container) {
 				State.setState('active', false, container, key);
 			}
 		})
-		this._lastActive.length = 0;
+		container._lastActive.length = 0;
 	}
 }
 

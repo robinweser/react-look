@@ -89,7 +89,7 @@ export default function evaluatePseudoClass(pseudo, container, element, key, chi
 
 	//other
 	else if (validateSelector(pseudo, ':lang')) {
-		return pseudo.includes(props.lang);
+		return pseudo.indexOf(props.lang) > -1;
 	} else if (validateSelector(pseudo, ':empty')) {
 		return (!props.children || props.children.length < 1);
 	}

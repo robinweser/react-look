@@ -46,7 +46,6 @@ export default function resolveLook(container, element, selectors, childProps) {
 							'typeIndex': indexMap[type],
 							'typeIndexLength': typeMap[type]
 						}
-						console.log(child.type, childProps);
 
 						children.push(resolveLook(container, child, selectors, childProps));
 

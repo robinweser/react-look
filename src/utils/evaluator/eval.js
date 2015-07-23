@@ -12,7 +12,7 @@ export function evalNth(expression, index, reverse) {
 	} else if (value == 'even') {
 		return index % 2 == 0;
 	} else {
-		if (expression.includes('n')) {
+		if (expression.indexOf('n') > -1) {
 			let termSplit = expression.split('n');
 			let mult = termSplit[0];
 			mult = (mult == '-' ? '-1' : mult);
