@@ -64,11 +64,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 					}
 				});
 			} else {
-				if (props.hasOwnProperty('look')) {
 					children = resolveLook(container, props.children, selectors);
-				} else {
-					children = props.children;
-				}
 			}
 		}
 
