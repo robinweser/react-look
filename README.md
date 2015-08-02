@@ -60,7 +60,7 @@ let styles = {
   title : {
     fontWeight: 800
   }
-})
+}
 ```
 
 ## Component
@@ -90,7 +90,7 @@ class Header extends React.Component {
   }
 }
 
-  export default Look(Header, styles, [Flexbox, Prefixer]);  //Your styles get processed and resolved here
+export default Look(Header, styles, [Flexbox, Prefixer]);  //Your styles get processed and resolved here
 ```
 
 # Under the hood
