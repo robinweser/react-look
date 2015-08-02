@@ -4,7 +4,7 @@ Look supports media-queries using a common syntax. There are actually two differ
 
 ## Example
 ```javascript
-let sheet = new Look({
+let styles = {
 	// nested media query
 	box : {
 		color: 'blue',
@@ -27,7 +27,7 @@ let sheet = new Look({
 			padding: '20px 0 20px 0'
 		}
 	}
-})
+}
 ```
 
 Similar to pseudo classes, media queries can be nested. They can also include pseudo classes and stateful conditions.

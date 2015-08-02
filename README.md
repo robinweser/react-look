@@ -4,7 +4,7 @@
 npm install react-look
 ```
 
-**Look** is a **feature-rich** styling library for [React.js](https://facebook.github.io/react/) that supports lots of CSS features as well as **stateful** styles. It extends your inline styles and still remains hackable and processable since it is based on [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
+**Look** is a **feature-rich** styling library for [React.js](https://facebook.github.io/react/) based on inline-styles that supports lots of CSS features as well as **stateful** styles. It extends your inline styles and still remains hackable and processable since it is based on [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
 
 > It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
 
@@ -33,16 +33,11 @@ Look tries to keep your `render` function clean of validations such as `this.sta
 # Usage
 
 ```javascript
-import React from 'react';
-import Look from 'react-look';
-import {Processors} from 'dynamic-style-sheets';
-let {Prefixer, Flexbox} = Processors;
-
 function custom(value){
   return value * 2 + 10
 }
 
-let sheet = new Look({
+let styles = {
   header : {
     padding: custom(5),               // use benefit of javascript
     transition: '200ms all linear',
@@ -66,13 +61,16 @@ let sheet = new Look({
     fontWeight: 800
   }
 })
-
-sheet.process([Prefixer, Flexbox])    // process your styles to add vendor prefixes and global flexbox support
 ```
 
 ## Component
 
 ```javascript
+import React from 'react';
+import Look from 'react-look';
+import {Processors} from 'dynamic-style-sheets';
+let {Prefixer, Flexbox} = Processors;
+
 class Header extends React.Component {
   constructor() {
     super(...arguments);
@@ -92,7 +90,7 @@ class Header extends React.Component {
   }
 }
 
-  export default Look.applyTo(Header);  //Your styles get applied here
+  export default Look(Header, styles, [Flexbox, Prefixer]);  //Your styles get processed and resolved here
 ```
 
 # Under the hood
@@ -116,10 +114,6 @@ Check out the [table of contents](docs/Docs.md#tableofcontents) for a quick over
 react-look-tools is a toolchain of useful **helper** and **mixins**.
 It adds support for **extending**, **keyframes** and a lot of css hacks that can't be achieved with pure javascript.
 It also provides an useful **developer tool** to improve **DX (developer experience)**.
-
-# Roadmap
-- [ ] **use-case examples**
-- [ ] Global (Sheet extension) for global CSS styles
 
 # License
 **Look** (react-look) is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>Created with ♥ by [@rofrischmann](http://rofrischmann.de) at [Unverschämt](http://unverschaemt.net).

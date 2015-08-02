@@ -8,10 +8,10 @@ Using State you can get/set special states for specific components.<br>
 ```javascript
 import {Look, State} from 'react-look';
 
-let sheet = new Look({
+let styles = {
   box : {':active' : {}},
   item : {':hover' : {}}
-});
+};
 
 class Header extends React.Component {
   render(){
@@ -22,7 +22,7 @@ class Header extends React.Component {
   }
 }
 
-let extendedHeader = Look.applyTo(Header)
+let extendedHeader = Look(Header, styles)
 
 // returns all 'box'-states since default-key is 'box'
 State.get(extendedHeader)

@@ -13,7 +13,7 @@ Core functionality has been adopted, including the following methods:
 
 For detailed information check the [CSSSheet API documentation](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/CSSSheet.md) or directly click a function.
 
-> **Note**: Since CSSSheet extends Sheet, Global also knows all methods of [Sheet](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md) which are similar to those [Look](Look.md) knows.
+> **Note**: Since CSSSheet extends Sheet, Global also knows all methods of [Sheet](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/Sheet.md).
 
 ## react-look specific methods
 You may pass a `unit` with your constructor. Default is `px`.

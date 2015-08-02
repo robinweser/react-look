@@ -4,7 +4,7 @@ Look supports pseudo classes using a common syntax as it would be in CSS. They *
 
 ## Example
 ```javascript
-let sheet = new Look({
+let styles = {
 	box : {
 		color: 'blue',
 		fontSize: 20,
@@ -14,7 +14,7 @@ let sheet = new Look({
 			background: 'gray'
 		}
 	}
-})
+}
 ```
 Pseudo-classes can be nested multiple to achieve something like `:focus:hover`. They can also contain nested media queries and stateful conditions.
 

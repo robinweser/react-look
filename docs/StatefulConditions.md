@@ -10,7 +10,7 @@ There are several states which are quite common to style a component state-speci
 
 ## Example
 ```javascript
-let sheet = new Look({
+let styles = {
 	box : {
 		color: 'blue',
 		fontSize: 20,
@@ -20,7 +20,7 @@ let sheet = new Look({
 			background: 'gray'
 		}
 	}
-})
+}
 ```
 Stateful conditions always check `this.props` values but you can pass `true` as `matchState` while applying your Look e.g. `sheet.applyTo(Component, true)`. This enables `this.state` values to be checked too.
 
