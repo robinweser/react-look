@@ -1,21 +1,45 @@
 import resolveLook from './resolver';
 import State from '../map/state';
 import assign from 'object-assign';
+import assignStyles from 'assign-stlyes';
+import Sheet from '../class/Sheet';
 
-export default function Enhancer(Component, look, matchState, mediaQueryListener) {
+/**
+ * Applies your styles to a React Component
+ * @param {Component} component - a valid React component that gets styles applied
+ * @param {Array|Object} styles - styles that used to resolve looks
+ * @param {Array|Function} processors - processors that modify the styles
+ * @param {Boolean} matchState - if also this.state (in addition to this.props) values are used while validatiing stateful conditions
+ * @param {Boolean} resizeListener - if a resize listener get's added to notice size changes/rematch media queries
+ */
+export default function Look(Component, styles, processors, matchState, mediaQueryListener) {
 	class LookComponent extends Component {
-		constructor() {
+		constructor() {	
 			super(...arguments);
 			this.state = this.state ||  {};
+			
+
+			//resolve multiple styles by merging those
+			if (styles instanceof Array){
+				styles = assignStyles(...styles);
+			}
+		
+			let sheet = new Sheet(styles);
+			
+			if (processors) {
+				sheet.process(processors);
+			}
+			
 			/**
 			 * If matchState is set all stateful conditions will both math this.state and this.props
 			 * Otherwise only this.props get checked
 			 */
 			this._matchValues = (matchState ? assign(this.state, this.props) : this.props);
 			this._lastActive = [];
+			this._sheet = sheet;
 			this.state._look = new Map();
-			this._pseudoMap = look._pseudoMap;
-
+			this._pseudoMap = sheet._pseudoMap;
+			
 			let me = this;
 
 			/**
@@ -46,7 +70,7 @@ export default function Enhancer(Component, look, matchState, mediaQueryListener
 		 */
 		render() {
 			let element = super.render();
-			return resolveLook(this, element, look.selectors);
+			return resolveLook(this, element, this._sheet.selectors);
 		}
 	}
 	return LookComponent;
