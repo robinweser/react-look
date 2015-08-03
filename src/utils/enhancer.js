@@ -24,6 +24,15 @@ export default function Look(Component, styles, processors, matchState, mediaQue
 				styles = assignStyles(...styles);
 			}
 		
+			//Merge component assigned styles with outer styles to 
+			if (this.look){
+				 if (this.look instanceof Function){
+					 styles = assignStyles(this.look(), styles);
+				 } else if (this.look instanceof Object){
+					 styles = assignStyles(this.look, styles);
+				 }
+			}
+			
 			let sheet = new Sheet(styles);
 			
 			if (processors) {
@@ -53,9 +62,8 @@ export default function Look(Component, styles, processors, matchState, mediaQue
 			}
 		}
 
-		/*
-		 * Remove mouseup listener if component unmounts to keep listeners clean
-		 */
+		
+		//Remove mouseup listener if component unmounts to keep listeners clean
 		componentWillUnmount() {
 			if (super.componentWillUnmount) {
 				super.componentWillUnmount();
@@ -65,9 +73,7 @@ export default function Look(Component, styles, processors, matchState, mediaQue
 			}
 		}
 
-		/**
-		 * Similar to Radium, Look wraps the render function and resolves styles on its own
-		 */
+		//Similar to Radium, Look wraps the render function and resolves styles on its own
 		render() {
 			let element = super.render();
 			return resolveLook(this, element, this._sheet.selectors);
