@@ -1,7 +1,7 @@
 import cloneObject from './cloner';
 import * as Validator from './validator';
 import React from 'react';
-import assign from 'object-assign';
+import assign from 'assign-styles';
 import evaluateExpression from './evaluator';
 import State from '../map/state';
 import pseudoMap from '../map/pseudo';
