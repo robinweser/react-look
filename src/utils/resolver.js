@@ -64,7 +64,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 					}
 				});
 			} else {
-					children = resolveLook(container, props.children, selectors);
+				children = resolveLook(container, props.children, selectors);
 			}
 		}
 
@@ -75,7 +75,6 @@ export default function resolveLook(container, element, selectors, childProps) {
 		if (props.hasOwnProperty('look')) {
 			let looks = props.look.split(' ');
 			let key = element.key || element.ref || 'root';
-
 			/**
 			 * Splits look to resolve multiple looks
 			 * Adds required event listeners and resolves all styles
@@ -86,7 +85,9 @@ export default function resolveLook(container, element, selectors, childProps) {
 					if (!State.has(container, key)) {
 						State.add(container, key);
 					} else {
-						console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
+						if (key == 'root') {
+							console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
+						}
 					}
 				}
 

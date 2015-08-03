@@ -1,7 +1,7 @@
 import resolveLook from './resolver';
 import State from '../map/state';
 import assign from 'object-assign';
-import assignStyles from 'assign-stlyes';
+import assignStyles from 'assign-styles';
 import Sheet from '../class/Sheet';
 
 /**
@@ -12,7 +12,7 @@ import Sheet from '../class/Sheet';
  * @param {Boolean} matchState - if also this.state (in addition to this.props) values are used while validatiing stateful conditions
  * @param {Boolean} resizeListener - if a resize listener get's added to notice size changes/rematch media queries
  */
-export default function Look(Component, styles, processors, matchState, mediaQueryListener) {
+export default function Look(Component, styles = {}, processors = undefined, matchState = true, mediaQueryListener = false) {
 	class LookComponent extends Component {
 		constructor() {
 			super(...arguments);
