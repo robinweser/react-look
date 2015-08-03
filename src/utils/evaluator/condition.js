@@ -8,8 +8,9 @@ export default function evaluateCondition(condition, matchValues) {
 	let operator = evaluateOperator(condition);
 	let [property, value] = condition.split(operator);
 
-	if (matchValues[property]) {
-		let match = matchValues[property].toString();
+	if (matchValues.hasOwnProperty(property)) {
+		let match = (matchValues[property] == undefined ? 'undefined' : matchValues[property]);
+		match = match.toString();
 
 		if (operator == '>=') {
 			return match >= value;

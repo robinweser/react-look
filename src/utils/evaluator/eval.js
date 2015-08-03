@@ -9,7 +9,7 @@ export function evalNth(expression, index, reverse) {
 	//TODO: drunk => dirty, fix later
 	if (expression == 'odd') {
 		return index % 2 != 0;
-	} else if (value == 'even') {
+	} else if (expression == 'even') {
 		return index % 2 == 0;
 	} else {
 		if (expression.indexOf('n') > -1) {
@@ -21,9 +21,7 @@ export function evalNth(expression, index, reverse) {
 			add = (add ? add : '+0');
 			add = parseInt(add);
 			mult = parseInt(mult);
-			if (!reverse) {
-				++index;
-			}
+			
 			if (isNaN(mult)) {
 				return index >= add;
 			} else {
