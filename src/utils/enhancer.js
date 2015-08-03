@@ -14,31 +14,31 @@ import Sheet from '../class/Sheet';
  */
 export default function Look(Component, styles, processors, matchState, mediaQueryListener) {
 	class LookComponent extends Component {
-		constructor() {	
+		constructor() {
 			super(...arguments);
 			this.state = this.state ||  {};
-			
+
 
 			//resolve multiple styles by merging those
-			if (styles instanceof Array){
+			if (styles instanceof Array) {
 				styles = assignStyles(...styles);
 			}
-		
+
 			//Merge component assigned styles with outer styles to 
-			if (this.look){
-				 if (this.look instanceof Function){
-					 styles = assignStyles(this.look(), styles);
-				 } else if (this.look instanceof Object){
-					 styles = assignStyles(this.look, styles);
-				 }
+			if (this.look) {
+				if (this.look instanceof Function) {
+					styles = assignStyles(this.look(), styles);
+				} else if (this.look instanceof Object) {
+					styles = assignStyles(this.look, styles);
+				}
 			}
-			
+
 			let sheet = new Sheet(styles);
-			
+
 			if (processors) {
 				sheet.process(processors);
 			}
-			
+
 			/**
 			 * If matchState is set all stateful conditions will both math this.state and this.props
 			 * Otherwise only this.props get checked
@@ -48,7 +48,7 @@ export default function Look(Component, styles, processors, matchState, mediaQue
 			this._sheet = sheet;
 			this.state._look = new Map();
 			this._pseudoMap = sheet._pseudoMap;
-			
+
 			let me = this;
 
 			/**
@@ -62,7 +62,7 @@ export default function Look(Component, styles, processors, matchState, mediaQue
 			}
 		}
 
-		
+
 		//Remove mouseup listener if component unmounts to keep listeners clean
 		componentWillUnmount() {
 			if (super.componentWillUnmount) {
@@ -79,5 +79,9 @@ export default function Look(Component, styles, processors, matchState, mediaQue
 			return resolveLook(this, element, this._sheet.selectors);
 		}
 	}
+
+	//Taken from Radium, this adds the original component displayName again
+	LookComponent.displayName = Component.displayName || Component.name || 'Component';
+
 	return LookComponent;
 }
