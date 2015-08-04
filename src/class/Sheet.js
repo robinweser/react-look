@@ -9,16 +9,19 @@ export default class LookSheet extends Sheet {
 	 * @param {Object} styles - A key-value map with style rules
 	 */
 	constructor(styles) {
-		let selectors = {};
-		let pseudo = new Map();
+		super(styles);
+	}
 
+
+	split() {
+		let pseudo = new Map();
 		/**
 		 * Splits your selectors into styles, conditions (pseudo, media, stateful) & css
 		 * Also creates a pseudoMap with information on used pseudo classes
 		 */
-		selectors = splitStyles(styles, selectors, pseudo);
-		
-		super(selectors);
+		let sheet = {};
+		sheet = splitStyles(this.selectors, sheet, pseudo);
+		this.selectors = sheet;
 		this._pseudoMap = pseudo;
 	}
 }

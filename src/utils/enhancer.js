@@ -52,6 +52,8 @@ export default function Look(Component, styles = {}, processors = undefined, mat
 			if (processors) {
 				sheet.process(processors);
 			}
+			
+			sheet.split();
 
 			/**
 			 * If matchState is set all stateful conditions will both math this.state and this.props

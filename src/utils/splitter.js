@@ -67,7 +67,7 @@ export default function splitStyles(styles, sheet, pseudoMap, parent, wrapper) {
 			/**
 			 * Small hack to add additional classNames
 			 */
-			if (Validator.validateSelector(selector, '_css')) {
+			if (Validator.validateSelector(selector, 'css')) {
 				sheet[parent].css = currentStyles;
 				delete styles[selector];
 				continue;
