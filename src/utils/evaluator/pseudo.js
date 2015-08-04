@@ -35,9 +35,9 @@ export default function evaluatePseudoClass(pseudo, container, element, key, chi
 
 	//index-sensitive
 	else if (validateSelector(pseudo, ':first-child')) {
-		return childProps.index == 0;
+		return childProps.index == 1;
 	} else if (validateSelector(pseudo, ':last-child')) {
-		return childProps.index == childProps.length - 1;
+		return childProps.index == childProps.length;
 	} else if (validateSelector(pseudo, ':only-child')) {
 		return childProps.length == 1;
 	} else if (validateSelector(pseudo, ':nth-child')) {
@@ -50,9 +50,9 @@ export default function evaluatePseudoClass(pseudo, container, element, key, chi
 
 	//type-sensitive
 	else if (validateSelector(pseudo, ':first-of-type')) {
-		return childProps.typeIndex == 0;
+		return childProps.typeIndex == 1;
 	} else if (validateSelector(pseudo, ':last-of-type')) {
-		return childprops.typeIndex == childProps.typeIndexLength - 1;
+		return childprops.typeIndex == childProps.typeIndexLength;
 	} else if (validateSelector(pseudo, ':only-of-type')) {
 		return childProps.typeIndexLength == 1;
 	} else if (validateSelector(pseudo, ':nth-of-type')) {
@@ -92,6 +92,11 @@ export default function evaluatePseudoClass(pseudo, container, element, key, chi
 		return pseudo.indexOf(props.lang) > -1;
 	} else if (validateSelector(pseudo, ':empty')) {
 		return (!props.children || props.children.length < 1);
+	}
+	
+	else {
+		console.warn('There has been an unsupported pseudo class:', pseudo);
+		return false;
 	}
 }
 

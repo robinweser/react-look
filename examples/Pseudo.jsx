@@ -1,5 +1,5 @@
 import React from 'react';
-import Look from '../src/index';
+import {Look, State} from '../src/index';
 import {Processors} from 'dynamic-style-sheets';
 
 let styles = {
@@ -41,6 +41,9 @@ let styles = {
     },
     ':last-child': {
       color: 'red'
+    },
+    ':first-child' : {
+      color: 'yellow'
     }
   }
 }
@@ -58,8 +61,8 @@ class Pseudo extends React.Component {
     });
     return (
       <div>
-        <div key="hover" look="button hoverButton">Hover me!</div>
-        <div key="active" look="button activeButton">Click me!</div>
+        <div key="hoverButton" look="button hoverButton">Hover me! {State.getState('hover', this, 'hoverButton') ? 'Now click me!' : ''} {State.getState('active', this, 'hoverButton') ? 'Well Done.': ''}</div>
+        <div look="button activeButton">Click me!</div>
         <ul>
           {list}
         </ul>

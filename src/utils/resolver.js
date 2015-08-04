@@ -46,7 +46,6 @@ export default function resolveLook(container, element, selectors, childProps) {
 							'typeIndex': indexMap[type],
 							'typeIndexLength': typeMap[type]
 						}
-
 						children.push(resolveLook(container, child, selectors, childProps));
 
 					} else {

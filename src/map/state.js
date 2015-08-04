@@ -50,7 +50,11 @@ export default {
 		 * @param {string} key - a unique whichs state gets returned
 		 */
 		getState(state, container, key = defaultKey) {
-			return container.state._look.get(key).get(state);
+			if (container.state._look.has(key)){
+				return container.state._look.get(key).get(state);
+			} else {
+				return false;
+			}
 		},
 
 		/**
