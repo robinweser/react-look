@@ -12,21 +12,9 @@ import Regex from '../deprecated/regex.js';
  * NOTE: This is held simple for readability purpose, you may easily add other pseudos
  */
 export default function evaluatePseudoClass(pseudo, props, keyState, childProps) {
-
-	if (evalUserAction(pseudo, keyState, props.type)) {
-		return true;
-	} else if (evalIndexSensitive(pseudo, childProps)) {
-		return true;
-	} else if (evalTypeSensitive(pseudo, childProps)) {
-		return true;
-	} else if (evalInput(pseudo, props)) {
-		return true;
-	} else if (evalOther(pseudo, props)) {
-		return true;
-	} else {
-		console.warn('There has been an unsupported pseudo class:', pseudo);
-		return false;
-	}
+	let matched;
+	matched = evalUserAction(pseudo, keyState, props.type) || evalIndexSensitive(pseudo, childProps) ||  evalTypeSensitive(pseudo, childProps) || evalInput(pseudo, props) || evalOther(pseudo, props);
+	return matched ? true : false;
 }
 
 function evalUserAction(pseudo, keyState, type) {
@@ -43,7 +31,6 @@ function evalUserAction(pseudo, keyState, type) {
 	} else if (validateSelector(pseudo, ':invalid')) {
 		return evalValue(keyState.get('change'), type);
 	}
-	return false;
 }
 
 function evalIndexSensitive(pseudo, childProps) {
@@ -60,14 +47,13 @@ function evalIndexSensitive(pseudo, childProps) {
 		let expr = splitNthExpression(pseudo, ':nth-last-child');
 		return evalNth(expr, childProps.length - childProps.index, true);
 	}
-	return false;
 }
 
 function evalTypeSensitive(pseudo, childProps) {
 	if (validateSelector(pseudo, ':first-of-type')) {
 		return childProps.typeIndex === 1;
 	} else if (validateSelector(pseudo, ':last-of-type')) {
-		return childprops.typeIndex === childProps.typeIndexLength;
+		return childProps.typeIndex === childProps.typeIndexLength;
 	} else if (validateSelector(pseudo, ':only-of-type')) {
 		return childProps.typeIndexLength === 1;
 	} else if (validateSelector(pseudo, ':nth-of-type')) {
@@ -77,7 +63,6 @@ function evalTypeSensitive(pseudo, childProps) {
 		let expr = splitNthExpression(pseudo, ':nth-last-of-type');
 		return evalNth(expr, childProps.typeIndexLength - childProps.typeIndex, true);
 	}
-	return false;
 }
 
 function evalInput(pseudo, props) {
@@ -102,7 +87,6 @@ function evalInput(pseudo, props) {
 	} else if (validateSelector(pseudo, ':indeterminate')) {
 		return props.indeterminate;
 	}
-	return false;
 }
 
 function evalOther(pseudo, props) {
@@ -111,7 +95,6 @@ function evalOther(pseudo, props) {
 	} else if (validateSelector(pseudo, ':empty')) {
 		return (!props.children || props.children.length < 1);
 	}
-	return false;
 }
 
 /**

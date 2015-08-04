@@ -65,18 +65,20 @@ function addEventListener(container, props, key, state, listener) {
 	for (event in listener) {
 		let existing = newProps[event];
 		newProps[event] = e => {
-			if (existing){
+			if (existing) {
 				existing(e);
 			}
 			let name = (e.dispatchConfig.registrationName ? e.dispatchConfig.registrationName : e.dispatchConfig.phasedRegistrationNames.bubbled);
 			State.setState(state, listener[name], container, key);
+			if (State.getState('active', container, key)) {
+				container._lastActive.push(key);
+			}
 		};
 	}
 	if (state == 'active') {
 		if (!container._onMouseUp) {
 			addMouseUpListener(container);
 		}
-		container._lastActive.push(key);
 	}
 	return newProps;
 }
@@ -120,7 +122,7 @@ function addChangeListener(container, element, key) {
 	let existingOnChange = newProps.onChange;
 
 	newProps.onChange = function (e) {
-		if(existingOnChange){
+		if (existingOnChange) {
 			existingOnChange(e);
 		}
 		State.setState('change', e.target.value, container, key);
