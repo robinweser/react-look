@@ -4,7 +4,7 @@ Look supports media-queries using a common syntax. There are actually two differ
 
 ## Example
 ```javascript
-let styles = {
+{
 	// nested media query
 	box : {
 		color: 'blue',

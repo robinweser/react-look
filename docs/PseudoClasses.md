@@ -4,7 +4,7 @@ Look supports pseudo classes using a common syntax as it would be in CSS. They *
 
 ## Example
 ```javascript
-let styles = {
+{
 	box : {
 		color: 'blue',
 		fontSize: 20,
