@@ -12,8 +12,13 @@ import Regex from '../deprecated/regex.js';
  * NOTE: This is held simple for readability purpose, you may easily add other pseudos
  */
 export default function evaluatePseudoClass(pseudo, props, keyState, childProps) {
-	let matched;
-	matched = evalUserAction(pseudo, keyState, props.type) || evalIndexSensitive(pseudo, childProps) ||  evalTypeSensitive(pseudo, childProps) || evalInput(pseudo, props) || evalOther(pseudo, props);
+	let userAction = evalUserAction(pseudo, keyState, props.type);
+	let indexSensitive = evalChildIndex(pseudo, childProps.index, childProps.length);
+	let typeSensitive = evalChildIndex(pseudo, childProps.typeIndex, childProps.typeIndexLength, true);
+	let input = evalInput(pseudo, props);
+	let other = evalOther(pseudo, props);
+	
+	let matched = userAction || indexSensitive || typeSensitive || input || other;
 	return matched ? true : false;
 }
 
@@ -33,35 +38,26 @@ function evalUserAction(pseudo, keyState, type) {
 	}
 }
 
-function evalIndexSensitive(pseudo, childProps) {
-	if (validateSelector(pseudo, ':first-child')) {
-		return childProps.index === 1;
-	} else if (validateSelector(pseudo, ':last-child')) {
-		return childProps.index === childProps.length;
-	} else if (validateSelector(pseudo, ':only-child')) {
-		return childProps.length === 1;
-	} else if (validateSelector(pseudo, ':nth-child')) {
-		let expr = splitNthExpression(pseudo, ':nth-child');
-		return evalNth(expr, childProps.index);
-	} else if (validateSelector(pseudo, ':nth-last-child')) {
-		let expr = splitNthExpression(pseudo, ':nth-last-child');
-		return evalNth(expr, childProps.length - childProps.index, true);
-	}
+const indexPseudos = {
+	indexSensitive : [':first-child', 'last-child', ':only-child', ':nth-child', 'nth-last-child'],
+	typeSensitive : [':first-of-type', ':last-of-type', ':only-of-type', ':nth-of-type', ':nth-last-of-type']
 }
 
-function evalTypeSensitive(pseudo, childProps) {
-	if (validateSelector(pseudo, ':first-of-type')) {
-		return childProps.typeIndex === 1;
-	} else if (validateSelector(pseudo, ':last-of-type')) {
-		return childProps.typeIndex === childProps.typeIndexLength;
-	} else if (validateSelector(pseudo, ':only-of-type')) {
-		return childProps.typeIndexLength === 1;
-	} else if (validateSelector(pseudo, ':nth-of-type')) {
-		let expr = splitNthExpression(pseudo, ':nth-of-type');
-		return evalNth(expr, childProps.typeIndex);
-	} else if (validateSelector(pseudo, ':nth-last-of-type')) {
-		let expr = splitNthExpression(pseudo, ':nth-last-of-type');
-		return evalNth(expr, childProps.typeIndexLength - childProps.typeIndex, true);
+function evalChildIndex(pseudo, index, length, typeSensitive) {
+	let pseudos = indexPseudos[typeSensitive ? 'typeSensitive' : 'indexSensitive'];
+	
+	if (validateSelector(pseudo, pseudos[0])) {
+		return index === 1;
+	} else if (validateSelector(pseudo, pseudos[1])) {
+		return index === length;
+	} else if (validateSelector(pseudo, pseudos[2])) {
+		return length === 1;
+	} else if (validateSelector(pseudo, pseudos[3])) {
+		let expr = splitNthExpression(pseudo, pseudos[3]);
+		return evalNth(expr, index);
+	} else if (validateSelector(pseudo, pseudos[4])) {
+		let expr = splitNthExpression(pseudo, pseudos[4]);
+		return evalNth(expr, length - index, true);
 	}
 }
 
