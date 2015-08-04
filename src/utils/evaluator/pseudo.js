@@ -12,7 +12,24 @@ import Regex from '../deprecated/regex.js';
  * NOTE: This is held simple for readability purpose, you may easily add other pseudos
  */
 export default function evaluatePseudoClass(pseudo, props, keyState, childProps) {
-	//user-action
+
+	if (evalUserAction(pseudo, keyState, props.type)) {
+		return true;
+	} else if (evalIndexSensitive(pseudo, childProps)) {
+		return true;
+	} else if (evalTypeSensitive(pseudo, childProps)) {
+		return true;
+	} else if (evalInput(pseudo, props)) {
+		return true;
+	} else if (evalOther(pseudo, props)) {
+		return true;
+	} else {
+		console.warn('There has been an unsupported pseudo class:', pseudo);
+		return false;
+	}
+}
+
+function evalUserAction(pseudo, keyState, type) {
 	if (validateSelector(pseudo, ':active')) {
 		return keyState.get('active');
 	} else if (validateSelector(pseudo, ':hover')) {
@@ -20,16 +37,17 @@ export default function evaluatePseudoClass(pseudo, props, keyState, childProps)
 	} else if (validateSelector(pseudo, ':focus')) {
 		return keyState.get('focus');
 	}
-
 	//special user-action
 	else if (validateSelector(pseudo, ':valid')) {
-		return evalValue(keyState.get('change'), props.type);
+		return evalValue(keyState.get('change'), type);
 	} else if (validateSelector(pseudo, ':invalid')) {
-		return evalValue(keyState.get('change'), props.type);
+		return evalValue(keyState.get('change'), type);
 	}
+	return false;
+}
 
-	//index-sensitive
-	else if (validateSelector(pseudo, ':first-child')) {
+function evalIndexSensitive(pseudo, childProps) {
+	if (validateSelector(pseudo, ':first-child')) {
 		return childProps.index === 1;
 	} else if (validateSelector(pseudo, ':last-child')) {
 		return childProps.index === childProps.length;
@@ -42,9 +60,11 @@ export default function evaluatePseudoClass(pseudo, props, keyState, childProps)
 		let expr = splitNthExpression(pseudo, ':nth-last-child');
 		return evalNth(expr, childProps.length - childProps.index, true);
 	}
+	return false;
+}
 
-	//type-sensitive
-	else if (validateSelector(pseudo, ':first-of-type')) {
+function evalTypeSensitive(pseudo, childProps) {
+	if (validateSelector(pseudo, ':first-of-type')) {
 		return childProps.typeIndex === 1;
 	} else if (validateSelector(pseudo, ':last-of-type')) {
 		return childprops.typeIndex === childProps.typeIndexLength;
@@ -57,9 +77,11 @@ export default function evaluatePseudoClass(pseudo, props, keyState, childProps)
 		let expr = splitNthExpression(pseudo, ':nth-last-of-type');
 		return evalNth(expr, childProps.typeIndexLength - childProps.typeIndex, true);
 	}
+	return false;
+}
 
-	//input
-	else if (validateSelector(pseudo, ':checked')) {
+function evalInput(pseudo, props) {
+	if (validateSelector(pseudo, ':checked')) {
 		return props.checked;
 	} else if (validateSelector(pseudo, ':disabled')) {
 		return props.disabled;
@@ -80,20 +102,17 @@ export default function evaluatePseudoClass(pseudo, props, keyState, childProps)
 	} else if (validateSelector(pseudo, ':indeterminate')) {
 		return props.indeterminate;
 	}
+	return false;
+}
 
-	//other
-	else if (validateSelector(pseudo, ':lang')) {
+function evalOther(pseudo, props) {
+	if (validateSelector(pseudo, ':lang')) {
 		return pseudo.indexOf(props.lang) > -1;
 	} else if (validateSelector(pseudo, ':empty')) {
 		return (!props.children || props.children.length < 1);
 	}
-	
-	else {
-		console.warn('There has been an unsupported pseudo class:', pseudo);
-		return false;
-	}
+	return false;
 }
-
 
 /**
  * Extracts only the mathematical expression out an pseudo-class string 

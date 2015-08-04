@@ -67,7 +67,7 @@ function addEventListener(container, props, key, state, listener) {
 		newProps[event] = e => {
 			if (existing){
 				existing(e);
-			};
+			}
 			let name = (e.dispatchConfig.registrationName ? e.dispatchConfig.registrationName : e.dispatchConfig.phasedRegistrationNames.bubbled);
 			State.setState(state, listener[name], container, key);
 		};
@@ -122,7 +122,7 @@ function addChangeListener(container, element, key) {
 	newProps.onChange = function (e) {
 		if(existingOnChange){
 			existingOnChange(e);
-		};
+		}
 		State.setState('change', e.target.value, container, key);
 	};
 	return newProps;

@@ -1,5 +1,4 @@
 import {CSSSheet, Processors} from 'dynamic-style-sheets';
-import multiProcess from './extension/process';
 let Units = Processors.Units;
 /**
  *  A global StyleSheet that directly applies to your DOM.
@@ -13,13 +12,5 @@ export default class Global extends CSSSheet {
 		super(styles);
 		
 		this.process(Units, unit);
-	}
-
-	/**
-	 * Processes your styles with any processor provided
-	 * @param {Array|Object} processors - processor(s) you want to run against your styles
-	 */
-	process(processors, ...args) {
-		multiProcess(super, processors, ...args);
 	}
 }

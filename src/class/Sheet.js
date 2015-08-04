@@ -1,6 +1,5 @@
 import {Sheet} from 'dynamic-style-sheets';
 import splitStyles from '../utils/splitter';
-import multiProcess from './extension/process';
 
 export default class LookSheet extends Sheet {
 
@@ -21,13 +20,5 @@ export default class LookSheet extends Sheet {
 		
 		super(selectors);
 		this._pseudoMap = pseudo;
-	}
-
-	/**
-	 * Processes your styles with any processor provided
-	 * @param {Array|Object} processors - processor(s) you want to run against your styles
-	 */
-	process(processors, ...args) {
-		multiProcess(super, processors, ...args);
 	}
 }
