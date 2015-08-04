@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Feature-rich, dynamic & stateful Component Styling for React (CSS in JS)",
   "main": "src/index.js",
   "files": [
