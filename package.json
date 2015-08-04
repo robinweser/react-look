@@ -1,12 +1,13 @@
 {
   "name": "react-look",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Feature-rich, dynamic & stateful Component Styling for React (CSS in JS)",
   "main": "src/index.js",
   "files": [
     "LICENSE",
     "README.md",
-    "src/"
+    "src/",
+    "docs/"
   ],
   "repository": {
     "type": "git",
