@@ -3,16 +3,19 @@ I try my best to keep all docs updated. If you have any recommendations or impro
 
 ## Table of Contents
 1. [Getting started](GettingStarted.md)
-2. [Pseudo classes](PseudoClasses.md)
-3. [Media queries](MediaQueries.md)
-4. [Stateful conditions](StatefulConditions.md)
-5. [Processors](Processors.md)
-6. [Mixins](Mixins.md) 
+2. [Under the hood](UnderTheHood.md)
+3. [Pseudo classes](PseudoClasses.md)
+4. [Media queries](MediaQueries.md)
+5. [Stateful conditions](StatefulConditions.md)
+6. [Processors](Processors.md)
+7. [Mixins](Mixins.md) 
+8. [FAQ](FAQ.md) 
 
 ### API
-1. [Global](api/Global.md)
-2. [State](api/State.md)
-3. [matchMedia](api/matchMedia.md)
+1. [Look](api/Look.md)
+2. [Global](api/Global.md)
+3. [State](api/State.md)
+4. [matchMedia](api/matchMedia.md)
 
 ## License
 Full documentation of react-look is licensed under Creative Common License.<br>
