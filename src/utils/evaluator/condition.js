@@ -9,20 +9,20 @@ export default function evaluateCondition(condition, matchValues) {
 	let [property, value] = condition.split(operator);
 
 	if (matchValues.hasOwnProperty(property)) {
-		let match = (matchValues[property] == undefined ? 'undefined' : matchValues[property]);
+		let match = (matchValues[property] === undefined ? 'undefined' : matchValues[property]);
 		match = match.toString();
 
-		if (operator == '>=') {
+		if (operator === '>=') {
 			return match >= value;
-		} else if (operator == '<=') {
+		} else if (operator === '<=') {
 			return match <= value;
-		} else if (operator == '!=') {
+		} else if (operator === '!=') {
 			return match != value;
-		} else if (operator == '=') {
+		} else if (operator === '=') {
 			return match == value;
-		} else if (operator == '>') {
+		} else if (operator === '>') {
 			return match > value;
-		} else if (operator == '<') {
+		} else if (operator === '<') {
 			return match < value;
 		}
 	} else {

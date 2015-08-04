@@ -7,15 +7,15 @@
  */
 export function evalNth(expression, index, reverse) {
 	//TODO: drunk => dirty, fix later
-	if (expression == 'odd') {
-		return index % 2 != 0;
-	} else if (expression == 'even') {
-		return index % 2 == 0;
+	if (expression === 'odd') {
+		return index % 2 !== 0;
+	} else if (expression === 'even') {
+		return index % 2 === 0;
 	} else {
 		if (expression.indexOf('n') > -1) {
 			let termSplit = expression.split('n');
 			let mult = termSplit[0];
-			mult = (mult == '-' ? '-1' : mult);
+			mult = (mult === '-' ? '-1' : mult);
 
 			let add = termSplit[1];
 			add = (add ? add : '+0');
@@ -33,7 +33,7 @@ export function evalNth(expression, index, reverse) {
 				return ((index - add) / mult) % 1 == 0;
 			}
 		} else {
-			return index == parseInt(value);
+			return index === parseInt(value);
 		}
 	}
 }

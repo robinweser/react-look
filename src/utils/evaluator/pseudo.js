@@ -1,22 +1,17 @@
 import {validateSelector, isNumber} from '../validator';
 import {evalValue, evalRange, evalNth} from './eval.js';
 import Regex from '../deprecated/regex.js';
-import State from '../../map/state';
 
 
 /**
  * Evaluates if a pseudo class fullfils its condition
  * @param {string} pseudo - pseudo-class that gets evaluated
- * @param {Object} container - React-Component that wraps these elements
- * @param {Object} element - current element that gets enhanced
- * @param {string} key - unique key each element using action pseudos (:active, :focus, :hover & :valid/:invalid) needs
+ * @param {Object} props - elements props that get used to evaluate pseudos
+ * @param {Map} keyState - stores information on elements current user-action states
  * @param {Object} childProps - a map with (type-specific) indexes to validate index-sensitive pseudos
  * NOTE: This is held simple for readability purpose, you may easily add other pseudos
  */
-export default function evaluatePseudoClass(pseudo, container, element, key, childProps) {
-	let keyState = State.get(container, key);
-	let props = element.props;
-
+export default function evaluatePseudoClass(pseudo, props, keyState, childProps) {
 	//user-action
 	if (validateSelector(pseudo, ':active')) {
 		return keyState.get('active');
@@ -35,11 +30,11 @@ export default function evaluatePseudoClass(pseudo, container, element, key, chi
 
 	//index-sensitive
 	else if (validateSelector(pseudo, ':first-child')) {
-		return childProps.index == 1;
+		return childProps.index === 1;
 	} else if (validateSelector(pseudo, ':last-child')) {
-		return childProps.index == childProps.length;
+		return childProps.index === childProps.length;
 	} else if (validateSelector(pseudo, ':only-child')) {
-		return childProps.length == 1;
+		return childProps.length === 1;
 	} else if (validateSelector(pseudo, ':nth-child')) {
 		let expr = splitNthExpression(pseudo, ':nth-child');
 		return evalNth(expr, childProps.index);
@@ -50,11 +45,11 @@ export default function evaluatePseudoClass(pseudo, container, element, key, chi
 
 	//type-sensitive
 	else if (validateSelector(pseudo, ':first-of-type')) {
-		return childProps.typeIndex == 1;
+		return childProps.typeIndex === 1;
 	} else if (validateSelector(pseudo, ':last-of-type')) {
-		return childprops.typeIndex == childProps.typeIndexLength;
+		return childprops.typeIndex === childProps.typeIndexLength;
 	} else if (validateSelector(pseudo, ':only-of-type')) {
-		return childProps.typeIndexLength == 1;
+		return childProps.typeIndexLength === 1;
 	} else if (validateSelector(pseudo, ':nth-of-type')) {
 		let expr = splitNthExpression(pseudo, ':nth-of-type');
 		return evalNth(expr, childProps.typeIndex);
@@ -85,7 +80,6 @@ export default function evaluatePseudoClass(pseudo, container, element, key, chi
 	} else if (validateSelector(pseudo, ':indeterminate')) {
 		return props.indeterminate;
 	}
-
 
 	//other
 	else if (validateSelector(pseudo, ':lang')) {

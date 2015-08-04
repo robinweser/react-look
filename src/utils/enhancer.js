@@ -7,8 +7,8 @@ import Sheet from '../class/Sheet';
 /**
  * Applies your styles to a React Component
  * @param {Component} component - a valid React component that gets styles applied
- * @param {Array|Object} styles - styles that used to resolve looks
- * @param {Array|Function} processors - processors that modify the styles
+ * @param {Array|Object} styles - additional styles that are used to resolve looks
+ * @param {Array|Function} processors - additional processors that modify the styles
  * @param {Boolean} matchState - if also this.state (in addition to this.props) values are used while validatiing stateful conditions
  * @param {Boolean} resizeListener - if a resize listener get's added to notice size changes/rematch media queries
  */
@@ -16,8 +16,9 @@ export default function Look(Component, styles = {}, processors = undefined, mat
 	class LookComponent extends Component {
 		constructor() {
 			super(...arguments);
-			this.state = this.state ||  {};
-
+			if (!this.state) {
+				this.state = {};
+			}
 
 			//resolve multiple styles by merging those
 			if (styles instanceof Array) {
@@ -31,10 +32,23 @@ export default function Look(Component, styles = {}, processors = undefined, mat
 				} else if (this.look instanceof Object) {
 					styles = assignStyles(this.look, styles);
 				}
+				delete this.look;
 			}
+
 
 			let sheet = new Sheet(styles);
 
+			//Process the styles with component-assigned processors
+			if (this.processors) {
+				if (this.processors instanceof Function) {
+					sheet.process(this.processors());
+				} else if (this.processors instanceof Object) {
+					sheet.process(this.processors)
+				}
+				delete this.processors;
+			}
+			
+			//Process the styles with additional processors if provided
 			if (processors) {
 				sheet.process(processors);
 			}

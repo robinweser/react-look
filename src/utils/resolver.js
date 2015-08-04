@@ -54,7 +54,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 						 * e.g. if you're trying to map {this.props.title} but it is not defined
 						 * It also fires a warning so that you may remove them on your own
 						 */
-						if (child == undefined) {
+						if (child === undefined) {
 							console.warn('There are children which are either undefined, empty or invalid React Elements: ', props.children);
 							console.warn('Look removed 1 child while validating (look="' + props.look + '"): child ', child);
 						} else {
@@ -84,7 +84,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 					if (!State.has(container, key)) {
 						State.add(container, key);
 					} else {
-						if (key == 'root') {
+						if (key === 'root') {
 							console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
 						}
 					}

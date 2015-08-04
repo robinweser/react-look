@@ -1,4 +1,5 @@
 import {CSSSheet, Processors} from 'dynamic-style-sheets';
+import multiProcess from './extension/process';
 let Units = Processors.Units;
 /**
  *  A global StyleSheet that directly applies to your DOM.
@@ -19,12 +20,6 @@ export default class Global extends CSSSheet {
 	 * @param {Array|Object} processors - processor(s) you want to run against your styles
 	 */
 	process(processors, ...args) {
-		if (processors instanceof Array == false) {
-			super.process(processors, ...args);
-		} else {
-			processors.forEach(item => {
-				super.process(item, ...args);
-			})
-		}
+		multiProcess(super, processors, ...args);
 	}
 }

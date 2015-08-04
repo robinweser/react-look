@@ -1,7 +1,8 @@
 import * as Validator from './validator';
-import evaluateMediaQuery from './evaluator/media'
-import evaluateCondition from './evaluator/condition'
-import evaluatePseudoClass from './evaluator/pseudo'
+import evaluateMediaQuery from './evaluator/media';
+import evaluateCondition from './evaluator/condition';
+import evaluatePseudoClass from './evaluator/pseudo';
+import State from '../map/state';
 
 /**
  * Evaluates any advanced expression which are pseudo classes, media queries or stateful conditions
@@ -23,7 +24,8 @@ export default function evaluateExpression(expression, container, element, key, 
 	}
 	//eval pseudos
 	else if (Validator.isPseudo(expression)) {
-		return evaluatePseudoClass(expression, container, element, key, childProps);
+		let keyState = State.get(container, key);
+		return evaluatePseudoClass(expression, element.props, keyState, childProps);
 	} else {
 		return false;
 	}

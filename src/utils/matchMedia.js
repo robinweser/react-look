@@ -22,5 +22,5 @@ export function getMatchMedia() {
  * Returns if the current environment can call the matchMedia function
  */
 export function canMatchMedia() {
-	return (defaultMatchMedia ? true : false);
+	return defaultMatchMedia ? true : false;
 }

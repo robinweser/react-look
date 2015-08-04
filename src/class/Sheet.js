@@ -1,6 +1,6 @@
 import {Sheet} from 'dynamic-style-sheets';
 import splitStyles from '../utils/splitter';
-
+import multiProcess from './extension/process';
 
 export default class LookSheet extends Sheet {
 
@@ -28,12 +28,6 @@ export default class LookSheet extends Sheet {
 	 * @param {Array|Object} processors - processor(s) you want to run against your styles
 	 */
 	process(processors, ...args) {
-		if (processors instanceof Array == false) {
-			super.process(processors, ...args);
-		} else {
-			processors.forEach(item => {
-				super.process(item, ...args);
-			})
-		}
+		multiProcess(super, processors, ...args);
 	}
 }
