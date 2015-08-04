@@ -30,7 +30,7 @@ export function evalNth(expression, index, reverse) {
 				} else if (mult > 0 && index < add) {
 					return false;
 				}
-				return ((index - add) / mult) % 1 == 0;
+				return ((index - add) / mult) % 1 === 0;
 			}
 		} else {
 			return index === parseInt(value);
@@ -47,13 +47,13 @@ export function evalNth(expression, index, reverse) {
 export function evalValue(value, type) {
 	console.warn("Validation within react-look has been deprecated. Use react-look-tools instead.");
 
-	if (type == 'email') {
+	if (type === 'email') {
 		return Regex.email.test(value);
-	} else if (type == 'url') {
+	} else if (type === 'url') {
 		return Regex.url.test(value);
-	} else if (type == 'number' || type == 'range') {
+	} else if (type === 'number' || type === 'range') {
 		return Validator.isNumber(value);
-	} else if (type == 'tel') {
+	} else if (type === 'tel') {
 		//TODO: tel validation
 		return false;
 	} else {
@@ -67,5 +67,5 @@ export function evalValue(value, type) {
  */
 export function evalRange(props) {
 	let {min, max, value} = props;
-	return min != undefined && max != undefined && value >= min && value <= max;
+	return min !== undefined && max !== undefined && value >= min && value <= max;
 }

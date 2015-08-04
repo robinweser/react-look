@@ -43,7 +43,7 @@ export default function Look(Component, styles = {}, processors = undefined, mat
 				if (this.processors instanceof Function) {
 					sheet.process(this.processors());
 				} else if (this.processors instanceof Object) {
-					sheet.process(this.processors)
+					sheet.process(this.processors);
 				}
 				delete this.processors;
 			}
@@ -83,7 +83,7 @@ export default function Look(Component, styles = {}, processors = undefined, mat
 				super.componentWillUnmount();
 			}
 			if (this._onMouseUp) {
-				window.removeEventListener('mouseup', this._onMouseUp)
+				window.removeEventListener('mouseup', this._onMouseUp);
 			}
 		}
 

@@ -15,7 +15,11 @@ export function setMatchMedia(matchMedia) {
  * Returns the currently used matchMedia function
  */
 export function getMatchMedia() {
-	return customMatchMedia ||  defaultMatchMedia;
+	if (customMatchMedia){
+		return customMatchMedia;
+	} else {
+		return defaultMatchMedia;
+	}
 }
 
 /**
