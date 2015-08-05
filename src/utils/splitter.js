@@ -63,6 +63,10 @@ export default function splitStyles(styles, sheet, pseudoMap, parent, wrapper) {
 				}
 			}
 		} else {
+			if (!parent){
+				parent = '_default';
+				sheet[parent] = cloneObject(blankStyle);
+			}
 			/**
 			 * Small hack to add additional classNames
 			 */

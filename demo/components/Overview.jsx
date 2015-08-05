@@ -9,24 +9,22 @@ class Overview extends React.Component {
   constructor() {
     super(...arguments);
   }
-	
-	look(){
-		return {
-			header : {
-				marginTop: 20,
-				marginBottom: 30,
-				fontSize: 40,
-				fontWeight: 600,
-				textAlign: 'center',
-				color: 'rgb(82, 67, 203)'
-			}
-		}
-	}
-	
+
+  look() {
+    return {
+      marginTop: 20,
+      marginBottom: 30,
+      fontSize: 40,
+      fontWeight: 600,
+      textAlign: 'center',
+      color: 'rgb(82, 67, 203)'
+    }
+  }
+
   render() {
     return (
       <div>
-				<h1 look="header">Look Examples</h1>
+        <h1 look>Look Examples</h1>
         <DemoContainer group title="1. Pseudo Classes">
           <Pseudo/>
         </DemoContainer>
@@ -44,5 +42,5 @@ class Overview extends React.Component {
     )
   }
 }
-
-export default Look(Overview);
+export
+default Look(Overview);

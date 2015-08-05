@@ -87,7 +87,7 @@ export default function Look(Component, additionalStyles, processors = undefined
 					me.forceUpdate();
 				});
 			}
-			
+
 			/**
 			 * If matchState is set all stateful conditions will both math this.state and this.props
 			 * Otherwise only this.props get checked

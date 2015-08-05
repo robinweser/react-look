@@ -73,7 +73,13 @@ export default function resolveLook(container, element, childProps) {
 
 		//TODO: add multiple look support, see #14
 		if (props.hasOwnProperty('look')) {
-			let looks = props.look.split(' ');
+			let looks;
+			if (props.look === true) {
+				looks = '_default';
+			} else {
+				looks = props.look;
+			}
+			looks = looks.split(' ');
 			let key = element.key || element.ref || 'root';
 			/**
 			 * Splits look to resolve multiple looks
