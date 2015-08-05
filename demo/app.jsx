@@ -1,17 +1,5 @@
 import React from 'react';
-import Overview from './Overview.jsx';
-import {Global} from '../src/index';
-
-let sheet = new Global({
-	'*' : {
-		padding: 0,
-		margin: 0,
-		fontFamily : '"Lato", sans-serif',
-		fontWeight: 300,
-		boxSizing : 'border-box'
-	}
-})
-
-sheet.apply();
-
+import Overview from './components/Overview.jsx';
+import GlobalStylesheet from './utils/GlobalStylesheet';
+  
 React.render(<Overview />, document.body);

@@ -99,6 +99,15 @@ class Header extends React.Component {
 
 export default Look(Header);            //Your styles get processed and resolved here
 ```
+# Demo 
+You can visit the [live-demo](http://rofrischmann.de/react-look/) or  easily run the examples on your own within the provided demo by just:
+```sh
+git clone --bare https://github.com/rofrischmann/react-look.git
+npm install
+npm run build
+open demo/index.html
+```
+
 # [Documentation](docs/Docs.md#tableofcontents)
 I tried to write as much helpful documentation as possible. Before asking any question or creating an issue please be sure to read all the documentation.<br>
 The documentation gives huge information on how to do all kind of stuff. It serves detailed information on how to use processors, mixins or react-look-tools.<br>
