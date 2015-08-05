@@ -22,10 +22,7 @@ There are several states which are quite common to style a component state-speci
 	}
 }
 ```
-Stateful conditions always check `this.props` values but you can [pass](api/Look.md) `true` as `matchState` while applying your Look. This enables `this.state` values to be checked too.
-
-
 Just as pseudo classes and media queries, stateful conditions can be nested. They can also contain nested pseudo classes and media queries.
 
 ## Validation
-Looks takes `this.props` and optional `this.state` and checks if there is a key that matches the condition. e.g. `status=active` gets validated with `this.props['status'] === 'active'`.
+Looks takes `this.props` and `this.state` and checks if there is a key that matches the condition. e.g. `status=active` gets validated with `this.props['status'] === 'active'`.

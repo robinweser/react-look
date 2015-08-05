@@ -11,7 +11,6 @@ import addRequiredEventListeners from './listener';
  * Resolves styling for an element and returns the modified one.
  * @param {LookComponent} container - the outer React Component to determine state and props
  * @param {Object} element - current element that gets modified
- * @param {object} selectors - all selectors with styles, conditions and extra css classNames
  * @param {Object} childProps - information on child-indexes for index-sensitive pseudo-classes
  */
 export default function resolveLook(container, element, childProps) {
@@ -71,7 +70,6 @@ export default function resolveLook(container, element, childProps) {
 		let newProps = ({}, props);
 		let newStyle = {};
 
-		//TODO: add multiple look support, see #14
 		if (props.hasOwnProperty('look')) {
 			let looks;
 			if (props.look === true) {
