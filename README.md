@@ -8,7 +8,7 @@ npm install react-look
 
 **Look** is a **feature-rich** styling library for [React.js](https://facebook.github.io/react/) based on inline-styles that adds support for lots of CSS features as well as **stateful** styles. It extends your inline styles and is fully customizable through processors since it is based on [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
 
-> It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
+> It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com). <br>Be sure to read my blog post [React Component styling without limitations](https://medium.com/@rofrischmann/react-component-styling-without-limitations-84e5e776fd44) which gives detail information how and why I build Look.
 
 # Features
 Look is as far as I know the **feature richest** inline-styling library for React. <br>
