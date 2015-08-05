@@ -28,7 +28,7 @@ export function isMediaQuery(selector) {
  * @param {string} selector - selector that gets validates
  */
 export function isCondition(selector) {
-	return selector.indexOf('=') > -1;
+	return selector.indexOf('=') > -1 || selector.indexOf('<') > -1 || selector.indexOf('>') > -1 || selector.indexOf('!=') > -1;
 }
 
 /**

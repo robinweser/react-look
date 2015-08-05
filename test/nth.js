@@ -39,6 +39,12 @@ describe('evaluating nth-child: ', () => {
 			3: true,
 			4: true,
 			5: true
+		},
+		'3' : {
+			1: false,
+			2: false,
+			3: true,
+			4: false
 		}
 	}
 	
@@ -93,6 +99,12 @@ describe('evaluating nth-last-child with '+ length + ' elements:', () => {
 			3: true,
 			4: false,
 			5: false
+		},
+		'3' : {
+			1: false,
+			2: false,
+			3: true,
+			4: false
 		}
 	}
 	

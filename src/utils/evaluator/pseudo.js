@@ -12,9 +12,9 @@ import Regex from '../deprecated/regex.js';
  * NOTE: This is held simple for readability purpose, you may easily add other pseudos
  */
 export default function evaluatePseudoClass(pseudo, props, keyState, childProps) {
-	let userAction = evalUserAction(pseudo, keyState, props.type);
-	let indexSensitive = evalChildIndex(pseudo, childProps.index, childProps.length);
-	let typeSensitive = evalChildIndex(pseudo, childProps.typeIndex, childProps.typeIndexLength, true);
+	let userAction = evalUserAction(pseudo, keyState, props);
+	let indexSensitive = childProps ? evalChildIndex(pseudo, childProps.index, childProps.length) : false;
+	let typeSensitive = childProps ? evalChildIndex(pseudo, childProps.typeIndex, childProps.typeIndexLength, true) : false;
 	let input = evalInput(pseudo, props);
 	let other = evalOther(pseudo, props);
 	
@@ -22,7 +22,7 @@ export default function evaluatePseudoClass(pseudo, props, keyState, childProps)
 	return matched ? true : false;
 }
 
-function evalUserAction(pseudo, keyState, type) {
+function evalUserAction(pseudo, keyState, props) {
 	if (validateSelector(pseudo, ':active')) {
 		return keyState.get('active');
 	} else if (validateSelector(pseudo, ':hover')) {
@@ -32,14 +32,18 @@ function evalUserAction(pseudo, keyState, type) {
 	}
 	//special user-action
 	else if (validateSelector(pseudo, ':valid')) {
-		return evalValue(keyState.get('change'), type);
+		return evalValue(keyState.get('change'), props.type);
 	} else if (validateSelector(pseudo, ':invalid')) {
-		return evalValue(keyState.get('change'), type);
-	}
+		return !evalValue(keyState.get('change'), props.type);
+	} else if (validateSelector(pseudo, ':in-range')) {
+		return !evalRange(props, keyState.get('change'));
+	} else if (validateSelector(pseudo, ':out-of-range')) {
+		return evalRange(props, keyState.get('change'));
+	} 
 }
 
 const indexPseudos = {
-	indexSensitive : [':first-child', 'last-child', ':only-child', ':nth-child', 'nth-last-child'],
+	indexSensitive : [':first-child', ':last-child', ':only-child', ':nth-child', 'nth-last-child'],
 	typeSensitive : [':first-of-type', ':last-of-type', ':only-of-type', ':nth-of-type', ':nth-last-of-type']
 }
 
@@ -61,7 +65,7 @@ function evalChildIndex(pseudo, index, length, typeSensitive) {
 	}
 }
 
-function evalInput(pseudo, props) {
+function evalInput(pseudo, props, changeState) {
 	if (validateSelector(pseudo, ':checked')) {
 		return props.checked;
 	} else if (validateSelector(pseudo, ':disabled')) {
@@ -72,14 +76,10 @@ function evalInput(pseudo, props) {
 		return props.required;
 	} else if (validateSelector(pseudo, ':optional')) {
 		return !props.required;
-	} else if (validateSelector(pseudo, ':in-range')) {
-		return evalRange(props);
-	} else if (validateSelector(pseudo, ':out-of-range')) {
-		return !evalRange(props);
 	} else if (validateSelector(pseudo, ':read-only')) {
-		return props.readonly;
+		return props.readOnly;
 	} else if (validateSelector(pseudo, ':read-write')) {
-		return !props.readonly;
+		return !props.readOnly;
 	} else if (validateSelector(pseudo, ':indeterminate')) {
 		return props.indeterminate;
 	}

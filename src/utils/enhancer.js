@@ -9,10 +9,8 @@ import Sheet from '../class/Sheet';
  * @param {Component} component - a valid React component that gets styles applied
  * @param {Array|Object} styles - additional styles that are used to resolve looks
  * @param {Array|Function} processors - additional processors that modify the styles
- * @param {Boolean} matchState - if also this.state (in addition to this.props) values are used while validatiing stateful conditions
- * @param {Boolean} resizeListener - if a resize listener get's added to notice size changes/rematch media queries
  */
-export default function Look(Component, styles = {}, processors = undefined, matchState = true, mediaQueryListener = false) {
+export default function Look(Component, additionalStyles, processors = undefined) {
 	class LookComponent extends Component {
 		constructor() {
 			super(...arguments);
@@ -20,9 +18,28 @@ export default function Look(Component, styles = {}, processors = undefined, mat
 				this.state = {};
 			}
 
+			this._lastActive = [];
+			this.state._look = new Map();
+		}
+
+
+		//Remove mouseup listener if component unmounts to keep listeners clean
+		componentWillUnmount() {
+			if (super.componentWillUnmount) {
+				super.componentWillUnmount();
+			}
+			if (this._onMouseUp) {
+				window.removeEventListener('mouseup', this._onMouseUp);
+			}
+		}
+
+		//Similar to Radium, Look wraps the render function and resolves styles on its own
+		render() {
+			let styles = {};
+
 			//resolve multiple styles by merging those
-			if (styles instanceof Array) {
-				styles = assignStyles(...styles);
+			if (additionalStyles instanceof Array) {
+				styles = assignStyles(...additionalStyles);
 			}
 
 			//Merge component assigned styles with outer styles to 
@@ -47,22 +64,15 @@ export default function Look(Component, styles = {}, processors = undefined, mat
 				}
 				delete this.processors;
 			}
-			
+
 			//Process the styles with additional processors if provided
 			if (processors) {
 				sheet.process(processors);
 			}
-			
+
 			sheet.split();
 
-			/**
-			 * If matchState is set all stateful conditions will both math this.state and this.props
-			 * Otherwise only this.props get checked
-			 */
-			this._matchValues = (matchState ? assign(this.state, this.props) : this.props);
-			this._lastActive = [];
 			this._sheet = sheet;
-			this.state._look = new Map();
 			this._pseudoMap = sheet._pseudoMap;
 
 			let me = this;
@@ -71,28 +81,21 @@ export default function Look(Component, styles = {}, processors = undefined, mat
 			 * Adds a resize listener to instantly recheck all media queries
 			 * NOTE: It is assumend that a user won't resize an application too often
 			 */
-			if (mediaQueryListener) {
+			if (this._pseudoMap.has('_mediaQueryListener') && !this._mediaQueryListener) {
+				this._mediaQueryListener = true;
 				window.addEventListener('resize', function () {
 					me.forceUpdate();
 				});
 			}
-		}
+			
+			/**
+			 * If matchState is set all stateful conditions will both math this.state and this.props
+			 * Otherwise only this.props get checked
+			 */
+			this._matchValues = assign(this.state, this.props);
 
-
-		//Remove mouseup listener if component unmounts to keep listeners clean
-		componentWillUnmount() {
-			if (super.componentWillUnmount) {
-				super.componentWillUnmount();
-			}
-			if (this._onMouseUp) {
-				window.removeEventListener('mouseup', this._onMouseUp);
-			}
-		}
-
-		//Similar to Radium, Look wraps the render function and resolves styles on its own
-		render() {
 			let element = super.render();
-			return resolveLook(this, element, this._sheet.selectors);
+			return resolveLook(this, element);
 		}
 	}
 

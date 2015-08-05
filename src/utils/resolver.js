@@ -14,7 +14,9 @@ import addRequiredEventListeners from './listener';
  * @param {object} selectors - all selectors with styles, conditions and extra css classNames
  * @param {Object} childProps - information on child-indexes for index-sensitive pseudo-classes
  */
-export default function resolveLook(container, element, selectors, childProps) {
+export default function resolveLook(container, element, childProps) {
+	let selectors = container._sheet.selectors;
+	
 	if (element && element.props) {
 		let props = element.props;
 
@@ -31,7 +33,6 @@ export default function resolveLook(container, element, selectors, childProps) {
 				 * Generate index-maps to resolve child-index-sensitive pseudo-classes
 				 */
 				props.children.forEach((child, index) => {
-
 					//only resolve child if it actually is a valid react element
 					if (child) {
 
@@ -46,7 +47,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 							'typeIndex': indexMap[type],
 							'typeIndexLength': typeMap[type]
 						}
-						children.push(resolveLook(container, child, selectors, childProps));
+						children.push(resolveLook(container, child, childProps));
 
 					} else {
 						/**
@@ -63,7 +64,7 @@ export default function resolveLook(container, element, selectors, childProps) {
 					}
 				});
 			} else {
-				children = resolveLook(container, props.children, selectors);
+				children = resolveLook(container, props.children);
 			}
 		}
 

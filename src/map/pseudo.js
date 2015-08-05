@@ -1,5 +1,5 @@
 import * as Validator from '../utils/validator';
-const eventPseudos = [':active', ':focus', ':hover', ':valid', ':invalid'];
+const eventPseudos = [':active', ':focus', ':hover', ':valid', ':invalid', ':in-range', ':out-of-range'];
 
 /**
  * Adds pseudo-class information concerning a style selector
@@ -22,6 +22,10 @@ export default function addRequiredEventPseudos(pseudo, selector, event) {
 			setEventPseudo(pseudo, selector, 'change')
 		} else {
 			setEventPseudo(pseudo, selector, event.substr(1, event.length - 1))
+		}
+	} else {
+		if (Validator.isMediaQuery(event)){
+			pseudo.set('_mediaQueryListener', true);
 		}
 	}
 }

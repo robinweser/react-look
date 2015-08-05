@@ -14,7 +14,7 @@ const blankStyle = {
  * Recursively resolves pseudo classes, extensions and media queries
  * @param {Object} styles - an object with selectors that contain style key-value pairs
  * @param {Object} sheet - a sheet you want to apply the splitted styles
- * @param {Map} map - a map that gets information about sepcial pseudo classes added
+ * @param {Map} pseudoMap - a map that gets information about sepcial pseudo classes added
  * @param {string} parent - represents the current selector if iterating inner objects
  * TODO: refactor wrapping resolver, this is kind of dirty and only allows single-stage
  */
@@ -33,7 +33,6 @@ export default function splitStyles(styles, sheet, pseudoMap, parent, wrapper) {
 				 * Resolves media queries and pseudo classes
 				 */
 				if (Validator.isAdvanced(selector)) {
-
 					//Resolve outer advanced wrapper 
 					if (!parent)  { 
 						splitStyles(currentStyles, sheet, pseudoMap, '', selector);

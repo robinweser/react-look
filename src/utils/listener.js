@@ -61,7 +61,7 @@ export default function addRequiredEventListeners(container, element, look, key,
 function addEventListener(container, props, key, state, listener) {
 	let newProps = props;
 
-	let event;
+	var event;
 	for (event in listener) {
 		let existing = newProps[event];
 		newProps[event] = e => {

@@ -1,3 +1,4 @@
+import Regex from '../deprecated/regex';
 /**
  * Evaluates nth expressions by parsing them
  * This is quite dirty and needs to be refactored later though it works fine
@@ -33,7 +34,7 @@ export function evalNth(expression, index, reverse) {
 				return ((index - add) / mult) % 1 === 0;
 			}
 		} else {
-			return index === parseInt(value);
+			return index === parseInt(expression);
 		}
 	}
 }
@@ -65,7 +66,9 @@ export function evalValue(value, type) {
  * Validates if a value is in range of min, max or not
  * @param {Object} props - current elements props including min,max and value
  */
-export function evalRange(props) {
-	let {min, max, value} = props;
+export function evalRange(props, val) {
+	let {min, max, defaultValue} = props;
+	
+	let value = parseInt(val) || defaultValue;
 	return min !== undefined && max !== undefined && value >= min && value <= max;
 }
