@@ -1,5 +1,5 @@
 import State from '../map/state';
-import assign from 'object-assign';
+import {assign} from 'object-enhancer';
 
 const events = {
 	'active': {

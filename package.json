@@ -14,7 +14,7 @@
     "url": "https://github.com/rofrischmann/react-look"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel/register",
+    "test": "mocha --recursive --compilers js:babel/register",
     "build": "browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js"
   },
   "keywords": [
@@ -35,7 +35,8 @@
     "assign-styles": "^1.0.0",
     "color": "^0.10.1",
     "dynamic-style-sheets": "0.1.6",
-    "object-assign": "^3.0.0"
+    "object-assign": "^3.0.0",
+    "object-enhancer": "^1.0.2"
   },
   "browserify": {
     "transform": [

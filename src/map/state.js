@@ -1,4 +1,4 @@
-import assign from 'object-assign';
+import {assign} from 'object-enhancer';
 const defaultKey = 'root';
 
 /**

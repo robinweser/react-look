@@ -1,6 +1,6 @@
 import resolveLook from './resolver';
 import State from '../map/state';
-import assign from 'object-assign';
+import {assign} from 'object-enhancer';
 import assignStyles from 'assign-styles';
 import Sheet from '../class/Sheet';
 

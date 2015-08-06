@@ -1,7 +1,7 @@
-import cloneObject from './cloner';
+import {clone} from 'object-enhancer';
 import * as Validator from './validator';
 import React from 'react';
-import assign from 'assign-styles';
+import assignStyles from 'assign-styles';
 import evaluateExpression from './evaluator';
 import State from '../map/state';
 import pseudoMap from '../map/pseudo';
@@ -96,12 +96,12 @@ export default function resolveLook(container, element, childProps) {
 				}
 
 				if (selectors.hasOwnProperty(look)) {
-					let styles = cloneObject(selectors[look]);
+					let styles = clone(selectors[look]);
 
 					addRequiredEventListeners(container, element, look, key, newProps);
 
 					let resolvedStyle = resolveStyle(styles, newProps, container, element, key, childProps);
-					newStyle = assign(newStyle, resolvedStyle);
+					newStyle = assignStyles(newStyle, resolvedStyle);
 				}
 			})
 			delete props.look;
@@ -112,7 +112,7 @@ export default function resolveLook(container, element, childProps) {
 		 *NOTE: newStyles get overwritten since attached ones have higher prio
 		 */
 		if (props.style) {
-			newStyle = assign(newStyle, props.style);
+			newStyle = assignStyles(newStyle, props.style);
 		}
 		newProps.style = newStyle;
 		return React.cloneElement(element, newProps, children);
@@ -145,7 +145,7 @@ function resolveStyle(styles, newProps, container, element, key, childProps) {
 		for (expr in styles.advanced) {
 			if (evaluateExpression(expr, container, element, key, childProps)) {
 				let resolvedStyle = resolveStyle(styles.advanced[expr], newProps, container, element, key, childProps);
-				newStyle = assign(newStyle, resolvedStyle);
+				newStyle = assignStyles(newStyle, resolvedStyle);
 			}
 		}
 	}

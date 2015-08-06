@@ -1,5 +1,5 @@
 import * as Validator from './validator';
-import cloneObject from './cloner';
+import {clone} from 'object-enhancer';
 import addRequiredEventPseudos from '../map/pseudo';
 
 let ref = '';
@@ -40,21 +40,21 @@ export default function splitStyles(styles, sheet, pseudoMap, parent, wrapper) {
 						continue;
 					}
 
-					sheet[parent].advanced[selector] = cloneObject(blankStyle);
+					sheet[parent].advanced[selector] = clone(blankStyle);
 
 					addRequiredEventPseudos(pseudoMap, ref, selector);
 
 					splitStyles(currentStyles, sheet[parent].advanced, pseudoMap, selector);
 				} else {
 					if (!sheet[selector]) {
-						sheet[selector] = cloneObject(blankStyle);
+						sheet[selector] = clone(blankStyle);
 					}
 
 					!parent && (ref = selector);
 
 					//Resolve outer advanced wrapper 
 					if (wrapper) {
-						sheet[selector].advanced[wrapper] = cloneObject(blankStyle);
+						sheet[selector].advanced[wrapper] = clone(blankStyle);
 						splitStyles(currentStyles, sheet, pseudoMap, selector, wrapper);
 						continue;
 					}
@@ -65,7 +65,7 @@ export default function splitStyles(styles, sheet, pseudoMap, parent, wrapper) {
 		} else {
 			if (!parent){
 				parent = '_default';
-				sheet[parent] = cloneObject(blankStyle);
+				sheet[parent] = clone(blankStyle);
 			}
 			/**
 			 * Small hack to add additional classNames
