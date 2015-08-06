@@ -42,5 +42,4 @@ class Overview extends React.Component {
     )
   }
 }
-export
-default Look(Overview);
+export default Look(Overview);

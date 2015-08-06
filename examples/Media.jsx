@@ -8,25 +8,23 @@ class Media extends React.Component {
 
   look() {
     return {
-      media: {
-        padding: 40,
-        backgroundColor: 'red',
-        '@media (max-width: 500px)': {
-          backgroundColor: 'blue'
-        },
-        '@media (orientation:landscape)': {
-          backgroundColor: 'orange'
-        },
-        '@media (min-width: 1000px)': {
-          backgroundColor: 'green'
-        }
+      padding: 40,
+      backgroundColor: 'red',
+      '@media (max-width: 500px)': {
+        backgroundColor: 'blue'
+      },
+      '@media (orientation:landscape)': {
+        backgroundColor: 'orange'
+      },
+      '@media (min-width: 1000px)': {
+        backgroundColor: 'green'
       }
     }
   }
 
   render() {
     return (
-      <div look="media">
+      <div look>
         Resize Me!
       </div>
     )

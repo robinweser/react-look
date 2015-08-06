@@ -34,9 +34,8 @@
   "dependencies": {
     "assign-styles": "^1.0.0",
     "color": "^0.10.1",
-    "dynamic-style-sheets": "0.1.6",
-    "object-assign": "^3.0.0",
-    "object-enhancer": "^1.0.2"
+    "dynamic-style-sheets": "^0.1.7",
+    "object-enhancer": "^1.0.4"
   },
   "browserify": {
     "transform": [
