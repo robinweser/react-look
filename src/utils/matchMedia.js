@@ -1,5 +1,5 @@
 let customMatchMedia;
-let defaultMatchMedia = window.matchMedia;
+let defaultMatchMedia = (typeof window !== 'undefined' ? window.matchMedia : undefined);
 
 /**
  * Lets you set an alternative matchMedia function

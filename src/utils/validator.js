@@ -20,7 +20,7 @@ export function isPseudo(selector) {
  * @param {string} selector - selector that gets validates
  */
 export function isMediaQuery(selector) {
-	return this.validateSelector(selector, '@');
+	return this.validateSelector(selector, '@media');
 }
 
 /**
@@ -28,7 +28,7 @@ export function isMediaQuery(selector) {
  * @param {string} selector - selector that gets validates
  */
 export function isCondition(selector) {
-	return selector.indexOf('=') > -1 || selector.indexOf('<') > -1 || selector.indexOf('>') > -1 || selector.indexOf('!=') > -1;
+	return selector.indexOf('=') > -1 || selector.indexOf('<') > -1 ||  selector.indexOf('>') > -1 ||  selector.indexOf('!=') > -1;
 }
 
 /**
@@ -52,5 +52,9 @@ export function isNumber(value) {
  * @param {Object} object - object that might be empty
  */
 export function isEmpty(object) {
-	return !Object.keys(object).length;
+	if (object !== undefined) {
+		return !Object.keys(object).length;
+	} else {
+		return true;
+	}
 }
