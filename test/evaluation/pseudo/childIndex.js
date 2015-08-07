@@ -1,8 +1,8 @@
-import evaluatePseudoClass from '../../lib/utils/evaluator/pseudo';
-import {evalNth} from '../../lib/utils/evaluator/eval';
+import evaluatePseudoClass from '../../../lib/utils/evaluator/pseudo';
+import {evalNth} from '../../../lib/utils/evaluator/eval';
 import {expect} from 'chai';
 
-describe('Evaluating child-index sensitives', () => {
+describe('Evaluating child-index sensitive pseudo classes', () => {
 
 	const conditions = {
 		':first-child': {
@@ -79,8 +79,7 @@ describe('Evaluating child-index sensitives', () => {
 				var str = '[' + arr.join(', ') + ']';
 
 				it(condition + ' with childProps: ' + str + ' should return ' + bool, () => {
-					expect(evaluatePseudoClass(condition, mockedState, {}, 'root', childProps).toString())
-						.to.equal(bool);
+					expect(evaluatePseudoClass(condition, mockedState, {}, 'root', childProps).toString()).to.equal(bool);
 				});
 			}
 		}
@@ -88,7 +87,7 @@ describe('Evaluating child-index sensitives', () => {
 });
 
 
-describe('Evaluating nth-child', () => {
+describe('Evaluating :nth-child pseudo class', () => {
 
 	const conditions = {
 		'even': {
@@ -139,15 +138,14 @@ describe('Evaluating nth-child', () => {
 		var index;
 		for (index in values)
 		it('nth-child(' + condition + ') at index ' + index + ' should return ' + values[index], () => {
-			expect(evalNth(condition, index))
-				.to.equal(values[index]);
+			expect(evalNth(condition, index)).to.equal(values[index]);
 		});
 	}
 });
 
 const length = 5;
 	
-describe('Evaluating nth-last-child with '+ length + ' elements', () => {
+describe('Evaluating :nth-last-child pseudo class with '+ length + ' elements', () => {
 	
 	const conditions = {
 		'even': {
@@ -199,8 +197,7 @@ describe('Evaluating nth-last-child with '+ length + ' elements', () => {
 		var index;
 		for (index in values)
 		it('nth-last-child(' + condition + ') at index ' + index + ' should return ' + values[index], () => {
-			expect(evalNth(condition, length - index, true))
-				.to.equal(values[index]);
+			expect(evalNth(condition, length - index, true)).to.equal(values[index]);
 		});
 	}
 });

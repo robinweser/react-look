@@ -1,7 +1,5 @@
 import {validateSelector, isNumber} from '../validator';
-import {evalValue, evalRange, evalNth} from './eval.js';
-import Regex from '../deprecated/regex.js';
-
+import {evalValue, evalRange} from '../deprecated/eval.js';
 
 /**
  * Evaluates if a pseudo class fullfils its condition
@@ -90,6 +88,46 @@ function evalOther(pseudo, props) {
 		return pseudo.indexOf(props.lang) > -1;
 	} else if (validateSelector(pseudo, ':empty')) {
 		return (!props.children || props.children.length < 1);
+	}
+}
+
+/**
+ * Evaluates nth expressions by parsing them
+ * This is quite dirty and needs to be refactored later though it works fine
+ * @param {string} expression - mathematical expression in the form an+b
+ * @param {number} index - current elements index
+ * @param {Boolean} reverse - if your validating a nth-last one
+ */
+function evalNth(expression, index, reverse) {
+	//TODO: drunk => dirty, fix later
+	if (expression === 'odd') {
+		return index % 2 !== 0;
+	} else if (expression === 'even') {
+		return index % 2 === 0;
+	} else {
+		if (expression.indexOf('n') > -1) {
+			let termSplit = expression.split('n');
+			let mult = termSplit[0];
+			mult = (mult === '-' ? '-1' : mult);
+
+			let add = termSplit[1];
+			add = (add ? add : '+0');
+			add = parseInt(add);
+			mult = parseInt(mult);
+			
+			if (isNaN(mult)) {
+				return index >= add;
+			} else {
+				if (mult < 0 && index > add) {
+					return false;
+				} else if (mult > 0 && index < add) {
+					return false;
+				}
+				return ((index - add) / mult) % 1 === 0;
+			}
+		} else {
+			return index === parseInt(expression);
+		}
 	}
 }
 

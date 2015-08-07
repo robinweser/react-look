@@ -27,8 +27,7 @@ describe('Evaluating stateful styles: ' + JSON.stringify(matchValues), () => {
 	var condition;
 	for (condition in conditions){
 		it(condition + ' should return ' + conditions[condition], () => {
-			expect(evaluateCondition(condition, matchValues))
-				.to.equal(conditions[condition]);
+			expect(evaluateCondition(condition, matchValues)).to.equal(conditions[condition]);
 		});
 	}
 });
