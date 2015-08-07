@@ -1,57 +1,59 @@
 {
-  "name": "react-look",
-  "version": "0.3.0",
-  "description": "Feature-rich, dynamic & stateful Component Styling for React (CSS in JS)",
-  "main": "src/index.js",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "src/",
-    "docs/"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rofrischmann/react-look"
-  },
-  "scripts": {
-    "test": "mocha --recursive --compilers js:babel/register",
-    "build": "browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js"
-  },
-  "keywords": [
-    "react-component",
-    "react",
-    "layout",
-    "component styling",
-    "styling",
-    "vendor",
-    "stylesheet",
-    "media query",
-    "inline styles",
-    "stateful styles"
-  ],
-  "author": "Robin Frischmann",
-  "license": "MIT",
-  "dependencies": {
-    "assign-styles": "^1.0.0",
-    "color": "^0.10.1",
-    "dynamic-style-sheets": "^0.1.7",
-    "object-enhancer": "^1.0.4"
-  },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
-  },
-  "devDependencies": {
-    "babel": "^5.6.14",
-    "babelify": "^6.1.3",
-    "browserify": "^10.2.6",
-    "chai": "^3.2.0",
-    "color": "^0.10.1",
-    "dss-mixins": "0.0.6",
-    "mocha": "^2.2.5",
-    "react": "^0.13.3",
-    "react-flex-kit": "^0.1.3",
-    "react-router": "^0.13.3"
-  }
+	"name": "react-look",
+	"version": "0.3.1",
+	"description": "Feature-rich, dynamic & stateful Component Styling for React (CSS in JS)",
+	"main": "src/index.js",
+	"files": [
+		"LICENSE",
+		"README.md",
+		"lib/",
+		"docs/"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rofrischmann/react-look"
+	},
+	"scripts": {
+		"pretest": "babel src --out-dir lib",
+		"test": "mocha --recursive --compilers js:babel/register",
+		"build": "browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js",
+		"prepublish": "babel src --out-dir lib"
+	},
+	"keywords": [
+		"react-component",
+		"react",
+		"layout",
+		"component styling",
+		"styling",
+		"vendor",
+		"stylesheet",
+		"media query",
+		"inline styles",
+		"stateful styles"
+	],
+	"author": "Robin Frischmann",
+	"license": "MIT",
+	"dependencies": {
+		"assign-styles": "^1.0.0",
+		"color": "^0.10.1",
+		"dynamic-style-sheets": "^0.1.7",
+		"object-enhancer": "^1.0.4"
+	},
+	"browserify": {
+		"transform": [
+			"babelify"
+		]
+	},
+	"devDependencies": {
+		"babel": "^5.6.14",
+		"babelify": "^6.1.3",
+		"browserify": "^10.2.6",
+		"chai": "^3.2.0",
+		"color": "^0.10.1",
+		"dss-mixins": "0.0.6",
+		"mocha": "^2.2.5",
+		"react": "^0.13.3",
+		"react-flex-kit": "^0.1.3",
+		"react-router": "^0.13.3"
+	}
 }
