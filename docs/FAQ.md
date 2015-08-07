@@ -1,7 +1,7 @@
-<div style="float:left">[< **7. Mixins**](Mixins.md)</div>
-<div style="float:right">[**API** >](/api/Look.md)</div>
+<div style="float:left"><a href="Mixins.md">< <b>7. Mixins</b></a></div>
+<div style="float:right"><a href="api/Look.md"><b>API</b> (1. Look) ></a></div>
 
-# FAQ
+# 8. FAQ
 The FAQ should help people with common tasks. Look allows you to do a lot of things since it is quite open and customizable, but sometimes it might be a bit hard to get it done all by yourself. That's why I try to ship as many examples as possible.
 
 ## Table of content

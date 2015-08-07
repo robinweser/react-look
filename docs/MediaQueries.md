@@ -1,5 +1,5 @@
-<div style="float:left">[< **3. Pseudo classes**](PseudoClasses.md)</div>
-<div style="float:right">[**5. Stateful conditions** >](StatefulConditions.md)</div>
+<div style="float:left"><a href="PseudoClasses.md">< <b>3. Pseudo classes</b></a></div>
+<div style="float:right"><a href="StatefulConditions.md"><b>5. Stateful conditions > </b></a></div>
 
 # 4. Media Queries
 

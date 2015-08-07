@@ -1,5 +1,5 @@
-<div style="float:left">[< **4. Media queries**](MediaQueries.md)</div>
-<div style="float:right">[**6. Processors** >](Processors.md)</div>
+<div style="float:left"><a href="MediaQueries.md">< <b>4. Media queries</b></a></div>
+<div style="float:right"><a href="Processors.md"><b>6. Processors</b> ></a></div>
 
 # 5. Stateful Conditions
 

@@ -1,5 +1,5 @@
-<div style="float:left">[< **6. Processors**](Processors.md)</div>
-<div style="float:right">[**8. FAQ** >](FAQ.md)</div>
+<div style="float:left"><a href="Processors.md">< <b>6. Processors</b></a></div>
+<div style="float:right"><a href="FAQ.md"><b>8. FAQ</b> ></a></div>
 
 # 7. Mixins
 

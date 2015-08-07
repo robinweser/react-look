@@ -1,5 +1,5 @@
-<div style="float:left">[< **2. Under the hood**](UnderTheHood.md)</div>
-<div style="float:right">[**4. Media queries** >](MediaQueries.md)</div>
+<div style="float:left"><a href="UnderTheHood.md">< <b>2. Under the hood</b></a></div>
+<div style="float:right"><a href="MediaQueries.md"><b>4. Media queries</b> ></a></div>
 
 # 3. Pseudo classes
 

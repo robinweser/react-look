@@ -1,4 +1,5 @@
-<div style="float:right">[**2. Global** >](Global.md)</div>
+<div style="float:right"><a href="Global.md"><b>2. Global</b> ></a></div>
+
 
 # 1. Look
 Look is the core function which wraps an existing React Component in order to resolve styles

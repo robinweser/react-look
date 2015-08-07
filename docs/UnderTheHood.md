@@ -1,5 +1,5 @@
-<div style="float:left">[< **1. Getting started** ](PseudoClasses.md)</div>
-<div style="float:right">[**3. Pseudo classes** >](PseudoClasses.md)</div>
+<div style="float:left"><a href="GettingStarted.md">< <b>1. Getting started</b></a></div>
+<div style="float:right"><a href="PseudoClasses.md"><b>3. Pseudo classes</b> ></a></div>
 
 # 2. Under the hood
 ## Dynamic Style Sheets

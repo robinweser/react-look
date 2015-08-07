@@ -1,4 +1,4 @@
-<div style="float:left">[< **3. State**](State.md)</div>
+<div style="float:left"><a href="State.md">< <b>3. State</b></a></div>
 
 # 4. matchMedia
 Like [Radium](https://github.com/FormidableLabs/radium/tree/master/docs/api#configsetmatchmedia), Look also provides an API interface to replace the default matchMedia function which is `window.matchMedia`. 

@@ -1,5 +1,5 @@
-<div style="float:left">[**< 5. Stateful conditions**](StatefulConditions.md)</div>
-<div style="float:right">[**7. Mixins** >](Mixins.md)</div>
+<div style="float:left"><a href="StatefulConditions.md">< <b>5. Stateful conditions</b></a></div>
+<div style="float:right"><a href="Mixins.md"><b>7. Mixins</b> ></a></div>
 
 # 6. Processors
 

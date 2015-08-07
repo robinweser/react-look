@@ -1,5 +1,5 @@
-<div style="float:left">[< **2. Global**](Global.md)</div>
-<div style="float:right">[**4. matchMedia** >](matchMedia.md)</div>
+<div style="float:left"><a href="Global.md">< <b>2. Global</b></a></div>
+<div style="float:right"><a href="matchMedia.md"><b>4. matchMedia</b> ></a></div>
 
 # 3. State
 Using State you can get/set special states for specific components.<br>
