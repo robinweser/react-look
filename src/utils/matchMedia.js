@@ -15,10 +15,18 @@ export function setMatchMedia(matchMedia) {
  * Returns the currently used matchMedia function
  */
 export function getMatchMedia() {
-	if (customMatchMedia){
+	if (customMatchMedia) {
 		return customMatchMedia;
 	} else {
 		return defaultMatchMedia;
+	}
+}
+
+export function match(query) {
+	if (canMatchMedia()) {
+		return getMatchMedia()(query);
+	} else {
+		return false
 	}
 }
 
@@ -26,5 +34,5 @@ export function getMatchMedia() {
  * Returns if the current environment can call the matchMedia function
  */
 export function canMatchMedia() {
-	return defaultMatchMedia ? true : false;
+	return getMatchMedia() instanceof Function ? true : false;
 }
