@@ -1,5 +1,4 @@
 import evaluatePseudoClass from '../../../lib/utils/evaluator/pseudo';
-import {evalNth} from '../../../lib/utils/evaluator/eval';
 import {expect} from 'chai';
 
 describe('Evaluating child-index sensitive pseudo classes', () => {
@@ -79,7 +78,7 @@ describe('Evaluating child-index sensitive pseudo classes', () => {
 				var str = '[' + arr.join(', ') + ']';
 
 				it(condition + ' with childProps: ' + str + ' should return ' + bool, () => {
-					expect(evaluatePseudoClass(condition, mockedState, {}, 'root', childProps).toString()).to.equal(bool);
+					expect(evaluatePseudoClass(condition, {}, 'root', childProps).toString()).to.equal(bool);
 				});
 			}
 		}
@@ -90,19 +89,19 @@ describe('Evaluating child-index sensitive pseudo classes', () => {
 describe('Evaluating :nth-child pseudo class', () => {
 
 	const conditions = {
-		'even': {
+		':nth-child(even)': {
 			1: false,
 			2: true,
 			3: false,
 			4: true
 		},
-		'odd': {
+		':nth-child(odd)': {
 			1: true,
 			2: false,
 			3: true,
 			4: false
 		},
-		'3n+2' : {
+		':nth-child(3n+2)' : {
 			1: false,
 			2: true,
 			3: false,
@@ -110,21 +109,21 @@ describe('Evaluating :nth-child pseudo class', () => {
 			7: false,
 			8: true
 		},
-		'-2n+3' : {
+		':nth-child(-2n+3)' : {
 			1 : true,
 			2: false,
 			3: true,
 			4: false,
 			5: false
 		},
-		'n+3': {
+		':nth-child(n+3)': {
 			1: false,
 			2: false,
 			3: true,
 			4: true,
 			5: true
 		},
-		'3' : {
+		':nth-child(3)' : {
 			1: false,
 			2: false,
 			3: true,
@@ -137,8 +136,8 @@ describe('Evaluating :nth-child pseudo class', () => {
 		var values = conditions[condition];
 		var index;
 		for (index in values)
-		it('nth-child(' + condition + ') at index ' + index + ' should return ' + values[index], () => {
-			expect(evalNth(condition, index)).to.equal(values[index]);
+		it(condition + ' at index ' + index + ' should return ' + values[index], () => {
+			expect(evaluatePseudoClass(condition, {}, 'root', {index: index})).to.equal(values[index]);
 		});
 	}
 });
@@ -148,42 +147,42 @@ const length = 5;
 describe('Evaluating :nth-last-child pseudo class with '+ length + ' elements', () => {
 	
 	const conditions = {
-		'even': {
+		':nth-last-child(even)': {
 			1: false,
 			2: true,
 			3: false,
 			4: true,
 			5: false
 		},
-		'odd': {
+		':nth-last-child(odd)': {
 			1: true,
 			2: false,
 			3: true,
 			4: false,
 			5: true
 		},
-		'3n+2' : {
+		':nth-last-child(3n+2)' : {
 			1: true,
 			2: false,
 			3: false,
 			4: true,
 			5: false
 		},
-		'-2n+3' : {
+		':nth-last-child(-2n+3)' : {
 			1 : false,
 			2: false,
 			3: true,
 			4: false,
 			5: true
 		},
-		'n+3': {
+		':nth-last-child(n+3)': {
 			1: true,
 			2: true,
 			3: true,
 			4: false,
 			5: false
 		},
-		'3' : {
+		':nth-last-child(3)' : {
 			1: false,
 			2: false,
 			3: true,
@@ -196,8 +195,8 @@ describe('Evaluating :nth-last-child pseudo class with '+ length + ' elements', 
 		var values = conditions[condition];
 		var index;
 		for (index in values)
-		it('nth-last-child(' + condition + ') at index ' + index + ' should return ' + values[index], () => {
-			expect(evalNth(condition, length - index, true)).to.equal(values[index]);
+		it(condition + ' at index ' + index + ' should return ' + values[index], () => {
+			expect(evaluatePseudoClass(condition, {}, 'root', {index: index, length: length})).to.equal(values[index]);
 		});
 	}
 });
