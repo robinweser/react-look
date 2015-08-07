@@ -104,8 +104,7 @@ You can visit the [live-demo](http://rofrischmann.de/react-look/) or  easily run
 ```sh
 git clone --bare https://github.com/rofrischmann/react-look.git
 npm install
-npm run build
-open demo/index.html
+npm start
 ```
 
 # [Documentation](docs/Docs.md#tableofcontents)

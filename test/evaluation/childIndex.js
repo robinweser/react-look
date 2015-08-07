@@ -1,8 +1,8 @@
-import evaluatePseudoClass from '../../src/utils/evaluator/pseudo';
-import {evalNth} from '../../src/utils/evaluator/eval';
+import evaluatePseudoClass from '../../lib/utils/evaluator/pseudo';
+import {evalNth} from '../../lib/utils/evaluator/eval';
 import {expect} from 'chai';
 
-describe('evaluating child-index sensitives', () => {
+describe('Evaluating child-index sensitives', () => {
 
 	const conditions = {
 		':first-child': {
@@ -88,7 +88,7 @@ describe('evaluating child-index sensitives', () => {
 });
 
 
-describe('evaluating nth-child: ', () => {
+describe('Evaluating nth-child', () => {
 
 	const conditions = {
 		'even': {
@@ -147,7 +147,7 @@ describe('evaluating nth-child: ', () => {
 
 const length = 5;
 	
-describe('evaluating nth-last-child with '+ length + ' elements:', () => {
+describe('Evaluating nth-last-child with '+ length + ' elements', () => {
 	
 	const conditions = {
 		'even': {

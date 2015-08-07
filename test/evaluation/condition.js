@@ -7,7 +7,7 @@ const matchValues = {
 	noprop : undefined
 };
 
-describe('evaluating stateful styles: ' + JSON.stringify(matchValues), () => {
+describe('Evaluating stateful styles: ' + JSON.stringify(matchValues), () => {
 
 	const conditions = {
 		'highlight=true': true,
@@ -19,7 +19,9 @@ describe('evaluating stateful styles: ' + JSON.stringify(matchValues), () => {
 		'clicks>=20' : true,
 		'clicks>=19' : true,
 		'clicks<=10' : false,
-		'noprop=undefined' : true
+		'noprop=undefined' : true,
+		'highlight=undefined' : false,
+		'clicks!=undefined' : true
 	}
 	
 	var condition;
