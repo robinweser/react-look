@@ -1,4 +1,7 @@
-# Pseudo Classes
+<div style="float:left">[< **2. Under the hood**](UnderTheHood.md)</div>
+<div style="float:right">[**4. Media queries** >](MediaQueries.md)</div>
+
+# 3. Pseudo classes
 
 Look supports pseudo classes using a common syntax as it would be in CSS. They **need to be nested** within a valid selector and **always** start with a doublepoint.
 

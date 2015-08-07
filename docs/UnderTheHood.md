@@ -1,4 +1,7 @@
-# Under the hood
+<div style="float:left">[< **1. Getting started** ](PseudoClasses.md)</div>
+<div style="float:right">[**3. Pseudo classes** >](PseudoClasses.md)</div>
+
+# 2. Under the hood
 ## Dynamic Style Sheets
 Under the hood Look is based on **[Dynamic Style Sheets](https://github.com/dynamicstylesheets)** which is an lightweight interface for style object manipulation. It also ships an interface for dynamic CSS sheet interaction that automatically diffs changes to your DOM which might be used in an early stage to add unsupported CSS-features.  _(Check the organisation for more information)_.
 

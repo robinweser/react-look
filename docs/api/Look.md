@@ -1,4 +1,6 @@
-# Look
+<div style="float:right">[**2. Global** >](Global.md)</div>
+
+# 1. Look
 Look is the core function which wraps an existing React Component in order to resolve styles
 
 ### `Look(Component, styles, processors)`

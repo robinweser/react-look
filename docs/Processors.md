@@ -1,4 +1,7 @@
-# Processors
+<div style="float:left">[**< 5. Stateful conditions**](StatefulConditions.md)</div>
+<div style="float:right">[**7. Mixins** >](Mixins.md)</div>
+
+# 6. Processors
 
 Processors are a core feature of [Dynamic Style Sheet](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets) to modify your styles dynamically.<br>
 They're used to add **vendor prefixes**, **mixins** and stuff like that.

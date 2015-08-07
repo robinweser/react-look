@@ -1,4 +1,7 @@
-# Global
+<div style="float:left">[< **1. Look**](Look.md)</div>
+<div style="float:right">[**3. State** >](State.md)</div>
+
+# 2. Global
 Global is a class that extends [CSSSheet](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/CSSSheet.md) from [Dynamic Style Sheets](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets).
 Core functionality has been adopted, including the following methods:
 * [apply](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/CSSSheet.md##apply)

@@ -1,4 +1,6 @@
-# matchMedia
+<div style="float:left">[< **3. State**](State.md)</div>
+
+# 4. matchMedia
 Like [Radium](https://github.com/FormidableLabs/radium/tree/master/docs/api#configsetmatchmedia), Look also provides an API interface to replace the default matchMedia function which is `window.matchMedia`. 
 
 This is mostly used for server-side rendering or to support older browser such as IE 8.

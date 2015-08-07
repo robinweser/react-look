@@ -1,4 +1,7 @@
-# State
+<div style="float:left">[< **2. Global**](Global.md)</div>
+<div style="float:right">[**4. matchMedia** >](matchMedia.md)</div>
+
+# 3. State
 Using State you can get/set special states for specific components.<br>
 
 > **Warning**: This only applies to elements that provide an explicit `key` or `ref` expect the root node which gets `root` applied if there's no `key` or `ref` set.<br>

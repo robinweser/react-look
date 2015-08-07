@@ -119,15 +119,15 @@ Check [Under the hood](docs/UnderTheHood.md) for more detailed information.
 
 ## [FAQ](docs/FAQ.md)
 > Unsupported pseudo classes?<br>
+Less boilerplate / shortcuts?<br>
 Additional styles & Processors?<br>
-Custom mixins?<br>
-Extend styles?<br>
+Custom mixins? Extend styles?<br>
 Server-side rendering?
 
 
 Read through the [FAQ](docs/FAQ.md) to get all those things done within seconds!
 
-#[react-look-tools](https://github.com/rofrischmann/react-look-tools)
+# [react-look-tools](https://github.com/rofrischmann/react-look-tools)
 react-look-tools is a toolchain of useful **helper** and **mixins**. It adds support for **extending**, **keyframes** and a lot of css hacks that can't be achieved with pure javascript. It also provides an useful **developer tool** to improve **DX (developer experience)**. Also check [FAQ](docs/FAQ.md) which spoils some tools as well.
 
 # License
