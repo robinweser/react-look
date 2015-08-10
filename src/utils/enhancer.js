@@ -1,6 +1,6 @@
 import resolveLook from './resolver';
 import State from '../map/state';
-import {assign} from 'object-enhancer';
+import {_Object} from 'type-utils';
 import assignStyles from 'assign-styles';
 import Sheet from '../class/Sheet';
 
@@ -74,17 +74,15 @@ export default function Look(Component, additionalStyles, processors = undefined
 
 			this._sheet = sheet;
 			this._pseudoMap = sheet._pseudoMap;
-
-			let me = this;
-
+			
 			/**
 			 * Adds a resize listener to instantly recheck all media queries
 			 * NOTE: It is assumend that a user won't resize an application too often
 			 */
 			if (this._pseudoMap.has('_mediaQueryListener') && !this._mediaQueryListener) {
 				this._mediaQueryListener = true;
-				window.addEventListener('resize', function () {
-					me.forceUpdate();
+				window.addEventListener('resize', () => {
+					this.forceUpdate();
 				});
 			}
 
@@ -92,7 +90,7 @@ export default function Look(Component, additionalStyles, processors = undefined
 			 * If matchState is set all stateful conditions will both math this.state and this.props
 			 * Otherwise only this.props get checked
 			 */
-			this._matchValues = assign(this.state, this.props);
+			this._matchValues = _Object.assign(this.state, this.props);
 
 			let element = super.render();
 			return resolveLook(this, element);

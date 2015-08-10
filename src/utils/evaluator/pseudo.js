@@ -1,4 +1,4 @@
-import {validateSelector, isNumber} from '../validator';
+import {validateSelector} from '../validator';
 import {evalValue, evalRange} from '../deprecated/eval.js';
 
 /**

@@ -1,5 +1,4 @@
-import {clone} from 'object-enhancer';
-import * as Validator from './validator';
+import {_Object, _Array} from 'type-utils';
 import React from 'react';
 import assignStyles from 'assign-styles';
 import evaluateExpression from './evaluator';
@@ -31,7 +30,7 @@ export default function resolveLook(container, element, childProps) {
 				 * Recursively resolve look for child elements first
 				 * Generate index-maps to resolve child-index-sensitive pseudo-classes
 				 */
-				props.children.forEach((child, index) => {
+				_Array.each(props.children, (child, index) => {
 					//only resolve child if it actually is a valid react element
 					if (child) {
 
@@ -67,7 +66,7 @@ export default function resolveLook(container, element, childProps) {
 			}
 		}
 
-		let newProps = ({}, props);
+		let newProps = _Object.assign({}, props);
 		let newStyle = {};
 
 		if (props.hasOwnProperty('look')) {
@@ -84,7 +83,7 @@ export default function resolveLook(container, element, childProps) {
 			 * Adds required event listeners and resolves all styles
 			 * addEventListener might be improved since this one might add double listeners of multiple looks require one
 			 */
-			looks.forEach(look => {
+			_Array.each(looks, look => {
 				if (container._pseudoMap.has(look)) {
 					if (!State.has(container, key)) {
 						State.add(container, key);
@@ -96,7 +95,7 @@ export default function resolveLook(container, element, childProps) {
 				}
 
 				if (selectors.hasOwnProperty(look)) {
-					let styles = clone(selectors[look]);
+					let styles = _Object.clone(selectors[look]);
 
 					addRequiredEventListeners(container, element, look, key, newProps);
 
@@ -142,12 +141,13 @@ function resolveStyle(styles, newProps, container, element, key, childProps) {
 
 	if (styles.advanced) {
 		let expr;
-		for (expr in styles.advanced) {
+		
+		_Object.each(styles.advanced, (expr, value) => {
 			if (evaluateExpression(expr, container, element, key, childProps)) {
-				let resolvedStyle = resolveStyle(styles.advanced[expr], newProps, container, element, key, childProps);
+				let resolvedStyle = resolveStyle(value, newProps, container, element, key, childProps);
 				newStyle = assignStyles(newStyle, resolvedStyle);
 			}
-		}
+		});
 	}
 	return newStyle;
 }
@@ -191,7 +191,7 @@ function generateIndexMap(child, indexMap) {
  */
 function generateTypeMap(children) {
 	let indexMap = {};
-	children.forEach((child, index) => {
+	_Array.each(children, (child, index) => {
 		generateIndexMap(child, indexMap);
 	});
 	return indexMap;

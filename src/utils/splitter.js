@@ -1,5 +1,5 @@
 import * as Validator from './validator';
-import {clone} from 'object-enhancer';
+import {_Object, Validator as _Validator} from 'type-utils';
 import addRequiredEventPseudos from '../map/pseudo';
 
 let ref = '';
@@ -28,7 +28,7 @@ export default function splitStyles(styles, sheet, pseudoMap, parent, wrapper) {
 			/**
 			 * Checks if the current object is perhaps empty
 			 */
-			if (!Validator.isEmpty(currentStyles)) {
+			if (!_Validator.isEmpty(currentStyles)) {
 				/**
 				 * Resolves media queries and pseudo classes
 				 */
@@ -40,21 +40,21 @@ export default function splitStyles(styles, sheet, pseudoMap, parent, wrapper) {
 						continue;
 					}
 
-					sheet[parent].advanced[selector] = clone(blankStyle);
+					sheet[parent].advanced[selector] = _Object.clone(blankStyle);
 
 					addRequiredEventPseudos(pseudoMap, ref, selector);
 
 					splitStyles(currentStyles, sheet[parent].advanced, pseudoMap, selector);
 				} else {
 					if (!sheet[selector]) {
-						sheet[selector] = clone(blankStyle);
+						sheet[selector] = _Object.clone(blankStyle);
 					}
 
 					!parent && (ref = selector);
 
 					//Resolve outer advanced wrapper 
 					if (wrapper) {
-						sheet[selector].advanced[wrapper] = clone(blankStyle);
+						sheet[selector].advanced[wrapper] = _Object.clone(blankStyle);
 						splitStyles(currentStyles, sheet, pseudoMap, selector, wrapper);
 						continue;
 					}
@@ -65,7 +65,7 @@ export default function splitStyles(styles, sheet, pseudoMap, parent, wrapper) {
 		} else {
 			if (!parent){
 				parent = '_default';
-				sheet[parent] = clone(blankStyle);
+				sheet[parent] = _Object.clone(blankStyle);
 			}
 			/**
 			 * Small hack to add additional classNames

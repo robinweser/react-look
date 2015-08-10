@@ -1,4 +1,4 @@
-import {isNumber} from '../validator';
+import {Validator} from 'type-utils';
 /**
  * Evaluates if a condition is fullfiled by checking a given set of values
  * NOTE: Those values always include this.props and this.state
@@ -13,7 +13,7 @@ export default function evaluateCondition(condition, matchValues) {
 	if (matchValues.hasOwnProperty(property)) {
 		let match = (matchValues[property] === undefined ? 'undefined' : matchValues[property]);
 
-		if (!isNumber(match)) {
+		if (!Validator.isNumber(match)) {
 			match = match.toString();
 		}
 

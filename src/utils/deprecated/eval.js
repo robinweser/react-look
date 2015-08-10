@@ -1,4 +1,5 @@
 import Regex from './regex';
+import {Validator} from 'type-utils';
 
 /**
  * Validates input values by their type

@@ -38,23 +38,3 @@ export function isCondition(selector) {
 export function isAdvanced(selector) {
 	return this.isCondition(selector) || this.isMediaQuery(selector) || this.isPseudo(selector);
 }
-
-/**
- * Validates if a value is a true number
- * @param {number} value - value that gets validated
- */
-export function isNumber(value) {
-	return !isNaN(parseFloat(value)) && isFinite(value);
-}
-
-/**
- * Validates if an object actually is empty
- * @param {Object} object - object that might be empty
- */
-export function isEmpty(object) {
-	if (object !== undefined) {
-		return !Object.keys(object).length;
-	} else {
-		return true;
-	}
-}

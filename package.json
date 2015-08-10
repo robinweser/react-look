@@ -17,7 +17,7 @@
     "pretest": "babel src --out-dir lib",
     "test": "mocha --recursive --compilers js:babel/register",
     "start": "browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js",
-    "poststart" : "open demo/index.html",
+    "poststart": "open demo/index.html",
     "prepublish": "babel src --out-dir lib"
   },
   "keywords": [
@@ -37,7 +37,7 @@
   "dependencies": {
     "assign-styles": "^1.0.2",
     "dynamic-style-sheets": "^0.2",
-    "object-enhancer": "^1.0.5"
+    "type-utils": "^1.0.2"
   },
   "browserify": {
     "transform": [

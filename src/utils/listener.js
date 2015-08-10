@@ -1,5 +1,5 @@
 import State from '../map/state';
-import {assign} from 'object-enhancer';
+import {_Object} from 'type-utils';
 
 const events = {
 	'active': {
@@ -36,7 +36,7 @@ export default function addRequiredEventListeners(container, element, look, key,
 		for (event in events) {
 			if (pseudo.get(event)) {
 				let eventListener = addEventListener(container, element.props, key, event, events[event]);
-				newProps = assign(newProps, eventListener);
+				newProps = _Object.assign(newProps, eventListener);
 			}
 		}
 
@@ -44,7 +44,7 @@ export default function addRequiredEventListeners(container, element, look, key,
 		let validTypes = ['url', 'email', 'tel', 'range', 'number'];
 		if (pseudo.get('change') && element.type === 'input' && validTypes.indexOf(newProps.type) != -1) {
 			let changeListener = addChangeListener(container, element, key);
-			newProps = assign(newProps, changeListener);
+			newProps = _Object.assign(newProps, changeListener);
 		}
 	}
 }
@@ -121,7 +121,7 @@ function addChangeListener(container, element, key) {
 	let newProps = element.props;
 	let existingOnChange = newProps.onChange;
 
-	newProps.onChange = function (e) {
+	newProps.onChange = (e) => {
 		if (existingOnChange) {
 			existingOnChange(e);
 		}

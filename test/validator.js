@@ -40,39 +40,3 @@ describe('Validating selectors', () => {
 			expect(Validator.isCondition('selector')).to.equal(false);
 	});
 });
-
-describe('Validating numbers', () => {
-	it('10 should validate as a number', () => {
-			expect(Validator.isNumber(10)).to.equal(true);
-	})
-	it('"10" should validate as a number', () => {
-			expect(Validator.isNumber('10')).to.equal(true);
-	})
-	it('4.0 should validate as a number', () => {
-			expect(Validator.isNumber(4.0)).to.equal(true);
-	})
-	it('"4.0" should validate as a number', () => {
-			expect(Validator.isNumber('4.0')).to.equal(true);
-	})
-	it('0 should validate as a number', () => {
-			expect(Validator.isNumber(0)).to.equal(true);
-	})
-	it('Inifinity should not validate as a number', () => {
-			expect(Validator.isNumber(Infinity)).to.equal(false);
-	})
-	it('"Infinity" should not validate as a number', () => {
-			expect(Validator.isNumber('Infinity')).to.equal(false);
-	})
-});
-
-describe('Validating empty objects', () => {
-	it('{} should validate as an empty object', () => {
-			expect(Validator.isEmpty({})).to.equal(true);
-	})
-	it('undefined should validate as an empty object', () => {
-			expect(Validator.isEmpty(undefined)).to.equal(true);
-	})
-	it('{foo: 1} should not validate as an empty object', () => {
-			expect(Validator.isEmpty({foo: 1})).to.equal(false);
-	})
-});
