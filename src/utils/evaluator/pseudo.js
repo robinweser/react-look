@@ -1,26 +1,25 @@
 import {validateSelector} from '../validator';
-import {evalValue, evalRange} from '../deprecated/eval.js';
 
 /**
  * Evaluates if a pseudo class fullfils its condition
  * @param {string} pseudo - pseudo-class that gets evaluated
  * @param {Object} props - elements props that get used to evaluate pseudos
  * @param {Map} keyState - stores information on elements current user-action states
- * @param {Object} childProps - a map with (type-specific) indexes to validate index-sensitive pseudos
+ * @param {Object} childIndexMap - a map with (type-specific) indexes to validate index-sensitive pseudos
  * NOTE: This is held simple for readability purpose, you may easily add other pseudos
  */
-export default function evaluatePseudoClass(pseudo, props, keyState, childProps) {
-	let userAction = evalUserAction(pseudo, keyState, props);
-	let indexSensitive = childProps ? evalChildIndex(pseudo, childProps.index, childProps.length) : false;
-	let typeSensitive = childProps ? evalChildIndex(pseudo, childProps.typeIndex, childProps.typeIndexLength, true) : false;
+export default function evaluatePseudoClass(pseudo, props, keyState, childIndexMap) {
+	let userAction = evalUserAction(pseudo, keyState);
+	let indexSensitive = childIndexMap ? evalChildIndex(pseudo, childIndexMap.index, childIndexMap.length) : false;
+	let typeSensitive = childIndexMap ? evalChildIndex(pseudo, childIndexMap.typeIndex, childIndexMap.typeIndexLength, true) : false;
 	let input = evalInput(pseudo, props);
 	let other = evalOther(pseudo, props);
-	
-	let matched = userAction || indexSensitive || typeSensitive || input || other;
+
+	let matched = userAction || indexSensitive || typeSensitive ||  input || other;
 	return matched ? true : false;
 }
 
-function evalUserAction(pseudo, keyState, props) {
+function evalUserAction(pseudo, keyState) {
 	if (validateSelector(pseudo, ':active')) {
 		return keyState.get('active');
 	} else if (validateSelector(pseudo, ':hover')) {
@@ -28,26 +27,16 @@ function evalUserAction(pseudo, keyState, props) {
 	} else if (validateSelector(pseudo, ':focus')) {
 		return keyState.get('focus');
 	}
-	//special user-action
-	else if (validateSelector(pseudo, ':valid')) {
-		return evalValue(keyState.get('change'), props.type);
-	} else if (validateSelector(pseudo, ':invalid')) {
-		return !evalValue(keyState.get('change'), props.type);
-	} else if (validateSelector(pseudo, ':in-range')) {
-		return !evalRange(props, keyState.get('change'));
-	} else if (validateSelector(pseudo, ':out-of-range')) {
-		return evalRange(props, keyState.get('change'));
-	} 
 }
 
 const indexPseudos = {
-	indexSensitive : [':first-child', ':last-child', ':only-child', ':nth-child', 'nth-last-child'],
-	typeSensitive : [':first-of-type', ':last-of-type', ':only-of-type', ':nth-of-type', ':nth-last-of-type']
+	indexSensitive: [':first-child', ':last-child', ':only-child', ':nth-child', 'nth-last-child'],
+	typeSensitive: [':first-of-type', ':last-of-type', ':only-of-type', ':nth-of-type', ':nth-last-of-type']
 }
 
 function evalChildIndex(pseudo, index, length, typeSensitive) {
 	let pseudos = indexPseudos[typeSensitive ? 'typeSensitive' : 'indexSensitive'];
-	
+
 	if (validateSelector(pseudo, pseudos[0])) {
 		return index === 1;
 	} else if (validateSelector(pseudo, pseudos[1])) {
@@ -114,7 +103,7 @@ function evalNth(expression, index, reverse) {
 			add = (add ? add : '+0');
 			add = parseInt(add);
 			mult = parseInt(mult);
-			
+
 			if (isNaN(mult)) {
 				return index >= add;
 			} else {
