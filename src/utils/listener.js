@@ -1,4 +1,4 @@
-import State from '../map/state';
+import State from '../class/State';
 import {_Object} from 'type-utils';
 
 const events = {
@@ -15,117 +15,71 @@ const events = {
 	}
 };
 
+let keyElementMap = new Map();
+
 /**
- * Adds additional event listeners to target some special pseudo classes
- * Only get applied if actually needed
- * NOTE: This has been heavily copied from Radium. Great thanks for providing this nice stuff.
- * @param {Component} container - React Component that gets enhanced by Look
+ * Creates an event listener to target pseudo classes
+ * This only gets applied if an element acutally got action-pseudo-class-specific styles
+ * @param {Component} Component - React Component that gets enhanced by Look
  * @param {Object} element - current element that gets a listener applied
- * @param {string} key - Unique key to identify each element with special event listeners
- * @param {Object} newProps - Props object that gets the listeners added
+ * @param {string} event - event type you want listeners for: active, focus, change
  */
-export default function addRequiredEventListeners(container, element, look, key, newProps) {
-	/**
-	 * This checks if there are any needed pseudo classes that need an event listener by checking the pseudo map for this element
-	 */
-
-	if (container._pseudoMap.has(look)) {
-		let pseudo = container._pseudoMap.get(look);
-
-		let event;
-		for (event in events) {
-			if (pseudo.get(event)) {
-				let eventListener = addEventListener(container, element.props, key, event, events[event]);
-				newProps = _Object.assign(newProps, eventListener);
-			}
-		}
-
-		//deprecated
-		let validTypes = ['url', 'email', 'tel', 'range', 'number'];
-		if (pseudo.get('change') && element.type === 'input' && validTypes.indexOf(newProps.type) != -1) {
-			let changeListener = addChangeListener(container, element, key);
-			newProps = _Object.assign(newProps, changeListener);
+export default function createEventListener(Component, element, key, event) {
+	// This checks if there are any needed pseudo classes that need an event listener by checking the pseudo map for this element
+	if (!State.has(Component, key)) {
+		State.add(Component, key);
+		keyElementMap.set(key, element);
+	} else {
+		if (!keyElementMap.get(key) === element) {
+			console.warn('You already got a state associated with element.key="' + key + '". Use unqiue `key` or `ref` while using :hover, :focus or :active on multiple elements.');
+			console.warn('Look will not add state-listeners for', element);
+			return element.props;
 		}
 	}
-}
 
+	var newProps = {};
+	//iterate current event's required listeners
+	_Object.each(events[event], (listener, state) => {
+		let existing = element.props[listener];
+		newProps[listener] = e => {
+			//Call former listeners if existing
+			existing && existing(e);
+			//Set action state
+			State.setState(event, state, Component, key);
 
-/**
- * Adds an event listener to target pseudo classes
- * This only gets applied if an element acutally got action-pseudo-class-specific styles
- * @param {Component} container - React Component that gets enhanced by Look
- * @param {Object} props - current elements properties
- * @param {string} key - Unique key to identify each element with special event listeners
- * @param {string} state - event type you want listeners for: active, focus, change
- */
-function addEventListener(container, props, key, state, listener) {
-	let newProps = props;
-
-	var event;
-	for (event in listener) {
-		let existing = newProps[event];
-		newProps[event] = e => {
-			if (existing) {
-				existing(e);
-			}
-			let name = (e.dispatchConfig.registrationName ? e.dispatchConfig.registrationName : e.dispatchConfig.phasedRegistrationNames.bubbled);
-			State.setState(state, listener[name], container, key);
-			if (State.getState('active', container, key)) {
-				container._lastActive.push(key);
+			if (event == 'active' && state) {
+				Component._lastActive.push(key);
 			}
 		};
-	}
-	if (state == 'active') {
-		if (!container._onMouseUp) {
-			addMouseUpListener(container);
-		}
+	});
+
+	//Add an mouse-up listener once if there's an :active pseudo class
+	if (event == 'active' && !Component._onMouseUp) {
+		addMouseUpListener(Component);
 	}
 	return newProps;
 }
 
+
 /**
  * Removes all active styles applied to elements by mouse down before
- * @param {Component} container - React Component that gets enhanced by Look
+ * @param {Component} Component - React Component that gets enhanced by Look
  */
-function onMouseUp(container) {
-	if (container._lastActive.length > 0) {
-		container._lastActive.forEach(key => {
-			if (State.has(container, key)) {
-				State.setState('active', false, container, key);
-			}
-		});
-		container._lastActive.length = 0;
+function onMouseUp(Component) {
+	while (Component._lastActive.length > 0) {
+		let key = Component._lastActive[0];
+		State.setState('active', false, Component, key);
+		Component._lastActive.pop(key);
 	}
 }
 
 /**
  * Adds a mosue up listener to delete :active styles
- * @param {Component} container - React Component that gets enhanced by Look
+ * @param {Component} Component - React Component that gets enhanced by Look
  */
-function addMouseUpListener(container) {
-	container._onMouseUp = function () {
-		onMouseUp(container);
+function addMouseUpListener(Component) {
+	Component._onMouseUp = () => {
+		onMouseUp(Component);
 	};
-	let mouseUpListener = window.addEventListener('mouseup', container._onMouseUp);
-}
-
-/**
- * Adds a change listener to validate :valid and :invalid pseudo classes
- * Only gets applied if the current element is an input elementement.
- * Also it needs to be of type: url, telement, email or range, number
- * @param {Component} container - React Component that gets enhanced by Look
- * @param {Object} element - current element that gets a listener applied
- * @param {string} key - Unique key to identify each element with special event listeners
- */
-function addChangeListener(container, element, key) {
-	let newProps = element.props;
-	let existingOnChange = newProps.onChange;
-
-	newProps.onChange = (e) => {
-		if (existingOnChange) {
-			existingOnChange(e);
-		}
-		State.setState('change', e.target.value, container, key);
-	};
-	return newProps;
+	window.addEventListener('mouseup', Component._onMouseUp);
 }

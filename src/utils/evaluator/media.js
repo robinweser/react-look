@@ -5,7 +5,7 @@ import * as matchMedia from '../matchMedia';
  * NOTE: This won't work by default server-side
  * @param {string} query - Media query that gets evaluated
  */
-export default function evaluateMediaQuery(query) {
+export default function evalMediaQuery(query) {
 	/**
 	 * Check if browser supports window.matchMedia
 	 */

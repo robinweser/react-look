@@ -1,21 +1,39 @@
 import resolveLook from './resolver';
-import State from '../map/state';
 import {_Object} from 'type-utils';
 import assignStyles from 'assign-styles';
-import Sheet from '../class/Sheet';
 
 /**
  * Applies your styles to a React Component
- * @param {Component} component - a valid React component that gets styles applied
- * @param {Array|Object} styles - additional styles that are used to resolve looks
- * @param {Array|Function} processors - additional processors that modify the styles
+ * @param {Component} Component - a valid React component that gets styles applied
+ * @param {Array|Object} additionalStyles - additional styles that are used to resolve looks
+ * @param {Array|Function} additionalProcessors - additional processors that modify the styles
  */
-export default function Look(Component, additionalStyles, processors = undefined) {
+export default function Look(Component, additionalStyles = {}, additionalProcessors = undefined) {
 	class LookComponent extends Component {
 		constructor() {
 			super(...arguments);
-			if (!this.state) {
-				this.state = {};
+			this.state = this.state ||  {};
+
+			//resolve processors
+			if (this.processors) {
+				if (this.processors instanceof Function) {
+					this.processors = this.processors();
+				}
+				//arrayify processors
+				if (this.processors instanceof Array !== true) {
+					this.processors = [this.processors];
+				}
+			}
+			
+			//add additional processors
+			if (additionalProcessors && !this.processors){
+				this.processors = [];
+			};
+			
+			if (additionalProcessors instanceof Array) {
+				this.processors.push(...additionalProcessors);
+			} else if (additionalProcessors instanceof Object) {
+				this.processors.push(additionalProcessors);
 			}
 
 			this._lastActive = [];
@@ -35,65 +53,44 @@ export default function Look(Component, additionalStyles, processors = undefined
 
 		//Similar to Radium, Look wraps the render function and resolves styles on its own
 		render() {
-			let styles = {};
-
+			
 			//resolve multiple styles by merging those
 			if (additionalStyles instanceof Array) {
-				styles = assignStyles(...additionalStyles);
+				this.styles = assignStyles(...additionalStyles);
+			} else if (additionalStyles instanceof Object) {
+				this.styles = additionalStyles;
+			} else {
+				console.warn('Additional styles need to be either a valid object or an array of valid objects.');
+				console.warn('Look ignores the following additional styles: ', additionalStyles);
+				this.styles = {};
 			}
+
 
 			//Merge component assigned styles with outer styles to 
 			if (this.look) {
 				if (this.look instanceof Function) {
-					styles = assignStyles(this.look(), styles);
+					this.styles = assignStyles(this.look(), this.styles);
 				} else if (this.look instanceof Object) {
-					styles = assignStyles(this.look, styles);
+					this.styles = assignStyles(this.look, this.styles);
 				}
 				delete this.look;
 			}
 
-
-			let sheet = new Sheet(styles);
-
-			//Process the styles with component-assigned processors
-			if (this.processors) {
-				if (this.processors instanceof Function) {
-					sheet.process(this.processors());
-				} else if (this.processors instanceof Object) {
-					sheet.process(this.processors);
+			//Resolve default style object if no outer selector is given
+			if (this.styles[Object.keys(this.styles)[0]] instanceof Object !== true) {
+				this.styles = {
+					'_default': this.styles
 				}
-				delete this.processors;
-			}
-
-			//Process the styles with additional processors if provided
-			if (processors) {
-				sheet.process(processors);
-			}
-
-			sheet.split();
-
-			this._sheet = sheet;
-			this._pseudoMap = sheet._pseudoMap;
-			
-			/**
-			 * Adds a resize listener to instantly recheck all media queries
-			 * NOTE: It is assumend that a user won't resize an application too often
-			 */
-			if (this._pseudoMap.has('_mediaQueryListener') && !this._mediaQueryListener) {
-				this._mediaQueryListener = true;
-				window.addEventListener('resize', () => {
-					this.forceUpdate();
-				});
 			}
 
 			/**
 			 * If matchState is set all stateful conditions will both math this.state and this.props
 			 * Otherwise only this.props get checked
 			 */
-			this._matchValues = _Object.assign(this.state, this.props);
-
-			let element = super.render();
-			return resolveLook(this, element);
+			 if (this.styles)
+			this._matchValues = _Object.assign(this.props, this.state);
+			
+			return resolveLook(this, super.render());
 		}
 	}
 

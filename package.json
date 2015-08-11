@@ -36,8 +36,8 @@
   "license": "MIT",
   "dependencies": {
     "assign-styles": "^1.0.2",
-    "dynamic-style-sheets": "^0.2",
-    "type-utils": "^1.0.2"
+    "dynamic-style-sheets": "^0.2.2",
+    "type-utils": "^1.0.4"
   },
   "browserify": {
     "transform": [

@@ -46,7 +46,7 @@ class UserAction extends React.Component {
     return (
       <div>
         <div key="b1" look="button activeButton">Click me!</div>
-			<div key="byasdasd2" look="button hoverButton">Hover me!</div>
+      <div key="b2" look="button hoverButton">Hover me!</div>
         <br/>
         <div>State-API live example</div>
 			<div key="b3" look="button hoverButton">{text}</div>

@@ -26,6 +26,7 @@ export function isMediaQuery(selector) {
 export function isActionPseudo(selector){
 	return validateSelector(selector, ':hover') || validateSelector(selector, ':focus') || validateSelector(selector, ':active');
 }
+
 /**
  * Validates if a selector is a stateful condition
  * @param {string} selector - selector that gets validates

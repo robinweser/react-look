@@ -1,7 +1,7 @@
-import State from './map/state';
-import * as matchMedia from './utils/matchMedia';
+import * as matchMedia from './modules/matchMedia';
+import Look from './modules/enhancer';
 import Global from './class/Global';
-import Look from './utils/enhancer';
+import State from './class/State';
 
 
 function registerProcessor(processor) {
@@ -18,8 +18,8 @@ function getProcessors(processor) {
 
 export {
 	Look as default,
-	Look as Look,
-	Global as Global,
-	State as State,
-	matchMedia as matchMedia
+	Look,
+	Global,
+	State,
+	matchMedia
 }

@@ -8,7 +8,7 @@ import {validateSelector} from '../validator';
  * @param {Object} childIndexMap - a map with (type-specific) indexes to validate index-sensitive pseudos
  * NOTE: This is held simple for readability purpose, you may easily add other pseudos
  */
-export default function evaluatePseudoClass(pseudo, props, keyState, childIndexMap) {
+export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) {
 	let userAction = evalUserAction(pseudo, keyState);
 	let indexSensitive = childIndexMap ? evalChildIndex(pseudo, childIndexMap.index, childIndexMap.length) : false;
 	let typeSensitive = childIndexMap ? evalChildIndex(pseudo, childIndexMap.typeIndex, childIndexMap.typeIndexLength, true) : false;
@@ -20,12 +20,14 @@ export default function evaluatePseudoClass(pseudo, props, keyState, childIndexM
 }
 
 function evalUserAction(pseudo, keyState) {
-	if (validateSelector(pseudo, ':active')) {
-		return keyState.get('active');
-	} else if (validateSelector(pseudo, ':hover')) {
-		return keyState.get('hover');
-	} else if (validateSelector(pseudo, ':focus')) {
-		return keyState.get('focus');
+	if (keyState) {
+		if (validateSelector(pseudo, ':active')) {
+			return keyState.get('active');
+		} else if (validateSelector(pseudo, ':hover')) {
+			return keyState.get('hover');
+		} else if (validateSelector(pseudo, ':focus')) {
+			return keyState.get('focus');
+		}
 	}
 }
 

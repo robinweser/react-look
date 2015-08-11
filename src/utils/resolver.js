@@ -1,51 +1,49 @@
-import {_Object, _Array} from 'type-utils';
+import {_Object, _Validator} from 'type-utils';
 import React from 'react';
-import assignStyles from 'assign-styles';
 import evaluateExpression from './evaluator';
-import State from '../map/state';
-import pseudoMap from '../map/pseudo';
-import addRequiredEventListeners from './listener';
+import assign from 'assign-styles';
+import State from '../class/State';
+import {Sheet} from 'dynamic-style-sheets';
 
 /**
  * Resolves styling for an element and returns the modified one.
- * @param {LookComponent} container - the outer React Component to determine state and props
+ * @param {LookComponent} Component - the outer React Component to determine state and props
  * @param {Object} element - current element that gets modified
- * @param {Object} childProps - information on child-indexes for index-sensitive pseudo-classes
+ * @param {Object} childIndexMap - information on child-indexes for index-sensitive pseudo-classes
  */
-export default function resolveLook(container, element, childProps) {
-	let selectors = container._sheet.selectors;
-	
+export default function resolveLook(Component, element, childIndexMap) {
 	if (element && element.props) {
 		let props = element.props;
 
-		let children = [];
+		let oldChildren = props.children;
+		let newChildren = [];
 
 		//If there are more than one child, iterate over them
-		if (props.children) {
-			if (props.children instanceof Array) {
+		if (oldChildren) {
+			if (oldChildren instanceof Array) {
 
-				let typeMap = generateTypeMap(props.children);
+				let typeMap = generateTypeMap(oldChildren);
 				let indexMap = {};
+				let childType, childIndex;
 				/**
 				 * Recursively resolve look for child elements first
-				 * Generate index-maps to resolve child-index-sensitive pseudo-classes
+				 * Generate index-maps to resolve child-index-sensitive pseudo classes
 				 */
-				_Array.each(props.children, (child, index) => {
+				oldChildren.forEach((child, index) => {
 					//only resolve child if it actually is a valid react element
 					if (child) {
 
 						//Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
 						generateIndexMap(child, indexMap);
 
-						let type = getChildType(child);
-
-						let childProps = {
+						childType = getChildType(child);
+						childIndex = {
 							'index': index + 1,
-							'length': props.children.length,
-							'typeIndex': indexMap[type],
-							'typeIndexLength': typeMap[type]
+							'length': oldChildren.length,
+							'typeIndex': indexMap[childType],
+							'typeIndexLength': typeMap[childType]
 						}
-						children.push(resolveLook(container, child, childProps));
+						newChildren.push(resolveLook(Component, child, childIndex));
 
 					} else {
 						/**
@@ -54,67 +52,49 @@ export default function resolveLook(container, element, childProps) {
 						 * It also fires a warning so that you may remove them on your own
 						 */
 						if (child === undefined) {
-							console.warn('There are children which are either undefined, empty or invalid React Elements: ', props.children);
+							console.warn('There are children which are either undefined, empty or invalid React Elements: ', oldChidren);
 							console.warn('Look removed 1 child while validating (look="' + props.look + '"): child ', child);
 						} else {
-							children.push(child);
+							newChildren.push(child);
 						}
 					}
 				});
 			} else {
-				children = resolveLook(container, props.children);
+				newChildren = resolveLook(Component, oldChildren);
 			}
 		}
 
 		let newProps = _Object.assign({}, props);
-		let newStyle = {};
+		let newStyles = {};
 
 		if (props.hasOwnProperty('look')) {
-			let looks;
-			if (props.look === true) {
-				looks = '_default';
-			} else {
-				looks = props.look;
-			}
-			looks = looks.split(' ');
-			let key = element.key || element.ref || 'root';
-			/**
-			 * Splits look to resolve multiple looks
-			 * Adds required event listeners and resolves all styles
-			 * addEventListener might be improved since this one might add double listeners of multiple looks require one
-			 */
-			_Array.each(looks, look => {
-				if (container._pseudoMap.has(look)) {
-					if (!State.has(container, key)) {
-						State.add(container, key);
-					} else {
-						if (key === 'root') {
-							console.warn('You already got a root element. Please use a specific key or ref in order to achieve :hover, :active, :focus to work properly.');
-						}
-					}
-				}
-
-				if (selectors.hasOwnProperty(look)) {
-					let styles = _Object.clone(selectors[look]);
-
-					addRequiredEventListeners(container, element, look, key, newProps);
-
-					let resolvedStyle = resolveStyle(styles, newProps, container, element, key, childProps);
-					newStyle = assignStyles(newStyle, resolvedStyle);
+			
+			 //Splits look to resolve multiple looks
+			 let looks = (props.look === true ? '_default' : props.look).split(' ');
+ 			
+			looks.forEach(look => {
+				if (Component.styles.hasOwnProperty(look)) {
+					assign(newStyles, resolveStyle(Component, element, Component.styles[look], newProps, childIndexMap));
 				}
 			})
 			delete props.look;
 		}
-
 		/**
 		 *If there already are styles in props they get assigned
-		 *NOTE: newStyles get overwritten since attached ones have higher prio
+		 *NOTE: new styles get overwritten since attached ones have higher prio
 		 */
 		if (props.style) {
-			newStyle = assignStyles(newStyle, props.style);
+			assign(newStyles, props.style);
 		}
-		newProps.style = newStyle;
-		return React.cloneElement(element, newProps, children);
+		
+		let sheet = new Sheet(newStyles);
+		
+		//Process all resolved styles at once
+		if (Component.processors) {
+			sheet.process(...Component.processors);
+		}
+		newProps.style = sheet.getSelectors();
+		return React.cloneElement(element, newProps, newChildren);
 	} else {
 		return element;
 	}
@@ -124,37 +104,40 @@ export default function resolveLook(container, element, childProps) {
  * Interates every condition and valuates the expressions
  * Also applies additional classNames if specified (This helps if you're using extern CSS-libraries)
  * This returns the final styles object
- * @param {Object} styles - object that stores all style information, style, advanced and css
- * @param {Object} newProps- props that get the new styles added 
- * @param {LookComponent} container - the outer React Component that wraps all elements
+ * @param {LookComponent} Component - the outer React Component that wraps all elements
+ * @param {Object} styles - current Look styles that get resolved
  * @param {Object} element - current element
- * @param {string} key - current element's unique key (default is 'root')
+ * @param {Object} newProps - props that get the new styles added 
  * @param {Object} childProps - map with information on index/type of the current element
  */
-function resolveStyle(styles, newProps, container, element, key, childProps) {
-	let newStyle = styles.style;
-	let state = container.state;
+function resolveStyle(Component, element, styles, newProps, childIndexMap) {
+	let state = Component.state;
+	let newStyle = {};
 
-	if (styles.css) {
+	//resolve additional classNames
+	if (styles.hasOwnProperty('css')) {
 		resolveClassName(styles.css, newProps);
+		delete styles.css;
 	}
 
-	if (styles.advanced) {
-		let expr;
-		
-		_Object.each(styles.advanced, (expr, value) => {
-			if (evaluateExpression(expr, container, element, key, childProps)) {
-				let resolvedStyle = resolveStyle(value, newProps, container, element, key, childProps);
-				newStyle = assignStyles(newStyle, resolvedStyle);
+	_Object.each(styles, (property, value) => {
+		if (value instanceof Object) {
+			if (!_Validator.isEmpty(value)) {	
+				if (evaluateExpression(Component, element, property, newProps, childIndexMap)) {
+					newStyle = assign(newStyle, resolveStyle(Component, element, value, newProps, childIndexMap));
+				}
 			}
-		});
-	}
+		} else {
+			newStyle[property] = value;
+		}
+	});
 	return newStyle;
 }
 
 /**
  * Adds additional CSS classes to the className list
  * @param {string} css - a string containing (a) valid className(s)
+ * @param {Object} newProps - props that get the new className added 
  */
 function resolveClassName(css, newProps) {
 	if (!newProps.className) {
@@ -174,14 +157,13 @@ function resolveClassName(css, newProps) {
 function generateIndexMap(child, indexMap) {
 
 	// use component displayName if child is a function (ES6 component)
-	let type = getChildType(child);
+	let childType = getChildType(child);
 
-	if (indexMap.hasOwnProperty(type)) {
-		++indexMap[type];
+	if (indexMap.hasOwnProperty(childType)) {
+		++indexMap[childType];
 	} else {
-		indexMap[type] = 1;
+		indexMap[childType] = 1;
 	}
-
 	return indexMap;
 }
 
@@ -191,7 +173,7 @@ function generateIndexMap(child, indexMap) {
  */
 function generateTypeMap(children) {
 	let indexMap = {};
-	_Array.each(children, (child, index) => {
+	children.forEach((child, index) => {
 		generateIndexMap(child, indexMap);
 	});
 	return indexMap;
@@ -204,11 +186,11 @@ function generateTypeMap(children) {
  * @param {Object} child - child which type gets identified
  */
 function getChildType(child) {
-	let type;
+	let childType;
 	if (child.type instanceof Function) {
-		type = (child.type.hasOwnProperty('name') ? child.type.name : child.type);
+		childType = (child.type.hasOwnProperty('name') ? child.type.name : child.type);
 	} else {
-		type = child.type;
+		childType = child.type;
 	}
-	return type;
+	return childType;
 }

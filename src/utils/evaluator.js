@@ -1,31 +1,51 @@
 import * as Validator from './validator';
-import evaluateMediaQuery from './evaluator/media';
-import evaluateCondition from './evaluator/condition';
-import evaluatePseudoClass from './evaluator/pseudo';
-import State from '../map/state';
+import {_Object} from 'type-utils';
+import evalMediaQuery from './evaluator/media';
+import evalCondition from './evaluator/condition';
+import evalPseudoClass from './evaluator/pseudo';
+import State from '../class/State';
+import createEventListener from './listener';
 
 /**
  * Evaluates any advanced expression which are pseudo classes, media queries or stateful conditions
- * @param {string} expression - expression that gets evaluated
- * @param {Component} container - the outer react component
+ * @param {Component} Component - the outer react component
  * @param {Object} element - current element thats style gets resolved
- * @param {string} key - current element's unique key to resolve user-action pseudos
- * @param {Object} childProps - information on children index/type 
+ * @param {string} expression - expression that gets evaluated
+ * @param {Object} newProps - props that get the new styles added 
+ * @param {Object} childIndexMap - information on children index/type 
  */
-export default function evaluateExpression(expression, container, element, key, childProps) {
+export default function evaluateExpression(Component, element, expression, newProps, childIndexMap) {
 	//eval media queries
 	if (Validator.isMediaQuery(expression)) {
-		return evaluateMediaQuery(expression);
+		/**
+		 * Adds a resize listener to instantly recheck all media queries
+		 * NOTE: It is assumend that a user won't resize an application too often
+		 */
+		if (!Component._mediaQueryListener) {
+			Component._mediaQueryListener = true;
+			window.addEventListener('resize', () => {
+				Component.forceUpdate();
+			});
+		}
+
+		return evalMediaQuery(expression);
 	}
+
 	//eval conditions
 	else if (Validator.isCondition(expression)) {
-		let matchValues = container._matchValues;
-		return evaluateCondition(expression, matchValues);
+		return evalCondition(expression, Component._matchValues);
 	}
-	//eval pseudos
+
+	//eval pseudo
 	else if (Validator.isPseudo(expression)) {
-		let keyState = State.get(container, key);
-		return evaluatePseudoClass(expression, element.props, keyState, childProps);
+		let key = element.key || element.ref || 'root';
+		
+		//add required event listeners
+		if (Validator.isActionPseudo(expression)) {
+			newProps = _Object.assign(newProps, createEventListener(Component, element, key, expression.split(':')[1]));
+		}
+		return evalPseudoClass(expression, element.props, State.get(Component, key), childIndexMap);
+
 	} else {
 		return false;
 	}
