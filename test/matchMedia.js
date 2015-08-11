@@ -1,4 +1,4 @@
-import * as matchMedia from '../lib/utils/matchMedia';
+import {matchMedia} from '../lib/index';
 import {expect} from 'chai';
 
 

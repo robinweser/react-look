@@ -1,4 +1,4 @@
-import * as Validator from '../lib/utils/validator';
+import * as Validator from '../lib/modules/validator';
 import {expect} from 'chai';
 
 

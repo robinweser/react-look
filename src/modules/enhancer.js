@@ -24,12 +24,12 @@ export default function Look(Component, additionalStyles = {}, additionalProcess
 					this.processors = [this.processors];
 				}
 			}
-			
+
 			//add additional processors
-			if (additionalProcessors && !this.processors){
+			if (additionalProcessors && !this.processors) {
 				this.processors = [];
 			};
-			
+
 			if (additionalProcessors instanceof Array) {
 				this.processors.push(...additionalProcessors);
 			} else if (additionalProcessors instanceof Object) {
@@ -53,7 +53,6 @@ export default function Look(Component, additionalStyles = {}, additionalProcess
 
 		//Similar to Radium, Look wraps the render function and resolves styles on its own
 		render() {
-			
 			//resolve multiple styles by merging those
 			if (additionalStyles instanceof Array) {
 				this.styles = assignStyles(...additionalStyles);
@@ -65,14 +64,9 @@ export default function Look(Component, additionalStyles = {}, additionalProcess
 				this.styles = {};
 			}
 
-
 			//Merge component assigned styles with outer styles to 
-			if (this.look) {
-				if (this.look instanceof Function) {
-					this.styles = assignStyles(this.look(), this.styles);
-				} else if (this.look instanceof Object) {
-					this.styles = assignStyles(this.look, this.styles);
-				}
+			if (this.look && this.look instanceof Function) {
+				this.styles = assignStyles(this.look(), this.styles);
 				delete this.look;
 			}
 
@@ -87,9 +81,9 @@ export default function Look(Component, additionalStyles = {}, additionalProcess
 			 * If matchState is set all stateful conditions will both math this.state and this.props
 			 * Otherwise only this.props get checked
 			 */
-			 if (this.styles)
-			this._matchValues = _Object.assign(this.props, this.state);
-			
+			if (this.styles)
+				this._matchValues = _Object.assign(this.props, this.state);
+
 			return resolveLook(this, super.render());
 		}
 	}

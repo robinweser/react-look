@@ -16,7 +16,3 @@ I try my best to keep all docs updated. If you have any recommendations or impro
 2. [Global](api/Global.md)
 3. [State](api/State.md)
 4. [matchMedia](api/matchMedia.md)
-
-## License
-Full documentation of react-look is licensed under Creative Common License.<br>
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />
