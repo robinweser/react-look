@@ -2,7 +2,7 @@
   "name": "react-look",
   "version": "0.3.1",
   "description": "Feature-rich, dynamic & stateful Component Styling for React (CSS in JS)",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "files": [
     "LICENSE",
     "README.md",
