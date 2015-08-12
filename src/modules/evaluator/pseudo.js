@@ -79,6 +79,8 @@ function evalOther(pseudo, props) {
 		return pseudo.indexOf(props.lang) > -1;
 	} else if (validateSelector(pseudo, ':empty')) {
 		return (!props.children || props.children.length < 1);
+	} else if (validateSelector(pseudo, ':before') || validateSelector(pseudo, ':after')){
+		return true;
 	}
 }
 

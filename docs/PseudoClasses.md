@@ -21,12 +21,10 @@ Look supports pseudo classes using a common syntax as it would be in CSS. They *
 ```
 Pseudo-classes can be nested multiple to achieve something like `:focus:hover`. They can also contain nested media queries and stateful conditions.
 
-Look currently supports **27 pseudo classes**. Some might be added soon. Check the following list for all supported / unsupported.
+Look currently supports **25 pseudo classes**. Some might be added soon. Check the following list for all supported / unsupported.
 
 ##Validation
 Most pseudo classes get validated within the `render` process, while some need extra event listeners applied. Those are `:focus`, `:hover` and `:active`.
-
-> **Deprecated**: By now `:valid` and `:invalid` use a `change`listener to validate current input value. This will soon be handled separatly by [react-look-tools](http://github.com/rofrischmann/react-look-tools).
 
 ## Supported pseudo classes
 ### user-action
@@ -37,8 +35,6 @@ Most pseudo classes get validated within the `render` process, while some need e
 ### input
 * checked
 * enabled / disabled
-* valid / invalid
-* in-range / out-of-range
 * read-only / read-write
 * required / optional
 * indeterminate
@@ -58,14 +54,19 @@ Most pseudo classes get validated within the `render` process, while some need e
 * only-of-type
 
 ### other
+* before / after
 * lang*(language)*
 * empty
+
+## Deprecated 
+Some pseudos have also been part of Look formerly, but got deprecated due to overhead. They can be achieved using [Look Tools](https://github.com/rofrischmann/react-look-tools) though.
+* valid / invalid
+* in-range / out-of-range
 
 ## Unsupported pseudo classes
 At least by now the following pseudo classes are yet unsupported. <br>
 Note that they might get implemeneted later.
 
-* [before / after](https://github.com/rofrischmann/react-look/issues/24)
 * link
 * visited
 * target

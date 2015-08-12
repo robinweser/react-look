@@ -4,6 +4,8 @@ import evaluateExpression from './evaluator';
 import assign from 'assign-styles';
 import State from '../class/State';
 import {Sheet} from 'dynamic-style-sheets';
+import * as Validator
+from './validator';
 
 /**
  * Resolves styling for an element and returns the modified one.
@@ -68,13 +70,13 @@ export default function resolveLook(Component, element, childIndexMap) {
 		let newStyles = {};
 
 		if (props.hasOwnProperty('look')) {
-			
-			 //Splits look to resolve multiple looks
-			 let looks = (props.look === true ? '_default' : props.look).split(' ');
- 			
+
+			//Splits look to resolve multiple looks
+			let looks = (props.look === true ? '_default' : props.look).split(' ');
+
 			looks.forEach(look => {
 				if (Component.styles.hasOwnProperty(look)) {
-					assign(newStyles, resolveStyle(Component, element, Component.styles[look], newProps, childIndexMap));
+					assign(newStyles, resolveStyle(Component, element, Component.styles[look], newProps, newChildren, childIndexMap));
 				}
 			})
 			delete props.look;
@@ -86,14 +88,32 @@ export default function resolveLook(Component, element, childIndexMap) {
 		if (props.style) {
 			assign(newStyles, props.style);
 		}
-		
+
 		let sheet = new Sheet(newStyles);
-		
+
 		//Process all resolved styles at once
 		if (Component.processors) {
 			sheet.process(...Component.processors);
 		}
-		newProps.style = sheet.getSelectors();
+
+		let styles = sheet.getSelectors();
+
+		//resolving :before & :after pseudo elements
+		if (styles.before || styles.after) {
+			if (newChildren instanceof Array !== true) {
+				newChildren = [newChildren];
+			}
+			if (styles.before) {
+				newChildren.unshift(styles.before);
+				delete styles.before;
+			} else if (styles.after) {
+				newChildren.push(styles.after);
+				delete styles.after;
+			}
+		}
+		newProps.style = styles;
+
+
 		return React.cloneElement(element, newProps, newChildren);
 	} else {
 		return element;
@@ -110,7 +130,7 @@ export default function resolveLook(Component, element, childIndexMap) {
  * @param {Object} newProps - props that get the new styles added 
  * @param {Object} childProps - map with information on index/type of the current element
  */
-function resolveStyle(Component, element, styles, newProps, childIndexMap) {
+function resolveStyle(Component, element, styles, newProps, newChildren, childIndexMap) {
 	let state = Component.state;
 	let newStyle = {};
 
@@ -122,9 +142,14 @@ function resolveStyle(Component, element, styles, newProps, childIndexMap) {
 
 	_Object.each(styles, (property, value) => {
 		if (value instanceof Object) {
-			if (!_Validator.isEmpty(value)) {	
+			if (!_Validator.isEmpty(value)) {
 				if (evaluateExpression(Component, element, property, newProps, childIndexMap)) {
-					newStyle = assign(newStyle, resolveStyle(Component, element, value, newProps, childIndexMap));
+					let resolved = resolveStyle(Component, element, value, newProps, newChildren, childIndexMap);
+					if (Validator.isPseudoElement(property)) {
+						newStyle[property.indexOf('before') > -1 ? 'before' : 'after'] = addPseudoElement(resolved);
+					} else {
+						newStyle = assign(newStyle, resolved);
+					}
 				}
 			}
 		} else {
@@ -133,6 +158,32 @@ function resolveStyle(Component, element, styles, newProps, childIndexMap) {
 	});
 	return newStyle;
 }
+
+
+function addPseudoElement(styles) {
+	let content =  '';
+	if (styles.content) {
+		content = styles.content;
+		delete styles.content;
+	}
+
+	let children;
+	if (content.indexOf('url(') > -1) {
+		children = [createPseudoImage(content)];
+	} else {
+		children = content;
+	}
+	return React.createElement('span', {
+		style: styles
+	}, children);
+}
+
+function createPseudoImage(content) {
+	return React.createElement('img', {
+		src: content.split('url(')[1].substr(0, content.length - 5)
+	});
+}
+
 
 /**
  * Adds additional CSS classes to the className list

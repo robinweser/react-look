@@ -12,13 +12,14 @@ npm install react-look
 
 # Features
 Look is as far as I know the **feature richest** inline-styling library for React. <br>
-Supporting [27 pseudo classes](docs/PseudoClasses.md) as well as **stateful styles** which is an awesome shortcut if you need some styles depending on any valid condition mostly used with `this.state` or `this.props`.
+Supporting [25 pseudo classes](docs/PseudoClasses.md) out of the box (many more via mixins) as well as **stateful styles** which is an awesome shortcut if you need some styles depending on any valid condition mostly used with `this.state` or `this.props`.
 - ES6-ready
 - media queries
 - pseudo classes
 - stateful styles (condition based)
 - nesting
 - [processors](docs/Processors.md) (Prefixer, Mixins, ...)
+- !important-notation
 - modular & themeable
 - useful APIs 
 

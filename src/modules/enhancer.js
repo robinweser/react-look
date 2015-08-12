@@ -82,7 +82,7 @@ export default function Look(Component, additionalStyles = {}, additionalProcess
 			 * Otherwise only this.props get checked
 			 */
 			if (this.styles)
-				this._matchValues = _Object.assign(this.props, this.state);
+				this._matchValues = _Object.assign({}, this.props, this.state);
 
 			return resolveLook(this, super.render());
 		}

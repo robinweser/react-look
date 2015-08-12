@@ -44,6 +44,7 @@ export default function evaluateExpression(Component, element, expression, newPr
 		if (Validator.isActionPseudo(expression)) {
 			newProps = _Object.assign(newProps, createEventListener(Component, element, key, expression.split(':')[1]));
 		}
+		
 		return evalPseudoClass(expression, element.props, State.get(Component, key), childIndexMap);
 
 	} else {

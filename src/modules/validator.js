@@ -4,7 +4,7 @@
  * @param {value} value - value that you want to check e.g. :hover
  */
 export function validateSelector(selector, value) {
-	return selector.indexOf(value) === 0;
+	return selector.indexOf(value) > -1;
 }
 
 /**
@@ -25,6 +25,10 @@ export function isMediaQuery(selector) {
 
 export function isActionPseudo(selector){
 	return validateSelector(selector, ':hover') || validateSelector(selector, ':focus') || validateSelector(selector, ':active');
+}
+
+export function isPseudoElement(selector){
+	return validateSelector(selector, ':before') || validateSelector(selector, ':after');
 }
 
 /**
