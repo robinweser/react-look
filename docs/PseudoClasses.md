@@ -54,7 +54,7 @@ Most pseudo classes get validated within the `render` process, while some need e
 * only-of-type
 
 ### other
-* before / after
+* before / after *(: or ::)*
 * lang*(language)*
 * empty
 
