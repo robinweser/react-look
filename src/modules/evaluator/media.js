@@ -12,6 +12,8 @@ export default function evalMediaQuery(query) {
 	if (matchMedia.canMatchMedia()) {
 		return matchMedia.match(query.replace('@media', '').trim()).matches;
 	} else {
-		throw "Can not resolve media queries. Caused while evaluating media query: " + expr;
+		console.warn('Failed evaluating media query: '+expr+'. Your environment is not able to use window.matchMedia.');
+		console.warn('Use .setMatchMedia to inject your very own. See docs for help.');
+		return false;
 	}
 }

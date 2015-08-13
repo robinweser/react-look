@@ -30,6 +30,8 @@ export default function evalCondition(condition, matchValues) {
 			return match < value;
 		}
 	} else {
+		console.warn('Failed evaluating condition', condition);
+		console.warn('There has been an invalid operator: ' + operator + '. Use >=, <=, !=, =, > or <');
 		return false;
 	}
 }

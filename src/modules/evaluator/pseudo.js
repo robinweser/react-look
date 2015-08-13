@@ -16,7 +16,13 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
 	let other = evalOther(pseudo, props);
 
 	let matched = userAction || indexSensitive || typeSensitive ||  input || other;
-	return matched ? true : false;
+	if (matched){
+		return true;
+	} else {
+		console.warn('Failed evaluating pseudo class: ' + pseudo + '. Invalid pseudo class.');
+		console.warn('Be sure to only use supported pseudo classes.');
+		return false;
+	}
 }
 
 function evalUserAction(pseudo, keyState) {
