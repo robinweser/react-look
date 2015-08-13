@@ -1,5 +1,5 @@
 import resolveLook from './resolver';
-import {_Object} from 'type-utils';
+import {_Object, _Validator} from 'type-utils';
 import assignStyles from 'assign-styles';
 
 /**
@@ -78,13 +78,15 @@ export default function Look(Component, additionalStyles = {}, additionalProcess
 			}
 
 			/**
-			 * If matchState is set all stateful conditions will both math this.state and this.props
-			 * Otherwise only this.props get checked
+			 * Only resolveLook if there are styles to resolve
+			 * Otherwise just return super.render() which leads to no difference
 			 */
-			if (this.styles)
+			if (this.styles || !_Validator.isEmpty(this.styles)) {
 				this._matchValues = _Object.assign({}, this.props, this.state);
-
-			return resolveLook(this, super.render());
+				return resolveLook(this, super.render());
+			} else {
+				return super.render();
+			}
 		}
 	}
 
