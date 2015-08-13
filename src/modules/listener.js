@@ -1,4 +1,4 @@
-import State from '../class/State';
+import State from '../api/State';
 import {_Object} from 'type-utils';
 
 const events = {

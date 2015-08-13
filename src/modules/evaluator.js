@@ -3,7 +3,7 @@ import {_Object} from 'type-utils';
 import evalMediaQuery from './evaluator/media';
 import evalCondition from './evaluator/condition';
 import evalPseudoClass from './evaluator/pseudo';
-import State from '../class/State';
+import State from '../api/State';
 import createEventListener from './listener';
 
 /**

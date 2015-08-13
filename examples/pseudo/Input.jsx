@@ -1,5 +1,5 @@
 import React from 'react';
-import {Look, State} from '../../src/index';
+import Look, {State} from '../../src/index';
 import {Processors} from 'dynamic-style-sheets';
 
 class Input extends React.Component {
