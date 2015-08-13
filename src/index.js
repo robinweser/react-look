@@ -1,11 +1,11 @@
-import * as matchMedia from './modules/matchMedia';
 import Look from './modules/enhancer';
-import Global from './class/Global';
-import State from './class/State';
+import Global from './api/Global';
+import State from './api/State';
+import Config from './api/Config'
 
 export {
 	Look as default,
 	Global,
 	State,
-	matchMedia
+	Config
 }
