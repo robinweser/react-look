@@ -85,6 +85,8 @@ export default function Look(Component, additionalStyles = {}, additionalProcess
 				this._matchValues = _Object.assign({}, this.props, this.state);
 				return resolveLook(this, super.render());
 			} else {
+				console.warn(Compoent + ' was enhanced with Look, but did not provide any styles.');
+				console.warn('This might affect performance and rendering time.');
 				return super.render();
 			}
 		}

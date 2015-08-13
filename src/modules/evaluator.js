@@ -48,6 +48,9 @@ export default function evaluateExpression(Component, element, expression, newPr
 		return evalPseudoClass(expression, element.props, State.get(Component, key), childIndexMap);
 
 	} else {
+		console.warn('Failed resolving expression: ' + expression);
+		console.warn('Invalid expression. Use `:`-prefix for pseudo classes, `@media` for media queries.');
+		console.warn('Stateful styles are condition based on use the following pattern: `propOPERATORvalue`. e.g. active=true, clicks>=20.');
 		return false;
 	}
 }

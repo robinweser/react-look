@@ -22,14 +22,6 @@ export function getMatchMedia() {
 	}
 }
 
-export function match(query) {
-	if (canMatchMedia()) {
-		return getMatchMedia()(query);
-	} else {
-		return false
-	}
-}
-
 /**
  * Returns if the current environment can call the matchMedia function
  */
