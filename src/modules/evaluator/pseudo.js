@@ -19,7 +19,7 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
 	let other = evalOther(pseudo, props);
 
 	let matched = userAction || indexSensitive || typeSensitive ||  input || other;
-	return matched;
+	return matched ? true : false;
 }
 
 function evalUserAction(pseudo, keyState) {

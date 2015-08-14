@@ -54,6 +54,7 @@
     "react": "^0.13.3",
     "react-layout-components": "^0.1.0",
     "react-router": "^0.13.3",
-    "sinon": "^1.15.4"
+    "sinon": "^1.15.4",
+    "sinon-chai": "^2.8.0"
   }
 }
