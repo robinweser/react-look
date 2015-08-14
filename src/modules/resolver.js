@@ -3,7 +3,6 @@ import React from 'react';
 import evaluateExpression from './evaluator';
 import assign from 'assign-styles';
 import State from '../api/State';
-import {Sheet} from 'dynamic-style-sheets';
 import * as Validator from './validator';
 
 /**
@@ -87,30 +86,27 @@ export default function resolveLook(Component, element, childIndexMap) {
 		if (props.style) {
 			assign(newStyles, props.style);
 		}
-
-		let sheet = new Sheet(newStyles);
-
 		//Process all resolved styles at once
-		if (Component.processors) {
-			sheet.process(...Component.processors);
+		if (Component.processors && Component.processors instanceof Array) {
+			Component.processors.forEach(proc => {
+				proc.process(newStyles);
+			});
 		}
 
-		let styles = sheet.getSelectors();
-
 		//resolving :before & :after pseudo elements
-		if (styles.before || styles.after) {
+		if (newStyles.before || newStyles.after) {
 			if (newChildren instanceof Array !== true) {
 				newChildren = [newChildren];
 			}
-			if (styles.before) {
-				newChildren.unshift(styles.before);
-				delete styles.before;
-			} else if (styles.after) {
-				newChildren.push(styles.after);
-				delete styles.after;
+			if (newStyles.before) {
+				newChildren.unshift(newStyles.before);
+				delete newStyles.before;
+			} else if (newStyles.after) {
+				newChildren.push(newStyles.after);
+				delete newStyles.after;
 			}
 		}
-		newProps.style = styles;
+		newProps.style = newStyles;
 
 
 		return React.cloneElement(element, newProps, newChildren);
