@@ -13,6 +13,6 @@ I try my best to keep all docs updated. If you have any recommendations or impro
 
 ### API
 1. [Look](api/Look.md)
-2. [Global](api/Global.md)
+2. [CSS](api/CSS.md)
 3. [State](api/State.md)
 4. [Config](api/Config.md)

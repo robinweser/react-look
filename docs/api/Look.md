@@ -1,4 +1,4 @@
-<div style="float:right"><a href="Global.md"><b>2. Global</b> ></a></div>
+<div style="float:right"><a href="CSS.md"><b>2. CSS</b> ></a></div>
 
 
 # 1. Look

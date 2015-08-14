@@ -1,4 +1,4 @@
-<div style="float:left"><a href="Global.md">< <b>2. Global</b></a></div>
+<div style="float:left"><a href="CSS.md">< <b>2. CSS</b></a></div>
 <div style="float:right"><a href="Config.md"><b>4. Config</b> ></a></div>
 
 # 3. State

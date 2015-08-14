@@ -1,11 +1,11 @@
 import Look from './modules/enhancer';
-import Global from './api/Global';
+import CSS from './api/CSS';
 import State from './api/State';
 import Config from './api/Config'
 
 export {
 	Look as default,
-	Global,
+	CSS,
 	State,
 	Config
 }
