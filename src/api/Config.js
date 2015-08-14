@@ -65,6 +65,6 @@ export default {
 		 * Returns if the current environment can call the matchMedia function
 		 */
 		canMatchMedia() {
-			return config.matchMedia && config.matchMedia instanceof Function;
+			return config.matchMedia && config.matchMedia instanceof Function ? true : false;
 		}
 }
