@@ -1,5 +1,5 @@
 <div style="float:left"><a href="Global.md">< <b>2. Global</b></a></div>
-<div style="float:right"><a href="matchMedia.md"><b>4. matchMedia</b> ></a></div>
+<div style="float:right"><a href="Config.md"><b>4. Config</b> ></a></div>
 
 # 3. State
 Using State you can get/set special states for specific components.<br>

@@ -15,4 +15,4 @@ I try my best to keep all docs updated. If you have any recommendations or impro
 1. [Look](api/Look.md)
 2. [Global](api/Global.md)
 3. [State](api/State.md)
-4. [matchMedia](api/matchMedia.md)
+4. [Config](api/Config.md)

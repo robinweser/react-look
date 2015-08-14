@@ -1,46 +1,98 @@
 let config = {
-	processors: {},
-	mixins: {},
+	processors: new Map(),
+	mixins: new Map(),
 	matchMedia: typeof window !== 'undefined' ? window.matchMedia : undefined
 }
 
 export default {
 	/**
-	 * Register processors to autoenable them globally 
+	 * Registers a processor to autoenable it globally 
 	 * NOTE: This may drop performance as Look will try to resolve every mixin even if you're not using them everywhere
 	 * @param {Object} processor - processor that gets registered
 	 * @param {any} args - any kind of arguments that get passed to processor.process()
 	 */
 	registerProcessor(processor, ...args) {
-			//TODO: register/deregister Processors
-		},
-
-		deregisterProcessor(processor) {
-			//TODO: register/deregister Processors
-		},
-
-		getProcessors() {
-			//TODO: register/deregister Processors
+			if (config.processors.has(processor)) {
+				console.warn('This processor has already been added. It will get overwritten.');
+				console.warn('The following arguments have been applied', config.processors.get(processor));
+			}
+			config.processors.set(processor, ...args);
 		},
 
 		/**
-		 * Register mixins to autoenable them globally 
+		 * Deregisters a processor to not autoenable it anymore 
+		 * @param {Object} processor - processor that gets deregistered
+		 */
+		deregisterProcessor(processor) {
+			if (config.processors.has(processor)) {
+				config.processors.delete(processor);
+			} else {
+				console.warn('You can only deregister processors that have been registered before.');
+			}
+		},
+
+		/**
+		 * Returns a processors registered arguments
+		 * @param {string|number} processor - processors thats arguments will be returned
+		 */
+		getProcessorArgs(processor) {
+			if (config.processors.has(processor)) {
+				return config.processors.get(processor);
+			} else {
+				console.warn('This processor has never been registered. Therefore there are no arguments applied.');
+			}
+		},
+
+		/**
+		 * Returns a map of all registered processors
+		 */
+		getProcessors() {
+			return config.processors;
+		},
+
+		/**
+		 * Registers a mixin to autoenable it globally 
 		 * NOTE: This may drop performance as Look will try to resolve every mixin even if you're not using them everywhere
 		 * @param {string|number} property - property which gets the unique mixin key
 		 * @param {Function} fn - function that creates valid style markup out of a property value
 		 */
 		registerMixin(property, fn) {
-			//TODO: register/deregister Mixins
+			if (config.mixins.has(property)) {
+				console.warn('This mixins has already been added. It will get overwritten.');
+				console.warn('The following method have been applied', config.mixins.get(property));
+			}
+			config.mixins.set(property, fn);
 		},
 
-		deregisterMixin(property, fn) {
-			//TODO: register/deregister Mixins
+		/**
+		 * Deregisters a mixin to not autoenabled anymore
+		 * @param {string|number} property - property which serves as the unique mixin key
+		 */
+		deregisterMixin(property) {
+			if (config.mixins.has(property)) {
+				config.mixins.delete(property);
+			} else {
+				console.warn('You can only deregister mixins that have been registered before.');
+			}
 		},
-		getMixin(property) {
-			//TODO: register/deregister Mixins
+
+		/**
+		 * Returns a mixins resolving method
+		 * @param {string|number} property - property thats method will be returned
+		 */
+		getMixinFn(property) {
+			if (config.mixins.has(property)) {
+				return config.mixins.get(property);
+			} else {
+				console.warn('This mixin has never been registered. Therefore there is no function applied.');
+			}
 		},
+
+		/**
+		 * Returns a map of all registered mixins
+		 */
 		getMixins() {
-			//TODO: register/deregister Mixins
+			return config.mixins;
 		},
 
 
