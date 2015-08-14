@@ -57,14 +57,14 @@ export default Look(Button)
 Look will actually treat a single style object as `default` and reference it automatically by using key-only `look` prop.
 
 ## 3. CSS Compatibility
-In some cases it is even useful to apply some global css selectors. This can be achieved using the [Global](api/Global.md).  <br>Global creates a static CSS strings which gets applied within an `<style></style>`-tag. You can even modify it later on and Global automatically applies your changes with a minimum of DOM manipulations.
+In some cases it is even useful to apply some global css selectors. This can be achieved using the [CSS](api/CSS.md).  <br>CSS creates a static CSS strings which gets applied within an `<style></style>`-tag. You can even modify it later on and CSS automatically applies your changes with a minimum of DOM manipulations.
 
 ### Usage
 You can either use it as you would any CSS by just applying a `className` property or use the build-in `css` property which resolves into a valid `className` string. Look automatically concatenates those.
 ```javascript
-import Look, {Global} from 'react-look';
+import Look, {CSS} from 'react-look';
 
-let global = new Global({
+let global = new CSS({
   '.header' : {
     color: 'blue',
     fontSize: 'red'
