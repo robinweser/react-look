@@ -1,4 +1,41 @@
-import {validateSelector} from '../validator';
+let conditionMap = {
+	//user-action
+	':hover' : {keyState : 'hover', toBe: true},
+	':active' : {keyState : 'active', toBe: true},
+	':focus' : {keyState : 'focus', toBe: true},
+	
+	//input
+	':checked' : {props : 'checked'},
+	':disabled' : {props : 'disabled'},
+	':enabled' : {props : 'disabled', negated: true},
+	':required' : {props : 'required'},
+	':optional' : {props : 'required', negated: true},
+	':read-only' : {props : 'readOnly'},
+	':read-write' : {props : 'readOnly', negated: true},
+	':indeterminate' : {props: 'indeterminate'},
+	
+	//child-index
+	':first-child' : {childIndexMap: 'index', toBe: 1},
+	':last-child' : {childIndexMap: 'index', toBe: 'length'},
+	':only-child' : {childIndexMap : 'length', toBe: 1},
+	':nth-child' : {childIndexMap : 'index', nth: true},
+	':nth-last-child' : {childIndexMap: 'index', nth: true, reverse: true},
+	
+	//type-index
+	':first-of-type' : {childIndexMap: 'typeIndex', toBe: 1},
+	':last-of-type' : {childIndexMap: 'typeIndex', toBe: 'typeLength'},
+	':only-of-type' : {childIndexMap : 'length', toBe: 1},
+	':nth-of-type' : {childIndexMap : 'typeIndex', nth: true},
+	':nth-last-of-type' : {childIndexMap: 'typeIndex', nth: true, reverse: true},
+	
+	//other
+	':lang' : {lang: true},
+	':empty' : {children: true},
+	':before' : {always: true},
+	':after' : {always: true},
+	'::before' : {always: true},
+	'::after' : {always: true}
+}
 
 /**
  * Evaluates if a pseudo class fullfils its condition
@@ -9,78 +46,67 @@ import {validateSelector} from '../validator';
  * NOTE: This is held simple for readability purpose, you may easily add other pseudos
  */
 export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) {
-	let userAction = evalUserAction(pseudo, keyState);
-	let indexSensitive = childIndexMap ? evalChildIndex(pseudo, childIndexMap.index, childIndexMap.length) : false;
-	let typeSensitive = childIndexMap ? evalChildIndex(pseudo, childIndexMap.typeIndex, childIndexMap.typeIndexLength, true) : false;
-	let input = evalInput(pseudo, props);
-	let other = evalOther(pseudo, props);
-
-	let matched = userAction || indexSensitive || typeSensitive ||  input || other;
-	return matched ? true : false;
-}
-
-function evalUserAction(pseudo, keyState) {
-	if (keyState) {
-		if (validateSelector(pseudo, ':active')) {
-			return keyState.get('active');
-		} else if (validateSelector(pseudo, ':hover')) {
-			return keyState.get('hover');
-		} else if (validateSelector(pseudo, ':focus')) {
-			return keyState.get('focus');
-		}
-	}
-}
-
-const indexPseudos = {
-	indexSensitive: [':first-child', ':last-child', ':only-child', ':nth-child', 'nth-last-child'],
-	typeSensitive: [':first-of-type', ':last-of-type', ':only-of-type', ':nth-of-type', ':nth-last-of-type']
-}
-
-function evalChildIndex(pseudo, index, length, typeSensitive) {
-	let pseudos = indexPseudos[typeSensitive ? 'typeSensitive' : 'indexSensitive'];
-
-	if (validateSelector(pseudo, pseudos[0])) {
-		return index === 1;
-	} else if (validateSelector(pseudo, pseudos[1])) {
-		return index === length;
-	} else if (validateSelector(pseudo, pseudos[2])) {
-		return length === 1;
-	} else if (validateSelector(pseudo, pseudos[3])) {
-		let expr = splitNthExpression(pseudo, pseudos[3]);
-		return evalNth(expr, index);
-	} else if (validateSelector(pseudo, pseudos[4])) {
-		let expr = splitNthExpression(pseudo, pseudos[4]);
-		return evalNth(expr, length - index, true);
-	}
-}
-
-function evalInput(pseudo, props, changeState) {
-	if (validateSelector(pseudo, ':checked')) {
-		return props.checked;
-	} else if (validateSelector(pseudo, ':disabled')) {
-		return props.disabled;
-	} else if (validateSelector(pseudo, ':enabled')) {
-		return !props.disabled;
-	} else if (validateSelector(pseudo, ':required')) {
-		return props.required;
-	} else if (validateSelector(pseudo, ':optional')) {
-		return !props.required;
-	} else if (validateSelector(pseudo, ':read-only')) {
-		return props.readOnly;
-	} else if (validateSelector(pseudo, ':read-write')) {
-		return !props.readOnly;
-	} else if (validateSelector(pseudo, ':indeterminate')) {
-		return props.indeterminate;
-	}
-}
-
-function evalOther(pseudo, props) {
-	if (validateSelector(pseudo, ':lang')) {
+	if (pseudo.indexOf('lang') > -1) {
 		return pseudo.indexOf(props.lang) > -1;
-	} else if (validateSelector(pseudo, ':empty')) {
-		return (!props.children || props.children.length < 1);
-	} else if (validateSelector(pseudo, ':before') ||  validateSelector(pseudo, ':after')) {
-		return true;
+	}
+
+	let split = '';
+	if (pseudo.indexOf('nth-') > -1) {
+		split = splitNthExpression(pseudo);
+		pseudo = split.pseudo;
+	}
+
+	//userAction
+	if (conditionMap.hasOwnProperty(pseudo)) {
+		let condition = conditionMap[pseudo];
+
+		if (condition.hasOwnProperty('keyState')) {
+			if (keyState) {
+				return keyState.get(condition.keyState) === condition.toBe;
+			} else {
+				return false
+			}
+		}
+
+		//input
+		if (condition.hasOwnProperty('props')) {
+			if (condition.hasOwnProperty('negated')) {
+				return !props[condition.props];
+			} else {
+				return props[condition.props];
+			}
+		}
+
+		//other
+		if (condition.hasOwnProperty('lang')) {
+			return pseudo.indexOf(props.lang) > -1;
+		} else if (condition.hasOwnProperty('children')) {
+			return !props.children ||  props.children.length < 1;
+		} else if (condition.hasOwnProperty('always')) {
+			return true;
+		}
+
+		//child-index
+		if (condition.hasOwnProperty('childIndexMap')) {
+			let length = condition.childIndexMap.indexOf('type') === 0 ? 'typeLength' : 'length';
+			if (condition.hasOwnProperty('nth')) {
+				if (condition.reverse) {
+					return evalNth(split.expression, childIndexMap[length] - childIndexMap[condition.childIndexMap], true);
+				} else {
+					return evalNth(split.expression, childIndexMap[condition.childIndexMap]);
+				}
+			} else {
+				if (condition.toBe === length) {
+					return childIndexMap[condition.childIndexMap] === childIndexMap[length];
+				} else {
+					return childIndexMap[condition.childIndexMap] === condition.toBe;
+				}
+			}
+		}
+	} else {
+		console.warn('Failed evaluating pseudo class: ' + pseudo + '. Invalid pseudo class.');
+		console.warn('Be sure to only use supported pseudo classes.');
+		return false;
 	}
 }
 
@@ -129,7 +155,10 @@ function evalNth(expression, index, reverse) {
  * @param {string} pseudo - pseudo-class selector that includes a mathmactical expression
  * @param {string} expression - defines which index-sensitive pseudo-class your pseudo is, e.g: nth-child, first-of-type 
  */
-function splitNthExpression(pseudo, expression) {
-	let split = pseudo.replace(/ /g, '').split(expression + '(');
-	return split[1].substr(0, split[1].length - 1);
+function splitNthExpression(pseudo) {
+	let split = pseudo.replace(/ /g, '').split('(');
+	return {
+		expression: split[1].substr(0, split[1].length - 1),
+		pseudo: split[0]
+	}
 }

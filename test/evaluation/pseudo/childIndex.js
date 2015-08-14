@@ -72,7 +72,7 @@ describe('Evaluating child-index sensitive pseudo classes', () => {
 					'index': arr[0],
 					'length': arr[1],
 					'typeIndex': arr[2],
-					'typeIndexLength': arr[3]
+					'typeLength': arr[3]
 				}
 
 				var str = '[' + arr.join(', ') + ']';
