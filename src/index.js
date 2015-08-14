@@ -1,25 +1,11 @@
-import State from './map/state';
-import * as matchMedia from './utils/matchMedia';
+import * as matchMedia from './modules/matchMedia';
+import Look from './modules/enhancer';
 import Global from './class/Global';
-import Look from './utils/enhancer';
-
-
-function registerProcessor(processor) {
-	//TODO: register/deregister Processors
-}
-
-function deregisterProcessor(processor) {
-	//TODO: register/deregister Processors
-}
-
-function getProcessors(processor) {
-	//TODO: register/deregister Processors
-}
+import State from './class/State';
 
 export {
 	Look as default,
-	Look as Look,
-	Global as Global,
-	State as State,
-	matchMedia as matchMedia
+	Global,
+	State,
+	matchMedia
 }

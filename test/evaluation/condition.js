@@ -1,4 +1,4 @@
-import evaluateCondition from '../../lib/utils/evaluator/condition';
+import evaluateCondition from '../../lib/modules/evaluator/condition';
 import {expect} from 'chai';
 
 const matchValues = {

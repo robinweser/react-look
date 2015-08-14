@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "description": "Feature-rich, dynamic & stateful Component Styling for React (CSS in JS)",
   "main": "lib/index.js",
   "files": [
@@ -21,7 +21,6 @@
     "prepublish": "babel src --out-dir lib"
   },
   "keywords": [
-    "react-component",
     "react",
     "layout",
     "component styling",
@@ -36,8 +35,8 @@
   "license": "MIT",
   "dependencies": {
     "assign-styles": "^1.0.2",
-    "dynamic-style-sheets": "^0.2",
-    "type-utils": "^1.0.2"
+    "dynamic-style-sheets": "^0.2.2",
+    "type-utils": "^1.0.4"
   },
   "browserify": {
     "transform": [
@@ -53,7 +52,9 @@
     "dss-mixins": "0.0.6",
     "mocha": "^2.2.5",
     "react": "^0.13.3",
-    "react-flex-kit": "^0.1.3",
-    "react-router": "^0.13.3"
+    "react-layout-components": "^0.1.0",
+    "react-router": "^0.13.3",
+    "sinon": "^1.15.4",
+    "sinon-chai": "^2.8.0"
   }
 }

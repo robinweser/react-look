@@ -1,4 +1,4 @@
-import evaluatePseudoClass from '../../../lib/utils/evaluator/pseudo';
+import evaluatePseudoClass from '../../../lib/modules/evaluator/pseudo';
 import {expect} from 'chai';
 
 describe('Evaluating other pseudo classes', () => {

@@ -1,14 +1,10 @@
-import * as matchMedia from '../lib/utils/matchMedia';
+import {matchMedia} from '../lib/index';
 import {expect} from 'chai';
 
 
 describe('Using matchMedia API', () => {
 	it('should not be able to matchMedia', () => {
 			expect(matchMedia.canMatchMedia()).to.equal(false);
-	});
-
-	it('matching should return false', () => {
-			expect(matchMedia.match('@media (min-height: 400px)')).to.equal(false);
 	});
 	
 	var func = function(selector){
@@ -26,6 +22,6 @@ describe('Using matchMedia API', () => {
 	});
 	
 	it('should be able to call the matchMedia function', () => {
-			expect(matchMedia.match('selector')).to.equal(42);
+			expect(matchMedia.getMatchMedia()('selector')).to.equal(42);
 	});
 });
