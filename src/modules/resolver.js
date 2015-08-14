@@ -41,7 +41,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 							'index': index + 1,
 							'length': oldChildren.length,
 							'typeIndex': indexMap[childType],
-							'typeIndexLength': typeMap[childType]
+							'typeLength': typeMap[childType]
 						}
 						newChildren.push(resolveLook(Component, child, childIndex));
 
