@@ -28,8 +28,8 @@
     "vendor",
     "stylesheet",
     "media query",
-    "inline styles",
-    "stateful styles"
+    "inline-style",
+    "stateful style"
   ],
   "author": "Robin Frischmann",
   "license": "MIT",

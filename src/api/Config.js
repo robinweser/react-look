@@ -67,7 +67,7 @@ export default {
 		registerMixin(property, fn) {
 			if (config.mixins.has(property)) {
 				console.warn('This mixins has already been added. It will get overwritten.');
-				console.warn('The following method have been applied', config.mixins.get(property));
+				console.warn('The following method has been applied', config.mixins.get(property));
 			}
 			config.mixins.set(property, fn);
 		},

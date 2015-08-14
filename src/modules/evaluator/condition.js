@@ -33,6 +33,8 @@ export default function evalCondition(condition, matchValues) {
 			console.warn('Use >=, <=, !=, =, > or < with the following pattern: `propOPERATORvalue`');
 			return false;
 		}
+	} else {
+		return false;
 	}
 }
 
