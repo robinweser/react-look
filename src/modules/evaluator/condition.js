@@ -28,11 +28,11 @@ export default function evalCondition(condition, matchValues) {
 			return match > value;
 		} else if (operator === '<') {
 			return match < value;
+		} else {
+			console.warn('Failed evaluating condition: ' + condition + '. There has been an invalid operator `' + operator) + '`.';
+			console.warn('Use >=, <=, !=, =, > or < with the following pattern: `propOPERATORvalue`');
+			return false;
 		}
-	} else {
-		console.warn('Failed evaluating condition', condition);
-		console.warn('There has been an invalid operator: ' + operator + '. Use >=, <=, !=, =, > or <');
-		return false;
 	}
 }
 

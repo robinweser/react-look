@@ -133,14 +133,11 @@ Server-side rendering?
 
 Read through the [FAQ](docs/FAQ.md) to get all those things done within seconds!
 
-# [react-look-tools](https://github.com/rofrischmann/react-look-tools)
-react-look-tools is a toolchain of useful **helper** and **mixins**. It adds support for **extending**, **keyframes** and a lot of css hacks that can't be achieved with pure javascript. Also check [FAQ](docs/FAQ.md) which spoils some tools as well.
-
 # License
 **Look** is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>
 Documentation is licensed under [Creative Common License](http://creativecommons.org/licenses/by/4.0/).<br>
 Created with ♥ by [@rofrischmann](http://rofrischmann.de).
+
 # Contributing
 I would love to see people getting involved.<br>
-If you have a feature request please create an issue.<br>
-If you're improving Look by any kind please don't be shy and send a pull request to let everyone benefit.
+If you have a feature request please create an issue. Also if you're even improving Look by any kind please don't be shy and send a pull request to let everyone benefit.
