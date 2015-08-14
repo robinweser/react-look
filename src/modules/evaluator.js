@@ -5,6 +5,9 @@ import evalCondition from './evaluator/condition';
 import evalPseudoClass from './evaluator/pseudo';
 import State from '../api/State';
 import createEventListener from './listener';
+import {getDefaultKey} from '../api/Config';
+
+const defaultKey = getDefaultKey();
 
 /**
  * Evaluates any advanced expression which are pseudo classes, media queries or stateful conditions
@@ -38,7 +41,7 @@ export default function evaluateExpression(Component, element, expression, newPr
 
 	//eval pseudo
 	else if (Validator.isPseudo(expression)) {
-		let key = element.key || element.ref || 'root';
+		let key = element.key || element.ref || defaultKey;
 		
 		//add required event listeners
 		if (Validator.isActionPseudo(expression)) {

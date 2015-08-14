@@ -9,82 +9,134 @@ Chai.use(sinonChai);
 
 
 describe('Enhancing React.Component with Look', () => {
-	
-	class Test extends React.Component {
-		constructor(){
-			super(...arguments);
-			this.state = {foo: 1}
-		}
-		processors(){
-				return ['Processor1', 'Processor2']
-		}
-	}
-	
-	var Enhanced = Look(Test);
-	var instance = new Enhanced({bar: 1});
-	
+
 	it('should use the same displayName', () => {
-			expect(instance.displayName).to.eql(Test.displayName);
+		class Test extends React.Component {}
+		let Enhanced = Look(Test);
+		let instance = new Enhanced();
+
+		expect(instance.displayName).to.eql(Test.displayName);
 	});
+
+
 	it('should set up initial state', () => {
-			expect(instance.state).to.have.property('_look');
+		class Test extends React.Component {}
+		let Enhanced = Look(Test);
+		let instance = new Enhanced();
+
+		expect(instance.state).to.have.property('_look');
 	});
+
+
 	it('should add an array which registers all clicked items', () => {
-			expect(instance._lastActive).to.exist.and.to.be.instanceof(Array);
+		class Test extends React.Component {}
+		let Enhanced = Look(Test);
+		let instance = new Enhanced();
+
+		expect(instance._lastActive).to.exist.and.to.be.instanceof(Array);
 	});
+
+
 	it('should merge existing state', () => {
-			expect(instance.state).to.eql({foo: 1, _look : new Map()});
+		class Test extends React.Component {
+			constructor() {
+				super(...arguments);
+				this.state = {
+					foo: 1
+				}
+			}
+		}
+
+		let Enhanced = Look(Test);
+		let instance = new Enhanced();
+
+		expect(instance.state).to.eql({foo: 1, _look: new Map()});
 	});
-	
+
+
 	it('should recieve props', () => {
-			expect(instance.props).to.eql({bar: 1});
+		class Test extends React.Component {
+			constructor() {
+				super(...arguments);
+			}
+		}
+
+		let Enhanced = Look(Test);
+		let instance = new Enhanced({bar: 1});
+
+		expect(instance.props).to.eql({bar: 1});
 	});
+
+
 	it('should resolve processors() as a prop', () => {
-			expect(instance.processors).to.eql(['Processor1', 'Processor2']);
-	});
-	
-	var constructorFunc = sinon.spy();
-	var callMe = sinon.spy();
-	
-	class Test2 extends React.Component {
-		constructor(){
-			super();
-			constructorFunc();
+		class Test extends React.Component {
+			processors() {
+				return ['Processor1', 'Processor2']
+			}
 		}
-		processors(){
-			return 'processor';
-		}
-		render(){
-			callMe();
-			return null;
-		}
-	}
-	var Enhanced2 = Look(Test2);
-	var instance2 = new Enhanced2();
-	instance2.render();
-	it('should call super (constructor) only once', () => {
-			expect(constructorFunc).to.have.been.calledOnce;
+
+		let Enhanced = Look(Test);
+		let instance = new Enhanced();
+		expect(instance.processors).to.eql(['Processor1', 'Processor2']);
 	});
-	
-	it('should call super.render only once', () => {
-			expect(callMe).to.have.been.calledOnce;
-	});
-	
+
+
 	it('should arrayify any kind of processors passed', () => {
-			expect(instance2.processors).to.eql(['processor']);
-	});
-	
-	class Test3 extends React.Component {
-		processors() {
-			return 'processor'
+		class Test extends React.Component {
+			processors() {
+				return 'processor';
+			}
 		}
-	}
-	var Enhanced3 = Look(Test3, {}, ['proc1', 'proc2']);
-	var instance3 = new Enhanced3();
-	it('should add additional processors', () => {
-			expect(instance3.processors).to.eql(['processor', 'proc1', 'proc2']);
+		let Enhanced = Look(Test);
+		let instance = new Enhanced();
+
+		expect(instance.processors).to.eql(['processor']);
 	});
-	
-	
-	
+
+
+	it('should add additional processors', () => {
+		class Test extends React.Component {
+			processors() {
+				return 'processor'
+			}
+		}
+		let Enhanced = Look(Test, {}, ['proc1', 'proc2']);
+		let instance = new Enhanced();
+
+		expect(instance.processors).to.eql(['processor', 'proc1', 'proc2']);
+	});
+
+
+	it('should call super (constructor) only once', () => {
+		let constructorFunc = sinon.spy();
+
+		class Test extends React.Component {
+			constructor() {
+				super();
+				constructorFunc();
+			}
+		}
+
+		let Enhanced = Look(Test);
+		let instance = new Enhanced();
+
+		expect(constructorFunc).to.have.been.calledOnce;
+	});
+
+
+	it('should call super.render only once', () => {
+		let callMe = sinon.spy();
+
+		class Test extends React.Component {
+			render() {
+				callMe();
+				return null;
+			}
+		}
+		let Enhanced = Look(Test);
+		let instance = new Enhanced();
+		instance.render();
+
+		expect(callMe).to.have.been.calledOnce;
+	});
 });

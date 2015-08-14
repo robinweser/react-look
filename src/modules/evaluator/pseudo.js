@@ -1,7 +1,4 @@
-import {
-	validateSelector
-}
-from '../validator';
+import {validateSelector} from '../validator';
 
 /**
  * Evaluates if a pseudo class fullfils its condition

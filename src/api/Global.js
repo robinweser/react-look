@@ -11,7 +11,7 @@ export default class Global extends CSSSheet {
 	constructor(styles, unit='px', media = '', id) {
 		super(styles, media, id);
 		
-		this.process(Units, unit);
+		this.process(Units, this.unit);
 		this.unit = unit;
 	}
 	

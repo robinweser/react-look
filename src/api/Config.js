@@ -1,17 +1,25 @@
 let config = {
 	processors: new Map(),
 	mixins: new Map(),
-	matchMedia: typeof window !== 'undefined' ? window.matchMedia : undefined
+	matchMedia: typeof window !== 'undefined' ? window.matchMedia : undefined,
+	defaultKey: 'root'
 }
 
 export default {
 	/**
-	 * Registers a processor to autoenable it globally 
-	 * NOTE: This may drop performance as Look will try to resolve every mixin even if you're not using them everywhere
-	 * @param {Object} processor - processor that gets registered
-	 * @param {any} args - any kind of arguments that get passed to processor.process()
+	 * Returns the default key for user action pseudo classes
 	 */
-	registerProcessor(processor, ...args) {
+	getDefaultKey() {
+			return config.defaultkey;
+		},
+
+		/**
+		 * Registers a processor to autoenable it globally 
+		 * NOTE: This may drop performance as Look will try to resolve every mixin even if you're not using them everywhere
+		 * @param {Object} processor - processor that gets registered
+		 * @param {any} args - any kind of arguments that get passed to processor.process()
+		 */
+		registerProcessor(processor, ...args) {
 			if (config.processors.has(processor)) {
 				console.warn('This processor has already been added. It will get overwritten.');
 				console.warn('The following arguments have been applied', config.processors.get(processor));

@@ -1,5 +1,5 @@
-const defaultKey = 'root';
-
+import {getDefaultKey} from './Config';
+const defaultKey = getDefaultKey();
 /**
  * A small helper module to handle States within react-look
  */
