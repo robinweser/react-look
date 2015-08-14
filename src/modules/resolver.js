@@ -2,7 +2,7 @@ import {_Object, _Validator} from 'type-utils';
 import React from 'react';
 import evaluateExpression from './evaluator';
 import assign from 'assign-styles';
-import State from '../class/State';
+import State from '../api/State';
 import {Sheet} from 'dynamic-style-sheets';
 import * as Validator from './validator';
 
@@ -77,7 +77,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 				if (Component.styles.hasOwnProperty(look)) {
 					assign(newStyles, resolveStyle(Component, element, Component.styles[look], newProps, newChildren, childIndexMap));
 				}
-			})
+			});
 			delete props.look;
 		}
 		/**
