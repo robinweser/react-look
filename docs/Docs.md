@@ -2,7 +2,7 @@
 I try my best to keep all docs updated. If you have any recommendations or improvements please tell me or create a pull request.
 
 ## Table of Contents
-1. [Getting started](GettingStarted.md)
+1. [Intro](Intro.md)
 2. [Under the hood](UnderTheHood.md)
 3. [Pseudo classes](PseudoClasses.md)
 4. [Media queries](MediaQueries.md)

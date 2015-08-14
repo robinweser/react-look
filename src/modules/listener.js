@@ -31,8 +31,8 @@ export default function createEventListener(Component, element, key, event) {
 		keyElementMap.set(key, element);
 	} else {
 		if (!keyElementMap.get(key) === element) {
-			console.warn('You already got a state associated with element.key="' + key + '". Use unqiue `key` or `ref` while using :hover, :focus or :active on multiple elements.');
-			console.warn('Look will not add state-listeners for', element);
+			console.warn('There is a state associated with element.key="' + key + '". Use unqiue `key` or `ref` while using :hover, :focus or :active on multiple elements.');
+			console.warn('Look will not add state-listeners to', element);
 			return element.props;
 		}
 	}

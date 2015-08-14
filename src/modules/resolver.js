@@ -81,8 +81,8 @@ export default function resolveLook(Component, element, childIndexMap) {
 			delete props.look;
 		}
 		/**
-		 *If there already are styles in props they get assigned
-		 *NOTE: new styles get overwritten since attached ones have higher prio
+		 * If there already are styles in props they get assigned
+		 * NOTE: new styles get overwritten since attached ones have higher prio
 		 */
 		if (props.style) {
 			assign(newStyles, props.style);
@@ -158,7 +158,12 @@ function resolveStyle(Component, element, styles, newProps, newChildren, childIn
 	return newStyle;
 }
 
-
+/**
+ * Creates a new pseudo element 
+ * Support for :before, :after / ::before, ::after
+ * NOTE: By passing a `content` you may specify a text or image which gets inserted
+ * @param {Object} styles - pseudo elements inner styles
+ */
 function addPseudoElement(styles) {
 	let content =  '';
 	if (styles.content) {
@@ -177,6 +182,10 @@ function addPseudoElement(styles) {
 	}, children);
 }
 
+/**
+ * Creates a new image element as child of a pseudo element
+ * @param {string} content - value including a valid url path to the image
+ */
 function createPseudoImage(content) {
 	return React.createElement('img', {
 		src: content.split('url(')[1].substr(0, content.length - 5)

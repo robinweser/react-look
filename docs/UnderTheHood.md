@@ -1,4 +1,4 @@
-<div style="float:left"><a href="GettingStarted.md">< <b>1. Getting started</b></a></div>
+<div style="float:left"><a href="Intro.md">< <b>1. Intro</b></a></div>
 <div style="float:right"><a href="PseudoClasses.md"><b>3. Pseudo classes</b> ></a></div>
 
 # 2. Under the hood

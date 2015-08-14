@@ -12,7 +12,7 @@ export function validateSelector(selector, value) {
  * @param {string} selector - selector that gets validates
  */
 export function isPseudo(selector) {
-	return this.validateSelector(selector, ':');
+	return selector.indexOf(':') === 0;
 }
 
 /**
@@ -20,29 +20,32 @@ export function isPseudo(selector) {
  * @param {string} selector - selector that gets validates
  */
 export function isMediaQuery(selector) {
-	return this.validateSelector(selector, '@media');
+	return selector.indexOf('@media') === 0;
 }
 
-export function isActionPseudo(selector){
-	return validateSelector(selector, ':hover') || validateSelector(selector, ':focus') || validateSelector(selector, ':active');
-}
-
-export function isPseudoElement(selector){
-	return validateSelector(selector, ':before') || validateSelector(selector, ':after');
-}
 
 /**
  * Validates if a selector is a stateful condition
  * @param {string} selector - selector that gets validates
  */
 export function isCondition(selector) {
-	return selector.indexOf('=') > -1 || selector.indexOf('<') > -1 ||  selector.indexOf('>') > -1 ||  selector.indexOf('!=') > -1;
+	return validateSelector(selector, '=') || validateSelector(selector, '<') ||  validateSelector(selector, '>') ||  validateSelector(selector, '!=');
 }
 
 /**
- * Validates if a selector is an advanced selector: pseudo-class, media query or stateful condition
+ * Validates if a selector is action pseudo class
+ * Action pseudo classes are :hover, :focus, :active
  * @param {string} selector - selector that gets validates
  */
-export function isAdvanced(selector) {
-	return this.isCondition(selector) || this.isMediaQuery(selector) || this.isPseudo(selector);
+export function isActionPseudo(selector) {
+	return validateSelector(selector, ':hover') ||  validateSelector(selector, ':focus') ||  validateSelector(selector, ':active');
+}
+
+/**
+ * Validates if a selector is a pseudo element
+ * NOTE: Pseudo elements currently are only :before, :after / ::before, ::after
+ * @param {string} selector - selector that gets validates
+ */
+export function isPseudoElement(selector) {
+	return validateSelector(selector, ':before') || validateSelector(selector, ':after');
 }

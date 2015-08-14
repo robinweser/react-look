@@ -1,7 +1,7 @@
 {
   "name": "react-look",
-  "version": "0.3.2",
-  "description": "Feature-rich, dynamic & stateful Component Styling for React (CSS in JS)",
+  "version": "1.0.0",
+  "description": "Feature-rich, dynamic & stateful Component Styling for React",
   "main": "lib/index.js",
   "files": [
     "LICENSE",
@@ -53,6 +53,8 @@
     "mocha": "^2.2.5",
     "react": "^0.13.3",
     "react-layout-components": "^0.1.0",
-    "react-router": "^0.13.3"
+    "react-router": "^0.13.3",
+    "sinon": "^1.15.4",
+    "sinon-chai": "^2.8.0"
   }
 }

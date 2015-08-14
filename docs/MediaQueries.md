@@ -3,7 +3,7 @@
 
 # 4. Media Queries
 
-Look supports media-queries using a common syntax. There are actually two different ways to use them. You can either **nest** them within a valid selector or use it as a **wrapper** *(just like you would do it in CSS)* that contains selectors.
+Look supports media-queries using a common syntax. There are actually two different ways to use them.
 
 ## Example
 ```javascript
@@ -16,18 +16,6 @@ Look supports media-queries using a common syntax. There are actually two differ
 		'@media (min-width: 800px)' : {
 			color: 'red',
 			background: 'gray'
-		}
-	}
-	
-	// wrapping media query
-	'@media (min-width: 800px)' : {
-		box : {
-			color: 'blue',
-			fontSize: 20
-		},
-		item : {
-			lineHeight: 15,
-			padding: '20px 0 20px 0'
 		}
 	}
 }

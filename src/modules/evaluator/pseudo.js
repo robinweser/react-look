@@ -1,4 +1,7 @@
-import {validateSelector} from '../validator';
+import {
+	validateSelector
+}
+from '../validator';
 
 /**
  * Evaluates if a pseudo class fullfils its condition
@@ -79,7 +82,7 @@ function evalOther(pseudo, props) {
 		return pseudo.indexOf(props.lang) > -1;
 	} else if (validateSelector(pseudo, ':empty')) {
 		return (!props.children || props.children.length < 1);
-	} else if (validateSelector(pseudo, ':before') || validateSelector(pseudo, ':after')){
+	} else if (validateSelector(pseudo, ':before') ||  validateSelector(pseudo, ':after')) {
 		return true;
 	}
 }
