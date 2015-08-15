@@ -24,7 +24,7 @@ let conditionMap = {
 	//type-index
 	':first-of-type' : {childIndexMap: 'typeIndex', toBe: 1},
 	':last-of-type' : {childIndexMap: 'typeIndex', toBe: 'typeLength'},
-	':only-of-type' : {childIndexMap : 'length', toBe: 1},
+	':only-of-type' : {childIndexMap : 'typeLength', toBe: 1},
 	':nth-of-type' : {childIndexMap : 'typeIndex', nth: true},
 	':nth-last-of-type' : {childIndexMap: 'typeIndex', nth: true, reverse: true},
 	
@@ -91,7 +91,7 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
 			let length = condition.childIndexMap.indexOf('type') === 0 ? 'typeLength' : 'length';
 			if (condition.hasOwnProperty('nth')) {
 				if (condition.reverse) {
-					return evalNth(split.expression, childIndexMap[length] - childIndexMap[condition.childIndexMap], true);
+					return evalNth(split.expression, childIndexMap[length] + 1 - childIndexMap[condition.childIndexMap]);
 				} else {
 					return evalNth(split.expression, childIndexMap[condition.childIndexMap]);
 				}
@@ -115,9 +115,8 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
  * This is quite dirty and needs to be refactored later though it works fine
  * @param {string} expression - mathematical expression in the form an+b
  * @param {number} index - current elements index
- * @param {Boolean} reverse - if your validating a nth-last one
  */
-function evalNth(expression, index, reverse) {
+function evalNth(expression, index) {
 	//TODO: drunk => dirty, fix later
 	if (expression === 'odd') {
 		return index % 2 !== 0;

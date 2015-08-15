@@ -14,11 +14,12 @@
     "url": "https://github.com/rofrischmann/react-look"
   },
   "scripts": {
-    "pretest": "babel src --out-dir lib",
+    "pretest": "npm run transpile",
     "test": "mocha --recursive --compilers js:babel/register",
-    "start": "browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js",
-    "poststart": "open demo/index.html",
-    "prepublish": "babel src --out-dir lib"
+    "prepublish": "npm run transpile",
+    "transpile": "babel src --out-dir lib",
+    "build:demo": "browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
+    "demo": "npm run build:demo && open demo/index.html"
   },
   "keywords": [
     "react",
@@ -38,22 +39,15 @@
     "dynamic-style-sheets": "^0.2.2",
     "type-utils": "^1.0.4"
   },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
-  },
   "devDependencies": {
     "babel": "^5.6.14",
     "babelify": "^6.1.3",
     "browserify": "^10.2.6",
     "chai": "^3.2.0",
-    "color": "^0.10.1",
-    "dss-mixins": "0.0.6",
+    "minifyify": "^7.0.5",
     "mocha": "^2.2.5",
     "react": "^0.13.3",
     "react-layout-components": "^0.1.0",
-    "react-router": "^0.13.3",
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0"
   }

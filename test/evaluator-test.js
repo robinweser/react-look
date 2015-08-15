@@ -1,15 +1,11 @@
 import evaluateCondition from '../lib/modules/evaluator/condition';
 import evaluatePseudoClass from '../lib/modules/evaluator/pseudo';
-
-import {
-	expect
-}
-from 'chai';
+import {expect} from 'chai';
 
 
 describe('Evaluating conditions', () => {
 
-	var matchValues = {
+	let matchValues = {
 		highlight: true,
 		clicks: 20,
 		noprop: undefined
@@ -34,6 +30,7 @@ describe('Evaluating conditions', () => {
 		expect(evaluateCondition('highlight=undefined', matchValues)).to.equal(false);
 	});
 });
+
 
 
 describe('Evaluating input pseudo classes', () => {
@@ -63,6 +60,7 @@ describe('Evaluating input pseudo classes', () => {
 });
 
 
+
 describe('Evaluating user-action pseudo classes', () => {
 	it('should return true if keyState is set and true', () => {
 		expect(evaluatePseudoClass(':hover', {}, new Map([['hover' , true]]), {})).to.equal(true);
@@ -86,6 +84,7 @@ describe('Evaluating user-action pseudo classes', () => {
 });
 
 
+
 describe('Evaluating :lang pseudo class', () => {
 	
 	it('should validate true', () => {
@@ -97,6 +96,7 @@ describe('Evaluating :lang pseudo class', () => {
 			expect(evaluatePseudoClass(':lang(en)', {lang: 'de'}, new Map(), {})).to.equal(false);
 	});
 });
+	
 	
 	
 describe('Evaluating :empty pseudo class', () => {
@@ -113,5 +113,150 @@ describe('Evaluating :empty pseudo class', () => {
 	
 	it('should validate false if element got children', () => {
 			expect(evaluatePseudoClass(':empty', {children: ['test']}, new Map(), {})).to.equal(false);
+	});
+});
+
+
+
+describe('Evaluating child index pseudo class', () => {
+	
+	it(':nth-last-child should validate true', () => {
+		expect(evaluatePseudoClass(':nth-last-child(even)', {}, new Map(), {length: 5, index: 2})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-last-child(even)', {}, new Map(), {length: 5, index: 4})).to.equal(true);
+		
+		expect(evaluatePseudoClass(':nth-last-child(odd)', {}, new Map(), {length: 5, index: 1})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-last-child(odd)', {}, new Map(), {length: 5, index: 3})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-last-child(odd)', {}, new Map(), {length: 5, index: 5})).to.equal(true);
+		
+		expect(evaluatePseudoClass(':nth-last-child(3n+2)', {}, new Map(), {length: 5, index: 1})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-last-child(3n+2)', {}, new Map(), {length: 5, index: 4})).to.equal(true);
+		
+		expect(evaluatePseudoClass(':nth-last-child(-2n+3)', {}, new Map(), {length: 5, index: 3})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-last-child(-2n+3)', {}, new Map(), {length: 5, index: 5})).to.equal(true);
+		
+		expect(evaluatePseudoClass(':nth-last-child(n+3)', {}, new Map(), {length: 5, index: 1})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-last-child(n+3)', {}, new Map(), {length: 5, index: 2})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-last-child(n+3)', {}, new Map(), {length: 5, index: 3})).to.equal(true);
+		
+		expect(evaluatePseudoClass(':nth-last-child(3)', {}, new Map(), {length: 5, index: 3})).to.equal(true);	
+	});
+	
+	
+	it(':nth-last-child should validate false', () => {
+		expect(evaluatePseudoClass(':nth-last-child(even)', {}, new Map(), {length: 5, index: 1})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-last-child(even)', {}, new Map(), {length: 5, index: 3})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-last-child(even)', {}, new Map(), {length: 5, index: 5})).to.equal(false);
+		
+		expect(evaluatePseudoClass(':nth-last-child(odd)', {}, new Map(), {length: 5, index: 2})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-last-child(odd)', {}, new Map(), {length: 5, index: 4})).to.equal(false);
+		
+		expect(evaluatePseudoClass(':nth-last-child(3n+2)', {}, new Map(), {length: 5, index: 2})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-last-child(3n+2)', {}, new Map(), {length: 5, index: 3})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-last-child(3n+2)', {}, new Map(), {length: 5, index: 5})).to.equal(false);
+		
+		expect(evaluatePseudoClass(':nth-last-child(-2n+3)', {}, new Map(), {length: 5, index: 1})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-last-child(-2n+3)', {}, new Map(), {length: 5, index: 2})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-last-child(-2n+3)', {}, new Map(), {length: 5, index: 4})).to.equal(false);
+		
+		expect(evaluatePseudoClass(':nth-last-child(n+3)', {}, new Map(), {length: 5, index: 4})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-last-child(n+3)', {}, new Map(), {length: 5, index: 5})).to.equal(false);
+
+		expect(evaluatePseudoClass(':nth-last-child(3)', {}, new Map(), {length: 5, index: 1})).to.equal(false);	
+		expect(evaluatePseudoClass(':nth-last-child(3)', {}, new Map(), {length: 5, index: 2})).to.equal(false);	
+		expect(evaluatePseudoClass(':nth-last-child(3)', {}, new Map(), {length: 5, index: 4})).to.equal(false);	
+		expect(evaluatePseudoClass(':nth-last-child(3)', {}, new Map(), {length: 5, index: 5})).to.equal(false);	
+	});
+	
+	
+	it(':nth-child should validate true', () => {
+		expect(evaluatePseudoClass(':nth-child(even)', {}, new Map(), {index: 2})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-child(even)', {}, new Map(), {index: 4})).to.equal(true);
+		
+		expect(evaluatePseudoClass(':nth-child(odd)', {}, new Map(), {index: 1})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-child(odd)', {}, new Map(), {index: 3})).to.equal(true);
+		
+		expect(evaluatePseudoClass(':nth-child(3n+2)', {}, new Map(), {index: 2})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-child(3n+2)', {}, new Map(), {index: 5})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-child(3n+2)', {}, new Map(), {index: 8})).to.equal(true);
+					
+		expect(evaluatePseudoClass(':nth-child(-2n+3)', {}, new Map(), {index: 1})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-child(-2n+3)', {}, new Map(), {index: 3})).to.equal(true);
+
+		expect(evaluatePseudoClass(':nth-child(n+3)', {}, new Map(), {index: 3})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-child(n+3)', {}, new Map(), {index: 4})).to.equal(true);
+		expect(evaluatePseudoClass(':nth-child(n+3)', {}, new Map(), {index: 5})).to.equal(true);
+		
+		expect(evaluatePseudoClass(':nth-child(3)', {}, new Map(), {index: 3})).to.equal(true);
+	});
+	
+	
+	it(':nth-child should validate false', () => {
+		expect(evaluatePseudoClass(':nth-child(even)', {}, new Map(), {index: 1})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-child(even)', {}, new Map(), {index: 3})).to.equal(false);
+		
+		expect(evaluatePseudoClass(':nth-child(odd)', {}, new Map(), {index: 2})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-child(odd)', {}, new Map(), {index: 4})).to.equal(false);
+		
+		expect(evaluatePseudoClass(':nth-child(3n+2)', {}, new Map(), {index: 1})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-child(3n+2)', {}, new Map(), {index: 4})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-child(3n+2)', {}, new Map(), {index: 6})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-child(3n+2)', {}, new Map(), {index: 7})).to.equal(false);
+							
+		expect(evaluatePseudoClass(':nth-child(-2n+3)', {}, new Map(), {index: 2})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-child(-2n+3)', {}, new Map(), {index: 4})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-child(-2n+3)', {}, new Map(), {index: 5})).to.equal(false);
+		
+		expect(evaluatePseudoClass(':nth-child(n+3)', {}, new Map(), {index: 1})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-child(n+3)', {}, new Map(), {index: 2})).to.equal(false);
+		
+		expect(evaluatePseudoClass(':nth-child(3)', {}, new Map(), {index: 1})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-child(3)', {}, new Map(), {index: 2})).to.equal(false);
+		expect(evaluatePseudoClass(':nth-child(3)', {}, new Map(), {index: 4})).to.equal(false);
+	});
+	
+	
+	it(':first-child should validate true', () => {
+		expect(evaluatePseudoClass(':first-child', {}, new Map(), {index: 1})).to.equal(true);
+	});
+	
+	
+	it(':first-child should validate false', () => {
+		expect(evaluatePseudoClass(':first-child', {}, new Map(), {index: 2})).to.equal(false);
+		expect(evaluatePseudoClass(':first-child', {}, new Map(), {index: 3})).to.equal(false);
+	});
+
+
+	it(':last-child should validate true', () => {
+		expect(evaluatePseudoClass(':last-child', {}, new Map(), {index: 2, length: 2})).to.equal(true);
+		expect(evaluatePseudoClass(':last-child', {}, new Map(), {index: 14, length: 14})).to.equal(true);
+	});
+	
+	
+	it(':last-child should validate false', () => {
+		expect(evaluatePseudoClass(':last-child', {}, new Map(), {index: 2, length: 4})).to.equal(false);
+		expect(evaluatePseudoClass(':last-child', {}, new Map(), {index: 3, length: 4})).to.equal(false);
+	});
+
+
+	it(':only-child should validate true', () => {
+		expect(evaluatePseudoClass(':only-child', {}, new Map(), {index: 1, length: 1})).to.equal(true);
+	});
+	
+	
+	it(':only-child should validate false', () => {
+		expect(evaluatePseudoClass(':only-child', {}, new Map(), {index: 1, length: 2})).to.equal(false);
+		expect(evaluatePseudoClass(':only-child', {}, new Map(), {index: 2, length: 2})).to.equal(false);
+	});
+	
+	
+	it(':only-of-type should validate true', () => {
+		expect(evaluatePseudoClass(':only-of-type', {}, new Map(), {typeIndex: 1, typeLength: 1})).to.equal(true);
+		expect(evaluatePseudoClass(':only-of-type', {}, new Map(), {typeIndex: 1, typeLength: 1, length: 2})).to.equal(true);
+	});
+	
+	
+	it(':only-of-type should validate false', () => {
+		expect(evaluatePseudoClass(':only-of-type', {}, new Map(), {typeIndex: 1, typeLength: 2})).to.equal(false);
+		expect(evaluatePseudoClass(':only-of-type', {}, new Map(), {typeIndex: 2, typeLength: 2})).to.equal(false);
 	});
 });
