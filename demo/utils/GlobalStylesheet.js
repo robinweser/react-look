@@ -1,7 +1,7 @@
-import {Global} from '../../src/index';
+import {CSS} from '../../src/index';
 import {Processors} from 'dynamic-style-sheets';
 
-let sheet = new Global({
+let sheet = new CSS({
 	'*' : {
 		padding: 0,
 		margin: 0,

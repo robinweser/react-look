@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "1.0.0",
+  "version": "0.3.3",
   "description": "Feature-rich, dynamic & stateful Component Styling for React",
   "main": "lib/index.js",
   "files": [
@@ -16,8 +16,8 @@
   "scripts": {
     "pretest": "npm run transpile",
     "test": "mocha --recursive --compilers js:babel/register",
-    "prepublish": "npm run transpile",
     "transpile": "babel src --out-dir lib",
+		"release" : "npm run transpile && npm publish",
     "build:demo": "browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
     "demo": "npm run build:demo && open demo/index.html"
   },
@@ -44,6 +44,7 @@
     "babelify": "^6.1.3",
     "browserify": "^10.2.6",
     "chai": "^3.2.0",
+    "color": "^0.10.1",
     "minifyify": "^7.0.5",
     "mocha": "^2.2.5",
     "react": "^0.13.3",
