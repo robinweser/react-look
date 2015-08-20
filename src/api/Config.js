@@ -1,7 +1,10 @@
+import Prefixer from 'inline-style-prefixer';
+
 let config = {
 	processors: new Map(),
 	mixins: new Map(),
 	matchMedia: typeof window !== 'undefined' ? window.matchMedia : undefined,
+	userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
 	defaultKey: 'root'
 }
 
@@ -126,5 +129,31 @@ export default {
 		 */
 		canMatchMedia() {
 			return config.matchMedia && config.matchMedia instanceof Function ? true : false;
+		},
+
+
+		/**
+		 * Lets you set a custom userAgent used for autoprefixing
+		 * @param {string} userAgent - a valid userAgent string which gets parsed for autoprefixing
+		 */
+		setUserAgent(userAgent) {
+			if (userAgent) {
+				config.userAgent = userAgent;
+				Prefixer.setUserAgent(userAgent);
+			}
+		},
+
+		/**
+		 * Returns the currently used userAgent string
+		 */
+		getUserAgent() {
+			return config.userAgent;
+		},
+
+		/**
+		 * Returns if the autoprefixing works / if a userAgent is available
+		 */
+		canAutoPrefix() {
+			return config.userAgent !== undefined ? true : false;
 		}
 }
