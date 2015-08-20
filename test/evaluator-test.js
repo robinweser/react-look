@@ -2,7 +2,6 @@ import evaluateCondition from '../lib/modules/evaluator/condition';
 import evaluatePseudoClass from '../lib/modules/evaluator/pseudo';
 import {expect} from 'chai';
 
-
 describe('Evaluating conditions', () => {
 
 	let matchValues = {
