@@ -14,12 +14,16 @@
     "url": "https://github.com/rofrischmann/react-look"
   },
   "scripts": {
+    "clean": "rimraf lib",
     "pretest": "npm run transpile",
     "test": "mocha --recursive --compilers js:babel/register",
-    "transpile": "babel src --out-dir lib",
-		"release" : "npm run transpile && npm publish",
-    "build:demo": "browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
-    "demo": "npm run build:demo && open demo/index.html"
+    "transpile": "npm run clean && babel src --out-dir lib",
+    "release": "npm run transpile && npm publish",
+    "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
+    "demo": "npm run build:demo && open demo/index.html",
+    
+    "build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js",
+    "demo-dev": "npm run build:demo-dev && open demo/index.html"
   },
   "keywords": [
     "react",
@@ -37,6 +41,8 @@
   "dependencies": {
     "assign-styles": "^1.0.2",
     "dynamic-style-sheets": "^0.2.2",
+    "inline-style-prefixer": "^0.1.7",
+    "param-case": "^1.1.1",
     "type-utils": "^1.0.4"
   },
   "devDependencies": {
@@ -49,6 +55,7 @@
     "mocha": "^2.2.5",
     "react": "^0.13.3",
     "react-layout-components": "^0.1.0",
+    "rimraf": "^2.4.2",
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0"
   }

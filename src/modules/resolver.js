@@ -5,6 +5,8 @@ import assign from 'assign-styles';
 import State from '../api/State';
 import * as Validator from './validator';
 import paramCase from 'param-case';
+import Config from '../api/Config';
+import Prefixer from 'inline-style-prefixer';
 
 /**
  * Resolves styling for an element and returns the modified one.
@@ -107,6 +109,10 @@ export default function resolveLook(Component, element, childIndexMap) {
 				delete newStyles.after;
 			}
 		}
+
+		//Autoprefix styles based on userAgent information
+		prefixStyles(newStyles);
+
 		newProps.style = newStyles;
 
 		return React.cloneElement(element, newProps, newChildren);
@@ -136,10 +142,11 @@ function resolveStyle(Component, element, styles, newProps, childIndexMap) {
 	}
 
 	_Object.each(styles, (property, value) => {
-		if (value instanceof Object  && value instanceof Array !== true) {
+		if (value instanceof Object && value instanceof Array !== true) {
 			if (!_Validator.isEmpty(value)) {
 				if (evaluateExpression(Component, element, property, newProps, childIndexMap)) {
 					let resolved = resolveStyle(Component, element, value, newProps, childIndexMap);
+
 					//resolve pseudo elements
 					if (Validator.isPseudoElement(property)) {
 						newStyle[property.indexOf('before') > -1 ? 'before' : 'after'] = addPseudoElement(resolved);
@@ -150,13 +157,26 @@ function resolveStyle(Component, element, styles, newProps, childIndexMap) {
 			}
 		} else {
 			//resolve alternative values
-			if (value instanceof Array){
+			if (value instanceof Array) {
 				value = value.join(';' + paramCase(property) + ':');
 			};
 			newStyle[property] = value;
 		}
 	});
 	return newStyle;
+}
+
+/**
+ * Adds prefixes to styles if needed
+ * @param {Object} styles - styles object that gets prefixes added
+ */
+function prefixStyles(styles) {
+	if (Config.canAutoPrefix()) {
+		Prefixer.process(styles);
+	} else {
+		console.warn('Autoprefixing failed as there is no valid userAgent specified.');
+		console.warn('Use Config.setUserAgent to specify a custom userAgent for server-side rendering.');
+	}
 }
 
 /**
@@ -178,6 +198,10 @@ function addPseudoElement(styles) {
 	} else {
 		children = content;
 	}
+
+	//Autoprefix styles based on userAgent information
+	prefixStyles(styles);
+
 	return React.createElement('span', {
 		style: styles
 	}, children);
