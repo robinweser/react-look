@@ -4,6 +4,7 @@ import evaluateExpression from './evaluator';
 import assign from 'assign-styles';
 import State from '../api/State';
 import * as Validator from './validator';
+import paramCase from 'param-case';
 
 /**
  * Resolves styling for an element and returns the modified one.
@@ -74,7 +75,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 
 			looks.forEach(look => {
 				if (Component.styles.hasOwnProperty(look)) {
-					assign(newStyles, resolveStyle(Component, element, Component.styles[look], newProps, newChildren, childIndexMap));
+					assign(newStyles, resolveStyle(Component, element, Component.styles[look], newProps, childIndexMap));
 				}
 			});
 			delete props.look;
@@ -108,7 +109,6 @@ export default function resolveLook(Component, element, childIndexMap) {
 		}
 		newProps.style = newStyles;
 
-
 		return React.cloneElement(element, newProps, newChildren);
 	} else {
 		return element;
@@ -125,7 +125,7 @@ export default function resolveLook(Component, element, childIndexMap) {
  * @param {Object} newProps - props that get the new styles added 
  * @param {Object} childProps - map with information on index/type of the current element
  */
-function resolveStyle(Component, element, styles, newProps, newChildren, childIndexMap) {
+function resolveStyle(Component, element, styles, newProps, childIndexMap) {
 	let state = Component.state;
 	let newStyle = {};
 
@@ -136,10 +136,11 @@ function resolveStyle(Component, element, styles, newProps, newChildren, childIn
 	}
 
 	_Object.each(styles, (property, value) => {
-		if (value instanceof Object) {
+		if (value instanceof Object  && value instanceof Array !== true) {
 			if (!_Validator.isEmpty(value)) {
 				if (evaluateExpression(Component, element, property, newProps, childIndexMap)) {
-					let resolved = resolveStyle(Component, element, value, newProps, newChildren, childIndexMap);
+					let resolved = resolveStyle(Component, element, value, newProps, childIndexMap);
+					//resolve pseudo elements
 					if (Validator.isPseudoElement(property)) {
 						newStyle[property.indexOf('before') > -1 ? 'before' : 'after'] = addPseudoElement(resolved);
 					} else {
@@ -148,6 +149,10 @@ function resolveStyle(Component, element, styles, newProps, newChildren, childIn
 				}
 			}
 		} else {
+			//resolve alternative values
+			if (value instanceof Array){
+				value = value.join(';' + paramCase(property) + ':');
+			};
 			newStyle[property] = value;
 		}
 	});
