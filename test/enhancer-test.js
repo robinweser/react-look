@@ -50,7 +50,10 @@ describe('Enhancing React.Component with Look', () => {
 		let Enhanced = Look(Test);
 		let instance = new Enhanced();
 
-		expect(instance.state).to.eql({foo: 1, _look: new Map()});
+		expect(instance.state).to.eql({
+			foo: 1,
+			_look: new Map()
+		});
 	});
 
 
@@ -62,9 +65,13 @@ describe('Enhancing React.Component with Look', () => {
 		}
 
 		let Enhanced = Look(Test);
-		let instance = new Enhanced({bar: 1});
+		let instance = new Enhanced({
+			bar: 1
+		});
 
-		expect(instance.props).to.eql({bar: 1});
+		expect(instance.props).to.eql({
+			bar: 1
+		});
 	});
 
 

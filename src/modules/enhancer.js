@@ -36,6 +36,11 @@ export default function Look(Component, additionalStyles = {}, additionalProcess
 				this.processors.push(additionalProcessors);
 			}
 
+			//resolve mixins			
+			if (this.mixins && this.mixins instanceof Function) {
+				this.mixins = this.mixins();
+			}
+
 			this._lastActive = [];
 			this.state._look = new Map();
 		}

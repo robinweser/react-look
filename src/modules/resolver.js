@@ -1,7 +1,7 @@
 import {_Object, _Validator} from 'type-utils';
 import React from 'react';
 import evaluateExpression from './evaluator';
-import assign from 'assign-styles';
+import assign from '../utils/assignStyles';
 import State from '../api/State';
 import * as Validator from './validator';
 import paramCase from 'param-case';
@@ -82,6 +82,13 @@ export default function resolveLook(Component, element, childIndexMap) {
 			});
 			delete props.look;
 		}
+		
+		//resolve additional classNames
+		if (newStyles.hasOwnProperty('css')) {
+			resolveClassName(newStyles.css, newProps);
+			delete newStyles.css;
+		}
+		
 		/**
 		 * If there already are styles in props they get assigned
 		 * NOTE: new styles get overwritten since attached ones have higher prio
@@ -89,6 +96,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 		if (props.style) {
 			assign(newStyles, props.style);
 		}
+		
 		//Process all resolved styles at once
 		if (Component.processors && Component.processors instanceof Array) {
 			Component.processors.forEach(proc => {
@@ -96,7 +104,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 			});
 		}
 
-		//resolving :before & :after pseudo elements
+		//resolving (:):before & (:):after pseudo elements
 		if (newStyles.before || newStyles.after) {
 			if (newChildren instanceof Array !== true) {
 				newChildren = [newChildren];
@@ -135,34 +143,34 @@ function resolveStyle(Component, element, styles, newProps, childIndexMap) {
 	let state = Component.state;
 	let newStyle = {};
 
-	//resolve additional classNames
-	if (styles.hasOwnProperty('css')) {
-		resolveClassName(styles.css, newProps);
-		delete styles.css;
-	}
-
 	_Object.each(styles, (property, value) => {
-		if (value instanceof Object && value instanceof Array !== true) {
-			if (!_Validator.isEmpty(value)) {
-				if (evaluateExpression(Component, element, property, newProps, childIndexMap)) {
-					let resolved = resolveStyle(Component, element, value, newProps, childIndexMap);
+		//resolve mixins
+		if (Component.mixins && Component.mixins[property]) {
+			assign(newStyle, Component.mixins[property](value));
+		} else {
+			if (value instanceof Object && value instanceof Array !== true) {
+				if (!_Validator.isEmpty(value)) {
+					if (evaluateExpression(Component, element, property, newProps, childIndexMap)) {
+						let resolved = resolveStyle(Component, element, value, newProps, childIndexMap);
 
-					//resolve pseudo elements
-					if (Validator.isPseudoElement(property)) {
-						newStyle[property.indexOf('before') > -1 ? 'before' : 'after'] = addPseudoElement(resolved);
-					} else {
-						newStyle = assign(newStyle, resolved);
+						//resolve pseudo elements
+						if (Validator.isPseudoElement(property)) {
+							newStyle[property.indexOf('before') > -1 ? 'before' : 'after'] = addPseudoElement(resolved);
+						} else {
+							newStyle = assign(newStyle, resolved);
+						}
 					}
 				}
+			} else {
+				//resolve alternative values
+				if (value instanceof Array) {
+					value = value.join(';' + paramCase(property) + ':');
+				};
+				newStyle[property] = value;
 			}
-		} else {
-			//resolve alternative values
-			if (value instanceof Array) {
-				value = value.join(';' + paramCase(property) + ':');
-			};
-			newStyle[property] = value;
 		}
 	});
+	
 	return newStyle;
 }
 
