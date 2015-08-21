@@ -1,6 +1,7 @@
 import resolveLook from './resolver';
 import {_Object, _Validator} from 'type-utils';
 import assignStyles from 'assign-styles';
+import extend from '../utils/extend';
 
 /**
  * Applies your styles to a React Component
@@ -37,9 +38,15 @@ export default function Look(Component, additionalStyles = {}, additionalProcess
 			}
 
 			//resolve mixins			
-			if (this.mixins && this.mixins instanceof Function) {
-				this.mixins = this.mixins();
+			if (this.mixins) {
+				if (this.mixins instanceof Function) {
+					this.mixins = this.mixins();
+				}
+			} else {
+				this.mixins = {};
 			}
+			//Adds default extend-mixin support
+			this.mixins.extend = extend;
 
 			this._lastActive = [];
 			this.state._look = new Map();
