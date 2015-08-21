@@ -64,7 +64,7 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
 			if (keyState) {
 				return keyState.get(condition.keyState) === condition.toBe;
 			} else {
-				return false
+				return false;
 			}
 		}
 
@@ -88,25 +88,36 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
 
 		//child-index
 		if (condition.hasOwnProperty('childIndexMap')) {
-			let length = condition.childIndexMap.indexOf('type') === 0 ? 'typeLength' : 'length';
-			if (condition.hasOwnProperty('nth')) {
-				if (condition.reverse) {
-					return evalNth(split.expression, childIndexMap[length] + 1 - childIndexMap[condition.childIndexMap]);
-				} else {
-					return evalNth(split.expression, childIndexMap[condition.childIndexMap]);
-				}
-			} else {
-				if (condition.toBe === length) {
-					return childIndexMap[condition.childIndexMap] === childIndexMap[length];
-				} else {
-					return childIndexMap[condition.childIndexMap] === condition.toBe;
-				}
-			}
+			return evalChildIndex(condition, split.expression, childIndexMap);
 		}
+
 	} else {
 		console.warn('Failed evaluating pseudo class: ' + pseudo + '. Invalid pseudo class.');
 		console.warn('Be sure to only use supported pseudo classes.');
 		return false;
+	}
+}
+
+/**
+ * Evaluates a child-ndex map
+ * @param {string} condition - pseudo class
+ * @param {string} expression - nth pseudo class expression
+ * @param {Object} childIndexMap - a map with (type-specific) indexes to validate index-sensitive pseudos
+ */
+function evalChildIndex(condition, expression, childIndexMap) {
+	let length = condition.childIndexMap.indexOf('type') === 0 ? 'typeLength' : 'length';
+	if (condition.hasOwnProperty('nth')) {
+		if (condition.reverse) {
+			return evalNth(expression, childIndexMap[length] + 1 - childIndexMap[condition.childIndexMap]);
+		} else {
+			return evalNth(expression, childIndexMap[condition.childIndexMap]);
+		}
+	} else {
+		if (condition.toBe === length) {
+			return childIndexMap[condition.childIndexMap] === childIndexMap[length];
+		} else {
+			return childIndexMap[condition.childIndexMap] === condition.toBe;
+		}
 	}
 }
 
@@ -117,35 +128,30 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
  * @param {number} index - current elements index
  */
 function evalNth(expression, index) {
-	//TODO: drunk => dirty, fix later
 	if (expression === 'odd') {
 		return index % 2 !== 0;
-	} else if (expression === 'even') {
+	}
+	if (expression === 'even') {
 		return index % 2 === 0;
-	} else {
-		if (expression.indexOf('n') > -1) {
-			let termSplit = expression.split('n');
-			let mult = termSplit[0];
-			mult = (mult === '-' ? '-1' : mult);
+	}
 
-			let add = termSplit[1];
-			add = (add ? add : '+0');
-			add = parseInt(add);
-			mult = parseInt(mult);
+	let split = expression.split('n');
 
-			if (isNaN(mult)) {
-				return index >= add;
-			} else {
-				if (mult < 0 && index > add) {
-					return false;
-				} else if (mult > 0 && index < add) {
-					return false;
-				}
-				return ((index - add) / mult) % 1 === 0;
+	if (split.length > 1) {
+		split[0] = split[0] === '-' ? '-1' : split[0];
+		let multiplier = split[0] ? parseInt(split[0]) : 0;
+		let addend = split[1] ? parseInt(split[1]) : 0;
+
+		if (multiplier) {
+			if (multiplier < 0 && index > addend ||  multiplier > 0 && index < addend) {
+				return false;
 			}
+			return ((index - addend) / multiplier) % 1 === 0;
 		} else {
-			return index === parseInt(expression);
+			return index >= addend;
 		}
+	} else {
+		return index == expression;
 	}
 }
 

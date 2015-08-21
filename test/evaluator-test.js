@@ -140,7 +140,7 @@ describe('Evaluating child index pseudo class', () => {
 		expect(evaluatePseudoClass(':nth-last-child(3)', {}, new Map(), {length: 5, index: 3})).to.equal(true);	
 	});
 	
-	
+ 
 	it(':nth-last-child should validate false', () => {
 		expect(evaluatePseudoClass(':nth-last-child(even)', {}, new Map(), {length: 5, index: 1})).to.equal(false);
 		expect(evaluatePseudoClass(':nth-last-child(even)', {}, new Map(), {length: 5, index: 3})).to.equal(false);
@@ -180,6 +180,9 @@ describe('Evaluating child index pseudo class', () => {
 					
 		expect(evaluatePseudoClass(':nth-child(-2n+3)', {}, new Map(), {index: 1})).to.equal(true);
 		expect(evaluatePseudoClass(':nth-child(-2n+3)', {}, new Map(), {index: 3})).to.equal(true);
+		
+		expect(evaluatePseudoClass(':nth-child(-3n+5)', {}, new Map(), {index: 2})).to.equal(true);
+    expect(evaluatePseudoClass(':nth-child(-3n+5)', {}, new Map(), {index: 5})).to.equal(true);
 
 		expect(evaluatePseudoClass(':nth-child(n+3)', {}, new Map(), {index: 3})).to.equal(true);
 		expect(evaluatePseudoClass(':nth-child(n+3)', {}, new Map(), {index: 4})).to.equal(true);
