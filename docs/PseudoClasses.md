@@ -59,7 +59,7 @@ Most pseudo classes get validated within the `render` process, while some need e
 * empty
 
 ## Deprecated 
-Some pseudos have also been part of Look formerly, but got deprecated due to overhead. They can be achieved using [Look Tools](https://github.com/rofrischmann/react-look-tools) though.
+Some pseudos have also been part of Look formerly, but got deprecated due to overhead. They will be provided by addons soon.
 * valid / invalid
 * in-range / out-of-range
 

@@ -1,41 +1,42 @@
 <div style="float:left"><a href="Processors.md">< <b>6. Processors</b></a></div>
-<div style="float:right"><a href="FAQ.md"><b>8. FAQ</b> ></a></div>
+<div style="float:right"><a href="VendorPrefixes.md"><b>8. Vendor Prefixes</b> ></a></div>
 
 # 7. Mixins
 
-Using [Mixins](https://github.com/rofrischmann/react-look-tools#mixins) provides a lot of power to improve your workflow. It let's you define custom keys which get resolved before your styles get applied.
+Define custom keys which get resolved using a special function before your styles get applied. 
 
 ## Usage
 ```javascript
-import {Processors} from 'react-look-tools';
-let Mixins = Processors.Mixins;
-```
-You register a mixin using `Mixin.register(name, function)` and that's it.
-> **Note**: Mixins respect `!important` values and won't overwrite them.
+import Look from 'react-look';
+import {Component} from 'react-look';
 
-```javascript
-function doubleLineHeight(fontSize){
-  return { 
-    fontSize: fontSize, 
-    lineHeight: fontSize*2 + 'px'
-  }
+function resolveFixed(arr){
+    return {
+      top: arr[0],
+      right: arr[1],
+      bottom: arr[2],
+      left: arr[3],
+      position: 'fixed'
+    }
 }
 
-Mixins.register('doubleLineHeight', doubleLineHeight);
-
-class Button extends React.Component {
+@Look
+class Button extends Component {
   look(){
     return {
-      color: 'blue',
-      doubleLineHeight : 15
+      fixPos : [10, 50, 0, 50]
     }
   }
-  processors(){
-    return Mixins;
+  
+  mixins(){
+    return {
+      fixPos: resolveFixed
+    }
+  }
+  
+  render(){
+    // => <div style="top: 10px; right: 50px; bottom: 0; left: 50px; position: fixed">Button</div>
+    return <div look>Button</div>
   }
 }
-
-export default Look(Button);
 ```
-## Mixin packs
-Check Look Tools' [Mixin packs](https://github.com/rofrischmann/react-look-tools#mixinpacks) which includes a lot of useful mixins such as **extend**, **linearGradient**, **keyframes** and some nice css-hacks that enable a lot of **additional pseudo classes** like `:webkit-scrollbar` or `:placeholder` that can't be achieved by pure javascript.

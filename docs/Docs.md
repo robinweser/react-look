@@ -8,8 +8,9 @@ I try my best to keep all docs updated. If you have any recommendations or impro
 4. [Media queries](MediaQueries.md)
 5. [Stateful conditions](StatefulConditions.md)
 6. [Processors](Processors.md)
-7. [Mixins](Mixins.md) 
-8. [FAQ](FAQ.md) 
+7. [Mixins](Mixins.md)
+8. [Vendor Prefixes](VendorPrefixes.md)
+8. [FAQ](FAQ.md)
 
 ### API
 1. [Look](api/Look.md)

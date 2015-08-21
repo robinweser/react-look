@@ -13,12 +13,15 @@ npm install react-look
 # Features
 Look is as far as I know the **feature richest** inline-styling library for React. <br>
 Supporting [25 pseudo classes](docs/PseudoClasses.md) out of the box (many more via mixins) as well as **stateful styles** which is an awesome shortcut if you need some styles depending on any valid condition mostly used with `this.state` or `this.props`.
-- ES6-ready
-- media queries
-- pseudo classes
-- stateful styles (condition based)
+- ES6-ready & `React.createClass`
+- [media queries](docs/MediaQueries.md)
+- [pseudo classes](docs/PseudoClasses.md)
+- [stateful styles](docs/StatefulConditions.md) (condition based)
 - nesting
-- [processors](docs/Processors.md) (Prefixer, Mixins, ...)
+- [processors](docs/Processors.md)
+- [mixins](docs/Mixins.md)
+- [extending](#extending)
+- [vendor prefixing](docs/VendorPrefixes.md)
 - !important-notation
 - modular & themeable
 - useful APIs 
@@ -29,7 +32,7 @@ Using inline styles instead of static CSS files has a lot of positive side-effec
 
 * **Component-scoped:** 
 As JSX brings your HTML to javascript, Look adds your **styling** (CSS) as well.<br>
-It encourages you to define your styles scoped to your Component which helps to improve your app structure and keeps together all Component-relevant data.
+It encourages you to define your styles scoped to your Component which helps to improve your app structure and keeps together all Component-relevant data. One file less to create.
 * **Separation of Concerns:**
 Look tries to keep your styling separated from your logic as much as possible while other styling libraries often encourage style validations such as `this.state.checked && styles.checked` within your `render()`-method.
 
@@ -37,64 +40,53 @@ Look tries to keep your styling separated from your logic as much as possible wh
 
 # Usage
 The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries. Use nested objects to define pseudo classes, media queries or conditioned styles. <br>
-If you only need a single selector just [leave](docs/FAQ.md##3-look-shortcut) it and directly pass `look` as a prop.
 
-## [Processors](docs/Processors.md)
-The example shows how to use processors as well. Processors can modify your styles as we are adding **vendor-prefixes** with [Prefxier](https://github.com/dynamicstylesheets/DSS-Prefixer) and **global flexbox support** with [Flexbox](https://github.com/dynamicstylesheets/DSS-Flexbox). <br>
-The documentation provides detailed information on processors as well as a list with available processors.
+The example uses an ES7 Decorator `@Look`. Alternatively wrap your Component with Look. e.g. `Header = Look(Header)`<br>
 
 ```javascript
-import React from 'react';
+import {Component} from 'react';
 import Look from 'react-look';
-import {Processors} from 'dynamic-style-sheets';
-let {Prefixer, Flexbox} = Processors;
 
-function custom(value){
-  return value * 2 + 10
-}
-
-class Header extends React.Component {
+@Look
+class Header extends Component {
   constructor() {
     super(...arguments);
-    this.state = {
-      status: 'active'
-    }
+    this.state = {status: 'active'}
   }
 
   look(){
     return {
       header : {
-        padding: custom(5),               // use benefit of javascript
         transition: '200ms all linear',
-        '@media (min-height: 800px)' : {  // media queries
+        // Use media queries, pseudo classes and stateful styles
+        // using nested style objects. Those get evaluated 
+        // on the fly and can be nested endlessly.
+        '@media (min-height: 800px)' : { 
           fontSize: 13,
-          ':hover' : {                    // pseudo classes
+          ':hover' : {    
             fontSize: 15,
-            ':checked' : {                // can be nested
-              color: 'red'
-            }
           }
         },
-        'status=active' : {               // stateful styles
+        'status=active' : {             
           backgroundColor: 'green',
-          'clicks>20' : {                 // nested conditions
+          'clicks>=20' : {            
             backgroundColor: 'pink'       
           }
         }
       },
       title : {
-        fontWeight: 800
+        fontWeight: 800,
+        fontSize: 20
       }
     }
   }
   
-  processors(){
-    return [Flexbox, Prefixer]
-  }
-  
   render() {
     return (
-      <header look="header">            //Just use the `look` prop to apply styles
+      // Apply your styles with the `look` property.
+      // If you are only using single looks you may just drop the
+      // selector and just use a plain `look` property.
+      <header look="header">
         <h1 look="title">
           {this.props.title}
         </h1>
@@ -102,15 +94,19 @@ class Header extends React.Component {
     )
   }
 }
-
-export default Look(Header);            //Your styles get processed and resolved here
+Header.defaultProps = {clicks: 24};
 ```
-# Demo 
+
+## Mixins
+
+
+# Demo
+Check out the examples for more specific examples for some special use cases. See them in action using the demo.<br>
 You can visit the [live-demo](http://rofrischmann.de/react-look/) or  easily run the examples on your own within the provided demo by just:
 ```sh
 git clone --bare https://github.com/rofrischmann/react-look.git
 npm install
-npm start
+npm run demo
 ```
 
 # [Documentation](docs/Docs.md#tableofcontents)
@@ -127,7 +123,6 @@ Check [Under the hood](docs/UnderTheHood.md) for more detailed information.
 > Unsupported pseudo classes?<br>
 Less boilerplate / shortcuts?<br>
 Additional styles & Processors?<br>
-Custom mixins? Extend styles?<br>
 Server-side rendering?
 
 

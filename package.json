@@ -17,6 +17,7 @@
     "clean": "rimraf lib",
     "pretest": "npm run transpile",
     "test": "mocha --recursive --compilers js:babel/register",
+    "test:watch" : "mocha --recursive --compilers js:babel/register -w",
     "transpile": "npm run clean && babel src --out-dir lib",
     "release": "npm run transpile && npm publish",
     "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
