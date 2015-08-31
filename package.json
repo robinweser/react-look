@@ -17,12 +17,11 @@
     "clean": "rimraf lib",
     "pretest": "npm run transpile",
     "test": "mocha --recursive --compilers js:babel/register",
-    "test:watch" : "mocha --recursive --compilers js:babel/register -w",
+    "test:watch": "mocha --recursive --compilers js:babel/register -w",
     "transpile": "npm run clean && babel src --out-dir lib",
     "release": "npm run transpile && npm publish",
     "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
     "demo": "npm run build:demo && open demo/index.html",
-    
     "build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js",
     "demo-dev": "npm run build:demo-dev && open demo/index.html"
   },
@@ -43,8 +42,8 @@
     "assign-styles": "^1.0.2",
     "dynamic-style-sheets": "^0.2.2",
     "inline-style-prefixer": "^0.1.7",
-    "param-case": "^1.1.1",
-    "type-utils": "^1.0.4"
+    "object-assign": "^4.0.1",
+    "param-case": "^1.1.1"
   },
   "devDependencies": {
     "babel": "^5.6.14",

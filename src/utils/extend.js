@@ -1,4 +1,3 @@
-import 	{_Object} from 'type-utils';
 import assignStyles from './assignStyles';
 
 /**
@@ -33,7 +32,7 @@ export default function extend(options) {
  * Resolves multiple style objects by merging those
  * @param {Object|Array} styles - A set of style objects or a single style object
  */
-function resolveStyles(styles) {
+export function resolveStyles(styles) {
 	let merged = {};
 	if (styles instanceof Array) {
 		styles.forEach(obj => {

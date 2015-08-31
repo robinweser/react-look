@@ -42,7 +42,7 @@ export default function assignStyles(...styles) {
  * @param {Object} obj - current style object that might have a css key
  * @param {Array} store - array that stores all classNames
  */
-function extractCSS(obj, store){
+export function extractCSS(obj, store){
 	if (obj.hasOwnProperty('css')){
 		store.push(obj.css);
 		delete obj.css;
@@ -52,6 +52,6 @@ function extractCSS(obj, store){
  * Checks if a property value is an css important rule with !important
  * @param {string} property - property thats value gets checked 
  */
-function isImportant(value) {
+export function isImportant(value) {
 	return typeof value == 'string' && value.toLowerCase().indexOf('!important') > -1;
 }

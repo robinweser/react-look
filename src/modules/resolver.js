@@ -1,12 +1,12 @@
-import {_Object, _Validator} from 'type-utils';
 import React from 'react';
 import evaluateExpression from './evaluator';
-import assign from '../utils/assignStyles';
+import assignStyles from '../utils/assignStyles';
 import State from '../api/State';
-import * as Validator from './validator';
+import {isPseudoElement} from './validator';
 import paramCase from 'param-case';
 import Config from '../api/Config';
 import Prefixer from 'inline-style-prefixer';
+import assign from 'object-assign';
 
 /**
  * Resolves styling for an element and returns the modified one.
@@ -67,7 +67,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 			}
 		}
 
-		let newProps = _Object.assign({}, props);
+		let newProps = assign({}, props);
 		let newStyles = {};
 
 		if (props.hasOwnProperty('look')) {
@@ -77,7 +77,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 
 			looks.forEach(look => {
 				if (Component.styles.hasOwnProperty(look)) {
-					assign(newStyles, resolveStyle(Component, element, Component.styles[look], newProps, childIndexMap));
+					assignStyles(newStyles, resolveStyle(Component, element, Component.styles[look], newProps, childIndexMap));
 				}
 			});
 			delete props.look;
@@ -94,7 +94,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 		 * NOTE: new styles get overwritten since attached ones have higher prio
 		 */
 		if (props.style) {
-			assign(newStyles, props.style);
+			assignStyles(newStyles, props.style);
 		}
 		
 		//Process all resolved styles at once
@@ -139,25 +139,28 @@ export default function resolveLook(Component, element, childIndexMap) {
  * @param {Object} newProps - props that get the new styles added 
  * @param {Object} childProps - map with information on index/type of the current element
  */
-function resolveStyle(Component, element, styles, newProps, childIndexMap) {
+export function resolveStyle(Component, element, styles, newProps, childIndexMap) {
 	let state = Component.state;
 	let newStyle = {};
 
-	_Object.each(styles, (property, value) => {
+	let property;
+	for (property in styles){
+		let value = styles[property];
+		
 		//resolve mixins
 		if (Component.mixins && Component.mixins[property]) {
-			assign(newStyle, Component.mixins[property](value));
+			assignStyles(newStyle, Component.mixins[property](value));
 		} else {
 			if (value instanceof Object && value instanceof Array !== true) {
-				if (!_Validator.isEmpty(value)) {
+				if (Object.keys(value).length > 0) {
 					if (evaluateExpression(Component, element, property, newProps, childIndexMap)) {
 						let resolved = resolveStyle(Component, element, value, newProps, childIndexMap);
 
 						//resolve pseudo elements
-						if (Validator.isPseudoElement(property)) {
+						if (isPseudoElement(property)) {
 							newStyle[property.indexOf('before') > -1 ? 'before' : 'after'] = addPseudoElement(resolved);
 						} else {
-							newStyle = assign(newStyle, resolved);
+							newStyle = assignStyles(newStyle, resolved);
 						}
 					}
 				}
@@ -169,7 +172,7 @@ function resolveStyle(Component, element, styles, newProps, childIndexMap) {
 				newStyle[property] = value;
 			}
 		}
-	});
+	}
 	
 	return newStyle;
 }
@@ -193,7 +196,7 @@ function prefixStyles(styles) {
  * NOTE: By passing a `content` you may specify a text or image which gets inserted
  * @param {Object} styles - pseudo elements inner styles
  */
-function addPseudoElement(styles) {
+export function addPseudoElement(styles) {
 	let content =  '';
 	if (styles.content) {
 		content = styles.content;

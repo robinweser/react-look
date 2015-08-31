@@ -1,5 +1,4 @@
 import State from '../api/State';
-import {_Object} from 'type-utils';
 
 const events = {
 	'active': {
@@ -39,8 +38,11 @@ export default function createEventListener(Component, element, key, event) {
 
 	var newProps = {};
 	//iterate current event's required listeners
-	_Object.each(events[event], (listener, state) => {
+	let listener;
+	for (listener in events[event]){
+		let state = events[event][listener];
 		let existing = element.props[listener];
+		
 		newProps[listener] = e => {
 			//Call former listeners if existing
 			existing && existing(e);
@@ -51,7 +53,7 @@ export default function createEventListener(Component, element, key, event) {
 				Component._lastActive.push(key);
 			}
 		};
-	});
+	}
 
 	//Add an mouse-up listener once if there's an :active pseudo class
 	if (event == 'active' && !Component._onMouseUp) {
