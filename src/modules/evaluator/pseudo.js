@@ -41,7 +41,7 @@ let pseudoMap = {
  * Evaluates if a pseudo class fullfils its condition
  * @param {string} pseudo - pseudo-class that gets evaluated
  * @param {Object} props - elements props that get used to evaluate pseudos
- * @param {Map} keyState - stores information on elements current user-action states
+ * @param {Map} keyState - information on elements current user-action states
  * @param {Object} childIndexMap - a map with (type-specific) indexes to validate index-sensitive pseudos
  * NOTE: This is held simple for readability purpose, you may easily add other pseudos
  */
@@ -59,24 +59,18 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
 	//userAction
 	if (pseudoMap.hasOwnProperty(pseudo)) {
 		let condition = pseudoMap[pseudo];
-
+		//user action
 		if (condition.hasOwnProperty('keyState')) {
-			if (keyState) {
-				return keyState.get(condition.keyState) === condition.toBe;
-			} else {
-				return false;
-			}
+			return evalUserAction(condition, keyState)
 		}
-
 		//input
 		if (condition.hasOwnProperty('props')) {
-			if (condition.hasOwnProperty('negated')) {
-				return !props[condition.props];
-			} else {
-				return props[condition.props];
-			}
+			return evalInput(condition, props);
 		}
-
+		//child-index
+		if (condition.hasOwnProperty('childIndexMap')) {
+			return evalChildIndex(condition, split.expression, childIndexMap);
+		}
 		//other
 		if (condition.hasOwnProperty('lang')) {
 			return pseudo.indexOf(props.lang) > -1;
@@ -85,12 +79,6 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
 		} else if (condition.hasOwnProperty('always')) {
 			return true;
 		}
-
-		//child-index
-		if (condition.hasOwnProperty('childIndexMap')) {
-			return evalChildIndex(condition, split.expression, childIndexMap);
-		}
-
 	} else {
 		console.warn('Failed evaluating pseudo class: ' + pseudo + '. Invalid pseudo class.');
 		console.warn('Be sure to only use supported pseudo classes.');
@@ -99,13 +87,40 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
 }
 
 /**
- * Evaluates a child-ndex map
+ * Evaluates user action states
+ * @param {string} condition - pseudo class
+ * @param {Map} keyState - information on elements current user-action states
+ */
+export function evalUserAction(condition, keyState){
+	if (keyState) {
+		return keyState.get(condition.keyState) === condition.toBe;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Evaluates input attributes
+ * @param {string} condition - pseudo class
+ * @param {Object} props - elements props that get used to evaluate attributes
+ */
+export function evalInput(condition, props){
+	if (condition.hasOwnProperty('negated')) {
+		return !props[condition.props];
+	} else {
+		return props[condition.props];
+	}
+}
+
+/**
+ * Evaluates a child-index map
  * @param {string} condition - pseudo class
  * @param {string} expression - nth pseudo class expression
  * @param {Object} childIndexMap - a map with (type-specific) indexes to validate index-sensitive pseudos
  */
 export function evalChildIndex(condition, expression, childIndexMap) {
 	let length = condition.childIndexMap.indexOf('type') === 0 ? 'typeLength' : 'length';
+	 
 	if (condition.hasOwnProperty('nth')) {
 		if (condition.reverse) {
 			return evalNth(expression, childIndexMap[length] + 1 - childIndexMap[condition.childIndexMap]);
