@@ -1,4 +1,3 @@
-import {_Object} from 'type-utils';
 /**
  * Assigns two styles and optionally overwrites existing values
  * Built to assign inline-style objects and respects CSS's !important annotation
@@ -10,14 +9,17 @@ export default function assignStyles(...styles) {
 	let newStyles = styles.splice(1);
 	let base = styles[0];
 	let css = [];
-	
+
 	extractCSS(base, css);
-	
+
 	newStyles.forEach(styleObj => {
 		if (styleObj) {
 			extractCSS(styleObj, css);
-			
-			_Object.each(styleObj, (property, value) => {
+
+			let property;
+			for (property in styleObj) {
+				let value = styleObj[property];
+
 				if (!(base.hasOwnProperty(property) && isImportant(base[property]))) {
 					if (value instanceof Object) {
 						assignStyles(base[property], value);
@@ -25,14 +27,14 @@ export default function assignStyles(...styles) {
 						base[property] = value;
 					}
 				}
-			})
+			}
 		}
 	});
-	
-	if (css.length > 0){
+
+	if (css.length > 0) {
 		base.css = css.join(' ');
 	}
-	
+
 	return base;
 }
 
@@ -42,8 +44,8 @@ export default function assignStyles(...styles) {
  * @param {Object} obj - current style object that might have a css key
  * @param {Array} store - array that stores all classNames
  */
-export function extractCSS(obj, store){
-	if (obj.hasOwnProperty('css')){
+export function extractCSS(obj, store) {
+	if (obj.hasOwnProperty('css')) {
 		store.push(obj.css);
 		delete obj.css;
 	}

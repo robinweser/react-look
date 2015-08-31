@@ -1,4 +1,3 @@
-import {_Validator} from 'type-utils';
 /**
  * Evaluates if a condition is fullfiled by checking a given set of values
  * NOTE: Those values always include this.props and this.state
@@ -12,7 +11,7 @@ export default function evalCondition(condition, matchValues) {
 	if (matchValues.hasOwnProperty(property)) {
 		let match = (matchValues[property] === undefined ? 'undefined' : matchValues[property]);
 
-		if (!_Validator.isNumber(match)) {
+		if (!isNumber(match)) {
 			match = match.toString();
 		}
 
@@ -53,4 +52,12 @@ function evaluateOperator(condition) {
 			return op;
 		}
 	}
+}
+
+/**
+ * Validates if a value is a true number
+ * @param {number} value - value that gets validated
+ */
+export function isNumber(value) {
+	return !isNaN(parseFloat(value)) && isFinite(value);
 }

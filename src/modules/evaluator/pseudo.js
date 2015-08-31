@@ -1,4 +1,4 @@
-let conditionMap = {
+let pseudoMap = {
 	//user-action
 	':hover' : {keyState : 'hover', toBe: true},
 	':active' : {keyState : 'active', toBe: true},
@@ -57,8 +57,8 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
 	}
 
 	//userAction
-	if (conditionMap.hasOwnProperty(pseudo)) {
-		let condition = conditionMap[pseudo];
+	if (pseudoMap.hasOwnProperty(pseudo)) {
+		let condition = pseudoMap[pseudo];
 
 		if (condition.hasOwnProperty('keyState')) {
 			if (keyState) {
@@ -104,7 +104,7 @@ export default function evalPseudoClass(pseudo, props, keyState, childIndexMap) 
  * @param {string} expression - nth pseudo class expression
  * @param {Object} childIndexMap - a map with (type-specific) indexes to validate index-sensitive pseudos
  */
-function evalChildIndex(condition, expression, childIndexMap) {
+export function evalChildIndex(condition, expression, childIndexMap) {
 	let length = condition.childIndexMap.indexOf('type') === 0 ? 'typeLength' : 'length';
 	if (condition.hasOwnProperty('nth')) {
 		if (condition.reverse) {
@@ -127,7 +127,7 @@ function evalChildIndex(condition, expression, childIndexMap) {
  * @param {string} expression - mathematical expression in the form an+b
  * @param {number} index - current elements index
  */
-function evalNth(expression, index) {
+export function evalNth(expression, index) {
 	if (expression === 'odd') {
 		return index % 2 !== 0;
 	}
@@ -160,7 +160,7 @@ function evalNth(expression, index) {
  * @param {string} pseudo - pseudo-class selector that includes a mathmactical expression
  * @param {string} expression - defines which index-sensitive pseudo-class your pseudo is, e.g: nth-child, first-of-type 
  */
-function splitNthExpression(pseudo) {
+export function splitNthExpression(pseudo) {
 	let split = pseudo.replace(/ /g, '').split('(');
 	return {
 		expression: split[1].substr(0, split[1].length - 1),
