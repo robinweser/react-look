@@ -5,6 +5,7 @@
 ```sh
 npm install react-look
 ```
+> **1.0 Release**: Look 1.0.0 is coming! Some minor API changes will happen. Changelog will be added soon.
 
 **Look** is a **feature-rich** styling library for [React.js](https://facebook.github.io/react/) based on **inline-styles** that adds support for lots of CSS features as well as **stateful** styles. It extends your inline styles and is fully customizable through processors since it is based on [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
 
@@ -49,6 +50,7 @@ import Look from 'react-look';
 
 @Look
 class Header extends Component {
+  static defaultProps = {clicks: 24}
   constructor() {
     super(...arguments);
     this.state = {status: 'active'}
@@ -94,7 +96,6 @@ class Header extends Component {
     )
   }
 }
-Header.defaultProps = {clicks: 24};
 ```
 
 ## Mixins

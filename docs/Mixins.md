@@ -22,15 +22,11 @@ function resolveFixed(arr){
 
 @Look
 class Button extends Component {
+  static mixins = {fixPos: resolveFixed}
+  
   look(){
     return {
       fixPos : [10, 50, 0, 50]
-    }
-  }
-  
-  mixins(){
-    return {
-      fixPos: resolveFixed
     }
   }
   

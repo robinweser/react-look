@@ -1,5 +1,5 @@
 <div style="float:left"><a href="Mixins.md">< <b>7. Mixins</b></a></div>
-<div style="float:right"><a href="api/FAQ.md"><b>9. FAQ</b> ></a></div>
+<div style="float:right"><a href="FAQ.md"><b>9. FAQ</b> ></a></div>
 
 # 8. Vendor Prefixes
 Look automatically adds vendor prefixes to your styles according a user's browser. It uses [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer) which pulls the latest [caniuse](http://caniuse.com) data.<br><br>
