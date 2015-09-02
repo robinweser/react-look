@@ -107,11 +107,4 @@ describe('Preparing look styles', () => {
 		Default.look = {color: 'red'}
 		expect(prepareStyles(Default)).to.eql({'_default' : {color: 'red'}});
 	})
-	
-	it('should prefer additional styles while preparing', () => {
-		class Default extends Component {}
-		Default.look = {color: 'red', fontSize: 15}
-		let Enhanced = Look(Default, {color: 'blue'})
-		expect(prepareStyles(Enhanced)).to.eql({'_default' : {color: 'blue', fontSize: 15}});
-	})
 })

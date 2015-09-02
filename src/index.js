@@ -1,11 +1,9 @@
-import Look from './modules/enhancer';
-import CSS from './api/CSS';
-import State from './api/State';
-import Config from './api/Config'
+import Look from './core/enhancer'
+import State from './core/api/State'
+import Config from './core/api/Config'
 
 export {
 	Look as default,
-	CSS,
 	State,
 	Config
 }

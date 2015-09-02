@@ -18,7 +18,6 @@ export default function Look(Component, additionalStyles) {
 			// Only resolve if there are styles to resolve
 			// Otherwise just return super.render() which leads to no difference
 			if (this.styles && Object.keys(this.styles).length > 0) {
-				this._matchValues = assign({}, this.props, this.state)
 				return resolveLook(this, super.render())
 			} else {
 				console.warn(Component + ' was enhanced with Look, but did not provide any styles.')
@@ -47,13 +46,10 @@ export function flattenStyles(styles) {
 		return styles
 	} else {
 		console.warn('Pass either a valid object or an array of valid objects.')
-		console.warn('Look can not flatten and will ignore the following styles input: ', styles)
+		console.warn('Look can not flatten and will ignore the following styles input ', styles)
 		return {}
 	}
 }
-
-
-
 
 /**
  * Prepares Component styles and additional styles for later use as a single style object
@@ -75,6 +71,5 @@ export function prepareStyles(Component, additionalStyles) {
 			'_default': styles
 		}
 	}
-
 	return styles;
 }
