@@ -49,7 +49,7 @@ export default {
 		 * @param {string} key - a unique whichs state gets returned
 		 */
 		getState(state, Component, key = defaultKey) {
-			if (Component.state._look.has(key)){
+			if (Component.state._look.has(key)) {
 				return Component.state._look.get(key).get(state);
 			} else {
 				return false;
