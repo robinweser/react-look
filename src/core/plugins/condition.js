@@ -2,6 +2,11 @@ import assign from 'object-assign'
 import assignStyles from 'assign-styles'
 
 export default {
+	name : 'Conditions',
+	version: '1.0.0',
+	description: 'Resolves conditioned style objects using props and state to validate',
+	
+	//Requiring the current Component to be passed to the processor
 	args: ['Component'],
 
 	/**
@@ -69,24 +74,38 @@ export default {
 		}
 	},
 
+	/**
+	* Processing method which resolves conditioned styles recursively
+	* @param {Object} styles - valid object containing styles
+	* @param {Object} matchValues - values used to validate conditions, by default props and state is used
+	*/
 	resolveCondition(styles, matchValues) {
-		let newStyles = {}
-
 		let property
 		for (property in styles) {
-			if (property instanceof Object && this.isCondition(property) && this.evaluateCondition(property, matchValues)) {
-				newStyles = resolveCondition(styles, matchValues)
-			} else {
-				newStyles[property] = styles[property]
+			let value = styles[property]
+			if (value instanceof Object) {
+				if (this.isCondition(property)) {
+					if (this.evaluateCondition(property, matchValues)) {
+						Object.assign(styles, this.resolveCondition(value, matchValues))
+					}
+					delete styles[property]
+				} else {
+					this.resolveCondition(value, matchValues)
+				}
 			}
 		}
 
-		return newStyles
+		return styles
 	},
 
+	/**
+	* Main method that gets called when using this processor
+	* @param {Object} styles - valid object containing styles
+	* @param {Object} Component - Component containing props and state
+	*/
 	process(styles, Component) {
 		let matchValues = assign({}, Component.props, Component.state)
-		return resolveCondition(styles, matchValues)
+		return this.resolveCondition(styles, matchValues)
 	}
 }
 
