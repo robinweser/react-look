@@ -1,6 +1,10 @@
-import {expect} from 'chai'
 import {Component} from 'react'
 import Look, {flattenStyles, prepareStyles} from '../../lib/core/enhancer'
+import Chai from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+let expect = Chai.expect;
+Chai.use(sinonChai);
 
 describe('Enhancing a Component', () => {
 	it('should use the same displayName', () => {
@@ -64,6 +68,79 @@ describe('Enhancing a Component', () => {
 		expect(instance.props).to.eql({
 			bar: 1
 		})
+	})
+	
+	
+	
+	it('should resolve processors() as a prop', () => {
+		class Default extends Component {
+			processors() {
+				return ['Processor1', 'Processor2']
+			}
+		}
+
+		let Enhanced = Look(Default)
+		let instance = new Enhanced()
+		expect(instance._processors).to.include.members(['Processor1', 'Processor2'])
+	})
+
+
+	it('should arrayify any kind of processors passed', () => {
+		class Default extends Component {
+			processors() {
+				return 'processor'
+			}
+		}
+		let Enhanced = Look(Default)
+		let instance = new Enhanced()
+
+		expect(instance._processors).to.include.members(['processor'])
+	})
+
+
+	it('should add additional processors', () => {
+		class Default extends Component {
+			processors() {
+				return 'processor'
+			}
+		}
+		let Enhanced = Look(Default, {}, ['proc1', 'proc2'])
+		let instance = new Enhanced()
+
+		expect(instance._processors).to.include.members(['processor', 'proc1', 'proc2'])
+	})
+	
+	it('should call super (constructor) only once', () => {
+		let constructorFunc = sinon.spy()
+
+		class Default extends Component {
+			constructor() {
+				super()
+				constructorFunc()
+			}
+		}
+
+		let Enhanced = Look(Default)
+		let instance = new Enhanced()
+
+		expect(constructorFunc).to.have.been.calledOnce
+	});
+
+
+	it('should call super.render only once', () => {
+		let callMe = sinon.spy()
+
+		class Default extends Component {
+			render() {
+				callMe()
+				return null
+			}
+		}
+		let Enhanced = Look(Default)
+		let instance = new Enhanced()
+		instance.render()
+
+		expect(callMe).to.have.been.calledOnce
 	})
 })
 
