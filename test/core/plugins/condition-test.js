@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import Condition from '../../../lib/core/processor/condition'
+import Condition from '../../../lib/core/plugins/condition'
 
 describe('Evaluating conditions', () => {
 

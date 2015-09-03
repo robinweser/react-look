@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import Mixins from '../../../lib/core/processor/mixin'
+import Mixins from '../../../lib/core/plugins/mixin'
 
 describe('Resolving mixins', () => {
 	it('should not modify anything', () => {
