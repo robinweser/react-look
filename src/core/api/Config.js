@@ -1,5 +1,5 @@
 let config = {
-	processors: new Set(),
+	processors: [],
 	mixins: new Map(),
 	defaultKey: 'root'
 }
@@ -17,8 +17,8 @@ export default {
 		 * @param {Object} processor - processor that gets registered
 		 */
 		registerProcessor(processor) {
-			if (!config.processors.has(processor)) {
-				config.processors.add(processor);
+			if (config.processors.indexOf(processor) < 0) {
+				config.processors.push(processor);
 			} else {
 				console.warn('This processor has already been added. It will not be added again.');
 			}
@@ -29,8 +29,8 @@ export default {
 		 * @param {Object} processor - processor that gets deregistered
 		 */
 		deregisterProcessor(processor) {
-			if (config.processors.has(processor)) {
-				config.processors.delete(processor);
+			if (config.processors.indexOf(processor) > 0) {
+				config.processors.pop(processor);
 			} else {
 				console.warn('You can only deregister processors that have been registered before.');
 			}

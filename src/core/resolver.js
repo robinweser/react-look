@@ -26,7 +26,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 			//Triggers style processing
 			//Uses the exact processor lineup defined within Config
 			let processArgs = {newProps, Component, element, childIndexMap}
-			processStyles(styles, processArgs)
+			processStyles(styles, Component._processors, processArgs)
 			
 			if (props.style){
 				newProps.style = assignStyles(styles, props.style)

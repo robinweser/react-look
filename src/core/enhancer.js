@@ -1,19 +1,27 @@
 import assign from 'object-assign'
 import assignStyles from 'assign-styles'
 import resolveLook from './resolver'
+import {getProcessors} from './api/Config'
 
-export default function Look(Component, additionalStyles) {
+/**
+ * Main wrapper that maps your styles to a React Component
+ * @param {Object} Component - a valid React Component that gets styles applied
+ * @param {Array|Object} additionalStyles - additional styles that are used to resolve looks
+ * @param {Array|Function} additionalProcessors - additional processors that modify the styles
+ */
+export default function Look(Component, additionalStyles, additionalProcessors) {
 	class EnhancedComponent extends Component {
 		constructor() {
 			super(...arguments)
 			this.state = this.state ||  {}
 
+			this._processors = prepareProcessors(this, additionalProcessors);
 			this._lastActiveElements = []
 			this.state._look = new Map()
 		}
 
 		render() {
-			this.styles = prepareStyles(this, additionalstyles)
+			this.styles = prepareStyles(this, additionalStyles)
 
 			// Only resolve if there are styles to resolve
 			// Otherwise just return super.render() which leads to no difference
@@ -46,7 +54,7 @@ export function flattenStyles(styles) {
 		return styles
 	} else {
 		console.warn('Pass either a valid object or an array of valid objects.')
-		console.warn('Look can not flatten and will ignore the following styles input ', styles)
+		console.warn('Look can not flatten and will ignore the following styles input:', styles)
 		return {}
 	}
 }
@@ -72,4 +80,35 @@ export function prepareStyles(Component, additionalStyles) {
 		}
 	}
 	return styles;
+}
+
+/**
+ * Prepares processors and adds them to one unified array
+ * @param {Object} Component - Component providing processors
+ * @param {Object|Array} additionalProcessors - any additional processors provided by outer wrapper
+ */
+export function prepareProcessors(Component, additionalProcessors) {
+	let newProcessors = getProcessors().slice(0)
+	
+	if (Component.processors) {
+		if (Component.processors instanceof Function) {
+			Component.processors = Component.processors()
+		}
+		//arrayify processors
+		if (Component.processors instanceof Array !== true) {
+			Component.processors = [Component.processors]
+		}
+		newProcessors.push(...Component.processors)
+	}
+	
+	//add additional processors
+	if (additionalProcessors) {
+		if (additionalProcessors instanceof Array) {
+			newProcessors.push(...additionalProcessors)
+		} else if (additionalProcessors instanceof Object) {
+			newProcessors.push(additionalProcessors)
+		}
+	}
+	
+	return newProcessors
 }
