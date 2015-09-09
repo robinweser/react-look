@@ -5,18 +5,7 @@
 */
 export default function processStyles(styles, processors, processArgs){
 	processors.forEach(processor => {
-		
-		//Gathering additional needed arguments
-		let args = []
-		if (processor.args){
-			processor.args.forEach(argument => {
-				if (processArgs.hasOwnProperty(argument)){
-					args.push(processArgs[argument])
-				}
-			})
-		}
-		
-		styles = processor.process(styles, ...args)
+		styles = processor.process(styles, processArgs)
 	})
 	
 	return styles
