@@ -1,16 +1,10 @@
 import assignStyles from 'assign-styles'
+import mixinTypes from '../utils/mixinTypes'
 
 export default {
 	name: 'Mixins',
 	version: '1.0.0',
 	description: 'Resolves any self defined properties also known as mixins',
-
-	//mixin types are used to check if a property is a mixin
-	mixinTypes: {
-		'INCLUDE',
-		'BEGINWITH',
-		'EQUAL'
-	},
 
 	/**
 	 * Prepares mixins and adds extend mixin support
@@ -53,11 +47,11 @@ export default {
 	 */
 	isMixin(property, mixin) {
 		switch (mixin.type) {
-			case this.mixinTypes.INCLUDE:
+			case mixinTypes.INCLUDE:
 				return property.indexOf(mixin.key) > -1
-			case this.mixinTypes.BEGINWITH:
+			case mixinTypes.BEGINWITH:
 				return property.indexOf(mixin.key) === 0
-			case this.mixinTypes.EQUAL:
+			case mixinTypes.EQUAL:
 				return property === mixin.key
 		}
 	},
