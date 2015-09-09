@@ -4,7 +4,7 @@ import mixinTypes from '../utils/mixinTypes'
 export default {
 	name: 'Mixins',
 	version: '1.0.0',
-	description: 'Resolves any self defined properties also known as mixins',
+	description: 'Resolves any self defined properties also known as mixins.',
 
 	/**
 	 * Prepares mixins and adds extend mixin support
@@ -13,12 +13,38 @@ export default {
 	prepareMixins(Component) {
 		if (Component.mixins) {
 			if (Component.mixins instanceof Function) {
-				return this.prepareMixins(Component.mixins())
-			} else if (Component.mixins instanceof Object) {
-				return [Component.mixins]
+				Component.mixins = Component.mixins()
 			}
+			if (Component.mixins instanceof Array !== true) {
+				Component.mixins = [Component.mixins]
+			}
+			return Component.mixins
 		} else {
 			return false
+		}
+	},
+
+	/**
+	 * Checks if a property actually is a mixin
+	 * WARNING: Order matters! Do not reorder the cases
+	 * @param {string} property - property that gets checked
+	 * @param {Object} mixin - a valid mixin object including key, type and fn
+	 */
+	isMixin(property, mixin) {
+		if (mixin.hasOwnProperty('type')) {
+			switch (mixin.type) {
+				case mixinTypes.EQUAL:
+					return property === mixin.key
+				case mixinTypes.BEGINWITH:
+					return property.indexOf(mixin.key) === 0
+				case mixinTypes.INCLUDE:
+					return property.indexOf(mixin.key) > -1
+				default:
+					return false
+			}
+		} else {
+			console.warn('Mixins need to provide a valid mixinType. Caused by this mixin: ', mixin)
+			return false;
 		}
 	},
 
@@ -39,23 +65,6 @@ export default {
 		return false
 	},
 
-
-	/**
-	 * Checks if a property actually is a mixin
-	 * @param {string} property - property that gets checked
-	 * @param {Object} mixin - a valid mixin object including key, type and fn
-	 */
-	isMixin(property, mixin) {
-		switch (mixin.type) {
-			case mixinTypes.INCLUDE:
-				return property.indexOf(mixin.key) > -1
-			case mixinTypes.BEGINWITH:
-				return property.indexOf(mixin.key) === 0
-			case mixinTypes.EQUAL:
-				return property === mixin.key
-		}
-	},
-
 	/**
 	 * Processing method which resolves mixins
 	 * @param {Object} styles - valid object containing styles
@@ -69,10 +78,10 @@ export default {
 			if (value instanceof Object) {
 				let mixin = this.getMixin(property, mixins)
 				if (mixin) {
-					assignStyles(styles, mixin.fn(value, args))
+					assignStyles(styles, this.resolveMixins(mixin.fn(value, args), mixins, args))
 					delete styles[property]
 				} else {
-					this.resolveMixins(value, mixins)
+					this.resolveMixins(value, mixins, args)
 				}
 			}
 		}
@@ -86,7 +95,7 @@ export default {
 	 */
 	process(styles, args) {
 		let mixins = this.prepareMixins(args.Component)
-		if (mixins && Object.keys(mixins).length > 0) {
+		if (mixins && mixins.length > 0) {
 			return this.resolveMixins(styles, mixins, args)
 		} else {
 			return styles

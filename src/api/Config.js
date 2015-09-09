@@ -9,7 +9,7 @@ export default {
 	 * Returns the default key for user action pseudo classes
 	 */
 	getDefaultKey() {
-			return config.defaultkey;
+			return config.defaultkey
 		},
 
 		/**
@@ -18,9 +18,9 @@ export default {
 		 */
 		registerProcessor(processor) {
 			if (config.processors.indexOf(processor) < 0) {
-				config.processors.push(processor);
+				config.processors.push(processor)
 			} else {
-				console.warn('This processor has already been added. It will not be added again.');
+				console.warn('This processor has already been added. It will not be added again.')
 			}
 		},
 
@@ -30,9 +30,9 @@ export default {
 		 */
 		deregisterProcessor(processor) {
 			if (config.processors.indexOf(processor) > 0) {
-				config.processors.pop(processor);
+				config.processors.pop(processor)
 			} else {
-				console.warn('You can only deregister processors that have been registered before.');
+				console.warn('You can only deregister processors that have been registered before.')
 			}
 		},
 		
@@ -40,7 +40,7 @@ export default {
 		 * Returns a map of all registered processors
 		 */
 		getProcessors() {
-			return config.processors;
+			return config.processors
 		},
 
 		/**
@@ -51,10 +51,10 @@ export default {
 		 */
 		registerMixin(property, fn) {
 			if (config.mixins.has(property)) {
-				console.warn('This mixins has already been added. It will get overwritten.');
-				console.warn('The following method has been applied', config.mixins.get(property));
+				console.warn('This mixins has already been added. It will get overwritten.')
+				console.warn('The following method has been applied', config.mixins.get(property))
 			}
-			config.mixins.set(property, fn);
+			config.mixins.set(property, fn)
 		},
 
 		/**
@@ -63,9 +63,9 @@ export default {
 		 */
 		deregisterMixin(property) {
 			if (config.mixins.has(property)) {
-				config.mixins.delete(property);
+				config.mixins.delete(property)
 			} else {
-				console.warn('You can only deregister mixins that have been registered before.');
+				console.warn('You can only deregister mixins that have been registered before.')
 			}
 		},
 
@@ -75,9 +75,9 @@ export default {
 		 */
 		getMixinFn(property) {
 			if (config.mixins.has(property)) {
-				return config.mixins.get(property);
+				return config.mixins.get(property)
 			} else {
-				console.warn('This mixin has never been registered. Therefore there is no function applied.');
+				console.warn('This mixin has never been registered. Therefore there is no function applied.')
 			}
 		},
 
@@ -85,6 +85,6 @@ export default {
 		 * Returns a map of all registered mixins
 		 */
 		getMixins() {
-			return config.mixins;
+			return config.mixins
 		}
 }

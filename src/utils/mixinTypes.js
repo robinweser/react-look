@@ -1,6 +1,6 @@
 	//mixin types are used to check if a property is a mixin
 	export default {
-		'INCLUDE',
-		'BEGINWITH',
-		'EQUAL'
+		'INCLUDE': 'INCLUDE',
+		'BEGINWITH': 'BEGINWITH',
+		'EQUAL': 'EQUAL'
 	}
