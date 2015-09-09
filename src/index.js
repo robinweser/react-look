@@ -1,10 +1,7 @@
 import Look from './core/enhancer'
-import State from './core/api/State'
-import Config from './core/api/Config'
-
-import Conditions from './core/plugins/condition'
-import Mixins from './core/plugins/mixin'
-Config.registerProcessor(Conditions)
+import State from './api/State'
+import Config from './api/Config'
+import Mixins from './processors/mixin'
 Config.registerProcessor(Mixins)
 
 export {
