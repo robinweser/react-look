@@ -1,7 +1,7 @@
 import assign from 'object-assign'
 import assignStyles from 'assign-styles'
 import resolveLook from './resolver'
-import {getProcessors} from './api/Config'
+import {getProcessors} from '../api/Config'
 
 /**
  * Main wrapper that maps your styles to a React Component
