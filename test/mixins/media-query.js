@@ -1,5 +1,4 @@
 import {mediaQuery} from '../../lib/mixins/media-query'
-import jsdom from 'mocha-jsdom'
 import {expect} from 'chai'
 
 
