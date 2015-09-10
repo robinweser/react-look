@@ -1,5 +1,4 @@
 import mixinTypes from '../utils/mixinTypes'
-let matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
 
 export default [{
 	key: '@media',
@@ -15,6 +14,7 @@ export default [{
 
 export function mediaQuery(key, styles, args) {
 	//Check if browser supports window.matchMedia
+	let matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
 	if (matchMedia !== undefined) {
 		if (matchMedia(key.replace('@media', '').trim()).matches) {
 			return styles
@@ -22,8 +22,7 @@ export function mediaQuery(key, styles, args) {
 			return false
 		}
 	} else {
-		console.warn('Failed evaluating media query: ' + expr + '. Your environment is not able to use window.matchMedia.');
-		console.warn('Use .setMatchMedia to inject your very own. See docs for help.');
+		console.warn('Failed evaluating media query: ' + key + '. Your environment is not able to use window.matchMedia.');
 		return false
 	}
 }
