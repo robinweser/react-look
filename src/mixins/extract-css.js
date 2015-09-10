@@ -7,10 +7,10 @@ export default [{
 }]
 
 export function extractCSS(key, className, args) {
-	let {newProps} = args
-	if (newProps.hasOwnProperty('className')){
-		newProps.className = className
+	let newProps = args.newProps
+	if (newProps.hasOwnProperty('className')) {
+		newProps.className += ' ' + className
 	} else {
-		newProps.clasName += ' ' + css
+		newProps.className = className
 	}
 }
