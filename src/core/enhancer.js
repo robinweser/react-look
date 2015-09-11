@@ -22,7 +22,7 @@ export default function Look(Component, additionalStyles, additionalProcessors) 
 
 		render() {
 			this.styles = prepareStyles(this, additionalStyles)
-
+			
 			// Only resolve if there are styles to resolve
 			// Otherwise just return super.render() which leads to no difference
 			if (this.styles && Object.keys(this.styles).length > 0) {
@@ -47,9 +47,7 @@ export default function Look(Component, additionalStyles, additionalProcessors) 
  */
 export function flattenStyles(styles) {
 	if (styles instanceof Array) {
-		return assignStyles(...styles);
-	} else if (styles instanceof Function) {
-		return flattenStyles(styles())
+		return assignStyles(...styles)
 	} else if (styles instanceof Object) {
 		return styles
 	} else {
@@ -68,7 +66,7 @@ export function prepareStyles(Component, additionalStyles) {
 	let styles = flattenStyles(additionalStyles ? additionalStyles : {})
 
 	if (Component.look) {
-		styles = assignStyles(flattenStyles(Component.look), styles)
+		styles = assignStyles(flattenStyles(Component.look instanceof Function ? Component.look.call(Component) : Component.look), styles)
 		delete Component.look
 	}
 
@@ -79,7 +77,7 @@ export function prepareStyles(Component, additionalStyles) {
 			'_default': styles
 		}
 	}
-	return styles;
+	return styles
 }
 
 /**

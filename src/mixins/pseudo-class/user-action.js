@@ -17,16 +17,17 @@ export default [{
 		//add event listener if not added yet
 		newProps.onMouseDown = createListener(Component, element, key, 'onMouseDown', () => {
 			State.setState('active', true, Component, key)
-			Component._lastActive.push(key)
+			Component._lastActiveElements.push(key)
 		})
 
 		//add a mouseup listener to cancel active-state
 		if (!Component._onMouseUp && typeof window !== 'undefined') {
 			Component._onMouseUp = () => {
-				while (Component._lastActive.length > 0) {
-					let key = Component._lastActive[0]
+				debugger;
+				while (Component._lastActiveElements.length > 0) {
+					let key = Component._lastActiveElements[0]
 					State.setState('active', false, Component, key)
-					Component._lastActive.pop(key)
+					Component._lastActiveElements.pop(key)
 				}
 			}
 			window.addEventListener('mouseup', Component._onMouseUp)

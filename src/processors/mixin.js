@@ -27,7 +27,7 @@ export default {
 	 */
 	addMixin(mixin) {
 		if (mixinTypes.hasOwnProperty(mixin.type)) {
-			mixins.push(mixin)
+			this.mixins.push(mixin)
 		} else {
 			let types = Object.keys(mixinTypes).map(valid => {
 				return " '" + valid + "'"
@@ -50,7 +50,7 @@ export default {
 			}
 			return this.mixins.concat(Component.mixins)
 		} else {
-			return false
+			return this.mixins ? this.mixins : false
 		}
 	},
 
@@ -108,7 +108,7 @@ export default {
 			if (value instanceof Object) {
 				let mixin = this.getMixin(property, mixins)
 				if (mixin) {
-					assignStyles(styles, this.resolveMixins(mixin.fn(value, args), mixins, args))
+					assignStyles(styles, this.resolveMixins(mixin.fn(property, value, args), mixins, args))
 					delete styles[property]
 				} else {
 					this.resolveMixins(value, mixins, args)
@@ -126,6 +126,7 @@ export default {
 	process(styles, args) {
 		let mixins = this.prepareMixins(args.Component)
 		if (mixins && mixins.length > 0) {
+			debugger
 			return this.resolveMixins(styles, mixins, args)
 		} else {
 			return styles

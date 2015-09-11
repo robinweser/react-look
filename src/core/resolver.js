@@ -26,14 +26,16 @@ export default function resolveLook(Component, element, childIndexMap) {
 			//Triggers style processing
 			//Uses the exact processor lineup defined within Config
 			let processArgs = {newProps, Component, element, childIndexMap}
-			processStyles(styles, Component._processors, processArgs)
-			
+			styles = processStyles(styles, Component._processors, processArgs)
 			if (props.style){
-				newProps.style = assignStyles(styles, props.style)
+				styles = assignStyles(styles, props.style)
 			}
+			
+			newProps.style = styles
 		}
 		
-		return React.cloneElement(element, newProps, newProps.children)
+		
+		return cloneElement(element, newProps, newProps.children)
 	} else {
 		return element
 	}
@@ -58,7 +60,7 @@ export function resolveChildren(Component, children) {
 			//Generate index-maps to resolve child-index-sensitive pseudo classes
 			children.forEach((child, index) => {
 				//only resolve child if it actually is a valid react element
-				if (React.isValidElement(child)) {
+				if (isValidElement(child)) {
 
 					//Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
 					indexMap = generateIndexMap(child, indexMap)
@@ -112,7 +114,7 @@ export function extractStyles(props, styles) {
 			lookList.forEach(look => {
 				//Reduce if look is existing otherwise throw a warning
 				if (styles.hasOwnProperty(look)) {
-					extracted = assignStyles(styles[look], extracted)
+					extracted = assignStyles({}, styles[look], extracted)
 				} else {
 					console.warn('Assigned look does not exist and will be ignored.')
 					console.warn('Provided styles: ' + styles + ' do not include ' + look)
