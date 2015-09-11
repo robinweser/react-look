@@ -1,6 +1,5 @@
 let config = {
 	processors: [],
-	mixins: new Map(),
 	defaultKey: 'root'
 }
 
@@ -29,7 +28,7 @@ export default {
 		 * @param {Object} processor - processor that gets deregistered
 		 */
 		deregisterProcessor(processor) {
-			if (config.processors.indexOf(processor) > 0) {
+			if (config.processors.indexOf(processor) >= 0) {
 				config.processors.pop(processor)
 			} else {
 				console.warn('You can only deregister processors that have been registered before.')
