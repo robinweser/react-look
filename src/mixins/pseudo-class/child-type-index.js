@@ -3,8 +3,9 @@ import splitNthExpression from '../../utils/splitNthExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
 
 /**
-* Evaluates if an element is empty / got no children at all
-*/
+ * Evaluates child-type index positions using data from childIndexMap
+ * childIndexMap is provided by arguments
+ */
 export default [{
 	key: ':first-of-type',
 	type: mixinTypes.EQUAL,

@@ -3,27 +3,28 @@ import splitNthExpression from '../../utils/splitNthExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
 
 /**
-* Evaluates if an element is empty / got no children at all
-*/
+ * Evaluates child index positions using data from childIndexMap
+ * childIndexMap is provided by arguments
+ */
 export default [{
 	key: ':first-child',
 	type: mixinTypes.EQUAL,
 	fn: (key, styles, args) => {
 		return args.childIndexMap.index === 1 ? styles : false
 	}
-},{
+}, {
 	key: ':last-child',
 	type: mixinTypes.EQUAL,
 	fn: (key, styles, args) => {
 		return args.childIndexMap.index === args.childIndexMap.length ? styles : false
 	}
-},{
+}, {
 	key: ':only-child',
 	type: mixinTypes.EQUAL,
 	fn: (key, styles, args) => {
 		return args.childIndexMap.length === 1 ? styles : false
 	}
-},{
+}, {
 	key: ':nth-child',
 	type: mixinTypes.BEGINWITH,
 	fn: (key, styles, args) => {
