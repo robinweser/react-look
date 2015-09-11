@@ -11,6 +11,13 @@ export default [{
 		//Check if browser supports window.matchMedia
 		let matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
 		if (matchMedia !== undefined) {
+			if (!args.Component._mediaQueryListener) {
+				args.Component._mediaQueryListener = true
+				window.addEventListener('resize', () => {
+					args.Component.forceUpdate()
+				})
+			}
+			
 			if (matchMedia(key.replace('@media', '').trim()).matches) {
 				return styles
 			} else {
