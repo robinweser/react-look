@@ -9,7 +9,7 @@ export default {
 	mixins: [],
 
 	use(mixin) {
-		if (mixin instanceof Array){
+		if (mixin instanceof Array) {
 			mixin.forEach(mixinObj => {
 				//add mixins as single mixins to ensure they are valid
 				this.addMixin(mixinObj)
@@ -18,14 +18,14 @@ export default {
 			this.addMixin(mixin)
 		}
 	},
-	
+
 	/**
 	 * Registers a mixin to autoenable it globally 
 	 * NOTE: This may drop performance as Look will try to resolve every mixin even if you're not using them everywhere
 	 * @param {string|number} property - property which gets the unique mixin key
 	 * @param {Function} fn - function that creates valid style markup out of a property value
 	 */
-	addMixin(mixin){
+	addMixin(mixin) {
 		if (mixinTypes.hasOwnProperty(mixin.type)) {
 			mixins.push(mixin)
 		} else {
@@ -34,7 +34,7 @@ export default {
 			}).toString()
 			console.warn("A valid mixinType needs to be passed. '" + mixin.type + "' is not a valid type of " + types)
 		}
-	}
+	},
 
 	/**
 	 * Prepares mixins and adds extend mixin support
