@@ -1,17 +1,42 @@
-import { expect } from 'chai'
-import { greaterThan, greater, less, lessThan, equal, unEqual } from '../../lib/mixins/condition'
+import {expect} from 'chai'
+import Conditions from '../../lib/mixins/condition'
 
 describe('Evaluating conditions', () => {
 	let args = {
-		Component : {
-			props : {
+		Component: {
+			props: {
 				highlight: true,
 				clicks: 20,
 				noprop: undefined
 			},
-			state : {}
+			state: {}
 		}
 	}
+	
+	//Separating mixin functions for better testing
+	let equal, greater, unEqual, greaterThan, less, lessThan
+	Conditions.forEach(mixin => {
+		switch (mixin.key) {
+			case '>=':
+				greaterThan = mixin.fn
+				break
+			case '<=':
+				lessThan = mixin.fn
+				break
+			case '>':
+				greater = mixin.fn
+				break
+			case '<':
+				less = mixin.fn
+				break
+			case '=':
+				equal = mixin.fn
+				break
+			case '!=':
+				unEqual = mixin.fn
+				break
+		}
+	})
 	
 	it('should validate true', () => {
 		expect(equal('highlight=true', true, args)).to.equal(true)

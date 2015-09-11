@@ -1,6 +1,7 @@
-import {mediaQuery} from '../../lib/mixins/media-query'
+import MediaQueries from '../../lib/mixins/media-query'
 import {expect} from 'chai'
 
+let mediaQuery = MediaQueries[0].fn
 
 describe('Resolving media queries', () => {
 

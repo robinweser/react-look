@@ -2,33 +2,61 @@ import assign from 'object-assign'
 import mixinTypes from '../utils/mixinTypes'
 import isNumber from '../utils/isNumber'
 
+/**
+ * Condition mixins are shortcuts to check if a prop/state fulfills a given expression
+ * Therefore it uses Component which gets provided as part of arguments to validate props/state
+ */
 export default [{
 	key: '>=',
 	type: mixinTypes.INCLUDE,
-	fn: greaterThan
-}, {
-	key: '>',
-	type: mixinTypes.INCLUDE,
-	fn: greater
-}, {
-	key: '<',
-	type: mixinTypes.INCLUDE,
-	fn: less
+	fn: (key, styles, args) => {
+		let evaluation = splitExpression(key, '>=', args.Component)
+		return evaluation && evaluation[0] >= evaluation[1] ? styles : false
+	}
 }, {
 	key: '<=',
 	type: mixinTypes.INCLUDE,
-	fn: lessThan
-}, {
-	key: '=',
-	type: mixinTypes.INCLUDE,
-	fn: equal
+	fn: (key, styles, args) => {
+		let evaluation = splitExpression(key, '<=', args.Component)
+		return evaluation && evaluation[0] <= evaluation[1] ? styles : false
+	}
 }, {
 	key: '!=',
 	type: mixinTypes.INCLUDE,
-	fn: unEqual
+	fn: (key, styles, args) => {
+		let evaluation = splitExpression(key, '!=', args.Component)
+		return evaluation && evaluation[0] != evaluation[1] ? styles : false
+	}
+}, {
+	key: '>',
+	type: mixinTypes.INCLUDE,
+	fn: (key, styles, args) => {
+		let evaluation = splitExpression(key, '>', args.Component)
+		return evaluation && evaluation[0] > evaluation[1] ? styles : false
+	}
+}, {
+	key: '<',
+	type: mixinTypes.INCLUDE,
+	fn: (key, styles, args) => {
+		let evaluation = splitExpression(key, '<', args.Component)
+		return evaluation && evaluation[0] < evaluation[1] ? styles : false
+	}
+}, {
+	key: '=',
+	type: mixinTypes.INCLUDE,
+	fn: (key, styles, args) => {
+		let evaluation = splitExpression(key, '=', args.Component)
+		return evaluation && evaluation[0] == evaluation[1] ? styles : false
+	}
 }]
 
-export function evalExpression(key, operator, Component) {
+/** 
+ * Splits an expression at a given operator and returns both values converted to compare them with ease 
+ * @param {string} key - key that gets evaluated, in this case the expression
+ * @param {operator} operator - operator which splits property and value
+ * @param {Object} Component - outer React Component holding props and state to match
+ */
+export function splitExpression(key, operator, Component) {
 	let matchValues = assign({}, Component.props, Component.state)
 
 	let [property, value] = key.split(operator)
@@ -42,34 +70,4 @@ export function evalExpression(key, operator, Component) {
 	} else {
 		return false
 	}
-}
-
-export function greaterThan(key, styles, args) {
-	let evaluation = evalExpression(key, '>=', args.Component)
-	return evaluation && evaluation[0] >= evaluation[1] ? styles : false
-}
-
-export function greater(key, styles, args) {
-	let evaluation = evalExpression(key, '>', args.Component)
-	return evaluation && evaluation[0] > evaluation[1] ? styles : false
-}
-
-export function less(key, styles, args) {
-	let evaluation = evalExpression(key, '<', args.Component)
-	return evaluation && evaluation[0] < evaluation[1] ? styles : false
-}
-
-export function lessThan(key, styles, args) {
-	let evaluation = evalExpression(key, '<=', args.Component)
-	return evaluation && evaluation[0] <= evaluation[1] ? styles : false
-}
-
-export function equal(key, styles, args) {
-	let evaluation = evalExpression(key, '=', args.Component)
-	return evaluation && evaluation[0] == evaluation[1] ? styles : false
-}
-
-export function unEqual(key, styles, args) {
-	let evaluation = evalExpression(key, '!=', args.Component)
-	return evaluation && evaluation[0] != evaluation[1] ? styles : false
 }

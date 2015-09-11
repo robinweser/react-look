@@ -1,6 +1,7 @@
-import {extractCSS} from '../../lib/mixins/extract-css'
+import ExtractCSS from '../../lib/mixins/extract-css'
 import {expect} from 'chai'
 
+let extractCSS = ExtractCSS[0].fn 
 
 describe('Extracting classNames', () => {
 

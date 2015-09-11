@@ -1,6 +1,7 @@
-import {extend} from '../../lib/mixins/extend' 
+import Extend from '../../lib/mixins/extend' 
 import {expect} from 'chai' 
 
+let extend = Extend[0].fn 
 
 describe('Extending styles', () => {
 
