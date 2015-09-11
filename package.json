@@ -18,7 +18,7 @@
     "pretest": "npm run transpile",
     "test": "mocha --recursive --compilers js:babel/register",
     "test:watch": "mocha --recursive --compilers js:babel/register -w",
-    "transpile": "npm run clean && babel --stage 0 src --out-dir lib",
+    "transpile": "npm run clean && babel src --out-dir lib",
     "release": "npm run transpile && npm publish",
     "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
     "demo": "npm run build:demo && open demo/index.html",
