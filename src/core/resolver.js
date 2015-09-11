@@ -16,9 +16,9 @@ export default function resolveLook(Component, element, childIndexMap) {
 		let props = element.props
 
 		//resolving child looks recursively to make sure they will be rendered correctly
-		let newChildren = resolveChildren(Component, props.children)
 		let newProps = assign({}, props)
-
+		newProps.children = resolveChildren(Component, props.children)
+		
 		//Extracts only relevant styles according to the look prop
 		let styles = extractStyles(props, Component.styles)
 
@@ -33,7 +33,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 			}
 		}
 		
-		return React.cloneElement(element, newProps, newChildren)
+		return React.cloneElement(element, newProps, newProps.children)
 	} else {
 		return element
 	}
