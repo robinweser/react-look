@@ -9,9 +9,10 @@ export default {
 	 * This only gets applied if an element acutally got action-pseudo-class-specific styles
 	 * @param {Component} Component - React Component that gets enhanced by Look
 	 * @param {Object} element - current element that gets a listener applied
-	 * @param {string} event - event type you want listeners for: active, focus, change
+	 * @param {Object} key - elements unique key
+	 * @param {Function} fn - callback function that gets called if listener event fires
 	 */
-	addListener(Component, element, key, event, fn) {
+	createListener(Component, element, key, event, fn) {
 		// This checks if there are any needed pseudo classes that need an event listener by checking the pseudo map for this element
 		if (!State.has(Component, key)) {
 			State.add(Component, key)
@@ -24,10 +25,9 @@ export default {
 			}
 		}
 
-		let newProps = {}
 		let existing = element.props[event]
 
-		newProps[event] = e => {
+		return listener = (e) {
 			existing && existing(e)
 			fn()
 		}
