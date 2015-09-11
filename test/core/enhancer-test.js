@@ -167,15 +167,6 @@ describe('Flattening styles', () => {
 	it('should warn and return an empty object', () => {
 		expect(flattenStyles(23)).to.eql({})
 	})
-	
-	it('should call functions and return the flattened output', () => {
-		function style(){
-			return {
-				color: 'red'
-			}
-		}
-		expect(flattenStyles(style)).to.eql({color: 'red'})
-	})
 })
 
 describe('Preparing look styles', () => {

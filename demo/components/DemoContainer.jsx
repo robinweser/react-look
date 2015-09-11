@@ -1,5 +1,5 @@
 import React from 'react';
-import Look from '../../src/dom/index';
+import Look from '../../lib/dom/index';
 
 @Look
 export default class DemoContainer extends React.Component {

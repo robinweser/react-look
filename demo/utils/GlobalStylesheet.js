@@ -1,4 +1,4 @@
-import {CSS} from '../../src/dom/index';
+import {CSS} from '../../lib/dom/index';
 import {Processors} from 'dynamic-style-sheets';
 
 let sheet = new CSS({

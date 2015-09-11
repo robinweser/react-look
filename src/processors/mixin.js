@@ -126,7 +126,6 @@ export default {
 	process(styles, args) {
 		let mixins = this.prepareMixins(args.Component)
 		if (mixins && mixins.length > 0) {
-			debugger
 			return this.resolveMixins(styles, mixins, args)
 		} else {
 			return styles

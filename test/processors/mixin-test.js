@@ -47,12 +47,13 @@ describe('Resolving mixins', () => {
 		})
 	})
 	
-	
-	let Component = {
+	var Component = {
 		mixins : [{
-			fn: (obj) => {return {color: obj.color + 'test'}},
+			key: 'colorMixin',
 			type: mixinTypes.EQUAL,
-			key: 'colorMixin'
+			fn: (key, styles, args) => {
+					return {color: styles.color + 'test'}
+			}
 		}]
 	}
 	
