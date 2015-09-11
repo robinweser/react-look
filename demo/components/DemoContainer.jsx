@@ -1,12 +1,16 @@
 import React from 'react';
-import Look from '../../src/index';
+import Look from '../../src/dom/index';
 
-class DemoContainer extends React.Component {
+@Look
+export default class DemoContainer extends React.Component {
   constructor() {
-    super(...arguments);
+    super(...arguments)
+  }
+  static defaultProps = {
+    padding: 10
   }
 
-  look() {
+  look(){
     return {
       container: {
         width: '100%',
@@ -64,9 +68,3 @@ class DemoContainer extends React.Component {
     )
   }
 }
-
-DemoContainer.defaultProps = {
-  padding: 10
-}
-
-export default Look(DemoContainer);
