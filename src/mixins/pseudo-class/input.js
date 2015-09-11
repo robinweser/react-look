@@ -1,4 +1,3 @@
-import assign from 'object-assign'
 import mixinTypes from '../../utils/mixinTypes'
 
 /**
@@ -20,7 +19,7 @@ export default [{
 	key: ':enabled',
 	type: mixinTypes.EQUAL,
 	fn: (key, styles, args) => {
-		return !args.newProps.disalbed ? styles : false
+		return !args.newProps.disabled ? styles : false
 	}
 },{
 	key: ':required',

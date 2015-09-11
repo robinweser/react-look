@@ -1,4 +1,3 @@
-import assign from 'object-assign'
 import mixinTypes from '../../utils/mixinTypes'
 
 /**

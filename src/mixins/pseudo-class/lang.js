@@ -1,4 +1,3 @@
-import assign from 'object-assign'
 import mixinTypes from '../../utils/mixinTypes'
 
 /**
@@ -6,7 +5,7 @@ import mixinTypes from '../../utils/mixinTypes'
 */
 export default [{
 	key: ':lang',
-	type: mixinTypes.EQUAL,
+	type: mixinTypes.BEGINWITH,
 	fn: (key, styles, args) => {
 		return args.newProps.lang && key.indexOf(args.newProps.lang) > -1 ? styles : false
 	}
