@@ -1,4 +1,4 @@
-import assignStyles from './assignStyles';
+import assignStyles from 'assign-styles';
 
 /**
  * Extend-Mixin 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Look, {State} from '../../src/index';
+import Look, {State} from '../../lib/dom/index';
 import {Processors} from 'dynamic-style-sheets';
 
 class Input extends React.Component {
@@ -48,9 +48,6 @@ class Input extends React.Component {
     }
   }
 
-  processors() {
-    return Processors.Prefixer;
-  }
 
   render() {
     return (

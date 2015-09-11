@@ -2,7 +2,7 @@ import Pseudo from './Pseudo.jsx';
 import Media from '../../examples/Media.jsx';
 import Condition from '../../examples/Condition.jsx';
 import DemoContainer from './DemoContainer.jsx';
-import Look from '../../src/index';
+import Look from '../../lib/dom/index';
 import React from 'react';
 
 class Overview extends React.Component {

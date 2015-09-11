@@ -1,5 +1,5 @@
 import React from 'react';
-import Look, {State} from '../../src/index';
+import Look, {State} from '../../lib/dom/index';
 
 class UserAction extends React.Component {
   constructor() {

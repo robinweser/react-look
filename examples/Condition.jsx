@@ -1,5 +1,5 @@
 import React from 'react';
-import Look from '../src/index';
+import Look from '../lib/dom/index';
 import Color from 'color';
 
 class Condition extends React.Component {
