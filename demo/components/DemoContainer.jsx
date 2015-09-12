@@ -1,34 +1,31 @@
-import React from 'react';
-import Look from '../../lib/dom/index';
+import React, {Component} from 'react'
+import Look from '../../lib/dom/index'
 
 @Look
-export default class DemoContainer extends React.Component {
-  constructor() {
-    super(...arguments)
-  }
+export default class DemoContainer extends Component {
   static defaultProps = {
     padding: 10
   }
-
-  look(){
+  
+  look() {
     return {
       container: {
         width: '100%',
         boxSizing: 'border-box',
         marginBottom: 50,
-        'group=true' :{
-            padding: '10px 20% 0 20%',
-            borderBottom: '1px solid lightgray'
+        'group=true': {
+          padding: '10px 20% 0 20%',
+          borderBottom: '1px solid lightgray'
         }
       },
       inner: {
         padding: this.props.padding,
         border: '1px solid lightgray',
-        'group=true' : {
+        'group=true': {
           border: 'none',
           paddingTop: 0
         }
-      
+
       },
       title: {
         fontSize: 25,
@@ -45,8 +42,8 @@ export default class DemoContainer extends React.Component {
           color: 'rgb(102, 79, 196)'
         }
       },
-      
-      desc : {
+
+      desc: {
         padding: 5,
         paddingTop: 0,
         lineHeight: 1,
@@ -60,7 +57,7 @@ export default class DemoContainer extends React.Component {
     return (
       <div look="container">
         <h1 look="title">{this.props.title}</h1>
-      <pre look="desc">{this.props.description}</pre>
+        <pre look="desc">{this.props.description}</pre>
         <div look="inner">
           {this.props.children}
         </div>

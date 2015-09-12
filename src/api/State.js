@@ -1,5 +1,5 @@
-import {getDefaultKey} from './Config';
-const defaultKey = getDefaultKey();
+import {getDefaultKey} from './Config'
+const defaultKey = getDefaultKey()
 /**
  * A small helper module to handle States within react-look
  */
@@ -11,7 +11,7 @@ export default {
 	 * @param {string} key - a unique key that gets added
 	 */
 	add(Component, key = defaultKey) {
-			return Component.state._look.set(key, new Map());
+			return Component.state._look.set(key, new Map())
 		},
 
 		/**
@@ -30,7 +30,7 @@ export default {
 		 * @param {string} key - a unique key which gets states set
 		 */
 		set(states, Component, key = defaultKey) {
-			return Component.state._look.set(key, states);
+			return Component.state._look.set(key, states)
 		},
 
 		/**
@@ -39,7 +39,7 @@ export default {
 		 * @param {string} key - a unique key which gets checked
 		 */
 		has(Component, key = defaultKey) {
-			return Component.state._look.has(key);
+			return Component.state._look.has(key)
 		},
 
 		/**
@@ -50,9 +50,9 @@ export default {
 		 */
 		getState(state, Component, key = defaultKey) {
 			if (Component.state._look.has(key)) {
-				return Component.state._look.get(key).get(state);
+				return Component.state._look.get(key).get(state)
 			} else {
-				return false;
+				return false
 			}
 		},
 
@@ -64,8 +64,8 @@ export default {
 		 * @param {string} key - a unique key whichs state gets set
 		 */
 		setState(state, value, Component, key = defaultKey) {
-			Component.state._look.get(key).set(state, value);
-			return Component.setState(Component.state._look);
+			Component.state._look.get(key).set(state, value)
+			return Component.setState(Component.state._look)
 		},
 
 		/**
@@ -75,6 +75,6 @@ export default {
 		 * @param {string} key - a unique key whichs state gets checked
 		 */
 		hasState(state, Component, key = defaultKey) {
-			return Component.state._look.has(key).has(state);
+			return Component.state._look.has(key).has(state)
 		}
 }

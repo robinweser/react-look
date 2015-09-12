@@ -1,5 +1,5 @@
-import {CSS} from '../../lib/dom/index';
-import {Processors} from 'dynamic-style-sheets';
+import {CSS} from '../../lib/dom/index'
+import {Processors} from 'dynamic-style-sheets'
 
 let sheet = new CSS({
 	'*' : {
@@ -10,7 +10,7 @@ let sheet = new CSS({
 		boxSizing : 'border-box',
 		userSelect : 'none'
 	}
-});
+})
 
-sheet.process(Processors.Prefixer);
-sheet.apply();
+sheet.process(Processors.Prefixer)
+sheet.apply()

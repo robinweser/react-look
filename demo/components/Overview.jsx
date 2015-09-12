@@ -3,22 +3,17 @@ import Media from '../../examples/Media.jsx';
 import Condition from '../../examples/Condition.jsx';
 import DemoContainer from './DemoContainer.jsx';
 import Look from '../../lib/dom/index';
-import React from 'react';
+import React, {Component} from 'react';
 
-class Overview extends React.Component {
-  constructor() {
-    super(...arguments);
-  }
-
-  look() {
-    return {
+@Look
+export default class Overview extends Component {
+  look = {
       marginTop: 20,
       marginBottom: 30,
       fontSize: 40,
       fontWeight: 600,
       textAlign: 'center',
       color: 'rgb(82, 67, 203)'
-    }
   }
 
   render() {
@@ -42,4 +37,3 @@ class Overview extends React.Component {
     )
   }
 }
-export default Look(Overview);

@@ -1,19 +1,15 @@
-import React from 'react';
-import Look from '../lib/dom/index';
-import Color from 'color';
+import React, {Component} from 'react'
+import Look from '../lib/dom/index'
+import Color from 'color'
 
-class Condition extends React.Component {
-  constructor() {
-    super(...arguments);
-    this.onClick = this.onClick.bind(this);
-		this.onClicksCount = this.onClicksCount.bind(this);
-    this.state = {
-      mode: 'default',
-			clicks : 0
-    }
+@Look
+export default class Condition extends Component {
+  state = {
+    mode: 'default',
+    clicks : 0
   }
 
-  onClick() {
+  onClick = () => {
     if (this.state.mode == 'important') {
       this.setState({
         mode: 'disabled'
@@ -31,7 +27,7 @@ class Condition extends React.Component {
     }
   }
 	
-	onClicksCount(){
+	onClicksCount = () => {
 		this.setState({
 			clicks : this.state.clicks +1
 		})
@@ -77,11 +73,11 @@ class Condition extends React.Component {
   }
 
   render() { 
-		let text = 'Click Me! ' + (20 - this.state.clicks) + ' times left';
+		let text = 'Click Me! ' + (20 - this.state.clicks) + ' times left'
 		if (this.state.clicks == 20) {
 			text= "HORAAAY";
 		} else if (this.state.clicks > 20) {
-			text ="Alright stop it.. " + (this.state.clicks) + ' clicks';
+			text ="Alright stop it.. " + (this.state.clicks) + ' clicks'
 		}
     return (
       <div>
@@ -91,4 +87,3 @@ class Condition extends React.Component {
     )
   }
 }
-export default Look(Condition);

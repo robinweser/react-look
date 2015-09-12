@@ -23,7 +23,6 @@ export default [{
 		//add a mouseup listener to cancel active-state
 		if (!Component._onMouseUp && typeof window !== 'undefined') {
 			Component._onMouseUp = () => {
-				debugger;
 				while (Component._lastActiveElements.length > 0) {
 					let key = Component._lastActiveElements[0]
 					State.setState('active', false, Component, key)

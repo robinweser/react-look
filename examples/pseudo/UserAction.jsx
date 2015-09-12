@@ -1,10 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Look, {State} from '../../lib/dom/index';
 
-class UserAction extends React.Component {
-  constructor() {
-    super(...arguments);
-  }
+@Look
+export default class UserAction extends Component {
 
   look() {
     return {
@@ -38,11 +36,12 @@ class UserAction extends React.Component {
   }
 
   render() {
-		let defaultState = 'Hover me!';
-    let hoverState = State.getState('hover', this, 'b3') ? ' Now click me! ' : '';
-    let activeState = State.getState('active', this, 'b3') ? ' Well Done. ' : '';
+		let defaultState = 'Hover me!'
+    let hoverState = State.getState('hover', this, 'b3') ? ' Now click me! ' : ''
+    let activeState = State.getState('active', this, 'b3') ? ' Well Done. ' : ''
 		
-		let text = activeState || hoverState || defaultState;
+		let text = activeState || hoverState || defaultState
+    
     return (
       <div>
         <div key="b1" look="button activeButton">Click me!</div>
@@ -54,4 +53,3 @@ class UserAction extends React.Component {
     )
   }
 }
-export default Look(UserAction);

@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import Look from '../../lib/dom/index';
 
-class ChildIndex extends React.Component {
-  constructor() {
-    super(...arguments);
+@Look
+export default class ChildIndex extends Component {
+  static defaultProps = {
+    items: [1,2,3,4,5,6,7,8,9,10]
   }
-
+  
+  static propTypes = {
+    items: PropTypes.array.isRequired
+  }
+  
   look() {
     return {
       listItem: {
@@ -33,18 +38,9 @@ class ChildIndex extends React.Component {
 
   render() {
     //create a small list of items to demonstrate nth-child, et cetera
-    var listItems = [];
-    var i;
-
-    for (i = 1; i <= this.props.items; ++i) {
-      listItems.push('List Item ' + i);
-    }
-
-    var list = listItems.map(text => {
-      return (
-        <li look="listItem">{text}</li>
-      )
-    });
+    let list = this.props.items.map(text => {
+      return <li look="listItem">ListItem {text}</li>
+    })
 
     return (
       <div>
@@ -55,7 +51,3 @@ class ChildIndex extends React.Component {
     )
   }
 }
-ChildIndex.defaultProps = {
-  items: 10
-}
-export default Look(ChildIndex);

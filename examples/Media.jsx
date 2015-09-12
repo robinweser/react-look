@@ -1,11 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Look from '../lib/dom/index';
 
-class Media extends React.Component {
-  constructor() {
-    super(...arguments);
-  }
-
+@Look
+export default class Media extends Component {
   look() {
     return {
       padding: 40,
@@ -30,4 +27,3 @@ class Media extends React.Component {
     )
   }
 }
-export default Look(Media);
