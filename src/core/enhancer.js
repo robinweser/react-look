@@ -9,7 +9,7 @@ import {getProcessors} from '../api/Config'
  * @param {Array|Object} additionalStyles - additional styles that are used to resolve looks
  * @param {Array|Function} additionalProcessors - additional processors that modify the styles
  */
-export default function Look(Component, additionalStyles, additionalProcessors) {
+export default function Enhancer(Component, additionalStyles, additionalProcessors) {
 	class EnhancedComponent extends Component {
 		constructor() {
 			super(...arguments)
@@ -22,7 +22,7 @@ export default function Look(Component, additionalStyles, additionalProcessors) 
 
 		render() {
 			this.styles = prepareStyles(this, additionalStyles)
-			
+
 			// Only resolve if there are styles to resolve
 			// Otherwise just return super.render() which leads to no difference
 			if (this.styles && Object.keys(this.styles).length > 0) {
@@ -63,16 +63,29 @@ export function flattenStyles(styles) {
  * @param {Object|Array} additionalStyles - any additional styles provided by outer wrapper
  */
 export function prepareStyles(Component, additionalStyles) {
-	let styles = flattenStyles(additionalStyles ? additionalStyles : {})
+	let styles = {}
 
 	if (Component.look) {
-		styles = assignStyles(flattenStyles(Component.look instanceof Function ? Component.look.call(Component) : Component.look), styles)
+		styles = flattenStyles(Component.look instanceof Function ? Component.look.call(Component) : Component.look)
 		delete Component.look
 	}
 
-	//In order to provide as less boilerplate as possible Look provides
-	//a shortcut to use a default selector if only passing a single style object
-	if (styles[Object.keys(styles)[0]] instanceof Object !== true) {
+	styles = resolveDefault(styles)
+
+	if (additionalStyles) {
+		additionalStyles = resolveDefault(additionalStyles)
+		styles = assignStyles(styles, additionalStyles)
+	}
+	return styles
+}
+
+/**
+ * In order to provide as less boilerplate as possible Look provides
+ * a shortcut to use a default selector if only passing a single style object
+ * @param {Object} styles - style object which perhaps is a default style
+ */
+export function resolveDefault(styles) {
+	if (styles && styles[Object.keys(styles)[0]] instanceof Object !== true) {
 		styles = {
 			'_default': styles
 		}
@@ -87,7 +100,7 @@ export function prepareStyles(Component, additionalStyles) {
  */
 export function prepareProcessors(Component, additionalProcessors) {
 	let newProcessors = getProcessors().slice(0)
-	
+
 	if (Component.processors) {
 		if (Component.processors instanceof Function) {
 			Component.processors = Component.processors()
@@ -98,7 +111,7 @@ export function prepareProcessors(Component, additionalProcessors) {
 		}
 		newProcessors.push(...Component.processors)
 	}
-	
+
 	//add additional processors
 	if (additionalProcessors) {
 		if (additionalProcessors instanceof Array) {
@@ -107,6 +120,6 @@ export function prepareProcessors(Component, additionalProcessors) {
 			newProcessors.push(additionalProcessors)
 		}
 	}
-	
+
 	return newProcessors
 }
