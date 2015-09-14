@@ -7,14 +7,12 @@ import Mixins from './processors/mixin'
 //mixins
 import Conditions from './mixins/condition'
 import Extend from './mixins/extend'
-import PseudoElements from './mixins/pseudo-class/before-after'
 import ChildIndex from './mixins/pseudo-class/child-index'
 import ChildTypeIndex from './mixins/pseudo-class/child-type-index'
 import Empty from './mixins/pseudo-class/empty'
 
 Mixins.use(Conditions)
 Mixins.use(Extend)
-Mixins.use(PseudoElements)
 Mixins.use(ChildIndex)
 Mixins.use(ChildTypeIndex)
 Mixins.use(Empty)

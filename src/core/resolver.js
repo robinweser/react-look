@@ -18,23 +18,25 @@ export default function resolveLook(Component, element, childIndexMap) {
 		//resolving child looks recursively to make sure they will be rendered correctly
 		let newProps = assign({}, props)
 		newProps.children = resolveChildren(Component, props.children)
-		
+
 		//Extracts only relevant styles according to the look prop
 		let styles = extractStyles(props, Component.styles)
 
 		if (styles) {
 			//Triggers style processing
 			//Uses the exact processor lineup defined within Config
-			let processArgs = {newProps, Component, element, childIndexMap}
+			let processArgs = {
+				newProps, Component, element, childIndexMap
+			}
 			styles = processStyles(styles, Component._processors, processArgs)
-			if (props.style){
+			if (props.style) {
 				styles = assignStyles(styles, props.style)
 			}
-			
+
 			newProps.style = styles
 		}
-		
-		
+
+
 		return cloneElement(element, newProps, newProps.children)
 	} else {
 		return element
@@ -59,6 +61,7 @@ export function resolveChildren(Component, children) {
 			//Recursively resolve look for child elements first
 			//Generate index-maps to resolve child-index-sensitive pseudo classes
 			children.forEach((child, index) => {
+	
 				//only resolve child if it actually is a valid react element
 				if (isValidElement(child)) {
 
@@ -91,7 +94,7 @@ export function resolveChildren(Component, children) {
 			return resolveLook(Component, children)
 		}
 	} else {
-		return false
+		return children === 0 ? children : false
 	}
 }
 
@@ -124,8 +127,8 @@ export function extractStyles(props, styles) {
 		}
 		delete props.look
 	} else {
-	return false
-}
+		return false
+	}
 }
 
 /**
