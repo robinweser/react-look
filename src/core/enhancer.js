@@ -67,7 +67,6 @@ export function prepareStyles(Component, additionalStyles) {
 
 	if (Component.look) {
 		styles = flattenStyles(Component.look instanceof Function ? Component.look.call(Component) : Component.look)
-		delete Component.look
 	}
 
 	styles = resolveDefault(styles)

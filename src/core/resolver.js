@@ -19,6 +19,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 		let newProps = assign({}, props)
 		newProps.children = resolveChildren(Component, props.children)
 
+		console.log(Component)
 		//Extracts only relevant styles according to the look prop
 		let styles = extractStyles(props, Component.styles)
 
@@ -130,7 +131,8 @@ export function extractStyles(props, styles) {
 					extracted = assignStyles({}, styles[look], extracted)
 				} else {
 					console.warn('Assigned look does not exist and will be ignored.')
-					console.warn('Provided styles: ' + styles + ' do not include ' + look)
+					console.warn('Provided styles: ' + JSON.stringify(styles) + ' do not include ' + look)
+					return false
 				}
 			})
 			return extracted

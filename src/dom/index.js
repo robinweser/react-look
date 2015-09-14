@@ -1,4 +1,4 @@
-import Look, {Config, State, Listener} from '../index'
+import Look, {State, Listener, MixinTypes, Config} from '../index'
 import CSS from '../api/CSS'
 import Prefixer from '../processors/prefixer'
 
@@ -21,8 +21,9 @@ Config.registerProcessor(Prefixer)
 
 export {
 	Look as default,
-	Config,
+	CSS,
 	State,
 	Listener,
-	CSS
+	MixinTypes,
+	Config
 }

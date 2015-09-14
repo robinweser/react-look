@@ -11,9 +11,6 @@ npm install react-look
 **Look** is a modular, **processor**-based and **feature-rich** styling library for [React.js](https://facebook.github.io/react/) and [React Native](https://github.com/facebook/react-native) *(starting with Version 0.4)* based on **inline styles**.
 It simplyfies how you are styling your Components and comes with two different packages. 
 
-
-
-
 > Be sure to read my blog post [React Component styling without limitations](https://medium.com/@rofrischmann/react-component-styling-without-limitations-84e5e776fd44) which gives detail information how and why I build Look.
 
 # Features
