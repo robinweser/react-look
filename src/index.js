@@ -1,4 +1,4 @@
-import Look from './core/enhancer'
+import Enhancer from './core/enhancer'
 import State from './api/State'
 import Config from './api/Config'
 import Listener from './api/Listener'
@@ -20,8 +20,21 @@ Mixins.use(Empty)
 
 Config.registerProcessor(Mixins)
 
+
+// Resolving annotations
+// If not passing arguments it just wraps the Component
+// Otherwise it returns a decorator
+export default (...args) => {
+	if (args[0] instanceof Function) {
+		return Enhancer(...args)
+	} else {
+		return function decorator(target) {
+			return Enhancer(target, ...args)
+		}
+	}
+}
+
 export {
-	Look as default,
 	Listener,
 	State,
 	Config,
