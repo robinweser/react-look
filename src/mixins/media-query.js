@@ -1,4 +1,4 @@
-import mixinTypes from '../utils/mixinTypes'
+import MixinTypes from '../utils/MixinTypes'
 
 /**
  * Evaluates if a media condition is fulfilled by using window.matchMedia
@@ -6,7 +6,7 @@ import mixinTypes from '../utils/mixinTypes'
  */
 export default [{
 	key: '@media',
-	type: mixinTypes.BEGINWITH,
+	type: MixinTypes.BEGINWITH,
 	fn: (key, styles, args) => {
 		//Check if browser supports window.matchMedia
 		let matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined

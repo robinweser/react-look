@@ -1,4 +1,4 @@
-import mixinTypes from '../../utils/mixinTypes'
+import MixinTypes from '../../utils/MixinTypes'
 import State from '../../api/State'
 import {getDefaultKey} from '../../api/Config'
 import {createListener} from '../../api/Listener'
@@ -9,7 +9,7 @@ import {createListener} from '../../api/Listener'
  */
 export default [{
 	key: ':active',
-	type: mixinTypes.EQUAL,
+	type: MixinTypes.EQUAL,
 	fn: (pseudo, styles, args) => {
 		let {element, Component, newProps} = args
 		let key = element.key || element.ref || getDefaultKey()
@@ -37,7 +37,7 @@ export default [{
 	}
 }, {
 	key: ':hover',
-	type: mixinTypes.EQUAL,
+	type: MixinTypes.EQUAL,
 	fn: (pseudo, styles, args) => {
 		let {element, Component, newProps} = args
 		let key = element.key || element.ref || getDefaultKey()
@@ -55,7 +55,7 @@ export default [{
 	}
 }, {
 	key: ':focus',
-	type: mixinTypes.EQUAL,
+	type: MixinTypes.EQUAL,
 	fn: (pseudo, styles, args) => {
 		let {element, Component, newProps} = args
 		let key = element.key || element.ref || getDefaultKey()

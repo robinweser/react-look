@@ -1,4 +1,4 @@
-import mixinTypes from '../utils/mixinTypes'
+import MixinTypes from '../utils/MixinTypes'
 
 /**
  * Lets you extract css to classNames using the css key
@@ -6,7 +6,7 @@ import mixinTypes from '../utils/mixinTypes'
  */
 export default [{
 	key: 'css',
-	type: mixinTypes.EQUAL,
+	type: MixinTypes.EQUAL,
 	fn: (key, className, args) => {
 		let newProps = args.newProps
 		if (newProps.hasOwnProperty('className')) {

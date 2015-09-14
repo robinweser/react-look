@@ -1,5 +1,5 @@
 import assignStyles from 'assign-styles'
-import mixinTypes from '../utils/mixinTypes'
+import MixinTypes from '../utils/MixinTypes'
 
 export default {
 	name: 'Mixins',
@@ -26,10 +26,10 @@ export default {
 	 * @param {Function} fn - function that creates valid style markup out of a property value
 	 */
 	addMixin(mixin) {
-		if (mixinTypes.hasOwnProperty(mixin.type)) {
+		if (MixinTypes.hasOwnProperty(mixin.type)) {
 			this.mixins.push(mixin)
 		} else {
-			let types = Object.keys(mixinTypes).map(valid => {
+			let types = Object.keys(MixinTypes).map(valid => {
 				return " '" + valid + "'"
 			}).toString()
 			console.warn("A valid mixinType needs to be passed. '" + mixin.type + "' is not a valid type of " + types)
@@ -63,11 +63,11 @@ export default {
 	isMixin(property, mixin) {
 		if (mixin.hasOwnProperty('type')) {
 			switch (mixin.type) {
-				case mixinTypes.EQUAL:
+				case MixinTypes.EQUAL:
 					return property === mixin.key
-				case mixinTypes.BEGINWITH:
+				case MixinTypes.BEGINWITH:
 					return property.indexOf(mixin.key) === 0
-				case mixinTypes.INCLUDE:
+				case MixinTypes.INCLUDE:
 					return property.indexOf(mixin.key) > -1
 				default:
 					return false

@@ -1,5 +1,5 @@
 import assignStyles from 'assign-styles';
-import mixinTypes from '../utils/mixinTypes'
+import MixinTypes from '../utils/MixinTypes'
 
 /**
  * Extends a given style object
@@ -8,7 +8,7 @@ import mixinTypes from '../utils/mixinTypes'
  */
 export default [{
 	key: 'extend',
-	type: mixinTypes.EQUAL,
+	type: MixinTypes.EQUAL,
 	fn: (key, options, args) => {
 		if (options.hasOwnProperty('condition')) {
 			if (options.condition) {

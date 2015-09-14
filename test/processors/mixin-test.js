@@ -1,11 +1,11 @@
 import { expect } from 'chai'
-import mixinTypes  from '../../lib/utils/mixinTypes'
+import MixinTypes  from '../../lib/utils/MixinTypes'
 import Mixins from '../../lib/processors/mixin'
 
 
-let equalMixin =	{type: mixinTypes.EQUAL, key:'foo', fn: () => {return true}}
-let includeMixin = {type: mixinTypes.INCLUDE, key:'bar', fn: () => {return true}}
-let beginWithMixin =  {type: mixinTypes.BEGINWITH, key:'bla', fn: () => {return true}}
+let equalMixin =	{type: MixinTypes.EQUAL, key:'foo', fn: () => {return true}}
+let includeMixin = {type: MixinTypes.INCLUDE, key:'bar', fn: () => {return true}}
+let beginWithMixin =  {type: MixinTypes.BEGINWITH, key:'bla', fn: () => {return true}}
 
 
 describe('Validating mixins', () => {
@@ -50,7 +50,7 @@ describe('Resolving mixins', () => {
 	var Component = {
 		mixins : [{
 			key: 'colorMixin',
-			type: mixinTypes.EQUAL,
+			type: MixinTypes.EQUAL,
 			fn: (key, styles, args) => {
 					return {color: styles.color + 'test'}
 			}
