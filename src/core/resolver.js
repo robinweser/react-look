@@ -36,6 +36,16 @@ export default function resolveLook(Component, element, childIndexMap) {
 			newProps.style = styles
 		}
 
+		//Resolving styles for elements passed by props
+		let prop
+		for (prop in newProps) {
+			if (prop === 'children') {
+				continue
+			}
+			if (isValidElement(newProps[prop])){
+				newProps[prop] = resolveLook(Component, newProps[prop])
+			}
+		}
 
 		return cloneElement(element, newProps, newProps.children)
 	} else {
@@ -61,7 +71,7 @@ export function resolveChildren(Component, children) {
 			//Recursively resolve look for child elements first
 			//Generate index-maps to resolve child-index-sensitive pseudo classes
 			children.forEach((child, index) => {
-	
+
 				//only resolve child if it actually is a valid react element
 				if (isValidElement(child)) {
 
@@ -99,7 +109,7 @@ export function resolveChildren(Component, children) {
 }
 
 /**
- * Extracts referenced styles to an elements props 
+ * Extracts referenced styles to an elements props
  * @param {Object} props - elements props that will be assigned
  * @param {Object} styles - a valid style object
  */
