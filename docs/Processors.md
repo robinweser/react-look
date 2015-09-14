@@ -3,12 +3,43 @@
 
 # 6. Processors
 
-Processors are a core feature of [Dynamic Style Sheet](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets) to modify your styles dynamically.<br>
-They're used to add **vendor prefixes**, **mixins** and stuff like that.
+Put simply, a processor is just a function. It takes in an object, does some transformation and outputs an object. Each processor should only accomplish **one single job** e.g. adding vendor prefixes.
 
-Check out the official [Processor Documentation](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets#processors) for further information on how to use and especially **how to build your own**.
+## Background
+Processors also are nothing new. They're widely used by Frontend-Developers all over the world. We are just bringing them to JavaScript directly, so you won't need to add yet another annoying build step.
 
-There's also a list with [Available Processors](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets#available-processors)  which provides some core processors.
+Using processors you will likely improve your workflow multiple times since you don't have to handle every versatile browser incompatibility or issue.
 
-## Common
-In order to simplify using processors and frequently used mixins I created a toolchain called [react-look-tools](https://github.com/rofrischmann/react-look-tools) which provides a set of useful predefined **mixins**, **functions** as well as a **developer tool** for maximum DX.
+## Usage
+You may pass processors to a Component directly just by adding a property to your class. <br>
+If you're using a processor multiple times you may also register it as a global processor using `Look.Config.registerProcessor(processor)`.<br>
+They may also be added within the wrapper using `Look(Component, {}, processors)`
+	
+### Arguments
+Look passes 4 special arguments which can be used within your `process`-method. Those are:
+* **Component**: Current wrapping React Component
+* **element**: Current element that gets resolved
+* **newProps**: Properties used to clone the Component (including old `element.props`)
+* **childIndexMap** Information on `element`'s index within its parent node
+
+### Custom Processors
+Every processor is an Object with at least a `process`-method.
+> **Note**: For maximal developer experience it is recommended to add `name`, `version` and `description` as well. Check out Mixins or Prefixer in the source directory for an example.
+
+```javascript
+export default {
+	name: 'My-Processor',
+	version: '1.0.0', // best if you start with 1.0.0
+	description: 'My-Processor does something.',
+	
+	// Main method
+	// => args = {Component, element, neProps, childIndexMap}
+	process(styleObject, args) {
+		/* do something with styleObject */
+		return styleObject 
+	}
+	
+	// ... probably add some other useful methods 
+	// that might be accessed public
+}
+``` 

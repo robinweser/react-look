@@ -1,7 +1,7 @@
 <div style="float:left"><a href="PseudoClasses.md">< <b>3. Pseudo classes</b></a></div>
 <div style="float:right"><a href="StatefulConditions.md"><b>5. Stateful conditions > </b></a></div>
 
-# 4. Media Queries
+# 4. Media Queries (DOM-only)
 
 Look supports media-queries using a common syntax. There are actually two different ways to use them.
 

@@ -14,28 +14,24 @@ The FAQ should help people with common tasks. Look allows you to do a lot of thi
 In some situations you need to apply additional styles or use some additional processors. You can do this by passing those directly to the `Look()`-method.
 
 ```javascript
-import Look from 'react-look';
-import themedStyle from './path/to/theme/Header.js';
-import Mixins from 'dss-mixins';
+import Look from 'react-look'
+import themedStyles from './path/to/theme/Header'
 
 let styles = {
-  header : {
-    marginLeft: 5
-  },
-  title : {
-    fontSize: 20
-  }
+  marginLeft: 5
 }
 
-Look(Header, [styles, themedStyle], Mixins)
+@Look([styles, themedStyles])
+class Header extends React.Component {}
 ```
 
 ## 2. Look shortcut
 Quite often you only want a single Look to be applied, so why should you even type a selector and reference it? Well, you don't need to.
 
 ```javascript
-import Look from 'react-look';
+import Look from 'react-look'
 
+@Look
 class Button extends React.Component {
   look(){
     return {
@@ -51,8 +47,6 @@ class Button extends React.Component {
     return <div look>Minimum</div>
   }
 }
-
-export default Look(Button)
 ```
 Look will actually treat a single style object as `default` and reference it automatically by using key-only `look` prop.
 
@@ -62,7 +56,7 @@ In some cases it is even useful to apply some global css selectors. This can be 
 ### Usage
 You can either use it as you would any CSS by just applying a `className` property or use the build-in `css` property which resolves into a valid `className` string. Look automatically concatenates those.
 ```javascript
-import Look, {CSS} from 'react-look';
+import Look, {CSS} from 'react-look/dom'
 
 let global = new CSS({
   '.header' : {
@@ -72,8 +66,9 @@ let global = new CSS({
   '.header-hover' : {
     color: 'red'
   }
-});
+})
 
+@Look
 class Header extends React.Component {
   look(){
     return {
@@ -85,11 +80,10 @@ class Header extends React.Component {
   }
   
   render(){
+    // => <div class="header header-hover">Header</div>
     return <div look>Header</div>
   }
 }
-
-export default Look(Header); // => <div class="header header-hover">Header</div>
 ```
 
 ## 4. Look Addons

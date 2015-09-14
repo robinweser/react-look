@@ -23,22 +23,10 @@ Pseudo-classes can be nested multiple to achieve something like `:focus:hover`. 
 
 Look currently supports **25 pseudo classes**. Some might be added soon. Check the following list for all supported / unsupported.
 
-##Validation
+## Validation
 Most pseudo classes get validated within the `render` process, while some need extra event listeners applied. Those are `:focus`, `:hover` and `:active`.
 
 ## Supported pseudo classes
-### user-action
-* hover
-* active
-* focus
-
-### input
-* checked
-* enabled / disabled
-* read-only / read-write
-* required / optional
-* indeterminate
-
 ### child-index
 * first-child
 * last-child
@@ -54,14 +42,24 @@ Most pseudo classes get validated within the `render` process, while some need e
 * only-of-type
 
 ### other
-* before / after *(: or ::)*
-* lang*(language)*
 * empty
 
-## Deprecated 
-Some pseudos have also been part of Look formerly, but got deprecated due to overhead. They will be provided by addons soon.
-* valid / invalid
-* in-range / out-of-range
+## `react-look/dom`-only
+### user-action
+* hover
+* active
+* focus
+
+### input
+* checked
+* enabled / disabled
+* read-only / read-write
+* required / optional
+* indeterminate
+
+### other
+* before / after *(: or ::)*
+* lang*(language)*
 
 ## Unsupported pseudo classes
 At least by now the following pseudo classes are yet unsupported. <br>
