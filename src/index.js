@@ -3,6 +3,7 @@ import State from './api/State'
 import Config from './api/Config'
 import Listener from './api/Listener'
 import Mixins from './processors/mixin'
+import MixinTypes from './utils/MixinTypes'
 
 //mixins
 import Conditions from './mixins/condition'
@@ -23,5 +24,6 @@ export {
 	Look as default,
 	Listener,
 	State,
-	Config
+	Config,
+	MixinTypes
 }
