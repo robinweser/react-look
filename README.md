@@ -139,8 +139,7 @@ npm run demo
 > Please keep in mind that this is done in my leisure time and that I cannot update the docs every commit.
 
 I tried to write as much helpful documentation as possible. Before asking any question or creating an issue please be sure to read all the documentation.<br>
-The documentation gives huge information on how to do all kind of stuff. It serves detailed information on how to use processors, mixins or react-look-tools.<br>
-You will also find some information on how Look works at the core and what [Dynamic Style Sheets](https://github.com/dynamicstylesheets) is all about.
+The documentation gives huge information on how to do all kind of stuff. It serves detailed information on how to use processors, mixins and how to write your own.<br>
 
 ## How does Look work?
 Similar to Radium, Look wraps the `render` function and modifies applied styles while iterating recursive over all children.
@@ -164,3 +163,6 @@ Created with ♥ by [@rofrischmann](http://rofrischmann.de).
 # Contributing
 I would love to see people getting involved.<br>
 If you have a feature request please create an issue. Also if you're even improving Look by any kind please don't be shy and send a pull request to let everyone benefit.
+
+### Pull Requests
+If you are creating a pull request, try to use commit messages that are self-explanatory. Also always add some **tests** unless it's totally senseless (add a reason why it's senseless) and test your code before you commit so Travis won't throw errors.
