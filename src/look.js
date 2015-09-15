@@ -11,12 +11,14 @@ import Extend from './mixins/extend'
 import ChildIndex from './mixins/pseudo-class/child-index'
 import ChildTypeIndex from './mixins/pseudo-class/child-type-index'
 import Empty from './mixins/pseudo-class/empty'
+import AlternativeValues from './mixins/alternative-value'
 
 Mixins.use(Conditions)
 Mixins.use(Extend)
 Mixins.use(ChildIndex)
 Mixins.use(ChildTypeIndex)
 Mixins.use(Empty)
+Mixins.use(AlternativeValues)
 
 Config.registerProcessor(Mixins)
 
