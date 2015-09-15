@@ -1,8 +1,8 @@
 {
   "name": "react-look",
-  "version": "0.4.0",
-  "description": "Feature-rich, dynamic & stateful Component Styling for React",
-  "main": "lib/index.js",
+  "version": "0.4.1",
+  "description": "Processable, dynamic & stateful Component Styling for React & React Native",
+  "main": "lib/look.js",
   "files": [
     "LICENSE",
     "README.md",
@@ -18,7 +18,7 @@
     "pretest": "npm run transpile",
     "test": "mocha --recursive --compilers js:babel/register",
     "test:watch": "mocha --recursive --compilers js:babel/register -w",
-    "transpile": "npm run clean && babel --stage 0 src --out-dir lib",
+    "transpile": "npm run clean && babel src --out-dir lib",
     "release": "npm run transpile && npm publish",
     "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
     "demo": "npm run build:demo && open demo/index.html",
@@ -34,7 +34,8 @@
     "stylesheet",
     "media query",
     "inline-style",
-    "stateful style"
+    "stateful style",
+    "cssinjs"
   ],
   "author": "Robin Frischmann",
   "license": "MIT",
