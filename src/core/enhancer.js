@@ -24,7 +24,7 @@ export default function Enhancer(Component, additionalStyles, additionalProcesso
 
 		render() {
 			this.styles = prepareStyles(this, additionalStyles)
-
+			
 			// Only resolve if there are styles to resolve
 			// Otherwise just return super.render() which leads to no difference
 			if (this.styles && Object.keys(this.styles).length > 0) {
@@ -54,7 +54,7 @@ export function flattenStyles(styles) {
 	} else {
 		console.warn('Pass either a valid object or an array of valid objects.')
 		console.warn('Look can not flatten and will ignore the following styles input:', styles)
-		return {}
+		return false
 	}
 }
 
@@ -64,17 +64,15 @@ export function flattenStyles(styles) {
  * @param {Object|Array} additionalStyles - any additional styles provided by outer wrapper
  */
 export function prepareStyles(Component, additionalStyles) {
-	let styles = {}
-
+	let styles
 	if (Component.look) {
-		styles = flattenStyles(Component.look instanceof Function ? Component.look.call(Component) : Component.look)
+		styles = Component.look instanceof Function ? Component.look.call(Component) : Component.look
+		styles = resolveDefault(flattenStyles(styles))
 	}
-
-	styles = resolveDefault(styles)
 
 	if (additionalStyles) {
 		additionalStyles = resolveDefault(additionalStyles)
-		styles = assignStyles(styles, additionalStyles)
+		styles = assignStyles({}, styles, additionalStyles)
 	}
 	return styles
 }
