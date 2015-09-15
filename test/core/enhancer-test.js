@@ -164,8 +164,8 @@ describe('Flattening styles', () => {
 		expect(flattenStyles([base, extend])).to.eql({color: 'blue', fontSize: 15})
 	})
 	
-	it('should warn and return an empty object', () => {
-		expect(flattenStyles(23)).to.eql({})
+	it('should warn and return false', () => {
+		expect(flattenStyles(23)).to.eql(false)
 	})
 })
 
