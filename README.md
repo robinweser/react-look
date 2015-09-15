@@ -46,7 +46,8 @@ Look tries to keep your styling separated from your logic as much as possible wh
 # Usage
 The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries. Use nested objects to define pseudo classes, media queries or conditioned styles. <br>
 
-The example uses an ES7 Decorator `@Look`. Alternatively wrap your Component with Look. e.g. `Header = Look(Header)`<br>
+The example uses an ES7 Decorator `@Look`. <br>
+Alternatively wrap your Component with Look. e.g. `Header = Look(Header)`<br>
 
 ```javascript
 import React, {Component, PropTypes} from 'react'
