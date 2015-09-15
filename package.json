@@ -1,11 +1,13 @@
 {
   "name": "react-look",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Processable, dynamic & stateful Component Styling for React & React Native",
-  "main": "lib/look.js",
+  "main": "look.js",
   "files": [
     "LICENSE",
     "README.md",
+    "dom.js",
+    "look.js",
     "lib/",
     "docs/"
   ],
@@ -19,7 +21,8 @@
     "test": "mocha --recursive --compilers js:babel/register",
     "test:watch": "mocha --recursive --compilers js:babel/register -w",
     "transpile": "npm run clean && babel src --out-dir lib",
-    "release": "npm run transpile && npm publish",
+    "package": "node build-package.js",
+    "release": "npm run transpile && npm run package && npm publish",
     "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
     "demo": "npm run build:demo && open demo/index.html",
     "build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js",
