@@ -11,10 +11,12 @@ import {getProcessors} from '../api/Config'
  */
 export default function Enhancer(Component, additionalStyles, additionalProcessors) {
 	class EnhancedComponent extends Component {
+		static displayName = Component.displayName || Component.name || 'Component'
+		
 		constructor() {
 			super(...arguments)
 			this.state = this.state ||  {}
-
+			
 			this._processors = prepareProcessors(this, additionalProcessors);
 			this._lastActiveElements = []
 			this.state._look = new Map()
@@ -36,7 +38,6 @@ export default function Enhancer(Component, additionalStyles, additionalProcesso
 	}
 
 	//Inherit the original displayName for proper use later on
-	EnhancedComponent.displayName = Component.displayName || Component.name || 'Component'
 	return EnhancedComponent
 }
 
