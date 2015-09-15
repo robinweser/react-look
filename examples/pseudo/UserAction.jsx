@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Look, {State} from '../../lib/dom/index';
+import Look, {State} from '../../lib/dom';
 
 @Look
 export default class UserAction extends Component {

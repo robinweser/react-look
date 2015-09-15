@@ -19,7 +19,6 @@ export default function resolveLook(Component, element, childIndexMap) {
 		let newProps = assign({}, props)
 		newProps.children = resolveChildren(Component, props.children)
 
-		console.log(Component)
 		//Extracts only relevant styles according to the look prop
 		let styles = extractStyles(props, Component.styles)
 

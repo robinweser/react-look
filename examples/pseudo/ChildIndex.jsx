@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import Look from '../../lib/dom/index';
+import React, {Component, PropTypes} from 'react'
+import Look from '../../lib/dom'
 
 @Look
 export default class ChildIndex extends Component {

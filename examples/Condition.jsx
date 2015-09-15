@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Look from '../lib/dom/index'
+import Look from '../lib/dom'
 import Color from 'color'
 
 @Look

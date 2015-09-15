@@ -49,8 +49,8 @@ The syntax is quite similar to [Sass](http://sass-lang.com) and other React styl
 The example uses an ES7 Decorator `@Look`. Alternatively wrap your Component with Look. e.g. `Header = Look(Header)`<br>
 
 ```javascript
-import React, {Component, PropTypes} from 'react';
-import Look from 'react-look';
+import React, {Component, PropTypes} from 'react'
+import Look from 'react-look/dom'
 
 @Look
 class Header extends Component {
