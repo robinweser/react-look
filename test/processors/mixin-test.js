@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import MixinTypes  from '../../lib/utils/MixinTypes'
-import Mixins from '../../lib/processors/mixin'
+import Mixins, {isMixin, getMixin} from '../../lib/processors/mixin'
 
 
 let equalMixin =	{type: MixinTypes.EQUAL, key:'foo', fn: () => {return true}}
@@ -10,15 +10,15 @@ let beginWithMixin =  {type: MixinTypes.BEGINWITH, key:'bla', fn: () => {return 
 
 describe('Validating mixins', () => {
 	it('should return true', () => {
-		expect(Mixins.isMixin('foo',equalMixin)).to.equal(true)
-		expect(Mixins.isMixin('fo-bar-o',includeMixin)).to.equal(true)
-		expect(Mixins.isMixin('blaba',beginWithMixin)).to.equal(true)
+		expect(isMixin('foo',equalMixin)).to.equal(true)
+		expect(isMixin('fo-bar-o',includeMixin)).to.equal(true)
+		expect(isMixin('blaba',beginWithMixin)).to.equal(true)
 	})
 	
 	it('should return false', () => {
-		expect(Mixins.isMixin('foobar',equalMixin)).to.equal(false)
-		expect(Mixins.isMixin('fo-ba-ro',includeMixin)).to.equal(false)
-		expect(Mixins.isMixin('babla',beginWithMixin)).to.equal(false)
+		expect(isMixin('foobar',equalMixin)).to.equal(false)
+		expect(isMixin('fo-ba-ro',includeMixin)).to.equal(false)
+		expect(isMixin('babla',beginWithMixin)).to.equal(false)
 	})
 })
 
@@ -26,9 +26,9 @@ describe('Getting correct mixin to resolve', () => {
 	let mixins = [equalMixin, includeMixin, beginWithMixin]
 	
 	it('should return the correct mixin', () => {
-		expect(Mixins.getMixin('foo', mixins)).to.eql(equalMixin)
-		expect(Mixins.getMixin('fo-bar-o', mixins)).to.eql(includeMixin)
-		expect(Mixins.getMixin('blaba', mixins)).to.eql(beginWithMixin)
+		expect(getMixin('foo', mixins)).to.eql(equalMixin)
+		expect(getMixin('fo-bar-o', mixins)).to.eql(includeMixin)
+		expect(getMixin('blaba', mixins)).to.eql(beginWithMixin)
 	})
 })
 
