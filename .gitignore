@@ -3,5 +3,5 @@ npm-debug.log
 demo/bundle.js
 lib
 addons
-look.js
-dom.js
+/look.js
+/dom.js
