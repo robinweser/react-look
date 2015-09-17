@@ -117,7 +117,7 @@ export function isMixin(property, mixin) {
 				return property.indexOf(mixin.key) > -1
 				break
 			case MixinTypes.REGEX:
-				return property.match(mixin.key)
+				return property.match(mixin.key) !== null
 				break
 			case MixinTypes.ANY:
 				return true
