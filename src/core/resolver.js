@@ -2,7 +2,7 @@ import assign from 'object-assign'
 import {cloneElement, isValidElement} from 'react'
 import assignStyles from 'assign-styles'
 import processStyles from './processor'
-
+import Config from '../api/Config'
 /**
  * Resolves provided styles into style objects
  * Processes those using a predefined processor lineup
@@ -26,7 +26,7 @@ export default function resolveStyles(Component, element, childIndexMap) {
 			//Triggers style processing
 			//Uses the exact processor lineup defined within Config
 			let processArgs = {
-				newProps, Component, element, childIndexMap
+				newProps, Component, element, childIndexMap, Config
 			}
 			styles = processStyles(styles, Component._processors, processArgs)
 			if (props.style) {
