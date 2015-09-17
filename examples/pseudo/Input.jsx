@@ -4,7 +4,7 @@ import Look from '../../lib/dom';
 @Look
 export default class Input extends Component {
   
-  look = {
+  styles = {
     input: {
       appearance: 'none',
       outline: 'none',

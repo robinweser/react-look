@@ -4,7 +4,7 @@ import Look, {State} from '../../lib/dom';
 @Look
 export default class UserAction extends Component {
 
-  look() {
+  styles() {
     return {
       button: {
         margin: 10,

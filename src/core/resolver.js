@@ -4,14 +4,14 @@ import assignStyles from 'assign-styles'
 import processStyles from './processor'
 
 /**
- * Resolves provided looks into style objects
+ * Resolves provided styles into style objects
  * Processes those using a predefined processor lineup
  * Maps the final style objects to the element
- * @param {Object} Component - wrapping React Component providing looks and elements
+ * @param {Object} Component - wrapping React Component providing styles and elements
  * @param {Object} element - previously rendered React element
  * @param {Object} childIndexMap - information on child index and child types
  */
-export default function resolveLook(Component, element, childIndexMap) {
+export default function resolveStyles(Component, element, childIndexMap) {
 	if (element && element.props) {
 		let props = element.props
 
@@ -20,7 +20,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 		newProps.children = resolveChildren(Component, props.children)
 
 		//Extracts only relevant styles according to the look prop
-		let styles = extractStyles(props, Component.styles)
+		let styles = extractStyles(props, Component.lookStyles)
 
 		if (styles) {
 			//Triggers style processing
@@ -43,7 +43,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 				continue
 			}
 			if (isValidElement(newProps[prop])){
-				newProps[prop] = resolveLook(Component, newProps[prop])
+				newProps[prop] = resolveStyles(Component, newProps[prop])
 			}
 		}
 
@@ -54,7 +54,7 @@ export default function resolveLook(Component, element, childIndexMap) {
 }
 
 /**
- * Resolves provided looks for an elements children
+ * Resolves provided styles for an elements children
  * @param {Object} Component - wrapping React Component providing looks and elements
  * @param {Array|string|number} children - children that get resolved
  */
@@ -68,7 +68,7 @@ export function resolveChildren(Component, children) {
 			let indexMap = {}
 			let childType, childIndex
 
-			//Recursively resolve look for child elements first
+			//Recursively resolve styles for child elements first
 			//Generate index-maps to resolve child-index-sensitive pseudo classes
 			children.forEach((child, index) => {
 
@@ -85,7 +85,7 @@ export function resolveChildren(Component, children) {
 						'typeIndex': indexMap[childType],
 						'typeLength': typeMap[childType]
 					}
-					newChildren.push(resolveLook(Component, child, childIndex))
+					newChildren.push(resolveStyles(Component, child, childIndex))
 
 				} else {
 					//This clears undefined childs as they would falsely render
@@ -93,7 +93,7 @@ export function resolveChildren(Component, children) {
 					//It also fires a warning so that you may remove them on your own
 					if (child === undefined) {
 						console.warn('There are children which are either undefined, empty or invalid React Elements: ', children)
-						console.warn('Look removed 1 child while validating (look="' + props.look + '"): child ', child)
+						console.warn('Look removed 1 child while validating (styles="' + props.look + '"): child ', child)
 					} else {
 						newChildren.push(child);
 					}
@@ -101,7 +101,7 @@ export function resolveChildren(Component, children) {
 			})
 			return newChildren
 		} else {
-			return resolveLook(Component, children)
+			return resolveStyles(Component, children)
 		}
 	} else {
 		return children === 0 ? children : false

@@ -3,7 +3,7 @@ import Look from '../lib/dom';
 
 @Look
 export default class Media extends Component {
-  look() {
+  styles() {
     return {
       padding: 40,
       backgroundColor: 'red',
@@ -20,6 +20,7 @@ export default class Media extends Component {
   }
 
   render() {
+    debugger
     return (
       <div look>
         Resize Me!

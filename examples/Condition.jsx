@@ -34,7 +34,7 @@ export default class Condition extends Component {
 	}
 	
 
-  look() {
+  styles() {
     return {
       states: {
         padding: 5,

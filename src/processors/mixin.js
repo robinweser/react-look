@@ -111,7 +111,7 @@ export function isMixin(property, mixin) {
 		}
 	} else {
 		console.warn('Mixins need to provide a valid mixinType. Caused by this mixin: ', mixin)
-		return false;
+		return false
 	}
 }
 
