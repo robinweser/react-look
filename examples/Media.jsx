@@ -20,7 +20,6 @@ export default class Media extends Component {
   }
 
   render() {
-    debugger
     return (
       <div look>
         Resize Me!

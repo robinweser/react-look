@@ -2,5 +2,6 @@
 export default {
 	'INCLUDE': 'INCLUDE',
 	'BEGINWITH': 'BEGINWITH',
-	'EQUAL': 'EQUAL'
+	'EQUAL': 'EQUAL',
+	'ANY' : 'ANY'
 }

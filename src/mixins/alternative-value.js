@@ -7,12 +7,14 @@ import paramCase from 'param-case'
  */
 export default [{
 	key: '',
-	type: MixinTypes.INCLUDE,
+	type: MixinTypes.ANY,
 	fn: (key, styles, args) => {
 			if (styles instanceof Array){
 				return {
 					[key]: styles.join(';' + paramCase(key) + ':')
 				}
+			} else {
+				return styles
 			}
 		}
 }]
