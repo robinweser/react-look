@@ -21,12 +21,12 @@
     "test": "mocha --recursive --compilers js:babel/register",
     "test:watch": "mocha --recursive --compilers js:babel/register -w",
     "transpile": "npm run clean && babel src --out-dir lib",
-    "package": "node build-package.js",
-    "release": "npm run transpile && npm run package && npm publish",
-    "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
+    "package": "npm run transpile && node build-package.js",
+    "release": "npm run package && npm publish",
     "demo": "npm run build:demo && open demo/index.html",
-    "build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js",
-    "demo-dev": "npm run build:demo-dev && open demo/index.html"
+    "demo-dev": "npm run build:demo-dev && open demo/index.html",
+    "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
+    "build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js"
   },
   "keywords": [
     "react",
