@@ -1,6 +1,6 @@
 import assign from 'object-assign'
 import assignStyles from 'assign-styles'
-import resolveLook from './resolver'
+import resolveStyles from './resolver'
 import {getProcessors} from '../api/Config'
 
 /**
@@ -23,12 +23,12 @@ export default function Enhancer(Component, additionalStyles, additionalProcesso
 		}
 
 		render() {
-			this.styles = prepareStyles(this, additionalStyles)
+			this.lookStyles = prepareStyles(this, additionalStyles)
 			
 			// Only resolve if there are styles to resolve
 			// Otherwise just return super.render() which leads to no difference
-			if (this.styles && Object.keys(this.styles).length > 0) {
-				return resolveLook(this, super.render())
+			if (this.lookStyles && Object.keys(this.lookStyles).length > 0) {
+				return resolveStyles(this, super.render())
 			} else {
 				console.warn(Component + ' was enhanced with Look, but did not provide any styles.')
 				console.warn('This might affect performance and rendering time.')
@@ -65,8 +65,8 @@ export function flattenStyles(styles) {
  */
 export function prepareStyles(Component, additionalStyles) {
 	let styles
-	if (Component.look) {
-		styles = Component.look instanceof Function ? Component.look.call(Component) : Component.look
+	if (Component.styles) {
+		styles = assignStyles({}, Component.styles instanceof Function ? Component.styles.call(Component) :  Component.styles)
 		styles = resolveDefault(flattenStyles(styles))
 	}
 

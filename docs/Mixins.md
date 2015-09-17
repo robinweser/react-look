@@ -45,7 +45,7 @@ let fixPosMixin = {
 @Look
 class Button extends Component {
   static mixins = [fixPosMixin]
-  look = {
+  styles = {
     fixPos : [10, 50, 0, 50]
   }
   

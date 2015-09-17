@@ -7,7 +7,7 @@ import React, {Component} from 'react';
 
 @Look
 export default class Overview extends Component {
-  look = {
+  styles = {
       marginTop: 20,
       marginBottom: 30,
       fontSize: 40,

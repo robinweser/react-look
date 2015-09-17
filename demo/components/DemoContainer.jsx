@@ -7,7 +7,7 @@ export default class DemoContainer extends Component {
     padding: 10
   }
   
-  look() {
+  styles() {
     return {
       container: {
         width: '100%',

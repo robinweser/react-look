@@ -33,13 +33,11 @@ import Look from 'react-look'
 
 @Look
 class Button extends React.Component {
-  look(){
-    return {
-      color: 'blue',
-      fontSize: 15,
-      ':hover' : {
-        color: 'red'
-      }
+  styles = {
+    color: 'blue',
+    fontSize: 15,
+    ':hover' : {
+      color: 'red'
     }
   }
   
@@ -54,7 +52,7 @@ Look will actually treat a single style object as `default` and reference it aut
 In some cases it is even useful to apply some global css selectors. This can be achieved using the [CSS](api/CSS.md).  <br>CSS creates a static CSS strings which gets applied within an `<style></style>`-tag. You can even modify it later on and CSS automatically applies your changes with a minimum of DOM manipulations.
 
 ### Usage
-You can either use it as you would any CSS by just applying a `className` property or use the build-in `css` property which resolves into a valid `className` string. Look automatically concatenates those.
+You can either use it as you would any CSS by just applying a `className` property or use the build-in `css` property provided by extract-css mixin which resolves into a valid `className` string. Look automatically concatenates those.
 ```javascript
 import Look, {CSS} from 'react-look/dom'
 
@@ -70,12 +68,10 @@ let global = new CSS({
 
 @Look
 class Header extends React.Component {
-  look(){
-    return {
-      css : '.header',
-      ':hover' : {
-        css : '.header-hover'
-      }
+  styles = {
+    css : '.header',
+    ':hover' : {
+      css : '.header-hover'
     }
   }
   

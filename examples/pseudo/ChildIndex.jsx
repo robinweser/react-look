@@ -11,7 +11,7 @@ export default class ChildIndex extends Component {
     items: PropTypes.array.isRequired
   }
   
-  look() {
+  styles() {
     return {
       listItem: {
         color: 'darkgray',

@@ -172,7 +172,7 @@ describe('Flattening styles', () => {
 describe('Preparing look styles', () => {
 	it('should add a default selector', () => {
 		class Default extends Component {}
-		Default.look = {color: 'red'}
+		Default.styles = {color: 'red'}
 		expect(prepareStyles(Default)).to.eql({'_default' : {color: 'red'}});
 	})
 })

@@ -58,7 +58,7 @@ class Header extends Component {
   static defaultProps = {clicks: 24}
   static propTypes = {clicks: PropTypes.number.isRequired}
   state = {status: 'active'}
-  look = {
+  styles = {
     header : {
       transition: '200ms all linear',
       // Use media queries, pseudo classes and stateful styles
