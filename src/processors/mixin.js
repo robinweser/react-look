@@ -3,7 +3,7 @@ import MixinTypes from '../utils/MixinTypes'
 
 export default {
 	name: 'Mixins',
-	version: '1.0.0',
+	version: '1.0.1',
 	description: 'Resolves any self defined properties also known as mixins.',
 
 	mixins: [],
@@ -62,9 +62,12 @@ export function resolveMixins(styles, mixins, args) {
 	for (property in styles) {
 		let value = styles[property]
 		if (value instanceof Object) {
-			let mixin = getMixin(property, mixins)
-			if (mixin) {
-				assignStyles(styles, resolveMixins(mixin.fn(property, value, args), mixins, args))
+			let matchingMixins = getMixins(property, mixins)
+			if (matchingMixins.length > 0) {
+				matchingMixins.forEach(mixin => {
+					value = mixin.fn(property, value, args)
+				})
+				assignStyles(styles, resolveMixins(value, mixins, args))
 				delete styles[property]
 			} else {
 				resolveMixins(value, mixins, args)
@@ -79,16 +82,20 @@ export function resolveMixins(styles, mixins, args) {
  * @param {string} property - property that gets checked
  * @param {Array} mixins - set of valid mixins
  */
-export function getMixin(property, mixins) {
-	let i;
-	let length = mixins.length;
-	for (i = 0; i < length; ++i) {
-		let mixin = mixins[i]
+export function getMixins(property, mixins) {
+	let matchingMixins = []
+	let globalMixins = []
+	mixins.forEach(mixin => {
 		if (isMixin(property, mixin)) {
-			return mixin
+			if (mixin.type === MixinTypes.ANY) {
+				globalMixins.push(mixin)
+			} else {
+				matchingMixins.push(mixin)
+			}
 		}
-	}
-	return false
+	})
+
+	return matchingMixins.concat(globalMixins)
 }
 
 /**
@@ -102,12 +109,19 @@ export function isMixin(property, mixin) {
 		switch (mixin.type) {
 			case MixinTypes.EQUAL:
 				return property === mixin.key
+				break
 			case MixinTypes.BEGINWITH:
 				return property.indexOf(mixin.key) === 0
+				break
 			case MixinTypes.INCLUDE:
 				return property.indexOf(mixin.key) > -1
+				break
+			case MixinTypes.ANY:
+				return true
+				break
 			default:
 				return false
+				break
 		}
 	} else {
 		console.warn('Mixins need to provide a valid mixinType. Caused by this mixin: ', mixin)
