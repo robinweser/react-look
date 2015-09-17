@@ -3,5 +3,6 @@ export default {
 	'INCLUDE': 'INCLUDE',
 	'BEGINWITH': 'BEGINWITH',
 	'EQUAL': 'EQUAL',
-	'ANY' : 'ANY'
+	'ANY' : 'ANY',
+	'REGEX' : 'REGEX'
 }
