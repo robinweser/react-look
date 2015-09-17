@@ -1,5 +1,5 @@
 import Enhancer from './core/enhancer'
-
+import Config from './api/Config'
 
 // Resolving annotations
 // If not passing arguments it just wraps the Component
@@ -13,3 +13,5 @@ export default (...args) => {
 		}
 	}
 }
+
+export { Config }
