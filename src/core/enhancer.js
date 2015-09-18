@@ -10,7 +10,7 @@ import {getProcessors} from '../api/Config'
  * @param {Array|Function} additionalProcessors - additional processors that modify the styles
  */
 export default function Enhancer(Component, additionalStyles, additionalProcessors) {
-	class EnhancedComponent extends Component {
+	class LookComponent extends Component {
 		static displayName = Component.displayName || Component.name || 'Component'
 		
 		constructor() {
