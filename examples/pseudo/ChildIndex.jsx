@@ -38,8 +38,8 @@ export default class ChildIndex extends Component {
 
   render() {
     //create a small list of items to demonstrate nth-child, et cetera
-    let list = this.props.items.map(text => {
-      return <li look="listItem">ListItem {text}</li>
+    let list = this.props.items.map((text,index) => {
+      return <li look="listItem" key={'list' + index}>ListItem {text}</li>
     })
 
     return (

@@ -42,12 +42,15 @@ export default function resolveStyles(Component, element, childIndexMap) {
 			if (prop === 'children') {
 				continue
 			}
-			if (isValidElement(newProps[prop])){
+			if (isValidElement(newProps[prop])) {
 				newProps[prop] = resolveStyles(Component, newProps[prop])
 			}
 		}
 
-		return cloneElement(element, newProps, newProps.children)
+		if (!newProps.children) {
+			delete newProps.children
+		}
+		return cloneElement(element, newProps)
 	} else {
 		return element
 	}

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import Look, {State} from '../../lib/dom';
 
 @Look
