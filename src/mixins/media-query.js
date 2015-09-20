@@ -23,12 +23,7 @@ export default [{
 					window.removeEventListener(args.Component._mediauQueryListener)
 				}
 			}
-			
-			if (matchMedia(key.replace('@media', '').trim()).matches) {
-				return styles
-			} else {
-				return false
-			}
+			return matchMedia(key.replace('@media', '').trim()).matches ? styles : false
 		} else {
 			console.warn('Failed evaluating media query: ' + key + '. Your environment is not able to use window.matchMedia.');
 			return false
