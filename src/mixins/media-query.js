@@ -12,10 +12,16 @@ export default [{
 		let matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
 		if (matchMedia !== undefined) {
 			if (!args.Component._mediaQueryListener) {
-				args.Component._mediaQueryListener = true
-				window.addEventListener('resize', () => {
+				args.Component._mediaQueryListener = () => {
 					args.Component.forceUpdate()
-				})
+				}
+				window.addEventListener('resize', args.Component_mediaQueryListener)
+				
+				//Remove the listener if the component unmounts to keep things clean
+				args.Component.componentWillUnmount = () => {
+					args.Component.componentWillUnmount()
+					window.removeEventListener(args.Component._mediauQueryListener)
+				}
 			}
 			
 			if (matchMedia(key.replace('@media', '').trim()).matches) {
