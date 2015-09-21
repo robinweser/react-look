@@ -2,43 +2,59 @@ import assign from 'object-assign'
 import assignStyles from 'assign-styles'
 import resolveStyles from './resolver'
 import {getProcessors} from '../api/Config'
+import React, {Component} from 'react'
 
 /**
  * Main wrapper that maps your styles to a React Component
- * @param {Object} Component - a valid React Component that gets styles applied
+ * @param {Object} CustomComponent - a valid React Component that gets styles applied
  * @param {Array|Object} additionalStyles - additional styles that are used to resolve looks
  * @param {Array|Function} additionalProcessors - additional processors that modify the styles
  */
-export default function Enhancer(Component, additionalStyles, additionalProcessors) {
-	class LookComponent extends Component {
-		static displayName = Component.displayName || Component.name || 'Component'
-		
-		constructor() {
-			super(...arguments)
-			this.state = this.state ||  {}
-			
-			this._processors = prepareProcessors(this, additionalProcessors);
-			this._lastActiveElements = []
-			this.state._look = new Map()
-		}
+export default function Enhancer(CustomComponent, additionalStyles, additionalProcessors) {
+	if (CustomComponent.prototype.setState) {
+		// stateful react component
+		class LookComponent extends CustomComponent {
+			//Inherit the original displayName for proper use later on
+			static displayName = CustomComponent.displayName || CustomComponent.name || 'Component'
 
-		render() {
-			this.lookStyles = prepareStyles(this, additionalStyles)
-			
-			// Only resolve if there are styles to resolve
-			// Otherwise just return super.render() which leads to no difference
-			if (this.lookStyles && Object.keys(this.lookStyles).length > 0) {
-				return resolveStyles(this, super.render())
-			} else {
-				console.warn(Component + ' was enhanced with Look, but did not provide any styles.')
-				console.warn('This might affect performance and rendering time.')
-				return super.render()
+			constructor() {
+				super(...arguments)
+				this.state = this.state ||  {}
+
+				this._processors = prepareProcessors(this, additionalProcessors)
+				this._lastActiveElements = []
+				this.state._look = new Map()
+			}
+
+			render() {
+				this.lookStyles = prepareStyles(this, additionalStyles)
+
+				// Only resolve if there are styles to resolve
+				// Otherwise just return super.render() which leads to no difference
+				if (this.lookStyles && Object.keys(this.lookStyles).length > 0) {
+					return resolveStyles(this, super.render())
+				} else {
+					console.warn(Component + ' was enhanced with Look, but did not provide any styles.')
+					console.warn('This might affect performance and rendering time.')
+					return super.render()
+				}
 			}
 		}
+		return LookComponent
+	} else {
+		//stateless react component
+		class Stateless extends Component {
+			constructor() {
+				super(...arguments)
+				this._processors = prepareProcessors(this, additionalProcessors)
+			}
+			render() {
+				this.lookStyles = prepareStyles(this, assign({}, additionalStyles))
+				return resolveStyles(this, CustomComponent())
+			}
+		}
+		return Stateless
 	}
-
-	//Inherit the original displayName for proper use later on
-	return EnhancedComponent
 }
 
 
@@ -66,13 +82,12 @@ export function flattenStyles(styles) {
 export function prepareStyles(Component, additionalStyles) {
 	let styles
 	if (Component.styles) {
-		styles = assignStyles({}, Component.styles instanceof Function ? Component.styles.call(Component) :  Component.styles)
+		styles = assignStyles({}, Component.styles instanceof Function ? Component.styles.call(Component) : Component.styles)
 		styles = resolveDefault(flattenStyles(styles))
 	}
 
 	if (additionalStyles) {
-		additionalStyles = resolveDefault(additionalStyles)
-		styles = assignStyles({}, styles, additionalStyles)
+		styles = assignStyles({}, styles, resolveDefault(assign({}, additionalStyles)))
 	}
 	return styles
 }
