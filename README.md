@@ -99,7 +99,7 @@ class Header extends Component {
 ```
 
 ## Stateless Components
-With look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14.
+With Look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14. *(Currently Look creates a Stateful Component for instant support)* 
 ```javascript
 let Header = ({title}) => (
   <div look="box">
@@ -122,7 +122,7 @@ let styles = {
 export default Look(Header, styles)
 ```
 ## React Native
-Look also support React Native and lets you use stateful conditions or pseudo classes such as `:first-child`.<br>
+Look also supports React Native to use stateful conditions or pseudo classes such as `:first-child`.<br>
 **Already got a lot of styles?** Just add them to the wrapper and reference the 'selector' as a look.
 ```javascript
 class Test extends React.Component {
@@ -139,10 +139,9 @@ let styles = StyleSheet.create({
 
 module.exports = Look(Component, styles)
 ```
-As React native does not support every ES6 Feature is could be quite a mess to get it running properly though. e.g. You need to require it using:
+As React native does not support every ES6 Feature it could be quite a mess to get it running properly though. e.g. You need to require it using:
 ```javascript
-var _Look = require('react-look'); 
-var Look = _Look.default;
+var Look = require('react-look').default;
 ```
 > Usage will be improved soon!
 
