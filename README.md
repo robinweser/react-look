@@ -16,7 +16,7 @@ It simplyfies how you are styling your Components and comes with two different p
 # Features
 Look is as far as I know the **feature richest** inline-styling library for React. <br>
 Supporting [25 pseudo classes](docs/PseudoClasses.md) out of the box as well as **stateful styles**.
-- ES6-ready & `React.createClass`
+- ES6 Classes, `React.createClass` & Stateless Components
 - [pseudo classes](docs/PseudoClasses.md)
 - [stateful styles](docs/StatefulConditions.md) (condition based)
 - nesting
