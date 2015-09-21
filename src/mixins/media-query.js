@@ -1,4 +1,5 @@
 import MixinTypes from '../utils/MixinTypes'
+import throttle from '../utils/throttle'
 
 /**
  * Evaluates if a media condition is fulfilled by using window.matchMedia
@@ -12,9 +13,9 @@ export default [{
 		let matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
 		if (matchMedia !== undefined) {
 			if (!args.Component._mediaQueryListener) {
-				args.Component._mediaQueryListener = () => {
+				args.Component._mediaQueryListener = throttle(() => {
 					args.Component.forceUpdate()
-				}
+				}, 250)
 				window.addEventListener('resize', args.Component._mediaQueryListener)
 				
 				//Remove the listener if the component unmounts to keep things clean

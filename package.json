@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Processable, dynamic & stateful Component Styling for React & React Native",
   "main": "look.js",
   "files": [
