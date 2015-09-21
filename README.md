@@ -97,6 +97,30 @@ class Header extends Component {
   }
 }
 ```
+
+## Stateless Components
+With look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14.
+```javascript
+let Header = ({title}) => (
+  <div look="box">
+    <div look="title">
+      {title}
+    </div>
+  </div>
+)
+
+let styles = {
+  box : {
+    backgroundColor: 'red',
+    padding: 10
+  },
+  title : {
+    fontSize: 20
+  }
+}
+
+export default Look(Header, styles)
+```
 ## React Native
 Look also support React Native and lets you use stateful conditions or pseudo classes such as `:first-child`.<br>
 **Already got a lot of styles?** Just add them to the wrapper and reference the 'selector' as a look.
