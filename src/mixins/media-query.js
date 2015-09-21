@@ -15,7 +15,7 @@ export default [{
 				args.Component._mediaQueryListener = () => {
 					args.Component.forceUpdate()
 				}
-				window.addEventListener('resize', args.Component_mediaQueryListener)
+				window.addEventListener('resize', args.Component._mediaQueryListener)
 				
 				//Remove the listener if the component unmounts to keep things clean
 				args.Component.componentWillUnmount = () => {
