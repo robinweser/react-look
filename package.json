@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Processable, dynamic & stateful Component Styling for React & React Native",
   "main": "look.js",
   "files": [
@@ -8,6 +8,7 @@
     "README.md",
     "dom.js",
     "look.js",
+    "core.js",
     "lib/",
     "docs/"
   ],
@@ -45,9 +46,11 @@
   "dependencies": {
     "assign-styles": "^1.0.2",
     "dynamic-style-sheets": "^0.2.2",
-    "inline-style-prefixer": "0.2.3",
+    "inline-style-prefixer": "0.2.4",
     "object-assign": "^4.0.1",
-    "param-case": "^1.1.1"
+    "param-case": "^1.1.1",
+    "react": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1"
   },
   "devDependencies": {
     "babel": "^5.8.23",
