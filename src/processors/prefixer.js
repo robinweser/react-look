@@ -3,7 +3,7 @@ let userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : undefin
 
 export default {
 	name: 'Prefixer',
-	version: '1.0.0',
+	version: '1.0.1',
 	description: 'Adds vendor prefix to properties if environment needs those.',
 
 	/**
@@ -12,7 +12,7 @@ export default {
 	 */
 	process(styles) {
 		if (userAgent !== undefined) {
-			styles = Prefixer.process(styles)
+			styles = Prefixer(styles)
 			return styles
 		} else {
 			console.warn('Autoprefixing failed as there is no valid userAgent specified.');
