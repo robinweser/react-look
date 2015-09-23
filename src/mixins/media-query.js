@@ -19,9 +19,10 @@ export default [{
 				window.addEventListener('resize', args.Component._mediaQueryListener)
 				
 				//Remove the listener if the component unmounts to keep things clean
+				let existingWillUnmount = args.componentWillUnmount
 				args.Component.componentWillUnmount = () => {
-					args.Component.componentWillUnmount()
-					window.removeEventListener(args.Component._mediauQueryListener)
+					existingWillUnmount && existingWillUnmount()
+					window.removeEventListener(args.Component._mediaQueryListener)
 				}
 			}
 			return matchMedia(key.replace('@media', '').trim()).matches ? styles : false
