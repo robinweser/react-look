@@ -19,7 +19,7 @@ export default [{
 				window.addEventListener('resize', args.Component._mediaQueryListener)
 				
 				//Remove the listener if the component unmounts to keep things clean
-				let existingWillUnmount = args.componentWillUnmount
+				let existingWillUnmount = args.Component.componentWillUnmount
 				args.Component.componentWillUnmount = () => {
 					existingWillUnmount && existingWillUnmount()
 					window.removeEventListener(args.Component._mediaQueryListener)
