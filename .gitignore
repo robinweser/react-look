@@ -2,6 +2,7 @@
 npm-debug.log
 demo/bundle.js
 lib
+addons
 /look.js
 /dom.js
 /core.js
