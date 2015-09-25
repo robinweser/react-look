@@ -1,9 +1,9 @@
 {
-	"name": "react-look",
-	"version": "0.4.7",
-	"description": "Processable, dynamic & stateful Component Styling for React & React Native",
-	"main": "look.js",
-	"files": [
+  "name": "react-look",
+  "version": "0.4.8",
+  "description": "Processable, dynamic & stateful Component Styling for React & React Native",
+  "main": "look.js",
+  "files": [
     "LICENSE",
     "README.md",
     "dom.js",
@@ -12,24 +12,24 @@
     "lib/",
     "docs/"
   ],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/rofrischmann/react-look"
-	},
-	"scripts": {
-		"clean": "rimraf lib",
-		"pretest": "npm run transpile",
-		"test": "mocha --recursive --compilers js:babel/register",
-		"test:watch": "mocha --recursive --compilers js:babel/register -w",
-		"transpile": "npm run clean && babel src --out-dir lib",
-		"package": "npm run transpile && node build-package.js",
-		"release": "npm run package && npm publish",
-		"demo": "npm run build:demo && open demo/index.html",
-		"demo-dev": "npm run build:demo-dev && open demo/index.html",
-		"build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
-		"build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js"
-	},
-	"keywords": [
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rofrischmann/react-look"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "pretest": "npm run transpile",
+    "test": "mocha --recursive --compilers js:babel/register",
+    "test:watch": "mocha --recursive --compilers js:babel/register -w",
+    "transpile": "npm run clean && babel src --out-dir lib",
+    "package": "npm run transpile && node build-package.js",
+    "release": "npm run package && npm publish",
+    "demo": "npm run build:demo && open demo/index.html",
+    "demo-dev": "npm run build:demo-dev && open demo/index.html",
+    "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
+    "build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js"
+  },
+  "keywords": [
     "react",
     "layout",
     "react-native",
@@ -44,30 +44,30 @@
     "stateful style",
     "cssinjs"
   ],
-	"author": "Robin Frischmann",
-	"license": "MIT",
-	"dependencies": {
-		"assign-styles": "^1.0.2",
-		"dynamic-style-sheets": "^0.2.2",
-		"inline-style-prefixer": "0.2.5",
-		"object-assign": "^4.0.1",
-		"param-case": "^1.1.1",
-		"react": "^0.14.0-rc1"
-	},
-	"devDependencies": {
-		"babel": "^5.8.23",
-		"babelify": "^6.3.0",
-		"browserify": "^11.1.0",
-		"chai": "^3.3.0",
-		"color": "^0.10.1",
-		"minifyify": "^7.1.0",
-		"mocha": "^2.3.3",
-		"rimraf": "^2.4.3",
-		"sinon": "^1.17.0",
-		"sinon-chai": "^2.8.0",
-		"react-dom": "^0.14.0-rc1"
-	},
-	"peerDependecies": {
-		"react-native": "0.11"
-	}
+  "author": "Robin Frischmann",
+  "license": "MIT",
+  "dependencies": {
+    "assign-styles": "^1.0.2",
+    "dynamic-style-sheets": "^0.2.2",
+    "inline-style-prefixer": "^0.2.5",
+    "object-assign": "^4.0.1",
+    "param-case": "^1.1.1",
+    "react": "^0.14.0-rc1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babelify": "^6.3.0",
+    "browserify": "^11.1.0",
+    "chai": "^3.3.0",
+    "color": "^0.10.1",
+    "minifyify": "^7.1.0",
+    "mocha": "^2.3.3",
+    "rimraf": "^2.4.3",
+    "sinon": "^1.17.0",
+    "sinon-chai": "^2.8.0",
+    "react-dom": "^0.14.0-rc1"
+  },
+  "peerDependecies": {
+    "react-native": "0.11"
+  }
 }

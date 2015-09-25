@@ -10,15 +10,15 @@ import Config from '../api/Config'
  * Maps the final style objects to the element
  * @param {Object} Component - wrapping React Component providing styles and elements
  * @param {Object} element - previously rendered React element
- * @param {Object} parent - referencing element's parent
+ * @param {Object} childIndexMap - information on child index and child types
  */
-export default function resolveStyles(Component, element, parent) {
+export default function resolveStyles(Component, element, childIndexMap) {
 	if (element && element.props) {
 		let props = element.props
 
 		//resolving child looks recursively to make sure they will be rendered correctly
 		let newProps = assign({}, props)
-		newProps.children = resolveChildren(Component, flattenArray(props.children), element)
+		newProps.children = resolveChildren(Component, flattenArray(props.children))
 
 		//Extracts only relevant styles according to the look prop
 		let styles = extractStyles(props, Component.lookStyles)
@@ -26,7 +26,9 @@ export default function resolveStyles(Component, element, parent) {
 		if (styles) {
 			//Triggers style processing
 			//Uses the exact processor lineup defined within Config
-			let processArgs = {newProps, Component, element, Config, parent}
+			let processArgs = {
+				newProps, Component, element, childIndexMap, Config
+			}
 			styles = processStyles(styles, Component._processors, processArgs)
 			if (props.style) {
 				styles = assignStyles(styles, props.style)
@@ -59,13 +61,16 @@ export default function resolveStyles(Component, element, parent) {
  * Resolves provided styles for an elements children
  * @param {Object} Component - wrapping React Component providing looks and elements
  * @param {Array|string|number} children - children that get resolved
- * @param {Object} parent - referencing element's parent
  */
-export function resolveChildren(Component, children, parent) {
+export function resolveChildren(Component, children) {
 	if (children) {
 		//If there are more than one child, iterate over them
 		if (children instanceof Array) {
 			let newChildren = []
+
+			let typeMap = generateTypeMap(children)
+			let indexMap = {}
+			let childType, childIndex
 
 			//Recursively resolve styles for child elements first
 			//Generate index-maps to resolve child-index-sensitive pseudo classes
@@ -73,7 +78,19 @@ export function resolveChildren(Component, children, parent) {
 
 				//only resolve child if it actually is a valid react element
 				if (isValidElement(child)) {
-					newChildren.push(resolveStyles(Component, child, parent))
+
+					//Provides information on child (type-sensitive) child indexes to resolve index-sensitive pseudo-classes
+					indexMap = generateIndexMap(child, indexMap)
+
+					childType = getChildType(child)
+					childIndex = {
+						'index': index + 1,
+						'length': children.length,
+						'typeIndex': indexMap[childType],
+						'typeLength': typeMap[childType]
+					}
+					newChildren.push(resolveStyles(Component, child, childIndex))
+
 				} else {
 					//This clears undefined childs as they would falsely render
 					//e.g. if you're trying to map {this.props.title} but it is not defined
@@ -88,7 +105,7 @@ export function resolveChildren(Component, children, parent) {
 			})
 			return newChildren
 		} else {
-			return resolveStyles(Component, children, parent)
+			return resolveStyles(Component, children)
 		}
 	} else {
 		return children === 0 ? children : false
@@ -127,4 +144,51 @@ export function extractStyles(props, styles) {
 	} else {
 		return false
 	}
+}
+
+/**
+ * Generates a index map with information on type/index of each child
+ * This is needed to validate type-specific index-sensitive pseudo-classes
+ * e.g. :last-type-of
+ * @param {Array} children - an array of children
+ * @pararam {Object} indexMap - an object which stores the information
+ */
+export function generateIndexMap(child, indexMap) {
+
+	// use component displayName if child is a function (ES6 component)
+	let childType = getChildType(child)
+
+	if (indexMap.hasOwnProperty(childType)) {
+		++indexMap[childType]
+	} else {
+		indexMap[childType] = 1;
+	}
+	return indexMap
+}
+
+/**
+ * Iterate through all children and create a map with type/index information
+ * @param {Array} children - an array of children
+ */
+export function generateTypeMap(children) {
+	let indexMap = {}
+	children.forEach((child, index) => {
+		generateIndexMap(child, indexMap)
+	})
+	return indexMap
+}
+
+/**
+ * Returns a childs type
+ * If child is an ES6 class it returns the displayName
+ * @param {Object} child - child which type gets identified
+ */
+export function getChildType(child) {
+	let childType
+	if (child.type instanceof Function) {
+		childType = (child.type.hasOwnProperty('name') ? child.type.name : child.type)
+	} else {
+		childType = child.type
+	}
+	return childType
 }
