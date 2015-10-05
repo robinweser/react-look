@@ -147,7 +147,7 @@ var Look = require('react-look').default;
 
 ## Processor & Mixins
 Look provides a nice interface to use custom processors. By default is ships with a Mixin processor which let's you define custom mixins. Every implemented pseudo class, media queries and even stateful conditions are also just plain mixins. There is also an autoprefixing processor for the DOM-package to add browser-specific vendor prefixes based on [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer) evaluating [caniuse.com](caniuse.com) data.
-> **Note**: Furhter documentation on how to create your own processors & mixins will be served as soon as 1.0 hits the ground. For now I'd like you to check out `src/mixins/` for some examples.
+> **Note**: Further documentation on how to create your own processors & mixins will be served as soon as 1.0 hits the ground. For now I'd like you to check out `src/mixins/` for some examples.
 
 # Demo
 Check out the examples for more specific examples for some special use cases. See them in action using the demo.<br>
