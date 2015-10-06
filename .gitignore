@@ -6,3 +6,4 @@ lib
 /dom.js
 /core.js
 addons
+coverage
