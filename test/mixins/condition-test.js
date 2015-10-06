@@ -7,12 +7,13 @@ describe('Evaluating conditions', () => {
 			props: {
 				highlight: true,
 				clicks: 20,
-				noprop: undefined
+				noprop: undefined,
+				error: null
 			},
 			state: {}
 		}
 	}
-	
+
 	//Separating mixin functions for better testing
 	let equal, greater, unEqual, greaterThan, less, lessThan
 	Conditions.forEach(mixin => {
@@ -37,7 +38,7 @@ describe('Evaluating conditions', () => {
 				break
 		}
 	})
-	
+
 	it('should validate true', () => {
 		expect(equal('highlight=true', true, args)).to.equal(true)
 		expect(greater('clicks>10', true, args)).to.equal(true)
@@ -46,6 +47,7 @@ describe('Evaluating conditions', () => {
 		expect(greaterThan('clicks>=19', true, args)).to.equal(true)
 		expect(equal('noprop=undefined', true, args)).to.equal(true)
 		expect(unEqual('clicks!=undefined', true, args)).to.equal(true)
+		expect(equal('error=null', true, args)).to.equal(true)
 	})
 
 
@@ -55,5 +57,6 @@ describe('Evaluating conditions', () => {
 		expect(unEqual('clicks!=20', true, args)).to.equal(false)
 		expect(lessThan('clicks<=10', true, args)).to.equal(false)
 		expect(equal('highlight=undefined', true, args)).to.equal(false)
+		expect(equal('error=undefined', true, args)).to.equal(false)
 	})
 })
