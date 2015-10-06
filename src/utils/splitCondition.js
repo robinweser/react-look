@@ -14,7 +14,7 @@ export default function splitCondition(key, operator, Component) {
 		let match = matchValues[property] === undefined ? 'undefined' : matchValues[property]
 
 		if (!isNumber(match)) {
-			match = match.toString()
+			match = (match + '').toString()
 		}
 		return [match, value]
 	} else {
