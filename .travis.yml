@@ -1,10 +1,6 @@
 language: node_js
 node_js:
   - "4.0"
-before_install:
-  - sudo pip install codecov
-after_success:
-  - codecov
 addons:
     code_climate:
         repo_token: f932c43d4ad44f04db1c05dd1bd2de3616affcec12bb9ce3171f5b01d5f17741
