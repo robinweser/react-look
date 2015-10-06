@@ -19,7 +19,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "pretest": "npm run transpile",
-    "test": "npm run test:coverage && mocha --recursive --compilers js:babel/register",
+    "test": "mocha --recursive --compilers js:babel/register",
     "test:watch": "mocha --recursive --compilers js:babel/register -w",
     "test:coverage": "istanbul cover _mocha -- --recursive --compilers js:babel/register",
     "coverage": "cat ./coverage/coverage.json | ./node_modules/codecov.io/bin/codecov.io.js",
