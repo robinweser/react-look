@@ -17,8 +17,8 @@ export default {
       styles = prefixer.prefix(styles)
       return styles
     } else {
-      console.warn('Autoprefixing failed as there is no valid userAgent specified.');
-      console.warn('Use Config.setUserAgent to specify a custom userAgent for server-side rendering.');
+      console.warn('Autoprefixing failed as there is no valid userAgent specified.')
+      console.warn('Use Config.setUserAgent to specify a custom userAgent for server-side rendering.')
     }
   }
 }

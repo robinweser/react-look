@@ -6,19 +6,19 @@ import createPseudoElement from '../../utils/createPseudoElement'
  * Uses MixinTypes.INCLUDE to cover both :before/:after as well as ::before/::after
  */
 export default [{
-	key: ':before',
-	type: MixinTypes.INCLUDE,
-	fn: (key, styles, args) => {
-		if (args.newProps.hasOwnProperty('children')) {
-			args.newProps.children.unshift(createPseudoElement(styles))
-		}
-	}
+  key: ':before',
+  type: MixinTypes.INCLUDE,
+  fn: (key, styles, {newProps}) => {
+    if (newProps.hasOwnProperty('children')) {
+      newProps.children.unshift(createPseudoElement(styles))
+    }
+  }
 }, {
-	key: ':after',
-	type: MixinTypes.INCLUDE,
-	fn: (key, styles, args) => {
-		if (args.newProps.hasOwnProperty('children')) {
-			args.newProps.children.push(createPseudoElement(styles))
-		}
-	}
+  key: ':after',
+  type: MixinTypes.INCLUDE,
+  fn: (key, styles, {newProps}) => {
+    if (newProps.hasOwnProperty('children')) {
+      newProps.children.push(createPseudoElement(styles))
+    }
+  }
 }]

@@ -7,17 +7,16 @@ import isNumber from './isNumber'
  * @param {Object} Component - outer React Component holding props and state to match
  */
 export default function splitCondition(key, operator, Component) {
-	let matchValues = assign({}, Component.props, Component.state)
+  let matchValues = assign({}, Component.props, Component.state)
 
-	let [property, value] = key.split(operator)
-	if (matchValues.hasOwnProperty(property)) {
-		let match = matchValues[property] === undefined ? 'undefined' : matchValues[property]
-
-		if (!isNumber(match)) {
-			match = (match + '').toString()
-		}
-		return [match, value]
-	} else {
-		return false
-	}
+  let [property, value] = key.split(operator)
+  if (matchValues.hasOwnProperty(property)) {
+    let match = matchValues[property] === undefined ? 'undefined' : matchValues[property]
+    if (!isNumber(match)) {
+      match = (match + '').toString()
+    }
+    return [match, value]
+  } else {
+    return false
+  }
 }

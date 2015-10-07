@@ -6,45 +6,45 @@ import splitCondition from '../utils/splitCondition'
  * Therefore it uses Component which gets provided as part of arguments to validate props/state
  */
 export default [{
-	key: '>=',
-	type: MixinTypes.INCLUDE,
-	fn: (key, styles, args) => {
-		let evaluation = splitCondition(key, '>=', args.Component)
-		return evaluation && evaluation[0] >= evaluation[1] ? styles : false
-	}
+  key: '>=',
+  type: MixinTypes.INCLUDE,
+  fn: (key, styles, args) => {
+    let evaluation = splitCondition(key, '>=', args.Component)
+    return evaluation && evaluation[0] >= evaluation[1] ? styles : false
+  }
 }, {
-	key: '<=',
-	type: MixinTypes.INCLUDE,
-	fn: (key, styles, args) => {
-		let evaluation = splitCondition(key, '<=', args.Component)
-		return evaluation && evaluation[0] <= evaluation[1] ? styles : false
-	}
+  key: '<=',
+  type: MixinTypes.INCLUDE,
+  fn: (key, styles, args) => {
+    let evaluation = splitCondition(key, '<=', args.Component)
+    return evaluation && evaluation[0] <= evaluation[1] ? styles : false
+  }
 }, {
-	key: '!=',
-	type: MixinTypes.INCLUDE,
-	fn: (key, styles, args) => {
-		let evaluation = splitCondition(key, '!=', args.Component)
-		return evaluation && evaluation[0] != evaluation[1] ? styles : false
-	}
+  key: '!=',
+  type: MixinTypes.INCLUDE,
+  fn: (key, styles, args) => {
+    let evaluation = splitCondition(key, '!=', args.Component)
+    return evaluation && evaluation[0] != evaluation[1] ? styles : false
+  }
 }, {
-	key: '>',
-	type: MixinTypes.INCLUDE,
-	fn: (key, styles, args) => {
-		let evaluation = splitCondition(key, '>', args.Component)
-		return evaluation && evaluation[0] > evaluation[1] ? styles : false
-	}
+  key: '>',
+  type: MixinTypes.INCLUDE,
+  fn: (key, styles, args) => {
+    let evaluation = splitCondition(key, '>', args.Component)
+    return evaluation && evaluation[0] > evaluation[1] ? styles : false
+  }
 }, {
-	key: '<',
-	type: MixinTypes.INCLUDE,
-	fn: (key, styles, args) => {
-		let evaluation = splitCondition(key, '<', args.Component)
-		return evaluation && evaluation[0] < evaluation[1] ? styles : false
-	}
+  key: '<',
+  type: MixinTypes.INCLUDE,
+  fn: (key, styles, args) => {
+    let evaluation = splitCondition(key, '<', args.Component)
+    return evaluation && evaluation[0] < evaluation[1] ? styles : false
+  }
 }, {
-	key: '=',
-	type: MixinTypes.INCLUDE,
-	fn: (key, styles, args) => {
-		let evaluation = splitCondition(key, '=', args.Component)
-		return evaluation && evaluation[0] == evaluation[1] ? styles : false
-	}
+  key: '=',
+  type: MixinTypes.INCLUDE,
+  fn: (key, styles, args) => {
+    let evaluation = splitCondition(key, '=', args.Component)
+    return evaluation && evaluation[0] == evaluation[1] ? styles : false
+  }
 }]

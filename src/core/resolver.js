@@ -26,7 +26,7 @@ export default function resolveStyles(Component, element, parent) {
     if (styles) {
       // Triggers style processing
       // Uses the exact processor lineup defined within Config
-      let processArgs = {newProps, Component, element, Config, parent}
+      let processArgs = {newProps, Component, element, Config}
       styles = processStyles(styles, Component._processors, processArgs)
       if (props.style) {
         styles = assignStyles(styles, props.style)
@@ -46,10 +46,17 @@ export default function resolveStyles(Component, element, parent) {
       }
     }
 
-    if (!newProps.children) {
-      delete newProps.children
+    !newProps.children && delete newProps.children
+    
+    // Passing the current parent element via props
+    // This is especially useful for mixins e.g. :first-child
+    if (parent) {
+      if (newProps._parent) {
+        console.warn('Look: Property `_parent` already exists. Please use another one.')
+      } else {
+        newProps._parent = parent
+      }
     }
-    parent && (newProps._parent = parent)
     return cloneElement(element, newProps)
   } else {
     return element
@@ -86,7 +93,7 @@ export function resolveChildren(Component, children, parent) {
             newChildren.push(child)
           }
         }
-      });
+      })
       return newChildren
     } else {
       return resolveStyles(Component, children, parent)
