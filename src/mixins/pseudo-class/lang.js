@@ -7,6 +7,6 @@ export default [{
   key: ':lang',
   type: MixinTypes.BEGINWITH,
   fn: (key, styles, {newProps}) => {
-    return args.newProps.lang && key.indexOf(newProps.lang) > -1 ? styles : false
+    return newProps.lang && key.indexOf(newProps.lang) > -1 ? styles : false
   }
 }]

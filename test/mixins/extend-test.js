@@ -45,7 +45,7 @@ describe('Extending styles', () => {
 			},
 			condition: (true == false)
 		}) 
-		expect(extended).to.equal(false) 
+		expect(extended).to.equal(undefined) 
 	}) 
 
 
