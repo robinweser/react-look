@@ -12,5 +12,6 @@ export default [{
     if (styles instanceof Array) {
       return {[ key]: styles.join(';' + paramCase(key) + ':')}
     }
+    return styles
   }
 }]

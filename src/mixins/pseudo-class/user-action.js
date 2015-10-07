@@ -23,7 +23,8 @@ export default [{
     if (!Component._onMouseUp && typeof window !== 'undefined') {
       Component._onMouseUp = () => {
         while (Component._lastActiveElements.length > 0) {
-          let key = Component._lastActiveElements[0]State.setState('active', false, Component, key)
+          let key = Component._lastActiveElements[0];
+          State.setState('active', false, Component, key)
           Component._lastActiveElements.pop(key)
         }
       }
