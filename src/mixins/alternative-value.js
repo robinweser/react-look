@@ -11,8 +11,6 @@ export default [{
   fn: (key, styles, args) => {
     if (styles instanceof Array) {
       return {[ key]: styles.join(';' + paramCase(key) + ':')}
-    } else {
-      return styles
     }
   }
 }]

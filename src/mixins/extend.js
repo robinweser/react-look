@@ -16,10 +16,7 @@ export default [{
           return resolveStyles(options.styles)
         } else {
           console.warn('There has no style object been passed. Use `styles` as key.')
-          return false
         }
-      } else {
-        return false
       }
     } else {
       if (options.hasOwnProperty('styles')) {

@@ -7,8 +7,7 @@ import MixinTypes from '../utils/MixinTypes'
 export default [{
   key: 'css',
   type: MixinTypes.EQUAL,
-  fn: (key, className, args) => {
-    let newProps = args.newProps
+  fn: (key, className, {newProps}) => {
     if (newProps.hasOwnProperty('className')) {
       newProps.className += ' ' + className
     } else {

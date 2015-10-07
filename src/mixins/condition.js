@@ -8,43 +8,43 @@ import splitCondition from '../utils/splitCondition'
 export default [{
   key: '>=',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, args) => {
-    let evaluation = splitCondition(key, '>=', args.Component)
+  fn: (key, styles, {Component}) => {
+    let evaluation = splitCondition(key, '>=', Component)
     return evaluation && evaluation[0] >= evaluation[1] ? styles : false
   }
 }, {
   key: '<=',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, args) => {
-    let evaluation = splitCondition(key, '<=', args.Component)
+  fn: (key, styles, {Component}) => {
+    let evaluation = splitCondition(key, '<=', Component)
     return evaluation && evaluation[0] <= evaluation[1] ? styles : false
   }
 }, {
   key: '!=',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, args) => {
-    let evaluation = splitCondition(key, '!=', args.Component)
+  fn: (key, styles, {Component}) => {
+    let evaluation = splitCondition(key, '!=', Component)
     return evaluation && evaluation[0] != evaluation[1] ? styles : false
   }
 }, {
   key: '>',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, args) => {
-    let evaluation = splitCondition(key, '>', args.Component)
+  fn: (key, styles, {Component}) => {
+    let evaluation = splitCondition(key, '>', Component)
     return evaluation && evaluation[0] > evaluation[1] ? styles : false
   }
 }, {
   key: '<',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, args) => {
-    let evaluation = splitCondition(key, '<', args.Component)
+  fn: (key, styles, {Component}) => {
+    let evaluation = splitCondition(key, '<', Component)
     return evaluation && evaluation[0] < evaluation[1] ? styles : false
   }
 }, {
   key: '=',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, args) => {
-    let evaluation = splitCondition(key, '=', args.Component)
+  fn: (key, styles, {Component}) => {
+    let evaluation = splitCondition(key, '=', Component)
     return evaluation && evaluation[0] == evaluation[1] ? styles : false
   }
 }]

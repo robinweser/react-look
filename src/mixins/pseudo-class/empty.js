@@ -7,8 +7,6 @@ export default [{
   key: ':empty',
   type: MixinTypes.EQUAL,
   fn: (key, styles, {newProps}) => {
-    if (newProps.children || newProps.children.length < 1) {
-      return styles
-    }
+    return !newProps.children || newProps.children.length < 1 ? styles : false
   }
 }]

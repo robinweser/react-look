@@ -10,8 +10,7 @@ import { createListener } from '../../api/Listener'
 export default [{
   key: ':active',
   type: MixinTypes.EQUAL,
-  fn: (pseudo, styles, args) => {
-    let {element, Component, newProps} = args
+  fn: (pseudo, styles, {element, Component, newProps}) => {
     let key = element.key || element.ref || getDefaultKey()
 
     // add event listener if not added yet
@@ -37,8 +36,7 @@ export default [{
 }, {
   key: ':hover',
   type: MixinTypes.EQUAL,
-  fn: (pseudo, styles, args) => {
-    let {element, Component, newProps} = args
+  fn: (pseudo, styles, {element, Component, newProps}) => {
     let key = element.key || element.ref || getDefaultKey()
 
     // add event listener if not added yet
@@ -55,8 +53,7 @@ export default [{
 }, {
   key: ':focus',
   type: MixinTypes.EQUAL,
-  fn: (pseudo, styles, args) => {
-    let {element, Component, newProps} = args
+  fn: (pseudo, styles, {element, Component, newProps}) => {
     let key = element.key || element.ref || getDefaultKey()
 
     // add event listener if not added yet
