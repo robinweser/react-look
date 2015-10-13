@@ -13,7 +13,7 @@ import Config from '../api/Config'
  * @param {Object} parent - referencing element's parent
  */
 export default function resolveStyles(Component, element, parent) {
-  if (element && element.props) {
+  if (element && element.props && (element.props.look || element.props.children)) {
     let props = element.props
 
     // resolving child looks recursively to make sure they will be rendered correctly
