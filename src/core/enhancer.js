@@ -50,7 +50,7 @@ export default function Enhancer(CustomComponent, additionalStyles, additionalPr
 			}
 			render() {
 				this.lookStyles = prepareStyles(this, assign({}, additionalStyles))
-				return resolveStyles(this, CustomComponent())
+				return resolveStyles(this, CustomComponent(this.props))
 			}
 		}
 		return Stateless

@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "Processable, dynamic & stateful Component Styling for React & React Native",
   "main": "look.js",
   "files": [
@@ -17,7 +17,7 @@
     "url": "https://github.com/rofrischmann/react-look"
   },
   "scripts": {
-    "clean": "rimraf lib",
+    "clean": "rimraf lib dist coverage",
     "pretest": "npm run transpile",
     "test": "mocha --recursive --compilers js:babel/register",
     "test:watch": "mocha --recursive --compilers js:babel/register -w",
@@ -28,6 +28,10 @@
     "release": "npm run package && npm publish",
     "demo": "npm run build:demo && open demo/index.html",
     "demo-dev": "npm run build:demo-dev && open demo/index.html",
+    "bundle": "npm run transpile && mkdir dist && npm run bundle:core && npm run bundle:look && npm run bundle:dom",
+    "bundle:core": "browserify src/core.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-core.min.js",
+    "bundle:dom": "browserify src/dom.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-dom.min.js",
+    "bundle:look": "browserify src/look.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look.min.js",
     "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
     "build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js"
   },
@@ -52,9 +56,7 @@
     "assign-styles": "^1.0.2",
     "dynamic-style-sheets": "^0.2.2",
     "inline-style-prefixer": "^0.3.2",
-    "object-assign": "^4.0.1",
-    "param-case": "^1.1.1",
-    "react": "^0.14.0-rc1"
+    "object-assign": "^4.0.1"
   },
   "devDependencies": {
     "babel": "^5.8.23",
@@ -66,10 +68,11 @@
     "istanbul": "^0.3.22",
     "minifyify": "^7.1.0",
     "mocha": "^2.3.3",
-    "react-dom": "^0.14.0-rc1",
     "rimraf": "^2.4.3",
     "sinon": "^1.17.1",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "react": "0.14.0",
+    "react-dom": "0.14.0"
   },
   "peerDependencies": {
     "react-native": "0.11"

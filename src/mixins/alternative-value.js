@@ -1,5 +1,5 @@
 import MixinTypes from '../utils/MixinTypes'
-import paramCase from 'param-case'
+import camelToDashCase from '../utils/camelToDashCase'
 
 /**
  * Condition mixins are shortcuts to check if a prop/state fulfills a given expression
@@ -10,7 +10,7 @@ export default [{
   type: MixinTypes.ANY,
   fn: (key, styles, args) => {
     if (styles instanceof Array) {
-      return {[ key]: styles.join(';' + paramCase(key) + ':')}
+      return {[ key]: styles.join(';' + camelToDashCase(key) + ':')}
     }
     return styles
   }
