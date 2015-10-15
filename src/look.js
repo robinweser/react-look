@@ -4,6 +4,7 @@ import Config from './api/Config'
 import Listener from './api/Listener'
 import Mixins from './processors/mixin'
 import MixinTypes from './utils/MixinTypes'
+import createStyleSheet from './core/stylesheet'
 
 //mixins
 import Conditions from './mixins/condition'
@@ -40,5 +41,6 @@ export {
 	Listener,
 	State,
 	Config,
-	MixinTypes
+	MixinTypes,
+	createStyleSheet
 }

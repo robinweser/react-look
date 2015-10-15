@@ -1,8 +1,7 @@
 import assign from 'object-assign'
-import { cloneElement, isValidElement } from 'react'
+import { cloneElement, isValidElement, Children } from 'react'
 import assignStyles from 'assign-styles'
 import processStyles from './processor'
-import flattenArray from '../utils/flattenArray'
 import Config from '../api/Config'
 /**
  * Resolves provided styles into style objects
@@ -18,41 +17,45 @@ export default function resolveStyles(Component, element, parent) {
 
     // resolving child looks recursively to make sure they will be rendered correctly
     let newProps = assign({}, props)
-    newProps.children = resolveChildren(Component, flattenArray(props.children), element)
 
-    // Extracts only relevant styles according to the look prop
-    let styles = extractStyles(props, Component.lookStyles)
+    if (props.children) {
+      newProps.children = resolveChildren(Component, props.children, element)
+    }
 
-    if (styles) {
-      // Triggers style processing
-      // Uses the exact processor lineup defined within Config
-      let processArgs = {newProps, Component, element, Config, parent}
-      styles = processStyles(styles, Component._processors, processArgs)
-      if (props.style) {
-        styles = assignStyles(styles, props.style)
+    if (props.look) {
+      if (props.look instanceof Array) {
+        newProps.look = assignStyles(...props.look)
       }
 
-      newProps.style = styles
+      if (Component._lookScopeId && newProps.look._scope && Component._lookScopeId === newProps.look._scope) {
+        let processArgs = {
+          newProps,
+          Component,
+          element,
+          Config,
+          parent
+        }
+        // Triggers style processing
+        // Uses the exact processor lineup defined within Config
+        let styles = processStyles(assign({}, newProps.look.style), Component._processors, processArgs)
+        newProps.style = props.style ? assignStyles(styles, props.style) : styles
+      }
     }
 
     // Resolving styles for elements passed by props
-    let prop;
-    for (prop in newProps) {
+    Object.keys(newProps).forEach(prop => {
       if (prop === 'children') {
-        continue;
+        return
       }
       if (isValidElement(newProps[prop])) {
         newProps[prop] = resolveStyles(Component, newProps[prop])
       }
-    }
+    })
 
-    !newProps.children && delete newProps.children
-    
     // Passing the current parent element via props
     // This is especially useful for mixins e.g. :first-child
-    if (parent) {
-        newProps._parent = parent
-    }
+    parent && (newProps._parent = parent)
+
     return cloneElement(element, newProps)
   } else {
     return element
@@ -66,69 +69,21 @@ export default function resolveStyles(Component, element, parent) {
  * @param {Object} parent - referencing element's parent
  */
 export function resolveChildren(Component, children, parent) {
-  if (children) {
-    // If there are more than one child, iterate over them
-    if (children instanceof Array) {
-      let newChildren = []
-
-      // Recursively resolve styles for child elements first
-      // Generate index-maps to resolve child-index-sensitive pseudo classes
-      children.forEach((child, index) => {
-
-        // only resolve child if it actually is a valid react element
-        if (isValidElement(child)) {
-          newChildren.push(resolveStyles(Component, child, parent))
-        } else {
-          // This clears undefined childs as they would falsely render
-          // e.g. if you're trying to map {this.props.title} but it is not defined
-          // It also fires a warning so that you may remove them on your own
-          if (child === undefined) {
-            console.warn('There are children which are either undefined, empty or invalid React Elements: ', children)
-            console.warn('Look removed 1 child while validating (styles="' + props.look + '"): child ', child)
-          } else {
-            newChildren.push(child)
-          }
-        }
-      })
-      return newChildren
-    } else {
-      return resolveStyles(Component, children, parent)
-    }
-  } else {
-    return children === 0 ? children : false
+  let childType = typeof children
+  // Directly return primitive children
+  if (childType === 'string' || childType === 'number') {
+    return children
   }
-}
-
-/**
- * Extracts referenced styles to an elements props
- * @param {Object} props - elements props that will be assigned
- * @param {Object} styles - a valid style object
- */
-export function extractStyles(props, styles) {
-  if (props.hasOwnProperty('look')) {
-
-    // Resolve look shortcut _default and map referenced styles
-    if (props.look === true) {
-      return styles._default
-    } else {
-      let extracted = {}
-      // Splits look to resolve multiple looks
-      // Reverse to loop backwards in order to resolve with priority
-      let lookList = props.look.split(' ').reverse()
-      lookList.forEach(look => {
-        // Reduce if look is existing otherwise throw a warning
-        if (styles.hasOwnProperty(look)) {
-          extracted = assignStyles({}, styles[look], extracted)
-        } else {
-          console.warn('Assigned look does not exist and will be ignored.')
-          console.warn('Provided styles: ' + JSON.stringify(styles) + ' do not include ' + look)
-          return false
-        }
-      })
-      return extracted
+  // If there are more than one child, iterate over them
+  if (children instanceof Array) {
+    if (Children.count(children) === 1) {
+      return resolveStyles(Component, Children.only(children), parent)
     }
-    delete props.look
+
+    // Recursively resolve styles for child elements
+    // This also flattens all the childs and adds keys
+    return Children.map(children, (child) => isValidElement(child) ? resolveStyles(Component, child, parent) : child)
   } else {
-    return false
+    return children.type ? resolveStyles(Component, children, parent) : children
   }
 }
