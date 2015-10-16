@@ -2,7 +2,7 @@ export default (fn, threshhold, scope) => {
   threshhold || (threshhold = 250)
   let last
   let deferTimer
-  return function() {
+  return () => {
     let context = scope || this
 
     let now = +new Date
@@ -18,5 +18,5 @@ export default (fn, threshhold, scope) => {
       last = now
       fn.apply(context, args)
     }
-  };
+  }
 }

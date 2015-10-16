@@ -4,7 +4,7 @@
  * @param {string} expression - mathematical expression in the form an+b
  * @param {number} index - current elements index
  */
-export default function evalNthExpression(expression, index) {
+export default (expression, index) => {
   if (expression === 'odd') {
     return index % 2 !== 0;
   }

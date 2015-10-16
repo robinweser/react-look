@@ -1,4 +1,5 @@
 const defaultKey = 'root'
+
 /**
  * A small helper module to handle States within react-look
  */
