@@ -27,4 +27,3 @@ By default Look uses `window.matchMedia` to validate media queries. Though some 
 By now there is no "perfect" way to validate media queries on server-side without performance loss *(initial request to get client dimensions)* or without a chance to missmatch the size *(e.g. validation e.g. the `userAgent`)*.<br>
 By default the media query plugin uses the `navigator.userAgent`. You may pass a custom userAgent within the `config` object.
 > See the guide [self-configured Look](guides/configureLook.md)
-

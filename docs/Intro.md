@@ -1,6 +1,6 @@
 # 1. Intro
 
-> You made it to the documentation! First of all I would like to **thank** you for using Look and pushing it forward. Feel free to star or share if you like it. 
+> You made it to the documentation! First of all I would like to **thank** you for using Look and pushing it forward. Feel free to star or share if you like it.
 
 The following documentation pages will hopefully solve all your remaining questions and clear out the usage and intention of Look.<br>
 

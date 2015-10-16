@@ -26,7 +26,7 @@ export default class Condition extends Component {
       })
     }
   }
-	
+
 	onClicksCount = () => {
 		this.setState({
 			clicks : this.state.clicks +1
@@ -71,7 +71,7 @@ const styles = StyleSheet.create(Condition, {
       backgroundColor: 'transparent'
     }
   },
-  
+
   clicks : {
     padding: 5,
     border: '1px solid gray',

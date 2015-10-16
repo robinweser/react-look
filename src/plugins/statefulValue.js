@@ -1,8 +1,8 @@
 const statefulValue = (styles, scopeArgs, config) => {
-	let {Component} = scopeArgs
-	
+	const {Component} = scopeArgs
+
   Object.keys(styles).forEach(property => {
-    let value = styles[property]
+    const value = styles[property]
     if (value instanceof Function) {
       styles[property] = value(Component.props, Component.state)
     } else if (value instanceof Object) {

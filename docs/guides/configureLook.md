@@ -15,13 +15,13 @@ import {CustomProperty, Plugin} from 'react-look/addons'
 const config = {
 	// a list of used plugins ordered by
 	// execution order
-	plugins: [ 
+	plugins: [
 	Plugin.CustomProperties
 	],
-	
+
 	// any special setting used by plugins
 	// e.g. custom property definitions or a userAgent
-	// used by the autoprefixer 
+	// used by the autoprefixer
 	customProperties : {
 		':hover': CustomProperty.hover,
 		':last-child': CustomProperty.lastChild

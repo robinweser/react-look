@@ -10,6 +10,7 @@ let args = {
     }
   },
   element: {
+    type: 'input',
     props: {},
     key: 'unique'
   },

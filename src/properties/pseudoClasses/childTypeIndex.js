@@ -2,18 +2,33 @@ import getNthExpression from '../../utils/splitNthExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
 
 /**
+ * Returns a childs type
+ * If child is an ES6 class it returns the displayName
+ * @param {Object} child - child which type gets identified
+ */
+const getChildType = (child) => {
+  let childType
+  if (child.type instanceof Function) {
+    childType = (child.type.hasOwnProperty('name') ? child.type.name : child.type)
+  } else {
+    childType = child.type
+  }
+  return childType
+}
+
+/**
  * Evaluates child-type index positions using data from childIndexMap
  * childIndexMap is provided by arguments
  */
 const firstOfType = (property, styles, customKey, {parent, element}) => {
   if (parent) {
-    let elementType = getChildType(element)
-    let children = parent.props.children
-    let i
-    let length = children.length
-    for (i = 0; i < length; ++i) {
-      if (getChildType(children[i]) === elementType) {
-        if (children[i] === element) {
+    const elementType = getChildType(element)
+    const children = parent.props.children
+    let index
+    const length = children.length
+    for (index = 0; index < length; ++index) {
+      if (getChildType(children[index]) === elementType) {
+        if (children[index] === element) {
           return styles
         } else {
           return false
@@ -21,20 +36,20 @@ const firstOfType = (property, styles, customKey, {parent, element}) => {
       }
     }
   } else {
-    let elementKey = element._owner._currentElement.key
+    const elementKey = element._owner._currentElement.key
     if (!elementKey) {
       // TODO: Warning
       return false
     }
-    let elementParent = element._owner._instance.props._parent
+    const elementParent = element._owner._instance.props._parent
     if (elementParent) {
-      let elementType = getChildType(element._owner._currentElement)
-      let children = elementParent.props.children
-      let i
-      let length = children.length
-      for (i = 0; i < length; ++i) {
-        if (getChildType(children[i]) === elementType) {
-          if (children[i].key === elementKey) {
+      const elementType = getChildType(element._owner._currentElement)
+      const children = elementParent.props.children
+      let index
+      const length = children.length
+      for (index = 0; index < length; ++index) {
+        if (getChildType(children[index]) === elementType) {
+          if (children[index].key === elementKey) {
             return styles
           } else {
             return false
@@ -49,14 +64,14 @@ const firstOfType = (property, styles, customKey, {parent, element}) => {
 
 const lastOfType = (property, styles, customKey, {parent, element}) => {
   if (parent) {
-    let elementType = getChildType(element)
-    let children = parent.props.children
+    const elementType = getChildType(element)
+    const children = parent.props.children
     let lastTypedElement
-    let i
-    let length = children.length
-    for (i = 0; i < length; ++i) {
-      if (getChildType(children[i]) === elementType) {
-        if (children[i] === element) {
+    let index
+    const length = children.length
+    for (index = 0; index < length; ++index) {
+      if (getChildType(children[index]) === elementType) {
+        if (children[index] === element) {
           lastTypedElement = true
         } else {
           lastTypedElement = false
@@ -67,21 +82,21 @@ const lastOfType = (property, styles, customKey, {parent, element}) => {
       return styles
     }
   } else {
-    let elementKey = element._owner._currentElement.key
+    const elementKey = element._owner._currentElement.key
     if (!elementKey) {
       // TODO: Warning
       return false
     }
-    let elementParent = element._owner._instance.props._parent
+    const elementParent = element._owner._instance.props._parent
     if (elementParent) {
-      let elementType = getChildType(element._owner._currentElement)
-      let children = elementParent.props.children
+      const elementType = getChildType(element._owner._currentElement)
+      const children = elementParent.props.children
       let lastTypedElement
-      let i
-      let length = children.length
-      for (i = 0; i < length; ++i) {
-        if (getChildType(children[i]) === elementType) {
-          if (children[i].key === elementKey) {
+      let index
+      const length = children.length
+      for (index = 0; index < length; ++index) {
+        if (getChildType(children[index]) === elementType) {
+          if (children[index].key === elementKey) {
             lastTypedElement = true
           } else {
             lastTypedElement = false
@@ -99,13 +114,13 @@ const lastOfType = (property, styles, customKey, {parent, element}) => {
 
 const onlyOfType = (property, styles, customKey, {parent, element}) => {
   if (parent) {
-    let elementType = getChildType(element)
-    let children = parent.props.children
+    const elementType = getChildType(element)
+    const children = parent.props.children
     let typeCount = 0
-    let i
-    let length = children.length
-    for (i = 0; i < length; ++i) {
-      if (getChildType(children[i]) === elementType) {
+    let index
+    const length = children.length
+    for (index = 0; index < length; ++index) {
+      if (getChildType(children[index]) === elementType) {
         ++typeCount
       }
     }
@@ -113,22 +128,22 @@ const onlyOfType = (property, styles, customKey, {parent, element}) => {
       return styles
     }
   } else {
-    let elementKey = element._owner._currentElement.key
+    const elementKey = element._owner._currentElement.key
     if (!elementKey) {
       // TODO: Warning
       return false
     }
-    let elementParent = element._owner._instance.props._parent
+    const elementParent = element._owner._instance.props._parent
     if (elementParent) {
-      let elementType = getChildType(element._owner._currentElement)
-      let children = elementParent.props.children
+      const elementType = getChildType(element._owner._currentElement)
+      const children = elementParent.props.children
       let typeCount = -1
-      let i
-      let length = children.length
-      for (i = 0; i < length; ++i) {
-        if (getChildType(children[i]) === elementType) {
+      let index
+      const length = children.length
+      for (index = 0; index < length; ++index) {
+        if (getChildType(children[index]) === elementType) {
           ++typeCount
-          if (children[i].key === elementKey) {
+          if (children[index].key === elementKey) {
             // double check to only match the real elements
             ++typeCount
           }
@@ -145,16 +160,16 @@ const onlyOfType = (property, styles, customKey, {parent, element}) => {
 
 const nthOfType = (property, styles, customKey, {parent, element}) => {
   if (parent) {
-    let elementType = getChildType(element)
-    let children = parent.props.children
+    const elementType = getChildType(element)
+    const children = parent.props.children
     let typeIndex = 0
-    let i
-    let length = children.length
-    for (i = 0; i < length; ++i) {
-      if (getChildType(children[i]) === elementType) {
+    let index
+    const length = children.length
+    for (index = 0; index < length; ++index) {
+      if (getChildType(children[index]) === elementType) {
         ++typeIndex
-        if (children[i] === element) {
-          let expression = getNthExpression(property)
+        if (children[index] === element) {
+          const expression = getNthExpression(property)
           if (evalNthExpression(expression, typeIndex)) {
             return styles
           }
@@ -162,23 +177,23 @@ const nthOfType = (property, styles, customKey, {parent, element}) => {
       }
     }
   } else {
-    let elementKey = element._owner._currentElement.key
+    const elementKey = element._owner._currentElement.key
     if (!elementKey) {
       // TODO: Warning
       return false
     }
-    let elementParent = element._owner._instance.props._parent
+    const elementParent = element._owner._instance.props._parent
     if (elementParent) {
-      let elementType = getChildType(element._owner._currentElement)
-      let children = elementParent.props.children
+      const elementType = getChildType(element._owner._currentElement)
+      const children = elementParent.props.children
       let typeIndex = 0
-      let i
-      let length = children.length
-      for (i = 0; i < length; ++i) {
-        if (getChildType(children[i]) === elementType) {
+      let index
+      const length = children.length
+      for (index = 0; index < length; ++index) {
+        if (getChildType(children[index]) === elementType) {
           ++typeIndex
-          if (children[i].key === elementKey) {
-            let expression = getNthExpression(property)
+          if (children[index].key === elementKey) {
+            const expression = getNthExpression(property)
             if (evalNthExpression(expression, typeIndex)) {
               return styles
             }
@@ -193,50 +208,50 @@ const nthOfType = (property, styles, customKey, {parent, element}) => {
 
 const nthLastOfType = (property, styles, customKey, {parent, element}) => {
   if (parent) {
-    let elementType = getChildType(element)
-    let children = parent.props.children
+    const elementType = getChildType(element)
+    const children = parent.props.children
     let typeIndex
     let typeCount = 0
-    let i
-    let length = children.length
-    for (i = 0; i < length; ++i) {
-      if (getChildType(children[i]) === elementType) {
+    let index
+    const length = children.length
+    for (index = 0; index < length; ++index) {
+      if (getChildType(children[index]) === elementType) {
         ++typeCount
-        if (children[i] === element) {
+        if (children[index] === element) {
           typeIndex = typeCount
         }
       }
     }
     if (typeIndex) {
-      let expression = getNthExpression(property)
+      const expression = getNthExpression(property)
       if (evalNthExpression(expression, typeCount + 1 - typeIndex)) {
         return styles
       }
     }
   } else {
-    let elementKey = element._owner._currentElement.key
+    const elementKey = element._owner._currentElement.key
     if (!elementKey) {
       // TODO: Warning
       return false
     }
-    let elementParent = element._owner._instance.props._parent
+    const elementParent = element._owner._instance.props._parent
     if (elementParent) {
-      let elementType = getChildType(element._owner._currentElement)
-      let children = elementParent.props.children
+      const elementType = getChildType(element._owner._currentElement)
+      const children = elementParent.props.children
       let typeIndex
       let typeCount = 0
-      let i
-      let length = children.length
-      for (i = 0; i < length; ++i) {
-        if (getChildType(children[i]) === elementType) {
+      let index
+      const length = children.length
+      for (index = 0; index < length; ++index) {
+        if (getChildType(children[index]) === elementType) {
           ++typeCount
-          if (children[i].key === elementKey) {
+          if (children[index].key === elementKey) {
             typeIndex = typeCount
           }
         }
       }
       if (typeIndex) {
-        let expression = getNthExpression(property)
+        const expression = getNthExpression(property)
         if (evalNthExpression(expression, typeCount + 1 - typeIndex)) {
           return styles
         }
@@ -252,19 +267,4 @@ export default {
   onlyOfType,
   nthOfType,
   nthLastOfType
-}
-
-/**
- * Returns a childs type
- * If child is an ES6 class it returns the displayName
- * @param {Object} child - child which type gets identified
- */
-const getChildType = (child) => {
-  let childType
-  if (child.type instanceof Function) {
-    childType = (child.type.hasOwnProperty('name') ? child.type.name : child.type)
-  } else {
-    childType = child.type
-  }
-  return childType
 }

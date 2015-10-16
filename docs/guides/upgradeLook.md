@@ -3,7 +3,7 @@
 ## 0.5
 Coming from a version below 0.5 needs some code refactoring to get Look working properly.
 
-* Use direct style mapping instead of the string syntax. 
+* Use direct style mapping instead of the string syntax.
 
 ```javascript
 // new => Version 0.5+
@@ -36,5 +36,3 @@ const styles = {
 	}
 }
 ```
-
-

@@ -1,6 +1,6 @@
 import throttle from '../utils/throttle'
 
-let matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
+const matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
 
 /**
  * Evaluates if a media condition is fulfilled by using window.matchMedia
@@ -17,14 +17,17 @@ export default (property, styles, customKey, {Component}) => {
       window.addEventListener('resize', Component._mediaQueryListener)
 
       // Remove the listener if the component unmounts to keep things clean
-      let existingWillUnmount = Component.componentWillUnmount
+      const existingWillUnmount = Component.componentWillUnmount
       Component.componentWillUnmount = () => {
-        existingWillUnmount && existingWillUnmount()
+        if (existingWillUnmount) {
+          existingWillUnmount()
+        }
+
         window.removeEventListener('resize', Component._mediaQueryListener)
       }
     }
     return matchMedia(property.replace(customKey, '').trim()).matches ? styles : false
   } else {
-    console.warn('Failed evaluating media query: ' + property + '. Your environment is not able to use window.matchMedia.');
+    console.warn('Failed evaluating media query: ' + property + '. Your environment is not able to use window.matchMedia.')
   }
 }

@@ -25,7 +25,7 @@ export default {
     prefixer
   ],
   customProperties: {
-    // NOTE: Ordner matters! 
+    // NOTE: Ordner matters!
     '>=': greaterThan,
     '<=': lessThan,
     '!=': unEqual,

@@ -75,15 +75,13 @@ Note that they might get implemeneted later.
 * first-line
 * selection
 * drop
-* past 
-* current 
-* future 
-* placeholder-shown 
+* past
+* current
+* future
+* placeholder-shown
 * any-link
 * user-error
 * blank
 * nth-column*(an+b)*
 * nth-last-column*(an+b)*
 * focus-within
-
-

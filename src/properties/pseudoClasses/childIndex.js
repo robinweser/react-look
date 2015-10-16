@@ -1,6 +1,32 @@
 import getNthExpression from '../../utils/splitNthExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
 
+/**
+ * Evaluates child index positions using data from childIndexMap
+ * childIndexMap is provided by arguments
+ */
+const getChildIndex = (parent, element) => {
+  let index
+  if (parent) {
+    index = parent.props.children.indexOf(element)
+  } else {
+    const elementParent = element._owner._instance.props._parent
+    if (elementParent) {
+      const ownerKey = element._owner._currentElement.key
+      if (ownerKey === null) {
+        console.warn('You need to pass a unique key in order to use child-index pseudo classes.')
+        return undefined
+      }
+      elementParent.props.children.forEach((child, pos) => {
+        if (child.key === ownerKey) {
+          index = pos
+          return
+        }
+      })
+    }
+  }
+  return index
+}
 
 const firstChild = (property, styles, customKey, {parent, element}) => {
   if (parent) {
@@ -8,8 +34,8 @@ const firstChild = (property, styles, customKey, {parent, element}) => {
       return styles
     }
   } else {
-    let elementParent = element._owner._instance.props._parent
-    let elementKey = element._owner._currentElement.key.replace('.$', '')
+    const elementParent = element._owner._instance.props._parent
+    const elementKey = element._owner._currentElement.key.replace('.$', '')
     if (elementParent && elementParent.props.children[0].key === elementKey && elementKey !== null) {
       return styles
     }
@@ -19,15 +45,15 @@ const firstChild = (property, styles, customKey, {parent, element}) => {
 
 const lastChild = (property, styles, customKey, {parent, element}) => {
   if (parent) {
-    let children = parent.props.children
+    const children = parent.props.children
     if (children[children.length - 1] === element) {
       return styles
     }
   } else {
-    let elementParent = element._owner._instance.props._parent
-    let elementKey = element._owner._currentElement.key
+    const elementParent = element._owner._instance.props._parent
+    const elementKey = element._owner._currentElement.key
     if (elementParent) {
-      let children = elementParent.props.children
+      const children = elementParent.props.children
       if (children[children.length - 1].key === elementKey && elementKey !== null) {
         return styles
       }
@@ -40,7 +66,7 @@ const onlyChild = (property, styles, customKey, {parent, element}) => {
   if (parent && parent.props.children.length === 1) {
     return styles
   } else {
-    let elementParent = element._owner._instance.props._parent
+    const elementParent = element._owner._instance.props._parent
     if (elementParent && elementParent.props.children.length === 1) {
       return styles
     }
@@ -49,8 +75,8 @@ const onlyChild = (property, styles, customKey, {parent, element}) => {
 }
 
 const nthChild = (property, styles, customKey, {parent, element}) => {
-  let expression = getNthExpression(property)
-  let childIndex = getChildIndex(parent, element)
+  const expression = getNthExpression(property)
+  const childIndex = getChildIndex(parent, element)
   if (childIndex === undefined) {
     return false
   }
@@ -58,8 +84,8 @@ const nthChild = (property, styles, customKey, {parent, element}) => {
 }
 
 const nthLastChild = (property, styles, customKey, {parent, element}) => {
-  let expression = getNthExpression(property)
-  let childIndex = getChildIndex(parent, element)
+  const expression = getNthExpression(property)
+  const childIndex = getChildIndex(parent, element)
   if (childIndex === undefined) {
     return false
   }
@@ -67,7 +93,7 @@ const nthLastChild = (property, styles, customKey, {parent, element}) => {
   if (parent) {
     childLength = parent.props.children.length
   } else {
-    let elementParent = element._owner._instance.props._parent
+    const elementParent = element._owner._instance.props._parent
     if (elementParent) {
       childLength = elementParent.props.children.length
     } else {
@@ -83,30 +109,4 @@ export default {
   onlyChild,
   nthChild,
   nthLastChild
-}
-
-/**
- * Evaluates child index positions using data from childIndexMap
- * childIndexMap is provided by arguments
- */
-const getChildIndex = (parent, element) => {
-  let index
-  if (parent) {
-    index = parent.props.children.indexOf(element)
-  } else {
-    let elementParent = element._owner._instance.props._parent
-    if (elementParent) {
-      let ownerKey = element._owner._currentElement.key
-      if (ownerKey === null) {
-        console.warn('You need to pass a unique key in order to use child-index pseudo classes.')
-        return undefined
-      }
-      elementParent.props.children.forEach((child, i) => {
-        if (child.key === ownerKey) {
-          return index = i
-        }
-      })
-    }
-  }
-  return index
 }

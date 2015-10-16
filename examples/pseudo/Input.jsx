@@ -3,7 +3,7 @@ import Look, {StyleSheet} from '../../lib/dom'
 
 @Look
 export default class Input extends Component {
-  
+
   render() {
     return (
       <div>

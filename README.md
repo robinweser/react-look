@@ -9,7 +9,7 @@ npm install react-look
 > Coming from version < 0.5? Check the [upgrade guide](docs/guides/upgradeLook.md).
 
 **Look** is a modular, **processor**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://github.com/facebook/react-native) *(starting with Version 0.4)* based on **inline styles**.
-It simplyfies how you are styling your Components and comes with two different packages. 
+It simplyfies how you are styling your Components and comes with two different packages.
 
 # Features
 Look is as far as I know the **feature richest** inline-styling library for React. <br>
@@ -21,7 +21,7 @@ Supporting [25 pseudo classes](docs/PseudoClasses.md) out of the box as well as 
 - [plugins](docs/Plugins.md)
 - [extending](#extending)
 - modular & themeable
-- useful APIs 
+- useful APIs
 
 The `react-look/dom` package also adds additional DOM-specific mixins as well as a vendor-prefixing processor.
 - [media queries](docs/MediaQueries.md)
@@ -33,7 +33,7 @@ The `react-look/dom` package also adds additional DOM-specific mixins as well as
 # Benefit
 Using inline styles instead of static CSS files has a lot of positive side-effects. The most important one is **dynamic behavior**.<br>Remember you're using JavaScript now. Your styles no longer belong to a static file but are just a plain javascript object which can be manipulated to fit your very own needs.
 
-* **Component-scoped:** 
+* **Component-scoped:**
 As JSX brings your View-structure to javascript, Look adds your **styling** (CSS) as well.<br>
 It encourages you to define your styles scoped to your Component which helps to improve your app structure and keeps together all Component-relevant data. One file less to create.
 * **Separation of Concerns:**
@@ -53,7 +53,7 @@ class Header extends Component {
   static defaultProps = {size: 24}
   static propTypes = {size: PropTypes.number.isRequired}
   state = {status: 'active'}
-  
+
   render() {
     return (
       // Apply your styles with the `look` property.
@@ -71,9 +71,9 @@ const styles = StyleSheet.create(Header, {
   header: {
     transition: '200ms all linear',
     // Use media queries, pseudo classes and stateful styles
-    // using nested style objects. Those get evaluated 
+    // using nested style objects. Those get evaluated
     // on the fly and can be nested endlessly.
-    '@media (min-height: 800px)': { 
+    '@media (min-height: 800px)': {
       fontSize: 13,
       ':hover': {    
         fontSize: 15,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create(Header, {
 ```
 
 ### Stateless Components
-With Look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14. *(Currently Look creates a Stateful Component for instant support)* 
+With Look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14. *(Currently Look creates a Stateful Component for instant support)*
 ```javascript
 let Header = ({title}) => (
   <header look={styles.header}>

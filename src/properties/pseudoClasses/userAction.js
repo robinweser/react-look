@@ -8,9 +8,11 @@ const defaultKey = 'root'
  * Also adds global mouseup event to remove active elements
  */
 const active = (property, styles, customKey, {element, Component, newProps}) => {
-  let key = element.key || element.ref || defaultKey
+  const key = element.key || element.ref || defaultKey
 
-  !Component._lastActiveElements && (Component._lastActiveElements = [])
+  if (!Component._lastActiveElements) {
+    Component._lastActiveElements = []
+  }
 
   // add event listener if not added yet
   newProps.onMouseDown = createListener(Component, element, key, 'onMouseDown', () => {
@@ -22,9 +24,9 @@ const active = (property, styles, customKey, {element, Component, newProps}) => 
   if (!Component._onMouseUp && typeof window !== 'undefined') {
     Component._onMouseUp = () => {
       while (Component._lastActiveElements.length > 0) {
-        let key = Component._lastActiveElements[0];
-        State.setState('active', false, Component, key)
-        Component._lastActiveElements.pop(key)
+        const elementKey = Component._lastActiveElements[0];
+        State.setState('active', false, Component, elementKey)
+        Component._lastActiveElements.pop(elementKey)
       }
     }
     window.addEventListener('mouseup', Component._onMouseUp)
@@ -35,7 +37,7 @@ const active = (property, styles, customKey, {element, Component, newProps}) => 
 
 
 const hover = (property, styles, customKey, {element, Component, newProps}) => {
-  let key = element.key || element.ref || defaultKey
+  const key = element.key || element.ref || defaultKey
 
   // add event listener if not added yet
   newProps.onMouseEnter = createListener(Component, element, key, 'onMouseEnter', () => {
@@ -50,7 +52,12 @@ const hover = (property, styles, customKey, {element, Component, newProps}) => {
 
 
 const focus = (property, styles, customKey, {element, Component, newProps}) => {
-  let key = element.key || element.ref || defaultKey
+  const key = element.key || element.ref || defaultKey
+
+  // only apply focus on input elements
+  if (element.type !== 'input') {
+    return false
+  }
 
   // add event listener if not added yet
   newProps.onFocus = createListener(Component, element, key, 'onFocus', () => {

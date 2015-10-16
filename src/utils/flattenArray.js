@@ -3,7 +3,7 @@
  * Flattens an array of nested arrays to the same level
  * @param {Array} array - array that gets flatten
  */
-export default (array) => {
+const flattenArray = (array) => {
   // return if input is not an array
   if (array instanceof Array !== true) {
     return array
@@ -17,9 +17,13 @@ export default (array) => {
     if (child instanceof Array) {
       catChild = flattenArray(child)
     }
-    
+
     flat = flat.concat(catChild)
   })
 
   return flat
+}
+
+export {
+  flattenArray as default
 }

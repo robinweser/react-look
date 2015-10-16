@@ -1,6 +1,8 @@
+const camelToDashCase = (str) => str.replace(/([a-z]|^)([A-Z])/g, (match, p1, p2) => p1 + '-' + p2.toLowerCase())
+
 const alternativeValue = (styles, scopeArgs, config) => {
   Object.keys(styles).forEach(property => {
-    let value = styles[property]
+    const value = styles[property]
     if (value instanceof Array) {
       styles[property] = value.join(';' + camelToDashCase(property) + ':')
     } else if (value instanceof Object) {
@@ -11,6 +13,3 @@ const alternativeValue = (styles, scopeArgs, config) => {
 }
 
 export { alternativeValue as default }
-const camelToDashCase = (str) => {
-  return str.replace(/([a-z]|^)([A-Z])/g, (match, p1, p2) => p1 + '-' + p2.toLowerCase())
-}

@@ -15,14 +15,13 @@ export default (expression, index) => {
 
   const split = expression.split('n')
 
-  if ( split.length > 1 ) {
+  if (split.length > 1) {
     split[0] = split[0] === '-' ? '-1' : split[0]
-
     const addend = split[1] ? parseInt(split[1], 10) : 0
     const multiplier = split[0] ? parseInt(split[0], 10) : 0
 
-    if ( multiplier ) {
-      if ( multiplier < 0 && index > addend || multiplier > 0 && index < addend ) {
+    if (multiplier) {
+      if (multiplier < 0 && index > addend || multiplier > 0 && index < addend) {
         return false
       }
 

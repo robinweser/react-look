@@ -8,7 +8,10 @@ describe('Evaluating conditions', () => {
         highlight: true,
         clicks: 20,
         noprop: undefined,
-        error: null
+        error: null,
+        location: {
+          pathname: '/'
+        }
       },
       state: {}
     }
@@ -22,7 +25,8 @@ describe('Evaluating conditions', () => {
     expect(greaterThan('clicks>=19', true, '>=', args)).to.equal(true)
     expect(equal('noprop=undefined', true, '=', args)).to.equal(true)
     expect(unEqual('clicks!=undefined', true, '!=', args)).to.equal(true)
-    expect(equal('error=null', true, '=', args)).to.equal(true)
+    expect(equal('error=null', true, '=', args)).to.equal(true),
+    expect(equal('location.pathname=/', true, '=', args)).to.equal(true)
   })
 
 

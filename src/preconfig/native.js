@@ -17,7 +17,7 @@ export default {
     statefulValue
   ],
   customProperties: {
-    // NOTE: Ordner matters! 
+    // NOTE: Ordner matters!
     '>=': biggerThan,
     '<=': smallerThan,
     '!=': unEqual,

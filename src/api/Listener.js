@@ -13,7 +13,7 @@ let keyElementMap = new Map()
  */
 export default (Component, element, key, event, callback) => {
 
-  // This checks if there are any needed pseudo classes 
+  // This checks if there are any needed pseudo classes
   // that need an event listener by checking the pseudo map for this element
   if (!State.has(Component, key)) {
     State.add(Component, key)
@@ -26,10 +26,10 @@ export default (Component, element, key, event, callback) => {
     }
   }
 
-  let existing = element.props[event];
+  const existing = element.props[event];
 
-  return (e) => {
-    existing && existing(e)
-    callback()
+  return (target) => {
+    existing && existing(target)
+    callback(...arguments)
   }
 }

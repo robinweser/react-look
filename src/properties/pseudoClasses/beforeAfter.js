@@ -1,32 +1,16 @@
 import { createElement } from 'react'
+
+
 /**
- * Adds a element before/after current element
- * Uses MixinTypes.INCLUDE to cover both :before/:after as well as ::before/::after
+ * Creates a new image element as child of a pseudo element
+ * @param {string} content - value including a valid url path to the image
  */
-
-const before = (property, styles, customKey, {newProps}) => {
-  initChildren(newProps)
-  newProps.children.unshift(createPseudoElement(styles))
-}
-
-const after = (property, styles, customKey, {newProps}) => {
-  initChildren(newProps)
-  newProps.children.push(createPseudoElement(styles))
-}
-
-export default {
-  before,
-  after
-}
-
-const initChildren = (props) => {
-  if (!props.hasOwnProperty('children')) {
-    props.children = []
-  }
-}
+const createPseudoImage = (content) => createElement('img', {
+    src: content.split('url(')[1].substr(0, content.length - 5)
+  })
 
 /**
- * Creates a new pseudo element 
+ * Creates a new pseudo element
  * NOTE: By passing a `content` you may specify a text or image which gets inserted
  * @param {Object} styles - pseudo elements inner styles
  */
@@ -44,10 +28,23 @@ const createPseudoElement = (styles) => {
   return createElement('span', {style: styles}, children)
 }
 
+const initChildren = (props) => {
+  if (!props.hasOwnProperty('children')) {
+    props.children = []
+  }
+}
+
 /**
- * Creates a new image element as child of a pseudo element
- * @param {string} content - value including a valid url path to the image
+ * Adds a element before/after current element
  */
-const createPseudoImage = (content) => createElement('img', {
-    src: content.split('url(')[1].substr(0, content.length - 5)
-  })
+const before = (property, styles, customKey, {newProps}) => {
+  initChildren(newProps)
+  newProps.children.unshift(createPseudoElement(styles))
+}
+
+const after = (property, styles, customKey, {newProps}) => {
+  initChildren(newProps)
+  newProps.children.push(createPseudoElement(styles))
+}
+
+export default {before, after}

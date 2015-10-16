@@ -1,20 +1,5 @@
 import assignStyles from 'object-assign'
 
-/**
-* This plugin is only for legacy code to support the old syntax
-* It also extracts styles attached to Components directly
-*/
-export default (styles, scopeArgs, config) => {
-  let {Component, element} = scopeArgs
-
-  if (Component.styles) {
-    console.warn('The string syntax look="' + element.props.look + '" within ' + Component._lookScope + ' is deprecated. Please use direct mapping instead. This will be removed in Version 1.0.0.')
-    styles = extractStyles(element.props, Component.styles)
-  }
-
-  return styles
-}
-
 
 /**
  * Extracts referenced styles to an elements props
@@ -49,4 +34,20 @@ const extractStyles = (props, styles) => {
   }
 
   return false
+}
+
+
+/**
+* This plugin is only for legacy code to support the old syntax
+* It also extracts styles attached to Components directly
+*/
+export default (styles, scopeArgs) => {
+  const {Component, element} = scopeArgs
+
+  if (Component.styles) {
+    console.warn('The string syntax look="' + element.props.look + '" within ' + Component._lookScope + ' is deprecated. Please use direct mapping instead. This will be removed in Version 1.0.0.')
+    styles = extractStyles(element.props, Component.styles)
+  }
+
+  return styles
 }

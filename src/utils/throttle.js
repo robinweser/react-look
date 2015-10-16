@@ -2,11 +2,9 @@ export default (fn, threshhold = 250, scope) => {
   let last
   let deferTimer
   return () => {
-    let context = scope || this
+    const context = scope || this
 
-    // TODO: look at below, I don't like seeing this keyword
     return function defer() {
-      const context = scope || this
       const now = +new Date
       const args = arguments
 
