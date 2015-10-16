@@ -54,6 +54,7 @@
   "license": "MIT",
   "dependencies": {
     "assign-styles": "^1.0.2",
+    "dot-prop": "^2.2.0",
     "dynamic-style-sheets": "^0.2.2",
     "inline-style-prefixer": "^0.3.2",
     "object-assign": "^4.0.1"
