@@ -10,7 +10,7 @@ import assignStyles from 'assign-styles'
  * @param {Object} parent - referencing element's parent
  */
 export default function resolveStyles(Component, element, config, parent) {
-  if (element && element.props) {
+  if (element && element.props && (element.props.look || element.props.children)) {
     let props = element.props
 
     // resolving child looks recursively to make sure they will be rendered correctly
@@ -22,7 +22,7 @@ export default function resolveStyles(Component, element, config, parent) {
 
     if (props.look) {
       if (props.look instanceof Array) {
-        newProps.look = assignStyles(...props.look)
+        newProps.look = assignStyles({}, ...props.look)
       }
 
       let styles = assign({}, newProps.look.style)
@@ -44,7 +44,7 @@ export default function resolveStyles(Component, element, config, parent) {
           newProps.style = styles
         }
       } else {
-        console.warn('In order to use Look please only use styles created with Look.createStyleSheet')
+        console.warn(Component._lookScope + ' got enhanced by Look using invalid styles. Please always use Look.createStyleSheet.')
       }
     }
 
@@ -86,6 +86,7 @@ const resolveChildren = (Component, children, config, parent) => {
       return resolveStyles(Component, Children.only(children), config, parent)
     }
 
+    children = flattenArray(children)
     // Recursively resolve styles for child elements
     // This also flattens all the childs and adds keys
     return Children.map(children, (child) => {
@@ -112,4 +113,29 @@ const resolvePlugins = (styles, config, scopeArgs) => {
     styles = plugin(styles, config, scopeArgs)
   })
   return styles
+}
+
+/**
+ * Flattens an array of nested arrays to the same level
+ * @param {Array} array - array that gets flatten
+ */
+const flattenArray = (array) => {
+  // return if input is not an array
+  if ( array instanceof Array !== true ) {
+    return array
+  }
+
+  let flat = []
+
+  array.forEach(child => {
+    let catChild = child
+
+    if ( child instanceof Array ) {
+      catChild = flattenArray(child)
+    }
+
+    flat = flat.concat(catChild)
+  })
+
+  return flat
 }
