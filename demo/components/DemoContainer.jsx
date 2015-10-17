@@ -6,7 +6,7 @@ export default class DemoContainer extends Component {
   static defaultProps = {
     padding: 10
   }
-  
+
   styles() {
     return {
       container: {
@@ -25,7 +25,6 @@ export default class DemoContainer extends Component {
           border: 'none',
           paddingTop: 0
         }
-
       },
       title: {
         fontSize: 25,
@@ -42,7 +41,6 @@ export default class DemoContainer extends Component {
           color: 'rgb(102, 79, 196)'
         }
       },
-
       desc: {
         padding: 5,
         paddingTop: 0,

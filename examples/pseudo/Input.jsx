@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import Look from '../../lib/dom';
+import React, {Component} from 'react'
+import Look from '../../lib/dom'
 
 @Look
 export default class Input extends Component {
-  
   styles = {
     input: {
       appearance: 'none',
@@ -35,13 +34,13 @@ export default class Input extends Component {
         backgroundColor: 'gray'
       }
     },
-
     readOnly: {
       ':read-only': {
         backgroundColor: 'lightgray'
       }
     }
   }
+
   render() {
     return (
       <div>

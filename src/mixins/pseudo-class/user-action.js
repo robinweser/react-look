@@ -28,6 +28,7 @@ export default [{
           Component._lastActiveElements.pop(key)
         }
       }
+
       window.addEventListener('mouseup', Component._onMouseUp)
     }
 

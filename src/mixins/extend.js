@@ -1,4 +1,4 @@
-import assignStyles from 'assign-styles';
+import assignStyles from 'assign-styles'
 import MixinTypes from '../utils/MixinTypes'
 
 /**
@@ -23,6 +23,7 @@ export default [{
         return resolveStyles(options.styles)
       } else {
         console.warn('Neither `styles` nor `condition` has been found. Used the whole object as styles instead.')
+
         return resolveStyles(options)
       }
     }
@@ -35,6 +36,7 @@ export default [{
  */
 export function resolveStyles(styles) {
   let merged = {}
+
   if (styles instanceof Array) {
     styles.forEach(obj => {
       merged = assignStyles(merged, obj)
@@ -42,5 +44,6 @@ export function resolveStyles(styles) {
   } else {
     merged = styles
   }
+
   return merged
 }

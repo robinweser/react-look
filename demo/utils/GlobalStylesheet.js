@@ -2,14 +2,14 @@ import {CSS} from '../../lib/dom'
 import {Processors} from 'dynamic-style-sheets'
 
 let sheet = new CSS({
-	'*' : {
-		padding: 0,
-		margin: 0,
-		fontFamily : '"Lato", sans-serif',
-		fontWeight: 300,
-		boxSizing : 'border-box',
-		userSelect : 'none'
-	}
+  '*' : {
+    padding: 0,
+    margin: 0,
+    fontFamily : '"Lato", sans-serif',
+    fontWeight: 300,
+    boxSizing : 'border-box',
+    userSelect : 'none'
+  }
 })
 
 sheet.process(Processors.Prefixer)

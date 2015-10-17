@@ -4,6 +4,7 @@ import assignStyles from 'assign-styles'
 import processStyles from './processor'
 import flattenArray from '../utils/flattenArray'
 import Config from '../api/Config'
+
 /**
  * Resolves provided styles into style objects
  * Processes those using a predefined processor lineup
@@ -36,23 +37,26 @@ export default function resolveStyles(Component, element, parent) {
     }
 
     // Resolving styles for elements passed by props
-    let prop;
+    let prop
+
     for (prop in newProps) {
       if (prop === 'children') {
-        continue;
+        continue
       }
+
       if (isValidElement(newProps[prop])) {
         newProps[prop] = resolveStyles(Component, newProps[prop])
       }
     }
 
     !newProps.children && delete newProps.children
-    
+
     // Passing the current parent element via props
     // This is especially useful for mixins e.g. :first-child
     if (parent) {
-        newProps._parent = parent
+      newProps._parent = parent
     }
+
     return cloneElement(element, newProps)
   } else {
     return element
@@ -90,6 +94,7 @@ export function resolveChildren(Component, children, parent) {
           }
         }
       })
+
       return newChildren
     } else {
       return resolveStyles(Component, children, parent)
@@ -115,6 +120,7 @@ export function extractStyles(props, styles) {
       // Splits look to resolve multiple looks
       // Reverse to loop backwards in order to resolve with priority
       let lookList = props.look.split(' ').reverse()
+
       lookList.forEach(look => {
         // Reduce if look is existing otherwise throw a warning
         if (styles.hasOwnProperty(look)) {
@@ -122,11 +128,14 @@ export function extractStyles(props, styles) {
         } else {
           console.warn('Assigned look does not exist and will be ignored.')
           console.warn('Provided styles: ' + JSON.stringify(styles) + ' do not include ' + look)
+
           return false
         }
       })
+
       return extracted
     }
+
     delete props.look
   } else {
     return false

@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
-import Look, {State} from '../../lib/dom';
+import Look, {State} from '../../lib/dom'
 
 @Look
 export default class UserAction extends Component {
-
   styles() {
     return {
       button: {
@@ -11,7 +10,6 @@ export default class UserAction extends Component {
         padding: 5,
         border: '1px solid black'
       },
-
       hoverButton: {
         backroundColor: 'blue',
         fontSize: 20,
@@ -25,7 +23,6 @@ export default class UserAction extends Component {
           backgroundColor: 'red'
         }
       },
-
       activeButton: {
         fontSize: 30,
         ':active': {
@@ -36,19 +33,18 @@ export default class UserAction extends Component {
   }
 
   render() {
-		let defaultState = 'Hover me!'
+    let defaultState = 'Hover me!'
     let hoverState = State.getState('hover', this, 'b3') ? ' Now click me! ' : ''
     let activeState = State.getState('active', this, 'b3') ? ' Well Done. ' : ''
-		
-		let text = activeState || hoverState || defaultState
-    
+    let text = activeState || hoverState || defaultState
+
     return (
       <div>
         <div key="b1" look="button activeButton">Click me!</div>
-      <div key="b2" look="button hoverButton">Hover me!</div>
+        <div key="b2" look="button hoverButton">Hover me!</div>
         <br/>
         <div>State-API live example</div>
-			<div key="b3" look="button hoverButton">{text}</div>
+        <div key="b3" look="button hoverButton">{text}</div>
       </div>
     )
   }

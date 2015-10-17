@@ -4,28 +4,29 @@ import {expect} from 'chai'
 let extractCSS = ExtractCSS[0].fn
 
 describe('Extracting classNames', () => {
+  it('should extract css to classNames', () => {
+    let args = {
+      newProps: {}
+    }
 
-	it('should extract css to classNames', () => {
-		let args = {
-			newProps: {}
-		}
+    extractCSS('css', 'foo', args)
 
-		extractCSS('css', 'foo', args)
-		expect(args.newProps).to.eql({
-			className: 'foo'
-		})
-	})
+    expect(args.newProps).to.eql({
+      className: 'foo'
+    })
+  })
 
-	it('should concat css if a className already exists', () => {
-		let args = {
-			newProps: {
-				className: 'bar'
-			}
-		}
+  it('should concat css if a className already exists', () => {
+    let args = {
+      newProps: {
+        className: 'bar'
+      }
+    }
 
-		extractCSS('css', 'foo', args)
-		expect(args.newProps).to.eql({
-			className: 'bar foo'
-		})
-	})
+    extractCSS('css', 'foo', args)
+
+    expect(args.newProps).to.eql({
+      className: 'bar foo'
+    })
+  })
 })

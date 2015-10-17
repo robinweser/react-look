@@ -9,10 +9,12 @@ export default function flattenArray(array) {
   }
 
   let flat = []
+
   array.forEach(child => {
     if (child instanceof Array) {
       child = flattenArray(child)
     }
+
     flat = flat.concat(child)
   })
 

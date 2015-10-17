@@ -8,6 +8,7 @@ import UserActions from './mixins/pseudo-class/user-action'
 import PseudoElements from './mixins/pseudo-class/before-after'
 import Input from './mixins/pseudo-class/input'
 import Lang from './mixins/pseudo-class/lang'
+
 let Mixins = Config.getProcessors()[0]
 
 Mixins.use(UserActions)
@@ -20,10 +21,10 @@ Mixins.use(ExtractCSS)
 Config.registerProcessor(Prefixer)
 
 export {
-	Look as default,
-	CSS,
-	State,
-	Listener,
-	MixinTypes,
-	Config
+  Look as default,
+  CSS,
+  State,
+  Listener,
+  MixinTypes,
+  Config
 }

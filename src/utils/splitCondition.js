@@ -1,6 +1,7 @@
 import assign from 'object-assign'
 import isNumber from './isNumber'
 import { get as getProp } from 'dot-prop'
+
 /**
  * Splits an expression at a given operator and returns both values converted to compare them with ease
  * @param {string} key - key that gets evaluated, in this case the expression
@@ -9,7 +10,6 @@ import { get as getProp } from 'dot-prop'
  */
 export default function splitCondition(key, operator, Component) {
   const matchValues = assign({}, Component.props, Component.state)
-
   const [property, value] = key.split(operator)
   const [baseProp] = property.split('.')
 
@@ -21,6 +21,7 @@ export default function splitCondition(key, operator, Component) {
     if (!isNumber(match)) {
       match = (match + '').toString()
     }
+
     return [match, value]
   } else {
     return false

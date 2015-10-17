@@ -11,50 +11,53 @@ import React, {Component} from 'react'
  * @param {Array|Function} additionalProcessors - additional processors that modify the styles
  */
 export default function Enhancer(CustomComponent, additionalStyles, additionalProcessors) {
-	if (CustomComponent.prototype.setState) {
-		// stateful react component
-		class LookComponent extends CustomComponent {
-			//Inherit the original displayName for proper use later on
-			static displayName = CustomComponent.displayName || CustomComponent.name || 'Component'
+  if (CustomComponent.prototype.setState) {
+    // stateful react component
+    class LookComponent extends CustomComponent {
+      //Inherit the original displayName for proper use later on
+      static displayName = CustomComponent.displayName || CustomComponent.name || 'Component'
 
-			constructor() {
-				super(...arguments)
-				this.state = this.state ||  {}
+      constructor() {
+        super(...arguments)
+        this.state = this.state ||  {}
 
-				this._processors = prepareProcessors(this, additionalProcessors)
-				this._lastActiveElements = []
-				this.state._look = new Map()
-			}
+        this._processors = prepareProcessors(this, additionalProcessors)
+        this._lastActiveElements = []
+        this.state._look = new Map()
+      }
 
-			render() {
-				this.lookStyles = prepareStyles(this, additionalStyles)
+      render() {
+        this.lookStyles = prepareStyles(this, additionalStyles)
 
-				// Only resolve if there are styles to resolve
-				// Otherwise just return super.render() which leads to no difference
-				if (this.lookStyles && Object.keys(this.lookStyles).length > 0) {
-					return resolveStyles(this, super.render())
-				} else {
-					console.warn(Component + ' was enhanced with Look, but did not provide any styles.')
-					console.warn('This might affect performance and rendering time.')
-					return super.render()
-				}
-			}
-		}
-		return LookComponent
-	} else {
-		//stateless react component
-		class Stateless extends Component {
-			constructor() {
-				super(...arguments)
-				this._processors = prepareProcessors(this, additionalProcessors)
-			}
-			render() {
-				this.lookStyles = prepareStyles(this, assign({}, additionalStyles))
-				return resolveStyles(this, CustomComponent(this.props))
-			}
-		}
-		return Stateless
-	}
+        // Only resolve if there are styles to resolve
+        // Otherwise just return super.render() which leads to no difference
+        if (this.lookStyles && Object.keys(this.lookStyles).length > 0) {
+          return resolveStyles(this, super.render())
+        } else {
+          console.warn(Component + ' was enhanced with Look, but did not provide any styles.')
+          console.warn('This might affect performance and rendering time.')
+          return super.render()
+        }
+      }
+    }
+
+    return LookComponent
+  } else {
+    //stateless react component
+    class Stateless extends Component {
+      constructor() {
+        super(...arguments)
+        this._processors = prepareProcessors(this, additionalProcessors)
+      }
+
+      render() {
+        this.lookStyles = prepareStyles(this, assign({}, additionalStyles))
+        return resolveStyles(this, CustomComponent(this.props))
+      }
+    }
+
+    return Stateless
+  }
 }
 
 
@@ -63,15 +66,16 @@ export default function Enhancer(CustomComponent, additionalStyles, additionalPr
  * @param {Array|Object} styles - input to flatten
  */
 export function flattenStyles(styles) {
-	if (styles instanceof Array) {
-		return assignStyles(...styles)
-	} else if (styles instanceof Object) {
-		return styles
-	} else {
-		console.warn('Pass either a valid object or an array of valid objects.')
-		console.warn('Look can not flatten and will ignore the following styles input:', styles)
-		return false
-	}
+  if (styles instanceof Array) {
+    return assignStyles(...styles)
+  } else if (styles instanceof Object) {
+    return styles
+  } else {
+    console.warn('Pass either a valid object or an array of valid objects.')
+    console.warn('Look can not flatten and will ignore the following styles input:', styles)
+
+    return false
+  }
 }
 
 /**
@@ -80,16 +84,18 @@ export function flattenStyles(styles) {
  * @param {Object|Array} additionalStyles - any additional styles provided by outer wrapper
  */
 export function prepareStyles(Component, additionalStyles) {
-	let styles
-	if (Component.styles) {
-		styles = assignStyles({}, Component.styles instanceof Function ? Component.styles.call(Component) : Component.styles)
-		styles = resolveDefault(flattenStyles(styles))
-	}
+  let styles
 
-	if (additionalStyles) {
-		styles = assignStyles({}, styles, resolveDefault(assign({}, additionalStyles)))
-	}
-	return styles
+  if (Component.styles) {
+    styles = assignStyles({}, Component.styles instanceof Function ? Component.styles.call(Component) : Component.styles)
+    styles = resolveDefault(flattenStyles(styles))
+  }
+
+  if (additionalStyles) {
+    styles = assignStyles({}, styles, resolveDefault(assign({}, additionalStyles)))
+  }
+
+  return styles
 }
 
 /**
@@ -98,12 +104,13 @@ export function prepareStyles(Component, additionalStyles) {
  * @param {Object} styles - style object which perhaps is a default style
  */
 export function resolveDefault(styles) {
-	if (styles && styles[Object.keys(styles)[0]] instanceof Object !== true) {
-		styles = {
-			'_default': styles
-		}
-	}
-	return styles
+  if (styles && styles[Object.keys(styles)[0]] instanceof Object !== true) {
+    styles = {
+      '_default': styles
+    }
+  }
+
+  return styles
 }
 
 /**
@@ -112,27 +119,27 @@ export function resolveDefault(styles) {
  * @param {Object|Array} additionalProcessors - any additional processors provided by outer wrapper
  */
 export function prepareProcessors(Component, additionalProcessors) {
-	let newProcessors = getProcessors().slice(0)
+  let newProcessors = getProcessors().slice(0)
 
-	if (Component.processors) {
-		if (Component.processors instanceof Function) {
-			Component.processors = Component.processors()
-		}
-		//arrayify processors
-		if (Component.processors instanceof Array !== true) {
-			Component.processors = [Component.processors]
-		}
-		newProcessors.push(...Component.processors)
-	}
+  if (Component.processors) {
+    if (Component.processors instanceof Function) {
+      Component.processors = Component.processors()
+    }
+    //arrayify processors
+    if (Component.processors instanceof Array !== true) {
+      Component.processors = [Component.processors]
+    }
+    newProcessors.push(...Component.processors)
+  }
 
-	//add additional processors
-	if (additionalProcessors) {
-		if (additionalProcessors instanceof Array) {
-			newProcessors.push(...additionalProcessors)
-		} else if (additionalProcessors instanceof Object) {
-			newProcessors.push(additionalProcessors)
-		}
-	}
+  //add additional processors
+  if (additionalProcessors) {
+    if (additionalProcessors instanceof Array) {
+      newProcessors.push(...additionalProcessors)
+    } else if (additionalProcessors instanceof Object) {
+      newProcessors.push(additionalProcessors)
+    }
+  }
 
-	return newProcessors
+  return newProcessors
 }
