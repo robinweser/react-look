@@ -1,4 +1,4 @@
-import {getDefaultKey} from './Config'
+import { getDefaultKey } from './Config'
 
 const defaultKey = getDefaultKey()
 
@@ -11,7 +11,7 @@ export default {
    * @param {Component} Component - outer wrapping React Component
    * @param {string} key - a unique key that gets added
    */
-  add(Component, key = defaultKey) {
+  add( Component, key = defaultKey ) {
     return Component.state._look.set(key, new Map())
   },
 
@@ -20,7 +20,7 @@ export default {
    * @param {Component} Component - outer wrapping React Component
    * @param {string} key - a unique key whichs state gets returned
    */
-  get(Component, key = defaultKey) {
+  get( Component, key = defaultKey ) {
     return Component.state._look.get(key)
   },
 
@@ -30,7 +30,7 @@ export default {
    * @param {Component} Component - outer wrapping React Component
    * @param {string} key - a unique key which gets states set
    */
-  set(states, Component, key = defaultKey) {
+  set( states, Component, key = defaultKey ) {
     return Component.state._look.set(key, states)
   },
 
@@ -39,7 +39,7 @@ export default {
    * @param {Component} Component - outer wrapping React Component
    * @param {string} key - a unique key which gets checked
    */
-  has(Component, key = defaultKey) {
+  has( Component, key = defaultKey ) {
     return Component.state._look.has(key)
   },
 
@@ -49,12 +49,12 @@ export default {
    * @param {Component} Component - outer wrapping React Component
    * @param {string} key - a unique whichs state gets returned
    */
-  getState(state, Component, key = defaultKey) {
+  getState( state, Component, key = defaultKey ) {
     if (Component.state._look.has(key)) {
       return Component.state._look.get(key).get(state)
-    } else {
-      return false
     }
+
+    return false
   },
 
   /**
@@ -64,8 +64,9 @@ export default {
    * @param {Component} Component - outer wrapping React Component
    * @param {string} key - a unique key whichs state gets set
    */
-  setState(state, value, Component, key = defaultKey) {
+  setState( state, value, Component, key = defaultKey ) {
     Component.state._look.get(key).set(state, value)
+
     return Component.setState(Component.state._look)
   },
 
@@ -75,7 +76,7 @@ export default {
    * @param {Component} Component - outer wrapping React Component
    * @param {string} key - a unique key whichs state gets checked
    */
-  hasState(state, Component, key = defaultKey) {
+  hasState( state, Component, key = defaultKey ) {
     return Component.state._look.has(key).has(state)
   }
 }

@@ -3,10 +3,12 @@
 * @param {Object} styles - any style object that gets processed
 * @param {Object} processArgs - a map of arguments that might be passed to the processor
 */
-export default function processStyles(styles, processors, processArgs) {
+export default function processStyles( styles, processors, processArgs ) {
+  let prcessedStyles = styles
+
   processors.forEach(processor => {
-    styles = processor.process(styles, processArgs)
+    prcessedStyles = processor.process(prcessedStyles, processArgs)
   })
 
-  return styles
+  return prcessedStyles
 }

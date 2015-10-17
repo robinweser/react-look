@@ -1,30 +1,30 @@
-import Look, {State, Listener, MixinTypes, Config} from './look'
-import CSS from './api/CSS'
-import Prefixer from './processors/prefixer'
+import CSS                                           from './api/CSS'
+import Look, { State, Listener, MixinTypes, Config } from './look'
+import Prefixer                                      from './processors/prefixer'
 
-import ExtractCSS from './mixins/extract-css'
-import MediaQueries from './mixins/media-query'
-import UserActions from './mixins/pseudo-class/user-action'
-import PseudoElements from './mixins/pseudo-class/before-after'
-import Input from './mixins/pseudo-class/input'
-import Lang from './mixins/pseudo-class/lang'
+import ExtractCSS                                    from './mixins/extract-css'
+import Input                                         from './mixins/pseudo-class/input'
+import Lang                                          from './mixins/pseudo-class/lang'
+import MediaQueries                                  from './mixins/media-query'
+import PseudoElements                                from './mixins/pseudo-class/before-after'
+import UserActions                                   from './mixins/pseudo-class/user-action'
 
-let Mixins = Config.getProcessors()[0]
+const Mixins = Config.getProcessors()[0]
 
-Mixins.use(UserActions)
-Mixins.use(MediaQueries)
+Mixins.use(ExtractCSS)
 Mixins.use(Input)
 Mixins.use(Lang)
+Mixins.use(MediaQueries)
 Mixins.use(PseudoElements)
-Mixins.use(ExtractCSS)
+Mixins.use(UserActions)
 
 Config.registerProcessor(Prefixer)
 
 export {
-  Look as default,
+  Config,
   CSS,
-  State,
   Listener,
+  Look as default,
   MixinTypes,
-  Config
+  State
 }

@@ -8,43 +8,49 @@ import splitCondition from '../utils/splitCondition'
 export default [{
   key: '>=',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, {Component}) => {
-    let evaluation = splitCondition(key, '>=', Component)
+  fn: ( key, styles, { Component } ) => {
+    const evaluation = splitCondition(key, '>=', Component)
+
     return evaluation && evaluation[0] >= evaluation[1] ? styles : false
   }
 }, {
   key: '<=',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, {Component}) => {
-    let evaluation = splitCondition(key, '<=', Component)
+  fn: ( key, styles, { Component } ) => {
+    const evaluation = splitCondition(key, '<=', Component)
+
     return evaluation && evaluation[0] <= evaluation[1] ? styles : false
   }
 }, {
   key: '!=',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, {Component}) => {
-    let evaluation = splitCondition(key, '!=', Component)
-    return evaluation && evaluation[0] != evaluation[1] ? styles : false
+  fn: ( key, styles, { Component } ) => {
+    const evaluation = splitCondition(key, '!=', Component)
+
+    return evaluation && evaluation[0] != evaluation[1] ? styles : false // eslint-disable-line eqeqeq
   }
 }, {
   key: '>',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, {Component}) => {
-    let evaluation = splitCondition(key, '>', Component)
+  fn: ( key, styles, { Component } ) => {
+    const evaluation = splitCondition(key, '>', Component)
+
     return evaluation && evaluation[0] > evaluation[1] ? styles : false
   }
 }, {
   key: '<',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, {Component}) => {
-    let evaluation = splitCondition(key, '<', Component)
+  fn: ( key, styles, { Component } ) => {
+    const evaluation = splitCondition(key, '<', Component)
+
     return evaluation && evaluation[0] < evaluation[1] ? styles : false
   }
 }, {
   key: '=',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, {Component}) => {
-    let evaluation = splitCondition(key, '=', Component)
-    return evaluation && evaluation[0] == evaluation[1] ? styles : false
+  fn: ( key, styles, { Component } ) => {
+    const evaluation = splitCondition(key, '=', Component)
+
+    return evaluation && evaluation[0] == evaluation[1] ? styles : false // eslint-disable-line eqeqeq
   }
 }]

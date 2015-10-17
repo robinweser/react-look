@@ -1,5 +1,5 @@
-import MixinTypes from '../../utils/MixinTypes'
 import createPseudoElement from '../../utils/createPseudoElement'
+import MixinTypes          from '../../utils/MixinTypes'
 
 /**
  * Adds a element before/after current element
@@ -8,16 +8,16 @@ import createPseudoElement from '../../utils/createPseudoElement'
 export default [{
   key: ':before',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, {newProps}) => {
-    if (newProps.hasOwnProperty('children')) {
+  fn: ( key, styles, { newProps } ) => {
+    if ( newProps.hasOwnProperty('children') ) {
       newProps.children.unshift(createPseudoElement(styles))
     }
   }
 }, {
   key: ':after',
   type: MixinTypes.INCLUDE,
-  fn: (key, styles, {newProps}) => {
-    if (newProps.hasOwnProperty('children')) {
+  fn: ( key, styles, { newProps } ) => {
+    if ( newProps.hasOwnProperty('children') ) {
       newProps.children.push(createPseudoElement(styles))
     }
   }

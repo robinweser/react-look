@@ -6,7 +6,7 @@ import MixinTypes from '../../utils/MixinTypes'
 export default [{
   key: ':empty',
   type: MixinTypes.EQUAL,
-  fn: (key, styles, {newProps}) => {
+  fn: ( key, styles, { newProps }) => {
     return !newProps.children || newProps.children.length < 1 ? styles : false
   }
 }]

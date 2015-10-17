@@ -1,6 +1,6 @@
-import {CSSSheet, Processors} from 'dynamic-style-sheets'
+import { CSSSheet, Processors } from 'dynamic-style-sheets'
 
-let Units = Processors.Units
+const Units = Processors.Units
 
 /**
  *  A global StyleSheet that directly applies to your DOM.
@@ -12,23 +12,26 @@ export default class CSS extends CSSSheet {
    * @param {string} media - a valid media query
    * @param {any} id - a special id that gets attached to the stylesheet in order catch it later
    */
-  constructor(styles, unit = 'px', scope='', media = '', id) {
-    if (scope !== '') {
-      var selector;
+  constructor( styles, unit = 'px', scope = '', media = '', id ) {
+    let selector
 
-      for (selector in styles) {
-        styles[scope + ' ' + selector] = styles[selector];
-        delete styles[selector];
+    if ( scope !== '' ) {
+      for ( selector in styles ) {
+        if ( styles.hasOwnProperty(selector) ) {
+          styles[scope + ' ' + selector] = styles[selector]
+          delete styles[selector]
+        }
       }
     }
-    super(styles, media, id);
 
-    this.process(Units, this.unit);
-    this.unit = unit;
+    super(styles, media, id)
+
+    this.process(Units, this.unit)
+    this.unit = unit
   }
 
   process() {
-    super.process(...arguments);
-    super.process(Units, this.unit);
+    super.process(...arguments)
+    super.process(Units, this.unit)
   }
 }

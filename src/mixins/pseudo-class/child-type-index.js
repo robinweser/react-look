@@ -1,17 +1,17 @@
-import MixinTypes from '../../utils/MixinTypes'
-import getNthExpression from '../../utils/splitNthExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
-import flattenArray from '../../utils/flattenArray'
+import flattenArray      from '../../utils/flattenArray'
+import getNthExpression  from '../../utils/splitNthExpression'
+import MixinTypes        from '../../utils/MixinTypes'
 
 /**
  * Returns a childs type
  * If child is an ES6 class it returns the displayName
  * @param {Object} child - child which type gets identified
  */
-export function getChildType(child) {
+export function getChildType( child ) {
   let childType
 
-  if (child.type instanceof Function) {
+  if ( child.type instanceof Function ) {
     childType = (child.type.hasOwnProperty('name') ? child.type.name : child.type)
   } else {
     childType = child.type
@@ -27,45 +27,43 @@ export function getChildType(child) {
 export default [{
   key: ':first-of-type',
   type: MixinTypes.EQUAL,
-  fn: (key, styles, {parent, element}) => {
-    if (parent) {
-      let elementType = getChildType(element)
-      let children = flattenArray(parent.props.children)
-      let i
-      let length = children.length
+  fn: ( key, styles, { parent, element } ) => {
+    if ( parent ) {
+      const children = flattenArray(parent.props.children)
+      const elementType = getChildType(element)
+      const length = children.length
 
-      for (i = 0; i < length; ++i) {
-        if (getChildType(children[i]) === elementType) {
-          if (children[i] === element) {
+      for ( let ix = 0; ix < length; ++ix ) {
+        if ( getChildType(children[ix]) === elementType ) {
+          if (children[ix] === element) {
             return styles
-          } else {
-            return false
           }
+
+          return false
         }
       }
     } else {
-      let elementKey = element._owner._currentElement.key
+      const elementKey = element._owner._currentElement.key
 
-      if (!elementKey) {
+      if ( !elementKey ) {
         // TODO: Warning
         return false
       }
 
-      let elementParent = element._owner._instance.props._parent
+      const elementParent = element._owner._instance.props._parent
 
-      if (elementParent) {
-        let elementType = getChildType(element._owner._currentElement)
-        let children = flattenArray(elementParent.props.children)
-        let i
-        let length = children.length
+      if ( elementParent ) {
+        const children = flattenArray(elementParent.props.children)
+        const elementType = getChildType(element._owner._currentElement)
+        const length = children.length
 
-        for (i = 0; i < length; ++i) {
-          if (getChildType(children[i]) === elementType) {
-            if (children[i].key === elementKey) {
+        for ( let ix = 0; ix < length; ++ix ) {
+          if ( getChildType(children[ix]) === elementType ) {
+            if ( children[ix].key === elementKey ) {
               return styles
-            } else {
-              return false
             }
+
+            return false
           }
         }
       }
@@ -74,55 +72,47 @@ export default [{
 }, {
   key: ':last-of-type',
   type: MixinTypes.EQUAL,
-  fn: (key, styles, {parent, element}) => {
-    if (parent) {
-      let elementType = getChildType(element)
-      let children = flattenArray(parent.props.children)
-      let lastTypedElement
-      let i
-      let length = children.length
+  fn: ( key, styles, { parent, element } ) => {
+    if ( parent ) {
+      const children = flattenArray(parent.props.children)
+      const elementType = getChildType(element)
+      const length = children.length
 
-      for (i = 0; i < length; ++i) {
-        if (getChildType(children[i]) === elementType) {
-          if (children[i] === element) {
-            lastTypedElement = true
-          } else {
-            lastTypedElement = false
-          }
+      let lastTypedElement
+
+      for ( let ix = 0; ix < length; ++ix ) {
+        if ( getChildType(children[ix]) === elementType ) {
+          lastTypedElement = children[ix] === element
         }
       }
 
-      if (lastTypedElement) {
+      if ( lastTypedElement ) {
         return styles
       }
     } else {
-      let elementKey = element._owner._currentElement.key
+      const elementKey = element._owner._currentElement.key
 
-      if (!elementKey) {
+      if ( !elementKey ) {
         // TODO: Warning
         return false
       }
 
-      let elementParent = element._owner._instance.props._parent
+      const elementParent = element._owner._instance.props._parent
 
-      if (elementParent) {
-        let elementType = getChildType(element._owner._currentElement)
-        let children = flattenArray(elementParent.props.children)
+      if ( elementParent ) {
+        const children = flattenArray(elementParent.props.children)
+        const elementType = getChildType(element._owner._currentElement)
+        const length = children.length
+
         let lastTypedElement
-        let i
-        let length = children.length
 
-        for (i = 0; i < length; ++i) {
-          if (getChildType(children[i]) === elementType) {
-            if (children[i].key === elementKey) {
-              lastTypedElement = true
-            } else {
-              lastTypedElement = false
-            }
+        for ( let ix = 0; ix < length; ++ix ) {
+          if ( getChildType(children[ix]) === elementType ) {
+            lastTypedElement = children[ix].key === elementKey
           }
         }
 
-        if (lastTypedElement) {
+        if ( lastTypedElement ) {
           return styles
         }
       }
@@ -131,51 +121,52 @@ export default [{
 }, {
   key: ':only-of-type',
   type: MixinTypes.EQUAL,
-  fn: (key, styles, {parent, element}) => {
-    if (parent) {
-      let elementType = getChildType(element)
-      let children = flattenArray(parent.props.children)
-      let typeCount = 0
-      let i
-      let length = children.length
+  fn: ( key, styles, { parent, element } ) => {
+    if ( parent ) {
+      const children = flattenArray(parent.props.children)
+      const elementType = getChildType(element)
+      const length = children.length
 
-      for (i = 0; i < length; ++i) {
-        if (getChildType(children[i]) === elementType) {
+      let typeCount = 0
+
+      for ( let ix = 0; ix < length; ++ix ) {
+        if ( getChildType(children[ix]) === elementType ) {
           ++typeCount
         }
       }
 
-      if (typeCount === 1) {
+      if ( typeCount === 1 ) {
         return styles
       }
     } else {
-      let elementKey = element._owner._currentElement.key
+      const elementKey = element._owner._currentElement.key
 
-      if (!elementKey) {
+      if ( !elementKey ) {
         // TODO: Warning
         return false
       }
 
-      let elementParent = element._owner._instance.props._parent
+      const elementParent = element._owner._instance.props._parent
 
-      if (elementParent) {
-        let elementType = getChildType(element._owner._currentElement)
-        let children = flattenArray(elementParent.props.children)
+      if ( elementParent ) {
+        const children = flattenArray(elementParent.props.children)
+        const elementType = getChildType(element._owner._currentElement)
+        const length = children.length
+
         let typeCount = -1
-        let i
-        let length = children.length
 
-        for (i = 0; i < length; ++i) {
-          if (getChildType(children[i]) === elementType) {
+        for ( let ix = 0; ix < length; ++ix ) {
+          if ( getChildType(children[ix]) === elementType ) {
             ++typeCount
-            if (children[i].key === elementKey) {
+
+            if ( children[ix].key === elementKey ) {
               // double check to only match the real elements
               ++typeCount
             }
           }
         }
 
-        if (typeCount === 1) {
+        if ( typeCount === 1 ) {
           return styles
         }
       }
@@ -184,52 +175,52 @@ export default [{
 }, {
   key: ':nth-of-type',
   type: MixinTypes.BEGINWITH,
-  fn: (key, styles, {parent, element}) => {
-    if (parent) {
-      let elementType = getChildType(element)
-      let children = flattenArray(parent.props.children)
-      let typeIndex = 0
-      let i
-      let length = children.length
+  fn: ( key, styles, { parent, element } ) => {
+    if ( parent ) {
+      const children = flattenArray(parent.props.children)
+      const elementType = getChildType(element)
+      const length = children.length
 
-      for (i = 0; i < length; ++i) {
-        if (getChildType(children[i]) === elementType) {
+      let typeIndex = 0
+
+      for ( let ix = 0; ix < length; ++ix ) {
+        if ( getChildType(children[ix]) === elementType ) {
           ++typeIndex
 
-          if (children[i] === element) {
-            let expression = getNthExpression(key)
+          if ( children[ix] === element ) {
+            const expression = getNthExpression(key)
 
-            if (evalNthExpression(expression, typeIndex)) {
+            if ( evalNthExpression(expression, typeIndex) ) {
               return styles
             }
           }
         }
       }
     } else {
-      let elementKey = element._owner._currentElement.key
+      const elementKey = element._owner._currentElement.key
 
-      if (!elementKey) {
+      if ( !elementKey ) {
         // TODO: Warning
         return false
       }
 
-      let elementParent = element._owner._instance.props._parent
+      const elementParent = element._owner._instance.props._parent
 
-      if (elementParent) {
-        let elementType = getChildType(element._owner._currentElement)
-        let children = flattenArray(elementParent.props.children)
+      if ( elementParent ) {
+        const children = flattenArray(elementParent.props.children)
+        const elementType = getChildType(element._owner._currentElement)
+        const length = children.length
+
         let typeIndex = 0
-        let i
-        let length = children.length
 
-        for (i = 0; i < length; ++i) {
-          if (getChildType(children[i]) === elementType) {
+        for ( let ix = 0; ix < length; ++ix ) {
+          if ( getChildType(children[ix]) === elementType ) {
             ++typeIndex
 
-            if (children[i].key === elementKey) {
-              let expression = getNthExpression(key)
+            if ( children[ix].key === elementKey ) {
+              const expression = getNthExpression(key)
 
-              if (evalNthExpression(expression, typeIndex)) {
+              if ( evalNthExpression(expression, typeIndex) ) {
                 return styles
               }
             }
@@ -241,64 +232,64 @@ export default [{
 }, {
   key: ':nth-last-of-type',
   type: MixinTypes.BEGINWITH,
-  fn: (key, styles, {parent, element}) => {
-    if (parent) {
-      let elementType = getChildType(element)
-      let children = flattenArray(parent.props.children)
-      let typeIndex
-      let typeCount = 0
-      let i
-      let length = children.length
+  fn: ( key, styles, { parent, element } ) => {
+    if ( parent ) {
+      const children = flattenArray(parent.props.children)
+      const elementType = getChildType(element)
+      const length = children.length
 
-      for (i = 0; i < length; ++i) {
-        if (getChildType(children[i]) === elementType) {
+      let typeCount = 0
+      let typeIndex
+
+      for ( let ix = 0; ix < length; ++ix ) {
+        if ( getChildType(children[ix]) === elementType ) {
           ++typeCount
 
-          if (children[i] === element) {
+          if ( children[ix] === element ) {
             typeIndex = typeCount
           }
         }
       }
 
-      if (typeIndex) {
-        let expression = getNthExpression(key)
+      if ( typeIndex ) {
+        const expression = getNthExpression(key)
 
-        if (evalNthExpression(expression, typeCount + 1 - typeIndex)) {
+        if ( evalNthExpression(expression, typeCount + 1 - typeIndex) ) {
           return styles
         }
       }
     } else {
-      let elementKey = element._owner._currentElement.key
+      const elementKey = element._owner._currentElement.key
 
-      if (!elementKey) {
+      if ( !elementKey ) {
         // TODO: Warning
         return false
       }
 
-      let elementParent = element._owner._instance.props._parent
+      const elementParent = element._owner._instance.props._parent
 
-      if (elementParent) {
-        let elementType = getChildType(element._owner._currentElement)
-        let children = flattenArray(elementParent.props.children)
-        let typeIndex
+      if ( elementParent ) {
+        const children = flattenArray(elementParent.props.children)
+        const elementType = getChildType(element._owner._currentElement)
+        const length = children.length
+
         let typeCount = 0
-        let i
-        let length = children.length
+        let typeIndex
 
-        for (i = 0; i < length; ++i) {
-          if (getChildType(children[i]) === elementType) {
+        for ( let ix = 0; ix < length; ++ix ) {
+          if ( getChildType(children[ix]) === elementType ) {
             ++typeCount
 
-            if (children[i].key === elementKey) {
+            if ( children[ix].key === elementKey ) {
               typeIndex = typeCount
             }
           }
         }
 
-        if (typeIndex) {
-          let expression = getNthExpression(key)
+        if ( typeIndex ) {
+          const expression = getNthExpression(key)
 
-          if (evalNthExpression(expression, typeCount + 1 - typeIndex)) {
+          if ( evalNthExpression(expression, typeCount + 1 - typeIndex) ) {
             return styles
           }
         }

@@ -1,26 +1,28 @@
-import MixinTypes from '../../utils/MixinTypes'
-import getNthExpression from '../../utils/splitNthExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
-import flattenArray from '../../utils/flattenArray'
+import flattenArray      from '../../utils/flattenArray'
+import getNthExpression  from '../../utils/splitNthExpression'
+import MixinTypes        from '../../utils/MixinTypes'
 
-const getChildIndex = (parent, element) => {
+const getChildIndex = ( parent, element ) => {
   let index
 
-  if (parent) {
+  if ( parent ) {
     index = flattenArray(parent.props.children).indexOf(element)
   } else {
-    let elementParent = element._owner._instance.props._parent
+    const elementParent = element._owner._instance.props._parent
 
-    if (elementParent) {
-      let ownerKey = element._owner._currentElement.key
-      if (ownerKey === null) {
+    if ( elementParent ) {
+      const ownerKey = element._owner._currentElement.key
+
+      if ( ownerKey === null ) {
         console.warn('You need to pass a unique key in order to use child-index pseudo classes.')
 
         return undefined
       }
-      flattenArray(elementParent.props.children).forEach((child, i) => {
-        if (child.key === ownerKey) {
-          index = i
+
+      flattenArray(elementParent.props.children).forEach(( child, ix ) => {
+        if ( child.key === ownerKey ) {
+          index = ix
 
           return
         }
@@ -38,16 +40,16 @@ const getChildIndex = (parent, element) => {
 export default [{
   key: ':first-child',
   type: MixinTypes.EQUAL,
-  fn: (key, styles, {parent, element}) => {
-    if (parent) {
-      if (flattenArray(parent.props.children)[0] === element) {
+  fn: ( key, styles, { parent, element } ) => {
+    if ( parent ) {
+      if ( flattenArray(parent.props.children)[0] === element ) {
         return styles
       }
     } else {
-      let elementParent = element._owner._instance.props._parent
-      let elementKey = element._owner._currentElement.key
+      const elementParent = element._owner._instance.props._parent
+      const elementKey = element._owner._currentElement.key
 
-      if (elementParent && flattenArray(elementParent.props.children)[0].key === elementKey && elementKey !== null) {
+      if ( elementParent && flattenArray(elementParent.props.children)[0].key === elementKey && elementKey !== null ) {
         return styles
       }
     }
@@ -55,21 +57,21 @@ export default [{
 }, {
   key: ':last-child',
   type: MixinTypes.EQUAL,
-  fn: (key, styles, {parent, element}) => {
-    if (parent) {
-      let children = flattenArray(parent.props.children)
+  fn: ( key, styles, { parent, element } ) => {
+    if ( parent ) {
+      const children = flattenArray(parent.props.children)
 
-      if (children[children.length - 1] === element) {
+      if ( children[children.length - 1] === element ) {
         return styles
       }
     } else {
-      let elementParent = element._owner._instance.props._parent
-      let elementKey = element._owner._currentElement.key
+      const elementParent = element._owner._instance.props._parent
+      const elementKey = element._owner._currentElement.key
 
-      if (elementParent) {
-        let children = flattenArray(elementParent.props.children)
+      if ( elementParent ) {
+        const children = flattenArray(elementParent.props.children)
 
-        if (children[children.length - 1].key === elementKey && elementKey !== null) {
+        if ( children[children.length - 1].key === elementKey && elementKey !== null ) {
           return styles
         }
       }
@@ -78,25 +80,25 @@ export default [{
 }, {
   key: ':only-child',
   type: MixinTypes.EQUAL,
-  fn: (key, styles, {parent}) => {
-    if (parent && flattenArray(parent.props.children).length === 1) {
+  fn: ( key, styles, { parent, element } ) => {
+    if ( parent && flattenArray(parent.props.children).length === 1 ) {
       return styles
-    } else {
-      let elementParent = element._owner._instance.props._parent
+    }
 
-      if (elementParent && flattenArray(elementParent.props.children).length === 1) {
-        return styles
-      }
+    const elementParent = element._owner._instance.props._parent
+
+    if ( elementParent && flattenArray(elementParent.props.children).length === 1 ) {
+      return styles
     }
   }
 }, {
   key: ':nth-child',
   type: MixinTypes.BEGINWITH,
-  fn: (key, styles, {parent, element}) => {
-    let expression = getNthExpression(key)
-    let childIndex = getChildIndex(parent, element)
+  fn: ( key, styles, { parent, element } ) => {
+    const expression = getNthExpression(key)
+    const childIndex = getChildIndex(parent, element)
 
-    if (childIndex === undefined) {
+    if ( childIndex === undefined ) {
       return false
     }
 
@@ -105,24 +107,19 @@ export default [{
 }, {
   key: ':nth-last-child',
   type: MixinTypes.BEGINWITH,
-  fn: (key, styles, {parent, element}) => {
-    let expression = getNthExpression(key)
-    let childIndex = getChildIndex(parent, element)
+  fn: ( key, styles, { parent, element } ) => {
+    // TODO: Review this method as the changes worry me
+    const expression = getNthExpression(key)
+    const childIndex = getChildIndex(parent, element)
 
-    if (!childIndex === undefined) {
+    if ( !childIndex === undefined ) {
       return false
     }
 
-    let childLength
+    if ( !parent ) {
+      const elementParent = element._owner._instance.props._parent
 
-    if (parent) {
-      childLength = flattenArray(parent.props.children).length
-    } else {
-      let elementParent = element._owner._instance.props._parent
-
-      if (elementParent) {
-        childLength = flattenArray(elementParent.props.children).length
-      } else {
+      if ( !elementParent ) {
         return false
       }
     }

@@ -6,7 +6,7 @@ import MixinTypes from '../../utils/MixinTypes'
 export default [{
   key: ':lang',
   type: MixinTypes.BEGINWITH,
-  fn: (key, styles, {newProps}) => {
+  fn: ( key, styles, { newProps } ) => {
     return newProps.lang && key.indexOf(newProps.lang) > -1 ? styles : false
   }
 }]

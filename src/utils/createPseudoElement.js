@@ -1,4 +1,5 @@
 import createPseudoImage from './createPseudoImage'
+import { createElement } from 'react'
 
 /**
  * Creates a new pseudo element
@@ -6,16 +7,17 @@ import createPseudoImage from './createPseudoImage'
  * NOTE: By passing a `content` you may specify a text or image which gets inserted
  * @param {Object} styles - pseudo elements inner styles
  */
-export default function createPseudoElement(styles) {
+export default function createPseudoElement( styles ) {
   let content = ''
 
-  if (styles.content) {
+  if ( styles.content ) {
     content = styles.content
+
     delete styles.content
   }
 
-  let children = content.indexOf('url(') > -1 ? [createPseudoImage(content)] : content
-  let newProps = {style: styles}
+  const children = content.indexOf('url(') > -1 ? [createPseudoImage(content)] : content
+  const newProps = { style: styles }
 
-  return React.createElement('span', newProps, children)
+  return createElement('span', newProps, children)
 }

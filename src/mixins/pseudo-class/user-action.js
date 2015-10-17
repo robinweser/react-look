@@ -1,7 +1,7 @@
-import MixinTypes from '../../utils/MixinTypes'
-import State from '../../api/State'
-import { getDefaultKey } from '../../api/Config'
+import MixinTypes         from '../../utils/MixinTypes'
+import State              from '../../api/State'
 import { createListener } from '../../api/Listener'
+import { getDefaultKey }  from '../../api/Config'
 
 /**
  * Evaluates browser states and adds event listeners if needed
@@ -10,8 +10,8 @@ import { createListener } from '../../api/Listener'
 export default [{
   key: ':active',
   type: MixinTypes.EQUAL,
-  fn: (pseudo, styles, {element, Component, newProps}) => {
-    let key = element.key || element.ref || getDefaultKey()
+  fn: ( pseudo, styles, { element, Component, newProps } ) => {
+    const key = element.key || element.ref || getDefaultKey()
 
     // add event listener if not added yet
     newProps.onMouseDown = createListener(Component, element, key, 'onMouseDown', () => {
@@ -20,12 +20,13 @@ export default [{
     })
 
     // add a mouseup listener to cancel active-state
-    if (!Component._onMouseUp && typeof window !== 'undefined') {
+    if ( !Component._onMouseUp && typeof window !== 'undefined' ) {
       Component._onMouseUp = () => {
-        while (Component._lastActiveElements.length > 0) {
-          let key = Component._lastActiveElements[0];
-          State.setState('active', false, Component, key)
-          Component._lastActiveElements.pop(key)
+        while ( Component._lastActiveElements.length > 0 ) {
+          const elementKey = Component._lastActiveElements[0]
+
+          State.setState('active', false, Component, elementKey)
+          Component._lastActiveElements.pop(elementKey)
         }
       }
 
@@ -38,8 +39,8 @@ export default [{
 }, {
   key: ':hover',
   type: MixinTypes.EQUAL,
-  fn: (pseudo, styles, {element, Component, newProps}) => {
-    let key = element.key || element.ref || getDefaultKey()
+  fn: ( pseudo, styles, { element, Component, newProps } ) => {
+    const key = element.key || element.ref || getDefaultKey()
 
     // add event listener if not added yet
     newProps.onMouseEnter = createListener(Component, element, key, 'onMouseEnter', () => {
@@ -55,8 +56,8 @@ export default [{
 }, {
   key: ':focus',
   type: MixinTypes.EQUAL,
-  fn: (pseudo, styles, {element, Component, newProps}) => {
-    let key = element.key || element.ref || getDefaultKey()
+  fn: ( pseudo, styles, { element, Component, newProps } ) => {
+    const key = element.key || element.ref || getDefaultKey()
 
     // add event listener if not added yet
     newProps.onFocus = createListener(Component, element, key, 'onFocus', () => {
