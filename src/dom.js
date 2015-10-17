@@ -1,29 +1,72 @@
-import Look, {State, Listener, MixinTypes, Config} from './look'
 import CSS from './api/CSS'
-import Prefixer from './processors/prefixer'
 
-import ExtractCSS from './mixins/extract-css'
-import MediaQueries from './mixins/media-query'
-import UserActions from './mixins/pseudo-class/user-action'
-import PseudoElements from './mixins/pseudo-class/before-after'
-import Input from './mixins/pseudo-class/input'
-import Lang from './mixins/pseudo-class/lang'
-let Mixins = Config.getProcessors()[0]
+import Look, {createStyleSheet} from './core'
+import State from './api/State'
+import Listener from './api/Listener'
 
-Mixins.use(UserActions)
-Mixins.use(MediaQueries)
-Mixins.use(Input)
-Mixins.use(Lang)
-Mixins.use(PseudoElements)
-Mixins.use(ExtractCSS)
+import alternativeValue from './plugins/alternativeValue'
+import statefulValue from './plugins/statefulValue'
+import customProperty from './plugins/customProperty'
 
-Config.registerProcessor(Prefixer)
+import {equal, unEqual, bigger, smaller, biggerThan, smallerThan} from './keys/condition'
+import {firstChild, lastChild, onlyChild, nthChild, nthLastChild} from './keys/pseudoClasses/childIndex'
+import {firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType} from './keys/pseudoClasses/childTypeIndex'
+import {checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate} from './keys/pseudoClasses/input'
+import {hover, active, focus} from './keys/pseudoClasses/userAction'
+import {before, after} from './keys/pseudoClasses/beforeAfter'
+import lang from './keys/pseudoClasses/lang'
+import empty from './keys/pseudoClasses/empty'
+import extractCSS from './keys/extractCSS'
+import extend from './keys/extend'
+import mediaQuery from './keys/mediaQuery'
+
+const config = {
+	plugins : [customProperty, alternativeValue, statefulValue],
+	keys: {
+		//NOTE: Ordner matters! 
+		'>=': biggerThan,
+		'<=': smallerThan,
+		'!=': unEqual,
+		'>': bigger,
+		'<': smaller,
+		'=': equal,
+		extend: extend,
+		css: extractCSS,
+		':empy': empty,
+		'@media': mediaQuery,
+		':first-child': firstChild,
+		':last-child': lastChild,
+		':only-child': onlyChild,
+		':nth-child': nthChild,
+		':nth-last-child': nthLastChild,
+		':first-of-type': firstOfType,
+		':last-of-type': lastOfType,
+		':only-of-type': onlyOfType,
+		':nth-of-type': nthOfType,
+		':nth-last-of-type': nthLastOfType,
+		':before': before,
+		':after': after,
+		':lang': lang,
+		':hover': hover,
+		':focus': focus,
+		':active': active,
+		':checked': checked,
+		':disabled': disabled,
+		':enabled': enabled,
+		':read-only': readOnly,
+		':read-write': readWrite,
+		':required': required,
+		':optional': optional,
+		':indeterminate': indeterminate
+	}
+}
+export default (...args) => {
+	return Look(...args, config)
+}
 
 export {
-	Look as default,
 	CSS,
 	State,
 	Listener,
-	MixinTypes,
-	Config
+	createStyleSheet
 }

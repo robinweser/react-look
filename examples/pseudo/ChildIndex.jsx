@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import Look from '../../lib/dom'
+import React, {Component, Children, PropTypes} from 'react'
+import Look, {createStyleSheet} from '../../lib/dom'
 
 @Look
 export default class ChildIndex extends Component {
@@ -11,35 +11,10 @@ export default class ChildIndex extends Component {
     items: PropTypes.array.isRequired
   }
   
-  styles() {
-    return {
-      listItem: {
-        color: 'darkgray',
-        listStyleType: 'none',
-        ':nth-child(odd)': {
-          backgroundColor: 'lightGray',
-          color: 'blue'
-        },
-        ':last-child': {
-          color: 'red'
-        },
-        ':first-child': {
-          color: 'yellow'
-        },
-        ':nth-of-type(3)': {
-          backgroundColor: 'rgba(30, 50, 60, 0.6)'
-        },
-        ':nth-of-type(3n+5)'  :{
-          backgroundColor:'rgba(141, 195, 131, 0.4)'
-        }
-      }
-    }
-  }
-
   render() {
     //create a small list of items to demonstrate nth-child, et cetera
     let list = this.props.items.map((text,index) => {
-      return <li look="listItem" key={'list' + index}>ListItem {text}</li>
+      return <li look={styles} key={'.' + index}>ListItem {text}</li>
     })
 
     return (
@@ -51,3 +26,24 @@ export default class ChildIndex extends Component {
     )
   }
 }
+
+const styles = createStyleSheet(ChildIndex, {
+    color: 'darkgray',
+    listStyleType: 'none',
+    ':nth-child(odd)': {
+      backgroundColor: 'lightGray',
+      color: 'blue'
+    },
+    ':last-child': {
+      color: 'red'
+    },
+    ':first-child': {
+      color: 'yellow'
+    },
+    ':nth-of-type(3)': {
+      backgroundColor: 'rgba(30, 50, 60, 0.6)'
+    },
+    ':nth-of-type(3n+5)'  :{
+      backgroundColor:'rgba(141, 195, 131, 0.4)'
+    }
+})

@@ -27,8 +27,10 @@ const customProperty = (styles, config, scopeArgs) => {
     })
     
     //only assign if there are new styles
-    if (newValue && newValue instanceof Object) {
+    if (newValue !== undefined) {
+      if (newValue instanceof Object) {
       assignStyles(styles, customProperty(newValue, config, scopeArgs))
+      }
       delete styles[property]
     }
   })

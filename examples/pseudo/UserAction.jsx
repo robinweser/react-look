@@ -1,39 +1,8 @@
 import React, {Component} from 'react'
-import Look, {State} from '../../lib/dom';
+import Look, {State, createStyleSheet} from '../../lib/dom';
 
 @Look
 export default class UserAction extends Component {
-
-  styles() {
-    return {
-      button: {
-        margin: 10,
-        padding: 5,
-        border: '1px solid black'
-      },
-
-      hoverButton: {
-        backroundColor: 'blue',
-        fontSize: 20,
-        color: 'black',
-        transition: '300ms all linear',
-        ':hover': {
-          backgroundColor: 'darkblue',
-          color: 'white'
-        },
-        ':active': {
-          backgroundColor: 'red'
-        }
-      },
-
-      activeButton: {
-        fontSize: 30,
-        ':active': {
-          backgroundColor: 'red'
-        }
-      }
-    }
-  }
 
   render() {
 		let defaultState = 'Hover me!'
@@ -44,12 +13,41 @@ export default class UserAction extends Component {
     
     return (
       <div>
-        <div key="b1" look="button activeButton">Click me!</div>
-      <div key="b2" look="button hoverButton">Hover me!</div>
+        <div key="b1" look={[styles.button, styles.activeButton]}>Click me!</div>
+      <div key="b2" look={[styles.button, styles.hoverButton]}>Hover me!</div>
         <br/>
         <div>State-API live example</div>
-			<div key="b3" look="button hoverButton">{text}</div>
+      <div key="b3" look={[styles.button, styles.hoverButton]}>{text}</div>
       </div>
     )
   }
 }
+
+const styles = createStyleSheet(UserAction, {
+  button: {
+    margin: 10,
+    padding: 5,
+    border: '1px solid black'
+  },
+
+  hoverButton: {
+    backroundColor: 'blue',
+    fontSize: 20,
+    color: 'black',
+    transition: '300ms all linear',
+    ':hover': {
+      backgroundColor: 'darkblue',
+      color: 'white'
+    },
+    ':active': {
+      backgroundColor: 'red'
+    }
+  },
+
+  activeButton: {
+    fontSize: 30,
+    ':active': {
+      backgroundColor: 'red'
+    }
+  }
+})

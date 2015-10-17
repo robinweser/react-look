@@ -1,29 +1,24 @@
-import React, {Component} from 'react';
-import Look from '../lib/dom';
+import React, { Component } from 'react';
+import Look, { createStyleSheet } from '../lib/dom';
 
-@Look
-export default class Media extends Component {
-  styles() {
-    return {
-      padding: 40,
-      backgroundColor: 'red',
-      '@media (max-width: 500px)': {
-        backgroundColor: 'blue'
-      },
-      '@media (orientation:landscape)': {
-        backgroundColor: 'orange'
-      },
-      '@media (min-width: 1000px)': {
-        backgroundColor: 'green'
-      }
-    }
-  }
+const Media = () => (
+<div look={styles}>
+    Resize Me!
+  </div>
+)
 
-  render() {
-    return (
-      <div look>
-        Resize Me!
-      </div>
-    )
+const styles = createStyleSheet(Media, {
+  padding: 40,
+  backgroundColor: 'red',
+  '@media (max-width: 500px)': {
+    backgroundColor: 'blue'
+  },
+  '@media (orientation:landscape)': {
+    backgroundColor: 'orange'
+  },
+  '@media (min-width: 1000px)': {
+    backgroundColor: 'green'
   }
-}
+})
+
+export default Look(Media)

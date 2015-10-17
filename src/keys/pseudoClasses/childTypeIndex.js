@@ -43,6 +43,7 @@ const firstOfType = (property, styles, customKey, {parent, element}) => {
       }
     }
   }
+  return false
 }
 
 
@@ -92,6 +93,7 @@ const lastOfType = (property, styles, customKey, {parent, element}) => {
       }
     }
   }
+  return false
 }
 
 
@@ -137,13 +139,14 @@ const onlyOfType = (property, styles, customKey, {parent, element}) => {
       }
     }
   }
+  return false
 }
 
 
 const nthOfType = (property, styles, customKey, {parent, element}) => {
   if (parent) {
     let elementType = getChildType(element)
-    let children = flattenArray(parent.props.children)
+    let children = parent.props.children
     let typeIndex = 0
     let i
     let length = children.length
@@ -151,7 +154,7 @@ const nthOfType = (property, styles, customKey, {parent, element}) => {
       if (getChildType(children[i]) === elementType) {
         ++typeIndex
         if (children[i] === element) {
-          let expression = getNthExpression(customKey)
+          let expression = getNthExpression(property)
           if (evalNthExpression(expression, typeIndex)) {
             return styles
           }
@@ -175,7 +178,7 @@ const nthOfType = (property, styles, customKey, {parent, element}) => {
         if (getChildType(children[i]) === elementType) {
           ++typeIndex
           if (children[i].key === elementKey) {
-            let expression = getNthExpression(customKey)
+            let expression = getNthExpression(property)
             if (evalNthExpression(expression, typeIndex)) {
               return styles
             }
@@ -184,6 +187,7 @@ const nthOfType = (property, styles, customKey, {parent, element}) => {
       }
     }
   }
+  return false
 }
 
 
@@ -204,7 +208,7 @@ const nthLastOfType = (property, styles, customKey, {parent, element}) => {
       }
     }
     if (typeIndex) {
-      let expression = getNthExpression(customKey)
+      let expression = getNthExpression(property)
       if (evalNthExpression(expression, typeCount + 1 - typeIndex)) {
         return styles
       }
@@ -232,13 +236,14 @@ const nthLastOfType = (property, styles, customKey, {parent, element}) => {
         }
       }
       if (typeIndex) {
-        let expression = getNthExpression(customKey)
+        let expression = getNthExpression(property)
         if (evalNthExpression(expression, typeCount + 1 - typeIndex)) {
           return styles
         }
       }
     }
   }
+  return false
 }
 
 export default {

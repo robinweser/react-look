@@ -1,6 +1,5 @@
 import Enhancer from './core/enhancer'
-import Config from './api/Config'
-import createStyleSheet from './core/stylesheet'
+import createStyleSheet from './core/createStyleSheet'
 // Resolving annotations
 // If not passing arguments it just wraps the Component
 // Otherwise it returns a decorator
@@ -14,4 +13,4 @@ export default (...args) => {
 	}
 }
 
-export { Config, createStyleSheet }
+export { createStyleSheet }

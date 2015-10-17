@@ -6,7 +6,7 @@
 */
 export default (Component, styles) => {
   if (Component !== undefined && styles && Object.keys(styles).length > 0) {
-    let scope = Component.name
+    let scope = Component.displayName || Component.name
 
     if (scope) {
       let styleSheet = {}

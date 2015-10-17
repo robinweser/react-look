@@ -1,46 +1,48 @@
-import Enhancer from './core/enhancer'
+import Look, {createStyleSheet} from './core'
 import State from './api/State'
-import Config from './api/Config'
 import Listener from './api/Listener'
-import Mixins from './processors/mixin'
-import MixinTypes from './utils/MixinTypes'
-import createStyleSheet from './core/stylesheet'
 
-//mixins
-import Conditions from './mixins/condition'
-import Extend from './mixins/extend'
-import ChildIndex from './mixins/pseudo-class/child-index'
-import ChildTypeIndex from './mixins/pseudo-class/child-type-index'
-import Empty from './mixins/pseudo-class/empty'
-import AlternativeValues from './mixins/alternative-value'
+import alternativeValue from './plugins/alternativeValue'
+import statefulValue from './plugins/statefulValue'
+import customProperty from './plugins/customProperty'
 
-Mixins.use(Conditions)
-Mixins.use(Extend)
-Mixins.use(ChildIndex)
-Mixins.use(ChildTypeIndex)
-Mixins.use(Empty)
-Mixins.use(AlternativeValues)
+import {equal, unEqual, bigger, smaller, biggerThan, smallerThan} from './keys/condition'
+import {firstChild, lastChild, onlyChild, nthChild, nthLastChild} from './keys/pseudoClasses/childIndex'
+import {firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType} from './keys/pseudoClasses/childIndex'
+import empty from './keys/pseudoClasses/empty'
+import extend from './keys/extend'
 
-Config.registerProcessor(Mixins)
-
-
-// Resolving annotations
-// If not passing arguments it just wraps the Component
-// Otherwise it returns a decorator
-export default (...args) => {
-	if (args[0] instanceof Function) {
-		return Enhancer(...args)
-	} else {
-		return function decorator(target) {
-			return Enhancer(target, ...args)
-		}
+const config = {
+	plugins : [customProperty, alternativeValue, statefulValue],
+	keys: {
+		//NOTE: Ordner matters! 
+		'>=': biggerThan,
+		'<=': smallerThan,
+		'!=': unEqual,
+		'>': bigger,
+		'<': smaller,
+		'=': equal,
+		extend: extend,
+		':empy': empty,
+		':first-child': firstChild,
+		':last-child': lastChild,
+		':only-child': onlyChild,
+		':nth-child': nthChild,
+		':nth-last-child': nthLastChild,
+		':first-of-type': firstOfType,
+		':last-of-type': lastOfType,
+		':only-of-type': onlyOfType,
+		':nth-of-type': nthOfType,
+		':nth-last-of-type': nthLastOfType
 	}
+}
+
+export default (...args) => {
+	return Look(...args, config)
 }
 
 export {
 	Listener,
 	State,
-	Config,
-	MixinTypes,
 	createStyleSheet
 }

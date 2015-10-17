@@ -9,11 +9,12 @@ const firstChild = (property, styles, customKey, {parent, element}) => {
     }
   } else {
     let elementParent = element._owner._instance.props._parent
-    let elementKey = element._owner._currentElement.key
+    let elementKey = element._owner._currentElement.key.replace('.$', '')
     if (elementParent && elementParent.props.children[0].key === elementKey && elementKey !== null) {
       return styles
     }
   }
+  return false
 }
 
 const lastChild = (property, styles, customKey, {parent, element}) => {
@@ -32,6 +33,7 @@ const lastChild = (property, styles, customKey, {parent, element}) => {
       }
     }
   }
+  return false
 }
 
 const onlyChild = (property, styles, customKey, {parent, element}) => {
@@ -43,6 +45,7 @@ const onlyChild = (property, styles, customKey, {parent, element}) => {
       return styles
     }
   }
+  return false
 }
 
 const nthChild = (property, styles, customKey, {parent, element}) => {
@@ -77,9 +80,9 @@ const nthLastChild = (property, styles, customKey, {parent, element}) => {
 export default {
   firstChild,
   lastChild,
-  OnlyChild,
-  NthChild,
-  NthLastChild
+  onlyChild,
+  nthChild,
+  nthLastChild
 }
 
 /**

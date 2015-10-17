@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Look from '../lib/dom'
+import Look, {createStyleSheet} from '../lib/dom'
 import Color from 'color'
 
 @Look
@@ -32,45 +32,6 @@ export default class Condition extends Component {
 			clicks : this.state.clicks +1
 		})
 	}
-	
-
-  styles() {
-    return {
-      states: {
-        padding: 5,
-				marginBottom: 5,
-				border: '1px solid gray',
-        fontSize: 17,
-        'mode=important': {
-          backgroundColor: 'rgba(182, 49, 40, 0.66)'
-        },
-        'mode=disabled': {
-          backgroundColor: 'rgba(133, 133, 133, 0.58)'
-        },
-        'mode=active': {
-          backgroundColor: 'rgba(86, 150, 177, 0.81)'
-        },
-				'mode=default' : {
-					backgroundColor: 'transparent'
-				}
-      },
-			
-			clicks : {
-				padding: 5,
-				border: '1px solid gray',
-				fontSize: 17,
-				'clicks<20' : {
-					backgroundColor: Color('green').alpha((this.state.clicks + 1) / 20).rgbString()
-				},
-				'clicks=20' : {
-					backgroundColor: 'green'
-				},
-				'clicks>20' : {
-					backgroundColor: 'red'
-				}
-			}
-    }
-  }
 
   render() { 
 		let text = 'Click Me! ' + (20 - this.state.clicks) + ' times left'
@@ -81,9 +42,45 @@ export default class Condition extends Component {
 		}
     return (
       <div>
-        <div look="states" onClick={this.onClick}>Click Me! Active Mode: {this.state.mode}</div>
-			<div look="clicks" onClick={this.onClicksCount}>{text}</div>
+        <div look={styles.states} onClick={this.onClick}>Click Me! Active Mode: {this.state.mode}</div>
+      <div look={styles.clicks} onClick={this.onClicksCount}>{text}</div>
       </div>
     )
   }
 }
+
+const styles = createStyleSheet(Condition, {
+  states: {
+    padding: 5,
+    marginBottom: 5,
+    border: '1px solid gray',
+    fontSize: 17,
+    'mode=important': {
+      backgroundColor: 'rgba(182, 49, 40, 0.66)'
+    },
+    'mode=disabled': {
+      backgroundColor: 'rgba(133, 133, 133, 0.58)'
+    },
+    'mode=active': {
+      backgroundColor: 'rgba(86, 150, 177, 0.81)'
+    },
+    'mode=default' : {
+      backgroundColor: 'transparent'
+    }
+  },
+  
+  clicks : {
+    padding: 5,
+    border: '1px solid gray',
+    fontSize: 17,
+    'clicks<20' : {
+      backgroundColor: (props, state) => Color('green').alpha((state.clicks + 1) / 20).rgbString()
+    },
+    'clicks=20' : {
+      backgroundColor: 'green'
+    },
+    'clicks>20' : {
+      backgroundColor: 'red'
+    }
+  }
+})

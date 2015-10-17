@@ -19,7 +19,7 @@ export default (CustomComponent, config = {}) => {
 			this.state = this.state ||  {}
 			
 			//Adds a scopeId to identify refering StyleSheets
-			this._lookScope = CustomComponent.name
+			this._lookScope = CustomComponent.displayName || CustomComponent.name
 			this.state._look = new Map()
 		}
 
