@@ -4,11 +4,11 @@ import assign from 'object-assign'
  * Condition mixins are shortcuts to check if a prop/state fulfills a given expression
  * Therefore it uses Component which gets provided as part of arguments to validate props/state
  */
-const biggerThan = (property, styles, customKey, {Component}) => {
+const greaterThan = (property, styles, customKey, {Component}) => {
   let condition = splitCondition(property, customKey, Component)
   return condition && condition.left >= condition.right ? styles : false
 }
-const smallerThan = (property, styles, customKey, {Component}) => {
+const lessThan = (property, styles, customKey, {Component}) => {
   let condition = splitCondition(property, customKey, Component)
   return condition && condition.left <= condition.right ? styles : false
 }
@@ -16,11 +16,11 @@ const unEqual = (property, styles, customKey, {Component}) => {
   let condition = splitCondition(property, customKey, Component)
   return condition && condition.left != condition.right ? styles : false
 }
-const bigger = (property, styles, customKey, {Component}) => {
+const greater = (property, styles, customKey, {Component}) => {
   let condition = splitCondition(property, customKey, Component)
   return condition && condition.left > condition.right ? styles : false
 }
-const smaller = (property, styles, customKey, {Component}) => {
+const less = (property, styles, customKey, {Component}) => {
   let condition = splitCondition(property, customKey, Component)
   return condition && condition.left < condition.right ? styles : false
 }
@@ -30,11 +30,11 @@ const equal = (property, styles, customKey, {Component}) => {
 }
 
 export default {
-  biggerThan,
-  smallerThan,
+  greaterThan,
+  lessThan,
   unEqual,
-  bigger,
-  smaller,
+  greater,
+  less,
   equal
 }
 

@@ -1,6 +1,7 @@
 import assign from 'object-assign'
 import { cloneElement, isValidElement, Children } from 'react'
 import assignStyles from 'assign-styles'
+
 /**
  * Resolves provided styles into style objects
  * Processes those using a predefined processor lineup

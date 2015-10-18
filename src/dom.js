@@ -8,7 +8,7 @@ import alternativeValue from './plugins/alternativeValue'
 import statefulValue from './plugins/statefulValue'
 import customProperty from './plugins/customProperty'
 
-import {equal, unEqual, bigger, smaller, biggerThan, smallerThan} from './keys/condition'
+import {equal, unEqual, greater, less, greaterThan, lessThan} from './keys/condition'
 import {firstChild, lastChild, onlyChild, nthChild, nthLastChild} from './keys/pseudoClasses/childIndex'
 import {firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType} from './keys/pseudoClasses/childTypeIndex'
 import {checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate} from './keys/pseudoClasses/input'
@@ -21,18 +21,22 @@ import extend from './keys/extend'
 import mediaQuery from './keys/mediaQuery'
 
 const config = {
-	plugins : [customProperty, alternativeValue, statefulValue],
+	plugins : [
+		customProperty, 
+		alternativeValue, 
+		statefulValue
+	],
 	keys: {
 		//NOTE: Ordner matters! 
-		'>=': biggerThan,
-		'<=': smallerThan,
+		'>=': greaterThan,
+		'<=': lessThan,
 		'!=': unEqual,
-		'>': bigger,
-		'<': smaller,
+		'>': greater,
+		'<': less,
 		'=': equal,
 		extend: extend,
 		css: extractCSS,
-		':empy': empty,
+		':empty': empty,
 		'@media': mediaQuery,
 		':first-child': firstChild,
 		':last-child': lastChild,
