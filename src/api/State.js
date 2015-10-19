@@ -6,7 +6,7 @@ const defaultKey = 'root'
 export default {
   /**
    * Set/Add a new key with some new object
-   * @param {Component} Component - outer wrapping React Component
+   * @param {Object} Component - outer wrapping React Component
    * @param {string} key - a unique key that gets added
    */
   add(Component, key = defaultKey) {
@@ -15,7 +15,7 @@ export default {
 
   /**
    * Returns all states/information about a key
-   * @param {Component} Component - outer wrapping React Component
+   * @param {Object} Component - outer wrapping React Component
    * @param {string} key - a unique key whichs state gets returned
    */
   get(Component, key = defaultKey) {
@@ -25,7 +25,7 @@ export default {
   /**
    * Sets a whole new state map for a key
    * @param {Object} states  - states that get applied
-   * @param {Component} Component - outer wrapping React Component
+   * @param {Object} Component - outer wrapping React Component
    * @param {string} key - a unique key which gets states set
    */
   set(states, Component, key = defaultKey) {
@@ -34,7 +34,7 @@ export default {
 
   /**
    * Check if there's already information about a key
-   * @param {Component} Component - outer wrapping React Component
+   * @param {Object} Component - outer wrapping React Component
    * @param {string} key - a unique key which gets checked
    */
   has(Component, key = defaultKey) {
@@ -44,7 +44,7 @@ export default {
   /**
    * Returns a specific state of a key
    * @param {string} state- state that gets returned
-   * @param {Component} Component - outer wrapping React Component
+   * @param {Object} Component - outer wrapping React Component
    * @param {string} key - a unique whichs state gets returned
    */
   getState(state, Component, key = defaultKey) {
@@ -58,8 +58,8 @@ export default {
   /**
    * Set a key's state
    * @param {string} state - state that gets set/replaced
-   * @param {string|number|Object|Map} value - value that gets added
-   * @param {Component} Component - outer wrapping React Component
+   * @param {any} value - value that gets added
+   * @param {Object} Component - outer wrapping React Component
    * @param {string} key - a unique key whichs state gets set
    */
   setState(state, value, Component, key = defaultKey) {
@@ -70,7 +70,7 @@ export default {
   /**
    * Check if a key has a specific state
    * @param {string} state - state that gets checked
-   * @param {Component} Component - outer wrapping React Component
+   * @param {Object} Component - outer wrapping React Component
    * @param {string} key - a unique key whichs state gets checked
    */
   hasState(state, Component, key = defaultKey) {

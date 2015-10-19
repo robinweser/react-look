@@ -1,6 +1,6 @@
 import assignStyles from 'assign-styles'
 
-const customProperty = (styles, config, scopeArgs) => {
+const customProperty = (styles, scopeArgs, config) => {
   let {keys} = config
   
   //if no custom keys are specified at all

@@ -7,26 +7,34 @@ import React, { Component } from 'react'
  * @param {Object} config - additional processors that modify the styles
  */
 export default (CustomComponent, config = {}) => {
+	
+	// Detecting stateless components
+	// Sets the base Component which should be extended
 	let stateless = !CustomComponent.prototype.setState
 	let Extend = stateless ? Component : CustomComponent
 	
+	
 	class LookComponent extends Extend {
+		
 		//Inherit the original displayName for proper use later on
 		static displayName = CustomComponent.displayName || CustomComponent.name || 'Component'
 
 		constructor() {
 			super(...arguments)
+			
 			this.state = this.state ||  {}
 			
 			//Adds a scopeId to identify refering StyleSheets
 			this._lookScope = CustomComponent.displayName || CustomComponent.name
 			this.state._look = new Map()
 		}
+		
 
 		render() {
 			let renderedElement = stateless ? CustomComponent(this.props) : super.render()
 			return resolveStyles(this, renderedElement, config)
 		}
 	}
+	
 	return LookComponent
 }

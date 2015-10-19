@@ -1,20 +1,16 @@
-import { createElement, Children } from 'react'
+import { createElement } from 'react'
 /**
  * Adds a element before/after current element
  * Uses MixinTypes.INCLUDE to cover both :before/:after as well as ::before/::after
  */
 
 const before = (property, styles, customKey, {newProps}) => {
-  if (!newProps.hasOwnProperty('children')) {
-    newProps.children = []
-  }
+  initChildren(newProps)
   newProps.children.unshift(createPseudoElement(styles))
 }
 
 const after = (property, styles, customKey, {newProps}) => {
-  if (!newProps.hasOwnProperty('children')) {
-    newProps.children = []
-  }
+  initChildren(newProps)
   newProps.children.push(createPseudoElement(styles))
 }
 
@@ -22,22 +18,30 @@ export default {
   before,
   after
 }
+
+const initChildren = (props) => {
+  if (!props.hasOwnProperty('children')) {
+    props.children = []
+  }
+}
+
 /**
  * Creates a new pseudo element 
- * Support for :before, :after / ::before, ::after
  * NOTE: By passing a `content` you may specify a text or image which gets inserted
  * @param {Object} styles - pseudo elements inner styles
  */
 const createPseudoElement = (styles) => {
   let children = ''
+
   if (styles.content) {
     children = styles.content
     delete styles.content
+
+    if (children.indexOf('url(') > -1) {
+      children = createPseudoImage(children)
+    }
   }
-  if (children.indexOf('url(') > -1) {
-    children = createPseudoImage(children)
-  }
-  return createElement('span', {style: styles}, Children.toArray(children))
+  return createElement('span', {style: styles}, children)
 }
 
 /**

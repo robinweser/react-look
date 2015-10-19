@@ -1,4 +1,5 @@
 import State from './State'
+
 let keyElementMap = new Map()
 
 /**
@@ -7,10 +8,13 @@ let keyElementMap = new Map()
  * @param {Component} Component - React Component that gets enhanced by Look
  * @param {Object} element - current element that gets a listener applied
  * @param {Object} key - elements unique key
- * @param {Function} fn - callback function that gets called if listener event fires
+ * @param {Object} event - triggered event that should be added
+ * @param {Function} callback - callback function that gets called if listener event fires
  */
-export default (Component, element, key, event, fn) => {
-  // This checks if there are any needed pseudo classes that need an event listener by checking the pseudo map for this element
+export default (Component, element, key, event, callback) => {
+
+  // This checks if there are any needed pseudo classes 
+  // that need an event listener by checking the pseudo map for this element
   if (!State.has(Component, key)) {
     State.add(Component, key)
     keyElementMap.set(key, element)
@@ -23,8 +27,9 @@ export default (Component, element, key, event, fn) => {
   }
 
   let existing = element.props[event];
+
   return (e) => {
     existing && existing(e)
-    fn()
+    callback()
   }
 }
