@@ -1,7 +1,4 @@
-<div style="float:left"><a href="CSS.md">< <b>2. CSS</b></a></div>
-<div style="float:right"><a href="Config.md"><b>4. Config</b> ></a></div>
-
-# 3. State
+# 4. State
 Using State you can get/set special states for specific components.<br>
 
 > **Warning**: This only applies to elements that provide an explicit `key` or `ref` expect the root node which gets `root` applied if there's no `key` or `ref` set.<br>

@@ -1,7 +1,4 @@
-<div style="float:left"><a href="MediaQueries.md">< <b>4. Media queries</b></a></div>
-<div style="float:right"><a href="Processors.md"><b>6. Processors</b> ></a></div>
-
-# 5. Stateful Conditions
+# 4. Stateful Conditions
 
 Look implements a shortcut to specify state-specific styles. It supports 6 different operators: `>=`, `<=`, `!=`, `=`, `>` and `<`.<br>
 This improves readability since you won't need to use expressions like this: `style={[styles.box, this.state.active && styles.active]}`. <br> 
@@ -29,3 +26,6 @@ Just as pseudo classes and media queries, stateful conditions can be nested. The
 
 ## Validation
 Looks takes `this.props` and `this.state` and checks if there is a key that matches the condition. e.g. `status=active` gets validated with `this.props['status'] === 'active'`.
+
+## Advanced
+You can even use dot-notation to adress deeper nested props and state. e.g. `items.name=foo`.

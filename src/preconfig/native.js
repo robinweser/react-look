@@ -1,12 +1,12 @@
-import alternativeValue from './plugins/alternativeValue'
-import statefulValue from './plugins/statefulValue'
-import customProperty from './plugins/customProperty'
+import alternativeValue from '../plugins/alternativeValue'
+import statefulValue from '../plugins/statefulValue'
+import customProperty from '../plugins/customProperty'
 
-import { equal, unEqual, bigger, smaller, biggerThan, smallerThan } from './keys/condition'
-import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from './keys/pseudoClasses/childIndex'
-import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from './keys/pseudoClasses/childIndex'
-import empty from './keys/pseudoClasses/empty'
-import extend from './keys/extend'
+import { equal, unEqual, bigger, smaller, biggerThan, smallerThan } from '../properties/condition'
+import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../properties/pseudoClasses/childIndex'
+import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../properties/pseudoClasses/childIndex'
+import empty from '../properties/pseudoClasses/empty'
+import extend from '../properties/extend'
 
 export default {
   plugins: [

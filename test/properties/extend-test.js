@@ -1,4 +1,4 @@
-import extend from '../../lib/keys/extend'
+import extend from '../../lib/properties/extend'
 import { expect } from 'chai'
 
 describe('Extending styles', () => {

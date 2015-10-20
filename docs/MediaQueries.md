@@ -1,9 +1,6 @@
-<div style="float:left"><a href="PseudoClasses.md">< <b>3. Pseudo classes</b></a></div>
-<div style="float:right"><a href="StatefulConditions.md"><b>5. Stateful conditions > </b></a></div>
+# 3. Media Queries (DOM-only)
 
-# 4. Media Queries (DOM-only)
-
-Look supports media-queries using a common syntax. There are actually two different ways to use them.
+Look supports media-queries using the [Custom Property](../src/plugins/customProperty.js) plugin.
 
 ## Example
 ```javascript
@@ -28,8 +25,6 @@ By default Look uses `window.matchMedia` to validate media queries. Though some 
 
 ## Server-side rendering
 By now there is no "perfect" way to validate media queries on server-side without performance loss *(initial request to get client dimensions)* or without a chance to missmatch the size *(e.g. validation e.g. the `userAgent`)*.<br>
-> Check [FAQ: Server-side rendering](FAQ.md#5-server-side-rendering) for an approach I figured out while working for **[uniJS](https://github.com/unijs/unijs)**.
-
-### matchMedia API
-Look's provides an [API](api/matchMedia.md) to replace the default validation method.
+By default the media query plugin uses the `navigator.userAgent`. You may pass a custom userAgent within the `config` object.
+> See the guide [self-configured Look](guides/configureLook.md)
 

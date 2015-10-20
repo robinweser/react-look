@@ -8,10 +8,10 @@ npm install react-look
 ```
 > **1.0 Release**: As soon as the documentation is ready, Release Candidate 1 will be shipped. Be sure to try that out.
 
-**Look** is a modular, **processor**-based and **feature-rich** styling library for [React.js](https://facebook.github.io/react/) and [React Native](https://github.com/facebook/react-native) *(starting with Version 0.4)* based on **inline styles**.
+**Look** is a modular, **processor**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://github.com/facebook/react-native) *(starting with Version 0.4)* based on **inline styles**.
 It simplyfies how you are styling your Components and comes with two different packages. 
 
-> Be sure to read my blog post [React Component styling without limitations](https://medium.com/@rofrischmann/react-component-styling-without-limitations-84e5e776fd44) which gives detail information how and why I build Look.
+> Be sure to read my blog post [React Component styling without limitations](https://medium.com/@rofrischmann/react-component-styling-without-limitations-84e5e776fd44) which gives detail information how and why I build Look. *(By now it is outdated, but will be updated soon)*
 
 # Features
 Look is as far as I know the **feature richest** inline-styling library for React. <br>
@@ -20,10 +20,8 @@ Supporting [25 pseudo classes](docs/PseudoClasses.md) out of the box as well as 
 - [pseudo classes](docs/PseudoClasses.md)
 - [stateful styles](docs/StatefulConditions.md) (condition based)
 - nesting
-- [processors](docs/Processors.md)
-- [mixins](docs/Mixins.md)
+- [plugins](docs/Plugins.md)
 - [extending](#extending)
-- !important-notation
 - modular & themeable
 - useful APIs 
 
@@ -46,111 +44,77 @@ Look tries to keep your styling separated from your logic as much as possible wh
 # Usage
 The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries. Use nested objects to define pseudo classes, media queries or conditioned styles. <br>
 
-The example uses an ES7 Decorator `@Look`. <br>
-Alternatively wrap your Component with Look. e.g. `Header = Look(Header)`<br>
+The example uses an ES7 Decorator. Alternatively wrap your Component with Look. e.g. `Header = Look(Header)`<br>
 
 ```javascript
-import React, {Component, PropTypes} from 'react'
-import Look from 'react-look/dom'
+import React, { Component, PropTypes } from 'react'
+import Look, { StyleSheet } from 'react-look/dom'
 
 @Look
 class Header extends Component {
-  static defaultProps = {clicks: 24}
-  static propTypes = {clicks: PropTypes.number.isRequired}
+  static defaultProps = {size: 24}
+  static propTypes = {size: PropTypes.number.isRequired}
   state = {status: 'active'}
-  styles = {
-    header : {
-      transition: '200ms all linear',
-      // Use media queries, pseudo classes and stateful styles
-      // using nested style objects. Those get evaluated 
-      // on the fly and can be nested endlessly.
-      '@media (min-height: 800px)' : { 
-        fontSize: 13,
-        ':hover' : {    
-          fontSize: 15,
-        }
-      },
-      'status=active' : {             
-        backgroundColor: 'green',
-        'clicks>=20' : {            
-          backgroundColor: 'pink'       
-        }
-      }
-    },
-    title : {
-      fontWeight: 800,
-      fontSize: 20
-    }
-  }
   
   render() {
     return (
       // Apply your styles with the `look` property.
-      // If you are only using single looks you may just drop the
-      // selector and just use a plain `look` property.
-      <header look="header">
-        <h1 look="title">
+      <header look={styles.header}>
+        <h1 look={styles.title}>
           {this.props.title}
         </h1>
       </header>
     )
   }
 }
+
+// creates a Header-scoped StyleSheet
+const styles = StyleSheet.create(Header, {
+  header: {
+    transition: '200ms all linear',
+    // Use media queries, pseudo classes and stateful styles
+    // using nested style objects. Those get evaluated 
+    // on the fly and can be nested endlessly.
+    '@media (min-height: 800px)': { 
+      fontSize: 13,
+      ':hover': {    
+        fontSize: 15,
+      }
+    },
+    'status=active': {             
+      backgroundColor: 'green',
+      'size>=20': {            
+        backgroundColor: 'pink'       
+      }
+    }
+  },
+  title: {
+    fontWeight: 800,
+    // use functions to inject props or state values
+    fontSize: (props) => props.size
+  }
+})
 ```
 
-## Stateless Components
+### Stateless Components
 With Look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14. *(Currently Look creates a Stateful Component for instant support)* 
 ```javascript
 let Header = ({title}) => (
-  <div look="box">
-    <div look="title">
+  <header look={styles.header}>
+    <h1 look={styles.title}>
       {title}
-    </div>
-  </div>
+    </h1>
+  </header>
 )
-
-let styles = {
-  box : {
-    backgroundColor: 'red',
-    padding: 10
-  },
-  title : {
-    fontSize: 20
-  }
-}
-
-export default Look(Header, styles)
 ```
-## React Native
+### React Native
 Look also supports React Native to use stateful conditions or pseudo classes such as `:first-child`.<br>
-**Already got a lot of styles?** Just add them to the wrapper and reference the 'selector' as a look.
-```javascript
-class Test extends React.Component {
-  render(){
-    return <div look="box"></div>
-  }
-}
+As you are most likely using the `StyleSheet.create` provided by React Native. You might just swap that with Look's `StyleSheet` and add the scope parameter.<br>
 
-let styles = StyleSheet.create({
-  box : {
-    color: 'red'
-  }
-})
-
-module.exports = Look(Component, styles)
-```
-As React native does not support every ES6 Feature it could be quite a mess to get it running properly though. e.g. You need to require it using:
-```javascript
-var Look = require('react-look').default;
-```
-> Usage will be improved soon!
-
-## Processor & Mixins
-Look provides a nice interface to use custom processors. By default is ships with a Mixin processor which let's you define custom mixins. Every implemented pseudo class, media queries and even stateful conditions are also just plain mixins. There is also an autoprefixing processor for the DOM-package to add browser-specific vendor prefixes based on [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer) evaluating [caniuse.com](caniuse.com) data.
-> **Note**: Further documentation on how to create your own processors & mixins will be served as soon as 1.0 hits the ground. For now I'd like you to check out `src/mixins/` for some examples.
+> NOTE: React native does not support every ES6 & ES7 feature out of the box and it could be quite a mess to get it running properly though.
 
 # Demo
-Check out the examples for more specific examples for some special use cases. See them in action using the demo.<br>
+Check out the provided examples for some special use cases. See them in action using the demo.<br>
 You can visit the [live-demo](http://rofrischmann.de/react-look/) or  easily run the examples on your own within the provided demo by just:
 ```sh
 git clone --bare https://github.com/rofrischmann/react-look.git
@@ -159,24 +123,11 @@ npm run demo
 ```
 
 # [Documentation](docs/Docs.md#tableofcontents)
-> Please keep in mind that this is done in my leisure time and that I cannot update the docs every commit.
+The documentation gives huge information on how to do all kind of stuff. It also serves detailed information on how to use plugins, use full power of the build-in ones and even how to write your own.<br>
 
-I tried to write as much helpful documentation as possible. Before asking any question or creating an issue please be sure to read all the documentation.<br>
-The documentation gives huge information on how to do all kind of stuff. It serves detailed information on how to use processors, mixins and how to write your own.<br>
-
-## How does Look work?
-Similar to Radium, Look wraps the `render` function and modifies applied styles while iterating recursive over all children.
-
-Check [Under the hood](docs/UnderTheHood.md) for more detailed information. 
-
-## [FAQ](docs/FAQ.md)
-> Unsupported pseudo classes?<br>
-Less boilerplate / shortcuts?<br>
-Additional styles & Processors?<br>
-Server-side rendering?
-
-
-Read through the [FAQ](docs/FAQ.md) to get all those things done within seconds!
+* [Usage Guides](docs/guides/)
+* [API](docs/api/)
+* [FAQ](docs/FAQ.md)
 
 # License
 **Look** is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>

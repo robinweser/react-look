@@ -1,4 +1,4 @@
-import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../../../lib/keys/pseudoClasses/input'
+import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../../../lib/properties/pseudoClasses/input'
 
 import { expect } from 'chai'
 

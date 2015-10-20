@@ -1,4 +1,4 @@
-import extractCSS from '../../lib/keys/extractCSS'
+import extractCSS from '../../lib/properties/extractCSS'
 import { expect } from 'chai'
 
 describe('Extracting classNames', () => {

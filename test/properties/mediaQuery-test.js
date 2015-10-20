@@ -1,4 +1,4 @@
-import mediaQuery from '../../lib/keys/mediaQuery'
+import mediaQuery from '../../lib/properties/mediaQuery'
 import { expect } from 'chai'
 
 describe('Resolving media queries', () => {
