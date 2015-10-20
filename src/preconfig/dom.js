@@ -22,7 +22,7 @@ export default {
     statefulValue,
     prefixer
   ],
-  keys: {
+  customProperties: {
     // NOTE: Ordner matters! 
     '>=': greaterThan,
     '<=': lessThan,

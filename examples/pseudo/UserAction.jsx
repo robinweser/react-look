@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Look, {State, createStyleSheet} from '../../lib/dom';
+import Look, {State, StyleSheet} from '../../lib/dom';
 
 @Look
 export default class UserAction extends Component {
@@ -23,7 +23,7 @@ export default class UserAction extends Component {
   }
 }
 
-const styles = createStyleSheet(UserAction, {
+const styles = StyleSheet.create(UserAction, {
   button: {
     margin: 10,
     padding: 5,

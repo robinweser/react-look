@@ -1,4 +1,4 @@
-const alternativeValue = (styles, config, scopeArgs) => {
+const alternativeValue = (styles, scopeArgs, config) => {
   Object.keys(styles).forEach(property => {
     let value = styles[property]
     if (value instanceof Array) {

@@ -16,13 +16,13 @@ import extend from './keys/extend'
 import mediaQuery from './keys/mediaQuery'
 
 export default {
-  Plugin: {
+  Plugins: {
     customProperty,
     alternativeValue,
     statefulValue,
     prefixer
   },
-  CustomProperty: {
+  CustomProperties: {
     greaterThan,
     lessThan,
     unEqual,

@@ -1,14 +1,14 @@
 import assignStyles from 'assign-styles'
 
 const customProperty = (styles, scopeArgs, config) => {
-  let {keys} = config
+  let {customProperties} = config
   
   //if no custom keys are specified at all
-  if (!keys) {
+  if (!customProperties) {
     return styles
   }
   
-  let customKeys = Object.keys(keys)
+  let customKeys = Object.keys(customProperties)
   
     //only iterate if there is at least one key
   if (customKeys.length <= 0) {
@@ -22,7 +22,7 @@ const customProperty = (styles, scopeArgs, config) => {
     // testing every customKey on the current property
     customKeys.forEach(customKey => {
       if (property.indexOf(customKey) > -1) {
-        newValue = keys[customKey](property, value, customKey, scopeArgs, config)
+        newValue = customProperties[customKey](property, value, customKey, scopeArgs, config)
       }
     })
     

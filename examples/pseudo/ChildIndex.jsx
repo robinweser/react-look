@@ -1,5 +1,5 @@
 import React, {Component, Children, PropTypes} from 'react'
-import Look, {createStyleSheet} from '../../lib/dom'
+import Look, {StyleSheet} from '../../lib/dom'
 
 @Look
 export default class ChildIndex extends Component {
@@ -27,7 +27,7 @@ export default class ChildIndex extends Component {
   }
 }
 
-const styles = createStyleSheet(ChildIndex, {
+const styles = StyleSheet.create(ChildIndex, {
     color: 'darkgray',
     listStyleType: 'none',
     ':nth-child(odd)': {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Look, {createStyleSheet} from '../../lib/dom';
+import Look, {StyleSheet} from '../../lib/dom';
 
 @Look
 export default class Input extends Component {
@@ -17,7 +17,7 @@ export default class Input extends Component {
   }
 }
 
-const styles = createStyleSheet(Input, {
+const styles = StyleSheet.create(Input, {
   input: {
     appearance: 'none',
     outline: 'none',

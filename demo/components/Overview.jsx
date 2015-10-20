@@ -2,7 +2,7 @@ import Pseudo from './Pseudo.jsx';
 import Media from '../../examples/Media.jsx';
 import Condition from '../../examples/Condition.jsx';
 import DemoContainer from './DemoContainer.jsx';
-import Look, {createStyleSheet} from '../../lib/dom';
+import Look, {StyleSheet} from '../../lib/dom';
 import React, {Component} from 'react';
 
 @Look
@@ -29,7 +29,7 @@ export default class Overview extends Component {
     )
   }
 }
-const styles = createStyleSheet(Overview, {
+const styles = StyleSheet.create(Overview, {
     marginTop: 20,
     marginBottom: 30,
     fontSize: 40,

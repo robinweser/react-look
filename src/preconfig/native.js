@@ -14,7 +14,7 @@ export default {
     alternativeValue,
     statefulValue
   ],
-  keys: {
+  customProperties: {
     // NOTE: Ordner matters! 
     '>=': biggerThan,
     '<=': smallerThan,

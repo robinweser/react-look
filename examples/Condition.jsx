@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Look, {createStyleSheet} from '../lib/dom'
+import Look, {StyleSheet} from '../lib/dom'
 import Color from 'color'
 
 @Look
@@ -49,7 +49,7 @@ export default class Condition extends Component {
   }
 }
 
-const styles = createStyleSheet(Condition, {
+const styles = StyleSheet.create(Condition, {
   states: {
     padding: 5,
     marginBottom: 5,

@@ -1,4 +1,4 @@
-const statefulValue = (styles, config, scopeArgs) => {
+const statefulValue = (styles, scopeArgs, config) => {
 	let {Component} = scopeArgs
 	
   Object.keys(styles).forEach(property => {

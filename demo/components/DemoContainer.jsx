@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Look, {createStyleSheet} from '../../lib/dom'
+import Look, {StyleSheet} from '../../lib/dom'
 
 @Look
 export default class DemoContainer extends Component {
@@ -20,7 +20,7 @@ export default class DemoContainer extends Component {
   }
 }
 
-const styles = createStyleSheet(DemoContainer, {
+const styles = StyleSheet.create(DemoContainer, {
     container: {
       width: '100%',
       boxSizing: 'border-box',

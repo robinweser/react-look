@@ -17,7 +17,7 @@ export default {
 
         // Resolving single selector styles
         if (styles[Object.keys(styles)[0]] instanceof Object === false) {
-          styleSheet = {scope: scope, style: styles}
+          styleSheet = {_scope: scope, style: styles}
         } else {
 
           // adds the Component referer uniqueId to every selector
@@ -30,9 +30,9 @@ export default {
               }
             }
           })
-
-          return styleSheet
         }
+
+        return styleSheet
       }
 
       return styles
