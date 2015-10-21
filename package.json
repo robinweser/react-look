@@ -32,7 +32,7 @@
     "package": "npm run transpile && node build-package.js",
     "pretest": "npm run transpile",
     "release": "npm run package && npm publish",
-    "test": "npm run lint && mocha --recursive --compilers js:babel/register",
+    "test": "mocha --recursive --compilers js:babel/register",
     "test:coverage": "istanbul cover _mocha -- --recursive --compilers js:babel/register",
     "test:watch": "mocha --recursive --compilers js:babel/register -w",
     "transpile": "npm run clean && babel src --out-dir lib"
@@ -55,7 +55,7 @@
   "author": "Robin Frischmann",
   "license": "MIT",
   "dependencies": {
-    "assign-styles": "^1.0.2",
+    "assign-styles": "2.0.0",
     "dot-prop": "^2.2.0",
     "dynamic-style-sheets": "^0.2.2",
     "inline-style-prefixer": "^0.3.2",

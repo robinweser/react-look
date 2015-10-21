@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import Look, {StyleSheet} from '../../lib/dom';
+import React, {Component} from 'react'
+import Look, {StyleSheet} from '../../lib/dom'
 
 @Look
 export default class Input extends Component {
