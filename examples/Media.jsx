@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Look, { StyleSheet } from '../lib/dom';
+import React, { Component } from 'react'
+import Look, { StyleSheet } from '../lib/dom'
 
 const Media = () => (
 <div look={styles}>

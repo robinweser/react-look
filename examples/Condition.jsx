@@ -18,9 +18,9 @@ export default class Condition extends Component {
       this.setState({
         mode: 'default'
       })
-    } else if (this.state.mode == 'active'){
-			this.setState({mode: 'important'})
-		} else {
+    } else if (this.state.mode == 'active') {
+      this.setState({mode: 'important'})
+    } else {
       this.setState({
         mode: 'active'
       })
@@ -33,13 +33,15 @@ export default class Condition extends Component {
 		})
 	}
 
-  render() { 
-		let text = 'Click Me! ' + (20 - this.state.clicks) + ' times left'
-		if (this.state.clicks == 20) {
-			text= "HORAAAY";
-		} else if (this.state.clicks > 20) {
-			text ="Alright stop it.. " + (this.state.clicks) + ' clicks'
-		}
+  render() {
+    let text = 'Click Me! ' + (20 - this.state.clicks) + ' times left'
+
+    if (this.state.clicks == 20) {
+      text = "HORAAAY"
+    } else if (this.state.clicks > 20) {
+      text = "Alright stop it.. " + (this.state.clicks) + ' clicks'
+    }
+
     return (
       <div>
         <div look={styles.states} onClick={this.onClick}>Click Me! Active Mode: {this.state.mode}</div>
@@ -48,6 +50,7 @@ export default class Condition extends Component {
     )
   }
 }
+
 
 const styles = StyleSheet.create(Condition, {
   states: {

@@ -38,6 +38,7 @@ styles = {
     )
   }
 }
+
 const bla = StyleSheet.create(Overview, {
     marginTop: 20,
     marginBottom: 30,

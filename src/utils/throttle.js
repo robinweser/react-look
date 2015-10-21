@@ -1,12 +1,15 @@
-export default (fn, threshhold, scope) => {
-  threshhold || (threshhold = 250)
+export default (fn, threshhold = 250, scope) => {
   let last
   let deferTimer
   return () => {
     let context = scope || this
 
-    let now = +new Date
-    let args = arguments
+  // TODO: look at below, I don't like seeing this keyword
+  return function defer() {
+    const context = scope || this
+    const now = +new Date
+    const args = arguments
+
     if (last && now < last + threshhold) {
       // hold on to it
       clearTimeout(deferTimer)

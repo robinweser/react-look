@@ -1,7 +1,6 @@
-import ChildIndex from '../../examples/pseudo/childIndex.jsx'
+import ChildIndex from '../../examples/pseudo/ChildIndex.jsx'
 import Input from '../../examples/pseudo/input.jsx'
 import UserAction from '../../examples/pseudo/userAction.jsx'
-
 import DemoContainer from './DemoContainer.jsx'
 import React, {Component} from 'react'
 
@@ -12,6 +11,7 @@ export default class Pseudo extends Component {
       childIndex: ':first-child, :last-child, :only-child, :nth-child, :nth-last-child\n:first-of-type, :last-of-type, :only-of-type, :nth-of-type, :nth-last-of-type',
       input: 'user-action  -  :focus, :valid/:invalid, :in-range/:out-of-range\n:checked, :enabled/:disabled, :read-only/:read-write:required/:optional, :ideterminate'
     }
+
     return (
       <div>
         <DemoContainer description={description.userAction} title="1.1. user action">

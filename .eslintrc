@@ -1,0 +1,30 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "no-multi-spaces": [0, { "exceptions": { "VariableDeclarator": true } }],
+
+    "semi": [2, "never"],
+    "comma-dangle": 0,
+    "no-console": 0,
+
+    "jsx-quotes": [
+      2, "prefer-double"
+    ],
+    "react/jsx-quotes": 0,
+
+    "array-bracket-spacing": [2, "always", {
+      "singleValue": false,
+      "objectsInArrays": false,
+      "arraysInArrays": false
+    }],
+    "computed-property-spacing": [2, "never"],
+    "space-after-keywords": 2,
+    "space-before-blocks": 2,
+    "space-before-function-paren": [2, "never"],
+    "space-return-throw-case": 2
+  }
+}

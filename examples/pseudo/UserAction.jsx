@@ -3,14 +3,12 @@ import Look, {State, StyleSheet} from '../../lib/dom';
 
 @Look
 export default class UserAction extends Component {
-
   render() {
-		let defaultState = 'Hover me!'
+    let defaultState = 'Hover me!'
     let hoverState = State.getState('hover', this, 'b3') ? ' Now click me! ' : ''
     let activeState = State.getState('active', this, 'b3') ? ' Well Done. ' : ''
-		
-		let text = activeState || hoverState || defaultState
-    
+    let text = activeState || hoverState || defaultState
+
     return (
       <div>
         <div key="b1" look={[styles.button, styles.activeButton]}>Click me!</div>

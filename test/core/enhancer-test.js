@@ -24,8 +24,6 @@ describe('Enhancing a Component', () => {
 
     expect(instance.state).to.have.property('_look');
   })
-
-
   it('should merge existing state', () => {
     class Default extends Component {
       constructor() {
@@ -42,7 +40,6 @@ describe('Enhancing a Component', () => {
       _look: new Map()
     })
   })
-
 
   it('should recieve props', () => {
     class Default extends Component {
@@ -71,8 +68,7 @@ describe('Enhancing a Component', () => {
     let instance = new Enhanced()
 
     expect(constructorFunc).to.have.been.calledOnce
-  });
-
+  })
 
   it('should call super.render only once', () => {
     let callMe = sinon.spy()

@@ -17,6 +17,7 @@ export default (array) => {
     if (child instanceof Array) {
       catChild = flattenArray(child)
     }
+    
     flat = flat.concat(catChild)
   })
 

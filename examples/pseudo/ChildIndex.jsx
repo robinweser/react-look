@@ -6,11 +6,10 @@ export default class ChildIndex extends Component {
   static defaultProps = {
     items: [1,2,3,4,5,6,7,8,9,10]
   }
-  
+
   static propTypes = {
     items: PropTypes.array.isRequired
   }
-  
   render() {
     //create a small list of items to demonstrate nth-child, et cetera
     let list = this.props.items.map((text,index) => {
