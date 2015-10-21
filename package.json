@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Processable, dynamic & stateful Component Styling for React & React Native",
   "main": "look.js",
   "files": [
@@ -21,7 +21,7 @@
     "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
     "build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js",
     "bundle": "npm run transpile && mkdir dist && npm run bundle:core && npm run bundle:look && npm run bundle:dom && npm run bundle:addons",
-    "bundle:addons": "browserify src/addons.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/addons.min.js",
+    "bundle:addons": "browserify src/addons.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-addons.min.js",
     "bundle:core": "browserify src/core.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-core.min.js",
     "bundle:dom": "browserify src/dom.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-dom.min.js",
     "bundle:look": "browserify src/look.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look.min.js",

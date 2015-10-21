@@ -1,6 +1,7 @@
 import alternativeValue from '../plugins/alternativeValue'
 import statefulValue from '../plugins/statefulValue'
 import customProperty from '../plugins/customProperty'
+import stringSyntax from '../plugins/stringSyntax'
 
 import { equal, unEqual, bigger, smaller, biggerThan, smallerThan } from '../properties/condition'
 import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../properties/pseudoClasses/childIndex'

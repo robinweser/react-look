@@ -20,7 +20,7 @@ Coming from a version below 0.5 needs some code refactoring to get Look working 
 
 ```javascript
 // new => Version 0.5+
-import {StyleSheet} from 'Look'
+import {StyleSheet} from 'react-look'
 
 // Pass the Component as your scope
 const styles = StyleSheet.create(Demo, {
