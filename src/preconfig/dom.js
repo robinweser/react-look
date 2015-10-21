@@ -2,6 +2,7 @@ import alternativeValue from '../plugins/alternativeValue'
 import statefulValue from '../plugins/statefulValue'
 import customProperty from '../plugins/customProperty'
 import prefixer from '../plugins/prefixer'
+import stringSyntax from '../plugins/stringSyntax'
 
 import { equal, unEqual, greater, less, greaterThan, lessThan } from '../properties/condition'
 import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../properties/pseudoClasses/childIndex'
@@ -17,6 +18,7 @@ import mediaQuery from '../properties/mediaQuery'
 
 export default {
   plugins: [
+    stringSyntax,
     customProperty,
     alternativeValue,
     statefulValue,

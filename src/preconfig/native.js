@@ -10,6 +10,7 @@ import extend from '../properties/extend'
 
 export default {
   plugins: [
+    stringSyntax,
     customProperty,
     alternativeValue,
     statefulValue

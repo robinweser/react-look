@@ -6,12 +6,10 @@
 ```sh
 npm install react-look
 ```
-> **1.0 Release**: As soon as the documentation is ready, Release Candidate 1 will be shipped. Be sure to try that out.
+> Coming from version < 0.5? Check the [upgrade guide](docs/guides/upgradeLook.md).
 
 **Look** is a modular, **processor**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://github.com/facebook/react-native) *(starting with Version 0.4)* based on **inline styles**.
 It simplyfies how you are styling your Components and comes with two different packages. 
-
-> Be sure to read my blog post [React Component styling without limitations](https://medium.com/@rofrischmann/react-component-styling-without-limitations-84e5e776fd44) which gives detail information how and why I build Look. *(By now it is outdated, but will be updated soon)*
 
 # Features
 Look is as far as I know the **feature richest** inline-styling library for React. <br>

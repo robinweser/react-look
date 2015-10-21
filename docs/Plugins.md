@@ -1,6 +1,6 @@
 # 6. Plugins 
 
-> **NOTE**: If you've been using Look before version 0.5 plugins have basically be named 'processors'.
+> **Note**: If you've been using Look before version 0.5 plugins have basically be named 'processors'.
 
 Style modifications of any kind are done using plugins. Plugins are triggered directly before styles get passed to the final element. <br>
 Every plugin should only do **one single job**. If there are multiple modifications to do, use multiple plugins. 
