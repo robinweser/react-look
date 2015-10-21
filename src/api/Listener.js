@@ -19,7 +19,7 @@ export default (Component, element, key, event, callback) => {
     State.add(Component, key)
     keyElementMap.set(key, element)
   } else {
-    if (!keyElementMap.get(key) === element) {
+    if (keyElementMap.get(key) !== element) {
       console.warn('There is a state associated with element.key="' + key + '". Use unqiue `key` or `ref` while using :hover, :focus or :active on multiple elements.')
       console.warn('Look will not add state-listeners to', element)
       return element.props

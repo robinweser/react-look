@@ -8,7 +8,7 @@ const defaultKey = 'root'
  * Also adds global mouseup event to remove active elements
  */
 const active = (property, styles, customKey, {element, Component, newProps}) => {
-  let key = element.key || element.ref || defaultkey
+  let key = element.key || element.ref || defaultKey
 
   !Component._lastActiveElements && (Component._lastActiveElements = [])
 

@@ -42,6 +42,7 @@
     "react",
     "layout",
     "react-native",
+    "react-component",
     "ios",
     "android",
     "component styling",

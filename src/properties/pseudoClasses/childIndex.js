@@ -60,7 +60,7 @@ const nthChild = (property, styles, customKey, {parent, element}) => {
 const nthLastChild = (property, styles, customKey, {parent, element}) => {
   let expression = getNthExpression(property)
   let childIndex = getChildIndex(parent, element)
-  if (!childIndex === undefined) {
+  if (childIndex === undefined) {
     return false
   }
   let childLength
