@@ -20,7 +20,7 @@
   "scripts": {
     "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
     "build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js",
-    "bundle": "npm run transpile && mkdir dist && npm run bundle:core && npm run bundle:look && npm run bundle:dom",
+    "bundle": "npm run transpile && mkdir dist && npm run bundle:core && npm run bundle:look && npm run bundle:dom && npm run bundle:addons",
     "bundle:addons": "browserify src/addons.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/addons.min.js",
     "bundle:core": "browserify src/core.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-core.min.js",
     "bundle:dom": "browserify src/dom.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-dom.min.js",
