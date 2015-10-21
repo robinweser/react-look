@@ -7,4 +7,4 @@ lib
 /addons.js
 /core.js
 coverage
-addons
+addons/

@@ -9,6 +9,7 @@
     "dom.js",
     "look.js",
     "core.js",
+    "addons.js",
     "lib/",
     "docs/"
   ],
