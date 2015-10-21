@@ -7,11 +7,20 @@ import React, {Component} from 'react';
 
 @Look
 export default class Overview extends Component {
-
+styles = {
+  box: {
+    marginTop: 20,
+    marginBottom: 30,
+    fontSize: 40,
+    fontWeight: 600,
+    textAlign: 'center',
+    color: 'rgb(82, 67, 203)'
+  }
+}
   render() {
     return (
       <div>
-        <h1 look={styles}>Look Examples</h1>
+        <h1 look="box">Look Examples</h1>
         <DemoContainer group title="1. Pseudo Classes">
           <Pseudo/>
         </DemoContainer>
@@ -29,7 +38,7 @@ export default class Overview extends Component {
     )
   }
 }
-const styles = StyleSheet.create(Overview, {
+const bla = StyleSheet.create(Overview, {
     marginTop: 20,
     marginBottom: 30,
     fontSize: 40,
