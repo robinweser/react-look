@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.4.9",
+  "version": "0.5.0",
   "description": "Processable, dynamic & stateful Component Styling for React & React Native",
   "main": "look.js",
   "files": [
@@ -20,6 +20,7 @@
     "build:demo": "npm run transpile && browserify ./demo/app.jsx -t babelify -d -p [minifyify --no-map] > ./demo/bundle.js",
     "build:demo-dev": "npm run transpile && browserify ./demo/app.jsx -t babelify --outfile ./demo/bundle.js",
     "bundle": "npm run transpile && mkdir dist && npm run bundle:core && npm run bundle:look && npm run bundle:dom",
+    "bundle:addons": "browserify src/addons.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/addons.min.js",
     "bundle:core": "browserify src/core.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-core.min.js",
     "bundle:dom": "browserify src/dom.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-dom.min.js",
     "bundle:look": "browserify src/look.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look.min.js",
@@ -31,7 +32,7 @@
     "package": "npm run transpile && node build-package.js",
     "pretest": "npm run transpile",
     "release": "npm run package && npm publish",
-    "test": "npm run lint && mocha --recursive --compilers js:babel/register",
+    "test": "mocha --recursive --compilers js:babel/register",
     "test:coverage": "istanbul cover _mocha -- --recursive --compilers js:babel/register",
     "test:watch": "mocha --recursive --compilers js:babel/register -w",
     "transpile": "npm run clean && babel src --out-dir lib"
@@ -54,7 +55,7 @@
   "author": "Robin Frischmann",
   "license": "MIT",
   "dependencies": {
-    "assign-styles": "^1.0.2",
+    "assign-styles": "2.0.0",
     "dot-prop": "^2.2.0",
     "dynamic-style-sheets": "^0.2.2",
     "inline-style-prefixer": "^0.3.2",
@@ -81,6 +82,8 @@
     "sinon-chai": "^2.8.0"
   },
   "peerDependencies": {
-    "react-native": "0.11"
+    "react-native": "0.11",
+    "react": "0.14.0",
+    "react-dom": "0.14.0"
   }
 }

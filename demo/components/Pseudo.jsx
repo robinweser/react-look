@@ -1,8 +1,8 @@
-import ChildIndex from '../../examples/pseudo/childIndex.jsx'
-import Input from '../../examples/pseudo/input.jsx'
-import UserAction from '../../examples/pseudo/userAction.jsx'
+import ChildIndex from '../../examples/pseudo/ChildIndex.jsx'
+import Input from '../../examples/pseudo/Input.jsx'
+import UserAction from '../../examples/pseudo/UserAction.jsx'
 import DemoContainer from './DemoContainer.jsx'
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 export default class Pseudo extends Component {
   render() {
@@ -18,12 +18,12 @@ export default class Pseudo extends Component {
           <UserAction/>
         </DemoContainer>
         <DemoContainer description={description.childIndex} padding={0} title="1.2. child index">
-          <ChildIndex items={[1,2,3,4,5,6,7,8,9,10,11,12,13,14]}/>
+          <ChildIndex items={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]}/>
         </DemoContainer>
         <DemoContainer description={description.input} title="1.3. input">
           <Input/>
         </DemoContainer>
       </div>
-    )
+      )
   }
 }

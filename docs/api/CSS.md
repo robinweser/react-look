@@ -1,7 +1,4 @@
-<div style="float:left"><a href="Look.md">< <b>1. Look</b></a></div>
-<div style="float:right"><a href="State.md"><b>3. State</b> ></a></div>
-
-# 2. CSS
+# 3. CSS
 CSS is a class that extends [CSSSheet](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/CSSSheet.md) from [Dynamic Style Sheets](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets).
 Core functionality has been adopted, including the following methods:
 * [apply](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets/blob/develop/docs/api/CSSSheet.md##apply)

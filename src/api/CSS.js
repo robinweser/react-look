@@ -12,12 +12,12 @@ export default class CSS extends CSSSheet {
    * @param {string} media - a valid media query
    * @param {any} id - a special id that gets attached to the stylesheet in order catch it later
    */
-  constructor( styles, unit = 'px', scope = '', media = '', id ) {
+  constructor(styles, unit = 'px', scope = '', media = '', id) {
     let selector
 
-    if ( scope !== '' ) {
-      for ( selector in styles ) {
-        if ( styles.hasOwnProperty(selector) ) {
+    if (scope !== '') {
+      for (selector in styles) {
+        if (styles.hasOwnProperty(selector)) {
           styles[scope + ' ' + selector] = styles[selector]
           delete styles[selector]
         }

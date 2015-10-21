@@ -1,30 +1,19 @@
-import CSS                                           from './api/CSS'
-import Look, { State, Listener, MixinTypes, Config } from './look'
-import Prefixer                                      from './processors/prefixer'
+import CSS from './api/CSS'
 
-import ExtractCSS                                    from './mixins/extract-css'
-import Input                                         from './mixins/pseudo-class/input'
-import Lang                                          from './mixins/pseudo-class/lang'
-import MediaQueries                                  from './mixins/media-query'
-import PseudoElements                                from './mixins/pseudo-class/before-after'
-import UserActions                                   from './mixins/pseudo-class/user-action'
+import Look from './core'
+import StyleSheet from './api/StyleSheet'
+import State from './api/State'
+import Listener from './api/Listener'
 
-const Mixins = Config.getProcessors()[0]
+import config from './preconfig/dom'
 
-Mixins.use(ExtractCSS)
-Mixins.use(Input)
-Mixins.use(Lang)
-Mixins.use(MediaQueries)
-Mixins.use(PseudoElements)
-Mixins.use(UserActions)
-
-Config.registerProcessor(Prefixer)
+export default (...args) => {
+	return Look(...args, config)
+}
 
 export {
-  Config,
-  CSS,
-  Listener,
-  Look as default,
-  MixinTypes,
-  State
+	CSS,
+	State,
+	Listener,
+	StyleSheet
 }

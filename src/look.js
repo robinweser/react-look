@@ -1,43 +1,17 @@
-import Config            from './api/Config'
-import Enhancer          from './core/enhancer'
-import Listener          from './api/Listener'
-import Mixins            from './processors/mixin'
-import MixinTypes        from './utils/MixinTypes'
-import State             from './api/State'
+import Look from './core'
 
-// mixins
-import AlternativeValues from './mixins/alternative-value'
-import ChildIndex        from './mixins/pseudo-class/child-index'
-import ChildTypeIndex    from './mixins/pseudo-class/child-type-index'
-import Conditions        from './mixins/condition'
-import Empty             from './mixins/pseudo-class/empty'
-import Extend            from './mixins/extend'
+import State from './api/State'
+import StyleSheet from './api/StyleSheet'
+import Listener from './api/Listener'
 
-Mixins.use(AlternativeValues)
-Mixins.use(ChildIndex)
-Mixins.use(ChildTypeIndex)
-Mixins.use(Conditions)
-Mixins.use(Empty)
-Mixins.use(Extend)
+import config from './preconfig/native'
 
-Config.registerProcessor(Mixins)
-
-// Resolving annotations
-// If not passing arguments it just wraps the Component
-// Otherwise it returns a decorator
-export default ( ...args ) => {
-  if ( args[0] instanceof Function ) {
-    return Enhancer(...args) // eslint-disable-line new-cap
-  }
-
-  return function decorator( target ) {
-    return Enhancer(target, ...args) // eslint-disable-line new-cap
-  }
+export default (...args) => {
+	return Look(...args, config)
 }
 
 export {
-  Config,
-  Listener,
-  State,
-  MixinTypes
+	Listener,
+	State,
+	StyleSheet
 }

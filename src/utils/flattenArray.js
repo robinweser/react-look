@@ -1,10 +1,11 @@
+
 /**
  * Flattens an array of nested arrays to the same level
  * @param {Array} array - array that gets flatten
  */
-export default function flattenArray( array ) {
+export default (array) => {
   // return if input is not an array
-  if ( array instanceof Array !== true ) {
+  if (array instanceof Array !== true) {
     return array
   }
 
@@ -13,10 +14,10 @@ export default function flattenArray( array ) {
   array.forEach(child => {
     let catChild = child
 
-    if ( child instanceof Array ) {
+    if (child instanceof Array) {
       catChild = flattenArray(child)
     }
-
+    
     flat = flat.concat(catChild)
   })
 

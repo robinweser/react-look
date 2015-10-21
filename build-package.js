@@ -1,18 +1,20 @@
-var dom = "module.exports = require('./lib/dom')"
-var look = "module.exports = require('./lib/look')"
-var core = "module.exports = require('./lib/core')"
+var dom = 'module.exports = require(\'./lib/dom\')';
+var look = 'module.exports = require(\'./lib/look\')';
+var core = 'module.exports = require(\'./lib/core\')';
+var addons = 'module.exports = require(\'./lib/addons\')';
 
-require('fs').writeFile('dom.js', dom, function (err) {
-  if (err) return console.log(err)
-  console.log('DOM-Package has been created as: dom.js (react-look/dom)')
-})
+var fs = require('fs');
 
-require('fs').writeFile('look.js', look, function (err) {
-  if (err) return console.log(err)
-  console.log('Default-Package has been created as: look.js (react-look)')
-})
+function createPackage(package, packageModule, packagePath) {
+  fs.writeFile(package, packageModule, function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log(packagePath + ' has been created as ' + package);
+  });
+}
 
-require('fs').writeFile('core.js', core, function (err) {
-  if (err) return console.log(err)
-  console.log('Core-Package has been created as: core.js (react-look/core)')
-})
+createPackage('dom.js', dom, 'react-look/dom');
+createPackage('look.js', look, 'react-look');
+createPackage('core.js', core, 'react-look/core');
+createPackage('addons.js', addons, 'react-look/addons');

@@ -4,6 +4,7 @@ demo/bundle.js
 lib
 /look.js
 /dom.js
+/addons.js
 /core.js
 coverage
 addons

@@ -1,7 +1,4 @@
-<div style="float:left"><a href="UnderTheHood.md">< <b>2. Under the hood</b></a></div>
-<div style="float:right"><a href="MediaQueries.md"><b>4. Media queries</b> ></a></div>
-
-# 3. Pseudo classes
+# 2. Pseudo classes
 
 Look supports pseudo classes using a common syntax as it would be in CSS. They **need to be nested** within a valid selector and **always** start with a doublepoint.
 
