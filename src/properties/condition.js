@@ -10,7 +10,7 @@ import { get as getProp } from 'dot-prop'
 export default function splitCondition(key, operator, Component) {
   const matchValues = assign({}, Component.props, Component.state)
 
-  const [property, value] = key.split(operator)
+  const [ property, value ] = key.split(operator)
   const [baseProp] = property.split('.')
 
   if (matchValues.hasOwnProperty(baseProp)) {
@@ -18,13 +18,14 @@ export default function splitCondition(key, operator, Component) {
 
     match = match === undefined ? 'undefined' : match
 
-  if (!(!isNaN(parseFloat(match)) && isFinite(match))) {
+    if (!(!isNaN(parseFloat(match)) && isFinite(match))) {
       match = (match + '').toString()
     }
+
     return {left: match, right: value}
-  } else {
-    return false
   }
+
+  return false
 }
 
 
@@ -42,7 +43,7 @@ const lessThan = (property, styles, customKey, {Component}) => {
 }
 const unEqual = (property, styles, customKey, {Component}) => {
   const condition = splitCondition(property, customKey, Component)
-  return condition && condition.left != condition.right ? styles : false
+  return condition && condition.left != condition.right ? styles : false // eslint-disable-line eqeqeq
 }
 const greater = (property, styles, customKey, {Component}) => {
   const condition = splitCondition(property, customKey, Component)
@@ -54,7 +55,7 @@ const less = (property, styles, customKey, {Component}) => {
 }
 const equal = (property, styles, customKey, {Component}) => {
   const condition = splitCondition(property, customKey, Component)
-  return condition && condition.left == condition.right ? styles : false
+  return condition && condition.left == condition.right ? styles : false // eslint-disable-line eqeqeq
 }
 
 export default {

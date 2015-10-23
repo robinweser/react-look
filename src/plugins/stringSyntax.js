@@ -44,10 +44,12 @@ const extractStyles = (props, styles) => {
 export default (styles, scopeArgs) => {
   const {Component, element} = scopeArgs
 
+  let retStyles = styles
+
   if (Component.styles) {
     console.warn('The string syntax look="' + element.props.look + '" within ' + Component._lookScope + ' is deprecated. Please use direct mapping instead. This will be removed in Version 1.0.0.')
-    styles = extractStyles(element.props, Component.styles)
+    retStyles = extractStyles(element.props, Component.styles)
   }
 
-  return styles
+  return retStyles
 }

@@ -26,8 +26,9 @@ export default (property, styles, customKey, {Component}) => {
         window.removeEventListener('resize', Component._mediaQueryListener)
       }
     }
+
     return matchMedia(property.replace(customKey, '').trim()).matches ? styles : false
-  } else {
-    console.warn('Failed evaluating media query: ' + property + '. Your environment is not able to use window.matchMedia.')
   }
+
+  console.warn('Failed evaluating media query: ' + property + '. Your environment is not able to use window.matchMedia.')
 }

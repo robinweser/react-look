@@ -6,7 +6,7 @@
  */
 export default (expression, index) => {
   if (expression === 'odd') {
-    return index % 2 !== 0;
+    return index % 2 !== 0; // eslint-disable-line semi
   }
 
   if (expression === 'even') {

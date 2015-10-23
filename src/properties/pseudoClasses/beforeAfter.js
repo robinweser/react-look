@@ -6,8 +6,8 @@ import { createElement } from 'react'
  * @param {string} content - value including a valid url path to the image
  */
 const createPseudoImage = (content) => createElement('img', {
-    src: content.split('url(')[1].substr(0, content.length - 5)
-  })
+  src: content.split('url(')[1].substr(0, content.length - 5)
+})
 
 /**
  * Creates a new pseudo element

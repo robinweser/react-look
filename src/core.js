@@ -5,10 +5,10 @@ import Enhancer from './core/enhancer'
 // Otherwise it returns a decorator
 export default (...args) => {
   if (args[0] instanceof Function) {
-    return Enhancer(...args)
-  } else {
-    return function decorator(target) {
-      return Enhancer(target, ...args)
-    }
+    return Enhancer(...args) // eslint-disable-line
+  }
+
+  return function decorator(target) {
+    return Enhancer(target, ...args) // eslint-disable-line
   }
 }

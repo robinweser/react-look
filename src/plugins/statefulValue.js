@@ -1,5 +1,5 @@
 const statefulValue = (styles, scopeArgs, config) => {
-	const {Component} = scopeArgs
+  const {Component} = scopeArgs
 
   Object.keys(styles).forEach(property => {
     const value = styles[property]
@@ -13,5 +13,5 @@ const statefulValue = (styles, scopeArgs, config) => {
 }
 
 export {
-	statefulValue as default
+  statefulValue as default
 }

@@ -1,6 +1,6 @@
 import State from './State'
 
-let keyElementMap = new Map()
+const keyElementMap = new Map()
 
 /**
  * Creates an event listener to target pseudo classes
@@ -12,7 +12,6 @@ let keyElementMap = new Map()
  * @param {Function} callback - callback function that gets called if listener event fires
  */
 export default (Component, element, key, event, callback) => {
-
   // This checks if there are any needed pseudo classes
   // that need an event listener by checking the pseudo map for this element
   if (!State.has(Component, key)) {
@@ -26,10 +25,13 @@ export default (Component, element, key, event, callback) => {
     }
   }
 
-  const existing = element.props[event];
+  const existing = element.props[event]; // eslint-disable-line
 
   return (target) => {
-    existing && existing(target)
+    if ( existing ) {
+      existing(target)
+    }
+
     callback(...arguments)
   }
 }

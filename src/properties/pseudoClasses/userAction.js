@@ -24,7 +24,8 @@ const active = (property, styles, customKey, {element, Component, newProps}) => 
   if (!Component._onMouseUp && typeof window !== 'undefined') {
     Component._onMouseUp = () => {
       while (Component._lastActiveElements.length > 0) {
-        const elementKey = Component._lastActiveElements[0];
+        const elementKey = Component._lastActiveElements[0]; // eslint-disable-line semi
+
         State.setState('active', false, Component, elementKey)
         Component._lastActiveElements.pop(elementKey)
       }

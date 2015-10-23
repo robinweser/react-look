@@ -10,11 +10,13 @@ import flattenArray from '../utils/flattenArray'
  * @param {Object} config - a map of arguments that might be passed to the plugin
  */
 const resolvePlugins = (styles, scopeArgs, config) => {
+  let retStyles = styles
+
   config.plugins.forEach(plugin => {
-    styles = plugin(styles, scopeArgs, config)
+    retStyles = plugin(retStyles, scopeArgs, config)
   })
 
-  return styles
+  return retStyles
 }
 
 /**
@@ -54,14 +56,13 @@ const processStyles = (styles, props, scopeArgs, config) => {
 export default function resolveStyles(Component, element, config, parent) {
   // only resolve if look or children exist
   if (element && element.props && (element.props.look || element.props.children)) {
-
     const props = element.props
-    let newProps = assign({}, props)
+    const newProps = assign({}, props)
 
 
     if (props.children) {
       // resolving child styles recursively to make sure they will be rendered correctly
-      newProps.children = resolveChildren(Component, props.children, config, element)
+      newProps.children = resolveChildren(Component, props.children, config, element) // eslint-disable-line
     }
 
 
@@ -72,7 +73,7 @@ export default function resolveStyles(Component, element, config, parent) {
       }
 
       // scopeArgs are provided to plugins to access special objects
-    	const scopeArgs = {newProps, Component, element, parent}
+      const scopeArgs = {newProps, Component, element, parent}
 
       // Checks if styles are scoped
       // Scoped styles only perform style processing if in correct scope
@@ -106,9 +107,9 @@ export default function resolveStyles(Component, element, config, parent) {
     }
 
     return cloneElement(element, newProps)
-  } else {
-    return element
   }
+
+  return element
 }
 
 /**
@@ -119,7 +120,7 @@ export default function resolveStyles(Component, element, config, parent) {
  * @param {Object} parent - referencing element's parent
  */
 const resolveChildren = (Component, children, config, parent) => {
-  let childType = typeof children
+  const childType = typeof children
 
   // directly return primitive children
   if (childType === 'string' || childType === 'number') {
@@ -133,19 +134,20 @@ const resolveChildren = (Component, children, config, parent) => {
     }
 
     // flattening children prevents deeper nested children
-    children = flattenArray(children)
+    const flatChildren = flattenArray(children)
 
     // recursively resolve styles for child elements if it is a valid React Component
-    return Children.map(children, (child) => {
+    return Children.map(flatChildren, (child) => {
       if (isValidElement(child)) {
         return resolveStyles(Component, child, config, parent)
       }
       return child
     })
-  } else {
-    if (children.type) {
-      return resolveStyles(Component, children, config, parent)
-    }
-    return children
   }
+
+  if (children.type) {
+    return resolveStyles(Component, children, config, parent)
+  }
+
+  return children
 }

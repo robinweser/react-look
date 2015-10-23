@@ -8,9 +8,7 @@ export default {
   */
   create(Component, styles) {
     if (Component !== undefined && styles && Object.keys(styles).length > 0) {
-
-      let scope = Component.displayName || Component.name
-
+      const scope = Component.displayName || Component.name
 
       if (scope) {
         let styleSheet = {}
@@ -19,10 +17,10 @@ export default {
         if (styles[Object.keys(styles)[0]] instanceof Object === false) {
           styleSheet = {_scope: scope, style: styles}
         } else {
-
           // adds the Component referer uniqueId to every selector
           Object.keys(styles).forEach(selector => {
-            let selectorStyles = styles[selector]
+            const selectorStyles = styles[selector]
+
             if (selectorStyles instanceof Object) {
               styleSheet[selector] = {
                 _scope: scope,

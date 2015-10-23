@@ -25,6 +25,7 @@ const getChildIndex = (parent, element) => {
       })
     }
   }
+
   return index
 }
 
@@ -65,12 +66,13 @@ const lastChild = (property, styles, customKey, {parent, element}) => {
 const onlyChild = (property, styles, customKey, {parent, element}) => {
   if (parent && parent.props.children.length === 1) {
     return styles
-  } else {
-    const elementParent = element._owner._instance.props._parent
-    if (elementParent && elementParent.props.children.length === 1) {
-      return styles
-    }
   }
+  const elementParent = element._owner._instance.props._parent
+
+  if (elementParent && elementParent.props.children.length === 1) {
+    return styles
+  }
+
   return false
 }
 
@@ -89,17 +91,15 @@ const nthLastChild = (property, styles, customKey, {parent, element}) => {
   if (childIndex === undefined) {
     return false
   }
-  let childLength
-  if (parent) {
-    childLength = parent.props.children.length
-  } else {
+  // TODO: childLength wasn't used.. is it needed?
+  if (!parent) {
     const elementParent = element._owner._instance.props._parent
-    if (elementParent) {
-      childLength = elementParent.props.children.length
-    } else {
+
+    if (!elementParent) {
       return false
     }
   }
+
   return evalNthExpression(expression, length - childIndex) ? styles : false
 }
 

@@ -3,6 +3,8 @@ import Prefixer from 'inline-style-prefixer'
 let prefixer = new Prefixer()
 
 export default (styles, scopeArgs, config) => {
+  let retStyles = styles
+
   // replace userAgent if config provides alternative one
   if (config.userAgent !== undefined) {
     if (prefixer._userAgent !== config.userAgent) {
@@ -12,8 +14,8 @@ export default (styles, scopeArgs, config) => {
 
   // only prefix if userAgent is not undefined
   if (prefixer._userAgent !== undefined) {
-    styles = prefixer.prefix(styles)
+    retStyles = prefixer.prefix(styles)
   }
 
-  return styles
+  return retStyles
 }

@@ -30,9 +30,9 @@ const firstOfType = (property, styles, customKey, {parent, element}) => {
       if (getChildType(children[index]) === elementType) {
         if (children[index] === element) {
           return styles
-        } else {
-          return false
         }
+
+        return false
       }
     }
   } else {
@@ -51,13 +51,14 @@ const firstOfType = (property, styles, customKey, {parent, element}) => {
         if (getChildType(children[index]) === elementType) {
           if (children[index].key === elementKey) {
             return styles
-          } else {
-            return false
           }
+
+          return false
         }
       }
     }
   }
+
   return false
 }
 

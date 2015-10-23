@@ -6,7 +6,7 @@ import assignStyles from 'assign-styles'
  */
 const resolveStyles = (styles) => {
   if (styles instanceof Array) {
-    let merged = {}
+    const merged = {}
     styles.forEach(obj => assignStyles(merged, obj))
     return merged
   }
@@ -23,16 +23,17 @@ export default (property, options) => {
     if (options.condition) {
       if (options.hasOwnProperty('styles')) {
         return resolveStyles(options.styles)
-      } else {
-        console.warn('There has no style object been passed. Use `styles` as key.')
       }
+
+      console.warn('There has no style object been passed. Use `styles` as key.')
     }
   } else {
     if (options.hasOwnProperty('styles')) {
       return resolveStyles(options.styles)
-    } else {
-      console.warn('Neither `styles` nor `condition` has been found. Used the whole object as styles instead.')
-      return resolveStyles(options)
     }
+
+    console.warn('Neither `styles` nor `condition` has been found. Used the whole object as styles instead.')
+
+    return resolveStyles(options)
   }
 }

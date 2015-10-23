@@ -8,12 +8,12 @@ import Listener from './api/Listener'
 import config from './preconfig/dom'
 
 export default (...args) => {
-	return Look(...args, config)
+  return Look(...args, config) // eslint-disable-line new-cap
 }
 
 export {
-	CSS,
-	State,
-	Listener,
-	StyleSheet
+  CSS,
+  State,
+  Listener,
+  StyleSheet
 }
