@@ -87,6 +87,10 @@ const valid = (property, styles, customKey, {element, Component, newProps}) => {
       isValid = false
     }
 
+    if ( input.pattern && !new RegExp(input.pattern).test(input.value) ) {
+      isValid = false
+    }
+
     State.setState('valid', isValid, Component, key)
   })
   // resolving browser State
