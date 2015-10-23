@@ -71,4 +71,30 @@ const focus = (property, styles, customKey, {element, Component, newProps}) => {
   return State.getState('focus', Component, key) ? styles : false
 }
 
-export default {active, focus, hover}
+
+const valid = (property, styles, customKey, {element, Component, newProps}) => {
+  const key = element.key || element.ref || defaultKey
+
+  // add event listener if not added yet
+  newProps.onKeyUp = createListener(Component, element, key, 'onKeyDown', () => {
+    const { refs } = Component
+    const ref = Object.keys(refs).pop()
+    const { [ref]: input } = refs
+
+    let isValid = true
+
+    if ( input.required && !input.value ) {
+      isValid = false
+    }
+
+    if ( input.pattern && !new RegExp(input.pattern).test(input.value) ) {
+      isValid = false
+    }
+
+    State.setState('valid', isValid, Component, key)
+  })
+  // resolving browser State
+  return State.getState('valid', Component, key) ? styles : false
+}
+
+export default {active, focus, hover, valid}

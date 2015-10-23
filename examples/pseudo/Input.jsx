@@ -31,6 +31,9 @@ const styles = StyleSheet.create(Input, {
     userSelect: 'text',
     ':required': {
       border: '2px solid black'
+    },
+    ':valid': {
+      backgroundColor: 'green'
     }
   },
   inputFocus: {
