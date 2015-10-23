@@ -8,10 +8,11 @@ export default class Input extends Component {
     return (
       <div>
         <input key="i1" look={[styles.input, styles.inputFocus]} placeholder="focus me"/>
-      <input look={styles.input} placeholder="i am required" required/>
-    <input look={[styles.input, styles.inputOptional]} placeholder="i am optional"/>
-  <input look={[styles.input, styles.readOnly]} placeholder="i am read only" readOnly/>
-<input disabled look={[styles.input, styles.inputDisabled]} placeholder="i am disabled"/>
+        <input look={styles.input} placeholder="i am required" required/>
+        <input look={styles.input} placeholder="i have pattern" pattern="[A-Z]" ref="valid"/>
+        <input look={[styles.input, styles.inputOptional]} placeholder="i am optional"/>
+        <input look={[styles.input, styles.readOnly]} placeholder="i am read only" readOnly/>
+        <input disabled look={[styles.input, styles.inputDisabled]} placeholder="i am disabled"/>
       </div>
     )
   }
