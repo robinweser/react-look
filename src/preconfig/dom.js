@@ -8,7 +8,7 @@ import { equal, unEqual, greater, less, greaterThan, lessThan } from '../propert
 import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../properties/pseudoClasses/childIndex'
 import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../properties/pseudoClasses/childTypeIndex'
 import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../properties/pseudoClasses/input'
-import { hover, active, focus } from '../properties/pseudoClasses/userAction'
+import { hover, active, focus, valid } from '../properties/pseudoClasses/userAction'
 import { before, after } from '../properties/pseudoClasses/beforeAfter'
 import lang from '../properties/pseudoClasses/lang'
 import empty from '../properties/pseudoClasses/empty'
@@ -59,6 +59,7 @@ export default {
     ':read-write': readWrite,
     ':required': required,
     ':optional': optional,
-    ':indeterminate': indeterminate
+    ':indeterminate': indeterminate,
+    ':valid': valid
   }
 }
