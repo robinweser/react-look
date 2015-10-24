@@ -10,7 +10,7 @@ It simplyfies how you are styling your Components and comes in two different con
 
 # Features
 - ES2015 Classes, `React.createClass` & Stateless Components
-- [25 pseudo classes](docs/PseudoClasses.md)
+- [27 pseudo classes](docs/PseudoClasses.md)
 - [stateful styles](docs/StatefulConditions.md) (condition based)
 - nesting
 - [plugins](docs/Plugins.md)
@@ -18,8 +18,9 @@ It simplyfies how you are styling your Components and comes in two different con
 - modular & themeable
 - useful APIs
 
-The `react-look/dom` package also adds additional DOM-specific custom properties as well as a vendor-prefixing plugin.
+The `react-look/dom` package also adds additional DOM-specific custom properties as well as a vendor-prefixing plugin.<br>
  ![Gzipped Size](https://img.shields.io/badge/gzipped-~14k-blue.svg)
+
 - [media queries](docs/MediaQueries.md)
 - [pseudo classes](docs/PseudoClasses.md)
 - [vendor prefixing](docs/VendorPrefixes.md)

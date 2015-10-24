@@ -7,6 +7,7 @@ import { equal, unEqual, bigger, smaller, biggerThan, smallerThan } from '../pro
 import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../properties/pseudoClasses/childIndex'
 import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../properties/pseudoClasses/childIndex'
 import empty from '../properties/pseudoClasses/empty'
+import firstLetter from '../properties/pseudoClasses/firstLetter'
 import extend from '../properties/extend'
 
 export default {
@@ -35,6 +36,7 @@ export default {
     ':last-of-type': lastOfType,
     ':only-of-type': onlyOfType,
     ':nth-of-type': nthOfType,
-    ':nth-last-of-type': nthLastOfType
+    ':nth-last-of-type': nthLastOfType,
+    ':first-letter': firstLetter
   }
 }

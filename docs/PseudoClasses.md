@@ -40,6 +40,7 @@ Most pseudo classes get validated within the `render` process, while some need e
 
 ### other
 * empty
+* first-letter
 
 ## `react-look/dom`-only
 ### user-action
@@ -63,19 +64,14 @@ Most pseudo classes get validated within the `render` process, while some need e
 
 ## Unsupported pseudo classes
 At least by now the following pseudo classes are yet unsupported. <br>
-Note that they might get implemeneted later.
+Note that they might get implemented later.
 
 * link
 * visited
 * not*(Element)*
 * dir*(dir)*
 * fullscreen
-* left / right *(print only)*
-* root
-* scope
-* first-letter
 * first-line
-* selection
 * drop
 * past
 * current
@@ -87,3 +83,11 @@ Note that they might get implemeneted later.
 * nth-column*(an+b)*
 * nth-last-column*(an+b)*
 * focus-within
+
+
+### Print-only
+Those pseudo classes will barely be supported at anytime.
+
+* left / right
+* root
+* scope
