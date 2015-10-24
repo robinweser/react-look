@@ -1,9 +1,7 @@
-import Look from './core'
-
 import State from './api/State'
 import StyleSheet from './api/StyleSheet'
-import Listener from './api/Listener'
 
+import Look from './core'
 import config from './preconfig/native'
 
 export default (...args) => {
@@ -11,7 +9,6 @@ export default (...args) => {
 }
 
 export {
-  Listener,
   State,
   StyleSheet
 }

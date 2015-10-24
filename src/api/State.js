@@ -19,7 +19,7 @@ export default {
    * @param {string} key - a unique key whichs state gets returned
    */
   get(Component, key = defaultKey) {
-    return Component.state._look.get(key); // eslint-disable-line
+    return Component.state._look.get(key)
   },
 
   /**

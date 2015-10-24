@@ -1,6 +1,6 @@
 import getNthExpression from '../../utils/splitNthExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
-
+import warn from '../../utils/warn'
 /**
  * Returns a childs type
  * If child is an ES6 class it returns the displayName
@@ -38,7 +38,7 @@ const firstOfType = (property, styles, customKey, {parent, element}) => {
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
-      // TODO: Warning
+      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element)
       return false
     }
     const elementParent = element._owner._instance.props._parent
@@ -85,7 +85,7 @@ const lastOfType = (property, styles, customKey, {parent, element}) => {
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
-      // TODO: Warning
+      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element)
       return false
     }
     const elementParent = element._owner._instance.props._parent
@@ -131,7 +131,7 @@ const onlyOfType = (property, styles, customKey, {parent, element}) => {
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
-      // TODO: Warning
+      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element)
       return false
     }
     const elementParent = element._owner._instance.props._parent
@@ -180,7 +180,7 @@ const nthOfType = (property, styles, customKey, {parent, element}) => {
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
-      // TODO: Warning
+      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element)
       return false
     }
     const elementParent = element._owner._instance.props._parent
@@ -232,7 +232,7 @@ const nthLastOfType = (property, styles, customKey, {parent, element}) => {
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
-      // TODO: Warning
+      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element)
       return false
     }
     const elementParent = element._owner._instance.props._parent

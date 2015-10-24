@@ -1,5 +1,5 @@
 import assignStyles from 'object-assign'
-
+import warn from '../utils/warn'
 
 /**
  * Extracts referenced styles to an elements props
@@ -23,8 +23,7 @@ const extractStyles = (props, styles) => {
       if (styles.hasOwnProperty(look)) {
         extracted = assignStyles({}, styles[look], extracted)
       } else {
-        console.warn('Assigned look does not exist and will be ignored.')
-        console.warn('Provided styles: ' + JSON.stringify(styles) + ' do not include ' + look)
+        warn('Provided styles do not include ' + look, styles)
 
         return false
       }
@@ -47,7 +46,7 @@ export default (styles, scopeArgs) => {
   let retStyles = styles
 
   if (Component.styles) {
-    console.warn('The string syntax look="' + element.props.look + '" within ' + Component._lookScope + ' is deprecated. Please use direct mapping instead. This will be removed in Version 1.0.0.')
+    warn('The string syntax look="' + element.props.look + '" within ' + Component._lookScope + ' is deprecated. Please use direct mapping instead. This will be removed in Version 1.0.0.', Component, element)
     retStyles = extractStyles(element.props, Component.styles)
   }
 

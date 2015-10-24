@@ -1,4 +1,5 @@
 import throttle from '../utils/throttle'
+import warn from '../utils/warn'
 
 const matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
 
@@ -30,5 +31,5 @@ export default (property, styles, customKey, {Component}) => {
     return matchMedia(property.replace(customKey, '').trim()).matches ? styles : false
   }
 
-  console.warn('Failed evaluating media query: ' + property + '. Your environment is not able to use window.matchMedia.')
+  warn('Failed evaluating media query: ' + property + '. Your environment is not able to use window.matchMedia.')
 }

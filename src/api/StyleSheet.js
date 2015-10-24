@@ -20,7 +20,6 @@ export default {
           // adds the Component referer uniqueId to every selector
           Object.keys(styles).forEach(selector => {
             const selectorStyles = styles[selector]
-
             if (selectorStyles instanceof Object) {
               styleSheet[selector] = {
                 _scope: scope,

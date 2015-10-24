@@ -2,6 +2,7 @@ import assign from 'object-assign'
 import { cloneElement, isValidElement, Children } from 'react'
 import assignStyles from 'assign-styles'
 import flattenArray from '../utils/flattenArray'
+import warn from '../utils/warn'
 
 /**
  * Processes styles using a predefined set of plugins
@@ -85,7 +86,7 @@ export default function resolveStyles(Component, element, config, parent) {
       } else {
         // If global scopes are used it processed styles everytime
         // Throws warning to use scoped styles instead
-        console.warn(Component._lookScope + ' got enhanced by Look using global styles which might affect performance. Please always use scoped styles with the StyleSheet API.')
+        warn(Component._lookScope + ' got enhanced by Look using global styles which might affect performance. Please always use scoped styles with the StyleSheet API.', Component, element)
         newProps.style = processStyles(newProps.look, props, scopeArgs, config)
       }
     }

@@ -1,5 +1,5 @@
 import assignStyles from 'assign-styles'
-
+import warn from '../utils/warn'
 /**
  * Resolves multiple style objects by merging those
  * @param {Object|Array} styles - A set of style objects or a single style object
@@ -25,14 +25,14 @@ export default (property, options) => {
         return resolveStyles(options.styles)
       }
 
-      console.warn('There has no style object been passed. Use `styles` as key.')
+      warn('There has no style object been passed. Use `styles` as key.', options)
     }
   } else {
     if (options.hasOwnProperty('styles')) {
       return resolveStyles(options.styles)
     }
 
-    console.warn('Neither `styles` nor `condition` has been found. Used the whole object as styles instead.')
+    warn('Neither `styles` nor `condition` has been found. Used the whole object as styles instead.', options)
 
     return resolveStyles(options)
   }

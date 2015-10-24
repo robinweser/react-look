@@ -91,16 +91,19 @@ const nthLastChild = (property, styles, customKey, {parent, element}) => {
   if (childIndex === undefined) {
     return false
   }
-  // TODO: childLength wasn't used.. is it needed?
-  if (!parent) {
-    const elementParent = element._owner._instance.props._parent
 
-    if (!elementParent) {
+  let childLength
+  if (parent) {
+    childLength = parent.props.children.length
+  } else {
+    const elementParent = element._owner._instance.props._parent
+    if (elementParent) {
+      childLength = elementParent.props.children.length
+    } else {
       return false
     }
   }
-
-  return evalNthExpression(expression, length - childIndex) ? styles : false
+  return evalNthExpression(expression, childLength - childIndex) ? styles : false
 }
 
 export default {
