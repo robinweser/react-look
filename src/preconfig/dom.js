@@ -11,6 +11,7 @@ import { checked, disabled, enabled, required, optional, readOnly, readWrite, in
 import { hover, active, focus } from '../properties/pseudoClasses/userAction'
 import { before, after } from '../properties/pseudoClasses/beforeAfter'
 import lang from '../properties/pseudoClasses/lang'
+import target from '../properties/pseudoClasses/target'
 import empty from '../properties/pseudoClasses/empty'
 import extractCSS from '../properties/extractCSS'
 import extend from '../properties/extend'
@@ -59,6 +60,7 @@ export default {
     ':read-write': readWrite,
     ':required': required,
     ':optional': optional,
-    ':indeterminate': indeterminate
+    ':indeterminate': indeterminate,
+    ':target': target
   }
 }

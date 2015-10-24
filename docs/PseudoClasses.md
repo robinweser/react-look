@@ -54,6 +54,9 @@ Most pseudo classes get validated within the `render` process, while some need e
 * required / optional
 * indeterminate
 
+### link
+* target
+
 ### other
 * before / after *(: or ::)*
 * lang*(language)*
@@ -64,7 +67,6 @@ Note that they might get implemeneted later.
 
 * link
 * visited
-* target
 * not*(Element)*
 * dir*(dir)*
 * fullscreen

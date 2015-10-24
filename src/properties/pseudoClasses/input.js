@@ -1,6 +1,4 @@
-/**
-* Input pseudo mixins just validate current elements props and validate those
-*/
+// Input pseudo mixins just validate current elements props and validate those
 const checked = (property, styles, customKey, {newProps}) => newProps && newProps.checked ? styles : false
 const disabled = (property, styles, customKey, {newProps}) => newProps && newProps.disabled ? styles : false
 const enabled = (property, styles, customKey, {newProps}) => newProps && !newProps.disabled ? styles : false

@@ -59,8 +59,7 @@
   "dependencies": {
     "assign-styles": "2.0.0",
     "dot-prop": "^2.2.0",
-    "dynamic-style-sheets": "^0.2.2",
-    "inline-style-prefixer": "^0.3.2",
+    "inline-style-prefixer": "^0.3.3",
     "object-assign": "^4.0.1"
   },
   "devDependencies": {

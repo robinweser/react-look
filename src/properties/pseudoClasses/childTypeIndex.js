@@ -16,10 +16,7 @@ const getChildType = (child) => {
   return childType
 }
 
-/**
- * Evaluates child-type index positions using data from childIndexMap
- * childIndexMap is provided by arguments
- */
+// Evaluates child-type index positions using the parent element passed with scopeArgs
 const firstOfType = (property, styles, customKey, {parent, element}) => {
   if (parent) {
     const elementType = getChildType(element)

@@ -1,10 +1,7 @@
 import getNthExpression from '../../utils/splitNthExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
 
-/**
- * Evaluates child index positions using data from childIndexMap
- * childIndexMap is provided by arguments
- */
+// Evaluates child index positions using the parent element passed with scopeArgs
 const getChildIndex = (parent, element) => {
   let index
   if (parent) {
