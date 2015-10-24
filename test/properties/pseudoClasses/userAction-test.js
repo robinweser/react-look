@@ -1,4 +1,4 @@
-import { hover, focus, active } from '../../../lib/properties/pseudoClasses/userAction'
+import { hover, focus, active, valid } from '../../../lib/properties/pseudoClasses/userAction'
 import State from '../../../lib/api/State'
 import { expect } from 'chai'
 
@@ -60,6 +60,20 @@ describe('Evaluating active pseudos', () => {
 
   it('should add a mouseDown listener', () => {
     expect(args.newProps).to.have.property('onMouseDown')
+  })
+
+  it('should set an initial state', () => {
+    expect(State.has(args.Component, args.element.key)).to.equal(true)
+    expect(State.get(args.Component, args.element.key)).to.eql({})
+  })
+})
+
+describe('Evaluating valid pseudos', () => {
+
+  valid(':valid', true, ':valid', args)
+
+  it('should add a keyUp listener', () => {
+    expect(args.newProps).to.have.property('onKeyUp')
   })
 
   it('should set an initial state', () => {

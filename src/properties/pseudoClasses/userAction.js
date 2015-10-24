@@ -3,6 +3,12 @@ import createListener from '../../api/Listener'
 
 const defaultKey = 'root'
 
+// See: https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+
+// See: https://gist.github.com/jpillora/7885636
+const urlRegex = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.​\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[​6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1​,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00​a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u​00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i // eslint-disable-line
+
 /**
  * Evaluates browser states and adds event listeners if needed
  * Also adds global mouseup event to remove active elements
@@ -76,10 +82,14 @@ const valid = (property, styles, customKey, {element, Component, newProps}) => {
   const key = element.key || element.ref || defaultKey
 
   // add event listener if not added yet
-  newProps.onKeyUp = createListener(Component, element, key, 'onKeyDown', () => {
-    const { refs } = Component
-    const ref = Object.keys(refs).pop()
-    const { [ref]: input } = refs
+  newProps.onKeyUp = createListener(Component, element, key, 'onKeyUp', () => {
+    const { [element.ref]: input } = Component.refs
+
+    if ( !input ) {
+      // TEMP: What to actually do here? We need a ref to get the input value
+      console.error('You need to specify a `ref` attribute to use `:valid` pseudo selector.')
+      return
+    }
 
     let isValid = true
 
@@ -88,6 +98,22 @@ const valid = (property, styles, customKey, {element, Component, newProps}) => {
     }
 
     if ( input.pattern && !new RegExp(input.pattern).test(input.value) ) {
+      isValid = false
+    }
+
+    if ( input.type === 'email' && !input.multiple && !emailRegex.test(input.value) ) {
+      isValid = false
+    }
+
+    if ( input.type === 'email' && input.multiple ) {
+      (input.value || '').split(',').forEach(email => {
+        if ( !emailRegex.test(email) ) {
+          isValid = false
+        }
+      })
+    }
+
+    if ( input.type === 'url' && !urlRegex.test(input.value) ) {
       isValid = false
     }
 

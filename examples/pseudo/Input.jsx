@@ -12,6 +12,9 @@ export default class Input extends Component {
     <input look={[styles.input, styles.inputOptional]} placeholder="i am optional"/>
   <input look={[styles.input, styles.readOnly]} placeholder="i am read only" readOnly/>
 <input disabled look={[styles.input, styles.inputDisabled]} placeholder="i am disabled"/>
+        <input ref="email" type="email" look={styles.input} placeholder="i am an email"/>
+        <input ref="email-multiple" type="email" multiple look={styles.input} placeholder="i am multiple emails"/>
+        <input ref="url" type="url" look={styles.input} placeholder="i am an url"/>
       </div>
     )
   }
