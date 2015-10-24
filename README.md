@@ -3,19 +3,14 @@
 ![TravisCI](https://travis-ci.org/rofrischmann/react-look.svg?branch=develop) [![Code Climate](https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg)](https://codeclimate.com/github/rofrischmann/react-look)
 [![npm version](https://badge.fury.io/js/react-look.svg)](http://badge.fury.io/js/react-look)
 ![Dependencies](https://david-dm.org/rofrischmann/react-look.svg)
-```sh
-npm install react-look
-```
-> Coming from version < 0.5? Check the [upgrade guide](docs/guides/upgradeLook.md).
+![Gzipped Size](https://img.shields.io/badge/gzipped-~6k-blue.svg)
 
-**Look** is a modular, **processor**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://github.com/facebook/react-native) *(starting with Version 0.4)* based on **inline styles**.
-It simplyfies how you are styling your Components and comes with two different packages.
+**Look** is a modular, **processor**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://github.com/facebook/react-native) using **inline styles**.
+It simplyfies how you are styling your Components and comes in two different configurations by default.
 
 # Features
-Look is as far as I know the **feature richest** inline-styling library for React. <br>
-Supporting [25 pseudo classes](docs/PseudoClasses.md) out of the box as well as **stateful styles**.
-- ES6 Classes, `React.createClass` & Stateless Components
-- [pseudo classes](docs/PseudoClasses.md)
+- ES2015 Classes, `React.createClass` & Stateless Components
+- [25 pseudo classes](docs/PseudoClasses.md)
 - [stateful styles](docs/StatefulConditions.md) (condition based)
 - nesting
 - [plugins](docs/Plugins.md)
@@ -23,11 +18,11 @@ Supporting [25 pseudo classes](docs/PseudoClasses.md) out of the box as well as 
 - modular & themeable
 - useful APIs
 
-The `react-look/dom` package also adds additional DOM-specific mixins as well as a vendor-prefixing processor.
+The `react-look/dom` ![Gzipped Size](https://img.shields.io/badge/gzipped-~14k-blue.svg)  package also adds additional DOM-specific custom properties as well as a vendor-prefixing plugin.
 - [media queries](docs/MediaQueries.md)
 - [pseudo classes](docs/PseudoClasses.md)
 - [vendor prefixing](docs/VendorPrefixes.md)
-- [CSS-API](docs/api/CSS.md)
+- [CSS-API](docs/api/StyleSheet.md)
 
 ### [Supported pseudo classes](docs/PseudoClasses.md#supportedpseudoclasses)
 # Benefit
@@ -40,6 +35,11 @@ It encourages you to define your styles scoped to your Component which helps to 
 Look tries to keep your styling separated from your logic as much as possible while other styling libraries often encourage style validations such as `this.state.checked && styles.checked` within your `render()`-method.
 
 # Usage
+```sh
+npm install react-look
+```
+> Coming from version < 0.5? Check the [upgrade guide](docs/guides/upgradeLook.md).
+
 The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries. Use nested objects to define pseudo classes, media queries or conditioned styles. <br>
 
 The example uses an ES7 Decorator. Alternatively wrap your Component with Look. e.g. `Header = Look(Header)`<br>
@@ -93,7 +93,6 @@ const styles = StyleSheet.create(Header, {
   }
 })
 ```
-
 ### Stateless Components
 With Look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14. *(Currently Look creates a Stateful Component for instant support)*
 ```javascript
@@ -110,6 +109,13 @@ Look also supports React Native to use stateful conditions or pseudo classes suc
 As you are most likely using the `StyleSheet.create` provided by React Native. You might just swap that with Look's `StyleSheet` and add the scope parameter.<br>
 
 > NOTE: React native does not support every ES6 & ES7 feature out of the box and it could be quite a mess to get it running properly though.
+
+### Different packages
+If you're wondering which package you should use. This depends on your needs.
+* `react-look` includes everything available for both React and React Native.
+* `react-look/dom` adds a lot of DOM-only plugins and custom properties.
+* `react-look/core` is used if you want to use a [custom configuration](docs/guides/configureLook.md) for Look.
+* `react-look/addons` includes every plugin, custom properties and tools used to configure your custom Look instance.
 
 # Demo
 Check out the provided examples for some special use cases. See them in action using the demo.<br>
