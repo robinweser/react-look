@@ -1,4 +1,4 @@
-const camelToDashCase = (str) => str.replace(/([a-z]|^)([A-Z])/g, (match, p1, p2) => p1 + '-' + p2.toLowerCase())
+import camelToDashCase from '../utils/camelToDashCase'
 
 const alternativeValue = (styles, scopeArgs, config) => {
   Object.keys(styles).forEach(property => {

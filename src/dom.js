@@ -1,4 +1,3 @@
-import CSS from './api/CSS'
 import State from './api/State'
 import StyleSheet from './api/StyleSheet'
 
@@ -10,7 +9,6 @@ export default (...args) => {
 }
 
 export {
-  CSS,
   State,
   StyleSheet
 }

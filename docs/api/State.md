@@ -1,4 +1,4 @@
-# 4. State
+# State
 Using State you can get/set special states for specific components.<br>
 
 > **Warning**: This only applies to elements that provide an explicit `key` or `ref` expect the root node which gets `root` applied if there's no `key` or `ref` set.<br>
@@ -6,34 +6,35 @@ Using State you can get/set special states for specific components.<br>
 ## Usage
 
 ```javascript
-import {Look, State} from 'react-look';
+import {Look, State} from 'react-look/dom'
 
-let styles = {
-  box : {':active' : {}},
-  item : {':hover' : {}}
-};
-
+@Look
 class Header extends React.Component {
   render(){
-    <div look="box">
-      <span look="item" key="first">First</span>
-      <span look="item" key="second">Second</span>
+    <div>
+      <span look={styles} key="first">First</span>
+      <span look={styles} key="second">Second</span>
     </div>
   }
 }
 
-let extendedHeader = Look(Header, styles)
+const styles = StyleSheet.create(Header, {
+  ':active': {
+    backgroundColor: 'red'
+  },
+  ':hover': {
+    backgroundColor: 'blue'
+  }
+})
 
-// returns all 'box'-states since default-key is 'box'
-State.get(extendedHeader)
-// returns 'second's active state
-State.getState('hover', extendedHeader, 'second')
+// returns the state as a boolean
+State.getState('hover', Header, 'second')
+State.getState('active', Header, 'first')
 ```
 
-## react-look specific action states
+## `react-look/dom` specific action states
 * hover
 * focus
-* change (returns newest value)
 * active
 
 ## Methods

@@ -1,7 +1,6 @@
-import { CSS } from '../../lib/dom'
-import { Processors } from 'dynamic-style-sheets'
+import { StyleSheet } from '../../lib/dom'
 
-let sheet = new CSS({
+StyleSheet.toCSS({
   '*': {
     padding: 0,
     margin: 0,
@@ -11,6 +10,3 @@ let sheet = new CSS({
     userSelect: 'none'
   }
 })
-
-sheet.process(Processors.Prefixer)
-sheet.apply()

@@ -1,4 +1,4 @@
-# 1. Look
+# Look
 Look is the core function which wraps an existing React Component in order to resolve styles
 
 ### `Look(Component, config)`

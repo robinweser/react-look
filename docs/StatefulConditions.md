@@ -1,4 +1,4 @@
-# 4. Stateful Conditions
+# Stateful Conditions
 
 Look implements a shortcut to specify state-specific styles. It supports 6 different operators: `>=`, `<=`, `!=`, `=`, `>` and `<`.<br>
 This improves readability since you won't need to use expressions like this: `style={[styles.box, this.state.active && styles.active]}`. <br>

@@ -1,4 +1,4 @@
-# 2. Pseudo classes
+# Pseudo classes
 
 Look supports pseudo classes using a common syntax as it would be in CSS. They **need to be nested** within a valid selector and **always** start with a doublepoint.
 

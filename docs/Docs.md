@@ -13,5 +13,4 @@ I try my best to keep all docs updated. If you have any recommendations or impro
 ### API
 1. [Look](api/Look.md)
 2. [StyleSheet](api/StyleSheet.md)
-3. [CSS (DOM-only)](api/CSS.md)
 4. [State](api/State.md)

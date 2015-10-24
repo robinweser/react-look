@@ -1,3 +1,18 @@
+import camelToDashCase from '../utils/camelToDashCase'
+
+/**
+* Creates a valid CSS string out of an object of styles
+* @param {Object} styles - an object with CSS styles
+*/
+const cssifyObject = (styles) => {
+  let rules = ''
+  Object.keys(styles).forEach(property => {
+    rules += camelToDashCase(property) + ':' + styles[property] + ';'
+  })
+  return rules
+}
+
+
 export default {
 
   /**
@@ -34,5 +49,40 @@ export default {
 
       return styles
     }
+  },
+
+  /**
+   * A global StyleSheet that directly applies to your DOM.
+   * @param {Object} selectors - a set of selectors containing valid CSS styles
+   * @param {string} unit - a valid unit that gets applied
+   * @param {string} media - a valid media query
+   * @param {any} id - a special id that gets attached to the stylesheet in order catch it later
+   */
+  toCSS(selectors, scope, media = '', id) {
+    if (!selectors || Object.keys(selectors).length < 1) {
+      return false
+    }
+
+    let style = document.createElement('style')
+    style.type = 'text/css'
+    style.media = media
+    if (id) {
+      style.id = id
+    }
+
+    let CSS = ''
+    Object.keys(selectors).forEach(selector => {
+      if (scope) {
+        CSS += scope + ' '
+      }
+      CSS += selector + '{' + cssifyObject(selectors[selector]) + '}'
+    })
+
+    // Apply the CSS styles to the head
+    let node = document.createTextNode(CSS)
+    style.appendChild(node)
+    document.head.appendChild(style)
+
+    return style
   }
 }

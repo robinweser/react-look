@@ -1,4 +1,4 @@
-# 3. Media Queries (DOM-only)
+# Media Queries (DOM-only)
 
 Look supports media-queries using the [Custom Property](../src/plugins/customProperty.js) plugin.
 
