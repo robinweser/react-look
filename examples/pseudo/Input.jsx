@@ -16,6 +16,8 @@ export default class Input extends Component {
         <input ref="email" type="email" look={styles.input} placeholder="i am an email"/>
         <input ref="email-multiple" type="email" multiple look={styles.input} placeholder="i am multiple emails"/>
         <input ref="url" type="url" look={styles.input} placeholder="i am an url"/>
+        <input ref="maxlength" maxLength="3" look={styles.input} placeholder="i have maxlength"/>
+        <input ref="minlength" minLength="3" look={styles.input} placeholder="i have minlength"/>
       </div>
     )
   }

@@ -117,6 +117,14 @@ const valid = (property, styles, customKey, {element, Component, newProps}) => {
       isValid = false
     }
 
+    if ( input.minLength && input.value.length < parseInt(input.minLength, 10) ) {
+      isValid = false
+    }
+
+    if ( input.maxLength && input.value.length > parseInt(input.maxLength, 10) ) {
+      isValid = false
+    }
+
     State.setState('valid', isValid, Component, key)
   })
   // resolving browser State
