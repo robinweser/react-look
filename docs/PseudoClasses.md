@@ -18,7 +18,7 @@ Look supports pseudo classes using a common syntax as it would be in CSS. They *
 ```
 Pseudo-classes can be nested multiple to achieve something like `:focus:hover`. They can also contain nested media queries and stateful conditions.
 
-Look currently supports **25 pseudo classes**. Some might be added soon. Check the following list for all supported / unsupported.
+Look currently supports **28 pseudo classes**. Some might be added soon. Check the following list for all supported / unsupported.
 
 ## Validation
 Most pseudo classes get validated within the `render` process, while some need extra event listeners applied. Those are `:focus`, `:hover` and `:active`.
@@ -41,6 +41,7 @@ Most pseudo classes get validated within the `render` process, while some need e
 ### other
 * empty
 * first-letter
+* blank
 
 ## `react-look/dom`-only
 ### user-action
@@ -79,7 +80,6 @@ Note that they might get implemented later.
 * placeholder-shown
 * any-link
 * user-error
-* blank
 * nth-column*(an+b)*
 * nth-last-column*(an+b)*
 * focus-within

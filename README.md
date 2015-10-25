@@ -10,7 +10,7 @@ It simplyfies how you are styling your Components and comes in two different con
 
 # Features
 - ES2015 Classes, `React.createClass` & Stateless Components
-- [27 pseudo classes](docs/PseudoClasses.md)
+- [28 pseudo classes](docs/PseudoClasses.md)
 - [stateful styles](docs/StatefulConditions.md) (condition based)
 - nesting
 - [plugins](docs/Plugins.md)

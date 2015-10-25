@@ -12,6 +12,7 @@ import { hover, active, focus } from '../properties/pseudoClasses/userAction'
 import { before, after } from '../properties/pseudoClasses/beforeAfter'
 import lang from '../properties/pseudoClasses/lang'
 import target from '../properties/pseudoClasses/target'
+import blank from '../properties/pseudoClasses/blank'
 import firstLetter from '../properties/pseudoClasses/firstLetter'
 import empty from '../properties/pseudoClasses/empty'
 import extractCSS from '../properties/extractCSS'
@@ -63,6 +64,7 @@ export default {
     ':optional': optional,
     ':indeterminate': indeterminate,
     ':target': target,
-    ':first-letter': firstLetter
+    ':first-letter': firstLetter,
+    ':blank': blank
   }
 }
