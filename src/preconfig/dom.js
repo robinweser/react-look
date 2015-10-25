@@ -15,6 +15,7 @@ import target from '../properties/pseudoClasses/target'
 import blank from '../properties/pseudoClasses/blank'
 import firstLetter from '../properties/pseudoClasses/firstLetter'
 import contains from '../properties/pseudoClasses/contains'
+import substr from '../properties/pseudoClasses/substr'
 import empty from '../properties/pseudoClasses/empty'
 import extractCSS from '../properties/extractCSS'
 import extend from '../properties/extend'
@@ -67,6 +68,7 @@ export default {
     ':target': target,
     ':first-letter': firstLetter,
     ':blank': blank,
-    ':contains': contains
+    ':contains': contains,
+    ':substr': substr
   }
 }

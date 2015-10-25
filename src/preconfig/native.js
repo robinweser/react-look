@@ -8,6 +8,8 @@ import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../pro
 import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../properties/pseudoClasses/childIndex'
 import empty from '../properties/pseudoClasses/empty'
 import firstLetter from '../properties/pseudoClasses/firstLetter'
+import contains from '../properties/pseudoClasses/contains'
+import substr from '../properties/pseudoClasses/substr'
 import blank from '../properties/pseudoClasses/blank'
 import extend from '../properties/extend'
 
@@ -39,6 +41,8 @@ export default {
     ':nth-of-type': nthOfType,
     ':nth-last-of-type': nthLastOfType,
     ':first-letter': firstLetter,
-    ':blank': blank
+    ':blank': blank,
+    ':contains': contains,
+    ':substr': substr
   }
 }
