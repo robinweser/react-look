@@ -1,4 +1,4 @@
-import getNthExpression from '../../utils/splitNthExpression'
+import getPseudoExpression from '../../utils/getPseudoExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
 import warn from '../../utils/warn'
 /**
@@ -167,7 +167,7 @@ const nthOfType = (property, styles, customKey, {parent, element}) => {
       if (getChildType(children[index]) === elementType) {
         ++typeIndex
         if (children[index] === element) {
-          const expression = getNthExpression(property)
+          const expression = getPseudoExpression(property)
           if (evalNthExpression(expression, typeIndex)) {
             return styles
           }
@@ -191,7 +191,7 @@ const nthOfType = (property, styles, customKey, {parent, element}) => {
         if (getChildType(children[index]) === elementType) {
           ++typeIndex
           if (children[index].key === elementKey) {
-            const expression = getNthExpression(property)
+            const expression = getPseudoExpression(property)
             if (evalNthExpression(expression, typeIndex)) {
               return styles
             }
@@ -221,7 +221,7 @@ const nthLastOfType = (property, styles, customKey, {parent, element}) => {
       }
     }
     if (typeIndex) {
-      const expression = getNthExpression(property)
+      const expression = getPseudoExpression(property)
       if (evalNthExpression(expression, typeCount + 1 - typeIndex)) {
         return styles
       }
@@ -249,7 +249,7 @@ const nthLastOfType = (property, styles, customKey, {parent, element}) => {
         }
       }
       if (typeIndex) {
-        const expression = getNthExpression(property)
+        const expression = getPseudoExpression(property)
         if (evalNthExpression(expression, typeCount + 1 - typeIndex)) {
           return styles
         }

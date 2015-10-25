@@ -1,4 +1,4 @@
-import getNthExpression from '../../utils/splitNthExpression'
+import getPseudoExpression from '../../utils/getPseudoExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
 
 // Evaluates child index positions using the parent element passed with scopeArgs
@@ -74,7 +74,7 @@ const onlyChild = (property, styles, customKey, {parent, element}) => {
 }
 
 const nthChild = (property, styles, customKey, {parent, element}) => {
-  const expression = getNthExpression(property)
+  const expression = getPseudoExpression(property)
   const childIndex = getChildIndex(parent, element)
   if (childIndex === undefined) {
     return false
@@ -83,7 +83,7 @@ const nthChild = (property, styles, customKey, {parent, element}) => {
 }
 
 const nthLastChild = (property, styles, customKey, {parent, element}) => {
-  const expression = getNthExpression(property)
+  const expression = getPseudoExpression(property)
   const childIndex = getChildIndex(parent, element)
   if (childIndex === undefined) {
     return false
