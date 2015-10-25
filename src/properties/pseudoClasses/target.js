@@ -1,6 +1,6 @@
 // Evaluates if an <a>-tag's id matches fragment identifier of the URI of the document
 export default (property, styles, customKey, {Component, element}) => {
-  if (element.type === 'a' && element.props.href !== undefined) {
+  if (element.id !== undefined) {
 
     if (!Component._locationHrefListener) {
       Component._locationHrefListener = () => {
@@ -21,8 +21,8 @@ export default (property, styles, customKey, {Component, element}) => {
     }
 
 
-    const fragment = '#' + location.href.split('#')[1]
-    if (element.props.href === fragment) {
+    const fragment = location.href.split('#')[1]
+    if (element.id === fragment) {
       return styles
     }
   }
