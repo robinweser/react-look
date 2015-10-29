@@ -35,7 +35,7 @@ const firstOfType = (property, styles, customKey, {parent, element}) => {
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
-      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element)
+      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element._owner._currentElement)
       return false
     }
     const elementParent = element._owner._instance.props._parent
@@ -82,7 +82,7 @@ const lastOfType = (property, styles, customKey, {parent, element}) => {
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
-      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element)
+      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element._owner._currentElement)
       return false
     }
     const elementParent = element._owner._instance.props._parent
@@ -128,7 +128,7 @@ const onlyOfType = (property, styles, customKey, {parent, element}) => {
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
-      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element)
+      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element._owner._currentElement)
       return false
     }
     const elementParent = element._owner._instance.props._parent
@@ -177,7 +177,7 @@ const nthOfType = (property, styles, customKey, {parent, element}) => {
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
-      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element)
+      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element._owner._currentElement)
       return false
     }
     const elementParent = element._owner._instance.props._parent
@@ -229,7 +229,7 @@ const nthLastOfType = (property, styles, customKey, {parent, element}) => {
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
-      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element)
+      warn('Use unique keys in order to use type-sensitive child index pseudo classes', element._owner._currentElement)
       return false
     }
     const elementParent = element._owner._instance.props._parent

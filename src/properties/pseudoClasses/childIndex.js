@@ -1,5 +1,6 @@
 import getPseudoExpression from '../../utils/getPseudoExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
+import warn from '../../utils/warn'
 
 // Evaluates child index positions using the parent element passed with scopeArgs
 const getChildIndex = (parent, element) => {
@@ -11,7 +12,7 @@ const getChildIndex = (parent, element) => {
     if (elementParent) {
       const ownerKey = element._owner._currentElement.key
       if (ownerKey === null) {
-        console.warn('You need to pass a unique key in order to use child-index pseudo classes.')
+        warn('You need to pass a unique key in order to use child-index pseudo classes.', element._owner._currentElement)
         return undefined
       }
       elementParent.props.children.forEach((child, pos) => {
