@@ -18,12 +18,13 @@ export default {
   /**
   * Generates a styleSheet with an scopeId applied to every selector
   * The scopeId refers to the Component that is responsible for resolving those styles
-  * @param {Object} Component - React Component that the styles refer to
+  * @param {Object|string} Component - React Component that the styles refer to
   * @param {styles} styles - Style selector or Object with selectors
   */
   create(Component, styles) {
     if (Component !== undefined && styles && Object.keys(styles).length > 0) {
-      const scope = Component.displayName || Component.name
+      // Either take the Components "name" itself or just a pure string as scope
+      const scope = Component.displayName || Component.name || Component
 
       if (scope) {
         let styleSheet = {}

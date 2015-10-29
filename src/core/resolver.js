@@ -75,18 +75,18 @@ export default function resolveStyles(Component, element, config, parent) {
 
       // scopeArgs are provided to plugins to access special objects
       const scopeArgs = {newProps, Component, element, parent}
-
+      const componentScope = Component.displayName || Component.name
       // Checks if styles are scoped
       // Scoped styles only perform style processing if in correct scope
       // NOTE: This solves multiple processing due to wrapping Components
       if (newProps.look._scope) {
-        if (Component._lookScope === newProps.look._scope) {
+        if (componentScope === newProps.look._scope) {
           newProps.style = processStyles(newProps.look.style, props, scopeArgs, config)
         }
       } else {
         // If global scopes are used it processed styles everytime
         // Throws warning to use scoped styles instead
-        warn(Component._lookScope + ' got enhanced by Look using global styles which might affect performance. Please always use scoped styles with the StyleSheet API.', Component, element)
+        warn(componentScope + ' got enhanced by Look using global styles which might affect performance. Please always use scoped styles with the StyleSheet API.', Component, element)
         newProps.style = processStyles(newProps.look, props, scopeArgs, config)
       }
     }
