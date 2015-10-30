@@ -11,6 +11,11 @@ import { hover, active, focus } from './properties/pseudoClasses/userAction'
 import { before, after } from './properties/pseudoClasses/beforeAfter'
 import lang from './properties/pseudoClasses/lang'
 import empty from './properties/pseudoClasses/empty'
+import target from './properties/pseudoClasses/target'
+import blank from './properties/pseudoClasses/blank'
+import firstLetter from './properties/pseudoClasses/firstLetter'
+import contains from './properties/pseudoClasses/contains'
+import substr from './properties/pseudoClasses/substr'
 import extractCSS from './properties/extractCSS'
 import extend from './properties/extend'
 import mediaQuery from './properties/mediaQuery'
@@ -56,6 +61,11 @@ export default {
     readWrite,
     required,
     optional,
-    indeterminate
+    indeterminate,
+    firstLetter,
+    blank,
+    target,
+    contains,
+    substr
   }
 }
