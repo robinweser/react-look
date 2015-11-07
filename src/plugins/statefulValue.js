@@ -6,7 +6,7 @@ const statefulValue = (styles, scopeArgs, config) => {
     if (value instanceof Function) {
       styles[property] = value(Component.props, Component.state)
     } else if (value instanceof Object) {
-      styles[property] = statefulValue(value, config, scopeArgs)
+      styles[property] = statefulValue(value, scopeArgs, config)
     }
   })
   return styles

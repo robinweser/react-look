@@ -6,7 +6,7 @@ const alternativeValue = (styles, scopeArgs, config) => {
     if (value instanceof Array) {
       styles[property] = value.join(';' + camelToDashCase(property) + ':')
     } else if (value instanceof Object) {
-      styles[property] = alternativeValue(value, config, scopeArgs)
+      styles[property] = alternativeValue(value, scopeArgs, config)
     }
   })
   return styles
