@@ -3,6 +3,7 @@
 ## 0.5
 ### 0.5.2 (07.11.15)
 - Fixed nested plugin resolving
+- Fixed media query automatic rerendering
 - Added new pseudo classes (`:target`, `:first-letter`, `:contains`, `:substr`, `:blank`)
 - Units are automatically added when using CSS
 - StyleSheet's scope can now also be as string. Add `styleScope: scope` to your config.

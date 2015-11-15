@@ -1,10 +1,20 @@
 import cssifyObject from '../utils/cssifyObject'
+import Prefixer from 'inline-style-prefixer'
+import insertRule from '../utils/globalStyleSheet'
 
-const defaultConfig = {
-  scope: '',
-  unit: 'px',
-  media: '',
-  id: undefined
+// Returns the font format for a specific font source
+const getFontFormat = src => {
+  if (src.indexOf('.woff') > -1) {
+    return 'woff'
+  } else if (src.indexOf('.eof') > -1) {
+    return 'eof'
+  } else if (src.indexOf('.ttf') > -1) {
+    return 'truetype'
+  } else if (src.indexOf('.svg') > -1) {
+    return 'svg'
+  } else {
+    return false
+  }
 }
 
 export default {
@@ -48,36 +58,58 @@ export default {
 
   /**
    * A global StyleSheet that directly applies to your DOM.
-   * @param {Object} selectors - a set of selectors containing valid CSS styles
-   * @param {string} unit - a valid unit that gets applied
-   * @param {string} media - a valid media query
-   * @param {any} id - a special id that gets attached to the stylesheet in order catch it later
+   * @param {Object} config - a configuration object
    */
-  toCSS(selectors, config = defaultConfig) {
+  toCSS(selectors, config = {}) {
     if (!selectors || selectors instanceof Object === false) {
       return false
     }
-    const {scope, unit, media, id} = config
-    let style = document.createElement('style')
-    style.type = 'text/css'
-    style.media = media
-    if (id) {
-      style.id = id
+
+    Object.keys(selectors).forEach(selector => {
+      insertRule((config.scope ? config.scope + ' ' : '') + selector + '{' + cssifyObject(selectors[selector], config) + '}')
+    })
+  },
+
+  /**
+   * Adds keyframe animations to the global StyleSheet and returns the animation name
+   * @param {Object} config - a configuration object
+   */
+  keyframes(frames, config = {}) {
+    const name = config.name ? config.name : 'animation'
+    if (!frames || frames instanceof Object === false) {
+      return name
     }
 
-    let CSS = ''
-    Object.keys(selectors).forEach(selector => {
-      if (scope) {
-        CSS += scope + ' '
-      }
-      CSS += selector + '{' + cssifyObject(selectors[selector], unit) + '}'
+    // Generating a CSS string which can be included
+    let CSS = '@' + new Prefixer(config.userAgent).prefixedKeyframes + ' ' + name + '{'
+    Object.keys(frames).forEach(percentage => {
+      CSS += percentage + '{' + cssifyObject(frames[percentage], config) + '}'
     })
+    CSS += '}'
 
-    // Apply the CSS styles to the head
-    let node = document.createTextNode(CSS)
-    style.appendChild(node)
-    document.head.appendChild(style)
+    insertRule(CSS)
+    return name
+  },
+  
+  /*
+  * Adds a new font family to the global StyleSheet for global usage
+  * @param {string} fontFamily - font-family for global usage
+  * @param {string|Array} files - source files refering to the font files
+  * @param {Object} styles - additional font styles including fontWeight, fontStretch, fontStyle, unicodeRange
+  */
+  fontFace(fontFamily, files, styles) {
+    if (!files) {
+      return false
+    }
 
-    return style
+    // Generates a style object including all font information
+    let fontFace = {
+      fontFamily: "'" + fontFamily + "'",
+      src: files instanceof Array ? files.map(src => "url('" + src + "') format('" + getFontFormat(src) + "')") : files,
+      ...styles
+    }
+
+    insertRule('@font-face {' + cssifyObject(fontFace) + '}')
+    return fontFamily
   }
 }
