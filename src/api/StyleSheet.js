@@ -1,11 +1,5 @@
 import cssifyObject from '../utils/cssifyObject'
-
-const defaultConfig = {
-  scope: '',
-  unit: 'px',
-  media: '',
-  id: undefined
-}
+import Prefixer from 'inline-style-prefixer'
 
 export default {
 
@@ -49,28 +43,27 @@ export default {
   /**
    * A global StyleSheet that directly applies to your DOM.
    * @param {Object} selectors - a set of selectors containing valid CSS styles
-   * @param {string} unit - a valid unit that gets applied
-   * @param {string} media - a valid media query
-   * @param {any} id - a special id that gets attached to the stylesheet in order catch it later
    */
-  toCSS(selectors, config = defaultConfig) {
+  toCSS(selectors, config = {}) {
     if (!selectors || selectors instanceof Object === false) {
       return false
     }
-    const {scope, unit, media, id} = config
-    let style = document.createElement('style')
+
+    const style = document.createElement('style')
     style.type = 'text/css'
-    style.media = media
-    if (id) {
-      style.id = id
+    if (config.media) {
+      style.media = config.media
+    }
+    if (config.id) {
+      style.id = config.id
     }
 
     let CSS = ''
     Object.keys(selectors).forEach(selector => {
-      if (scope) {
-        CSS += scope + ' '
+      if (config.scope) {
+        CSS += config.scope + ' '
       }
-      CSS += selector + '{' + cssifyObject(selectors[selector], unit) + '}'
+      CSS += selector + '{' + cssifyObject(selectors[selector], config) + '}'
     })
 
     // Apply the CSS styles to the head
@@ -79,5 +72,29 @@ export default {
     document.head.appendChild(style)
 
     return style
-  }
+  },
+
+  keyframes(frames, name, config = {}) {
+    if (!frames || frames instanceof Object === false) {
+      return name
+    }
+
+    let style = document.createElement('style')
+    style.type = 'text/css'
+
+    let CSS = '@' + new Prefixer(config.userAgent).prefixedKeyframes + ' ' + name + '{'
+    Object.keys(frames).forEach(percentage => {
+      CSS += percentage + '{' + cssifyObject(frames[percentage], config) + '}'
+    })
+    CSS += '}'
+
+    // Apply the CSS styles to the head
+    let node = document.createTextNode(CSS)
+    style.appendChild(node)
+    document.head.appendChild(style)
+
+    return name
+  },
+
+  fontFace(fontFamily, files, styles) {}
 }

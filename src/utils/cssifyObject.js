@@ -1,4 +1,5 @@
 import camelToDashCase from './camelToDashCase'
+import prefixStyles from '../plugins/prefixer'
 
 // Taken directly from React core
 // https://github.com/facebook/react/blob/master/src/renderers/dom/shared/CSSProperty.js
@@ -50,17 +51,23 @@ Object.keys(isUnitlessNumber).forEach(property => {
 * Creates a valid CSS string out of an object of styles
 * @param {Object} styles - an object with CSS styles
 */
-export default (styles, unit = 'px') => {
+export default (styles, config = {}) => {
   let rules = ''
 
-  Object.keys(styles).forEach(property => {
+  const prefixedStyles = prefixStyles(styles, {}, config)
+
+  Object.keys(prefixedStyles).forEach(property => {
     if (rules !== '') {
       rules += ';'
     }
-    let value = styles[property]
+
+    let value = prefixedStyles[property]
+    // automatically adds units to CSS properties that are not unitless
+    // but are provided as a plain number
     if (!isUnitlessNumber[property] && !isNaN(parseFloat(value)) && isFinite(value) && value !== 0) {
-      value = value + 'px'
+      value = value + config.unit || 'px'
     }
+
     rules += camelToDashCase(property) + ':' + value
   })
   return rules

@@ -59,7 +59,7 @@
   "dependencies": {
     "assign-styles": "2.0.0",
     "dot-prop": "^2.2.0",
-    "inline-style-prefixer": "^0.3.3",
+    "inline-style-prefixer": "^0.5.1",
     "object-assign": "^4.0.1"
   },
   "devDependencies": {
