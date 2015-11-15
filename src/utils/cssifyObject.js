@@ -65,7 +65,7 @@ export default (styles, config = {}) => {
     // automatically adds units to CSS properties that are not unitless
     // but are provided as a plain number
     if (!isUnitlessNumber[property] && !isNaN(parseFloat(value)) && isFinite(value) && value !== 0) {
-      value = value + config.unit || 'px'
+      value = value + (config.unit || 'px')
     }
 
     rules += camelToDashCase(property) + ':' + value

@@ -1,5 +1,21 @@
 import cssifyObject from '../utils/cssifyObject'
 import Prefixer from 'inline-style-prefixer'
+import insertRule from '../utils/globalStyleSheet'
+
+// Returns the font format for a specific font source
+const getFontFormat = src => {
+  if (src.indexOf('.woff') > -1) {
+    return 'woff'
+  } else if (src.indexOf('.eof') > -1) {
+    return 'eof'
+  } else if (src.indexOf('.ttf') > -1) {
+    return 'truetype'
+  } else if (src.indexOf('.svg') > -1) {
+    return 'svg'
+  } else {
+    return false
+  }
+}
 
 export default {
 
@@ -42,59 +58,37 @@ export default {
 
   /**
    * A global StyleSheet that directly applies to your DOM.
-   * @param {Object} selectors - a set of selectors containing valid CSS styles
+   * @param {Object} config - a configuration object
    */
   toCSS(selectors, config = {}) {
     if (!selectors || selectors instanceof Object === false) {
       return false
     }
 
-    const style = document.createElement('style')
-    style.type = 'text/css'
-    if (config.media) {
-      style.media = config.media
-    }
-    if (config.id) {
-      style.id = config.id
-    }
-
-    let CSS = ''
     Object.keys(selectors).forEach(selector => {
-      if (config.scope) {
-        CSS += config.scope + ' '
-      }
-      CSS += selector + '{' + cssifyObject(selectors[selector], config) + '}'
+      insertRule((config.scope ? config.scope + ' ' : '') + selector + '{' + cssifyObject(selectors[selector], config) + '}')
     })
-
-    // Apply the CSS styles to the head
-    let node = document.createTextNode(CSS)
-    style.appendChild(node)
-    document.head.appendChild(style)
-
-    return style
   },
 
-  keyframes(frames, name, config = {}) {
-    if (!frames || frames instanceof Object === false) {
-      return name
+  /*
+  * Adds a new font family to the global StyleSheet for global usage
+  * @param {string} fontFamily - font-family for global usage
+  * @param {string|Array} files - source files refering to the font files
+  * @param {Object} styles - additional font styles including fontWeight, fontStretch, fontStyle, unicodeRange
+  */
+  fontFace(fontFamily, files, styles) {
+    if (!files) {
+      return false
     }
 
-    let style = document.createElement('style')
-    style.type = 'text/css'
+    // Generates a style object including all font information
+    let fontFace = {
+      fontFamily: "'" + fontFamily + "'",
+      src: files instanceof Array ? files.map(src => "url('" + src + "') format('" + getFontFormat(src) + "')") : files,
+      ...styles
+    }
 
-    let CSS = '@' + new Prefixer(config.userAgent).prefixedKeyframes + ' ' + name + '{'
-    Object.keys(frames).forEach(percentage => {
-      CSS += percentage + '{' + cssifyObject(frames[percentage], config) + '}'
-    })
-    CSS += '}'
-
-    // Apply the CSS styles to the head
-    let node = document.createTextNode(CSS)
-    style.appendChild(node)
-    document.head.appendChild(style)
-
-    return name
-  },
-
-  fontFace(fontFamily, files, styles) {}
+    insertRule('@font-face {' + cssifyObject(fontFace) + '}')
+    return fontFamily
+  }
 }
