@@ -70,6 +70,27 @@ export default {
     })
   },
 
+  /**
+   * Adds keyframe animations to the global StyleSheet and returns the animation name
+   * @param {Object} config - a configuration object
+   */
+  keyframes(frames, config = {}) {
+    const name = config.name ? config.name : 'animation'
+    if (!frames || frames instanceof Object === false) {
+      return name
+    }
+
+    // Generating a CSS string which can be included
+    let CSS = '@' + new Prefixer(config.userAgent).prefixedKeyframes + ' ' + name + '{'
+    Object.keys(frames).forEach(percentage => {
+      CSS += percentage + '{' + cssifyObject(frames[percentage], config) + '}'
+    })
+    CSS += '}'
+
+    insertRule(CSS)
+    return name
+  },
+  
   /*
   * Adds a new font family to the global StyleSheet for global usage
   * @param {string} fontFamily - font-family for global usage
