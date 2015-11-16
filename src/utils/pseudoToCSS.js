@@ -1,16 +1,10 @@
-import { toCSS } from '../api/StyleSheet'
 import cssifyObject from './cssifyObject'
+import insertRule, { generateUniqueSelector } from './globalStyleSheet'
 
-let globalStyleSheet = toCSS({}).sheet
-let counter = 0
 
-export default (styles, pseudo, unit) => {
-  const className = 'c' + counter.toString(36)
-  const rule = '.' + className + pseudo + '{' + cssifyObject(styles, unit) + '}'
-
-  // adds the rule to the global style sheet
-  // TODO: add global browser support (check for addRule)
-  globalStyleSheet.insertRule(rule, globalStyleSheet.cssRules.length)
+export default (styles, pseudo, config) => {
+  const className = generateUniqueSelector()
+  insertRule('.' + className + pseudo, cssifyObject(styles, config))
 
   return className
 }
