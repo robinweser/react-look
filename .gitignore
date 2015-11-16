@@ -1,7 +1,7 @@
 /node_modules/
 npm-debug.log
 demo/bundle.js
-lib
+/lib
 /look.js
 /dom.js
 /addons.js

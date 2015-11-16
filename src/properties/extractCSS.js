@@ -8,4 +8,6 @@ export default (property, className, customKey, {newProps}) => {
   } else {
     newProps.className = className
   }
+
+  return true
 }
