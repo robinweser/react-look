@@ -1,6 +1,6 @@
 import cssifyObject from '../utils/cssifyObject'
 import Prefixer from 'inline-style-prefixer'
-import insertRule from '../utils/globalStyleSheet'
+import insertRule, {generateUniqueSelector} from '../utils/globalStyleSheet'
 
 // Returns the font format for a specific font source
 const getFontFormat = src => {
@@ -75,19 +75,21 @@ export default {
    * @param {Object} config - a configuration object
    */
   keyframes(frames, config = {}) {
-    const name = config.name ? config.name : 'animation'
     if (!frames || frames instanceof Object === false) {
-      return name
+      return false
     }
 
-    // Generating a CSS string which can be included
+    const name = config.name ? config.name : generateUniqueSelector(frames)
     const selector = '@' + new Prefixer(config.userAgent).prefixedKeyframes + ' ' + name
+
+    // Generating a CSS string which can be included
     let CSS = ''
     Object.keys(frames).forEach(percentage => {
       CSS += percentage + '{' + cssifyObject(frames[percentage], config) + '}'
     })
-
+    if (name) {
     insertRule(selector, CSS)
+    }
     return name
   },
 
@@ -104,8 +106,8 @@ export default {
 
     // Generates a style object including all font information
     let fontFace = {
-      fontFamily: "'" + fontFamily + "'",
-      src: files instanceof Array ? files.map(src => "url('" + src + "') format('" + getFontFormat(src) + "')") : files,
+      fontFamily: `'${fontFamily}'`,
+      src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`) : files,
       ...styles
     }
 
