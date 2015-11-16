@@ -1,6 +1,6 @@
 import cssifyObject from '../utils/cssifyObject'
 import Prefixer from 'inline-style-prefixer'
-import insertRule from '../utils/globalStyleSheet'
+import insertRule, {generateUniqueSelector} from '../utils/globalStyleSheet'
 
 // Returns the font format for a specific font source
 const getFontFormat = src => {
@@ -66,7 +66,7 @@ export default {
     }
 
     Object.keys(selectors).forEach(selector => {
-      insertRule((config.scope ? config.scope + ' ' : '') + selector + '{' + cssifyObject(selectors[selector], config) + '}')
+      insertRule((config.scope ? config.scope + ' ' : '') + selector, cssifyObject(selectors[selector], config))
     })
   },
 
@@ -75,22 +75,24 @@ export default {
    * @param {Object} config - a configuration object
    */
   keyframes(frames, config = {}) {
-    const name = config.name ? config.name : 'animation'
     if (!frames || frames instanceof Object === false) {
-      return name
+      return false
     }
 
+    const name = config.name ? config.name : generateUniqueSelector(frames)
+    const selector = '@' + new Prefixer(config.userAgent).prefixedKeyframes + ' ' + name
+
     // Generating a CSS string which can be included
-    let CSS = '@' + new Prefixer(config.userAgent).prefixedKeyframes + ' ' + name + '{'
+    let CSS = ''
     Object.keys(frames).forEach(percentage => {
       CSS += percentage + '{' + cssifyObject(frames[percentage], config) + '}'
     })
-    CSS += '}'
-
-    insertRule(CSS)
+    if (name) {
+    insertRule(selector, CSS)
+    }
     return name
   },
-  
+
   /*
   * Adds a new font family to the global StyleSheet for global usage
   * @param {string} fontFamily - font-family for global usage
@@ -104,12 +106,12 @@ export default {
 
     // Generates a style object including all font information
     let fontFace = {
-      fontFamily: "'" + fontFamily + "'",
-      src: files instanceof Array ? files.map(src => "url('" + src + "') format('" + getFontFormat(src) + "')") : files,
+      fontFamily: `'${fontFamily}'`,
+      src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`) : files,
       ...styles
     }
 
-    insertRule('@font-face {' + cssifyObject(fontFace) + '}')
+    insertRule('@font-face', cssifyObject(fontFace))
     return fontFamily
   }
 }

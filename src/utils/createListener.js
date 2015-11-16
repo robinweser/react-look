@@ -1,4 +1,4 @@
-import State from './State'
+import State from '../api/State'
 
 /**
  * Creates an event listener to target pseudo classes
