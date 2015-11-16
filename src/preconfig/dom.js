@@ -20,6 +20,7 @@ import empty from '../properties/pseudoClasses/empty'
 import extractCSS from '../properties/extractCSS'
 import extend from '../properties/extend'
 import mediaQuery from '../properties/mediaQuery'
+import platformQuery from '../properties/platformQuery'
 
 export default {
   plugins: [
@@ -41,6 +42,7 @@ export default {
     css: extractCSS,
     ':empty': empty,
     '@media': mediaQuery,
+    '@platform': platformQuery,
     ':first-child': firstChild,
     ':last-child': lastChild,
     ':only-child': onlyChild,

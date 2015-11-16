@@ -20,6 +20,7 @@ import substr from './properties/pseudoClasses/substr'
 import extractCSS from './properties/extractCSS'
 import extend from './properties/extend'
 import mediaQuery from './properties/mediaQuery'
+import platformQuery from './properties/platformQuery'
 
 export default {
   Plugins: {
@@ -40,6 +41,7 @@ export default {
     extractCSS,
     empty,
     mediaQuery,
+    platformQuery,
     firstChild,
     lastChild,
     onlyChild,
