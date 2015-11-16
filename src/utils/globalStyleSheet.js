@@ -8,6 +8,23 @@ document.head.appendChild(style)
 
 const globalStyleSheet = style.sheet
 
-export default (rule) => {
-  globalStyleSheet.insertRule(rule, globalStyleSheet.cssRules.length)
+const addCSSRule = (sheet, selector, rule) => {
+  if (typeof sheet.insertRule === 'function') {
+    sheet.insertRule(selector + '{' + rule + '}', sheet.cssRules.length)
+  } else if (typeof sheet.addRule === 'function') {
+    sheet.addRule(selector, rule, sheet.cssRules.length)
+  }
+}
+// adds the rule to the global style sheet
+export default (selector, rule) => {
+  addCSSRule(globalStyleSheet, selector, rule)
+}
+
+let counter = 0
+
+export function generateUniqueSelector(rule) {
+  if (!rule) {
+    ++counter
+    return 'c' + counter.toString(36)
+  }
 }

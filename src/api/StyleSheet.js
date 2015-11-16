@@ -66,7 +66,7 @@ export default {
     }
 
     Object.keys(selectors).forEach(selector => {
-      insertRule((config.scope ? config.scope + ' ' : '') + selector + '{' + cssifyObject(selectors[selector], config) + '}')
+      insertRule((config.scope ? config.scope + ' ' : '') + selector, cssifyObject(selectors[selector], config))
     })
   },
 
@@ -81,16 +81,16 @@ export default {
     }
 
     // Generating a CSS string which can be included
-    let CSS = '@' + new Prefixer(config.userAgent).prefixedKeyframes + ' ' + name + '{'
+    const selector = '@' + new Prefixer(config.userAgent).prefixedKeyframes + ' ' + name
+    let CSS = ''
     Object.keys(frames).forEach(percentage => {
       CSS += percentage + '{' + cssifyObject(frames[percentage], config) + '}'
     })
-    CSS += '}'
 
-    insertRule(CSS)
+    insertRule(selector, CSS)
     return name
   },
-  
+
   /*
   * Adds a new font family to the global StyleSheet for global usage
   * @param {string} fontFamily - font-family for global usage
@@ -109,7 +109,7 @@ export default {
       ...styles
     }
 
-    insertRule('@font-face {' + cssifyObject(fontFace) + '}')
+    insertRule('@font-face', cssifyObject(fontFace))
     return fontFamily
   }
 }
