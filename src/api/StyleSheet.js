@@ -1,24 +1,10 @@
 import cssifyObject from '../utils/cssifyObject'
-import Prefixer from 'inline-style-prefixer'
-import insertRule, {generateUniqueSelector} from '../utils/globalStyleSheet'
-
-// Returns the font format for a specific font source
-const getFontFormat = src => {
-  if (src.indexOf('.woff') > -1) {
-    return 'woff'
-  } else if (src.indexOf('.eof') > -1) {
-    return 'eof'
-  } else if (src.indexOf('.ttf') > -1) {
-    return 'truetype'
-  } else if (src.indexOf('.svg') > -1) {
-    return 'svg'
-  } else {
-    return false
-  }
-}
+import prefixer from '../utils/prefixer'
+import insertRule from '../utils/globalStyleSheet'
+import generateUniqueSelector from '../utils/generateUniqueSelector'
+import getFontFormat from '../utils/getFontFormat'
 
 export default {
-
   /**
   * Generates a styleSheet with an scopeId applied to every selector
   * The scopeId refers to the Component that is responsible for resolving those styles
@@ -80,12 +66,12 @@ export default {
     }
 
     const name = config.name ? config.name : generateUniqueSelector(frames)
-    const selector = '@' + new Prefixer(config.userAgent).prefixedKeyframes + ' ' + name
+    const selector = `@${prefixer(config.userAgent).prefixedKeyframes} ${name}`
 
     // Generating a CSS string which can be included
     let CSS = ''
     Object.keys(frames).forEach(percentage => {
-      CSS += percentage + '{' + cssifyObject(frames[percentage], config) + '}'
+      CSS += `${percentage}{${cssifyObject(frames[percentage], config)}}`
     })
     if (name) {
     insertRule(selector, CSS)

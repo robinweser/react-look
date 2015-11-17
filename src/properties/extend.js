@@ -1,5 +1,6 @@
 import assignStyles from 'assign-styles'
 import warn from '../utils/warn'
+
 /**
  * Resolves multiple style objects by merging those
  * @param {Object|Array} styles - A set of style objects or a single style object

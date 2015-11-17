@@ -1,21 +1,9 @@
-import Prefixer from 'inline-style-prefixer'
+import prefixer from '../utils/prefixer'
 
-let prefixer = new Prefixer()
-
+/*
+ * Adds vendor-prefixes to properties in need of
+ * Uses inline-style-prefixer to achieve that
+ */
 export default (styles, scopeArgs, config) => {
-  let retStyles = styles
-
-  // replace userAgent if config provides alternative one
-  if (config.userAgent !== undefined) {
-    if (prefixer._userAgent !== config.userAgent) {
-      prefixer = new Prefixer(config.userAgent)
-    }
-  }
-
-  // only prefix if userAgent is not undefined
-  if (prefixer._userAgent !== undefined) {
-    retStyles = prefixer.prefix(styles)
-  }
-
-  return retStyles
+  return prefixer(config.userAgent).prefix(styles)
 }

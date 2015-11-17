@@ -19,7 +19,6 @@ export default (CustomComponent, config = {}) => {
 
     constructor() {
       super(...arguments)
-
       this.state = this.state || {}
 
       // Adds a scopeId to identify refering StyleSheets
@@ -27,10 +26,8 @@ export default (CustomComponent, config = {}) => {
       this.state._look = new Map()
     }
 
-
     render() {
       const renderedElement = stateless ? CustomComponent(this.props) : super.render() // eslint-disable-line
-
       return resolveStyles(this, renderedElement, config)
     }
   }

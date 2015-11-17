@@ -1,13 +1,9 @@
-import Prefixer from 'inline-style-prefixer'
+import prefixer from '../utils/prefixer'
 
-let prefixer = new Prefixer()
-
-export default (property, styles, customKey, {}, {userAgent}) => {
-  if (prefixer._userAgent !== userAgent) {
-    prefixer = new Prefixer(userAgent)
-  }
-
-  const browserInfo = prefixer._browserInfo
+// Allows the use of platform queries supported by browser information
+// provided by the inline-style-prefixer
+export default (property, styles, customKey, scopeArgs, {userAgent}) => {
+  const browserInfo = prefixer(userAgent)._browserInfo
   const platform = property.replace(customKey, '').trim()
 
   return browserInfo[platform] ? styles : false

@@ -1,29 +1,13 @@
-
 /**
  * Flattens an array of nested arrays to the same level
  * @param {Array} array - array that gets flatten
  */
-const flattenArray = (array) => {
+const flattenArray = array => {
   // return if input is not an array
   if (array instanceof Array !== true) {
     return array
   }
-
-  let flat = []
-
-  array.forEach(child => {
-    let catChild = child
-
-    if (child instanceof Array) {
-      catChild = flattenArray(child)
-    }
-
-    flat = flat.concat(catChild)
-  })
-
-  return flat
+  return array.map(child => child instanceof Array ? flattenArray(child) : child)
 }
 
-export {
-  flattenArray as default
-}
+export {flattenArray as default}

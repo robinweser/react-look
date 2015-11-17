@@ -16,11 +16,10 @@ export default (Component, element, key, event, callback) => {
 
   const existing = element.props[event]; // eslint-disable-line
 
-  return (target) => {
+  return target => {
     if (existing) {
       existing(target)
     }
-
     callback(target)
   }
 }

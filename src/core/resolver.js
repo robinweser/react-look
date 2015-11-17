@@ -85,7 +85,7 @@ export default function resolveStyles(Component, element, config, parent) {
       } else {
         // If global scopes are used it processed styles everytime
         // Throws warning to use scoped styles instead
-        warn(Component._lookScope + ' got enhanced by Look using global styles which might affect performance. Please always use scoped styles with the StyleSheet API.', Component, element)
+        warn(`${Component._lookScope} got enhanced by Look using global styles which might affect performance. Please always use scoped styles with the StyleSheet API.`, Component, element)
         newProps.style = processStyles(newProps.look, props, scopeArgs, config)
       }
     }

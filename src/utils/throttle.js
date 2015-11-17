@@ -1,21 +1,17 @@
-export default (fn, threshhold = 250, scope) => {
-  let last
-  let deferTimer
-  return function() {
-    let context = scope || this
+const threshhold = 250
 
-    let now = +new Date
-    let args = arguments
-    if (last && now < last + threshhold) {
-      // hold on to it
-      clearTimeout(deferTimer)
-      deferTimer = setTimeout(() => {
-        last = now
-        fn.apply(context, args)
-      }, threshhold)
-    } else {
-      last = now
-      fn.apply(context, args)
+/**
+ * A throttle method to throttle browser event triggering
+ * Delay is set to 250 on default
+ * @param {function} callback - Function that gets throttled
+ */
+export default fn => {
+  let wait = false
+  return () => {
+    if (!wait) {
+      fn.call()
+      wait = true
+      setTimeout(() => wait = false, threshhold)
     }
   }
 }

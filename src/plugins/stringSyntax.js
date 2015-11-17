@@ -44,7 +44,7 @@ export default (styles, {Component, element}) => {
   let retStyles = styles
 
   if (Component.styles) {
-    warn('The string syntax look="' + element.props.look + '" within ' + Component._lookScope + ' is deprecated. Please use direct mapping instead. This will be removed in Version 1.0.0.', Component, element)
+    warn(`The string syntax look="${element.props.look}" within ${Component._lookScope} is deprecated. Please use direct mapping instead. This will be removed in Version 1.0.0.`, Component, element)
     retStyles = extractStyles(element.props, Component.styles)
   }
 
