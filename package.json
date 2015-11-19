@@ -1,7 +1,7 @@
 {
   "name": "react-look",
-  "version": "0.5.2",
-  "description": "Processable, dynamic & stateful Component Styling for React & React Native",
+  "version": "0.6.0",
+  "description": "Advanced & Dynamic Component Styling for React & React Native",
   "main": "look.js",
   "files": [
     "LICENSE",
@@ -33,7 +33,7 @@
     "package": "npm run transpile && node build-package.js",
     "pretest": "npm run transpile",
     "release": "npm run package && npm publish",
-    "test": "mocha --recursive --compilers js:babel/register",
+    "test": "npm run lint && mocha --recursive --compilers js:babel/register",
     "test:coverage": "istanbul cover _mocha -- --recursive --compilers js:babel/register",
     "test:watch": "mocha --recursive --compilers js:babel/register -w",
     "transpile": "npm run clean && babel src --out-dir lib"
@@ -76,15 +76,15 @@
     "istanbul": "^0.3.22",
     "minifyify": "^7.1.0",
     "mocha": "^2.3.3",
-    "react": "0.14.0",
-    "react-dom": "0.14.0",
+    "react": "0.14.3",
+    "react-dom": "0.14.3",
     "rimraf": "^2.4.3",
     "sinon": "^1.17.1",
     "sinon-chai": "^2.8.0"
   },
   "peerDependencies": {
-    "react-native": "^0.11.0",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react-native": "^0.14.0",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   }
 }
