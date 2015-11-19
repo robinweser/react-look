@@ -24,7 +24,7 @@ const config = {
 	// any special setting used by plugins
 	// e.g. mixin definitions or a userAgent
 	// used by the autoprefixer
-	mixins : {
+	mixins: {
 		':hover': Mixins.hover,
 		':last-child': Mixins.lastChild,
 		'@media': Mixins.mediaQuery
