@@ -3,13 +3,13 @@ As the `mixin`-plugin is basically the most important as it provides any special
 <br>
 .Mixins can be nested multiple times to achieve e.g. `:focus:hover`
 ## Table of contents
-* [Pseudo classes](#pseudoclasses)
-* [Media queries](#mediaqueries)
-* [Platform queries](#platformqueries)
-* [Stateful Conditions](#statefulconditions)
-* [Extract CSS](#extractcss)
+* [Pseudo classes](#pseudo-classes)
+* [Media queries](#media-queries)
+* [Platform queries](#platform-queries)
+* [Stateful Conditions](#stateful-conditions)
+* [Extract CSS](#extract-css)
 * [Extend](#extend)
-* [Pseudo to CSS (polyfill)](#pseudotocss)
+* [Pseudo to CSS (polyfill)](#pseudo-to-css)
 
 ## Pseudo classes
 ```javascript
@@ -284,7 +284,12 @@ Just use the new spread operator `...`.
 import Look, { StyleSheet } from 'react-look/dom'
 import { Mixins } from 'react-look/addons'
 
-const Input = () => <div><input look={styles} placeholder='red placeholder'/></div>
+const Input = () => (
+	<div>
+		<input look={styles} placeholder='red placeholder'/>
+	</div>
+)
+
 const styles = StyleSheet.create(Input, {
 	color: 'blue',
 	'::-webkit-input-placeholder': {

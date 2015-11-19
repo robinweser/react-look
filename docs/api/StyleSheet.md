@@ -4,8 +4,8 @@ A helper to create scoped styles and global CSS StyleSheets. This helps to impro
 ## Methods
 - [create](#createcomponent-styles)
 - [toCSS](#tocssstyles--config)
-- [keyframes](#keyframes-frames--config)
-- [fontFace](#fontface-fontfamily-files--properties)
+- [keyframes](#keyframesframes--config)
+- [fontFace](#fontfacefontfamily-files--properties)
 
 
 ### `create(Component, styles)`

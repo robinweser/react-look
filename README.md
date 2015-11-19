@@ -11,8 +11,8 @@ It simplyfies how you are styling your Components and comes in two different con
 # Features
 - ECMAScript 2015 (ES6) Classes & `React.createClass`
 - stateless Components
-- [15 pseudo classes](docs/plugins/Mixin.md#pseudoclasses.md)
-- [stateful styles](docs/plugins/Mixin.md#statefulconditions.md) (condition based)
+- [15 pseudo classes](docs/plugins/Mixin.md#pseudo-classes.md)
+- [stateful styles](docs/plugins/Mixin.md#stateful-conditions.md) (condition based)
 - nesting
 - [plugins](docs/Plugins.md)
 - [extending](docs/plugins/Mixin.md#extend)
@@ -22,16 +22,16 @@ It simplyfies how you are styling your Components and comes in two different con
 The `react-look/dom` package also adds additional DOM-specific custom properties as well as a vendor-prefixing plugin.<br>
  ![Gzipped Size](https://img.shields.io/badge/gzipped-~14k-blue.svg)
 
-- [media queries](docs/plugins/Mixin.md#mediaqueries.md)
-- [platform queries](docs/plugins/Mixin.md#platformqueries.md)
-- [30 pseudo classes](docs/plugins/Mixin.md#pseudoclasses.md)
+- [media queries](docs/plugins/Mixin.md#media-queries.md)
+- [platform queries](docs/plugins/Mixin.md#platform-queries.md)
+- [30 pseudo classes](docs/plugins/Mixin.md#pseudo-classes.md)
 - [vendor prefixing](docs/plugins/Prefixer.md)
-- [pseudo to CSS polyfill](docs/plugins/Mixin.md#pseudotocss)
+- [pseudo to CSS polyfill](docs/plugins/Mixin.md#pseudo-to-css)
 - [font-face API](docs/api/StyleSheet.md#font-face)
 - [keyframes API](docs/api/StyleSheet.md#keyframes)
 - [CSS API](docs/api/StyleSheet.md##tocssstyles--scope-media-id)
 
-### [Supported pseudo classes](docs/plugins/Mixin.md#supportedpseudoclasses)
+### [Supported pseudo classes](docs/plugins/Mixin.md#supported-pseudo-classes)
 # Benefit
 Using inline styles instead of static CSS files has a lot of positive side-effects. The most important one is **dynamic behavior**.<br>Remember you're using JavaScript now. Your styles no longer belong to a static file but are just a plain javascript object which can be manipulated, extended or iterated to fit your very own needs.
 
@@ -140,7 +140,7 @@ npm install
 npm run demo
 ```
 
-# [Documentation](docs/Docs.md#tableofcontents)
+# [Documentation](docs/Docs.md#table-of-contents)
 The documentation gives huge information on how to do all kind of stuff. It also serves detailed information on how to use plugins, use full power of the build-in ones and even how to write your own.<br>
 
 * [Usage Guides](docs/guides/)
