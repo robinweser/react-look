@@ -19,7 +19,7 @@ It simplyfies how you are styling your Components and comes in two different con
 - modular & themeable
 - [State API](docs/api/State.md)
 
-The `react-look/dom` package also adds additional DOM-specific custom properties as well as a vendor-prefixing plugin.<br>
+The `react-look/dom` package also adds additional DOM-specific mixins as well as a vendor-prefixing plugin.<br>
  ![Gzipped Size](https://img.shields.io/badge/gzipped-~14k-blue.svg)
 
 - [media queries](docs/plugins/Mixin.md#media-queries.md)
