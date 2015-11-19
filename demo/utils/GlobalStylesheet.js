@@ -1,16 +1,12 @@
-import {Global} from '../../src/index';
-import {Processors} from 'dynamic-style-sheets';
+import { StyleSheet } from '../../lib/dom'
 
-let sheet = new Global({
-	'*' : {
-		padding: 0,
-		margin: 0,
-		fontFamily : '"Lato", sans-serif',
-		fontWeight: 300,
-		boxSizing : 'border-box',
-		userSelect : 'none'
-	}
-});
-
-sheet.process(Processors.Prefixer);
-sheet.apply();
+StyleSheet.toCSS({
+  '*': {
+    padding: 0,
+    margin: 0,
+    fontFamily: '"Lato", sans-serif',
+    fontWeight: 300,
+    boxSizing: 'border-box',
+    userSelect: 'none'
+  }
+})

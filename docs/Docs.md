@@ -1,22 +1,18 @@
 # Documentation
 I try my best to keep all docs updated. If you have any recommendations or improvements please tell me or create a pull request.
 
-## Table of Contents
-1. [Getting started](GettingStarted.md)
-2. [Under the hood](UnderTheHood.md)
-3. [Pseudo classes](PseudoClasses.md)
-4. [Media queries](MediaQueries.md)
-5. [Stateful conditions](StatefulConditions.md)
-6. [Processors](Processors.md)
-7. [Mixins](Mixins.md) 
-8. [FAQ](FAQ.md) 
+## Table of contents
+1. [Intro](Intro.md)
+2. [Plugins](Plugins.md)
+3. [FAQ](FAQ.md)
 
-### API
+#### API
 1. [Look](api/Look.md)
-2. [Global](api/Global.md)
-3. [State](api/State.md)
-4. [matchMedia](api/matchMedia.md)
+2. [StyleSheet](api/StyleSheet.md)
+4. [State](api/State.md)
 
-## License
-Full documentation of react-look is licensed under Creative Common License.<br>
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />
+#### Plugins
+1. [Mixins](plugins/Mixin.md)
+2. [Prefixer](plugins/Prefixer.md)
+3. [Stateful Values](plugins/StatefulValue.md)
+4. [Alternative Values](plugins/AlternativeValue.md)

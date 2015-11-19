@@ -1,30 +1,16 @@
-import Pseudo from './Pseudo.jsx';
-import Media from '../../examples/Media.jsx';
-import Condition from '../../examples/Condition.jsx';
-import DemoContainer from './DemoContainer.jsx';
-import Look from '../../src/index';
-import React from 'react';
+import Pseudo from './Pseudo.jsx'
+import Media from '../../examples/Media.jsx'
+import Condition from '../../examples/Condition.jsx'
+import DemoContainer from './DemoContainer.jsx'
+import Look, {StyleSheet} from '../../lib/dom'
+import React, {Component} from 'react'
 
-class Overview extends React.Component {
-  constructor() {
-    super(...arguments);
-  }
-
-  look() {
-    return {
-      marginTop: 20,
-      marginBottom: 30,
-      fontSize: 40,
-      fontWeight: 600,
-      textAlign: 'center',
-      color: 'rgb(82, 67, 203)'
-    }
-  }
-
+@Look
+export default class Overview extends Component {
   render() {
     return (
       <div>
-        <h1 look>Look Examples</h1>
+        <h1 look={styles}>Look Examples</h1>
         <DemoContainer group title="1. Pseudo Classes">
           <Pseudo/>
         </DemoContainer>
@@ -42,5 +28,12 @@ class Overview extends React.Component {
     )
   }
 }
-export
-default Look(Overview);
+
+const styles = StyleSheet.create(Overview, {
+    marginTop: 20,
+    marginBottom: 30,
+    fontSize: 40,
+    fontWeight: 600,
+    textAlign: 'center',
+    color: 'rgb(82, 67, 203)'
+})

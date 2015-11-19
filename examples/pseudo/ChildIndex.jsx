@@ -1,50 +1,20 @@
-import React from 'react';
-import Look from '../../src/index';
+import React, {Component, Children, PropTypes} from 'react'
+import Look, {StyleSheet} from '../../lib/dom'
 
-class ChildIndex extends React.Component {
-  constructor() {
-    super(...arguments);
+@Look
+export default class ChildIndex extends Component {
+  static defaultProps = {
+    items: [1,2,3,4,5,6,7,8,9,10]
   }
 
-  look() {
-    return {
-      listItem: {
-        color: 'darkgray',
-        listStyleType: 'none',
-        ':nth-child(odd)': {
-          backgroundColor: 'lightGray',
-          color: 'blue'
-        },
-        ':last-child': {
-          color: 'red'
-        },
-        ':first-child': {
-          color: 'yellow'
-        },
-        ':nth-of-type(3)': {
-          backgroundColor: 'rgba(30, 50, 60, 0.6)'
-        },
-        ':nth-of-type(3n+5)'  :{
-          backgroundColor:'rgba(141, 195, 131, 0.4)'
-        }
-      }
-    }
+  static propTypes = {
+    items: PropTypes.array.isRequired
   }
-
   render() {
     //create a small list of items to demonstrate nth-child, et cetera
-    var listItems = [];
-    var i;
-
-    for (i = 1; i <= this.props.items; ++i) {
-      listItems.push('List Item ' + i);
-    }
-
-    var list = listItems.map(text => {
-      return (
-        <li look="listItem">{text}</li>
-      )
-    });
+    let list = this.props.items.map((text,index) => {
+      return <li look={styles} key={'.' + index}>ListItem {text}</li>
+    })
 
     return (
       <div>
@@ -55,7 +25,24 @@ class ChildIndex extends React.Component {
     )
   }
 }
-ChildIndex.defaultProps = {
-  items: 10
-}
-export default Look(ChildIndex);
+
+const styles = StyleSheet.create(ChildIndex, {
+    color: 'darkgray',
+    listStyleType: 'none',
+    ':nth-child(odd)': {
+      backgroundColor: 'lightGray',
+      color: 'blue'
+    },
+    ':last-child': {
+      color: 'red'
+    },
+    ':first-child': {
+      color: 'yellow'
+    },
+    ':nth-of-type(3)': {
+      backgroundColor: 'rgba(30, 50, 60, 0.6)'
+    },
+    ':nth-of-type(3n+5)'  :{
+      backgroundColor:'rgba(141, 195, 131, 0.4)'
+    }
+})

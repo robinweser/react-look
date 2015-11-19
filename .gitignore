@@ -1,4 +1,10 @@
 /node_modules/
 npm-debug.log
 demo/bundle.js
-tools
+/lib
+/look.js
+/dom.js
+/addons.js
+/core.js
+coverage
+addons/
