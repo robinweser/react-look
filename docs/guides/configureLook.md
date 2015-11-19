@@ -10,21 +10,22 @@ e.g. the **Custom Property**-Plugin which lets you define custom style propertie
 > Check out the given [preconfigurations](../../src/preconfig) for React (DOM) and React Native
 
 ```javascript
-import {CustomProperty, Plugin} from 'react-look/addons'
+import {Mixins, Plugins} from 'react-look/addons'
 
 const config = {
 	// a list of used plugins ordered by
 	// execution order
 	plugins: [
-	Plugin.CustomProperties
+		Plugin.mixin
 	],
 
 	// any special setting used by plugins
-	// e.g. custom property definitions or a userAgent
+	// e.g. mixin definitions or a userAgent
 	// used by the autoprefixer
-	customProperties : {
-		':hover': CustomProperty.hover,
-		':last-child': CustomProperty.lastChild
+	mixins : {
+		':hover': Mixins.hover,
+		':last-child': Mixins.lastChild,
+		'@media': Mixins.mediaQuery
 	},
 	userAgent: 'Mozilla/5.0 ...'
 }

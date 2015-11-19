@@ -1,16 +1,18 @@
 # Documentation
 I try my best to keep all docs updated. If you have any recommendations or improvements please tell me or create a pull request.
 
-## Table of Contents
+## Table of contents
 1. [Intro](Intro.md)
-2. [Pseudo classes](PseudoClasses.md)
-3. [Media queries (DOM-only)](MediaQueries.md)
-4. [Stateful conditions](StatefulConditions.md)
-5. [Vendor Prefixes (DOM-only)](VendorPrefixes.md)
-6. [Plugins](Plugins.md)
-7. [FAQ](FAQ.md)
+2. [Plugins](Plugins.md)
+3. [FAQ](FAQ.md)
 
-### API
+#### API
 1. [Look](api/Look.md)
 2. [StyleSheet](api/StyleSheet.md)
 4. [State](api/State.md)
+
+#### Plugins
+1. [Mixins](plugins/Mixin.md)
+2. [Prefixer](plugins/Prefixer.md)
+3. [Stateful Values](plugins/StatefulValue.md)
+4. [Alternative Values](plugins/AlternativeValue.md)
