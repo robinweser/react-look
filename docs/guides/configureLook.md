@@ -16,7 +16,9 @@ const config = {
 	// a list of used plugins ordered by
 	// execution order
 	plugins: [
-		Plugin.mixin
+		Plugins.mixin,
+		Plugins.alternativeValue,
+		Plugins.prefixer
 	],
 
 	// any special setting used by plugins
@@ -27,7 +29,8 @@ const config = {
 		':last-child': Mixins.lastChild,
 		'@media': Mixins.mediaQuery
 	},
-	userAgent: 'Mozilla/5.0 ...'
+	userAgent: 'Mozilla/5.0 ...',
+	unit: 'px'
 }
 ```
 
@@ -38,7 +41,7 @@ import Look from 'react-look/core'
 
 // Basically just a wrapper function
 // calling Look with a specific config object
-export default (...args) => {
-	return Look(...args, config)
+export default (Component) => {
+	return Look(Component, config)
 }
 ```
