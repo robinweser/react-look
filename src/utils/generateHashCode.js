@@ -5,14 +5,14 @@
  */
 export default str => {
   let hash = 0
-  let i
+  let iterator
   let char
   const length = str.length
   if (length === 0) {
     return hash
   }
-  for (i = 0; i < length; ++i) {
-    char = str.charCodeAt(i)
+  for (iterator = 0; iterator < length; ++iterator) {
+    char = str.charCodeAt(iterator)
     hash = ((hash << 5) - hash) + char
     hash |= 0
   }

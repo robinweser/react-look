@@ -1,4 +1,4 @@
-import extend from '../../lib/properties/extend'
+import extend from '../../lib/mixins/extend'
 import { expect } from 'chai'
 
 describe('Extending styles', () => {

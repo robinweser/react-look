@@ -1,6 +1,6 @@
 // Taken directly from React core
 // https://github.com/facebook/react/blob/master/src/renderers/dom/shared/CSSProperty.js
-let unitlessProperties = {
+const unitlessProperties = { // eslint-disable-line
   animationIterationCount: true,
   boxFlex: true,
   boxFlexGroup: true,

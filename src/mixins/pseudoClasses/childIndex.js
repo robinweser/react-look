@@ -27,7 +27,7 @@ const getChildIndex = (parent, element) => {
   return index
 }
 
-const firstChild = (property, styles, customKey, {parent, element}) => {
+const firstChild = (property, styles, mixinKey, {parent, element}) => {
   if (parent) {
     if (parent.props.children[0] === element) {
       return styles
@@ -42,7 +42,7 @@ const firstChild = (property, styles, customKey, {parent, element}) => {
   return false
 }
 
-const lastChild = (property, styles, customKey, {parent, element}) => {
+const lastChild = (property, styles, mixinKey, {parent, element}) => {
   if (parent) {
     const children = parent.props.children
     if (children[children.length - 1] === element) {
@@ -61,7 +61,7 @@ const lastChild = (property, styles, customKey, {parent, element}) => {
   return false
 }
 
-const onlyChild = (property, styles, customKey, {parent, element}) => {
+const onlyChild = (property, styles, mixinKey, {parent, element}) => {
   if (parent && parent.props.children.length === 1) {
     return styles
   }
@@ -74,7 +74,7 @@ const onlyChild = (property, styles, customKey, {parent, element}) => {
   return false
 }
 
-const nthChild = (property, styles, customKey, {parent, element}) => {
+const nthChild = (property, styles, mixinKey, {parent, element}) => {
   const expression = getPseudoExpression(property)
   const childIndex = getChildIndex(parent, element)
   if (childIndex === undefined) {
@@ -83,7 +83,7 @@ const nthChild = (property, styles, customKey, {parent, element}) => {
   return evalNthExpression(expression, childIndex + 1) ? styles : false
 }
 
-const nthLastChild = (property, styles, customKey, {parent, element}) => {
+const nthLastChild = (property, styles, mixinKey, {parent, element}) => {
   const expression = getPseudoExpression(property)
   const childIndex = getChildIndex(parent, element)
   if (childIndex === undefined) {

@@ -16,7 +16,6 @@ const resolvePlugins = (styles, scopeArgs, config) => {
   config.plugins.forEach(plugin => {
     retStyles = plugin(retStyles, scopeArgs, config)
   })
-
   return retStyles
 }
 
@@ -32,7 +31,7 @@ const processStyles = (styles, props, scopeArgs, config) => {
 
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
-  if (config.plugins) {
+  if (config.plugins && config.plugins instanceof Array) {
     newStyles = resolvePlugins(newStyles, scopeArgs, config)
   }
 

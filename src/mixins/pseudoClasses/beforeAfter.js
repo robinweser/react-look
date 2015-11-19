@@ -4,9 +4,11 @@ import { createElement } from 'react'
  * Creates a new image element as child of a pseudo element
  * @param {string} content - value including a valid url path to the image
  */
-const createPseudoImage = content => createElement('img', {
+const createPseudoImage = content => {
+  return createElement('img', {
     src: content.split('url(')[1].substr(0, content.length - 5)
   })
+}
 
 /**
  * Creates a new pseudo element
@@ -37,11 +39,11 @@ const initChildren = props => {
  * Adds a element before/after current element
  */
 export default {
-  before: (property, styles, customKey, {newProps}) => {
+  before: (property, styles, mixinKey, {newProps}) => {
     initChildren(newProps)
     newProps.children.unshift(createPseudoElement(styles))
   },
-  after: (property, styles, customKey, {newProps}) => {
+  after: (property, styles, mixinKey, {newProps}) => {
     initChildren(newProps)
     newProps.children.push(createPseudoElement(styles))
   }

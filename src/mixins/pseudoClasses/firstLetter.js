@@ -1,7 +1,7 @@
 import { createElement } from 'react'
 
 // Styles the first letter of an element
-export default (property, styles, customKey, {newProps}) => {
+export default (property, styles, mixinKey, {newProps}) => {
   let children = newProps.children
 
   if (typeof children === 'number') {

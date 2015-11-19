@@ -1,14 +1,15 @@
 // Returns the font format for a specific font source
 export default src => {
+  let format
   if (src.indexOf('.woff') > -1) {
-    return 'woff'
+    format = 'woff'
   } else if (src.indexOf('.eof') > -1) {
-    return 'eof'
+    format = 'eof'
   } else if (src.indexOf('.ttf') > -1) {
-    return 'truetype'
+    format = 'truetype'
   } else if (src.indexOf('.svg') > -1) {
-    return 'svg'
-  } else {
-    return false
+    format = 'svg'
   }
+
+  return format
 }

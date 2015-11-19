@@ -5,7 +5,7 @@ const matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
 
 // Evaluates if a media condition is fulfilled by using window.matchMedia
 // NOTE: This won't work on server-side by default
-export default (property, styles, customKey, {Component}) => {
+export default (property, styles, mixinKey, {Component}) => {
   // Check if browser supports window.matchMedia
   if (matchMedia !== undefined) {
     if (!Component._mediaQueryListener) {
@@ -26,7 +26,7 @@ export default (property, styles, customKey, {Component}) => {
       }
     }
 
-    return matchMedia(property.replace(customKey, '').trim()).matches ? styles : false
+    return matchMedia(property.replace(mixinKey, '').trim()).matches ? styles : false
   }
 
   warn(`Failed evaluating media query: ${property}. Your environment is not able to use window.matchMedia.`)

@@ -1,7 +1,6 @@
 // Evaluates if an <a>-tag's id matches fragment identifier of the URI of the document
-export default (property, styles, customKey, {Component, element}) => {
+export default (property, styles, mixinKey, {Component, element}) => {
   if (element.id !== undefined) {
-
     if (!Component._locationHrefListener) {
       Component._locationHrefListener = () => {
         Component.forceUpdate()

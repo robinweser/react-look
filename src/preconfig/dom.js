@@ -1,36 +1,36 @@
 import alternativeValue from '../plugins/alternativeValue'
 import statefulValue from '../plugins/statefulValue'
-import customProperty from '../plugins/customProperty'
+import mixin from '../plugins/mixin'
 import prefixer from '../plugins/prefixer'
 import stringSyntax from '../plugins/stringSyntax'
 
-import { equal, unEqual, greater, less, greaterThan, lessThan } from '../properties/condition'
-import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../properties/pseudoClasses/childIndex'
-import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../properties/pseudoClasses/childTypeIndex'
-import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../properties/pseudoClasses/input'
-import { hover, active, focus } from '../properties/pseudoClasses/userAction'
-import { before, after } from '../properties/pseudoClasses/beforeAfter'
-import lang from '../properties/pseudoClasses/lang'
-import target from '../properties/pseudoClasses/target'
-import blank from '../properties/pseudoClasses/blank'
-import firstLetter from '../properties/pseudoClasses/firstLetter'
-import contains from '../properties/pseudoClasses/contains'
-import substr from '../properties/pseudoClasses/substr'
-import empty from '../properties/pseudoClasses/empty'
-import extractCSS from '../properties/extractCSS'
-import extend from '../properties/extend'
-import mediaQuery from '../properties/mediaQuery'
-import platformQuery from '../properties/platformQuery'
+import { equal, unEqual, greater, less, greaterThan, lessThan } from '../mixins/condition'
+import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../mixins/pseudoClasses/childIndex'
+import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../mixins/pseudoClasses/childTypeIndex'
+import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../mixins/pseudoClasses/input'
+import { hover, active, focus } from '../mixins/pseudoClasses/userAction'
+import { before, after } from '../mixins/pseudoClasses/beforeAfter'
+import lang from '../mixins/pseudoClasses/lang'
+import target from '../mixins/pseudoClasses/target'
+import blank from '../mixins/pseudoClasses/blank'
+import firstLetter from '../mixins/pseudoClasses/firstLetter'
+import contains from '../mixins/pseudoClasses/contains'
+import substr from '../mixins/pseudoClasses/substr'
+import empty from '../mixins/pseudoClasses/empty'
+import extractCSS from '../mixins/extractCSS'
+import extend from '../mixins/extend'
+import mediaQuery from '../mixins/mediaQuery'
+import platformQuery from '../mixins/platformQuery'
 
 export default {
   plugins: [
     stringSyntax,
-    customProperty,
+    mixin,
     alternativeValue,
     statefulValue,
     prefixer
   ],
-  customProperties: {
+  mixins: {
     // NOTE: Ordner matters!
     '>=': greaterThan,
     '<=': lessThan,

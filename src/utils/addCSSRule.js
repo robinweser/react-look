@@ -1,4 +1,4 @@
-let CSSRules = new Set()
+const CSSRules = new Set()
 
 /**
  * Adds a rule to the global StyleSheet

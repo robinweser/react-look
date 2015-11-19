@@ -2,11 +2,11 @@ import { createElement } from 'react'
 import getPseudoExpression from '../../utils/getPseudoExpression'
 
 // Evaluates if a element contains a given string
-export default (property, styles, customKey, {newProps}) => {
+export default (property, styles, mixinKey, {newProps}) => {
   let children = newProps.children
 
   if ( (typeof children === 'string' || typeof children === 'number') ) {
-    let newChildren = []
+    const newChildren = []
 
     const matches = children.match(new RegExp(getPseudoExpression(property), 'g'))
     if (!matches) {
@@ -25,5 +25,6 @@ export default (property, styles, customKey, {newProps}) => {
     newChildren.push(children)
     newProps.children = newChildren
   }
+
   return false
 }

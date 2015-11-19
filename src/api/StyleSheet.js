@@ -4,6 +4,8 @@ import insertRule from '../utils/globalStyleSheet'
 import generateUniqueSelector from '../utils/generateUniqueSelector'
 import getFontFormat from '../utils/getFontFormat'
 
+const fontProperties = ['fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange']
+
 export default {
   /**
   * Generates a styleSheet with an scopeId applied to every selector
@@ -74,7 +76,7 @@ export default {
       CSS += `${percentage}{${cssifyObject(frames[percentage], config)}}`
     })
     if (name) {
-    insertRule(selector, CSS)
+      insertRule(selector, CSS)
     }
     return name
   },
@@ -83,18 +85,22 @@ export default {
   * Adds a new font family to the global StyleSheet for global usage
   * @param {string} fontFamily - font-family for global usage
   * @param {string|Array} files - source files refering to the font files
-  * @param {Object} styles - additional font styles including fontWeight, fontStretch, fontStyle, unicodeRange
+  * @param {Object} properties - additional font properties including fontWeight, fontStretch, fontStyle, unicodeRange
   */
-  fontFace(fontFamily, files, styles) {
+  fontFace(fontFamily, files, properties) {
     if (!files) {
       return false
     }
 
     // Generates a style object including all font information
-    let fontFace = {
+    const fontFace = {
       fontFamily: `'${fontFamily}'`,
-      src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`) : files,
-      ...styles
+      src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`) : files
+    }
+
+    // Filter the properties to only include valid properties
+    if (properties && properties instanceof Object) {
+      Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => fontFace[fontProp] = properties[fontProp])
     }
 
     insertRule('@font-face', cssifyObject(fontFace))

@@ -1,4 +1,4 @@
-import { hover, focus, active } from '../../../lib/properties/pseudoClasses/userAction'
+import { hover, focus, active } from '../../../lib/mixins/pseudoClasses/userAction'
 import State from '../../../lib/api/State'
 import { expect } from 'chai'
 

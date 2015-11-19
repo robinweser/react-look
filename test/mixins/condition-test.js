@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { equal, unEqual, greater, less, greaterThan, lessThan } from '../../lib/properties/condition'
+import { equal, unEqual, greater, less, greaterThan, lessThan } from '../../lib/mixins/condition'
 
 describe('Evaluating conditions', () => {
   let args = {

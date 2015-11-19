@@ -1,4 +1,4 @@
-import hasLang from '../../../lib/properties/pseudoClasses/lang'
+import hasLang from '../../../lib/mixins/pseudoClasses/lang'
 import { expect } from 'chai'
 
 describe('Evaluating lang-attribute', () => {

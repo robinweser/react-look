@@ -1,4 +1,4 @@
-import isEmpty from '../../../lib/properties/pseudoClasses/empty'
+import isEmpty from '../../../lib/mixins/pseudoClasses/empty'
 import { expect } from 'chai'
 
 describe('Evaluating empty elements', () => {

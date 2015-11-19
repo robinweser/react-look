@@ -1,26 +1,26 @@
 import alternativeValue from '../plugins/alternativeValue'
 import statefulValue from '../plugins/statefulValue'
-import customProperty from '../plugins/customProperty'
+import mixin from '../plugins/mixin'
 import stringSyntax from '../plugins/stringSyntax'
 
-import { equal, unEqual, bigger, smaller, biggerThan, smallerThan } from '../properties/condition'
-import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../properties/pseudoClasses/childIndex'
-import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../properties/pseudoClasses/childIndex'
-import empty from '../properties/pseudoClasses/empty'
-import firstLetter from '../properties/pseudoClasses/firstLetter'
-import contains from '../properties/pseudoClasses/contains'
-import substr from '../properties/pseudoClasses/substr'
-import blank from '../properties/pseudoClasses/blank'
-import extend from '../properties/extend'
+import { equal, unEqual, bigger, smaller, biggerThan, smallerThan } from '../mixins/condition'
+import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../mixins/pseudoClasses/childIndex'
+import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../mixins/pseudoClasses/childIndex'
+import empty from '../mixins/pseudoClasses/empty'
+import firstLetter from '../mixins/pseudoClasses/firstLetter'
+import contains from '../mixins/pseudoClasses/contains'
+import substr from '../mixins/pseudoClasses/substr'
+import blank from '../mixins/pseudoClasses/blank'
+import extend from '../mixins/extend'
 
 export default {
   plugins: [
     stringSyntax,
-    customProperty,
+    mixin,
     alternativeValue,
     statefulValue
   ],
-  customProperties: {
+  mixins: {
     // NOTE: Ordner matters!
     '>=': biggerThan,
     '<=': smallerThan,

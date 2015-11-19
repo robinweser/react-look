@@ -5,28 +5,28 @@ import splitCondition from '../utils/splitCondition'
  * Therefore it uses Component which gets provided as part of arguments to validate props/state
  */
 export default {
-  greaterThan: (property, styles, customKey, {Component}) => {
-    const condition = splitCondition(property, customKey, Component)
+  greaterThan: (property, styles, mixinKey, {Component}) => {
+    const condition = splitCondition(property, mixinKey, Component)
     return condition && condition.left >= condition.right ? styles : false
   },
-  lessThan: (property, styles, customKey, {Component}) => {
-    const condition = splitCondition(property, customKey, Component)
+  lessThan: (property, styles, mixinKey, {Component}) => {
+    const condition = splitCondition(property, mixinKey, Component)
     return condition && condition.left <= condition.right ? styles : false
   },
-  unEqual: (property, styles, customKey, {Component}) => {
-    const condition = splitCondition(property, customKey, Component)
+  unEqual: (property, styles, mixinKey, {Component}) => {
+    const condition = splitCondition(property, mixinKey, Component)
     return condition && condition.left != condition.right ? styles : false // eslint-disable-line eqeqeq
   },
-  greater: (property, styles, customKey, {Component}) => {
-    const condition = splitCondition(property, customKey, Component)
+  greater: (property, styles, mixinKey, {Component}) => {
+    const condition = splitCondition(property, mixinKey, Component)
     return condition && condition.left > condition.right ? styles : false
   },
-  less: (property, styles, customKey, {Component}) => {
-    const condition = splitCondition(property, customKey, Component)
+  less: (property, styles, mixinKey, {Component}) => {
+    const condition = splitCondition(property, mixinKey, Component)
     return condition && condition.left < condition.right ? styles : false
   },
-  equal: (property, styles, customKey, {Component}) => {
-    const condition = splitCondition(property, customKey, Component)
+  equal: (property, styles, mixinKey, {Component}) => {
+    const condition = splitCondition(property, mixinKey, Component)
     return condition && condition.left == condition.right ? styles : false // eslint-disable-line eqeqeq
   }
 }
