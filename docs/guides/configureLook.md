@@ -5,7 +5,7 @@ Luckily, it is really easy to create a custom configured Look yourself. You just
 
 Basically you will set an array of plugins which will perform in the exact same order as specified.
 Plugins might also require some special settings within your config object.
-e.g. the **Custom Property**-Plugin which lets you define custom style properties (used to implement pseudo classes) uses the key `customProperties` setting to define those.
+e.g. the **Mixin**-Plugin which lets you define custom style properties (used to implement pseudo classes) uses the key `mixin` setting to define those.
 
 > Check out the given [preconfigurations](../../src/preconfig) for React (DOM) and React Native
 
