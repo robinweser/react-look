@@ -4,7 +4,15 @@ import prefixer from '../utils/prefixer'
 // provided by the inline-style-prefixer
 export default (property, styles, mixinKey, scopeArgs, {userAgent}) => {
   const browserInfo = prefixer(userAgent)._browserInfo
-  const platform = property.replace(mixinKey, '').trim()
+  const platforms = property.replace(mixinKey, '').trim().split(' ')
 
-  return browserInfo[platform] ? styles : false
+  let isPlatform = false
+
+  platforms.forEach(platform => {
+    if (browserInfo[platform.trim()]) {
+      isPlatform = true
+    }
+  })
+
+  return isPlatform ? styles : false
 }
