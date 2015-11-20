@@ -1,7 +1,8 @@
 # Mixins
 As the `mixin`-plugin is basically the most important as it provides any special key that is not part of the inline style standard *(such as pseudo classes, media queries, or stateful conditions)* this will bring some detail information of all existing mixins.
 <br>
-.Mixins can be nested multiple times to achieve e.g. `:focus:hover`
+Mixins can be nested multiple times to achieve e.g. `:focus:hover`
+
 ## Table of contents
 * [Pseudo classes](#pseudo-classes)
 * [Media queries](#media-queries)
@@ -127,7 +128,8 @@ Therefore a plugin will be provided soon that converts every media query to a CS
 		'@platform ios': {
 			color: 'blue'
 		},
-		'@platform android': {
+		// You may also use multiple
+		'@platform android chrome': {
 			color: 'red'
 		}
 	}
