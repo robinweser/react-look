@@ -1,6 +1,9 @@
 # Changelog
 
 ## 0.6
+### 0.6.1 (24.11.15)
+- platform queries now allow multiple platforms e.g. `@platform ios android`
+
 ### 0.6.0 (19.11.15)
 - Huge documentation refactoring
 - Renamed `customProperty` to `mixin`
