@@ -54,7 +54,7 @@ export default {
     }
 
     Object.keys(selectors).forEach(selector => {
-      insertRule((config.scope ? config.scope + ' ' : '') + selector, cssifyObject(selectors[selector], config), config.globalStyleSheet)
+      insertRule((config.scope ? config.scope + ' ' : '') + selector, cssifyObject(selectors[selector], config), config.globalStyleElement)
     })
   },
 
@@ -76,7 +76,7 @@ export default {
       CSS += `${percentage}{${cssifyObject(frames[percentage], config)}}`
     })
     if (name) {
-      insertRule(selector, CSS, config.globalStyleSheet)
+      insertRule(selector, CSS, config.globalStyleElement)
     }
     return name
   },
@@ -103,7 +103,7 @@ export default {
       Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => fontFace[fontProp] = properties[fontProp])
     }
 
-    insertRule('@font-face', cssifyObject(fontFace), config.globalStyleSheet)
+    insertRule('@font-face', cssifyObject(fontFace), config.globalStyleElement)
     return fontFamily
   }
 }

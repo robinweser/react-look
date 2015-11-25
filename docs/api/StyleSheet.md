@@ -5,7 +5,7 @@ A helper to create scoped styles and global CSS StyleSheets. This helps to impro
 - [create](#createcomponent-styles)
 - [toCSS](#tocssstyles--config)
 - [keyframes](#keyframesframes--config)
-- [fontFace](#fontfacefontfamily-files--properties)
+- [fontFace](#fontfacefontfamily-files--properties-config)
 
 
 ### `create(Component, styles)`
@@ -14,7 +14,9 @@ Creates a scoped `styles` object to reduce style resolving when nesting Componen
 
 ### `toCSS(styles [, config])`
 Adds all `styles` as a valid CSS string and directly applies those to the global CSSStyleSheet. <br>
-`config` may include (optional):
+
+##### `config` (optional)
+
 * `scope`: Specificity selector which gets added before every selector *(e.g. `.#demo-container`)*
 * `unit`: Unit that gets added to number values *(default to `px`)*
 * `userAgent`: userAgent used to detect required vendor-prefixes
@@ -34,10 +36,13 @@ StyleSheet.toCSS({
 ### `keyframes(frames [, config])`
 Adds the `frames` as a new keyframe animation to the global CSSStyleSheet and returns the animation name.
 `frames` should be an object containing a set of percentage-based styles. or both `from` and `to` values.<br>
-`config` may include (optional):
+
+##### `config` (optional)
+
 * `name`: animation name if an exact one is needed
 * `unit`: Unit that gets added to number values *(default to `px`)*
 * `userAgent`: userAgent used to detect required vendor-prefixes
+* `globalStyleElement`: (server-side rendering) custom `<style></style>`-element to insert CSSRules
 
 ```javascript
 StyleSheet.keyframes({
@@ -53,9 +58,13 @@ StyleSheet.keyframes({
 })
 ```
 
-### `fontFace(fontFamily, files [, properties])`
+### `fontFace(fontFamily, files [, properties, config])`
 Adds the `fontFamily` to the global CSSStyleSheet and uses `files` as source for fonts. `files` may either be a string (single) or an array (multiple).<br>
 `properties` may contain additional font properties which are `fontWeight`, `fontStretch`, `fontStyle` and  `unicodeRange`.
+
+##### `config` (optional)
+
+* `globalStyleElement`: (server-side rendering) custom `<style></style>`-element to insert CSSRules
 
 ```javascript
 const fontStyles = {fontWeight: 400, fontStretch: 'condensed'}
