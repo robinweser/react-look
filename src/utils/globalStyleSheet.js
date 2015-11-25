@@ -12,7 +12,7 @@ const initGlobalStyleSheet = () => {
   return style.sheet
 }
 
-let globalStyleSheet = typeof document != 'undefined' ? initGlobalStyleSheet() : undefined
+let globalStyleSheet = typeof document !== 'undefined' ? initGlobalStyleSheet() : undefined
 
 /**
  * Adds the rule to the global StyleSheet

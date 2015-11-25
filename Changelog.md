@@ -1,6 +1,11 @@
 # Changelog
 
 ## 0.6
+### 0.6.2 Hotfix (25.11.15)
+- updated [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer) to 0.5.2
+- fixed a bug when resolving stateful styles
+- pass a custom `<style></style>` DOMElement within your Look config as a global StyleSheet if doing server-side rendering
+
 ### 0.6.1 (24.11.15)
 - platform queries now allow multiple platforms e.g. `@platform ios android`
 
