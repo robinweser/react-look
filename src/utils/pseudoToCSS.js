@@ -11,7 +11,7 @@ import generateUniqueSelector from './generateUniqueSelector'
 export default (styles, pseudo, config) => {
   const className = generateUniqueSelector(styles)
   if (className) {
-    insertRule(`.${className}${pseudo}`, cssifyObject(styles, config))
+    insertRule(`.${className}${pseudo}`, cssifyObject(styles, config), config.globalStyleElement)
   }
   return className
 }

@@ -1,4 +1,5 @@
 import addCSSRule from './addCSSRule'
+import warn from './warn'
 
 // Initialize a global StyleSheet that gets used to add new CSSRules
 const initGlobalStyleSheet = () => {
@@ -11,13 +12,21 @@ const initGlobalStyleSheet = () => {
   return style.sheet
 }
 
-const globalStyleSheet = initGlobalStyleSheet()
+let globalStyleSheet = typeof document != 'undefined' ? initGlobalStyleSheet() : undefined
 
 /**
  * Adds the rule to the global StyleSheet
  * @param {string} selector - selector that is used as a reference
  * @param {string} rule - a valid CSSRule
  */
-export default (selector, rule) => {
-  addCSSRule(globalStyleSheet, selector, rule)
+export default (selector, rule, customStyleElement) => {
+  if (customStyleElement) {
+    globalStyleSheet = customStyleElement.sheet
+  }
+
+  if (globalStyleSheet !== undefined) {
+    addCSSRule(globalStyleSheet, selector, rule)
+  } else {
+    warn('Adding styles to the global StyleSheet was not possible. No StyleSheet has been found.', 'Rendering on server? Pass a <style>-DOMElement within the configuration.')
+  }
 }
