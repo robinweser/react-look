@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Advanced & Dynamic Component Styling for React & React Native",
   "main": "look.js",
   "files": [
@@ -59,7 +59,7 @@
   "dependencies": {
     "assign-styles": "2.0.0",
     "dot-prop": "^2.2.0",
-    "inline-style-prefixer": "^0.5.1",
+    "inline-style-prefixer": "^0.5.2",
     "object-assign": "^4.0.1"
   },
   "devDependencies": {
