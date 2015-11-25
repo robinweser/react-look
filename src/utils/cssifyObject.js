@@ -26,5 +26,6 @@ export default (styles, config = {}) => {
 
     rules += camelToDashCase(property) + ':' + value
   })
+
   return rules
 }
