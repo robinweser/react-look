@@ -1,7 +1,7 @@
 import cssifyObject from '../utils/cssifyObject'
 import prefixer from '../utils/prefixer'
 import insertRule from '../utils/globalStyleSheet'
-import generateUniqueSelector from '../utils/generateUniqueSelector'
+import generateUniqueClassName from '../utils/generateUniqueClassName'
 import getFontFormat from '../utils/getFontFormat'
 
 const fontProperties = ['fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange']
@@ -67,7 +67,7 @@ export default {
       return false
     }
 
-    const name = config.name ? config.name : generateUniqueSelector(frames)
+    const name = config.name ? config.name : generateUniqueClassName(frames)
     const selector = `@${prefixer(config.userAgent).prefixedKeyframes} ${name}`
 
     // Generating a CSS string which can be included

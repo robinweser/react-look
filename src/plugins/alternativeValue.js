@@ -3,7 +3,7 @@ import camelToDashCase from '../utils/camelToDashCase'
 /**
  * Resolves alternative values provided as an Array
  */
-const alternativeValue = (styles, scopeArgs, config) => {
+export default function alternativeValue(styles, scopeArgs, config) {
   Object.keys(styles).forEach(property => {
     const value = styles[property]
     if (value instanceof Array) {
@@ -13,8 +13,4 @@ const alternativeValue = (styles, scopeArgs, config) => {
     }
   })
   return styles
-}
-
-export {
-	alternativeValue as default
 }

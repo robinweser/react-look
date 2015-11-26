@@ -3,7 +3,7 @@ import assignStyles from 'assign-styles'
 /*
  * Resolves mixins
  */
-const mixin = (styles, scopeArgs, config) => {
+export default function mixin(styles, scopeArgs, config) {
   const {mixins} = config
 
   // if no custom keys are specified at all
@@ -19,7 +19,8 @@ const mixin = (styles, scopeArgs, config) => {
   }
 
   Object.keys(styles).forEach(property => {
-    const value = styles[property]
+    const value = styles[property]; // eslint-disable-line
+
     let newValue
 
     // testing every mixin on the current property
@@ -40,8 +41,4 @@ const mixin = (styles, scopeArgs, config) => {
   })
 
   return styles
-}
-
-export {
-	mixin as default
 }
