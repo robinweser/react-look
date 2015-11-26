@@ -45,5 +45,5 @@ Object.keys(unitlessProperties).forEach(property => {
 })
 
 export default property => {
-  return unitlessProperties[property]
+  return unitlessProperties[property] ? true : false
 }
