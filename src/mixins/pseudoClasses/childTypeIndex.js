@@ -1,20 +1,8 @@
 import getPseudoExpression from '../../utils/getPseudoExpression'
 import evalNthExpression from '../../utils/evalNthExpression'
+import getChildType from '../../utils/getChildType'
 import warn from '../../utils/warn'
-/**
- * Returns a childs type
- * If child is an ES6 class it returns the displayName
- * @param {Object} child - child which type gets identified
- */
-const getChildType = (child) => {
-  let childType
-  if (child.type instanceof Function) {
-    childType = (child.type.hasOwnProperty('name') ? child.type.name : child.type)
-  } else {
-    childType = child.type
-  }
-  return childType
-}
+
 
 // Evaluates child-type index positions using the parent element passed with scopeArgs
 const firstOfType = (property, styles, mixinKey, {parent, element}) => {
