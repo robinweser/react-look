@@ -5,6 +5,10 @@
  * @param {number} index - current elements index
  */
 export default (expression, index) => {
+  if (!expression || typeof expression !== 'string' || index === undefined) {
+    return false
+  }
+
   if (expression === 'odd') {
     return index % 2 !== 0; // eslint-disable-line semi
   }

@@ -47,4 +47,11 @@ describe('Evaluating :nth pseudo expressions', () => {
     expect(evalNthExpression('3', 2)).to.equal(false)
     expect(evalNthExpression('3', 4)).to.equal(false)
   })
+
+  it('should validate false if expression or index are invalid', () => {
+    expect(evalNthExpression('14')).to.equal(false)
+    expect(evalNthExpression(14)).to.equal(false)
+    expect(evalNthExpression(14, 3)).to.equal(false)
+    expect(evalNthExpression(14, '3')).to.equal(false)
+  })
 })
