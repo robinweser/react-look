@@ -8,6 +8,10 @@ import { get as getProp } from 'dot-prop'
  * @param {Object} Component - outer React Component holding props and state to match
  */
 export default (key, operator, Component) => {
+  if (typeof key !== 'string' || key.indexOf(operator) === -1 || Component instanceof Object !== true) {
+    return false
+  }
+
   const matchValues = assign({}, Component.props, Component.state)
 
   const [property, value] = key.split(operator)
