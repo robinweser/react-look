@@ -15,10 +15,14 @@ export default (property, styles, mixinKey, {newProps}) => {
 
     matches.forEach(match => {
       const [left, ...right] = children.split(match)
-      newChildren.push(left)
+      if (left !== '') {
+        newChildren.push(left)
+      }
+
       newChildren.push(createElement('span', {
         style: styles
       }, match))
+
       children = right.join(match)
     })
 
