@@ -1,5 +1,6 @@
 import statefulValue from '../../lib/plugins/statefulValue'
-import Look from '../../lib/dom'
+import Look, {StyleSheet} from '../../lib/dom'
+import React from 'react'
 import { expect } from 'chai'
 
 
@@ -17,5 +18,24 @@ describe('Resolving stateful values', () => {
     expect(statefulValue({color: 'red'}, {Component})).to.eql({
       color: 'red'
     })
+  })
+
+	it('should update styles on state change', () => {
+		@Look
+		class Example extends React.Component {
+			state = {clicked: false}
+			onClick = () => {
+				this.setState({clicked: true})
+			}
+			render() {
+				<div look={styles} onClick={this.onClick}>foo</div>
+			}
+		}
+
+		const styles = StyleSheet.create(Example, {
+			color: (props, state) => state.clicked ? 'red' : 'green'
+		})
+
+		const test = new Example({color: 'red'})
   })
 })

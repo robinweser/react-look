@@ -1,6 +1,11 @@
 // Returns the font format for a specific font source
 export default src => {
   let format
+
+  if (src === undefined || typeof src !== 'string') {
+    return false
+  }
+
   if (src.indexOf('.woff') > -1) {
     format = 'woff'
   } else if (src.indexOf('.eof') > -1) {
