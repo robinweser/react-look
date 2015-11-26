@@ -2,7 +2,11 @@
  * Sorts objects in order to always get the same hash code
  * @param {Object} obj - Object that gets sorted
  */
-const sortObject = obj => {
+export default function sortObject(obj) {
+  if (obj instanceof Object === false) {
+    return false
+  }
+
   const out = {}
 
   Object.keys(obj).sort().forEach(key => {
@@ -14,8 +18,4 @@ const sortObject = obj => {
   })
 
   return out
-}
-
-export  {
-  sortObject as default
 }
