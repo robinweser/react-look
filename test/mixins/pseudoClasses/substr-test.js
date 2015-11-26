@@ -1,7 +1,7 @@
 import substr from '../../../lib/mixins/pseudoClasses/substr'
 import { expect } from 'chai'
 
-describe('Evaluating :contains pseudo', () => {
+describe('Styling substrings', () => {
 
   it('should split children at substrings and add styles', () => {
     const numbers = {newProps: {children: 'foo12bar'}}
@@ -21,5 +21,26 @@ describe('Evaluating :contains pseudo', () => {
 
     substr(':substr([0-9])', true, ':subsr', numbers)
     expect(numbers.newProps.children).to.eql('foobar')
+  })
+
+  it('should do nothing if children is not a string', () => {
+    const arr = {
+      newProps: {
+        children: ['foobar']
+      }
+    }
+    const obj = {
+      newProps: {
+        children: {
+          type: 'div'
+        }
+      }
+    }
+
+    substr(':substr([0-9])', true, ':substr', arr)
+    expect(arr.newProps.children).to.eql(['foobar'])
+
+    substr(':substr([0-9])', true, ':substr', obj)
+    expect(obj.newProps.children).to.eql({type: 'div'})
   })
 })
