@@ -9,7 +9,6 @@ describe('Converting camel case to dash case', () => {
   })
 
   it('sould add an additional - for vendor-prefixes', () => {
-    console.log(camelToDashCase('msFlexDirection'))
     expect(camelToDashCase('WebkitFlexDirection')).to.eql('-webkit-flex-direction')
     expect(camelToDashCase('msFlexDirection')).to.eql('-ms-flex-direction')
   })
