@@ -1,6 +1,6 @@
 import cssifyObject from './cssifyObject'
 import insertRule from './globalStyleSheet'
-import generateUniqueSelector from './generateUniqueSelector'
+import generateUniqueClassName from './generateUniqueClassName'
 
 /**
  * Converts a set of pseudo class styles to a CSSRule and returns the className
@@ -9,7 +9,7 @@ import generateUniqueSelector from './generateUniqueSelector'
  * @param {Object} config - configuration object used to cssify the styles
  */
 export default (styles, pseudo, config) => {
-  const className = generateUniqueSelector(styles)
+  const className = generateUniqueClassName(styles)
   if (className) {
     insertRule(`.${className}${pseudo}`, cssifyObject(styles, config), config.globalStyleElement)
   }

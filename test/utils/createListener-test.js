@@ -13,7 +13,6 @@ describe('Creating an event listener', () => {
     }
   }
 
-  console.log(Example)
   const listenerFunc = sinon.spy()
   const customListenerFunc = sinon.spy()
 

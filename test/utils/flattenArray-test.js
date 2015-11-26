@@ -8,3 +8,4 @@ describe('Flattening arrays', () => {
     expect(flattenArray([[[[[[[[[[[3]]]]]]]]]]])).to.eql([3])
   })
 })
+

@@ -4,18 +4,18 @@ import { expect } from 'chai'
 describe('Evaluating empty elements', () => {
 
   it('should validate true', () => {
-    let emptyChildren = {
+    const emptyChildren = {
       newProps: {
         children: []
       }
     }
-    let noChildren = {newProps: {}}
+    const noChildren = {newProps: {}}
     expect(isEmpty(':empty', true, ':empty', emptyChildren)).to.equal(true)
     expect(isEmpty(':empty', true, ':empty', noChildren)).to.equal(true)
   })
 
   it('should validate false', () => {
-    let args = {
+    const args = {
       newProps: {
         children: ['test']
       }
