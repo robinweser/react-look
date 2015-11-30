@@ -1,10 +1,9 @@
 import { Component } from 'react'
 import Look from '../../lib/core/enhancer'
-import Chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-let expect = Chai.expect;
-Chai.use(sinonChai);
+import Chai, { expect } from 'chai'
+import sinon from 'sinon'
+import sinonChai from 'sinon-chai'
+Chai.use(sinonChai)
 
 describe('Enhancing a Component', () => {
   it('should use the same displayName', () => {
@@ -13,7 +12,7 @@ describe('Enhancing a Component', () => {
     let Enhanced = Look(Default)
     let instance = new Enhanced()
 
-    expect(instance.displayName).to.eql(Default.displayName);
+    expect(instance.displayName).to.eql(Default.displayName)
   })
 
   it('should set up initial state', () => {
@@ -22,18 +21,18 @@ describe('Enhancing a Component', () => {
     let Enhanced = Look(Default);
     let instance = new Enhanced();
 
-    expect(instance.state).to.have.property('_look');
+    expect(instance.state).to.have.property('_look')
   })
   it('should merge existing state', () => {
     class Default extends Component {
       constructor() {
-        super(...arguments);
+        super(...arguments)
         this.state = {foo: 1}
       }
     }
 
-    let Enhanced = Look(Default);
-    let instance = new Enhanced();
+    let Enhanced = Look(Default)
+    let instance = new Enhanced()
 
     expect(instance.state).to.eql({
       foo: 1,
@@ -44,11 +43,11 @@ describe('Enhancing a Component', () => {
   it('should recieve props', () => {
     class Default extends Component {
       constructor() {
-        super(...arguments);
+        super(...arguments)
       }
     }
 
-    let Enhanced = Look(Default);
+    let Enhanced = Look(Default)
     let instance = new Enhanced({bar: 1})
 
     expect(instance.props).to.eql({bar: 1})
