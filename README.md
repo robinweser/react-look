@@ -24,7 +24,7 @@ The `react-look/dom` package also adds additional DOM-specific mixins as well as
 
 - [media queries](docs/plugins/Mixin.md#media-queries.md)
 - [platform queries](docs/plugins/Mixin.md#platform-queries.md)
-- [30 pseudo classes](docs/plugins/Mixin.md#pseudo-classes.md)
+- [34 pseudo classes](docs/plugins/Mixin.md#pseudo-classes.md)
 - [vendor prefixing](docs/plugins/Prefixer.md)
 - [pseudo to CSS polyfill](docs/plugins/Mixin.md#pseudo-to-css)
 - [font-face API](docs/api/StyleSheet.md#font-face)
