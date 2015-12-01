@@ -10,6 +10,7 @@ import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from './mixi
 import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from './mixins/pseudoClasses/childTypeIndex'
 import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from './mixins/pseudoClasses/input'
 import { hover, active, focus } from './mixins/pseudoClasses/userAction'
+import { valid, invalid, inRange, outOfRange } from './mixins/pseudoClasses/validation'
 import { before, after } from './mixins/pseudoClasses/beforeAfter'
 import lang from './mixins/pseudoClasses/lang'
 import empty from './mixins/pseudoClasses/empty'
@@ -60,6 +61,10 @@ export default {
     hover,
     focus,
     active,
+    valid,
+    invalid,
+    inRange,
+    outOfRange,
     checked,
     disabled,
     enabled,

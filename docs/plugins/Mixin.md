@@ -24,11 +24,11 @@ Mixins can be nested multiple times to achieve e.g. `:focus:hover`
 }
 ```
 Pseudo classes use a common syntax as it would be in CSS. They **always** start with a doublepoint.<br>
-Look currently supports **30 pseudo classes**. Some might be added soon. Check the following list for all supported / unsupported.
+Look currently supports **34 pseudo classes**. Some might be added soon. Check the following list for all supported / unsupported.
 
 
 ### Validation
-Most pseudo classes get validated within the `render` process, while some need extra event listeners applied such as `:focus`, `:hover` and `:active`.
+Most pseudo classes get validated within the `render` process, while some need extra event listeners applied which are `:focus`, `:hover`, `:active`, `:valid`, `:invalid`, `:in-range` and `:out-of-range`.
 
 ### Supported pseudo classes
 ##### child-index
@@ -66,6 +66,8 @@ Most pseudo classes get validated within the `render` process, while some need e
 * read-only / read-write
 * required / optional
 * indeterminate
+* valid / invalid
+* in-range / out-of-range
 
 ##### link
 * target
@@ -243,7 +245,9 @@ const extendStyles = {
 }
 ```
 Lets you extend your styles with other styles. The idea was taken from Sass' `@extend` and works basically all the same.
+
 ### Advanced
+
 Extending also supports conditioned extend which is achieved by passing both a `condition` as well a `styles` object.
 ```javascript
 {

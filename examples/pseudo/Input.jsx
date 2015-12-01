@@ -8,8 +8,9 @@ class Input extends Component {
       <div>
         <input key="i1" look={[styles.input, styles.inputFocus]} placeholder="focus me"/>
         <input look={styles.input} placeholder="i am required" required/>
-        <input look={styles.input} placeholder="i have pattern" pattern="[A-Z]" ref="valid"/>
+      <input look={[styles.input, styles.inputValid]} placeholder="i only allow uppercase" pattern="[A-Z]*" ref="valid"/>
         <input look={[styles.input, styles.inputOptional]} placeholder="i am optional"/>
+      <input look={[styles.input, styles.range]} type="number" placeholder="i have a range" min={10} max={100} defaultValue={120} step={1} ref="step"/>
         <input look={[styles.input, styles.readOnly]} placeholder="i am read only" readOnly/>
         <input disabled look={[styles.input, styles.inputDisabled]} placeholder="i am disabled"/>
       </div>
@@ -32,6 +33,26 @@ const styles = StyleSheet.create(Input, {
       border: '2px solid black'
     }
   },
+  range: {
+    appearance: 'none',
+    outline: 'none',
+    border: '2px solid gray',
+    ':in-range': {
+      borderColor: 'green'
+    },
+    ':out-of-range': {
+      borderColor: 'red'
+    }
+  },
+  inputValid: {
+    border: '2px solid gray',
+    ':valid': {
+      borderColor: 'green'
+    },
+    ':invalid': {
+      borderColor: 'red'
+    }
+  },
   inputFocus: {
     ':focus': {
       borderColor: 'red',
@@ -48,7 +69,6 @@ const styles = StyleSheet.create(Input, {
       backgroundColor: 'gray'
     }
   },
-
   readOnly: {
     ':read-only': {
       backgroundColor: 'lightgray'
