@@ -11,7 +11,7 @@ import generateUniqueClassName from './generateUniqueClassName'
 export default (styles, pseudo, config) => {
   const className = generateUniqueClassName(styles)
   if (className) {
-    insertRule(`.${className}${pseudo}`, cssifyObject(styles, config), config.globalStyleElement)
+    insertRule(`.${className}${pseudo}`, cssifyObject(styles, config))
   }
   return className
 }

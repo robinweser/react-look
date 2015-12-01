@@ -23,7 +23,7 @@ export default {
     })
 
     // add a mouseup listener to cancel active-state
-    if (!Component._onMouseUp && typeof window !== 'undefined') {
+    if (!Component._onMouseUp) {
       Component._onMouseUp = () => {
         while (Component._lastActiveElements.length > 0) {
           const elementKey = Component._lastActiveElements[0]; // eslint-disable-line semi
@@ -32,7 +32,15 @@ export default {
           Component._lastActiveElements.pop(elementKey)
         }
       }
-      window.addEventListener('mouseup', Component._onMouseUp)
+
+      // Add a global mouseup listener
+      const existingDidMount = Component.componentDidMount
+      Component.componentDidMount = () => {
+        if (existingDidMount) {
+          existingDidMount()
+        }
+        window.addEventListener('mouseup', Component._onMouseUp)
+      }
     }
     // resolving browser State
     return State.getState('active', Component, key) ? styles : false
