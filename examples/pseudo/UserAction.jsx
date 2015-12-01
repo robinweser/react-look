@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import Look, {State, StyleSheet} from '../../lib/dom'
+import React, { Component } from 'react'
+import Look, { State, StyleSheet } from '../../lib/dom'
 
-@Look
-export default class UserAction extends Component {
+
+class UserAction extends Component {
   render() {
     let defaultState = 'Hover me!'
     let hoverState = State.getState('hover', this, 'b3') ? ' Now click me! ' : ''
@@ -17,7 +17,7 @@ export default class UserAction extends Component {
         <div>State-API live example</div>
       <div key="b3" look={[styles.button, styles.hoverButton]}>{text}</div>
       </div>
-    )
+      )
   }
 }
 
@@ -49,3 +49,5 @@ const styles = StyleSheet.create(UserAction, {
     }
   }
 })
+
+export default Look(UserAction)

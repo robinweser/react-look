@@ -21,8 +21,10 @@ describe('Resolving stateful values', () => {
   })
 
 	it('should update styles on state change', () => {
-		@Look
 		class Example extends React.Component {
+      constructor(){
+        super(...arguments)
+      }
 			state = {clicked: false}
 			onClick = () => {
 				this.setState({clicked: true})
@@ -35,6 +37,8 @@ describe('Resolving stateful values', () => {
 		const styles = StyleSheet.create(Example, {
 			color: (props, state) => state.clicked ? 'red' : 'green'
 		})
+
+    Example = Look(Example)
 
 		const test = new Example({color: 'red'})
   })

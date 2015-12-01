@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import Look, {StyleSheet} from '../../lib/dom'
 
-@Look
-export default class DemoContainer extends Component {
+class DemoContainer extends Component {
   static defaultProps = {
     padding: 10
   }
@@ -63,3 +62,5 @@ const styles = StyleSheet.create(DemoContainer, {
       fontSize: 15
     }
 })
+
+export default Look(DemoContainer)

@@ -1,8 +1,7 @@
-import React, {Component} from 'react'
-import Look, {StyleSheet} from '../../lib/dom'
+import React, { Component } from 'react'
+import Look, { StyleSheet } from '../../lib/dom'
 
-@Look
-export default class Input extends Component {
+class Input extends Component {
 
   render() {
     return (
@@ -14,7 +13,7 @@ export default class Input extends Component {
         <input look={[styles.input, styles.readOnly]} placeholder="i am read only" readOnly/>
         <input disabled look={[styles.input, styles.inputDisabled]} placeholder="i am disabled"/>
       </div>
-    )
+      )
   }
 }
 
@@ -54,4 +53,7 @@ const styles = StyleSheet.create(Input, {
     ':read-only': {
       backgroundColor: 'lightgray'
     }
-  }})
+  }
+})
+
+export default Look(Input)

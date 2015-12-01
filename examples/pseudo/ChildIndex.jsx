@@ -1,8 +1,7 @@
 import React, {Component, Children, PropTypes} from 'react'
 import Look, {StyleSheet} from '../../lib/dom'
 
-@Look
-export default class ChildIndex extends Component {
+class ChildIndex extends Component {
   static defaultProps = {
     items: [1,2,3,4,5,6,7,8,9,10]
   }
@@ -46,3 +45,5 @@ const styles = StyleSheet.create(ChildIndex, {
       backgroundColor:'rgba(141, 195, 131, 0.4)'
     }
 })
+
+export default Look(ChildIndex)
