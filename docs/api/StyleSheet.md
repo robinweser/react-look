@@ -42,7 +42,6 @@ Adds the `frames` as a new keyframe animation to the global CSSStyleSheet and re
 * `name`: animation name if an exact one is needed
 * `unit`: Unit that gets added to number values *(default to `px`)*
 * `userAgent`: userAgent used to detect required vendor-prefixes
-* `globalStyleElement`: (server-side rendering) custom `<style></style>`-element to insert CSSRules
 
 ```javascript
 StyleSheet.keyframes({
@@ -58,13 +57,9 @@ StyleSheet.keyframes({
 })
 ```
 
-### `fontFace(fontFamily, files [, properties, config])`
+### `fontFace(fontFamily, files [, properties])`
 Adds the `fontFamily` to the global CSSStyleSheet and uses `files` as source for fonts. `files` may either be a string (single) or an array (multiple).<br>
 `properties` may contain additional font properties which are `fontWeight`, `fontStretch`, `fontStyle` and  `unicodeRange`.
-
-##### `config` (optional)
-
-* `globalStyleElement`: (server-side rendering) custom `<style></style>`-element to insert CSSRules
 
 ```javascript
 const fontStyles = {fontWeight: 400, fontStretch: 'condensed'}

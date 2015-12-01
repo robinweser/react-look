@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import Look, { StyleSheet } from '../../lib/dom'
 
-@Look
-export default class Input extends Component {
+class Input extends Component {
 
   render() {
     return (
@@ -76,3 +75,5 @@ const styles = StyleSheet.create(Input, {
     }
   }
 })
+
+export default Look(Input)
