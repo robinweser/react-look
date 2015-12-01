@@ -87,7 +87,7 @@ export default {
   * @param {string|Array} files - source files refering to the font files
   * @param {Object} properties - additional font properties including fontWeight, fontStretch, fontStyle, unicodeRange
   */
-  fontFace(fontFamily, files, properties, config = {}) {
+  fontFace(fontFamily, files, properties) {
     if (!files) {
       return false
     }

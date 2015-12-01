@@ -1,5 +1,4 @@
 import addCSSRule from './addCSSRule'
-import warn from './warn'
 import mountingPipeline from './mountingPipeline'
 
 let globalStyleSheet

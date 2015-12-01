@@ -39,7 +39,7 @@ export default {
         if (existingDidMount) {
           existingDidMount()
         }
-        window.addEventListener('mouseup', Component.Component._onMouseUp)
+        window.addEventListener('mouseup', Component._onMouseUp)
       }
     }
     // resolving browser State
