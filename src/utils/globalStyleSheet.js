@@ -1,5 +1,8 @@
 import addCSSRule from './addCSSRule'
 import warn from './warn'
+import mountingPipeline from './mountingPipeline'
+
+let globalStyleSheet
 
 // Initialize a global StyleSheet that gets used to add new CSSRules
 const initGlobalStyleSheet = () => {
@@ -9,24 +12,27 @@ const initGlobalStyleSheet = () => {
   const node = document.createTextNode('')
   style.appendChild(node)
   document.head.appendChild(style)
-  return style.sheet
+  globalStyleSheet = style.sheet
 }
 
-let globalStyleSheet = typeof document !== 'undefined' ? initGlobalStyleSheet() : undefined
+
+if (typeof document !== 'undefined') {
+  initGlobalStyleSheet()
+} else {
+  mountingPipeline.add(initGlobalStyleSheet)
+}
 
 /**
  * Adds the rule to the global StyleSheet
  * @param {string} selector - selector that is used as a reference
  * @param {string} rule - a valid CSSRule
  */
-export default (selector, rule, customStyleElement) => {
-  if (customStyleElement) {
-    globalStyleSheet = customStyleElement.sheet
-  }
-
+export default (selector, rule) => {
   if (globalStyleSheet !== undefined) {
     addCSSRule(globalStyleSheet, selector, rule)
   } else {
-    warn('Adding styles to the global StyleSheet was not possible. No StyleSheet has been found.', 'Rendering on server? Pass a <style>-DOMElement within the configuration.')
+    mountingPipeline.add(() => {
+      addCSSRule(globalStyleSheet, selector, rule)
+    })
   }
 }

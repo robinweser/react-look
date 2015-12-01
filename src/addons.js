@@ -2,6 +2,7 @@ import alternativeValue from './plugins/alternativeValue'
 import statefulValue from './plugins/statefulValue'
 import mixin from './plugins/mixin'
 import prefixer from './plugins/prefixer'
+import serverSideRendering from './plugins/serverSideRendering'
 import stringSyntax from './plugins/stringSyntax'
 
 import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/condition'
@@ -28,6 +29,7 @@ export default {
     alternativeValue,
     statefulValue,
     prefixer,
+    serverSideRendering,
     stringSyntax
   },
   Mixins: {

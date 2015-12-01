@@ -5,8 +5,15 @@ export default (property, styles, mixinKey, {Component, element}) => {
       Component._locationHrefListener = () => {
         Component.forceUpdate()
       }
-      // Add a global resize listener to rerender media queries
-      window.addEventListener('hashchange', Component._locationHrefListener)
+
+      // Add a global hashchange listener
+      const existingDidMount = Component.componentDidMount
+      Component.componentDidMount = () => {
+        if (existingDidMount) {
+          existingDidMount()
+        }
+        window.addEventListener('hashchange', Component._locationHrefListener)
+      }
 
       // Remove the listener if the component unmounts to keep things clean
       const existingWillUnmount = Component.componentWillUnmount
