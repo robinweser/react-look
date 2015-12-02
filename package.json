@@ -27,6 +27,7 @@
     "coverage": "cat ./coverage/coverage.json | ./node_modules/codecov.io/bin/codecov.io.js",
     "demo": "webpack-dev-server --config demo/webpack.config.js --no-info --content-base demo/",
     "demo:universal": "concurrent --kill-others \"npm run demo\" \"npm start\"",
+    "demo:dev": "npm run babel && npm run demo",
     "start": "babel-node demo/server.js",
     "lint": "eslint src",
     "package": "npm run babel && node build-package.js",

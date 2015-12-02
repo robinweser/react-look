@@ -30,8 +30,15 @@ export default class CSSContainer {
     this._addCSS(CSSRule)
   }
 
+  removeRule(CSSRule) {
+    if (this.CSSRules[CSSRule]) {
+      delete this.CSSRules[CSSRule]
+      this._executeListener()
+    }
+  }
+
   getCSSString() {
-    return Object.keys(this.CSSRules).join('')
+    return Object.keys(this.CSSRules).join('\n')
   }
 
   subscribe(listener) {

@@ -16,8 +16,8 @@ app.use('/app.js', proxy('localhost:8080', {
 
 app.get('/', (req, res) => {
   const appHtml = ReactDOMServer.renderToString(
-    <App />
-  );
+    <App lookConfig={{userAgent: req.headers['user-agent']}} />
+  )
   res.write(indexHTML.replace('<!-- {{app}} -->', appHtml))
   res.end()
 });

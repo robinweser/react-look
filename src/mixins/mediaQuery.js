@@ -1,38 +1,62 @@
 import throttle from '../utils/throttle'
-import warn from '../utils/warn'
+import { processStyles } from '../core/resolver'
+import extractCSS from './extractCSS'
+import GlobalStyleSheet from '../utils/GlobalStyleSheet'
+import cssifyObject from '../utils/cssifyObject'
+import generateClassName from '../utils/generateClassName'
+
+const CSSMediaQueries = new Set()
 
 // Evaluates if a media condition is fulfilled by using window.matchMedia
-export default (property, styles, mixinKey, {Component}) => {
+export default (property, styles, mixinKey, scopeArgs, config) => {
   const matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
+
+  const {Component, newProps} = scopeArgs
+
+  if (!Component._mediaQueryListener) {
+    Component._mediaQueryListener = throttle(() => {
+      Component.forceUpdate()
+    }, 250)
+
+    // Add a global resize listener to rerender media queries
+    const existingDidMount = Component.componentDidMount
+    Component.componentDidMount = () => {
+      if (existingDidMount) {
+        existingDidMount()
+      }
+      window.addEventListener('resize', Component._mediaQueryListener)
+    }
+
+    // Remove the listener if the component unmounts to keep things clean
+    const existingWillUnmount = Component.componentWillUnmount
+    Component.componentWillUnmount = () => {
+      if (existingWillUnmount) {
+        existingWillUnmount()
+      }
+      window.removeEventListener('resize', Component._mediaQueryListener)
+    }
+  }
 
   // Check if browser supports window.matchMedia
   if (matchMedia !== undefined) {
-    if (!Component._mediaQueryListener) {
-      Component._mediaQueryListener = throttle(() => {
-        Component.forceUpdate()
-      }, 250)
-
-      // Add a global resize listener to rerender media queries
-      const existingDidMount = Component.componentDidMount
-      Component.componentDidMount = () => {
-        if (existingDidMount) {
-          existingDidMount()
-        }
-        window.addEventListener('resize', Component._mediaQueryListener)
-      }
-
-      // Remove the listener if the component unmounts to keep things clean
-      const existingWillUnmount = Component.componentWillUnmount
-      Component.componentWillUnmount = () => {
-        if (existingWillUnmount) {
-          existingWillUnmount()
-        }
-        window.removeEventListener('resize', Component._mediaQueryListener)
-      }
+    // Remove polyfilled CSS rules if matchMedia gets available
+    if (CSSMediaQueries.size > 0) {
+      CSSMediaQueries.forEach(CSSRule => GlobalStyleSheet.removeRule(CSSRule))
     }
 
     return matchMedia(property.replace(mixinKey, '').trim()).matches ? styles : false
   }
 
-  warn(`Failed evaluating media query: ${property}. Your environment is not able to use window.matchMedia.`)
+  // If no window.matchMedia was found Look transforms
+  // media queries to CSS and injects it while rendering
+  const resolvedStyles = processStyles(styles, newProps, scopeArgs, config)
+
+  const className = generateClassName(resolvedStyles)
+  const CSSRule = `${property}{.${className}{${cssifyObject(resolvedStyles)}}}`
+
+  GlobalStyleSheet.insertRule(CSSRule)
+  CSSMediaQueries.add(CSSRule)
+
+  extractCSS(property, className, mixinKey, scopeArgs)
+  return true
 }

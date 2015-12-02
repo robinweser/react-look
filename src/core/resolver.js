@@ -27,7 +27,7 @@ const resolvePlugins = (styles, scopeArgs, config) => {
  * @param {Object} scopeArgs - special objects including important information
  * @param {Object} config - configuration containing plugins and plugin-specific configs
  */
-const processStyles = (styles, props, scopeArgs, config) => {
+export function processStyles(styles, props, scopeArgs, config) {
   let newStyles = assign({}, styles)
 
   // Triggers plugin resolving
