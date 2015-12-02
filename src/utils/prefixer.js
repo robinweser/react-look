@@ -1,6 +1,6 @@
 import Prefixer from 'inline-style-prefixer'
 
-let prefixer = new Prefixer()
+let prefixer
 
 /**
  * Global prefixer instance
@@ -8,9 +8,14 @@ let prefixer = new Prefixer()
  * @param {string} userAgent - optional userAgent that gets used to gather information on prefixes
  */
 export default userAgent => {
+  if (!prefixer) {
+    prefixer = new Prefixer(userAgent)
+  }
+
   // replace userAgent if config provides alternative one
   if (userAgent !== undefined && prefixer._userAgent !== userAgent) {
     prefixer = new Prefixer(userAgent)
   }
+
   return prefixer
 }

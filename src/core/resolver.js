@@ -1,5 +1,6 @@
 import assign from 'object-assign'
 import { cloneElement, isValidElement, Children } from 'react'
+import GlobalStyleSheet from '../utils/GlobalStyleSheet'
 import assignStyles from 'assign-styles'
 import flattenArray from '../utils/flattenArray'
 import warn from '../utils/warn'
@@ -73,7 +74,14 @@ export default function resolveStyles(Component, element, config, parent) {
       }
 
       // scopeArgs are provided to plugins to access special objects
-      const scopeArgs = {newProps, Component, element, parent}
+      const scopeArgs = {
+        newProps,
+        Component,
+        element,
+        parent,
+        GlobalStyleSheet
+      }
+
       // Checks if styles are scoped
       // Scoped styles only perform style processing if in correct scope
       // NOTE: This solves multiple processing due to wrapping Components
@@ -136,17 +144,11 @@ const resolveChildren = (Component, children, config, parent) => {
     const flatChildren = flattenArray(children)
 
     // recursively resolve styles for child elements if it is a valid React Component
-    return Children.map(flatChildren, (child) => {
-      if (isValidElement(child)) {
-        return resolveStyles(Component, child, config, parent)
-      }
-      return child
-    })
+    return Children.map(flatChildren, (child) => isValidElement(child) ? resolveStyles(Component, child, config, parent) : child)
   }
 
   if (children.type) {
     return resolveStyles(Component, children, config, parent)
   }
-
   return children
 }

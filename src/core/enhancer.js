@@ -1,6 +1,8 @@
 import resolveStyles from './resolver'
 import CSSStyleSheet from '../components/CSSStyleSheet'
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import assign from 'object-assign'
+
 /**
  * Main wrapper that maps your styles to a React Component
  * @param {Object} CustomComponent - a valid React Component that gets styles applied
@@ -16,6 +18,8 @@ export default (CustomComponent, config = {}) => {
   class LookComponent extends Extend {
     // Inherit the original displayName for proper use later on
     static displayName = CustomComponent.displayName || CustomComponent.name || 'Component'
+    static childContextTypes = {_lookConfig: PropTypes.object}
+    static contextTypes = {_lookConfig: PropTypes.object}
 
     constructor() {
       super(...arguments)
@@ -26,17 +30,39 @@ export default (CustomComponent, config = {}) => {
       this.state._look = new Map()
     }
 
-    render() {
-      const renderedElement = stateless ? CustomComponent(this.props, this.context) : super.render() // eslint-disable-line
-      const content = resolveStyles(this, renderedElement, config)
+    getChildContext() {
+      let newContext = super.getChildContext ? super.getChildContext() : {}
 
-      if (config.lookRoot) {
+      // Passes down a lookConfig to its children
+      if (this.props.lookConfig) {
+        newContext = assign(newContext, {
+          _lookConfig: this.props.lookConfig
+        })
+      }
+
+      return newContext
+    }
+
+    render() {
+      const contextConfig = this.context ? this.context._lookConfig : {}
+      const propsConfig = this.props ? this.props.lookConfig : {}
+
+      // Compose all possible ways to configure Look
+      const composedConfig = assign({}, contextConfig, propsConfig, config)
+
+      const renderedElement = stateless ? CustomComponent(this.props, this.context) : super.render() // eslint-disable-line
+      const content = resolveStyles(this, renderedElement, composedConfig)
+
+      // This mechanism was heavily inspired by Radium which passes
+      // a Style Catcher down the context to add CSS styles
+      // and renders those in a <style> after the main content
+      if (composedConfig.lookRoot) {
         return (
           <div>
             {content}
             <CSSStyleSheet />
           </div>
-        )
+          )
       }
 
       return content
