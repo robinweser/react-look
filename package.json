@@ -27,7 +27,7 @@
     "coverage": "cat ./coverage/coverage.json | ./node_modules/codecov.io/bin/codecov.io.js",
     "demo": "webpack-dev-server --config demo/webpack.config.js --no-info --content-base demo/",
     "demo:universal": "concurrent --kill-others \"npm run demo\" \"npm start\"",
-    "start": "/node_modules/.bin/babel-node demo/server.js",
+    "start": "./node_modules/.bin/babel-node demo/server.js",
     "lint": "eslint src",
     "package": "npm run transpile && node build-package.js",
     "pretest": "npm run transpile",
@@ -35,7 +35,7 @@
     "test": "npm run lint && mocha --recursive --compilers js:babel-core/register",
     "test:coverage": "istanbul cover _mocha -- --recursive --compilers js:babel-core/register",
     "test:watch": "mocha --recursive --compilers js:babel-core/register -w",
-    "transpile": "npm run clean && /node_modules/.bin/babel -d lib src"
+    "transpile": "npm run clean && ./node_modules/.bin/babel -d lib src"
   },
   "keywords": [
     "react",
