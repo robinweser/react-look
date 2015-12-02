@@ -1,18 +1,16 @@
-import cssifyObject from '../utils/cssifyObject'
 import prefixer from '../utils/prefixer'
-import insertRule from '../utils/globalStyleSheet'
-import generateUniqueClassName from '../utils/generateUniqueClassName'
+import GlobalStyleSheet from '../utils/GlobalStyleSheet'
 import getFontFormat from '../utils/getFontFormat'
-
-const fontProperties = ['fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange']
+import generateClassName from '../utils/generateClassName'
+import cssifyObject from '../utils/cssifyObject'
 
 export default {
   /**
-  * Generates a styleSheet with an scopeId applied to every selector
-  * The scopeId refers to the Component that is responsible for resolving those styles
-  * @param {Object|string} Component - React Component that the styles refer to
-  * @param {styles} styles - Style selector or Object with selectors
-  */
+   * Generates a styleSheet with an scopeId applied to every selector
+   * The scopeId refers to the Component that is responsible for resolving those styles
+   * @param {Object|string} Component - React Component that the styles refer to
+   * @param {styles} styles - Style selector or Object with selectors
+   */
   create(Component, styles) {
     if (Component !== undefined && styles && Object.keys(styles).length > 0) {
       // Either take the Components "name" itself or just a pure string as scope
@@ -46,64 +44,61 @@ export default {
 
   /**
    * A global StyleSheet that directly applies to your DOM.
-   * @param {Object} config - a configuration object
+   * @param {Object} selectors - a set of style objects
+   * @param {string?} scope - additional scoping selector
+   * @param {string?} userAgent - custom userAgent
    */
-  toCSS(selectors, config = {}) {
+  toCSS(selectors, scope = '', userAgent) {
     if (!selectors || selectors instanceof Object === false) {
       return false
     }
-
-    Object.keys(selectors).forEach(selector => {
-      insertRule((config.scope ? config.scope + ' ' : '') + selector, cssifyObject(selectors[selector], config))
-    })
+    const CSSRule = Object.keys(selectors).map(selector => scope + selector + '{' + cssifyObject(selectors[selector]) + '}', userAgent).join('')
+    GlobalStyleSheet.insertRule(CSSRule)
   },
 
   /**
    * Adds keyframe animations to the global StyleSheet and returns the animation name
-   * @param {Object} config - a configuration object
+   * @param {Object} frames - keyframes that get inserted
+   * @param {string?} name - custom animation name
+   * @param {string?} userAgent - custom userAgent
    */
-  keyframes(frames, config = {}) {
+  keyframes(frames, name, userAgent) {
     if (!frames || frames instanceof Object === false) {
       return false
     }
 
-    const name = config.name ? config.name : generateUniqueClassName(frames)
-    const selector = `@${prefixer(config.userAgent).prefixedKeyframes} ${name}`
+    const animationName = name ? name : generateClassName(frames)
+    const prefix = '@' + prefixer(userAgent).prefixedKeyframes + ' ' + animationName
 
-    // Generating a CSS string which can be included
-    let CSS = ''
-    Object.keys(frames).forEach(percentage => {
-      CSS += `${percentage}{${cssifyObject(frames[percentage], config)}}`
-    })
-    if (name) {
-      insertRule(selector, CSS)
-    }
-    return name
+    GlobalStyleSheet.insertStyles(frames, '', prefix, userAgent)
+    return animationName
   },
 
-  /*
-  * Adds a new font family to the global StyleSheet for global usage
-  * @param {string} fontFamily - font-family for global usage
-  * @param {string|Array} files - source files refering to the font files
-  * @param {Object} properties - additional font properties including fontWeight, fontStretch, fontStyle, unicodeRange
-  */
-  fontFace(fontFamily, files, properties) {
+  /**
+   * Adds a new font family to the global StyleSheet for global usage
+   * @param {string} fontFamily - font-family for global usage
+   * @param {string|Array} files - source files refering to the font files
+   * @param {Object} properties - additional font properties including fontWeight, fontStretch, fontStyle, unicodeRange
+   * @param {string?} userAgent - custom userAgent
+   */
+  fontFace(fontFamily, files, properties, userAgent) {
     if (!files) {
       return false
     }
 
     // Generates a style object including all font information
     const fontFace = {
-      fontFamily: `'${fontFamily}'`,
-      src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`) : files
+      fontFamily: '\'fontFamily}\'',
+      src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`).join(',') : files
     }
 
     // Filter the properties to only include valid properties
     if (properties && properties instanceof Object) {
+      const fontProperties = ['fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange']
       Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => fontFace[fontProp] = properties[fontProp])
     }
 
-    insertRule('@font-face', cssifyObject(fontFace))
+    GlobalStyleSheet.insertStyles(fontFace, '', '@font-face', userAgent)
     return fontFamily
   }
 }

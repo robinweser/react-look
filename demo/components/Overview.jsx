@@ -37,4 +37,4 @@ const styles = StyleSheet.create(Overview, {
   color: 'rgb(82, 67, 203)'
 })
 
-export default Look(Overview)
+export default Look(Overview, {lookRoot: true})

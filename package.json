@@ -18,7 +18,7 @@
     "url": "https://github.com/rofrischmann/react-look"
   },
   "scripts": {
-    "bundle": "npm run transpile && mkdir dist && npm run bundle:core && npm run bundle:look && npm run bundle:dom && npm run bundle:addons",
+    "bundle": "npm run babel && mkdir dist && npm run bundle:core && npm run bundle:look && npm run bundle:dom && npm run bundle:addons",
     "bundle:addons": "browserify src/addons.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-addons.min.js",
     "bundle:core": "browserify src/core.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-core.min.js",
     "bundle:dom": "browserify src/dom.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-dom.min.js",
@@ -29,13 +29,13 @@
     "demo:universal": "concurrent --kill-others \"npm run demo\" \"npm start\"",
     "start": "babel-node demo/server.js",
     "lint": "eslint src",
-    "package": "npm run transpile && node build-package.js",
-    "pretest": "npm run transpile",
+    "package": "npm run babel && node build-package.js",
+    "pretest": "npm run babel",
     "release": "npm run package && npm publish",
     "test": "npm run lint && mocha --recursive --compilers js:babel-core/register",
     "test:coverage": "istanbul cover _mocha -- --recursive --compilers js:babel-core/register",
     "test:watch": "mocha --recursive --compilers js:babel-core/register -w",
-    "transpile": "npm run clean && babel -d lib src"
+    "babel": "npm run clean && babel -d lib src"
   },
   "keywords": [
     "react",

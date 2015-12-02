@@ -12,5 +12,6 @@ export default function alternativeValue(styles, scopeArgs, config) {
       styles[property] = alternativeValue(value, scopeArgs, config)
     }
   })
+
   return styles
 }

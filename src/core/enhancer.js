@@ -1,6 +1,6 @@
 import resolveStyles from './resolver'
-import { Component } from 'react'
-
+import CSSStyleSheet from '../components/CSSStyleSheet'
+import React, { Component } from 'react'
 /**
  * Main wrapper that maps your styles to a React Component
  * @param {Object} CustomComponent - a valid React Component that gets styles applied
@@ -27,8 +27,19 @@ export default (CustomComponent, config = {}) => {
     }
 
     render() {
-      const renderedElement = stateless ? CustomComponent(this.props) : super.render() // eslint-disable-line
-      return resolveStyles(this, renderedElement, config)
+      const renderedElement = stateless ? CustomComponent(this.props, this.context) : super.render() // eslint-disable-line
+      const content = resolveStyles(this, renderedElement, config)
+
+      if (config.lookRoot) {
+        return (
+          <div>
+            {content}
+            <CSSStyleSheet />
+          </div>
+        )
+      }
+
+      return content
     }
   }
 
