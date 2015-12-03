@@ -6,6 +6,7 @@ import prefixer from './plugins/prefixer'
 
 // devTools
 import styleLogger from './plugins/devTools/styleLogger'
+import noVendorPrefixes from './plugins/devTools/noVendorPrefixes'
 
 // Conditions
 import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/condition'
@@ -47,7 +48,8 @@ export default {
     prefixer
   },
   DevTools: {
-    styleLogger
+    styleLogger,
+    noVendorPrefixes
   },
   Mixins: {
     // Conditions

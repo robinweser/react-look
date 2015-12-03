@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Look, {StyleSheet} from '../lib/dom'
+import Color from 'color'
 
  class Condition extends Component {
    constructor(props) {
@@ -80,7 +81,7 @@ const styles = StyleSheet.create(Condition, {
     border: '1px solid gray',
     fontSize: 17,
     'clicks<20' : {
-      backgroundColor: (props, state) => 'red' //Color('green').alpha((state.clicks + 1) / 20).rgbString()
+      backgroundColor: (props, state) => Color('green').alpha((state.clicks + 1) / 20).rgbString()
     },
     'clicks=20' : {
       backgroundColor: 'green'

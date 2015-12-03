@@ -3,7 +3,7 @@ import cssifyObject from '../../utils/cssifyObject'
 /**
  * Logs styles according to different settings
  */
-export default (styles, {Component, element, newProps}, {styleLogger}) => {
+export default (styles, {Component, element, newProps}, {styleLogger}) => { //eslint-disable-line
   if (styleLogger) {
     // Logger information
     const {ref, key} = element
