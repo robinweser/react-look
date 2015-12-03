@@ -4,11 +4,11 @@ import statefulValue from '../plugins/statefulValue'
 import mixin from '../plugins/mixin'
 
 // Conditions
-import { equal, unEqual, bigger, smaller, biggerThan, smallerThan } from '../mixins/condition'
+import { equal, unEqual, greater, less, greaterThan, lessThan } from '../mixins/condition'
 
 // Pseudo classes
 import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../mixins/pseudoClasses/childIndex'
-import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../mixins/pseudoClasses/childIndex'
+import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../mixins/pseudoClasses/childTypeIndex'
 import empty from '../mixins/pseudoClasses/empty'
 import firstLetter from '../mixins/pseudoClasses/firstLetter'
 import contains from '../mixins/pseudoClasses/contains'
@@ -27,11 +27,11 @@ export default {
   mixins: {
     // Conditions
     // NOTE: Condition order matters
-    '>=': biggerThan,
-    '<=': smallerThan,
+    '>=': greaterThan,
+    '<=': lessThan,
     '!=': unEqual,
-    '>': bigger,
-    '<': smaller,
+    '>': greater,
+    '<': less,
     '=': equal,
 
     // Extend

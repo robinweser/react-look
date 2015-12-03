@@ -4,6 +4,9 @@ import statefulValue from './plugins/statefulValue'
 import mixin from './plugins/mixin'
 import prefixer from './plugins/prefixer'
 
+// devTools
+import styleLogger from './plugins/styleLogger'
+
 // Conditions
 import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/condition'
 
@@ -33,15 +36,16 @@ import mediaQuery from './mixins/mediaQuery'
 import platformQuery from './mixins/platformQuery'
 
 // Presets
-import nativePreset from '../presets/react-native'
-import domPreset from '../presets/react-dom'
+import nativePreset from './presets/react-native'
+import domPreset from './presets/react-dom'
 
 export default {
   Plugins: {
     mixin,
     alternativeValue,
     statefulValue,
-    prefixer
+    prefixer,
+    styleLogger
   },
   Mixins: {
     // Conditions
