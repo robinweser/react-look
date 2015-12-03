@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7
+### 0.7.0 (03.12.15)
+##### Breaking
+- server-side rendering support
+- new package structure with configuration presets
+
+##### Improvements
+- updated [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer/blob/master/Changelog.md#054-031215) to 0.5.4
+- `:valid`, `:invalid`, `:in-range` and `:out-of-range` pseudo classes
+- Switched to [Webpack](https://webpack.github.io) for the demo
+- Updated to [Babel 6](https://babeljs.io)
+- configuration can now be passed as a prop named `lookConfig`
+
 ## 0.6
 ### 0.6.2 Hotfix (25.11.15)
 - updated [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer) to 0.5.2
@@ -10,11 +23,14 @@
 - platform queries now allow multiple platforms e.g. `@platform ios android`
 
 ### 0.6.0 (19.11.15)
-- Huge documentation refactoring
-- Renamed `customProperty` to `mixin`
+##### Breaking Changes
 - [platform queries](docs/Mixins.md#platformqueries) `@platform`
 - [keyframes API](docs/api/StyleSheet.md) `StyleSheet.keyframes`
 - [font-face API](docs/api/StyleSheet.md) `StyleSheet.fontFace`
+
+##### Improvements
+- Huge documentation refactoring
+- Renamed `customProperty` to `mixin`
 - updated [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer)
 - [stateful styles](docs/StatefulCondition.md) now support `context` as third parameter
 - [Polyfill](docs/plugins/Mixin.md#pseudotocss) to support any CSS pseudo class by adding a global CSSRule
@@ -33,9 +49,12 @@
 - Small bugfix that prevented `:focus` to work.
 
 ### 0.5.0 (19.10.15)
-- stateless wrapper by passing a **config** object
+##### Breaking
 - all new **plugin** system
 - **scoped** styles and performant style resolving
+
+##### Improvements
+- stateless wrapper by passing a **config** object
 
 ## old versions
 Actually a lot of fast development happened in the beginning which is why there was no changelog at all.

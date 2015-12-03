@@ -6,17 +6,14 @@ Using State you can get/set special states for specific components.<br>
 ## Usage
 
 ```javascript
-import {Look, State} from 'react-look/dom'
+import { Look, State } from 'react-look'
 
-@Look
-class Header extends React.Component {
-  render(){
-    <div>
-      <span look={styles} key="first">First</span>
-      <span look={styles} key="second">Second</span>
-    </div>
-  }
-}
+let Header = () => (
+  <div>
+    <span look={styles} key="first">First</span>
+    <span look={styles} key="second">Second</span>
+  </div>
+)
 
 const styles = StyleSheet.create(Header, {
   ':active': {
@@ -27,15 +24,18 @@ const styles = StyleSheet.create(Header, {
   }
 })
 
+Header = Look(Header)
+
 // returns the state as a boolean
 State.getState('hover', Header, 'second')
 State.getState('active', Header, 'first')
 ```
 
-## `react-look/dom` specific action states
+## Available action states
 * hover
 * focus
 * active
+* valid (returns a validity object)
 
 ## Methods
 - [add](#addcontainer--key)

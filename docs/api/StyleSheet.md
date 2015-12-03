@@ -3,23 +3,19 @@ A helper to create scoped styles and global CSS StyleSheets. This helps to impro
 
 ## Methods
 - [create](#createcomponent-styles)
-- [toCSS](#tocssstyles--config)
-- [keyframes](#keyframesframes--config)
-- [fontFace](#fontfacefontfamily-files--properties-config)
+- [toCSS](#tocssstyles--scope-useragent)
+- [keyframes](#keyframesframes--name-useragent)
+- [fontFace](#fontfacefontfamily-files--properties)
 
 
 ### `create(Component, styles)`
 Creates a scoped `styles` object to reduce style resolving when nesting Components enhanced by Look. The scope also serves as reference to the used `Component`.
 > NOTE: This is optional as you may also use a plain JavaScript object as styles, but it improves rendering performance and is considered best practice.
 
-### `toCSS(styles [, config])`
-Adds all `styles` as a valid CSS string and directly applies those to the global CSSStyleSheet. <br>
+### `toCSS(styles [, scope, userAgent])`
+> Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
 
-##### `config` (optional)
-
-* `scope`: Specificity selector which gets added before every selector *(e.g. `.#demo-container`)*
-* `unit`: Unit that gets added to number values *(default to `px`)*
-* `userAgent`: userAgent used to detect required vendor-prefixes
+Adds all `styles` as a valid CSS string and directly applies those to the global CSSStyleSheet. `scope` will also add a scope selector to add more specificity.
 
 ```javascript
 StyleSheet.toCSS({
@@ -33,15 +29,11 @@ StyleSheet.toCSS({
 	}
 })
 ```
-### `keyframes(frames [, config])`
+### `keyframes(frames [, name, userAgent])`
+> Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
+
 Adds the `frames` as a new keyframe animation to the global CSSStyleSheet and returns the animation name.
-`frames` should be an object containing a set of percentage-based styles. or both `from` and `to` values.<br>
-
-##### `config` (optional)
-
-* `name`: animation name if an exact one is needed
-* `unit`: Unit that gets added to number values *(default to `px`)*
-* `userAgent`: userAgent used to detect required vendor-prefixes
+`frames` should be an object containing a set of percentage-based styles. or both `from` and `to` values.<br> You may also pass a custom animation `name`.
 
 ```javascript
 StyleSheet.keyframes({
@@ -58,6 +50,8 @@ StyleSheet.keyframes({
 ```
 
 ### `fontFace(fontFamily, files [, properties])`
+> Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
+
 Adds the `fontFamily` to the global CSSStyleSheet and uses `files` as source for fonts. `files` may either be a string (single) or an array (multiple).<br>
 `properties` may contain additional font properties which are `fontWeight`, `fontStretch`, `fontStyle` and  `unicodeRange`.
 

@@ -1,5 +1,9 @@
 # Upgrade guide
 
+## 0.7
+* `react-look/dom` & `react-look/native` are both deprecated and will be removed soon. [Configure](./configureLook.md) your own Look instance or use a preset.
+* You need to add `lookRoot: true` to your top-level Component's configuration in order to render global CSS rules correctly.
+
 ## 0.5
 Coming from a version below 0.5 needs some code refactoring to get Look working properly.
 
