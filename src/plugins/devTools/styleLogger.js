@@ -1,12 +1,12 @@
-import getChildType from '../utils/getChildType'
-import cssifyObject from '../utils/cssifyObject'
+import getChildType from '../../utils/getChildType'
+import cssifyObject from '../../utils/cssifyObject'
 /**
  * Logs styles according to different settings
  */
-export default (styles, {Component, element, newProps} , {styleLogger}) => {
+export default (styles, {Component, element, newProps}, {styleLogger}) => {
   if (styleLogger) {
     // Logger information
-    const {ref, key, type} = element
+    const {ref, key} = element
 
     const childType = getChildType(element)
 
@@ -18,7 +18,6 @@ export default (styles, {Component, element, newProps} , {styleLogger}) => {
 
     const loggerPrefix = Component._lookScope + ':' + elementInfo + ''
     const logStyles = styleLogger.string ? cssifyObject(styles) : styles
-
 
 
     // logs styles if element is clicked

@@ -5,7 +5,7 @@ import mixin from './plugins/mixin'
 import prefixer from './plugins/prefixer'
 
 // devTools
-import styleLogger from './plugins/styleLogger'
+import styleLogger from './plugins/devTools/styleLogger'
 
 // Conditions
 import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/condition'
@@ -44,7 +44,9 @@ export default {
     mixin,
     alternativeValue,
     statefulValue,
-    prefixer,
+    prefixer
+  },
+  DevTools: {
     styleLogger
   },
   Mixins: {
