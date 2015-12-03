@@ -1,10 +1,13 @@
+// Plugins
 import alternativeValue from './plugins/alternativeValue'
 import statefulValue from './plugins/statefulValue'
 import mixin from './plugins/mixin'
 import prefixer from './plugins/prefixer'
-import stringSyntax from './plugins/stringSyntax'
 
+// Conditions
 import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/condition'
+
+// Pseudo classes
 import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from './mixins/pseudoClasses/childIndex'
 import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from './mixins/pseudoClasses/childTypeIndex'
 import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from './mixins/pseudoClasses/input'
@@ -18,31 +21,49 @@ import blank from './mixins/pseudoClasses/blank'
 import firstLetter from './mixins/pseudoClasses/firstLetter'
 import contains from './mixins/pseudoClasses/contains'
 import substr from './mixins/pseudoClasses/substr'
+
+// CSS extraction
 import extractCSS from './mixins/extractCSS'
+
+// Extending
 import extend from './mixins/extend'
+
+// Queries
 import mediaQuery from './mixins/mediaQuery'
 import platformQuery from './mixins/platformQuery'
+
+// Presets
+import nativePreset from '../presets/react-native'
+import domPreset from '../presets/react-dom'
 
 export default {
   Plugins: {
     mixin,
     alternativeValue,
     statefulValue,
-    prefixer,
-    stringSyntax
+    prefixer
   },
   Mixins: {
+    // Conditions
     greaterThan,
     lessThan,
     unEqual,
     greater,
     less,
     equal,
+
+    // Extending
     extend,
+
+    // CSS extraction
     extractCSS,
-    empty,
+
+    // Queries
     mediaQuery,
     platformQuery,
+
+    // Pseudo classes
+    empty,
     firstChild,
     lastChild,
     onlyChild,
@@ -76,5 +97,9 @@ export default {
     target,
     contains,
     substr
+  },
+  Presets: {
+    'react-native': nativePreset,
+    'react-dom': domPreset
   }
 }
