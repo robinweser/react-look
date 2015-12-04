@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Look, { StyleSheet } from '../lib/dom'
+import Look, { StyleSheet } from '../../../lib/look'
 
 const Media = () => (
 <div look={styles}>
@@ -9,6 +9,8 @@ const Media = () => (
 
 const styles = StyleSheet.create(Media, {
   padding: 40,
+  color: 'white',
+  fontSize: 20,
   backgroundColor: 'red',
   '@media (max-width: 500px)': {
     backgroundColor: 'blue'

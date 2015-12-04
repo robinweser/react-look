@@ -1,5 +1,5 @@
-import React, {Component, Children, PropTypes} from 'react'
-import Look, {StyleSheet} from '../../lib/dom'
+import React, { Component, PropTypes } from 'react'
+import Look, { StyleSheet } from '../../../lib/look'
 
 class ChildIndex extends Component {
   static defaultProps = {
@@ -11,7 +11,7 @@ class ChildIndex extends Component {
   }
   render() {
     //create a small list of items to demonstrate nth-child, et cetera
-    let list = this.props.items.map((text,index) => {
+    let list = this.props.items.map((text, index) => {
       return <li look={styles} key={'.' + index}>ListItem {text}</li>
     })
 

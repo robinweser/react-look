@@ -1,5 +1,7 @@
-import ReactDOM from 'react-dom'
 import React from 'react'
+import { render } from 'react-dom'
+import { Presets } from '../lib/addons'
+
 import App from './app.jsx'
 
-ReactDOM.render(<App />, document.getElementById('app'))
+render(<App lookConfig={Presets['react-dom']} />, document.getElementById('app'))
