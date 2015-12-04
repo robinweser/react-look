@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import Look, { StyleSheet } from '../../../lib/look'
 
-const Media = () => (
-<div look={styles}>
-    Resize Me!
-  </div>
-)
+const Media = () => <div look={styles}>Resize your window</div>
 
 const styles = StyleSheet.create(Media, {
   padding: 40,
+  textAlign: 'center',
   color: 'white',
-  fontSize: 20,
+  fontSize: 40,
   backgroundColor: 'red',
   '@media (max-width: 500px)': {
     backgroundColor: 'blue'

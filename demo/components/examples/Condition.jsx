@@ -34,7 +34,7 @@ class Condition extends Component {
   render () {
     const getText = (clicks) => {
       if(clicks < 20) {
-        return 'Click Me! ' + (20 - clicks) + ' times left.'
+        return 'Click me ' + (20 - clicks) + ' times'
       } else if (clicks === 20) {return 'HORRAAAY!'} else {
         return 'Alright stop it. ' + clicks + ' clicks'
       }
@@ -42,7 +42,7 @@ class Condition extends Component {
 
     return (
       <div>
-        <div look={styles.states} onClick={this.onClick}>Click Me! Active Mode: {this.state.mode}</div>
+        <div look={styles.states} onClick={this.onClick}>Click me<br /> Active state: {this.state.mode}</div>
         <div look={styles.clicks} onClick={this.onClicksCount}>{getText(this.state.clicks)}</div>
       </div>
     )
@@ -57,7 +57,7 @@ const buttonStyles = {
   color: 'black',
   borderRadius: 5,
   textAlign: 'center',
-  border: '1px solid gray',
+  border: '1px solid lightgray',
   boxShadow: '0px 1px 2px rgba(0,0,0,0.34)'
 }
 const styles = StyleSheet.create(Condition, {

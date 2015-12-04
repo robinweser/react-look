@@ -19,9 +19,9 @@ const styles = StyleSheet.create(Container, {
   container: {
     width: '100%',
     boxSizing: 'border-box',
-    marginBottom: 50,
+    marginBottom: 70,
     'group=true': {
-      paddingTop: 10,
+      paddingTop: 50,
       margin: '0 auto',
       maxWidth: 900,
       minWidth: 500,

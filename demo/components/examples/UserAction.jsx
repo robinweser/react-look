@@ -4,8 +4,8 @@ import Look, { State, StyleSheet } from '../../../lib/look'
 
 class UserAction extends Component {
   render() {
-    const states = {hover: 'Now click me!', active: 'Well done.'}
-    let stateLabel = 'Hover me!'
+    const states = {hover: 'Now click me', active: 'Well done'}
+    let stateLabel = 'Hover me'
 
     Object.keys(states).forEach(state => {
       if (State.getState(state, this, 'both')) {
@@ -15,8 +15,8 @@ class UserAction extends Component {
 
     return (
       <div>
-        <div key="active" look={[styles.button, styles.activeButton]}>Click me!</div>
-        <div key="hover" look={[styles.button, styles.hoverButton]}>Hover me!</div>
+        <div key="active" look={[styles.button, styles.activeButton]}>Click me</div>
+        <div key="hover" look={[styles.button, styles.hoverButton]}>Hover me</div>
         <br/>
         <div>State-API live example</div>
         <div key="both" look={[styles.button, styles.stateButton]}>{stateLabel}</div>
@@ -30,30 +30,28 @@ const styles = StyleSheet.create(UserAction, {
     margin: 10,
     padding: 5,
     fontSize: 20,
-    border: '1px solid black',
     color: 'black',
     borderRadius: 5,
     textAlign: 'center',
-    boxShadow: '0px 1px 2px rgba(0,0,0,0.2)'
+    border: '1px solid lightgray',
+    boxShadow: '0px 1px 2px rgba(0,0,0,0.34)'
   },
   hoverButton: {
     ':hover': {
-      backgroundColor: 'darkblue',
-      color: 'white'
+      backgroundColor: 'rgba(0, 0, 255, 0.3)'
     }
   },
   activeButton: {
     ':active': {
-      backgroundColor: 'red'
+      backgroundColor: 'rgba(255, 0, 0, 0.3)'
     }
   },
   stateButton: {
     ':hover': {
-      backgroundColor: 'green'
+      backgroundColor: 'rgba(0, 255, 0, 0.3)'
     },
     ':active': {
-      backgroundColor: 'black',
-      color: 'white'
+      backgroundColor: 'rgba(0, 0,0, 0.3)'
     }
   }
 })

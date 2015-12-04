@@ -47,10 +47,11 @@ export default (CustomComponent, config = {}) => {
       const contextConfig = this.context ? this.context._lookConfig : {}
       const propsConfig = this.props ? this.props.lookConfig : {}
 
-      // Compose all possible ways to configure Look
-      const composedConfig = assign({}, contextConfig, propsConfig, config)
-
       const renderedElement = stateless ? CustomComponent(this.props, this.context) : super.render() // eslint-disable-line
+
+      // Compose all possible ways to configure Look
+      const composedConfig = assign({}, contextConfig, propsConfig, renderedElement.props.lookConfig, config)
+
       const content = resolveStyles(this, renderedElement, composedConfig)
 
       // This mechanism was heavily inspired by Radium which passes

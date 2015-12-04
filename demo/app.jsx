@@ -7,6 +7,8 @@ import ChildIndex from './components/examples/ChildIndex.jsx'
 import Input from './components/examples/Input.jsx'
 import Condition from './components/examples/Condition.jsx'
 import Media from './components/examples/Media.jsx'
+import Keyframes from './components/examples/Keyframes.jsx'
+import Platform from './components/examples/Platform.jsx'
 
 // Global CSS styles
 StyleSheet.toCSS({
@@ -23,7 +25,7 @@ StyleSheet.toCSS({
 const App = () => (
 <div>
 		<h1 look={styles}>Look Examples</h1>
-		<Container group title="1. Pseudo Classes">
+		<Container group title="1. Pseudo classes">
 			<Container title="1.1. user action">
 				<UserAction />
 			</Container>
@@ -46,6 +48,18 @@ const App = () => (
 				<Media />
 			</Container>
 		</Container>
+
+    <Container group title="4. Platform queries">
+      <Container noPadding>
+        <Platform />
+      </Container>
+    </Container>
+
+    <Container group title="5. Keyframe animations">
+      <Container noPadding description="Using the StyleSheet.keyframes helper">
+        <Keyframes />
+      </Container>
+    </Container>
 	</div>
 )
 
