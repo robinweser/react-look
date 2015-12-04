@@ -1,8 +1,8 @@
 import resolveStyles from './resolver'
 import CSSStyleSheet from '../components/CSSStyleSheet'
 import React, { Component, PropTypes } from 'react'
+import assignDeep from 'object-assign-deep'
 import assign from 'object-assign'
-
 /**
  * Main wrapper that maps your styles to a React Component
  * @param {Object} CustomComponent - a valid React Component that gets styles applied
@@ -51,7 +51,8 @@ export default (CustomComponent, config = {}) => {
 
       // Compose all possible ways to configure Look
       const elementConfig = renderedElement && renderedElement.props ? renderedElement.props.lookConfig : {}
-      const composedConfig = assign({}, contextConfig, propsConfig, elementConfig, config)
+      debugger
+      const composedConfig = assignDeep({}, contextConfig, propsConfig, elementConfig, config)
 
       const content = resolveStyles(this, renderedElement, composedConfig)
 

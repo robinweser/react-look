@@ -9,6 +9,7 @@ import Condition from './components/examples/Condition.jsx'
 import Media from './components/examples/Media.jsx'
 import Keyframes from './components/examples/Keyframes.jsx'
 import Platform from './components/examples/Platform.jsx'
+import Pseudo from './components/examples/Pseudo.jsx'
 
 // Global CSS styles
 StyleSheet.toCSS({
@@ -35,10 +36,13 @@ const App = () => (
 			<Container title="1.3. input">
 				<Input />
 			</Container>
+      <Container title="1.4. other">
+        <Pseudo />
+      </Container>
 		</Container>
 
 		<Container group title="2. Stateful conditions">
-			<Container description="Styles depend on props, state & context" title="2.1. stateful styles">
+			<Container description="Styles depend on props, state & context">
 				<Condition />
 			</Container>
 		</Container>

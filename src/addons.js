@@ -24,6 +24,7 @@ import substr from './mixins/pseudoClasses/substr'
 
 // CSS extraction
 import extractCSS from './mixins/extractCSS'
+import pseudoToCSS from './mixins/pseudoToCSS'
 
 // Extending
 import extend from './mixins/extend'
@@ -57,6 +58,7 @@ export default {
 
     // CSS extraction
     extractCSS,
+    pseudoToCSS,
 
     // Queries
     mediaQuery,

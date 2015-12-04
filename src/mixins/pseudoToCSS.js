@@ -1,4 +1,4 @@
-import GlobalStyleSheet from './GlobalStyleSheet'
+import GlobalStyleSheet from '../utils/GlobalStyleSheet'
 import extractCSS from './extractCSS'
 
 // Converts pseudo class styles to a global CSSRule and returns the className

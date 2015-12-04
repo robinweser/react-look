@@ -30,8 +30,12 @@ const createPseudoElement = styles => {
 }
 
 const initChildren = props => {
-  if (!props.hasOwnProperty('children')) {
+  if (!props.children) {
     props.children = []
+  }
+
+  if (props.children instanceof Array !== true) {
+    props.children = [props.children]
   }
 }
 

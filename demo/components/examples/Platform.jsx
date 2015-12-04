@@ -33,8 +33,8 @@ class Platform extends Component {
         </div>
         <div look={styles.platform}>
           <span>On iOS I am blue</span>
-          <span>On Android I am red</span>
-          <span>On default I am gray</span>
+          <span>On android I am red</span>
+          <span>On others I am gray</span>
         </div>
       </div>
     )
