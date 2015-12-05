@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Advanced & Dynamic Component Styling for React & React Native",
   "main": "look.js",
   "files": [
@@ -30,7 +30,7 @@
     "demo:dev": "npm run babel && npm run demo",
     "start": "babel-node demo/server.js",
     "lint": "eslint src",
-    "package": "npm run babel && node build-package.js",
+    "package": "npm run test && npm run bundle && node build-package.js",
     "pretest": "npm run babel",
     "release": "npm run package && npm publish",
     "test": "npm run lint && mocha --recursive --compilers js:babel-core/register",
@@ -59,8 +59,9 @@
   "dependencies": {
     "assign-styles": "2.0.0",
     "dot-prop": "^2.2.0",
-    "inline-style-prefixer": "^0.5.3",
-    "object-assign": "^4.0.1"
+    "inline-style-prefixer": "^0.5.4",
+    "object-assign": "^4.0.1",
+    "object-assign-deep": "0.0.4"
   },
   "devDependencies": {
     "babel": "^6.1.18",

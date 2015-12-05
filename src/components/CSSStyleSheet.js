@@ -4,7 +4,7 @@ import GlobalStyleSheet from '../utils/GlobalStyleSheet'
 export default class CSSStyleSheet extends Component {
   constructor(props) {
     super(...arguments)
-    const CSSString = GlobalStyleSheet.getCSSString(props.userAgent)
+    const CSSString = GlobalStyleSheet.getCSSString(props.userAgent) //eslint-disable-line
     this.state = {CSSString: CSSString}
   }
 
@@ -18,13 +18,15 @@ export default class CSSStyleSheet extends Component {
   }
 
   updateCSSString = () => {
-    const CSSString = GlobalStyleSheet.getCSSString(this.props.userAgent)
+    const CSSString = GlobalStyleSheet.getCSSString(this.props.userAgent) //eslint-disable-line
     this.setState({CSSString: CSSString})
   }
 
   render() {
-    return <style dangerouslySetInnerHTML={{
+    return (
+      <style dangerouslySetInnerHTML={{
         __html: this.state.CSSString
       }} />
+    )
   }
 }

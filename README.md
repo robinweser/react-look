@@ -3,59 +3,46 @@
 ![TravisCI](https://travis-ci.org/rofrischmann/react-look.svg?branch=develop) [![Code Climate](https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg)](https://codeclimate.com/github/rofrischmann/react-look)
 [![npm version](https://badge.fury.io/js/react-look.svg)](http://badge.fury.io/js/react-look)
 ![Dependencies](https://david-dm.org/rofrischmann/react-look.svg)
-![Gzipped Size](https://img.shields.io/badge/gzipped-~6k-blue.svg)
+![Gzipped Size](https://img.shields.io/badge/gzipped-~17k-blue.svg)
 
 **Look** is a modular, **plugin**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://github.com/facebook/react-native) using **inline styles**.
 It simplyfies how you are styling your Components and comes in two different configurations by default.
 
 # Features
-- ECMAScript 2015 (ES6) Classes & `React.createClass`
+- ECMAScript 2015 Classes
+- `React.createClass`
 - stateless Components
-- [15 pseudo classes](docs/plugins/Mixin.md#pseudo-classes.md)
-- [stateful styles](docs/plugins/Mixin.md#stateful-conditions.md) (condition based)
-- nesting
+- configurable
+- server-side rendering
 - [plugins](docs/Plugins.md)
-- [extending](docs/plugins/Mixin.md#extend)
-- modular & themeable
-- [State API](docs/api/State.md)
-
-The `react-look/dom` package also adds additional DOM-specific mixins as well as a vendor-prefixing plugin.<br>
- ![Gzipped Size](https://img.shields.io/badge/gzipped-~14k-blue.svg)
-
-- [media queries](docs/plugins/Mixin.md#media-queries.md)
-- [platform queries](docs/plugins/Mixin.md#platform-queries.md)
-- [34 pseudo classes](docs/plugins/Mixin.md#pseudo-classes.md)
+- nesting
+- [34 pseudo classes](docs/Mixins.md#pseudo-classes.md)
+- [stateful styles](docs/Mixins.md#stateful-conditions.md) (condition based)
+- [extending](docs/Mixins.md#extend)
+- [media queries](docs/Mixins.md#media-queries.md)
+- [platform queries](docs/Mixins.md#platform-queries.md)
 - [vendor prefixing](docs/plugins/Prefixer.md)
 - [pseudo to CSS polyfill](docs/plugins/Mixin.md#pseudo-to-css)
 - [font-face API](docs/api/StyleSheet.md#font-face)
 - [keyframes API](docs/api/StyleSheet.md#keyframes)
 - [CSS API](docs/api/StyleSheet.md##tocssstyles--scope-media-id)
+- [State API](docs/api/State.md)
 
-### [Supported pseudo classes](docs/plugins/Mixin.md#supported-pseudo-classes)
-# Benefit
-Using inline styles instead of static CSS files has a lot of positive side-effects. The most important one is **dynamic behavior**.<br>Remember you're using JavaScript now. Your styles no longer belong to a static file but are just a plain javascript object which can be manipulated, extended or iterated to fit your very own needs.
-
-* **Component-scoped:**
-As JSX brings your View-structure to JavaScript, Look adds your **styling** (CSS) as well.<br>
-It encourages you to define your styles scoped to your Component which helps to improve your app structure and keeps together all Component-relevant data. One file less to create.
-* **Separation of Concerns:**
-Look tries to keep your styling separated from your logic as much as possible while other styling libraries often encourage style validations such as `this.state.checked && styles.checked` within your `render()`-method.
+### [Supported pseudo classes](docs/Mixins.md#supported-pseudo-classes)
 
 # Usage
-> Coming from version < 0.5? Check the [upgrade guide](docs/guides/upgradeLook.md).
+> Upgrading from an older major update? Check out the [upgrade guide](docs/guides/upgradeLook.md).
 
 ```sh
 npm install react-look
 ```
 The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries. Use nested objects to define pseudo classes, media queries or conditioned styles. <br>
 
-The example uses an ES7 decorator which is not part of the ECMAScript specification by now (and perhaps will never be). Alternatively just wrap your Component e.g. `Header = Look(Header)`<br>
 
 ```javascript
 import React, { Component, PropTypes } from 'react'
-import Look, { StyleSheet } from 'react-look/dom'
+import Look, { StyleSheet } from 'react-look'
 
-@Look
 class Header extends Component {
   static defaultProps = {size: 24}
   static propTypes = {size: PropTypes.number.isRequired}
@@ -100,6 +87,8 @@ const styles = StyleSheet.create(Header, {
     fontSize: (props, state, context) => props.size * state.zoom
   }
 })
+
+export default Look(Header)
 ```
 ### Stateless Components
 With Look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14. *(Currently Look creates a Stateful Component for instant support)*
@@ -121,23 +110,32 @@ As you are most likely using the `StyleSheet.create` provided by React Native. Y
 
 > NOTE: React Native does not support every ECMAScript 2015 (ES6) & ECMAScript 2016 (ES7) feature out of the box and it could be quite a mess to get it running properly though.
 
-### Different packages
-If you're wondering which package you should use. This depends on your needs.
+### Configuration
+Look ships without any plugin or mixin configured. You need to configure them on your own or use one of the presets.<br>
+`react-look/addons` includes every plugin, mixin, devTool and preset used to configure  Look.
+```javascript
+import { Presets, DevTools } from 'react-look/addons'
 
-#### Preconfigured
-* `react-look` includes everything available for both React and React Native.
-* `react-look/dom` adds a lot of DOM-only plugins and custom properties.
+const customConfig = Presets['react-dom']
+customConfig.plugins.push(DevTools.styleLogger)
 
-#### Do it yourself
-* `react-look/core` is used if you want to use a [custom configuration](docs/guides/configureLook.md) for Look.
-* `react-look/addons` includes every plugin, mixin and tools used to configure your custom Look instance.
+// By default you pass your configuration as
+// lookConfig to your root Component
+ReactDOM.render(<App lookConfig={customConfig} />, document.getElementById('app'))
+```
+
+Check out the detailed [configuration guide](docs/guides/configureLook.md).
 
 # Demo
-Check out the provided examples for some special use cases. See them in action using the demo. You can visit the [live-demo](http://rofrischmann.de/react-look/) *(Caution: This is outdated right now)* or  easily run the examples on your own within the provided demo by just:
+Check out the provided examples for some special use cases. See them in action using the demo. You can easily run the examples on your own within the provided demo by just:
 ```sh
 git clone --bare https://github.com/rofrischmann/react-look.git
 npm install
+npm run babel
+# run this as a client-side only demo
 npm run demo
+# run this as a universal demo
+npm run demo:universal
 ```
 
 # [Documentation](docs/Docs.md#table-of-contents)
