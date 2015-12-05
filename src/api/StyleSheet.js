@@ -1,8 +1,6 @@
-import prefixer from '../utils/prefixer'
 import GlobalStyleSheet from '../utils/GlobalStyleSheet'
 import getFontFormat from '../utils/getFontFormat'
 import generateClassName from '../utils/generateClassName'
-import cssifyObject from '../utils/cssifyObject'
 
 export default {
   /**
@@ -43,35 +41,29 @@ export default {
   },
 
   /**
-   * A global StyleSheet that directly applies to your DOM.
-   * @param {Object} selectors - a set of style objects
+   * A global StyleSheet that directly applies to your DOM
+   * @param {Object} styles - a set of style objects
    * @param {string?} scope - additional scoping selector
-   * @param {string?} userAgent - custom userAgent
    */
-  toCSS(selectors, scope = '', userAgent) {
-    if (!selectors || selectors instanceof Object === false) {
-      return false
+  toCSS(styles, scope) {
+    if (styles && styles instanceof Object) {
+      const scopeSelector = scope !== undefined && scope.trim() !== '' ? scope + ' ' : ''
+      Object.keys(styles).forEach(selector => GlobalStyleSheet.addSelector(scopeSelector + selector, styles[selector]))
     }
-    const CSSRule = Object.keys(selectors).map(selector => scope + selector + '{' + cssifyObject(selectors[selector]) + '}', userAgent).join('')
-    GlobalStyleSheet.insertRule(CSSRule)
   },
 
   /**
    * Adds keyframe animations to the global StyleSheet and returns the animation name
    * @param {Object} frames - keyframes that get inserted
    * @param {string?} name - custom animation name
-   * @param {string?} userAgent - custom userAgent
    */
-  keyframes(frames, name, userAgent) {
-    if (!frames || frames instanceof Object === false) {
-      return false
+  keyframes(frames, name) {
+    if (frames && frames instanceof Object) {
+      const animationName = name ? name : generateClassName(frames)
+
+      GlobalStyleSheet.addKeyframes(animationName, frames)
+      return animationName
     }
-
-    const animationName = name ? name : generateClassName(frames)
-    const prefix = '@' + prefixer(userAgent).prefixedKeyframes + ' ' + animationName
-
-    GlobalStyleSheet.insertStyles(frames, '', prefix, userAgent)
-    return animationName
   },
 
   /**
@@ -79,26 +71,23 @@ export default {
    * @param {string} fontFamily - font-family for global usage
    * @param {string|Array} files - source files refering to the font files
    * @param {Object} properties - additional font properties including fontWeight, fontStretch, fontStyle, unicodeRange
-   * @param {string?} userAgent - custom userAgent
    */
   fontFace(fontFamily, files, properties, userAgent) {
-    if (!files) {
-      return false
-    }
+    if (files) {
+      // Generates a style object including all font information
+      const fontFace = {
+        fontFamily: '\'fontFamily}\'',
+        src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`).join(',') : files
+      }
 
-    // Generates a style object including all font information
-    const fontFace = {
-      fontFamily: '\'fontFamily}\'',
-      src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`).join(',') : files
-    }
+      // Filter the properties to only include valid properties
+      if (properties && properties instanceof Object) {
+        const fontProperties = ['fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange']
+        Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => fontFace[fontProp] = properties[fontProp])
+      }
 
-    // Filter the properties to only include valid properties
-    if (properties && properties instanceof Object) {
-      const fontProperties = ['fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange']
-      Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => fontFace[fontProp] = properties[fontProp])
+      GlobalStyleSheet.addFontFace(fontFace)
+      return fontFamily
     }
-
-    GlobalStyleSheet.insertStyles(fontFace, '', '@font-face', userAgent)
-    return fontFamily
   }
 }

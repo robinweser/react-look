@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import GlobalStyleSheet from '../utils/GlobalStyleSheet'
 
 export default class CSSStyleSheet extends Component {
-  constructor() {
+  constructor(props) {
     super(...arguments)
-    this.state = {CSSString: GlobalStyleSheet.getCSSString()}
+    const CSSString = GlobalStyleSheet.getCSSString(props.userAgent)
+    this.state = {CSSString: CSSString}
   }
 
   componentDidMount() {
@@ -16,7 +17,8 @@ export default class CSSStyleSheet extends Component {
     this._changeListener.unsubscribe()
   }
 
-  updateCSSString = (CSSString) => {
+  updateCSSString = () => {
+    const CSSString = GlobalStyleSheet.getCSSString(this.props.userAgent)
     this.setState({CSSString: CSSString})
   }
 

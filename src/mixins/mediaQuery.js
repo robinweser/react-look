@@ -5,12 +5,12 @@ import GlobalStyleSheet from '../utils/GlobalStyleSheet'
 import cssifyObject from '../utils/cssifyObject'
 import generateClassName from '../utils/generateClassName'
 
-const CSSMediaQueries = new Set()
+const CSSMediaQueries = new Map()
 
 // Evaluates if a media condition is fulfilled by using window.matchMedia
 export default (property, styles, mixinKey, scopeArgs, config) => {
   const matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
-
+  const query = property.replace(mixinKey, '').trim()
   const {Component, newProps} = scopeArgs
 
   if (!Component._mediaQueryListener) {
@@ -41,10 +41,9 @@ export default (property, styles, mixinKey, scopeArgs, config) => {
   if (matchMedia !== undefined) {
     // Remove polyfilled CSS rules if matchMedia gets available
     if (CSSMediaQueries.size > 0) {
-      CSSMediaQueries.forEach(CSSRule => GlobalStyleSheet.removeRule(CSSRule))
+      CSSMediaQueries.forEach((selectors, media) => selectors.forEach((styles, selector) => GlobalStyleSheet.removeMediaQuery(media, selector)))
     }
-
-    return matchMedia(property.replace(mixinKey, '').trim()).matches ? styles : false
+    return matchMedia(query).matches ? styles : false
   }
 
   // If no window.matchMedia was found Look transforms
@@ -52,10 +51,12 @@ export default (property, styles, mixinKey, scopeArgs, config) => {
   const resolvedStyles = processStyles(styles, newProps, scopeArgs, config)
 
   const className = generateClassName(resolvedStyles)
-  const CSSRule = `${property}{.${className}{${cssifyObject(resolvedStyles)}}}`
+  GlobalStyleSheet.addMediaQuery(query, '.' + className, resolvedStyles)
 
-  GlobalStyleSheet.insertRule(CSSRule)
-  CSSMediaQueries.add(CSSRule)
+  if (!CSSMediaQueries.has(query)) {
+    CSSMediaQueries.set(query, new Set())
+  }
+  CSSMediaQueries.get(query).add('.' + className)
 
   extractCSS(property, className, mixinKey, scopeArgs)
   return true

@@ -1,44 +1,85 @@
+import prefixer from './prefixer'
 import cssifyObject from './cssifyObject'
 import generateClassName from './generateClassName'
 
 export default class CSSContainer {
   constructor() {
-    this.CSSRules = {}
+    this.CSSRules = new Map()
+    this.keyframes = new Map()
+    this.mediaQueries = new Map()
+    this.fontFaces = new Set()
     this._listener = new Set()
   }
 
-  /**
-  * Converts style objects to CSSRules and generates
-  * a unique className if no selector is passed
-  * @param {Object} styles - style object that gets inserted
-  * @param {string?} pseudoSelector - reference pseudo selector
-  */
-  insertStyles(styles, pseudoSelector, selector, userAgent) {
-    const pseudo = pseudoSelector ? pseudoSelector : ''
-
-    if (!selector) {
-      const className = generateClassName(styles)
-      this._addCSS(`.${className}${pseudo}{${cssifyObject(styles, userAgent)}}`)
-      return className
-    }
-
-    this._addCSS(`${selector}${pseudo}{${cssifyObject(styles, userAgent)}}`)
-    return selector
-  }
-
-  insertRule(CSSRule) {
-    this._addCSS(CSSRule)
-  }
-
-  removeRule(CSSRule) {
-    if (this.CSSRules[CSSRule]) {
-      delete this.CSSRules[CSSRule]
+  addSelector(selector, styles) {
+    if (!this.CSSRules.has(selector)) {
+      this.CSSRules.set(selector, styles)
       this._executeListener()
     }
   }
 
-  getCSSString() {
-    return Object.keys(this.CSSRules).join('\n')
+  removeSelector(selector) {
+    if (this.CSSRules.has(selector)) {
+      this.CSSRules.delete(selector)
+      this._executeListener()
+    }
+  }
+
+  addFontFace(fontFace) {
+    const fontFaceString = '@font-face {' + cssifyObject(fontFace) + '}'
+    if (this.fontFaces.has(fontFaceString)) {
+      this.fontFaces.add(fontFaceString)
+      this._executeListener()
+    }
+  }
+
+  addKeyframes(animationName, frames) {
+    if (!this.keyframes.has(animationName)) {
+      this.keyframes.set(animationName, frames)
+      this._executeListener()
+    }
+  }
+
+  removeKeyframes(animationName) {
+    if (this.keyframes.has(animationName)) {
+      this.keyframes.delete(animationName)
+      this._executeListener()
+    }
+  }
+
+  addMediaQuery(media, selector, styles) {
+    if (!this.mediaQueries.has(media)) {
+      this.mediaQueries.set(media, new Map())
+    }
+    if (!this.mediaQueries.get(media).has(selector)) {
+      this.mediaQueries.get(media).set(selector, styles)
+      this._executeListener()
+    }
+  }
+
+  removeMediaQuery(media, selector) {
+    if (this.mediaQueries.has(media)) {
+      if (this.mediaQueries.get(media).has(selector)) {
+        this.mediaQueries.get(media).remove(selector)
+        this._executeListener()
+      }
+    }
+  }
+
+  getCSSString(userAgent) {
+    let CSSString = ''
+
+    const prefixedKeyframes = prefixer(userAgent).prefixedKeyframes
+    this.CSSRules.forEach((styles, selector) => CSSString += selector + '{' + cssifyObject(styles, userAgent) + '}\n')
+    this.keyframes.forEach((frames, name) => CSSString += '@' + prefixedKeyframes + ' ' + name + '{' + cssifyObject(frames, userAgent) + '}\n')
+    this.fontFaces.forEach(font => CSSString += fontFace + '\n')
+    this.mediaQueries.forEach((selectors, media) => {
+      CSSString += '@media ' + media + '{'
+      selectors.forEach((styles, selector) => CSSString += selector + '{' + cssifyObject(styles, userAgent) + '}\n')
+      CSSString += '}'
+    })
+
+    return CSSString
   }
 
   subscribe(listener) {
@@ -52,16 +93,7 @@ export default class CSSContainer {
     this._listener.delete(listener)
   }
 
-
-  _addCSS(CSS) {
-    if (!this.CSSRules[CSS]) {
-      this.CSSRules[CSS] = true
-      this._executeListener()
-    }
-  }
-
   _executeListener() {
-    const CSSString = this.getCSSString()
-    this._listener.forEach(listener => listener(CSSString))
+    this._listener.forEach(listener => listener())
   }
 }
