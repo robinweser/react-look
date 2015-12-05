@@ -12,7 +12,7 @@ A helper to create scoped styles and global CSS StyleSheets. This helps to impro
 Creates a scoped `styles` object to reduce style resolving when nesting Components enhanced by Look. The scope also serves as reference to the used `Component`.
 > NOTE: This is optional as you may also use a plain JavaScript object as styles, but it improves rendering performance and is considered best practice.
 
-### `toCSS(styles [, scope, userAgent])`
+### `toCSS(styles [, scope])`
 > Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
 
 Adds all `styles` as a valid CSS string and directly applies those to the global CSSStyleSheet. `scope` will also add a scope selector to add more specificity.
@@ -29,7 +29,7 @@ StyleSheet.toCSS({
 	}
 })
 ```
-### `keyframes(frames [, name, userAgent])`
+### `keyframes(frames [, name])`
 > Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
 
 Adds the `frames` as a new keyframe animation to the global CSSStyleSheet and returns the animation name.

@@ -144,6 +144,7 @@ The documentation gives huge information on how to do all kind of stuff. It also
 * [Usage Guides](docs/guides/)
 * [API](docs/api/)
 * [Plugins](docs/plugins/)
+* [Mixins](docs/Mixins.md)
 * [FAQ](docs/FAQ.md)
 
 # License
