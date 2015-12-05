@@ -2,7 +2,6 @@ import throttle from '../utils/throttle'
 import { processStyles } from '../core/resolver'
 import extractCSS from './extractCSS'
 import GlobalStyleSheet from '../utils/GlobalStyleSheet'
-import cssifyObject from '../utils/cssifyObject'
 import generateClassName from '../utils/generateClassName'
 
 const CSSMediaQueries = new Map()
@@ -41,7 +40,7 @@ export default (property, styles, mixinKey, scopeArgs, config) => {
   if (matchMedia !== undefined) {
     // Remove polyfilled CSS rules if matchMedia gets available
     if (CSSMediaQueries.size > 0) {
-      CSSMediaQueries.forEach((selectors, media) => selectors.forEach((styles, selector) => GlobalStyleSheet.removeMediaQuery(media, selector)))
+      CSSMediaQueries.forEach((selectors, media) => selectors.forEach(selector => GlobalStyleSheet.removeMediaQuery(media, selector)))
     }
     return matchMedia(query).matches ? styles : false
   }

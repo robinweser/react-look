@@ -72,7 +72,7 @@ export default {
    * @param {string|Array} files - source files refering to the font files
    * @param {Object} properties - additional font properties including fontWeight, fontStretch, fontStyle, unicodeRange
    */
-  fontFace(fontFamily, files, properties, userAgent) {
+  fontFace(fontFamily, files, properties) {
     if (files) {
       // Generates a style object including all font information
       const fontFace = {
