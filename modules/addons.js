@@ -4,6 +4,10 @@ import statefulValue from './plugins/statefulValue'
 import mixin from './plugins/mixin'
 import prefixer from './plugins/prefixer'
 
+// Dev tools
+import noVendorPrefixes from './plugins/devTools/noVendorPrefixes'
+import styleLogger from './plugins/devTools/styleLogger'
+
 // Conditions
 import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/condition'
 
@@ -43,6 +47,10 @@ export default {
     alternativeValue,
     statefulValue,
     prefixer
+  },
+  DevTools: {
+    styleLogger,
+    noVendorPrefixes
   },
   Mixins: {
     // Conditions

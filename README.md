@@ -1,6 +1,7 @@
 <img src="docs/res/banner.png" width="300">
 
 ![TravisCI](https://travis-ci.org/rofrischmann/react-look.svg?branch=develop) [![Code Climate](https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg)](https://codeclimate.com/github/rofrischmann/react-look)
+[![bitHound Overalll Score](https://www.bithound.io/github/rofrischmann/react-look/badges/score.svg)](https://www.bithound.io/github/rofrischmann/react-look)
 [![npm version](https://badge.fury.io/js/react-look.svg)](http://badge.fury.io/js/react-look)
 ![Dependencies](https://david-dm.org/rofrischmann/react-look.svg)
 ![Gzipped Size](https://img.shields.io/badge/gzipped-~17k-blue.svg)

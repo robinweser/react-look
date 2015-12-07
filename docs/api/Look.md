@@ -13,6 +13,6 @@ There are some configuration options that can be set by now. Check out the [conf
 | Option | Type | Description |
 | --------- | --- | ----------- |
 | plugins | `Array` | Set of [plugins](../Plugins.md) used to process styles |
-| mixins | `Object` | key-value pairs of [mixin](../Mixins.md) definitions
+| mixins | `Object` | key-value pairs of [mixin](../Mixins.md) definitions
 | userAgent    | `string` | userAgent to detect platform  information & prefix styles |
-| lookRoot | `boolean` | Defines the top-level Component. Used to render global CSS rules |
+| lookRoot | `boolean` | Defines the top-level Component. Used to render global CSS rules |
