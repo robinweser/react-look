@@ -7,7 +7,7 @@ import isUnitlessProperty from './isUnitlessProperty'
  * @param {Object} styles - an object with CSS styles
  * @param {string?} userAgent - custom userAgent
  */
-export default function cssifyObject(styles, userAgent) {
+export default function cssifyObject(styles, addImportantFlag, userAgent) {
   if (!styles || styles instanceof Object === false) {
     return ''
   }
@@ -19,7 +19,7 @@ export default function cssifyObject(styles, userAgent) {
   Object.keys(prefixedStyles).forEach(property => {
     let value = prefixedStyles[property]
     if (value instanceof Object) {
-      rules += camelToDashCase(property) + '{' + cssifyObject(value, userAgent) + '}'
+      rules += camelToDashCase(property) + '{' + cssifyObject(value, addImportantFlag, userAgent) + '}'
     } else {
       if (rules !== '') {
         rules += ';'
@@ -28,6 +28,11 @@ export default function cssifyObject(styles, userAgent) {
       // but are provided as a plain number
       if (!isUnitlessProperty(property) && !isNaN(parseFloat(value)) && isFinite(value) && value !== 0) {
         value = value + 'px'
+      }
+
+      // add !important flag to achieve higher priority than inline styles
+      if (addImportantFlag && value.toString().indexOf('!important') === -1) {
+        value = value + '!important'
       }
 
       rules += camelToDashCase(property) + ':' + value

@@ -69,12 +69,12 @@ export default class CSSContainer {
     let CSSString = ''
 
     const prefixedKeyframes = prefixer(userAgent).prefixedKeyframes
-    this.CSSRules.forEach((styles, selector) => CSSString += selector + '{' + cssifyObject(styles, userAgent) + '}\n')
-    this.keyframes.forEach((frames, name) => CSSString += '@' + prefixedKeyframes + ' ' + name + '{' + cssifyObject(frames, userAgent) + '}\n')
+    this.CSSRules.forEach((styles, selector) => CSSString += selector + '{' + cssifyObject(styles, false, userAgent) + '}\n')
+    this.keyframes.forEach((frames, name) => CSSString += '@' + prefixedKeyframes + ' ' + name + '{' + cssifyObject(frames, false, userAgent) + '}\n')
     this.fontFaces.forEach(font => CSSString += font + '\n')
     this.mediaQueries.forEach((selectors, media) => {
       CSSString += '@media ' + media + '{'
-      selectors.forEach((styles, selector) => CSSString += selector + '{' + cssifyObject(styles, userAgent) + '}\n')
+      selectors.forEach((styles, selector) => CSSString += selector + '{' + cssifyObject(styles, true, userAgent) + '}\n')
       CSSString += '}'
     })
 

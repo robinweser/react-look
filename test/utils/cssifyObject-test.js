@@ -21,4 +21,8 @@ describe('Converting a style object to a CSS string', () => {
   it('should return an empty string if styles is not an object', () => {
     expect(cssifyObject(12)).to.eql('')
   })
+
+  it('should add an !important flag', () => {
+    expect(cssifyObject({color: 'red'}, true)).to.eql('color:red!important')
+  })
 })
