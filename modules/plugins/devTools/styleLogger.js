@@ -3,7 +3,7 @@ import cssifyObject from '../../utils/cssifyObject'
 /**
  * Logs styles according to different settings
  */
-export default (styles, {Component, element, newProps}, {styleLogger}) => { //eslint-disable-line
+export default (styles, {Component, element, newProps} , {styleLogger}) => { // eslint-disable-line
   if (styleLogger) {
     // Logger information
     const {ref, key} = element
@@ -20,26 +20,12 @@ export default (styles, {Component, element, newProps}, {styleLogger}) => { //es
     const logStyles = styleLogger.string ? cssifyObject(styles) : styles
 
 
-    // logs styles if element is clicked
-    if (styleLogger.onClick) {
-      const existingOnClick = newProps.onClick
-      newProps.onClick = (event) => {
-        if (existingOnClick) {
-          existingOnClick()
-        }
-        console.log(loggerPrefix, logStyles)
-        if (styleLogger.onlyTopMost) {
-          event.stopPropagation()
-        }
-      }
-    }
-
-    // logs styles if element is hovered
-    if (styleLogger.onHover) {
-      const existingOnMouseEnter = newProps.onMouseEnter
-      newProps.onMouseEnter = () => {
-        if (existingOnMouseEnter) {
-          existingOnMouseEnter()
+    // logs styles if a given event got triggered
+    if (styleLogger.onEvent) {
+      const existingEvent = newProps[styleLogger.onEvent]
+      newProps[styleLogger.onEvent] = (event) => {
+        if (existingEvent) {
+          existingEvent()
         }
         console.log(loggerPrefix, logStyles)
         if (styleLogger.onlyTopMost) {
