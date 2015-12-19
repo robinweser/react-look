@@ -136,10 +136,6 @@ const resolveChildren = (Component, children, config, parent) => {
 
   // if there are more than one child, iterate over them
   if (children instanceof Array) {
-    if (Children.count(children) === 1) {
-      return resolveStyles(Component, Children.only(children), config, parent)
-    }
-
     // flattening children prevents deeper nested children
     const flatChildren = flattenArray(children)
 
