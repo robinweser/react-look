@@ -272,7 +272,7 @@ Just use the new spread operator `...`.
 	// or subsequent which perhaps overwrites other styles
 	container: {
 		color: 'blue',
-		...etendStyles
+		...extendStyles
 	}
 }
 ```
