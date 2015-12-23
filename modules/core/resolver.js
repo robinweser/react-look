@@ -39,7 +39,7 @@ export function processStyles(styles, props, scopeArgs, config) {
   // If element already got some style just merge them
   // NOTE: This might overwrite the look assigned
   if (props.style) {
-    newStyles = assignStyles(styles, props.style)
+    newStyles = assignStyles(newStyles, props.style)
   }
 
   return newStyles
