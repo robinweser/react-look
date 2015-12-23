@@ -2,6 +2,7 @@
 // https://github.com/facebook/react/blob/master/src/renderers/dom/shared/CSSProperty.js
 const unitlessProperties = { // eslint-disable-line
   animationIterationCount: true,
+  borderImageOutset: true,
   boxFlex: true,
   boxFlexGroup: true,
   boxOrdinalGroup: true,
