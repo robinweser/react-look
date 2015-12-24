@@ -28,6 +28,10 @@ Look currently supports **34 pseudo classes**. Some might be added soon. Check t
 ### Validation
 Most pseudo classes get validated within the `render` process, while some need extra event listeners applied which are `:focus`, `:hover`, `:active`, `:valid`, `:invalid`, `:in-range` and `:out-of-range`.
 
+#### Keys and Refs
+In order to render multiple elements with those special pseudo classes you need to apply either a `key` or a `ref`. This needs to be done to identify the exact element.
+> Note: `:valid`, `:invalid`, `:in-range` and `out-of-range` **always require** a `ref`.
+
 ### Supported pseudo classes
 ##### child-index
 * first-child
