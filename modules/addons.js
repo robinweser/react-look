@@ -5,7 +5,7 @@ import mixin from './plugins/mixin'
 import prefixer from './plugins/prefixer'
 
 // Dev tools
-import noVendorPrefixes from './plugins/devTools/noVendorPrefixes'
+import linter from './plugins/devTools/linter'
 import styleLogger from './plugins/devTools/styleLogger'
 
 // Conditions
@@ -50,7 +50,7 @@ export default {
   },
   DevTools: {
     styleLogger,
-    noVendorPrefixes
+    linter
   },
   Mixins: {
     // Conditions
