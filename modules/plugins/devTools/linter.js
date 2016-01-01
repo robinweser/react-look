@@ -4,7 +4,7 @@ import getChildType from '../../utils/getChildType'
 export default (styles, {Component, element} , config) => { // eslint-disable-line
   const linterInstance = linter(config.linter)
 
-  const hasLintingWarnings = linterInstance.lint(styles)
+  linterInstance.lint(styles)
 
   // only print warnings if lookRoot is active
   // adds a didMount listener to log all linter errors

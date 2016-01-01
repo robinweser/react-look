@@ -23,6 +23,7 @@ It simplyfies how you are styling your Components and comes in two different con
 - [media queries](docs/Mixins.md#media-queries.md)
 - [platform queries](docs/Mixins.md#platform-queries.md)
 - [vendor prefixing](docs/plugins/Prefixer.md)
+- developer tools (styleLogger, linter)
 - [pseudo to CSS polyfill](docs/plugins/Mixin.md#pseudo-to-css)
 - [font-face API](docs/api/StyleSheet.md#font-face)
 - [keyframes API](docs/api/StyleSheet.md#keyframes)
