@@ -1,5 +1,5 @@
 import getChildType from '../../utils/getChildType'
-import cssifyObject from '../../utils/cssifyObject'
+import { toCSS } from 'style-transform'
 /**
  * Logs styles according to different settings
  */
@@ -17,7 +17,7 @@ export default (styles, {Component, element, newProps} , {styleLogger}) => { // 
     const elementInfo = childType + (elementReference !== '' ? '[' + elementReference + ']' : '')
 
     const loggerPrefix = Component._lookScope + ':' + elementInfo + ''
-    const logStyles = styleLogger.string ? cssifyObject(styles) : styles
+    const logStyles = styleLogger.string ? toCSS(styles) : styles
 
 
     // logs styles if a given event got triggered

@@ -1,5 +1,5 @@
 import prefixer from './prefixer'
-import cssifyObject from './cssifyObject'
+import { toCSS, importantify } from 'style-transform'
 
 export default class CSSContainer {
   constructor() {
@@ -25,7 +25,7 @@ export default class CSSContainer {
   }
 
   addFontFace(fontFace) {
-    const fontFaceString = '@font-face {' + cssifyObject(fontFace) + '}'
+    const fontFaceString = '@font-face {' + toCSS(fontFace) + '}'
     if (this.fontFaces.has(fontFaceString)) {
       this.fontFaces.add(fontFaceString)
       this._executeListener()
@@ -68,13 +68,14 @@ export default class CSSContainer {
   getCSSString(userAgent) {
     let CSSString = ''
 
-    const prefixedKeyframes = prefixer(userAgent).prefixedKeyframes
-    this.CSSRules.forEach((styles, selector) => CSSString += selector + '{' + cssifyObject(styles, false, userAgent) + '}\n')
-    this.keyframes.forEach((frames, name) => CSSString += '@' + prefixedKeyframes + ' ' + name + '{' + cssifyObject(frames, false, userAgent) + '}\n')
+    const prefixerInstance = prefixer(userAgent)
+
+    this.CSSRules.forEach((styles, selector) => CSSString += selector + '{' + toCSS(prefixerInstance.prefix(styles)) + '}\n')
+    this.keyframes.forEach((frames, name) => CSSString += '@' + prefixerInstance.prefixedKeyframes + ' ' + name + '{' + toCSS(prefixerInstance.prefix(frames)) + '}\n')
     this.fontFaces.forEach(font => CSSString += font + '\n')
     this.mediaQueries.forEach((selectors, media) => {
       CSSString += '@media ' + media + '{'
-      selectors.forEach((styles, selector) => CSSString += selector + '{' + cssifyObject(styles, true, userAgent) + '}\n')
+      selectors.forEach((styles, selector) => CSSString += selector + '{' + toCSS(prefixerInstance.prefix(importantify(styles))) + '}\n')
       CSSString += '}'
     })
 
