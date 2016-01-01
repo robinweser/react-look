@@ -59,9 +59,11 @@
   "dependencies": {
     "assign-styles": "2.0.0",
     "dot-prop": "^2.2.0",
+    "inline-style-linter": "^0.1.2",
     "inline-style-prefixer": "^0.5.4",
     "object-assign": "^4.0.1",
-    "object-assign-deep": "0.0.4"
+    "object-assign-deep": "0.0.4",
+    "style-transform": "^1.0.1"
   },
   "devDependencies": {
     "babel": "^6.1.18",

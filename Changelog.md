@@ -1,6 +1,16 @@
 # Changelog
 
 ## 0.7
+### 0.7.1 (01.01.16)
+##### Breaking
+* Added a linter plugin based on [inline-style-linter](https://github.com/rofrischmann/inline-style-linter)
+
+##### Improvements
+* fixed a bug that prevents children to render ( [#159](https://github.com/rofrischmann/react-look/issues/159) )
+* fixed a bug that caused dynamically generated custom `style`-props to render wrong ( [#160](https://github.com/rofrischmann/react-look/issues/160) )
+* now using [style-transform](https://github.com/rofrischmann/style-transform) to perform object-to-CSS transformations
+* initial server-side media query now use a `!important`-flag to overwrite inline styles
+
 ### 0.7.0 (03.12.15)
 ##### Breaking
 - server-side rendering support
