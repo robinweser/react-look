@@ -1,5 +1,6 @@
 import resolveStyles from './resolver'
 import CSSStyleSheet from '../components/CSSStyleSheet'
+import copyProperties from '../utils/copyProperties'
 import React, { Component, PropTypes } from 'react'
 import assignDeep from 'object-assign-deep'
 /**
@@ -63,11 +64,16 @@ export default (CustomComponent, config = {}) => {
             {content}
             <CSSStyleSheet userAgent={composedConfig.userAgent} />
           </div>
-          )
+        )
       }
 
       return content
     }
+  }
+
+  // copy props in order to get hmr working correctly
+  if (process.env.NODE_ENV !== 'production') {
+    copyProperties(CustomComponent.prototype, LookComponent.prototype)
   }
 
   return LookComponent
