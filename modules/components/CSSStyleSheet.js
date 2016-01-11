@@ -9,7 +9,7 @@ export default class CSSStyleSheet extends Component {
   }
 
   componentDidMount() {
-    this._changeListener = GlobalStyleSheet.subscribe(this.updateCSSString)
+    this._changeListener = GlobalStyleSheet.subscribe(this.updateCSSString.bind(this))
     GlobalStyleSheet._executeListener()
   }
 
@@ -17,12 +17,14 @@ export default class CSSStyleSheet extends Component {
     this._changeListener.unsubscribe()
   }
 
-  updateCSSString = () => {
+  updateCSSString() {
     const CSSString = GlobalStyleSheet.getCSSString(this.props.userAgent) // eslint-disable-line
     this.setState({CSSString: CSSString})
   }
 
   render() {
-    return this.state.CSSString !== '' ? <style dangerouslySetInnerHTML={{__html: this.state.CSSString}} /> : ''
+    return <style dangerouslySetInnerHTML={{
+        __html: this.state.CSSString
+      }} />
   }
 }

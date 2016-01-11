@@ -75,8 +75,8 @@ export default class CSSContainer {
     this.fontFaces.forEach(font => CSSString += font + '\n')
     this.mediaQueries.forEach((selectors, media) => {
       CSSString += '@media ' + media + '{'
-      selectors.forEach((styles, selector) => CSSString += selector + '{' + toCSS(prefixerInstance.prefix(importantify(styles))) + '}\n')
-      CSSString += '}'
+      selectors.forEach((styles, selector) => CSSString += selector + '{' + toCSS(prefixerInstance.prefix(importantify(styles))) + '}')
+      CSSString += '}\n'
     })
 
     return CSSString

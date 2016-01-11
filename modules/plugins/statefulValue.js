@@ -1,3 +1,4 @@
+import assignStyles from 'assign-styles'
 /**
  * Resolves values that are functions
  * Calling them with props, state, context as parameter
@@ -10,7 +11,7 @@ export default function statefulValue(styles, scopeArgs) {
     if (value instanceof Function) {
       styles[property] = value(Component.props, Component.state, Component.context)
     } else if (value instanceof Object) {
-      styles[property] = statefulValue(value, scopeArgs)
+      styles[property] = statefulValue(assignStyles({}, value), scopeArgs)
     }
   })
 
