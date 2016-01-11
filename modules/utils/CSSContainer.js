@@ -1,5 +1,5 @@
 import prefixer from './prefixer'
-import { toCSS, importantify } from 'style-transform'
+import { toCSS, importantify } from 'inline-style-transformer'
 
 export default class CSSContainer {
   constructor() {

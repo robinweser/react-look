@@ -1,4 +1,4 @@
-import injectValidationListener from '../../utils/injectValidationListener'
+import injectValidationListener from '../utils/injectValidationListener'
 
 export default {
   valid: (property, styles, mixinKey, {element, Component, newProps}) => {

@@ -7,13 +7,13 @@ import mixin from '../plugins/mixin'
 import { equal, unEqual, greater, less, greaterThan, lessThan } from '../mixins/condition'
 
 // Pseudo classes
-import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../mixins/pseudoClasses/childIndex'
-import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../mixins/pseudoClasses/childTypeIndex'
-import empty from '../mixins/pseudoClasses/empty'
-import firstLetter from '../mixins/pseudoClasses/firstLetter'
-import contains from '../mixins/pseudoClasses/contains'
-import substr from '../mixins/pseudoClasses/substr'
-import blank from '../mixins/pseudoClasses/blank'
+import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from '../mixins/childIndex'
+import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from '../mixins/childTypeIndex'
+import empty from '../mixins/empty'
+import firstLetter from '../mixins/firstLetter'
+import contains from '../mixins/contains'
+import substr from '../mixins/substr'
+import blank from '../mixins/blank'
 
 // Extending
 import extend from '../mixins/extend'

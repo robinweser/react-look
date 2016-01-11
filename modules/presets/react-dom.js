@@ -4,12 +4,12 @@ import nativePreset from './react-native'
 import prefixer from '../plugins/prefixer'
 
 // Pseudo classes
-import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../mixins/pseudoClasses/input'
-import { hover, active, focus } from '../mixins/pseudoClasses/userAction'
-import { valid, invalid, inRange, outOfRange } from '../mixins/pseudoClasses/validation'
-import { before, after } from '../mixins/pseudoClasses/beforeAfter'
-import lang from '../mixins/pseudoClasses/lang'
-import target from '../mixins/pseudoClasses/target'
+import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../mixins/input'
+import { hover, active, focus } from '../mixins/userAction'
+import { valid, invalid, inRange, outOfRange } from '../mixins/validation'
+import { before, after } from '../mixins/beforeAfter'
+import lang from '../mixins/lang'
+import target from '../mixins/target'
 
 // CSS extraction
 import extractCSS from '../mixins/extractCSS'

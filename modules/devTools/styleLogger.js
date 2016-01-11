@@ -1,5 +1,5 @@
-import getChildType from '../../utils/getChildType'
-import { toCSS } from 'style-transform'
+import getChildType from '../utils/getChildType'
+import { toCSS } from 'inline-style-transformer'
 /**
  * Logs styles according to different settings
  */

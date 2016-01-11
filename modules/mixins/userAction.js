@@ -1,5 +1,5 @@
-import State from '../../api/State'
-import createListener from '../../utils/createListener'
+import State from '../api/State'
+import createListener from '../utils/createListener'
 
 const defaultKey = 'root'
 

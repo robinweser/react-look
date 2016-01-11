@@ -1,7 +1,7 @@
-import getPseudoExpression from '../../utils/getPseudoExpression'
-import evalNthExpression from '../../utils/evalNthExpression'
-import getChildType from '../../utils/getChildType'
-import warn from '../../utils/warn'
+import getPseudoExpression from '../utils/getPseudoExpression'
+import evalNthExpression from '../utils/evalNthExpression'
+import getChildType from '../utils/getChildType'
+import warn from '../utils/warn'
 
 
 // Evaluates child-type index positions using the parent element passed with scopeArgs

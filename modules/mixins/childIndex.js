@@ -1,6 +1,6 @@
-import getPseudoExpression from '../../utils/getPseudoExpression'
-import evalNthExpression from '../../utils/evalNthExpression'
-import getChildIndex from '../../utils/getChildIndex'
+import getPseudoExpression from '../utils/getPseudoExpression'
+import evalNthExpression from '../utils/evalNthExpression'
+import getChildIndex from '../utils/getChildIndex'
 
 const firstChild = (property, styles, mixinKey, {parent, element}) => {
   if (parent) {

@@ -1,4 +1,4 @@
-import getPseudoExpression from '../../utils/getPseudoExpression'
+import getPseudoExpression from '../utils/getPseudoExpression'
 
 // Evaluates if a element contains a given string
 export default (property, styles, mixinKey, {newProps}) => {
