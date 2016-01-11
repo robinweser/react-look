@@ -61,8 +61,8 @@ export default (Component, config) => {
 import Look from './customLook'
 import { StyleSheet } from 'react-look'
 
-const Example = () => <div look={styles}>Foo</div>
-const styles = StyleSheet.create(Example, {color: 'red'})
+const Example = () => <div look={styles.box}>Foo</div>
+const styles = StyleSheet.create(Example, {box: {color: 'red'}})
 
 export default Look(Example)
 ```
@@ -91,10 +91,12 @@ import Look from 'react-look'
 import { Plugins } from 'react-look/addons'
 import { StyleSheet } from 'react-look'
 
-const Example = () => <div look={styles}>Foo</div>
+const Example = () => <div look={styles.box}>Foo</div>
 const styles = StyleSheet.create(Example, {
-	color: ['#ccc', 'rgba(0, 0, 0, 0.5)'],
-	fontSize: 12
+	box: {
+		color: ['#ccc', 'rgba(0, 0, 0, 0.5)'],
+		fontSize: 12
+	}
 })
 
 // You only need the alternative plugin to resolve an array of values

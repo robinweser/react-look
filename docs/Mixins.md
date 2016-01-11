@@ -293,15 +293,17 @@ import { Mixins } from 'react-look/addons'
 
 const Input = () => (
 	<div>
-		<input look={styles} placeholder='red placeholder'/>
+		<input look={styles.input} placeholder='red placeholder'/>
 	</div>
 )
 
 const styles = StyleSheet.create(Input, {
-	color: 'blue',
-	'::-webkit-input-placeholder': {
-		color: 'red'
-	}
+	input : {
+		color: 'blue',
+		'::-webkit-input-placeholder': {
+			color: 'red'
+		}
+	}	
 })
 
 Input = Look(Input, {
