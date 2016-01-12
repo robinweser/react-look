@@ -1,9 +1,14 @@
 # Changelog
 
 ## 0.7
+### 0.7.2 (12.01.16)
+* added support for hot module replacement
+* fixed a bug that prevents nested stateful values to resolve correctly
+* upgraded devTools (docs soon)
+
 ### 0.7.1 (01.01.16)
 ##### Breaking
-* Added a linter plugin based on [inline-style-linter](https://github.com/rofrischmann/inline-style-linter)
+* added a linter plugin based on [inline-style-linter](https://github.com/rofrischmann/inline-style-linter)
 
 ##### Improvements
 * fixed a bug that prevents children to render ( [#159](https://github.com/rofrischmann/react-look/issues/159) )

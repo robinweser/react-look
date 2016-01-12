@@ -23,8 +23,8 @@ export default class CSSStyleSheet extends Component {
   }
 
   render() {
-    return <style dangerouslySetInnerHTML={{
-        __html: this.state.CSSString
-      }} />
+    return (
+      <style dangerouslySetInnerHTML={{__html: this.state.CSSString}} />
+      )
   }
 }

@@ -1,4 +1,4 @@
-import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../../../lib/mixins/pseudoClasses/input'
+import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../../lib/mixins/input'
 
 import { expect } from 'chai'
 

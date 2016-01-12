@@ -13,8 +13,8 @@ export default config => {
   }
 
   // replace userAgent if config provides alternative one
-  if (config !== undefined && linter.getConfig() !== config) {
-    linter.setConfig(config)
+  if (config !== undefined && linter._config !== config) {
+    linter = new Linter(config)
   }
 
   return linter

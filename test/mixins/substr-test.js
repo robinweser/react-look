@@ -1,4 +1,4 @@
-import substr from '../../../lib/mixins/pseudoClasses/substr'
+import substr from '../../lib/mixins/substr'
 import { expect } from 'chai'
 
 describe('Styling substrings', () => {

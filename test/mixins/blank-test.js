@@ -1,4 +1,4 @@
-import isBlank from '../../../lib/mixins/pseudoClasses/blank'
+import isBlank from '../../lib/mixins/blank'
 import { expect } from 'chai'
 
 describe('Evaluating blank elements', () => {

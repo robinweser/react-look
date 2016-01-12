@@ -1,4 +1,4 @@
-import contains from '../../../lib/mixins/pseudoClasses/contains'
+import contains from '../../lib/mixins/contains'
 import { expect } from 'chai'
 
 describe('Evaluating :contains pseudo', () => {

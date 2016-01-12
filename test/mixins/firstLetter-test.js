@@ -1,4 +1,4 @@
-import firstLetter from '../../../lib/mixins/pseudoClasses/firstLetter'
+import firstLetter from '../../lib/mixins/firstLetter'
 import { expect } from 'chai'
 
 describe('Styling the first letter', () => {
