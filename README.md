@@ -13,17 +13,16 @@ It simplyfies how you are styling your Components and comes in two different con
 - ECMAScript 2015 Classes
 - `React.createClass`
 - stateless Components
-- configurable
 - server-side rendering
 - [plugins](docs/Plugins.md)
-- nesting
+- [developer tools](docs/devTools/devTools.md)
+- Sass-like nesting
 - [34 pseudo classes](docs/Mixins.md#pseudo-classes.md)
 - [stateful styles](docs/Mixins.md#stateful-conditions.md) (condition based)
 - [extending](docs/Mixins.md#extend)
 - [media queries](docs/Mixins.md#media-queries.md)
 - [platform queries](docs/Mixins.md#platform-queries.md)
 - [vendor prefixing](docs/plugins/Prefixer.md)
-- developer tools (styleLogger, linter)
 - [pseudo to CSS polyfill](docs/plugins/Mixin.md#pseudo-to-css)
 - [font-face API](docs/api/StyleSheet.md#font-face)
 - [keyframes API](docs/api/StyleSheet.md#keyframes)
@@ -31,6 +30,16 @@ It simplyfies how you are styling your Components and comes in two different con
 - [State API](docs/api/State.md)
 
 ### [Supported pseudo classes](docs/Mixins.md#supported-pseudo-classes)
+
+# [Documentation](docs/Docs.md#table-of-contents)
+The documentation gives huge information on how to do all kind of stuff. It also serves detailed information on how to use plugins, use full power of the build-in ones and even how to write your own.<br>
+
+* [Usage Guides](docs/guides/)
+* [API](docs/api/)
+* [Plugins](docs/plugins/)
+* [DevTools](docs/devTools/)
+* [Mixins](docs/Mixins.md)
+* [FAQ](docs/FAQ.md)
 
 # Usage
 > Upgrading from an older major update? Check out the [upgrade guide](docs/guides/upgradeLook.md).
@@ -139,15 +148,6 @@ npm run demo
 # run this as a universal demo
 npm run demo:universal
 ```
-
-# [Documentation](docs/Docs.md#table-of-contents)
-The documentation gives huge information on how to do all kind of stuff. It also serves detailed information on how to use plugins, use full power of the build-in ones and even how to write your own.<br>
-
-* [Usage Guides](docs/guides/)
-* [API](docs/api/)
-* [Plugins](docs/plugins/)
-* [Mixins](docs/Mixins.md)
-* [FAQ](docs/FAQ.md)
 
 # License
 **Look** is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>
