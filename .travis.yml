@@ -1,10 +1,10 @@
 language: node_js
-sudo: true
 node_js:
-  - "5.0"
-install:
-  - npm install -g babel-cli
-  - npm install
+  - "5"
+script:
+  - npm test
+  - npm run test:coverage
+  - npm run coverage
 addons:
   code_climate:
     repo_token: f932c43d4ad44f04db1c05dd1bd2de3616affcec12bb9ce3171f5b01d5f17741
