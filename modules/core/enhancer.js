@@ -17,9 +17,9 @@ export default (CustomComponent, config = {}) => {
 
   class LookComponent extends Extend {
     // Inherit the original displayName for proper use later on
-    static displayName = CustomComponent.displayName || CustomComponent.name || 'Component'
-    static childContextTypes = {_lookConfig: PropTypes.object}
-    static contextTypes = {_lookConfig: PropTypes.object}
+    static displayName = CustomComponent.displayName || CustomComponent.name || 'Component';
+    static childContextTypes = { _lookConfig: PropTypes.object };
+    static contextTypes = { _lookConfig: PropTypes.object };
 
     constructor() {
       super(...arguments)

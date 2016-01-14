@@ -3,10 +3,10 @@ import { toCSS } from 'inline-style-transformer'
 /**
  * Logs styles according to different settings
  */
-export default (styles, {Component, element, newProps} , {styleLogger}) => { // eslint-disable-line
+export default (styles, { Component, element, newProps }, { styleLogger }) => { // eslint-disable-line
   if (styleLogger) {
     // Logger information
-    const {ref, key} = element
+    const { ref, key } = element
 
     const childType = getChildType(element)
 
@@ -17,7 +17,7 @@ export default (styles, {Component, element, newProps} , {styleLogger}) => { // 
     const elementInfo = childType + (elementReference !== '' ? '[' + elementReference + ']' : '')
 
     const loggerPrefix = Component._lookScope + ':' + elementInfo + ''
-    const logStyles = styleLogger.string ? toCSS(styles) : styles
+    const logStyles = styleLogger.toString ? toCSS(styles) : styles
 
 
     // logs styles if a given event got triggered

@@ -1,4 +1,4 @@
-import getFontFormat from '../../lib/utils/getFontFormat'
+import getFontFormat from '../../modules/utils/getFontFormat'
 import { expect } from 'chai'
 
 describe('Evaluating the font format', () => {

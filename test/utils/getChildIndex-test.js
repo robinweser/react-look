@@ -1,4 +1,4 @@
-import getChildIndex from '../../lib/utils/getChildIndex'
+import getChildIndex from '../../modules/utils/getChildIndex'
 import React from 'react'
 import { expect } from 'chai'
 

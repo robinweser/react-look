@@ -28,7 +28,7 @@ const resolvePlugins = (styles, scopeArgs, config) => {
  * @param {Object} config - configuration containing plugins and plugin-specific configs
  */
 export function processStyles(styles, props, scopeArgs, config) {
-  let newStyles = assign({}, styles)
+  let newStyles = assign({ }, styles)
 
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
@@ -58,7 +58,7 @@ export default function resolveStyles(Component, element, config, parent) {
   // only resolve if look or children exist
   if (element && element.props && (element.props.look || element.props.children)) {
     const props = element.props
-    const newProps = assign({}, props)
+    const newProps = assign({ }, props)
 
 
     if (props.children) {
@@ -70,7 +70,7 @@ export default function resolveStyles(Component, element, config, parent) {
     if (props.look) {
       // Merge an array of styles into a single style object
       if (props.look instanceof Array) {
-        newProps.look = assignStyles({}, ...props.look)
+        newProps.look = assignStyles({ }, ...props.look)
       }
 
       // scopeArgs are provided to plugins to access special objects

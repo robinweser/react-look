@@ -2,7 +2,7 @@ import prefixer from '../utils/prefixer'
 
 // Allows the use of platform queries supported by browser information
 // provided by the inline-style-prefixer
-export default (property, styles, mixinKey, scopeArgs, {userAgent}) => {
+export default (property, styles, mixinKey, scopeArgs, { userAgent }) => {
   const browserInfo = prefixer(userAgent)._browserInfo
   const platforms = property.replace(mixinKey, '').trim().split(' ')
 

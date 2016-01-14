@@ -1,4 +1,4 @@
-import isEmpty from '../../lib/mixins/empty'
+import isEmpty from '../../modules/mixins/empty'
 import { expect } from 'chai'
 
 describe('Evaluating empty elements', () => {
@@ -9,7 +9,7 @@ describe('Evaluating empty elements', () => {
         children: []
       }
     }
-    const noChildren = {newProps: {}}
+    const noChildren = { newProps: { } }
     expect(isEmpty(':empty', true, ':empty', emptyChildren)).to.equal(true)
     expect(isEmpty(':empty', true, ':empty', noChildren)).to.equal(true)
   })
@@ -17,7 +17,7 @@ describe('Evaluating empty elements', () => {
   it('should validate false', () => {
     const args = {
       newProps: {
-        children: ['test']
+        children: [ 'test' ]
       }
     }
 

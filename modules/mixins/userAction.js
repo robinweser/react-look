@@ -9,11 +9,11 @@ const defaultKey = 'root'
  */
 
 export default {
-  active: (property, styles, mixinKey, {element, Component, newProps}) => {
+  active: (property, styles, mixinKey, { element, Component, newProps }) => {
     const key = element.key || element.ref || defaultKey
 
     if (!Component._lastActiveElements) {
-      Component._lastActiveElements = []
+      Component._lastActiveElements = [ ]
     }
 
     // add event listener if not added yet
@@ -45,7 +45,7 @@ export default {
     // resolving browser State
     return State.getState('active', Component, key) ? styles : false
   },
-  hover: (property, styles, mixinKey, {element, Component, newProps}) => {
+  hover: (property, styles, mixinKey, { element, Component, newProps }) => {
     const key = element.key || element.ref || defaultKey
 
     // add event listener if not added yet
@@ -58,7 +58,7 @@ export default {
     // resolving browser State
     return State.getState('hover', Component, key) ? styles : false
   },
-  focus: (property, styles, mixinKey, {element, Component, newProps}) => {
+  focus: (property, styles, mixinKey, { element, Component, newProps }) => {
     const key = element.key || element.ref || defaultKey
 
     // only apply focus on input elements

@@ -1,10 +1,10 @@
-import substr from '../../lib/mixins/substr'
+import substr from '../../modules/mixins/substr'
 import { expect } from 'chai'
 
 describe('Styling substrings', () => {
 
   it('should split children at substrings and add styles', () => {
-    const numbers = {newProps: {children: 'foo12bar'}}
+    const numbers = { newProps: { children: 'foo12bar' } }
 
     substr(':substr([0-9])', true, ':subsr', numbers)
     expect(numbers.newProps.children instanceof Array).to.eql(true)
@@ -17,7 +17,7 @@ describe('Styling substrings', () => {
   })
 
   it('should do nothing if no match was found', () => {
-    const numbers = {newProps: {children: 'foobar'}}
+    const numbers = { newProps: { children: 'foobar' } }
 
     substr(':substr([0-9])', true, ':subsr', numbers)
     expect(numbers.newProps.children).to.eql('foobar')
@@ -26,7 +26,7 @@ describe('Styling substrings', () => {
   it('should do nothing if children is not a string', () => {
     const arr = {
       newProps: {
-        children: ['foobar']
+        children: [ 'foobar' ]
       }
     }
     const obj = {
@@ -38,9 +38,9 @@ describe('Styling substrings', () => {
     }
 
     substr(':substr([0-9])', true, ':substr', arr)
-    expect(arr.newProps.children).to.eql(['foobar'])
+    expect(arr.newProps.children).to.eql([ 'foobar' ])
 
     substr(':substr([0-9])', true, ':substr', obj)
-    expect(obj.newProps.children).to.eql({type: 'div'})
+    expect(obj.newProps.children).to.eql({ type: 'div' })
   })
 })

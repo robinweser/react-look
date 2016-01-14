@@ -1,10 +1,10 @@
-import firstLetter from '../../lib/mixins/firstLetter'
+import firstLetter from '../../modules/mixins/firstLetter'
 import { expect } from 'chai'
 
 describe('Styling the first letter', () => {
 
   it('should split children and add styles to the first letter', () => {
-    const comp = {newProps: {children: 'foobar'}}
+    const comp = { newProps: { children: 'foobar' } }
 
     firstLetter(':first-letter', true, ':first-letter', comp)
     expect(comp.newProps.children instanceof Array).to.eql(true)
@@ -17,7 +17,7 @@ describe('Styling the first letter', () => {
   it('should do nothing if children is not a string', () => {
     const arr = {
       newProps: {
-        children: ['foobar']
+        children: [ 'foobar' ]
       }
     }
     const obj = {
@@ -29,9 +29,9 @@ describe('Styling the first letter', () => {
     }
 
     firstLetter(':first-letter', true, ':first-letter', arr)
-    expect(arr.newProps.children).to.eql(['foobar'])
+    expect(arr.newProps.children).to.eql([ 'foobar' ])
 
     firstLetter(':first-letter', true, ':first-letter', obj)
-    expect(obj.newProps.children).to.eql({type: 'div'})
+    expect(obj.newProps.children).to.eql({ type: 'div' })
   })
 })

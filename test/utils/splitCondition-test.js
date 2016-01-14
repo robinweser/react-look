@@ -1,4 +1,4 @@
-import splitCondition from '../../lib/utils/splitCondition'
+import splitCondition from '../../modules/utils/splitCondition'
 import { expect } from 'chai'
 
 describe('Splitting conditions', () => {

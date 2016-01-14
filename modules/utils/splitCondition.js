@@ -12,10 +12,9 @@ export default (key, operator, Component) => {
     return false
   }
 
-  const matchValues = assign({}, Component.props, Component.state)
-
-  const [property, value] = key.split(operator)
-  const [baseProp] = property.split('.')
+  const matchValues = assign({ }, Component.props, Component.state)
+  const [ property, value ] = key.split(operator)
+  const [ baseProp ] = property.split('.')
 
   if (matchValues.hasOwnProperty(baseProp)) {
     let match = getProp(matchValues, property)
@@ -26,7 +25,7 @@ export default (key, operator, Component) => {
       match = (match + '').toString()
     }
 
-    return {left: match, right: value}
+    return { left: match, right: value }
   }
 
   return false

@@ -1,7 +1,7 @@
 import injectValidationListener from '../utils/injectValidationListener'
 
 export default {
-  valid: (property, styles, mixinKey, {element, Component, newProps}) => {
+  valid: (property, styles, mixinKey, { element, Component, newProps }) => {
     // add a validation listener
     const validationState = injectValidationListener(Component, element, newProps)
     if (validationState === false || validationState === undefined) {
@@ -11,7 +11,7 @@ export default {
     return validationState.valid ? styles : false
   },
 
-  invalid: (property, styles, mixinKey, {element, Component, newProps}) => {
+  invalid: (property, styles, mixinKey, { element, Component, newProps }) => {
     // add a validation listener
     const validationState = injectValidationListener(Component, element, newProps)
     if (validationState === false || validationState === undefined) {
@@ -21,7 +21,7 @@ export default {
     return validationState.valid ? false : styles
   },
 
-  inRange: (property, styles, mixinKey, {element, Component, newProps}) => {
+  inRange: (property, styles, mixinKey, { element, Component, newProps }) => {
     // add a validation listener
     const validationState = injectValidationListener(Component, element, newProps)
     if (validationState === false || validationState === undefined) {
@@ -31,7 +31,7 @@ export default {
     return !validationState.rangeOverflow && !validationState.rangeUnderflow ? styles : false
   },
 
-  outOfRange: (property, styles, mixinKey, {element, Component, newProps}) => {
+  outOfRange: (property, styles, mixinKey, { element, Component, newProps }) => {
     // add a validation listener
     const validationState = injectValidationListener(Component, element, newProps)
     if (validationState === false || validationState === undefined) {

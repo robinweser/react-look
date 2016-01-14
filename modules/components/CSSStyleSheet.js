@@ -5,7 +5,7 @@ export default class CSSStyleSheet extends Component {
   constructor(props) {
     super(...arguments)
     const CSSString = GlobalStyleSheet.getCSSString(props.userAgent) // eslint-disable-line
-    this.state = {CSSString: CSSString}
+    this.state = { CSSString: CSSString }
   }
 
   componentDidMount() {
@@ -19,12 +19,12 @@ export default class CSSStyleSheet extends Component {
 
   updateCSSString() {
     const CSSString = GlobalStyleSheet.getCSSString(this.props.userAgent) // eslint-disable-line
-    this.setState({CSSString: CSSString})
+    this.setState({ CSSString: CSSString })
   }
 
   render() {
     return (
-      <style dangerouslySetInnerHTML={{__html: this.state.CSSString}} />
+      <style dangerouslySetInnerHTML={{ __html: this.state.CSSString }} />
       )
   }
 }

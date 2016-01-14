@@ -1,5 +1,5 @@
-import statefulValue from '../../lib/plugins/statefulValue'
-import Look, {StyleSheet} from '../../lib/dom'
+import statefulValue from '../../modules/plugins/statefulValue'
+import Look, {StyleSheet} from '../../modules/dom'
 import React from 'react'
 import { expect } from 'chai'
 
@@ -25,12 +25,12 @@ describe('Resolving stateful values', () => {
       constructor(){
         super(...arguments)
       }
-			state = {clicked: false}
-			onClick = () => {
+			state = {clicked: false};
+			onClick() {
 				this.setState({clicked: true})
 			}
 			render() {
-				<div look={styles} onClick={this.onClick}>foo</div>
+				<div look={styles} onClick={this.onClick.bind(this)}>foo</div>
 			}
 		}
 

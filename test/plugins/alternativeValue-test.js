@@ -1,4 +1,4 @@
-import alternativeValue from '../../lib/plugins/alternativeValue'
+import alternativeValue from '../../modules/plugins/alternativeValue'
 import { expect } from 'chai'
 
 

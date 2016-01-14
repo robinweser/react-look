@@ -26,16 +26,16 @@ const createPseudoElement = styles => {
       children = createPseudoImage(children)
     }
   }
-  return createElement('span', {style: styles}, children)
+  return createElement('span', { style: styles }, children)
 }
 
 const initChildren = props => {
   if (!props.children) {
-    props.children = []
+    props.children = [ ]
   }
 
   if (props.children instanceof Array !== true) {
-    props.children = [props.children]
+    props.children = [ props.children ]
   }
 }
 
@@ -43,11 +43,11 @@ const initChildren = props => {
  * Adds a element before/after current element
  */
 export default {
-  before: (property, styles, mixinKey, {newProps}) => {
+  before: (property, styles, mixinKey, { newProps }) => {
     initChildren(newProps)
     newProps.children.unshift(createPseudoElement(styles))
   },
-  after: (property, styles, mixinKey, {newProps}) => {
+  after: (property, styles, mixinKey, { newProps }) => {
     initChildren(newProps)
     newProps.children.push(createPseudoElement(styles))
   }

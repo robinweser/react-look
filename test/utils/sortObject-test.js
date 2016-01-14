@@ -1,4 +1,4 @@
-import sortObject from '../../lib/utils/sortObject'
+import sortObject from '../../modules/utils/sortObject'
 import { expect } from 'chai'
 
 describe('Sorting objects', () => {

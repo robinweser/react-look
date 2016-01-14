@@ -1,4 +1,4 @@
-import getChildType from '../../lib/utils/getChildType'
+import getChildType from '../../modules/utils/getChildType'
 import React from 'react'
 import { expect } from 'chai'
 

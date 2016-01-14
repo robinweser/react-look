@@ -1,4 +1,4 @@
-import createListener from '../../lib/utils/createListener'
+import createListener from '../../modules/utils/createListener'
 import React, { Component } from 'react'
 import Chai, { expect } from 'chai'
 import sinon from 'sinon'

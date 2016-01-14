@@ -10,7 +10,7 @@ const CSSMediaQueries = new Map()
 export default (property, styles, mixinKey, scopeArgs, config) => {
   const matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
   const query = property.replace(mixinKey, '').trim()
-  const {Component, newProps} = scopeArgs
+  const { Component, newProps } = scopeArgs
 
   if (!Component._mediaQueryListener) {
     Component._mediaQueryListener = throttle(() => {

@@ -1,4 +1,4 @@
-import generateClassName from '../../lib/utils/generateClassName'
+import generateClassName from '../../modules/utils/generateClassName'
 import { expect } from 'chai'
 
 describe('Generating unique selectors', () => {

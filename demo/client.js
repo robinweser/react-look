@@ -6,7 +6,7 @@ import { Plugins } from 'inline-style-linter'
 import App from './app.jsx'
 
 const config = Presets['react-dom'];
-// config.plugins.push(DevTools.linter)
+config.plugins.push(DevTools.linter)
 
 config.linter = {
   plugins: [
@@ -15,7 +15,18 @@ config.linter = {
     Plugins.noInitialValue,
     Plugins.compatibility
   ],
-  compatibility: {},
+  compatibility: {
+    targetBrowser: {
+      android: 4,
+      ios_saf: 7,
+      safari: 7,
+      chrome: 30,
+      firefox: 30,
+      edge: 12,
+      ie: 9
+    },
+    partial: true
+  },
   onlyLogHint: true
 }
 

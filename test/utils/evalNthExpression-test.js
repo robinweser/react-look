@@ -1,4 +1,4 @@
-import evalNthExpression from '../../lib/utils/evalNthExpression'
+import evalNthExpression from '../../modules/utils/evalNthExpression'
 import { expect } from 'chai'
 
 describe('Evaluating :nth pseudo expressions', () => {

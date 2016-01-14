@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import Look from '../../lib/core/enhancer'
+import Look from '../../modules/core/enhancer'
 import Chai, { expect } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
@@ -27,7 +27,7 @@ describe('Enhancing a Component', () => {
     class Default extends Component {
       constructor() {
         super(...arguments)
-        this.state = {foo: 1}
+        this.state = { foo: 1 }
       }
     }
 
@@ -48,9 +48,9 @@ describe('Enhancing a Component', () => {
     }
 
     let Enhanced = Look(Default)
-    let instance = new Enhanced({bar: 1})
+    let instance = new Enhanced({ bar: 1 })
 
-    expect(instance.props).to.eql({bar: 1})
+    expect(instance.props).to.eql({ bar: 1 })
   })
 
   it('should call super (constructor) only once', () => {

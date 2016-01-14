@@ -31,7 +31,7 @@ const App = () => (
 				<UserAction />
 			</Container>
 			<Container noPadding title="1.2. child index & child type">
-				<ChildIndex items={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]} />
+				<ChildIndex items={[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]} />
 			</Container>
 			<Container title="1.3. input">
 				<Input />
@@ -77,4 +77,4 @@ const styles = StyleSheet.create(App, {
 })
 
 // Apply lookRoot: true as this is the top-level Component
-export default Look(App, {lookRoot: true})
+export default Look(App, { lookRoot: true })

@@ -5,7 +5,7 @@ import warn from '../utils/warn'
 
 
 // Evaluates child-type index positions using the parent element passed with scopeArgs
-const firstOfType = (property, styles, mixinKey, {parent, element}) => {
+const firstOfType = (property, styles, mixinKey, { parent, element }) => {
   if (parent) {
     const elementType = getChildType(element)
     const children = parent.props.children
@@ -48,7 +48,7 @@ const firstOfType = (property, styles, mixinKey, {parent, element}) => {
 }
 
 
-const lastOfType = (property, styles, mixinKey, {parent, element}) => {
+const lastOfType = (property, styles, mixinKey, { parent, element }) => {
   if (parent) {
     const elementType = getChildType(element)
     const children = parent.props.children
@@ -98,7 +98,7 @@ const lastOfType = (property, styles, mixinKey, {parent, element}) => {
 }
 
 
-const onlyOfType = (property, styles, mixinKey, {parent, element}) => {
+const onlyOfType = (property, styles, mixinKey, { parent, element }) => {
   if (parent) {
     const elementType = getChildType(element)
     const children = parent.props.children
@@ -144,7 +144,7 @@ const onlyOfType = (property, styles, mixinKey, {parent, element}) => {
 }
 
 
-const nthOfType = (property, styles, mixinKey, {parent, element}) => {
+const nthOfType = (property, styles, mixinKey, { parent, element }) => {
   if (parent) {
     const elementType = getChildType(element)
     const children = parent.props.children
@@ -192,7 +192,7 @@ const nthOfType = (property, styles, mixinKey, {parent, element}) => {
 }
 
 
-const nthLastOfType = (property, styles, mixinKey, {parent, element}) => {
+const nthLastOfType = (property, styles, mixinKey, { parent, element }) => {
   if (parent) {
     const elementType = getChildType(element)
     const children = parent.props.children

@@ -11,7 +11,7 @@ class Condition extends Component {
     }
   }
 
-  onClick = () => {
+  onClick(){
     const mode = this.state.mode
 
     if (mode === 'important') {
@@ -25,7 +25,7 @@ class Condition extends Component {
     }
   }
 
-  onClicksCount = () => {
+  onClicksCount() {
     this.setState({
       clicks: ++this.state.clicks
     })
@@ -42,8 +42,8 @@ class Condition extends Component {
 
     return (
       <div>
-        <div look={styles.states} onClick={this.onClick}>Click me<br /> Active state: {this.state.mode}</div>
-        <div look={styles.clicks} onClick={this.onClicksCount}>{getText(this.state.clicks)}</div>
+        <div look={styles.states} onClick={this.onClick.bind(this)}>Click me<br /> Active state: {this.state.mode}</div>
+        <div look={styles.clicks} onClick={this.onClicksCount.bind(this)}>{getText(this.state.clicks)}</div>
       </div>
     )
   }

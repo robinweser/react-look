@@ -7,7 +7,7 @@ import warn from '../utils/warn'
  */
 const resolveStyles = (styles) => {
   if (styles instanceof Array) {
-    const merged = {}
+    const merged = { }
     styles.forEach(obj => assignStyles(merged, obj))
     return merged
   }

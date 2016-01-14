@@ -3,7 +3,7 @@
  * @param {Array} array - array that gets flatten
  */
 export default function flattenArray(array) {
-  let out = []
+  let out = [ ]
 
   // return if input is not an array
   if (array instanceof Array !== true) {

@@ -7,7 +7,7 @@ export default function sortObject(obj) {
     return false
   }
 
-  const out = {}
+  const out = { }
 
   Object.keys(obj).sort().forEach(key => {
     if (obj[key] instanceof Object) {

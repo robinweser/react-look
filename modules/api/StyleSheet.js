@@ -15,11 +15,11 @@ export default {
       const scope = Component.displayName || Component.name || Component
 
       if (scope) {
-        let styleSheet = {}
+        let styleSheet = { }
 
         // Resolving single selector styles
         if (styles[Object.keys(styles)[0]] instanceof Object === false) {
-          styleSheet = {_scope: scope, style: styles}
+          styleSheet = { _scope: scope, style: styles }
         } else {
           // adds the Component referer uniqueId to every selector
           Object.keys(styles).forEach(selector => {
@@ -82,7 +82,7 @@ export default {
 
       // Filter the properties to only include valid properties
       if (properties && properties instanceof Object) {
-        const fontProperties = ['fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange']
+        const fontProperties = [ 'fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange' ]
         Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => fontFace[fontProp] = properties[fontProp])
       }
 

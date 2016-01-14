@@ -1,4 +1,4 @@
-import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../../lib/mixins/input'
+import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from '../../modules/mixins/input'
 
 import { expect } from 'chai'
 
@@ -27,7 +27,7 @@ describe('Evaluating input pseudo classes', () => {
   })
 
   it('should validate false', () => {
-    let args = {newProps: {}}
+    let args = { newProps: { } }
     expect(checked(':checked', true, ':checked', args)).to.equal(false)
     expect(disabled(':disabled', true, ':disabled', args)).to.equal(false)
     expect(required(':required', true, ':required', args)).to.equal(false)

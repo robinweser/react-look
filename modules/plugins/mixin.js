@@ -4,7 +4,7 @@ import assignStyles from 'assign-styles'
  * Resolves mixins
  */
 export default function mixin(styles, scopeArgs, config) {
-  const {mixins} = config
+  const { mixins } = config
 
   // if no custom keys are specified at all
   if (!mixins) {

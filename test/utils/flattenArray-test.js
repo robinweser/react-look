@@ -1,4 +1,4 @@
-import flattenArray from '../../lib/utils/flattenArray'
+import flattenArray from '../../modules/utils/flattenArray'
 import { expect } from 'chai'
 
 describe('Flattening arrays', () => {
