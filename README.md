@@ -1,11 +1,12 @@
 <h1 align="center"><img src="docs/res/banner.png" width=450></h1>
 
-
+<div align="center">
 ![TravisCI](https://travis-ci.org/rofrischmann/react-look.svg?branch=develop) [![Test Coverage](https://codeclimate.com/github/rofrischmann/react-look/badges/coverage.svg)](https://codeclimate.com/github/rofrischmann/react-look/coverage) [![Code Climate](https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg)](https://codeclimate.com/github/rofrischmann/react-look)
 [![bitHound Overalll Score](https://www.bithound.io/github/rofrischmann/react-look/badges/score.svg)](https://www.bithound.io/github/rofrischmann/react-look)
 [![npm version](https://badge.fury.io/js/react-look.svg)](http://badge.fury.io/js/react-look)
 ![Dependencies](https://david-dm.org/rofrischmann/react-look.svg)
 ![Gzipped Size](https://img.shields.io/badge/gzipped-~17k-blue.svg)
+</div>
 
 **Look** is a modular, **plugin**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://github.com/facebook/react-native) using **inline styles**.
 It simplyfies how you are styling your Components and comes in two different configurations by default.
