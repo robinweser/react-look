@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../lib/look'
 
 const Keyframes = () => (
 <div look={styles.container}>
@@ -59,4 +59,4 @@ const styles = StyleSheet.create(Keyframes, {
   }
 })
 
-export default Look(Keyframes)
+export default look(Keyframes)

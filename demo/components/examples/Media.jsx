@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../lib/look'
 
 const Media = () => <div look={styles}>Resize your window</div>
 
@@ -20,4 +20,4 @@ const styles = StyleSheet.create(Media, {
   }
 })
 
-export default Look(Media)
+export default look(Media)

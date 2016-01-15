@@ -1,6 +1,6 @@
 <img src="docs/res/banner.png" width="300">
 
-![TravisCI](https://travis-ci.org/rofrischmann/react-look.svg?branch=develop) [![Code Climate](https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg)](https://codeclimate.com/github/rofrischmann/react-look)
+![TravisCI](https://travis-ci.org/rofrischmann/react-look.svg?branch=develop) [![Test Coverage](https://codeclimate.com/github/rofrischmann/react-look/badges/coverage.svg)](https://codeclimate.com/github/rofrischmann/react-look/coverage) [![Code Climate](https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg)](https://codeclimate.com/github/rofrischmann/react-look)
 [![bitHound Overalll Score](https://www.bithound.io/github/rofrischmann/react-look/badges/score.svg)](https://www.bithound.io/github/rofrischmann/react-look)
 [![npm version](https://badge.fury.io/js/react-look.svg)](http://badge.fury.io/js/react-look)
 ![Dependencies](https://david-dm.org/rofrischmann/react-look.svg)
@@ -52,7 +52,7 @@ The syntax is quite similar to [Sass](http://sass-lang.com) and other React styl
 
 ```javascript
 import React, { Component, PropTypes } from 'react'
-import Look, { StyleSheet } from 'react-look'
+import look, { StyleSheet } from 'react-look'
 
 class Header extends Component {
   static defaultProps = {size: 24}
@@ -99,7 +99,7 @@ const styles = StyleSheet.create(Header, {
   }
 })
 
-export default Look(Header)
+export default look(Header)
 ```
 ### Stateless Components
 With Look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14. *(Currently Look creates a Stateful Component for instant support)*
@@ -113,7 +113,7 @@ const Header = ({title}) => (
 )
 
 const styles = StyleSheet.create(Header, {/* See above */})
-export default Look(Header)
+export default look(Header)
 ```
 ### React Native
 Look also supports React Native to use stateful conditions or pseudo classes such as `:first-child`.<br>

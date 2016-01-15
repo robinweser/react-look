@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../lib/look'
 
 const iOS = 'Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/538.34.9 (KHTML, like Gecko) Mobile/12A4265u'
 const android = 'Mozilla/5.0 (Linux; Android 4.4; Nexus 7 Build/KOT24) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.105 Safari/537.36'
@@ -100,4 +100,4 @@ const styles = StyleSheet.create(Platform, {
   }
 })
 
-export default Look(Platform)
+export default look(Platform)

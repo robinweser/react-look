@@ -1,5 +1,5 @@
 import React from 'react'
-import Look, { StyleSheet } from '../lib/look'
+import look, { StyleSheet } from '../lib/look'
 import { Presets } from '../lib/addons'
 import Container from './components/layout/Container.jsx'
 import UserAction from './components/examples/UserAction.jsx'
@@ -77,4 +77,4 @@ const styles = StyleSheet.create(App, {
 })
 
 // Apply lookRoot: true as this is the top-level Component
-export default Look(App, { lookRoot: true })
+export default look(App, { lookRoot: true })

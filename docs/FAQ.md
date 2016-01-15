@@ -32,11 +32,11 @@ In order to get global CSS rendered as expected. You need to add the `lookRoot: 
 
 ```javascript
 import React from 'react'
-import Look from 'react-look'
+import look from 'react-look'
 import { render } from 'react-dom'
 
 let App = () => <div>/* app content */</div>
-App = Look(App, {lookRoot: true})
+App = look(App, {lookRoot: true})
 
 render(<App />, document.getElementById('app'))
 ```

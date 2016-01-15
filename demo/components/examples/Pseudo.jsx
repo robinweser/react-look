@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../lib/look'
 import { Mixins } from '../../../lib/addons'
 
 const Pseudo = () => (
@@ -58,7 +58,7 @@ const styles = StyleSheet.create(Pseudo, {
   }
 })
 
-export default Look(Pseudo, {
+export default look(Pseudo, {
   mixins: {
     '::-webkit-input-placeholder': Mixins.pseudoToCSS
   }

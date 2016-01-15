@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../lib/look'
 import Color from 'color'
 
 class Condition extends Component {
@@ -91,4 +91,4 @@ const styles = StyleSheet.create(Condition, {
   }
 })
 
-export default Look(Condition)
+export default look(Condition)

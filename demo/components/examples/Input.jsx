@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Look, { StyleSheet, State } from '../../../lib/look'
+import look, { StyleSheet, State } from '../../../lib/look'
 
 class Input extends Component {
   render() {
@@ -7,13 +7,13 @@ class Input extends Component {
 
     return (
       <div>
-        <input key="i1" look={[styles.input, styles.inputFocus]} placeholder="focus me"/>
+        <input key="i1" look={[ styles.input, styles.inputFocus ]} placeholder="focus me"/>
         <input look={styles.input} placeholder="i am required" required/>
-        <input look={[styles.input, styles.inputValid]} placeholder="i only allow uppercase" pattern="[A-Z]*" ref="valid"/>
-        <input look={[styles.input, styles.inputOptional]} placeholder="i am optional"/>
-        <input look={[styles.input, styles.range]} type="number" placeholder={rangePlaceholder} min={10} max={100} defaultValue={120} step={1} ref="step"/>
-        <input look={[styles.input, styles.readOnly]} defaultValue="i am read only" readOnly/>
-        <input disabled look={[styles.input, styles.inputDisabled]} placeholder="i am disabled"/>
+        <input look={[ styles.input, styles.inputValid ]} placeholder="i only allow uppercase" pattern="[A-Z]*" ref="valid"/>
+        <input look={[ styles.input, styles.inputOptional ]} placeholder="i am optional"/>
+        <input look={[ styles.input, styles.range ]} type="number" placeholder={rangePlaceholder} min={10} max={100} defaultValue={120} step={1} ref="step"/>
+        <input look={[ styles.input, styles.readOnly ]} defaultValue="i am read only" readOnly/>
+        <input disabled look={[ styles.input, styles.inputDisabled ]} placeholder="i am disabled"/>
       </div>
       )
   }
@@ -79,4 +79,4 @@ const styles = StyleSheet.create(Input, {
   }
 })
 
-export default Look(Input)
+export default look(Input)

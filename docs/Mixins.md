@@ -288,7 +288,7 @@ Just use the new spread operator `...`.
 > NOTE: This is only a **polyfill** and might be removed if there's a better solution to the problem.
 
 ```javascript
-import Look, { StyleSheet } from 'react-look'
+import look, { StyleSheet } from 'react-look'
 import { Mixins } from 'react-look/addons'
 
 const Input = () => (
@@ -303,10 +303,10 @@ const styles = StyleSheet.create(Input, {
 		'::-webkit-input-placeholder': {
 			color: 'red'
 		}
-	}	
+	}
 })
 
-Input = Look(Input, {
+Input = look(Input, {
 	mixins: {
 		'::-webkit-input-placeholder': Mixins.pseudoToCSS
 	}

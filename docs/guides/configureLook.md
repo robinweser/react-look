@@ -47,34 +47,34 @@ There are two different ways to apply your configuration globally.
 
 ### Custom instance
 ```javascript
-import Look from 'react-look'
+import look from 'react-look'
 
 // Basically just a wrapper function
 // calling Look with a specific config object
 export default (Component, config) => {
 	// Use this to allow Component-scoped configs later on
 	const configuration = Object.assign({}, customConfig, config)
-	return Look(Component, configuration)
+	return look(Component, configuration)
 }
 ```
 ```javascript
-import Look from './customLook'
+import look from './customLook'
 import { StyleSheet } from 'react-look'
 
 const Example = () => <div look={styles.box}>Foo</div>
 const styles = StyleSheet.create(Example, {box: {color: 'red'}})
 
-export default Look(Example)
+export default look(Example)
 ```
 
 ### Pass lookConfig as a prop
 Basically you will only do this once on your top-level Component which is the root Component Look renders. The primary use case is server-side rendering where you might want to pass e.g. a *userAgent* from request headers directly.
 ```javascript
 import 'react' from 'react'
-import Look from 'react-look'
+import look from 'react-look'
 
 const App = () => <div>/*App content*/</div>
-export default Look(App)
+export default look(App)
 ```
 ```javascript
 import App from './App'
@@ -87,7 +87,7 @@ render(<App lookConfig={customConfig} />, document.getElementById('app'))
 ## Component-based configuration
 While both examples above will hand the configuration down to all the child Components you may also want to apply some configuration for just a single Component.
 ```javascript
-import Look from 'react-look'
+import look from 'react-look'
 import { Plugins } from 'react-look/addons'
 import { StyleSheet } from 'react-look'
 
@@ -100,5 +100,5 @@ const styles = StyleSheet.create(Example, {
 })
 
 // You only need the alternative plugin to resolve an array of values
-export default Look(Example, {plugins: [Plugins.alternativeValue]})
+export default look(Example, {plugins: [Plugins.alternativeValue]})
 ```

@@ -6,7 +6,7 @@ Using State you can get/set special states for specific components.<br>
 ## Usage
 
 ```javascript
-import { Look, State } from 'react-look'
+import { look, State } from 'react-look'
 
 let Header = () => (
   <div>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create(Header, {
   }
 })
 
-Header = Look(Header)
+Header = look(Header)
 
 // returns the state as a boolean
 State.getState('hover', Header, 'second')

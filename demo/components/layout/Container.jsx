@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../lib/look'
 
 class Container extends Component {
   render() {
@@ -65,4 +65,4 @@ const styles = StyleSheet.create(Container, {
   }
 })
 
-export default Look(Container)
+export default look(Container)

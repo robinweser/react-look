@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../lib/look'
 
 class ChildIndex extends Component {
   static defaultProps = {
@@ -45,4 +45,4 @@ const styles = StyleSheet.create(ChildIndex, {
     }
 })
 
-export default Look(ChildIndex)
+export default look(ChildIndex)

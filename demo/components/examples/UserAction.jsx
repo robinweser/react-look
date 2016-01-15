@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import Look, { State, StyleSheet } from '../../../lib/look'
+import look, { State, StyleSheet } from '../../../lib/look'
 
 
 class UserAction extends Component {
   render() {
-    const states = {hover: 'Now click me', active: 'Well done'}
+    const states = { hover: 'Now click me', active: 'Well done' }
     let stateLabel = 'Hover me'
 
     Object.keys(states).forEach(state => {
@@ -15,11 +15,11 @@ class UserAction extends Component {
 
     return (
       <div>
-        <div key="active" look={[styles.button, styles.activeButton]}>Click me</div>
-        <div key="hover" look={[styles.button, styles.hoverButton]}>Hover me</div>
+        <div key="active" look={[ styles.button, styles.activeButton ]}>Click me</div>
+        <div key="hover" look={[ styles.button, styles.hoverButton ]}>Hover me</div>
         <br/>
         <div>State-API live example</div>
-        <div key="both" look={[styles.button, styles.stateButton]}>{stateLabel}</div>
+        <div key="both" look={[ styles.button, styles.stateButton ]}>{stateLabel}</div>
       </div>
       )
   }
@@ -56,4 +56,4 @@ const styles = StyleSheet.create(UserAction, {
   }
 })
 
-export default Look(UserAction)
+export default look(UserAction)

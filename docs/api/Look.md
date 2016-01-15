@@ -1,7 +1,7 @@
 # Look
 Look is the core function which wraps an existing React Component in order to resolve styles
 
-## `Look(Component [, config])`
+## `look(Component [, config])`
 | Parameter | Description |
 | --------- | ----------- |
 | Component | Valid React Component you want to enhance with styles |
