@@ -10,7 +10,7 @@ export default {
    * @param {styles} styles - Style selector or Object with selectors
    */
   create(Component, styles) {
-    if (Component !== undefined && styles && Object.keys(styles).length > 0) {
+    if (styles && Object.keys(styles).length > 0) {
       // Either take the Components "name" itself or just a pure string as scope
       const scope = Component.displayName || Component.name || Component
 
@@ -32,12 +32,10 @@ export default {
             }
           })
         }
-
         return styleSheet
       }
-
-      return styles
     }
+    return { }
   },
 
   /**

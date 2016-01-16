@@ -30,7 +30,6 @@ describe('Evaluating hover pseudos', () => {
 
   it('should set an initial state', () => {
     expect(State.has(args.Component, args.element.key)).to.equal(true)
-    expect(State.get(args.Component, args.element.key)).to.eql({})
   })
 })
 
@@ -49,7 +48,6 @@ describe('Evaluating focus pseudos', () => {
 
   it('should set an initial state', () => {
     expect(State.has(args.Component, args.element.key)).to.equal(true)
-    expect(State.get(args.Component, args.element.key)).to.eql({})
   })
 })
 
@@ -64,6 +62,5 @@ describe('Evaluating active pseudos', () => {
 
   it('should set an initial state', () => {
     expect(State.has(args.Component, args.element.key)).to.equal(true)
-    expect(State.get(args.Component, args.element.key)).to.eql({})
   })
 })

@@ -34,9 +34,8 @@
     "lint": "eslint modules",
     "package": "npm test && npm run bundle && node build-package.js",
     "release": "npm run package && npm publish",
-    "test": "npm run lint && mocha --recursive --compilers js:babel-core/register",
-    "test:coverage": "babel-node ./node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha -- --recursive",
-    "test:watch": "mocha --recursive --compilers js:babel-core/register -w"
+    "test": "mocha --recursive --compilers js:babel-core/register",
+    "test:coverage": "babel-node ./node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha -- --recursive"
   },
   "keywords": [
     "react",
@@ -93,11 +92,13 @@
     "express": "^4.13.3",
     "express-http-proxy": "^0.6.0",
     "isparta": "^4.0.0",
+    "jsdom": "^7.2.2",
     "json-loader": "^0.5.4",
     "minifyify": "^7.1.0",
     "mocha": "^2.3.4",
     "path": "^0.12.7",
     "react": "^0.14.6",
+    "react-addons-test-utils": "^0.14.6",
     "react-dom": "^0.14.6",
     "rimraf": "^2.5.0",
     "sinon": "^1.17.2",

@@ -14,25 +14,6 @@ export default {
   },
 
   /**
-   * Returns all states/information about a key
-   * @param {Object} Component - outer wrapping React Component
-   * @param {string} key - a unique key whichs state gets returned
-   */
-  get(Component, key = defaultKey) {
-    return Component.state._look.get(key)
-  },
-
-  /**
-   * Sets a whole new state map for a key
-   * @param {Object} states  - states that get applied
-   * @param {Object} Component - outer wrapping React Component
-   * @param {string} key - a unique key which gets states set
-   */
-  set(states, Component, key = defaultKey) {
-    return Component.state._look.set(key, states)
-  },
-
-  /**
    * Check if there's already information about a key
    * @param {Object} Component - outer wrapping React Component
    * @param {string} key - a unique key which gets checked
@@ -40,6 +21,7 @@ export default {
   has(Component, key = defaultKey) {
     return Component.state._look.has(key)
   },
+
 
   /**
    * Returns a specific state of a key
@@ -63,6 +45,9 @@ export default {
    * @param {string} key - a unique key whichs state gets set
    */
   setState(state, value, Component, key = defaultKey) {
+    if (!Component.state._look.has(key)) {
+      Component.state._look.set(key, new Map())
+    }
     Component.state._look.get(key).set(state, value)
     return Component.setState(Component.state._look)
   },
@@ -74,6 +59,9 @@ export default {
    * @param {string} key - a unique key whichs state gets checked
    */
   hasState(state, Component, key = defaultKey) {
-    return Component.state._look.has(key).has(state)
+    if (Component.state._look.has(key)) {
+      return Component.state._look.get(key).has(state)
+    }
+    return false
   }
 }

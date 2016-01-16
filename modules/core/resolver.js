@@ -56,18 +56,22 @@ export function processStyles(styles, props, scopeArgs, config) {
  */
 export default function resolveStyles(Component, element, config, parent) {
   // only resolve if look or children exist
-  if (element && element.props && (element.props.look || element.props.children)) {
+  if (element && element.props) {
+    let nothingToResolve = true
+
     const props = element.props
     const newProps = assign({ }, props)
 
 
     if (props.children) {
+      nothingToResolve = false
       // resolving child styles recursively to make sure they will be rendered correctly
       newProps.children = resolveChildren(Component, props.children, config, element) // eslint-disable-line
     }
 
 
     if (props.look) {
+      nothingToResolve = false
       // Merge an array of styles into a single style object
       if (props.look instanceof Array) {
         newProps.look = assignStyles({ }, ...props.look)
@@ -102,6 +106,7 @@ export default function resolveStyles(Component, element, config, parent) {
     // Skip children as they've been resolved already
     Object.keys(newProps).forEach(prop => {
       if (prop !== 'children' && isValidElement(newProps[prop])) {
+        nothingToResolve = false
         newProps[prop] = resolveStyles(Component, newProps[prop], config)
       }
     })
@@ -113,7 +118,9 @@ export default function resolveStyles(Component, element, config, parent) {
       newProps._parent = parent
     }
 
-    return cloneElement(element, newProps)
+    if (!nothingToResolve) {
+      return cloneElement(element, newProps)
+    }
   }
 
   return element
@@ -146,5 +153,4 @@ const resolveChildren = (Component, children, config, parent) => {
   if (children.type) {
     return resolveStyles(Component, children, config, parent)
   }
-  return children
 }
