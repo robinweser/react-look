@@ -3,7 +3,6 @@ import evalNthExpression from '../utils/evalNthExpression'
 import getChildType from '../utils/getChildType'
 import warn from '../utils/warn'
 
-
 // Evaluates child-type index positions using the parent element passed with scopeArgs
 const firstOfType = (property, styles, mixinKey, { parent, element }) => {
   if (parent) {
@@ -43,8 +42,6 @@ const firstOfType = (property, styles, mixinKey, { parent, element }) => {
       }
     }
   }
-
-  return false
 }
 
 
@@ -67,6 +64,7 @@ const lastOfType = (property, styles, mixinKey, { parent, element }) => {
     if (lastTypedElement) {
       return styles
     }
+    return false
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
@@ -94,7 +92,6 @@ const lastOfType = (property, styles, mixinKey, { parent, element }) => {
       }
     }
   }
-  return false
 }
 
 
@@ -214,6 +211,7 @@ const nthLastOfType = (property, styles, mixinKey, { parent, element }) => {
         return styles
       }
     }
+    return false
   } else {
     const elementKey = element._owner._currentElement.key
     if (!elementKey) {
