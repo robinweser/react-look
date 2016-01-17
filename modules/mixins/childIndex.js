@@ -37,13 +37,14 @@ const lastChild = (property, styles, mixinKey, { parent, element }) => {
 }
 
 const onlyChild = (property, styles, mixinKey, { parent, element }) => {
-  if (parent && parent.props.children.length === 1) {
-    return styles
-  }
-  const elementParent = element._owner._instance.props._parent
+  if (parent) {
+    return parent.props.children.length === 1 ? styles : false
+  } else {
+    const elementParent = element._owner._instance.props._parent
 
-  if (elementParent && elementParent.props.children.length === 1) {
-    return styles
+    if (elementParent && elementParent.props.children.length === 1) {
+      return styles
+    }
   }
 
   return false
