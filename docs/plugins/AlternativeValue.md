@@ -4,7 +4,7 @@ Sometimes you want to provide alternative values also know as *fallback values*.
 For example in Internet Explorer 8 there is no `rgba` compatibility for colors which means just passing *e.g. `color: rgba(0, 0, 0, 0.5)`* would not be applied correctly.
 By passing an array of values you may provide fallback values.
 
-> NOTE: The main purpose of fallback values is to achieve better cross-browser compatibility.
+> **Note**: The main purpose of fallback values is to achieve better cross-browser compatibility.
 
 ```javascript
 {

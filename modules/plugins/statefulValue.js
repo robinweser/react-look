@@ -1,4 +1,5 @@
 import assignStyles from 'assign-styles'
+
 /**
  * Resolves values that are functions
  * Calling them with props, state, context as parameter
