@@ -6,6 +6,7 @@ import { Plugins } from 'inline-style-linter'
 import App from './app.jsx'
 
 const config = Presets['react-dom'];
+/*
 config.plugins.push(DevTools.linter)
 
 config.linter = {
@@ -29,6 +30,7 @@ config.linter = {
   },
   onlyLogHint: true
 }
+*/
 
 config.userAgent = navigator.userAgent
 

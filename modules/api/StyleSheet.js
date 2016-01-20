@@ -2,6 +2,17 @@ import GlobalStyleSheet from '../utils/GlobalStyleSheet'
 import getFontFormat from '../utils/getFontFormat'
 import generateClassName from '../utils/generateClassName'
 
+const getStaticStyles = (styles) => {
+  const staticStyles = { }
+  Object.keys(styles).forEach(property => {
+    if (typeof styles[property] === 'string' || typeof styles[property] === 'number') {
+      staticStyles[property] = styles[property]
+      delete styles[property]
+    }
+  })
+  GlobalStyleSheet.addSelector(scopeSelector + selector, styles[selector])
+}
+
 export default {
   /**
    * Generates a styleSheet with an scopeId applied to every selector
@@ -10,32 +21,7 @@ export default {
    * @param {styles} styles - Style selector or Object with selectors
    */
   create(Component, styles) {
-    if (styles && Object.keys(styles).length > 0) {
-      // Either take the Components "name" itself or just a pure string as scope
-      const scope = Component.displayName || Component.name || Component
-
-      if (scope) {
-        let styleSheet = { }
-
-        // Resolving single selector styles
-        if (styles[Object.keys(styles)[0]] instanceof Object === false) {
-          styleSheet = { _scope: scope, style: styles }
-        } else {
-          // adds the Component referer uniqueId to every selector
-          Object.keys(styles).forEach(selector => {
-            const selectorStyles = styles[selector]
-            if (selectorStyles instanceof Object) {
-              styleSheet[selector] = {
-                _scope: scope,
-                style: selectorStyles
-              }
-            }
-          })
-        }
-        return styleSheet
-      }
-    }
-    return { }
+    return styles
   },
 
   /**
