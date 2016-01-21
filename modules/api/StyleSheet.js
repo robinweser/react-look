@@ -20,23 +20,6 @@ export function renderStaticStyles(styles) {
 }
 
 export default {
-  combineStyles(...styles) {
-    const combined = { className: '', look: { } }
-
-    const flatStyles = styles.reverse()
-
-    flatStyles.forEach(mapping => {
-      if (mapping.className) {
-        combined.className += ' ' + mapping.className
-      }
-      if (mapping.look) {
-        assignStyles(combined.look, mapping.look)
-      }
-    })
-    combined.className = combined.className.trim()
-
-    return combined
-  },
   /**
    * Generates a styleSheet with an scopeId applied to every selector
    * The scopeId refers to the Component that is responsible for resolving those styles
@@ -79,6 +62,26 @@ export default {
       }
       return output; // eslint-disable-line
     }, { })
+  },
+
+
+
+  combineStyles(...styles) {
+    const combined = { className: '', look: { } }
+
+    const flatStyles = styles.reverse()
+
+    flatStyles.forEach(mapping => {
+      if (mapping.className) {
+        combined.className += ' ' + mapping.className
+      }
+      if (mapping.look) {
+        assignStyles(combined.look, mapping.look)
+      }
+    })
+    combined.className = combined.className.trim()
+
+    return combined
   },
 
   /**

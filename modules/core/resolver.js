@@ -47,7 +47,6 @@ export default function resolveStyles(Component, element, config, parent) {
     }
 
     let newProps = {...element.props }
-    let changeIndicator = false
 
     Object.keys(newProps).forEach(property => {
       if (property === 'children') {
@@ -59,7 +58,6 @@ export default function resolveStyles(Component, element, config, parent) {
       const propElement = newProps[property]
       if (isValidElement(propElement)) {
         newProps[property] = resolveStyles(Component, propElement, config)
-        changeIndicator = true
       }
     })
 
@@ -87,17 +85,14 @@ export default function resolveStyles(Component, element, config, parent) {
       }
 
       newProps.style = processStyles(styles, newProps, scopeArgs, config)
-      changeIndicator = true
     }
 
-    if (changeIndicator || newProps.children !== element.props.children) {
-      // Passing the current parent element via props
-      // This is especially useful for mixins e.g. :first-child
-      if (parent) {
-        newProps._parent = parent
-      }
-      return cloneElement(element, newProps)
+    // Passing the current parent element via props
+    // This is especially useful for mixins e.g. :first-child
+    if (parent) {
+      newProps._parent = parent
     }
+    return cloneElement(element, newProps)
   }
 
   return element
