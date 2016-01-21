@@ -1,5 +1,5 @@
 import { cloneElement, isValidElement, Children } from 'react'
-import GlobalStyleSheet from '../utils/GlobalStyleSheet'
+import CSSContainer from '../utils/CSSContainer'
 import flattenArray from '../utils/flattenArray'
 import assignStyles from 'assign-styles'
 import warn from '../utils/warn'
@@ -11,7 +11,7 @@ import warn from '../utils/warn'
  * @param {Object} scopeArgs - special objects including important information
  * @param {Object} config - configuration containing plugins and plugin-specific configs
  */
-function processStyles(styles, props, scopeArgs, config) {
+export function processStyles(styles, props, scopeArgs, config) {
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
   if (config.plugins && config.plugins instanceof Array) {
@@ -83,7 +83,7 @@ export default function resolveStyles(Component, element, config, parent) {
         Component,
         element,
         parent,
-        GlobalStyleSheet
+        CSSContainer
       }
 
       newProps.style = processStyles(styles, newProps, scopeArgs, config)

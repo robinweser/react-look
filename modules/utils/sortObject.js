@@ -4,7 +4,7 @@
  */
 export default function sortObject(obj) {
   return Object.keys(obj).sort().reduce((output, property) => {
-    output[property] = ob[property]; // eslint-disable-line
+    output[property] = obj[property]; // eslint-disable-line
     return output; // eslint-disable-line
-  }, {})
+  }, { })
 }

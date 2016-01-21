@@ -12,7 +12,7 @@ const KEYS_TO_IGNORE_WHEN_COPYING_PROPERTIES = [
   'type'
 ]
 
-export default copyProperties(source, target) {
+export default function copyProperties(source, target) {
   Object.getOwnPropertyNames(source).forEach(key => {
     if (KEYS_TO_IGNORE_WHEN_COPYING_PROPERTIES.indexOf(key) < 0 && !target.hasOwnProperty(key)) {
       const descriptor = Object.getOwnPropertyDescriptor(source, key)

@@ -1,68 +1,66 @@
 import React, { Component } from 'react'
 import look, { StyleSheet } from '../../../lib/look'
+const c = StyleSheet.combineStyles
+
 import Color from 'color'
 
 class Condition extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      mode: 'default',
-      clicks: 0
-    }
+    this.state = { mode: 'default', clicks: 0 }
   }
 
-  onClick(){
+  onClick() {
     const mode = this.state.mode
 
     if (mode === 'important') {
-      this.setState({mode: 'disabled'})
+      this.setState({ mode: 'disabled' })
     } else if (mode === 'disabled') {
-      this.setState({mode: 'default'})
+      this.setState({ mode: 'default' })
     } else if (mode === 'active') {
-      this.setState({mode: 'important'})
+      this.setState({ mode: 'important' })
     } else {
-      this.setState({mode: 'active'})
+      this.setState({ mode: 'active' })
     }
   }
 
   onClicksCount() {
-    this.setState({
-      clicks: ++this.state.clicks
-    })
+    this.setState({ clicks: ++this.state.clicks })
   }
 
-  render () {
+  render() {
     const getText = (clicks) => {
-      if(clicks < 20) {
+      if (clicks < 20) {
         return 'Click me ' + (20 - clicks) + ' times'
-      } else if (clicks === 20) {return 'HORRAAAY!'} else {
+      } else if (clicks === 20) {
+        return 'HORRAAAY!'
+      } else {
         return 'Alright stop it. ' + clicks + ' clicks'
       }
     }
 
     return (
       <div>
-        <div look={styles.states} onClick={this.onClick.bind(this)}>Click me<br /> Active state: {this.state.mode}</div>
-        <div look={styles.clicks} onClick={this.onClicksCount.bind(this)}>{getText(this.state.clicks)}</div>
+        <div {... c(styles.button, styles.states)} onClick={this.onClick.bind(this)}>Click me<br /> Active state: {this.state.mode}</div>
+      <div {...c(styles.button, styles.clicks)} onClick={this.onClicksCount.bind(this)}>{getText(this.state.clicks)}</div>
       </div>
-    )
+      )
   }
 }
 
-const buttonStyles = {
-  margin: 10,
-  padding: 5,
-  fontSize: 20,
-  border: '1px solid black',
-  color: 'black',
-  borderRadius: 5,
-  textAlign: 'center',
-  border: '1px solid lightgray',
-  boxShadow: '0px 1px 2px rgba(0,0,0,0.34)'
-}
-const styles = StyleSheet.create(Condition, {
+const styles = StyleSheet.create({
+  button: {
+    margin: 10,
+    padding: 5,
+    fontSize: 20,
+    border: '1px solid black',
+    color: 'black',
+    borderRadius: 5,
+    textAlign: 'center',
+    border: '1px solid lightgray',
+    boxShadow: '0px 1px 2px rgba(0,0,0,0.34)'
+  },
   states: {
-    ...buttonStyles,
     'mode=important': {
       backgroundColor: 'rgba(182, 49, 40, 0.66)'
     },
@@ -78,7 +76,6 @@ const styles = StyleSheet.create(Condition, {
   },
 
   clicks: {
-    ...buttonStyles,
     'clicks<20': {
       backgroundColor: (props, state) => Color('green').alpha((state.clicks + 1) / 20).rgbString()
     },
@@ -91,4 +88,5 @@ const styles = StyleSheet.create(Condition, {
   }
 })
 
+console.log(styles)
 export default look(Condition)

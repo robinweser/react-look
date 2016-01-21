@@ -11,7 +11,7 @@ class ChildIndex extends Component {
   render() {
     //create a small list of items to demonstrate nth-child, et cetera
     let list = this.props.items.map((text, index) => {
-      return <li look={styles} key={'.' + index}>ListItem {text}</li>
+      return <li {...styles} key={'.' + index}>ListItem {text}</li>
     })
 
     return (
@@ -24,7 +24,7 @@ class ChildIndex extends Component {
   }
 }
 
-const styles = StyleSheet.create(ChildIndex, {
+const styles = StyleSheet.create({
     color: 'darkgray',
     listStyleType: 'none',
     ':nth-child(odd)': {

@@ -25,13 +25,13 @@ StyleSheet.toCSS({
 
 const App = () => (
 <div>
-		<h1 look={styles}>Look Examples</h1>
+		<h1 {...styles}>Look Examples</h1>
 		<Container group title="1. Pseudo classes">
 			<Container title="1.1. user action">
 				<UserAction />
 			</Container>
 			<Container noPadding title="1.2. child index & child type">
-				<ChildIndex items={[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]} />
+				<ChildIndex items={new Array(100).join(',').split('').map((item, index) => index)} />
 			</Container>
 			<Container title="1.3. input">
 				<Input />
@@ -67,7 +67,7 @@ const App = () => (
 	</div>
 )
 
-const styles = StyleSheet.create(App, {
+const styles = StyleSheet.create({
   marginTop: 20,
   marginBottom: 30,
   fontSize: 40,

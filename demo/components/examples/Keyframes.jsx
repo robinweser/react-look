@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import look, { StyleSheet } from '../../../lib/look'
 
 const Keyframes = () => (
-<div look={styles.container}>
-		<div look={styles.box} />
+<div {...styles.container}>
+		<div {...styles.box} />
 	</div>
 )
 
@@ -46,7 +46,7 @@ const backgroundFrames = StyleSheet.keyframes({
   }
 })
 
-const styles = StyleSheet.create(Keyframes, {
+const styles = StyleSheet.create({
   container: {
     height: 300,
     animation: positionFrames + ' 6s linear 0s infinite'

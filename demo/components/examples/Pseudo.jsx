@@ -4,18 +4,18 @@ import { Mixins } from '../../../lib/addons'
 
 const Pseudo = () => (
 <div>
-    <div look={styles.firstLetter}>First letter is colored red.</div>
+    <div {...styles.firstLetter}>First letter is colored red.</div>
     <br/>
-    <div look={styles.numbers}>:substr lets you style regex m4tches 4 example only numb3rs with :substr([0-9]*).</div>
+  <div {...styles.numbers}>:substr lets you style regex m4tches 4 example only numb3rs with :substr([0-9]*).</div>
     <br/>
-    <div look={styles.beforeAfter}>Who's after me?</div>
+  <div {...styles.beforeAfter}>Who's after me?</div>
     <br/>
     <div>Pseudo to CSS polyfill <i>(e.g. ::-webkit-input-placeholder)</i></div>
-    <input look={styles.input} placeholder="Webkit-based browsers show this placeholder in green" />
+  <input {...styles.input} placeholder="Webkit-based browsers show this placeholder in green" />
   </div>
 )
 
-const styles = StyleSheet.create(Pseudo, {
+const styles = StyleSheet.create({
   firstLetter: {
     fontSize: 20,
     ':first-letter': {

@@ -1,7 +1,7 @@
 import throttle from '../utils/throttle'
 import { processStyles } from '../core/resolver'
 import extractCSS from './extractCSS'
-import GlobalStyleSheet from '../utils/GlobalStyleSheet'
+import CSSContainer from '../utils/CSSContainer'
 import generateClassName from '../utils/generateClassName'
 
 const CSSMediaQueries = new Map()
@@ -50,11 +50,12 @@ export default (property, styles, mixinKey, scopeArgs, config) => {
   const resolvedStyles = processStyles(styles, newProps, scopeArgs, config)
 
   const className = generateClassName(resolvedStyles)
-  GlobalStyleSheet.addMediaQuery(query, '.' + className, resolvedStyles)
+  CSSContainer.add(query, '.' + className, resolvedStyles)
 
   if (!CSSMediaQueries.has(query)) {
     CSSMediaQueries.set(query, new Set())
   }
+
   CSSMediaQueries.get(query).add('.' + className)
 
   extractCSS(property, className, mixinKey, scopeArgs)

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import look, { StyleSheet } from '../../../lib/look'
 
-const Media = () => <div look={styles}>Resize your window</div>
+const Media = () => <div {...styles}>Resize your window</div>
 
-const styles = StyleSheet.create(Media, {
+const styles = StyleSheet.create({
   padding: 40,
   textAlign: 'center',
   color: 'white',
