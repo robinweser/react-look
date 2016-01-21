@@ -7,8 +7,4 @@ import sortObject from './sortObject'
  * no matter how they're sorted
  * @param {Object} styles - style object which will get sorted and hashed
  */
-export default styles => {
-  if (styles !== undefined && styles instanceof Object) {
-    return 'c' + generateHashCode(JSON.stringify(sortObject(styles)))
-  }
-}
+export default styles => 'c' + generateHashCode(JSON.stringify(sortObject(styles)))

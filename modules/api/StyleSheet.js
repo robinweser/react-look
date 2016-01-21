@@ -1,77 +1,37 @@
-import GlobalStyleSheet from '../utils/GlobalStyleSheet'
-import getFontFormat from '../utils/getFontFormat'
+import CSSContainer from '../utils/CSSContainer'
 import generateClassName from '../utils/generateClassName'
 
-const getStaticStyles = (styles) => {
-  const staticStyles = { }
-  Object.keys(styles).forEach(property => {
-    if (typeof styles[property] === 'string' || typeof styles[property] === 'number') {
-      staticStyles[property] = styles[property]
+export function renderStaticStyles(styles) {
+  const staticStyles = Object.keys(styles).reduce((output, property) => {
+    const value = styles[property]
+    if (typeof value === 'string' || typeof value === 'number' || value instanceof Array) {
+      output[property] = styles[property]
       delete styles[property]
     }
-  })
-  GlobalStyleSheet.addSelector(scopeSelector + selector, styles[selector])
+    return output;
+  }, {})
+
+  return generateClassName(staticStyles)
 }
 
-export default {
-  /**
-   * Generates a styleSheet with an scopeId applied to every selector
-   * The scopeId refers to the Component that is responsible for resolving those styles
-   * @param {Object|string} Component - React Component that the styles refer to
-   * @param {styles} styles - Style selector or Object with selectors
-   */
-  create(Component, styles) {
-    return styles
-  },
-
-  /**
-   * A global StyleSheet that directly applies to your DOM
-   * @param {Object} styles - a set of style objects
-   * @param {string?} scope - additional scoping selector
-   */
-  toCSS(styles, scope) {
-    if (styles && styles instanceof Object) {
-      const scopeSelector = scope !== undefined && scope.trim() !== '' ? scope + ' ' : ''
-      Object.keys(styles).forEach(selector => GlobalStyleSheet.addSelector(scopeSelector + selector, styles[selector]))
-    }
-  },
-
-  /**
-   * Adds keyframe animations to the global StyleSheet and returns the animation name
-   * @param {Object} frames - keyframes that get inserted
-   * @param {string?} name - custom animation name
-   */
-  keyframes(frames, name) {
-    if (frames && frames instanceof Object) {
-      const animationName = name ? name : generateClassName(frames)
-
-      GlobalStyleSheet.addKeyframes(animationName, frames)
-      return animationName
-    }
-  },
-
-  /**
-   * Adds a new font family to the global StyleSheet for global usage
-   * @param {string} fontFamily - font-family for global usage
-   * @param {string|Array} files - source files refering to the font files
-   * @param {Object} properties - additional font properties including fontWeight, fontStretch, fontStyle, unicodeRange
-   */
-  fontFace(fontFamily, files, properties) {
-    if (files) {
-      // Generates a style object including all font information
-      const fontFace = {
-        fontFamily: '\'fontFamily}\'',
-        src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`).join(',') : files
-      }
-
-      // Filter the properties to only include valid properties
-      if (properties && properties instanceof Object) {
-        const fontProperties = [ 'fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange' ]
-        Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => fontFace[fontProp] = properties[fontProp])
-      }
-
-      GlobalStyleSheet.addFontFace(fontFace)
-      return fontFamily
-    }
+export function create(comp, styles) {
+  if (!styles || Object.keys(styles).length < 1) {
+    warn('WRONG INPUT')
+    return false
   }
+
+  return Object.keys(styles).reduce((output, selector) => {
+    const selectorStyles = styles[selector]; // eslint-disable-line
+    const className = renderStaticStyles(selectorStyles)
+
+    output[selector] = {}
+
+    if (className) {
+      output[selector].className = className
+    }
+    if (Object.keys(selectorStyles).length > 0) {
+      output[selector].look = selectorStyles
+    }
+    return output; // eslint-disable-line
+  }, {})
 }

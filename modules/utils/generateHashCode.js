@@ -3,11 +3,7 @@
  * Taken from http://stackoverflow.com/a/7616484
  * @param {string} str - str used to generate the unique hash code
  */
-export default str => {
-  if (typeof str !== 'string') {
-    return false
-  }
-
+export default function generateHashCode(str) {
   let hash = 0
   let iterator
   let char

@@ -1,30 +1,35 @@
 import React, { Component } from 'react'
-import GlobalStyleSheet from '../utils/GlobalStyleSheet'
+import CSSContainer from '../utils/CSSContainer'
 
 export default class CSSStyleSheet extends Component {
   constructor(props) {
     super(...arguments)
-    const CSSString = GlobalStyleSheet.getCSSString(props.userAgent) // eslint-disable-line
-    this.state = { CSSString: CSSString }
+    const css = CSSContainer.render(userAgent) // eslint-disable-line
+    this.setState({styles: css})
+
+    this.updateStyles = this.updateStyles.bind(this, props.userAgent)
   }
 
   componentDidMount() {
-    this._changeListener = GlobalStyleSheet.subscribe(this.updateCSSString.bind(this))
-    GlobalStyleSheet._executeListener()
+    this._changeListener = CSSContainer.subscribe(this.updateStyles)
+    CSSContainer._executeListener()
   }
 
   componentWillUnmount() {
     this._changeListener.unsubscribe()
   }
 
-  updateCSSString() {
-    const CSSString = GlobalStyleSheet.getCSSString(this.props.userAgent) // eslint-disable-line
-    this.setState({ CSSString: CSSString })
+  updateStyles(userAgent) {
+    const css = CSSContainer.render(userAgent) // eslint-disable-line
+    this.setState({styles: css})
   }
 
   render() {
-    return (
-      <style dangerouslySetInnerHTML={{ __html: this.state.CSSString }} />
-      )
+    if (this.state.css !== '') {
+      return <style dangerouslySetInnerHTML={{
+          __html: this.state.css
+        }} />
+    }
+    return ''
   }
 }

@@ -1,99 +1,47 @@
 import prefixer from './prefixer'
-import { toCSS, importantify } from 'inline-style-transformer'
+import { toCSS } from 'inline-style-transformer'
 
-export default class CSSContainer {
+
+class CSSContainer {
   constructor() {
-    this.CSSRules = new Map()
-    this.keyframes = new Map()
-    this.mediaQueries = new Map()
-    this.fontFaces = new Set()
+    this.selectors = new Map()
     this._listener = new Set()
   }
 
-  addSelector(selector, styles) {
-    if (!this.CSSRules.has(selector)) {
-      this.CSSRules.set(selector, styles)
-      this._executeListener()
+  add(selector, styles) {
+    if (!this.selectors.has(selector)) {
+      this.selectors.set(selector, styles)
+      this._emit()
     }
   }
 
-  removeSelector(selector) {
-    if (this.CSSRules.has(selector)) {
-      this.CSSRules.delete(selector)
-      this._executeListener()
-    }
+  remove(selector) {
+    this.selectors.remove(selector)
+    this._emit()
   }
 
-  addFontFace(fontFace) {
-    const fontFaceString = '@font-face {' + toCSS(fontFace) + '}'
-    if (this.fontFaces.has(fontFaceString)) {
-      this.fontFaces.add(fontFaceString)
-      this._executeListener()
+  render(userAgent) {
+    let css = ''
+
+    let [selector, styles] = pair
+    for (pair of this.selectors) {
+      css += selector + '{' + toCSS(prefixer(userAgent).prefix(styles)) + '}'
     }
-  }
 
-  addKeyframes(animationName, frames) {
-    if (!this.keyframes.has(animationName)) {
-      this.keyframes.set(animationName, frames)
-      this._executeListener()
-    }
-  }
-
-  removeKeyframes(animationName) {
-    if (this.keyframes.has(animationName)) {
-      this.keyframes.delete(animationName)
-      this._executeListener()
-    }
-  }
-
-  addMediaQuery(media, selector, styles) {
-    if (!this.mediaQueries.has(media)) {
-      this.mediaQueries.set(media, new Map())
-    }
-    if (!this.mediaQueries.get(media).has(selector)) {
-      this.mediaQueries.get(media).set(selector, styles)
-      this._executeListener()
-    }
-  }
-
-  removeMediaQuery(media, selector) {
-    if (this.mediaQueries.has(media)) {
-      if (this.mediaQueries.get(media).has(selector)) {
-        this.mediaQueries.get(media).remove(selector)
-        this._executeListener()
-      }
-    }
-  }
-
-  getCSSString(userAgent) {
-    let CSSString = ''
-
-    const prefixerInstance = prefixer(userAgent)
-
-    this.CSSRules.forEach((styles, selector) => CSSString += selector + '{' + toCSS(prefixerInstance.prefix(styles)) + '}\n')
-    this.keyframes.forEach((frames, name) => CSSString += '@' + prefixerInstance.prefixedKeyframes + ' ' + name + '{' + toCSS(prefixerInstance.prefix(frames)) + '}\n')
-    this.fontFaces.forEach(font => CSSString += font + '\n')
-    this.mediaQueries.forEach((selectors, media) => {
-      CSSString += '@media ' + media + '{'
-      selectors.forEach((styles, selector) => CSSString += selector + '{' + toCSS(prefixerInstance.prefix(importantify(styles))) + '}')
-      CSSString += '}\n'
-    })
-
-    return CSSString
+    return css
   }
 
   subscribe(listener) {
     this._listener.add(listener)
 
-    const remove = () => this.unsubscribe(listener)
-    return remove
+    return {
+      unsubscribe: () => this._listener.delete(listener)
+    }
   }
 
-  unsubscribe(listener) {
-    this._listener.delete(listener)
-  }
-
-  _executeListener() {
+  _emit() {
     this._listener.forEach(listener => listener())
   }
 }
+
+export default new CSSContainer()
