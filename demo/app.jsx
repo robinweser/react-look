@@ -1,6 +1,6 @@
 import React from 'react'
-import look, { StyleSheet } from '../lib/look'
-import { Presets } from '../lib/addons'
+import look, { StyleSheet } from '../modules/look'
+import { Presets } from '../modules/addons'
 import Container from './components/layout/Container.jsx'
 import UserAction from './components/examples/UserAction.jsx'
 import ChildIndex from './components/examples/ChildIndex.jsx'
@@ -11,18 +11,6 @@ import Keyframes from './components/examples/Keyframes.jsx'
 import Platform from './components/examples/Platform.jsx'
 import Pseudo from './components/examples/Pseudo.jsx'
 
-// Global CSS styles
-StyleSheet.toCSS({
-  '*': {
-    padding: 0,
-    margin: 0,
-    fontFamily: '"Lato", sans-serif',
-    fontWeight: 300,
-    boxSizing: 'border-box',
-    userSelect: 'none'
-  }
-})
-
 const App = () => (
 <div>
 		<h1 {...styles}>Look Examples</h1>
@@ -31,7 +19,7 @@ const App = () => (
 				<UserAction />
 			</Container>
 			<Container noPadding title="1.2. child index & child type">
-				<ChildIndex items={new Array(100).join(',').split('').map((item, index) => index)} />
+				<ChildIndex items={new Array(5).join(',').split('').map((item, index) => index)} />
 			</Container>
 			<Container title="1.3. input">
 				<Input />

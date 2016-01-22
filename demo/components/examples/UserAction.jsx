@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import look, { State, StyleSheet } from '../../../lib/look'
+import look, { State, StyleSheet } from '../../../modules/look'
 const c = StyleSheet.combineStyles
 
 class UserAction extends Component {

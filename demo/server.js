@@ -4,7 +4,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import App from './app.jsx'
 import fs from 'fs'
-import { Presets } from '../lib/addons'
+import { Presets } from '../modules/addons'
 
 const indexHTML = fs.readFileSync(__dirname + '/index.html').toString()
 const app = express()

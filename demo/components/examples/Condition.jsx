@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../modules/look'
 const c = StyleSheet.combineStyles
 
 import Color from 'color'
@@ -88,5 +88,7 @@ const styles = StyleSheet.create({
   }
 })
 
-console.log(styles)
+console.log(c(styles.button, styles.states))
+console.log(c(styles.button, styles.clicks))
+
 export default look(Condition)

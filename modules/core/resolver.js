@@ -14,6 +14,7 @@ import warn from '../utils/warn'
 export function processStyles(styles, props, scopeArgs, config) {
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
+  debugger
   if (config.plugins && config.plugins instanceof Array) {
     config.plugins.forEach(plugin => {
       styles = plugin(styles, scopeArgs, config)
@@ -66,7 +67,7 @@ export default function resolveStyles(Component, element, config, parent) {
       newProps.children = resolveChildren(Component, newProps.children, config, element) // eslint-disable-line
     }
 
-
+    
     if (newProps.look) {
       // Merge an array of styles into a single style object
       if (newProps.look instanceof Array) {
@@ -83,7 +84,7 @@ export default function resolveStyles(Component, element, config, parent) {
         parent,
         CSSContainer
       }
-
+      
       newProps.style = processStyles(styles, newProps, scopeArgs, config)
     }
 
@@ -92,6 +93,7 @@ export default function resolveStyles(Component, element, config, parent) {
     if (parent) {
       newProps._parent = parent
     }
+    
     return cloneElement(element, newProps)
   }
 

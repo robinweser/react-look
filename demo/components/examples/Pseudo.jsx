@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import look, { StyleSheet } from '../../../lib/look'
-import { Mixins } from '../../../lib/addons'
+import look, { StyleSheet } from '../../../modules/look'
+import { Mixins } from '../../../modules/addons'
 
 const Pseudo = () => (
 <div>
@@ -33,12 +33,12 @@ const styles = StyleSheet.create({
   beforeAfter: {
     fontSize: 20,
     ':before': {
-      content: ':before',
+      content: '\':before\'',
       color: 'gray'
     },
     ':after': {
       color: 'red',
-      content: 'It\'s me',
+      content: '"It\'s me"',
       fontSize: 18
     }
   },
@@ -58,8 +58,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default look(Pseudo, {
-  mixins: {
-    '::-webkit-input-placeholder': Mixins.pseudoToCSS
-  }
-})
+export default look(Pseudo)

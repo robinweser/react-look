@@ -3,21 +3,56 @@ import generateClassName from '../utils/generateClassName'
 import assignStyles from 'assign-styles'
 import warn from '../utils/warn'
 
-export function renderStaticStyles(styles) {
-  const dynamicStyles = { }
-
-  const staticStyles = Object.keys(styles).reduce((output, property) => {
+export function parseStyles(styles, inner) { 
+  const dynamic = { }
+  const base = { } 
+  const immutable = { }
+  
+  Object.keys(styles).forEach(property => {
     const value = styles[property]
-    if (typeof value === 'string' || typeof value === 'number' || value instanceof Array) {
-      output[property] = styles[property]
+    const valueType = typeof value
+    // simple value 
+    if (valueType === 'string' || valueType === 'number' || value instanceof Array) {
+      if (!inner) {
+        base[property] = value
+      } else {
+        immutable[property] = value
+      } 
+    } else if (valueType === 'object') {
+      if (property.charAt(0) === ':') {
+        
+      const parsedInner = parseStyles(value, true)
+      immutable[property] = parsedInner.immutable
+      dynamic[property] = parsedInner.dynamic
+    }   else {
+        dynamic[property] = value
+      }
     } else {
-      dynamicStyles[property] = styles[property]
+      dynamic[property] = value
     }
-    return output;
-  }, { })
-
-  return { staticStyles: staticStyles, dynamicStyles: dynamicStyles }
+  })
+  
+  return { immutable,  dynamic, base }
 }
+
+export function renderImmutable(immutable, className, pseudo = '') {
+    const styles = {}
+  Object.keys(immutable).forEach(extension => {
+    const value = immutable[extension]
+    
+    if (typeof value === 'object' && Object.keys(value).length > 0) {
+      const innerStyles = renderImmutable(value, className, pseudo + extension)
+      CSSContainer.add('.' + className + pseudo + extension, innerStyles)
+      delete immutable[extension]
+    } else {
+      styles[extension] = value
+    }
+  })
+
+  return styles
+}
+
+let scope = 0
 
 export default {
   /**
@@ -26,48 +61,60 @@ export default {
    * @param {Object|string} Component - React Component that the styles refer to
    * @param {styles} styles - Style selector or Object with selectors
    */
-  create(styles) {
+  create(styles, Component) {
+    let currentScope = Component ? Component.displayName || Component.name : 's' + ++scope
+    
     if (!styles || Object.keys(styles).length < 1) {
       warn('WRONG INPUT')
       return false
     }
-
+    
     // flat style object without selectors
     if (styles[Object.keys(styles)[0]] instanceof Object === false) {
-      const { staticStyles, dynamicStyles } = renderStaticStyles(styles)
+      const { base, immutable, dynamic } = parseStyles(styles)
 
-      const output = { }
-      if (Object.keys(staticStyles).length > 0) {
-        const className = generateClassName(staticStyles)
-        CSSContainer.add('.' + className, staticStyles)
-        output.className = className
+      const output = {}
+      const className = currentScope + '-' + generateClassName(base)
+      if (Object.keys(base).length > 0) {
+        CSSContainer.add('.' + className, base)
       }
-      if (Object.keys(dynamicStyles).length > 0) {
-        output.look = dynamicStyles
+      output.className = className
+      
+      renderImmutable(immutable, className)
+      
+      if (Object.keys(dynamic).length > 0) {
+        output.look = dynamic
       }
       return output; // eslint-disable-line
     }
-
+    
     return Object.keys(styles).reduce((output, selector) => {
-      const { staticStyles, dynamicStyles } = renderStaticStyles(styles[selector])
+        const { base, immutable, dynamic } = parseStyles(styles[selector])
 
-      output[selector] = { }
-      if (Object.keys(staticStyles).length > 0) {
-        const className = generateClassName(staticStyles)
-        CSSContainer.add('.' + className, staticStyles)
+        output[selector] = {}
+        const className = currentScope + '-' + selector + '--' + generateClassName(base)
+        if (Object.keys(base).length > 0) {
+        CSSContainer.add('.' + className, base)
+        }
         output[selector].className = className
-      }
-      if (Object.keys(dynamicStyles).length > 0) {
-        output[selector].look = dynamicStyles
-      }
-      return output; // eslint-disable-line
-    }, { })
+        
+        renderImmutable(immutable, className)
+        
+        if (Object.keys(dynamic).length > 0) {
+          output[selector].look = dynamic
+        }
+        
+        return output
+    }, {})
   },
 
 
 
   combineStyles(...styles) {
-    const combined = { className: '', look: { } }
+    const combined = {
+      className: '',
+      look: {}
+    }
 
     const flatStyles = styles.reverse()
 

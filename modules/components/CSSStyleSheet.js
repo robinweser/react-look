@@ -25,9 +25,9 @@ export default class CSSStyleSheet extends Component {
 
   render() {
     console.log('CSSSheet rendered')
-    return (<style dangerouslySetInnerHTML={{
+    return <style dangerouslySetInnerHTML={{
         __html: this.state.css
-      }} />)
+      }} />
 
   }
 }

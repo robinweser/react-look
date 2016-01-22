@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import look, { StyleSheet, State } from '../../../lib/look'
+import look, { StyleSheet, State } from '../../../modules/look'
 const c = StyleSheet.combineStyles
 
 class Input extends Component {
