@@ -1,30 +1,29 @@
 import React, { Component } from 'react'
-import CSSContainer from '../utils/CSSContainer'
+import StyleContainer from '../utils/StyleContainer'
 
 export default class CSSStyleSheet extends Component {
   constructor(props) {
     super(...arguments)
-    const css = CSSContainer.render(props.userAgent) // eslint-disable-line
+    const css = StyleContainer.renderStaticStyles(props.userAgent) // eslint-disable-line
     this.state = { css: css }
 
-    this.updateStyleSheet = this.updateStyleSheet.bind(this, props.userAgent)
+    this.updateStyles = this.updateStyles.bind(this, props.userAgent)
   }
 
   componentDidMount() {
-    this._changeListener = CSSContainer.subscribe(this.updateStyleSheet)
+    this._changeListener = StyleContainer.subscribe(this.updateStyles)
   }
 
   componentWillUnmount() {
     this._changeListener.unsubscribe()
   }
 
-  updateStyleSheet(userAgent) {
-    const css = CSSContainer.render(userAgent) // eslint-disable-line
+  updateStyles(userAgent) {
+    const css = StyleContainer.renderStaticStyles(userAgent) // eslint-disable-line
     this.setState({ css: css })
   }
 
   render() {
-    console.log('CSSSheet rendered')
     return <style dangerouslySetInnerHTML={{
         __html: this.state.css
       }} />

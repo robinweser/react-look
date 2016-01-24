@@ -13,13 +13,13 @@ import Pseudo from './components/examples/Pseudo.jsx'
 
 const App = () => (
 <div>
-		<h1 {...styles}>Look Examples</h1>
+		<h1 className={styles}>Look Examples</h1>
 		<Container group title="1. Pseudo classes">
 			<Container title="1.1. user action">
 				<UserAction />
 			</Container>
 			<Container noPadding title="1.2. child index & child type">
-				<ChildIndex items={new Array(5).join(',').split('').map((item, index) => index)} />
+				<ChildIndex items={14} />
 			</Container>
 			<Container title="1.3. input">
 				<Input />

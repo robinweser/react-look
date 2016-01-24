@@ -4,14 +4,14 @@ import { Mixins } from '../../../modules/addons'
 
 const Pseudo = () => (
 <div>
-    <div {...styles.firstLetter}>First letter is colored red.</div>
+    <div className={styles.firstLetter}>First letter is colored red.</div>
     <br/>
-  <div {...styles.numbers}>:substr lets you style regex m4tches 4 example only numb3rs with :substr([0-9]*).</div>
+  <div className={styles.numbers}>:substr lets you style regex m4tches 4 example only numb3rs with :substr([0-9]*).</div>
     <br/>
-  <div {...styles.beforeAfter}>Who's after me?</div>
+  <div className={styles.beforeAfter}>Who's after me?</div>
     <br/>
     <div>Pseudo to CSS polyfill <i>(e.g. ::-webkit-input-placeholder)</i></div>
-  <input {...styles.input} placeholder="Webkit-based browsers show this placeholder in green" />
+  <input className={styles.input} placeholder="Webkit-based browsers show this placeholder in green" />
   </div>
 )
 
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   numbers: {
     fontSize: 20,
-    ':substr([0-9]*)': {
+    'substr([0-9]*)': {
       color: 'red'
     }
   },

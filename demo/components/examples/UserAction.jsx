@@ -15,11 +15,11 @@ class UserAction extends Component {
 
     return (
       <div>
-        <div key="active" {...c(styles.button, styles.activeButton)}>Click me</div>
-      <div key="hover" {... c(styles.button, styles.hoverButton)}>Hover me</div>
+        <div key="active" className={c(styles.button, styles.activeButton)}>Click me</div>
+      <div key="hover" className={ c(styles.button, styles.hoverButton)}>Hover me</div>
         <br/>
         <div>State-API live example</div>
-      <div key="both" {... c(styles.button, styles.stateButton)}>{stateLabel}</div>
+      <div key="both" className={ c(styles.button, styles.stateButton)}>{stateLabel}</div>
       </div>
       )
   }

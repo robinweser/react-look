@@ -3,15 +3,16 @@ import look, { StyleSheet } from '../../../modules/look'
 
 class ChildIndex extends Component {
   static defaultProps = {
-    items: [1,2,3,4,5,6,7,8,9,10]
+    items: 10
   };
   static propTypes = {
     items: PropTypes.array.isRequired
   };
   render() {
     //create a small list of items to demonstrate nth-child, et cetera
-    let list = this.props.items.map((text, index) => {
-      return <li {...styles} key={'.' + index}>ListItem {text}</li>
+    const arr = new Array(this.props.items+1).join(',').split('').map((item, index) => index + 1)
+    let list = arr.map((text, index) => {
+      return <li className={styles} key={'.' + index}>ListItem {text}</li>
     })
 
     return (

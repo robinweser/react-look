@@ -1,12 +1,29 @@
 import prefixer from './prefixer'
 import { toCSS } from 'inline-style-transformer'
 
+function removeEmpty(obj) {
+  if (obj instanceof Object && !Array.isArray(obj) && typeof obj !== 'function') {
+    if (Object.keys(obj).length < 1) {
+      return false
+    }
 
-class CSSContainer {
+    Object.keys(obj).forEach(key => {
+      if (!removeEmpty(obj[key])) {
+        delete obj[key]
+      }
+    })
+  }
+
+  return obj
+}
+
+class StyleContainer {
   constructor() {
     this.selectors = new Map()
     this.mediaQueries = new Map()
     this.keyframes = new Map()
+    this.fonts = new Map()
+    this.dynamics = new Map()
 
     this._listener = new Set()
   }
@@ -25,12 +42,20 @@ class CSSContainer {
     }
   }
 
-  render(userAgent) {
+  addDynamic(className, styles) {
+    removeEmpty(styles)
+
+    if (Object.keys(styles).length > 0 && !this.dynamics.has(className)) {
+      this.dynamics.set(className, styles)
+      this._emitChange()
+    }
+  }
+
+  renderStaticStyles(userAgent) {
     const tempPrefixer = prefixer(userAgent)
     let css = ''
 
     this.selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}\n')
-    css += '\n'
     this.keyframes.forEach((frames, name) => css += '@' + tempPrefixer.prefixedKeyframes + ' ' + name + '{' + toCSS(tempPrefixer.prefix(frames)) + '}\n')
 
     return css
@@ -49,4 +74,4 @@ class CSSContainer {
   }
 }
 
-export default new CSSContainer()
+export default new StyleContainer()

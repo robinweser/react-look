@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import look, { StyleSheet } from '../../../modules/look'
 
 const Keyframes = () => (
-<div {...styles.container}>
-		<div {...styles.box} />
+<div className={styles.container}>
+		<div className={styles.box} />
 	</div>
 )
 

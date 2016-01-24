@@ -10,7 +10,7 @@ export default function statefulValue(styles, scopeArgs) {
   Object.keys(styles).forEach(property => {
     const value = styles[property]
     if (value instanceof Function) {
-      debugger
+
       styles[property] = value(Component.props, Component.state, Component.context)
     } else if (value instanceof Object) {
       styles[property] = statefulValue(assignStyles({ }, value), scopeArgs)

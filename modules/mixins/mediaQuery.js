@@ -1,7 +1,7 @@
 import throttle from '../utils/throttle'
 import { processStyles } from '../core/resolver'
 import extractCSS from './extractCSS'
-import CSSContainer from '../utils/CSSContainer'
+import StyleContainer from '../utils/StyleContainer'
 import generateClassName from '../utils/generateClassName'
 
 const CSSMediaQueries = new Map()

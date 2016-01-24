@@ -4,10 +4,10 @@ import look, { StyleSheet } from '../../../modules/look'
 class Container extends Component {
   render() {
     return (
-      <div {...styles.container}>
-        <h1 {...styles.title}>{this.props.title}</h1>
-      <pre {...styles.desc}>{this.props.description}</pre>
-    <div {...styles.inner}>
+      <div className={styles.container}>
+        <h1 className={styles.title}>{this.props.title}</h1>
+      <pre className={styles.desc}>{this.props.description}</pre>
+    <div className={styles.inner}>
           {this.props.children}
         </div>
       </div>

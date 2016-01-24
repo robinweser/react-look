@@ -8,13 +8,13 @@ class Input extends Component {
 
     return (
       <div>
-        <input key="i1" {...c(styles.input, styles.inputFocus)} placeholder="focus me"/>
-      <input {...styles.input} placeholder="i am required" required/>
-    <input {...c(styles.input, styles.inputValid)} placeholder="i only allow uppercase" pattern="[A-Z]*" ref="valid"/>
-  <input {...c(styles.input, styles.inputOptional)} placeholder="i am optional"/>
-<input {...c(styles.input, styles.range)} type="number" placeholder={rangePlaceholder} min={10} max={100} defaultValue={120} step={1} ref="step"/>
-        <input {...c(styles.input, styles.readOnly)} defaultValue="i am read only" readOnly/>
-      <input disabled {...c(styles.input, styles.inputDisabled)} placeholder="i am disabled"/>
+        <input key="i1" className={c(styles.input, styles.inputFocus)} placeholder="focus me"/>
+      <input className={styles.input} placeholder="i am required" required/>
+    <input className={c(styles.input, styles.inputValid)} placeholder="i only allow uppercase" pattern="[A-Z]*" ref="valid"/>
+  <input className={c(styles.input, styles.inputOptional)} placeholder="i am optional"/>
+<input className={c(styles.input, styles.range)} type="number" placeholder={rangePlaceholder} min={10} max={100} defaultValue={120} step={1} ref="step"/>
+        <input className={c(styles.input, styles.readOnly)} defaultValue="i am read only" readOnly/>
+      <input disabled className={c(styles.input, styles.inputDisabled)} placeholder="i am disabled"/>
       </div>
       )
   }
@@ -80,5 +80,4 @@ const styles = StyleSheet.create({
   }
 })
 
-console.log(styles)
 export default look(Input)

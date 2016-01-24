@@ -41,8 +41,8 @@ class Condition extends Component {
 
     return (
       <div>
-        <div {... c(styles.button, styles.states)} onClick={this.onClick.bind(this)}>Click me<br /> Active state: {this.state.mode}</div>
-      <div {...c(styles.button, styles.clicks)} onClick={this.onClicksCount.bind(this)}>{getText(this.state.clicks)}</div>
+        <div className={c(styles.button, styles.states)} onClick={this.onClick.bind(this)}>Click me<br /> Active state: {this.state.mode}</div>
+      <div className={c(styles.button, styles.clicks)} onClick={this.onClicksCount.bind(this)}>{getText(this.state.clicks)}</div>
       </div>
       )
   }
@@ -88,7 +88,5 @@ const styles = StyleSheet.create({
   }
 })
 
-console.log(c(styles.button, styles.states))
-console.log(c(styles.button, styles.clicks))
 
 export default look(Condition)

@@ -27,7 +27,7 @@
     "bundle:look": "browserify modules/look.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look.min.js",
     "clean": "rimraf lib dist coverage",
     "coverage": "codeclimate-test-reporter < coverage/lcov.info",
-    "demo": "webpack-dev-server --config webpack.config.js --no-info --content-base demo/",
+    "demo": "webpack-dev-server --config demo/webpack.config.js --no-info --content-base demo/",
     "demo:universal": "concurrent --kill-others \"npm run demo\" \"npm start\"",
     "start": "node devServer.js",
     "lint": "eslint modules",

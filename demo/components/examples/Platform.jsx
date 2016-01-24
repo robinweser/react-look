@@ -41,12 +41,12 @@ class Platform extends Component {
       userAgent: this.state.userAgent
     } : { }
     return (
-      <div {...styles.container} lookConfig={config}>
+      <div className={styles.container} lookConfig={config}>
         <div>
-          <div {... c(styles.button, styles.ios)} onClick={this.onClick.bind(this, iOS)}>iOS userAgent</div>
-        <div {... c(styles.button, styles.android)} onClick={this.onClick.bind(this, android)}>Android userAgent</div>
+          <div className={ c(styles.button, styles.ios)} onClick={this.onClick.bind(this, iOS)}>iOS userAgent</div>
+        <div className={ c(styles.button, styles.android)} onClick={this.onClick.bind(this, android)}>Android userAgent</div>
         </div>
-        <div {...styles.platform}>
+        <div className={styles.platform}>
           <span>On iOS I am blue</span>
           <span>On android I am red</span>
           <span>On others I am gray</span>

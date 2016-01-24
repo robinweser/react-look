@@ -1,5 +1,5 @@
 import { cloneElement, isValidElement, Children } from 'react'
-import CSSContainer from '../utils/CSSContainer'
+import StyleContainer from '../utils/StyleContainer'
 import flattenArray from '../utils/flattenArray'
 import assignStyles from 'assign-styles'
 import warn from '../utils/warn'
@@ -14,17 +14,11 @@ import warn from '../utils/warn'
 export function processStyles(styles, props, scopeArgs, config) {
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
-  debugger
+
   if (config.plugins && config.plugins instanceof Array) {
     config.plugins.forEach(plugin => {
-      styles = plugin(styles, scopeArgs, config)
+      styles = plugin(assignStyles({}, styles), scopeArgs, config)
     })
-  }
-
-  // If element already got some style just merge them
-  // NOTE: This might overwrite the look assigned
-  if (props.style) {
-    styles = assignStyles(styles, props.style)
   }
 
   return styles
@@ -67,14 +61,8 @@ export default function resolveStyles(Component, element, config, parent) {
       newProps.children = resolveChildren(Component, newProps.children, config, element) // eslint-disable-line
     }
 
-    
-    if (newProps.look) {
-      // Merge an array of styles into a single style object
-      if (newProps.look instanceof Array) {
-        newProps.look = assignStyles({ }, ...newProps.look)
-      }
 
-      const styles = assignStyles({ }, newProps.look)
+    if (newProps.className) {
 
       // scopeArgs are provided to plugins to access special objects
       const scopeArgs = {
@@ -82,10 +70,28 @@ export default function resolveStyles(Component, element, config, parent) {
         Component,
         element,
         parent,
-        CSSContainer
+        StyleContainer
       }
-      
-      newProps.style = processStyles(styles, newProps, scopeArgs, config)
+
+      const newStyles = {}
+
+      newProps.className.split(' ').forEach(className => {
+        let dynamicStyles = StyleContainer.dynamics.get(className)
+        console.log(dynamicStyles)
+        if (dynamicStyles) {
+          assignStyles(newStyles, processStyles(dynamicStyles, newProps, scopeArgs, config))
+        }
+      })
+
+      if (Object.keys(newStyles).length > 0) {
+        newProps.style = newStyles
+      }
+
+      // If element already got some style just merge them
+      // NOTE: This might overwrite the look assigned
+      if (element.props.style) {
+        newProps.style = assignStyles(newProps.style, element.props.style)
+      }
     }
 
     // Passing the current parent element via props
@@ -93,7 +99,7 @@ export default function resolveStyles(Component, element, config, parent) {
     if (parent) {
       newProps._parent = parent
     }
-    
+
     return cloneElement(element, newProps)
   }
 

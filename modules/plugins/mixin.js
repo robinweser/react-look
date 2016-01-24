@@ -3,7 +3,8 @@ import assignStyles from 'assign-styles'
 /*
  * Resolves mixins
  */
-export default function mixin(styles, scopeArgs, config) {
+export default function mixin(letStyles, scopeArgs, config) {
+  let styles = assignStyles({ }, letStyles)
   const { mixins } = config
 
   // if no custom keys are specified at all
@@ -33,7 +34,7 @@ export default function mixin(styles, scopeArgs, config) {
     // only assign if there are new styles
     if (newValue !== undefined) {
       if (newValue instanceof Object) {
-        assignStyles(styles, mixin(newValue, scopeArgs, config))
+        styles = assignStyles(styles, mixin(newValue, scopeArgs, config))
       }
 
       delete styles[property]
