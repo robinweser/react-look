@@ -50,7 +50,7 @@ export default (property, styles, mixinKey, scopeArgs, config) => {
   const resolvedStyles = processStyles(styles, newProps, scopeArgs, config)
 
   const className = generateClassName(resolvedStyles)
-  CSSContainer.add(query, '.' + className, resolvedStyles)
+  StyleContainer.add(query, '.' + className, resolvedStyles)
 
   if (!CSSMediaQueries.has(query)) {
     CSSMediaQueries.set(query, new Set())

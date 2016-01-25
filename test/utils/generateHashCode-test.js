@@ -14,13 +14,6 @@ describe('Generating hash codes', () => {
     expect(input1).to.eql(input2)
   })
 
-  it('should return false if no string was provided', () => {
-    expect(generateHashCode()).to.eql(false)
-    expect(generateHashCode(3)).to.eql(false)
-    expect(generateHashCode([ 1, 2, 3 ])).to.eql(false)
-    expect(generateHashCode({ foo: 'bar' })).to.eql(false)
-  })
-
   it('should return 0 if string is empty', () => {
     expect(generateHashCode('')).to.eql(0)
   })
