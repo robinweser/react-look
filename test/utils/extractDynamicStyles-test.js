@@ -128,5 +128,39 @@ describe('Extracting dynamic styles', () => {
         }
       }
     })
+    expect(styles).to.eql({
+      backgroundColor: 'red',
+      width: 12,
+      display: [ 'webkit-flex', 'flex' ],
+      ':focus': {
+        color: 'blue',
+        width: 12,
+        ':active': {
+          color: 'black'
+        },
+        ':hover': {
+          lineHeight: 12
+        }
+      },
+      ':active': {
+        width: 300,
+        ':hover': {
+          fontSize: 13
+        }
+      },
+      '@media (min-width: 200px)': {
+        backgroundColor: 'red',
+        width: 12,
+        display: [ 'webkit-flex', 'flex' ],
+        '@media (min-height: 300px)': {
+          ':hover': {
+            lineHeight: 12
+          },
+          backgroundColor: 'red',
+          width: 12,
+          display: [ 'webkit-flex', 'flex' ]
+        }
+      }
+    })
   })
 })
