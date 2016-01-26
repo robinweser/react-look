@@ -1,4 +1,4 @@
-<h1 align="center"><img src="docs/res/banner.png" width=450></h1>
+<h1><img src="docs/res/logo.png" width=350></h1>
 
 ![TravisCI](https://travis-ci.org/rofrischmann/react-look.svg?branch=develop) [![Test Coverage](https://codeclimate.com/github/rofrischmann/react-look/badges/coverage.svg)](https://codeclimate.com/github/rofrischmann/react-look/coverage) [![Code Climate](https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg)](https://codeclimate.com/github/rofrischmann/react-look)
 [![bitHound Overalll Score](https://www.bithound.io/github/rofrischmann/react-look/badges/score.svg)](https://www.bithound.io/github/rofrischmann/react-look)
