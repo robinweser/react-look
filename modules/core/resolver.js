@@ -77,7 +77,6 @@ export default function resolveStyles(Component, element, config, parent) {
 
       newProps.className.split(' ').forEach(className => {
         let dynamicStyles = StyleContainer.dynamics.get(className)
-        console.log(dynamicStyles)
         if (dynamicStyles) {
           assignStyles(newStyles, processStyles(dynamicStyles, newProps, scopeArgs, config))
         }

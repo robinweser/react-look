@@ -13,10 +13,11 @@ export default function extractDynamicStyles(styles, parent) {
     const valueType = typeof value
 
     if (valueType === 'object' && !Array.isArray(value)) {
-
       // only consider pseudo classes and media queries
       // that contain inner dynamic styles
       if (isPseudo(property) || isMediaQuery(property)) {
+        const valueCount = Object.keys(value).length
+
         const innerDynamic = extractDynamicStyles(value, property)
         const innerDynamicCount = Object.keys(innerDynamic).length
 
@@ -28,9 +29,8 @@ export default function extractDynamicStyles(styles, parent) {
 
         // Remove the property if all inner styles
         // are actually dynamic styles
-        if (innerDynamicCount === Object.keys(value).length) {
-          // TODO: test
-          //  delete styles[property]
+        if (innerDynamicCount === valueCount) {
+          delete styles[property]
         }
       } else {
         dynamic[property] = value

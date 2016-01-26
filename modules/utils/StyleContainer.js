@@ -1,22 +1,6 @@
 import prefixer from './prefixer'
 import { toCSS } from 'inline-style-transformer'
 
-function removeEmpty(obj) {
-  if (obj instanceof Object && !Array.isArray(obj) && typeof obj !== 'function') {
-    if (Object.keys(obj).length < 1) {
-      return false
-    }
-
-    Object.keys(obj).forEach(key => {
-      if (!removeEmpty(obj[key])) {
-        delete obj[key]
-      }
-    })
-  }
-
-  return obj
-}
-
 class StyleContainer {
   constructor() {
     this.selectors = new Map()
@@ -28,9 +12,26 @@ class StyleContainer {
     this._listener = new Set()
   }
 
-  add(selector, styles) {
-    if (!this.selectors.has(selector)) {
-      this.selectors.set(selector, styles)
+  add(selector, styles, media) {
+    if (media && media !== '') {
+      this.addMediaQuery(selector, styles, media)
+    } else {
+      if (!this.selectors.has(selector)) {
+        this.selectors.set(selector, styles)
+        this._emitChange()
+      }
+    }
+  }
+
+  addMediaQuery(selector, styles, media) {
+    if (!this.mediaQueries.has(media)) {
+      this.mediaQueries.set(media, new Map())
+    }
+
+    const mediaQuery = this.mediaQueries.get(media)
+
+    if (!mediaQuery.has(selector)) {
+      mediaQuery.set(selector, styles)
       this._emitChange()
     }
   }
@@ -43,8 +44,6 @@ class StyleContainer {
   }
 
   addDynamic(className, styles) {
-    removeEmpty(styles)
-
     if (Object.keys(styles).length > 0 && !this.dynamics.has(className)) {
       this.dynamics.set(className, styles)
       this._emitChange()
@@ -57,6 +56,11 @@ class StyleContainer {
 
     this.selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}\n')
     this.keyframes.forEach((frames, name) => css += '@' + tempPrefixer.prefixedKeyframes + ' ' + name + '{' + toCSS(tempPrefixer.prefix(frames)) + '}\n')
+    this.mediaQueries.forEach((selectors, query) => {
+      css += '@media ' + query + '{'
+      selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}\n')
+      css += '}\n'
+    })
 
     return css
   }

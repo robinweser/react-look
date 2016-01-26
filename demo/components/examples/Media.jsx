@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   '@media (max-width: 500px)': {
     backgroundColor: 'blue'
   },
-  '@media (orientation:landscape)': {
+  '@media (orientation:portrait)': {
     backgroundColor: 'orange'
   },
   '@media (min-width: 1000px)': {
