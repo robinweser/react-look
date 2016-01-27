@@ -5,26 +5,6 @@ import assignStyles from 'assign-styles'
 import warn from '../utils/warn'
 
 /**
- * Resolves plugins and merges with existing style property
- * @param {Object} styles - object with styles
- * @param {Object} props - current elements props
- * @param {Object} scopeArgs - special objects including important information
- * @param {Object} config - configuration containing plugins and plugin-specific configs
- */
-export function processStyles(styles, props, scopeArgs, config) {
-  // Triggers plugin resolving
-  // Uses the exact plugin lineup defined within Config
-
-  if (config.plugins && config.plugins instanceof Array) {
-    config.plugins.forEach(plugin => {
-      styles = plugin(assignStyles({}, styles), scopeArgs, config)
-    })
-  }
-
-  return styles
-}
-
-/**
  * Resolves provided styles into style objects
  * Processes those using a predefined plugin lineup
  * Maps the final style objects to the element
@@ -73,12 +53,18 @@ export default function resolveStyles(Component, element, config, parent) {
         StyleContainer
       }
 
-      const newStyles = {}
+      let newStyles = {}
 
       newProps.className.split(' ').forEach(className => {
         let dynamicStyles = StyleContainer.dynamics.get(className)
         if (dynamicStyles) {
-          assignStyles(newStyles, processStyles(dynamicStyles, newProps, scopeArgs, config))
+          // Triggers plugin resolving
+          // Uses the exact plugin lineup defined within Config
+          if (config.plugins && config.plugins instanceof Array) {
+            config.plugins.forEach(plugin => {
+              assignStyles(newStyles, plugin(assignStyles({}, dynamicStyles), scopeArgs, config))
+            })
+          }
         }
       })
 
@@ -129,6 +115,11 @@ function resolveChildren(Component, children, config, parent) {
     const flatChildren = flattenArray(children)
 
     // recursively resolve styles for child elements if it is a valid React Component
-    return Children.map(flatChildren, child => isValidElement(child) ? resolveStyles(Component, child, config, parent) : child)
+    return Children.map(flatChildren, child => {
+      if (isValidElement(child)) {
+        resolveStyles(Component, child, config, parent)
+      }
+      return child
+    })
   }
 }
