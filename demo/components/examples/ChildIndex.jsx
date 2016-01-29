@@ -6,7 +6,7 @@ class ChildIndex extends Component {
     items: 10
   };
   static propTypes = {
-    items: PropTypes.array.isRequired
+    items: PropTypes.number.isRequired
   };
   render() {
     //create a small list of items to demonstrate nth-child, et cetera
@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
     ':last-child': {
       color: 'red'
     },
-    ':first-child': {
-      color: 'yellow'
-    },
     ':nth-of-type(3)': {
       backgroundColor: 'rgba(30, 50, 60, 0.6)'
     },
     ':nth-of-type(3n+5)'  :{
       backgroundColor:'rgba(141, 195, 131, 0.4)'
+    },
+    ':first-child': {
+      color: 'yellow'
     }
 })
 

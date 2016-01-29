@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
   const appHtml = renderToString(
     <App lookConfig={serverConfig} />
   )
+
   res.write(indexHTML.replace('<!-- {{app}} -->', appHtml))
   res.end()
 })

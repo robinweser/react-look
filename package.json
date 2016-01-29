@@ -28,7 +28,7 @@
     "clean": "rimraf lib dist coverage",
     "coverage": "codeclimate-test-reporter < coverage/lcov.info",
     "demo": "webpack-dev-server --config demo/webpack.config.js --no-info --content-base demo/",
-    "demo:universal": "concurrent --kill-others \"npm run demo\" \"npm start\"",
+    "demo:universal": "concurrent --kill-others \"npm run demo\" \"babel-node demo/server.js\"",
     "start": "node devServer.js",
     "lint": "eslint modules",
     "package": "npm test && npm run bundle && node build-package.js",

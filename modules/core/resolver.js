@@ -4,6 +4,17 @@ import flattenArray from '../utils/flattenArray'
 import assignStyles from 'assign-styles'
 import warn from '../utils/warn'
 
+
+function resolvePlugins(styles, scopeArgs, config) {
+  // Triggers plugin resolving
+  // Uses the exact plugin lineup defined within Config
+  if (config.plugins && config.plugins instanceof Array) {
+    config.plugins.forEach(plugin => styles = plugin(styles, scopeArgs, config))
+  }
+
+  return styles
+}
+
 /**
  * Resolves provided styles into style objects
  * Processes those using a predefined plugin lineup
@@ -22,7 +33,6 @@ export default function resolveStyles(Component, element, config, parent) {
     }
 
     let newProps = {...element.props }
-
     Object.keys(newProps).forEach(property => {
       if (property === 'children') {
         return
@@ -33,6 +43,7 @@ export default function resolveStyles(Component, element, config, parent) {
       const propElement = newProps[property]
       if (isValidElement(propElement)) {
         newProps[property] = resolveStyles(Component, propElement, config)
+        newProps.hasResolvedProps = true
       }
     })
 
@@ -56,24 +67,19 @@ export default function resolveStyles(Component, element, config, parent) {
       let newStyles = {}
 
       newProps.className.split(' ').forEach(className => {
-        let dynamicStyles = StyleContainer.dynamics.get(className)
+        let dynamicStyles = assignStyles({}, StyleContainer.dynamics.get(className))
+
         if (dynamicStyles) {
-          // Triggers plugin resolving
-          // Uses the exact plugin lineup defined within Config
-          if (config.plugins && config.plugins instanceof Array) {
-            config.plugins.forEach(plugin => {
-              assignStyles(newStyles, plugin(assignStyles({}, dynamicStyles), scopeArgs, config))
-            })
-          }
+          assignStyles(newStyles, resolvePlugins(dynamicStyles, scopeArgs, config))
         }
       })
 
+      // Only apply styles if there are some
       if (Object.keys(newStyles).length > 0) {
         newProps.style = newStyles
       }
 
-      // If element already got some style just merge them
-      // NOTE: This might overwrite the look assigned
+      // If element already got inlined styles just merge them
       if (element.props.style) {
         newProps.style = assignStyles(newProps.style, element.props.style)
       }
@@ -85,7 +91,12 @@ export default function resolveStyles(Component, element, config, parent) {
       newProps._parent = parent
     }
 
-    return cloneElement(element, newProps)
+
+    // Only actually clone if it is needed
+    // If there are styles, children got resolved or props got resolved
+    if (newProps.style || newProps.children !== element.props.children || newProps.hasResolvedProps) {
+      return cloneElement(element, newProps)
+    }
   }
 
   return element
@@ -117,7 +128,7 @@ function resolveChildren(Component, children, config, parent) {
     // recursively resolve styles for child elements if it is a valid React Component
     return Children.map(flatChildren, child => {
       if (isValidElement(child)) {
-        resolveStyles(Component, child, config, parent)
+        return resolveStyles(Component, child, config, parent)
       }
       return child
     })

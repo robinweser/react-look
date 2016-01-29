@@ -6,8 +6,8 @@ class Container extends Component {
     return (
       <div className={styles.container}>
         <h1 className={styles.title}>{this.props.title}</h1>
-      <pre className={styles.desc}>{this.props.description}</pre>
-    <div className={styles.inner}>
+        <pre className={styles.desc}>{this.props.description}</pre>
+        <div className={styles.inner}>
           {this.props.children}
         </div>
       </div>
