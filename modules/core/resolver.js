@@ -2,7 +2,6 @@ import { cloneElement, isValidElement, Children } from 'react'
 import StyleContainer from '../utils/StyleContainer'
 import flattenArray from '../utils/flattenArray'
 import assignStyles from 'assign-styles'
-import warn from '../utils/warn'
 
 
 export function resolvePlugins(styles, scopeArgs, config) {
@@ -32,7 +31,7 @@ export default function resolveStyles(Component, element, config, parent) {
       return element
     }
 
-    let newProps = {...element.props }
+    let newProps = { ...element.props }
     Object.keys(newProps).forEach(property => {
       if (property === 'children') {
         return

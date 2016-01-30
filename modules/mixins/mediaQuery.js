@@ -1,11 +1,10 @@
 import throttle from '../utils/throttle'
-import { resolvePlugins } from '../core/resolver'
 
 // Evaluates if a media condition is fulfilled by using window.matchMedia
-export default (property, styles, mixinKey, scopeArgs, config) => {
+export default (property, styles, mixinKey, scopeArgs) => {
   const matchMedia = typeof window !== 'undefined' ? window.matchMedia : undefined
   const query = property.replace(mixinKey, '').trim()
-  const { Component, newProps } = scopeArgs
+  const { Component } = scopeArgs
 
   if (!Component._mediaQueryListener) {
     Component._mediaQueryListener = throttle(() => {

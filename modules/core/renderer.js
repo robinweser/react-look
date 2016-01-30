@@ -8,9 +8,8 @@ import isPseudo from '../utils/isPseudo'
  * Extracts all possible dynamic styles out of a style object
  * To be able to render all other (static) styles directly to CSS
  * @param {Object} styles - pure style object which gets parsed
- * @param {string?} parent - outer property to extract nested styles
  */
-export function extractDynamicStyles(styles, parent) {
+export function extractDynamicStyles(styles) {
   return Object.keys(styles).reduce((dynamic, property) => {
     const value = styles[property]; // eslint-disable-line
     const valueType = typeof value
@@ -21,7 +20,7 @@ export function extractDynamicStyles(styles, parent) {
       if (isPseudo(property) || isMediaQuery(property)) {
         const valueCount = Object.keys(value).length
 
-        const innerDynamic = extractDynamicStyles(value, property)
+        const innerDynamic = extractDynamicStyles(value)
         const innerDynamicCount = Object.keys(innerDynamic).length
 
         // if the inner styles contain dynamic styles
