@@ -1,2 +1,0 @@
-instrumentation:
-  excludes: ['modules/utils/CSSContainer.js', 'modules/components/CSSStyleSheet.js']

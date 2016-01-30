@@ -5,7 +5,7 @@ import assignStyles from 'assign-styles'
 import warn from '../utils/warn'
 
 
-function resolvePlugins(styles, scopeArgs, config) {
+export function resolvePlugins(styles, scopeArgs, config) {
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
   if (config.plugins && config.plugins instanceof Array) {
