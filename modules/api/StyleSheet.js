@@ -1,6 +1,8 @@
-import GlobalStyleSheet from '../utils/GlobalStyleSheet'
-import getFontFormat from '../utils/getFontFormat'
+import StyleContainer from '../utils/StyleContainer'
 import generateClassName from '../utils/generateClassName'
+import renderStaticStyles from '../core/renderer'
+
+let scope = 0
 
 export default {
   /**
@@ -9,33 +11,22 @@ export default {
    * @param {Object|string} Component - React Component that the styles refer to
    * @param {styles} styles - Style selector or Object with selectors
    */
-  create(Component, styles) {
-    if (styles && Object.keys(styles).length > 0) {
-      // Either take the Components "name" itself or just a pure string as scope
-      const scope = Component.displayName || Component.name || Component
+  create(styles, Component) {
+    let currentScope = Component ? Component.displayName || Component.name : 'SCOPE' + ++scope
 
-      if (scope) {
-        let styleSheet = { }
-
-        // Resolving single selector styles
-        if (styles[Object.keys(styles)[0]] instanceof Object === false) {
-          styleSheet = { _scope: scope, style: styles }
-        } else {
-          // adds the Component referer uniqueId to every selector
-          Object.keys(styles).forEach(selector => {
-            const selectorStyles = styles[selector]
-            if (selectorStyles instanceof Object) {
-              styleSheet[selector] = {
-                _scope: scope,
-                style: selectorStyles
-              }
-            }
-          })
-        }
-        return styleSheet
-      }
+    // flat style object without selectors
+    if (styles[Object.keys(styles)[0]] instanceof Object === false) {
+      return renderStaticStyles(styles, currentScope)
     }
-    return { }
+
+    return Object.keys(styles).reduce((classes, selector) => {
+      classes[selector] = renderStaticStyles(styles[selector], currentScope, selector)
+      return classes; // eslint-disable-line
+    }, { })
+  },
+
+  combineStyles(...styles) {
+    return styles.join(' ')
   },
 
   /**
@@ -46,7 +37,7 @@ export default {
   toCSS(styles, scope) {
     if (styles && styles instanceof Object) {
       const scopeSelector = scope !== undefined && scope.trim() !== '' ? scope + ' ' : ''
-      Object.keys(styles).forEach(selector => GlobalStyleSheet.addSelector(scopeSelector + selector, styles[selector]))
+      Object.keys(styles).forEach(selector => StyleContainer.add(scopeSelector + selector, styles[selector]))
     }
   },
 
@@ -59,33 +50,8 @@ export default {
     if (frames && frames instanceof Object) {
       const animationName = name ? name : generateClassName(frames)
 
-      GlobalStyleSheet.addKeyframes(animationName, frames)
+      StyleContainer.addKeyframes(animationName, frames)
       return animationName
-    }
-  },
-
-  /**
-   * Adds a new font family to the global StyleSheet for global usage
-   * @param {string} fontFamily - font-family for global usage
-   * @param {string|Array} files - source files refering to the font files
-   * @param {Object} properties - additional font properties including fontWeight, fontStretch, fontStyle, unicodeRange
-   */
-  fontFace(fontFamily, files, properties) {
-    if (files) {
-      // Generates a style object including all font information
-      const fontFace = {
-        fontFamily: '\'fontFamily}\'',
-        src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`).join(',') : files
-      }
-
-      // Filter the properties to only include valid properties
-      if (properties && properties instanceof Object) {
-        const fontProperties = [ 'fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange' ]
-        Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => fontFace[fontProp] = properties[fontProp])
-      }
-
-      GlobalStyleSheet.addFontFace(fontFace)
-      return fontFamily
     }
   }
 }

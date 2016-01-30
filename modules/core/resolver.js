@@ -1,48 +1,17 @@
-import assign from 'object-assign'
 import { cloneElement, isValidElement, Children } from 'react'
-import GlobalStyleSheet from '../utils/GlobalStyleSheet'
-import assignStyles from 'assign-styles'
+import StyleContainer from '../utils/StyleContainer'
 import flattenArray from '../utils/flattenArray'
-import warn from '../utils/warn'
+import assignStyles from 'assign-styles'
 
-/**
- * Processes styles using a predefined set of plugins
- * @param {Object} styles - any style object that gets processed
- * @param {Object} scopeArgs - special objects including important information
- * @param {Object} config - a map of arguments that might be passed to the plugin
- */
-const resolvePlugins = (styles, scopeArgs, config) => {
-  let retStyles = styles
 
-  config.plugins.forEach(plugin => {
-    retStyles = plugin(retStyles, scopeArgs, config)
-  })
-  return retStyles
-}
-
-/**
- * Resolves plugins and merges with existing style property
- * @param {Object} styles - object with styles
- * @param {Object} props - current elements props
- * @param {Object} scopeArgs - special objects including important information
- * @param {Object} config - configuration containing plugins and plugin-specific configs
- */
-export function processStyles(styles, props, scopeArgs, config) {
-  let newStyles = assign({ }, styles)
-
+export function resolvePlugins(styles, scopeArgs, config) {
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
   if (config.plugins && config.plugins instanceof Array) {
-    newStyles = resolvePlugins(newStyles, scopeArgs, config)
+    config.plugins.forEach(plugin => styles = plugin(styles, scopeArgs, config))
   }
 
-  // If element already got some style just merge them
-  // NOTE: This might overwrite the look assigned
-  if (props.style) {
-    newStyles = assignStyles(newStyles, props.style)
-  }
-
-  return newStyles
+  return styles
 }
 
 /**
@@ -55,27 +24,35 @@ export function processStyles(styles, props, scopeArgs, config) {
  * @param {Object} parent - referencing element's parent
  */
 export default function resolveStyles(Component, element, config, parent) {
-  // only resolve if look or children exist
   if (element && element.props) {
-    let nothingToResolve = true
+    // early return if element itself is a Look component
+    // it will be resolved anyways
+    if (element.type && element.type._isLookEnhanced) {
+      return element
+    }
 
-    const props = element.props
-    const newProps = assign({ }, props)
+    let newProps = { ...element.props }
+    Object.keys(newProps).forEach(property => {
+      if (property === 'children') {
+        return
+      }
 
+      // Resolving styles for elements passed by props
+      // Skip children as they've been resolved already
+      const propElement = newProps[property]
+      if (isValidElement(propElement)) {
+        newProps[property] = resolveStyles(Component, propElement, config)
+        newProps.hasResolvedProps = true
+      }
+    })
 
-    if (props.children) {
-      nothingToResolve = false
+    if (newProps.children) {
       // resolving child styles recursively to make sure they will be rendered correctly
-      newProps.children = resolveChildren(Component, props.children, config, element) // eslint-disable-line
+      newProps.children = resolveChildren(Component, newProps.children, config, element) // eslint-disable-line
     }
 
 
-    if (props.look) {
-      nothingToResolve = false
-      // Merge an array of styles into a single style object
-      if (props.look instanceof Array) {
-        newProps.look = assignStyles({ }, ...props.look)
-      }
+    if (newProps.className) {
 
       // scopeArgs are provided to plugins to access special objects
       const scopeArgs = {
@@ -83,34 +60,29 @@ export default function resolveStyles(Component, element, config, parent) {
         Component,
         element,
         parent,
-        GlobalStyleSheet
+        StyleContainer
       }
 
-      // Checks if styles are scoped
-      // Scoped styles only perform style processing if in correct scope
-      // NOTE: This solves multiple processing due to wrapping Components
-      if (newProps.look._scope) {
-        if (Component._lookScope === newProps.look._scope) {
-          newProps.style = processStyles(newProps.look.style, props, scopeArgs, config)
+      let newStyles = {}
+
+      newProps.className.split(' ').forEach(className => {
+        let dynamicStyles = assignStyles({}, StyleContainer.dynamics.get(className))
+
+        if (dynamicStyles) {
+          assignStyles(newStyles, resolvePlugins(dynamicStyles, scopeArgs, config))
         }
-      } else {
-        // If global scopes are used it processed styles everytime
-        // Throws warning to use scoped styles instead
-        warn(`${Component._lookScope} got enhanced by Look using global styles which might affect performance. Please always use scoped styles with the StyleSheet API.`, Component, element)
-        newProps.style = processStyles(newProps.look, props, scopeArgs, config)
+      })
+
+      // Only apply styles if there are some
+      if (Object.keys(newStyles).length > 0) {
+        newProps.style = newStyles
+      }
+
+      // If element already got inlined styles just merge them
+      if (element.props.style) {
+        newProps.style = assignStyles(newProps.style, element.props.style)
       }
     }
-
-
-    // Resolving styles for elements passed by props
-    // Skip children as they've been resolved already
-    Object.keys(newProps).forEach(prop => {
-      if (prop !== 'children' && isValidElement(newProps[prop])) {
-        nothingToResolve = false
-        newProps[prop] = resolveStyles(Component, newProps[prop], config)
-      }
-    })
-
 
     // Passing the current parent element via props
     // This is especially useful for mixins e.g. :first-child
@@ -118,7 +90,10 @@ export default function resolveStyles(Component, element, config, parent) {
       newProps._parent = parent
     }
 
-    if (!nothingToResolve) {
+
+    // Only actually clone if it is needed
+    // If there are styles, children got resolved or props got resolved
+    if (newProps.style || newProps.children !== element.props.children || newProps.hasResolvedProps) {
       return cloneElement(element, newProps)
     }
   }
@@ -133,12 +108,15 @@ export default function resolveStyles(Component, element, config, parent) {
  * @param {Object} config - configuration containing plugins and plugin-specific configs
  * @param {Object} parent - referencing element's parent
  */
-const resolveChildren = (Component, children, config, parent) => {
+function resolveChildren(Component, children, config, parent) {
   const childType = typeof children
 
   // directly return primitive children
   if (childType === 'string' || childType === 'number') {
     return children
+  }
+  if (children.type) {
+    return resolveStyles(Component, children, config, parent)
   }
 
   // if there are more than one child, iterate over them
@@ -147,10 +125,11 @@ const resolveChildren = (Component, children, config, parent) => {
     const flatChildren = flattenArray(children)
 
     // recursively resolve styles for child elements if it is a valid React Component
-    return Children.map(flatChildren, (child) => isValidElement(child) ? resolveStyles(Component, child, config, parent) : child)
-  }
-
-  if (children.type) {
-    return resolveStyles(Component, children, config, parent)
+    return Children.map(flatChildren, child => {
+      if (isValidElement(child)) {
+        return resolveStyles(Component, child, config, parent)
+      }
+      return child
+    })
   }
 }

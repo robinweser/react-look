@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../modules/look'
 
 class Container extends Component {
   render() {
     return (
-      <div look={styles.container}>
-        <h1 look={styles.title}>{this.props.title}</h1>
-        <pre look={styles.desc}>{this.props.description}</pre>
-        <div look={styles.inner}>
+      <div className={styles.container}>
+        <h1 className={styles.title}>{this.props.title}</h1>
+        <pre className={styles.desc}>{this.props.description}</pre>
+        <div className={styles.inner}>
           {this.props.children}
         </div>
       </div>
@@ -15,7 +15,7 @@ class Container extends Component {
   }
 }
 
-const styles = StyleSheet.create(Container, {
+const styles = StyleSheet.create({
   container: {
     width: '100%',
     boxSizing: 'border-box',

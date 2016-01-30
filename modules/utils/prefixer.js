@@ -12,7 +12,7 @@ export default userAgent => {
     prefixer = new Prefixer({ userAgent: userAgent })
   }
   // replace userAgent if config provides alternative one
-  if (userAgent !== undefined && prefixer._userAgent !== userAgent) {
+  if (prefixer._userAgent !== userAgent && userAgent !== undefined) {
     prefixer = new Prefixer({ userAgent: userAgent })
   }
 

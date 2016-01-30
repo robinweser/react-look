@@ -20,9 +20,9 @@ import extend from '../mixins/extend'
 
 export default {
   plugins: [
+    statefulValue,
     mixin,
-    alternativeValue,
-    statefulValue
+    alternativeValue
   ],
   mixins: {
     // Conditions

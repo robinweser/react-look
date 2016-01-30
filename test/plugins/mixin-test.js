@@ -5,11 +5,13 @@ import { expect } from 'chai'
 describe('Resolving mixins', () => {
 
   it('should return styles if no mixins are passed', () => {
-    expect(mixin(true, { }, { })).to.eql(true)
+    expect(mixin({ }, { }, { })).to.eql({ })
   })
 
   it('should return styles if mixins is empty', () => {
-    expect(mixin(true, { }, { mixins: { } })).to.eql(true)
+    expect(mixin({ }, { }, {
+      mixins: { }
+    })).to.eql({ })
   })
 
   it('should resolve mixins', () => {

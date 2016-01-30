@@ -20,13 +20,11 @@ export default (CustomComponent, config = {}) => {
     static displayName = CustomComponent.displayName || CustomComponent.name || 'Component';
     static childContextTypes = { _lookConfig: PropTypes.object };
     static contextTypes = { _lookConfig: PropTypes.object };
+    static _isLookEnhanced = true;
 
     constructor() {
       super(...arguments)
       this.state = this.state || {}
-
-      // Adds a scopeId to identify refering StyleSheets
-      this._lookScope = config.styleScope || CustomComponent.displayName || CustomComponent.name
       this.state._look = new Map()
     }
 

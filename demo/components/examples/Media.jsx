@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../modules/look'
 
-const Media = () => <div look={styles}>Resize your window</div>
+const Media = () => <div className={styles}>Resize your window</div>
 
-const styles = StyleSheet.create(Media, {
+const styles = StyleSheet.create({
   padding: 40,
   textAlign: 'center',
   color: 'white',
@@ -12,7 +12,7 @@ const styles = StyleSheet.create(Media, {
   '@media (max-width: 500px)': {
     backgroundColor: 'blue'
   },
-  '@media (orientation:landscape)': {
+  '@media (orientation:portrait)': {
     backgroundColor: 'orange'
   },
   '@media (min-width: 1000px)': {

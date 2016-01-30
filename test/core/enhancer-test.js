@@ -113,27 +113,4 @@ describe('Enhancing a Component', () => {
     expect(instance.render().props.children[0]).to.eql(element)
     expect(instance.render().props.children[1].type.name).to.eql('CSSStyleSheet')
   })
-
-  it('should pass lookConfig within context', () => {
-    const fn = sinon.spy()
-    const pluggedStyles = { color: 'red' }
-    const plugin = () => {
-      fn()
-      return pluggedStyles;
-    }
-
-    const Child = () => <span id="hello" look={{ color: 'blue' }}/>
-    const EnhancedChild = look(Child)
-
-    const Parent = () => (<div look={{ color: 'yellow' }}><EnhancedChild /></div>)
-    let Enhanced = look(Parent)
-    const comp = TestUtils.renderIntoDocument(<Enhanced lookConfig={{
-      plugins: [ plugin ]
-    }} />)
-    const element = TestUtils.findRenderedDOMComponentWithTag(comp, 'span')
-    expect(fn).to.have.been.calledTwice
-    expect(ReactDOM.findDOMNode(element).style._values).to.eql({
-      color: 'red'
-    })
-  })
 })

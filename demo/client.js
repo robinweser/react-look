@@ -1,11 +1,25 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Presets, DevTools } from '../lib/addons'
+import { Presets, DevTools } from '../modules/addons'
 import { Plugins } from 'inline-style-linter'
+import { StyleSheet } from '../modules/look'
 
 import App from './app.jsx'
 
+StyleSheet.toCSS({
+  '*': {
+    padding: 0,
+    margin: 0,
+    fontFamily: '"Lato", sans-serif',
+    fontWeight: 300,
+    boxSizing: 'border-box',
+    userSelect: 'none'
+  }
+})
+
 const config = Presets['react-dom'];
+config.mixins.substr = config.mixins[':substr']
+/*
 config.plugins.push(DevTools.linter)
 
 config.linter = {
@@ -29,6 +43,7 @@ config.linter = {
   },
   onlyLogHint: true
 }
+*/
 
 config.userAgent = navigator.userAgent
 

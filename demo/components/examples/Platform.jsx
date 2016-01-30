@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import look, { StyleSheet } from '../../../lib/look'
+import look, { StyleSheet } from '../../../modules/look'
+const c = StyleSheet.combineStyles
 
 const iOS = 'Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/538.34.9 (KHTML, like Gecko) Mobile/12A4265u'
 const android = 'Mozilla/5.0 (Linux; Android 4.4; Nexus 7 Build/KOT24) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.105 Safari/537.36'
@@ -40,12 +41,12 @@ class Platform extends Component {
       userAgent: this.state.userAgent
     } : { }
     return (
-      <div look={styles.container} lookConfig={config}>
+      <div className={styles.container} lookConfig={config}>
         <div>
-          <div look={[ styles.button, styles.ios ]} onClick={this.onClick.bind(this, iOS)}>iOS userAgent</div>
-          <div look={[ styles.button, styles.android ]} onClick={this.onClick.bind(this, android)}>Android userAgent</div>
+          <div className={ c(styles.button, styles.ios)} onClick={this.onClick.bind(this, iOS)}>iOS userAgent</div>
+        <div className={ c(styles.button, styles.android)} onClick={this.onClick.bind(this, android)}>Android userAgent</div>
         </div>
-        <div look={styles.platform}>
+        <div className={styles.platform}>
           <span>On iOS I am blue</span>
           <span>On android I am red</span>
           <span>On others I am gray</span>
@@ -54,7 +55,7 @@ class Platform extends Component {
       )
   }
 }
-const styles = StyleSheet.create(Platform, {
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     display: 'flex'

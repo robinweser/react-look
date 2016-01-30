@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
-import look, { StyleSheet } from '../../../lib/look'
-import { Mixins } from '../../../lib/addons'
+import look, { StyleSheet } from '../../../modules/look'
+import { Mixins } from '../../../modules/addons'
 
 const Pseudo = () => (
 <div>
-    <div look={styles.firstLetter}>First letter is colored red.</div>
+    <div className={styles.firstLetter}>First letter is colored red.</div>
     <br/>
-    <div look={styles.numbers}>:substr lets you style regex m4tches 4 example only numb3rs with :substr([0-9]*).</div>
+  <div className={styles.numbers}>:substr lets you style regex m4tches 4 example only numb3rs with :substr([0-9]*).</div>
     <br/>
-    <div look={styles.beforeAfter}>Who's after me?</div>
+  <div className={styles.beforeAfter}>Who's after me?</div>
     <br/>
     <div>Pseudo to CSS polyfill <i>(e.g. ::-webkit-input-placeholder)</i></div>
-    <input look={styles.input} placeholder="Webkit-based browsers show this placeholder in green" />
+  <input className={styles.input} placeholder="Webkit-based browsers show this placeholder in green" />
   </div>
 )
 
-const styles = StyleSheet.create(Pseudo, {
+const styles = StyleSheet.create({
   firstLetter: {
     fontSize: 20,
     ':first-letter': {
@@ -26,19 +26,19 @@ const styles = StyleSheet.create(Pseudo, {
   },
   numbers: {
     fontSize: 20,
-    ':substr([0-9]*)': {
+    'substr([0-9]*)': {
       color: 'red'
     }
   },
   beforeAfter: {
     fontSize: 20,
     ':before': {
-      content: ':before',
+      content: '\':before\'',
       color: 'gray'
     },
     ':after': {
       color: 'red',
-      content: 'It\'s me',
+      content: '"It\'s me"',
       fontSize: 18
     }
   },
@@ -58,8 +58,4 @@ const styles = StyleSheet.create(Pseudo, {
   }
 })
 
-export default look(Pseudo, {
-  mixins: {
-    '::-webkit-input-placeholder': Mixins.pseudoToCSS
-  }
-})
+export default look(Pseudo)
