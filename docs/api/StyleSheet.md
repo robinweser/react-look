@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
 	},
 })
 ```
-This will generate the following CSS *(`.pbu82m` is just an example)*
+This will generate the following CSS *(`.wrg802` is just an example)*
 ```CSS
-.pbu82m:hover:active { color: gray }
-.pbu82m:hover { color: blue }
-.pbu82m { color: red }
+.wrg802:hover:active { color: gray }
+.wrg802:hover { color: blue }
+.wrg802 { color: red }
 ```
 
 ### Media queries
@@ -58,14 +58,14 @@ const styles = StyleSheet.create({
 	},
 })
 ```
-This will generate the following CSS *(`.pbu82m` is just an example)*
+This will generate the following CSS *(`.wrg802` is just an example)*
 ```CSS
-.pbu82m { color: red }
+.wrg802 { color: red }
 @media (min-height: 300px) {
-	.pbu82m { color: blue }
+	.wrg802 { color: blue }
 }
 @media (min-height: 300px) and (min-width: 500px) {
-	.pbu82m { color: gray }
+	.wrg802 { color: gray }
 }
 ```
 
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 	container: { fontSize: 14 }
 })
 
-c(styles.box, styles.container) // => className_box className_container
+c(styles.box, styles.container) // => wrg802 fqvmt1
 ```
 
 ## toCSS(styles [, scope])
