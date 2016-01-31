@@ -16,3 +16,4 @@ There are some configuration options that can be set by now. Check out the [conf
 | mixins | `Object` | key-value pairs of [mixin](../Mixins.md) definitions
 | userAgent    | `string` | userAgent to detect platform  information & prefix styles |
 | lookRoot | `boolean` | Defines the top-level Component. Used to render global CSS rules |
+| linter | `Object` | Configures the [linter](../devTools/linter.md) devTools |

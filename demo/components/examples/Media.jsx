@@ -4,10 +4,7 @@ import look, { StyleSheet } from '../../../modules/look'
 const Media = () => <div className={styles}>Resize your window</div>
 
 const styles = StyleSheet.create({
-  padding: 40,
-  textAlign: 'center',
-  color: 'white',
-  fontSize: 40,
+  color: 'red',
   backgroundColor: 'red',
   '@media (max-width: 500px)': {
     backgroundColor: 'blue'
@@ -18,6 +15,6 @@ const styles = StyleSheet.create({
   '@media (min-width: 1000px)': {
     backgroundColor: 'green'
   }
-})
+}, 'Media')
 
 export default look(Media)

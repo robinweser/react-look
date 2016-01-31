@@ -12,7 +12,7 @@ export default {
    * @param {styles} styles - Style selector or Object with selectors
    */
   create(styles, Component) {
-    let currentScope = Component ? Component.displayName || Component.name : 'SCOPE' + ++scope
+    let currentScope = Component ? Component.displayName || Component.name || Component : 'SCOPE' + ++scope
 
     // flat style object without selectors
     if (styles[Object.keys(styles)[0]] instanceof Object === false) {
