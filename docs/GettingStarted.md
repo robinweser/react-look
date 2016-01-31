@@ -8,7 +8,7 @@ Subitems show which part of Look is teached in each chapter.
 	* Presets
 3. [First Component](#3-first-component)
 	* `look` & [`@look`](#decorator)
-	* [`StyleSheet.create`](#stylesheet-createcomponent-styles)
+	* [`StyleSheet.create`](#stylesheet-createstyles)
 	* [Multiple styles](#multiple-styles)
 4. [Stateless Components](#4-stateless-components)
 5. [Pseudo classes](#4-pseudo-classes)
@@ -35,7 +35,7 @@ const look = require('react-look')
 ```
 
 ## 2. Configuration
-Before we can use any of the features Look provides, we need to configure Look.<br>
+Look supports pseudo classes and media queries by default, but requires some configuration to be able to use plugins, mixins or devTools.
 We will use a preset which provides every mixin & plugin available. We will refer to this as the 'global config' as it should affect every Component resolved with Look. Therefore we basically just pass them as a prop of the **root-Component** that gets directly rendered into a DOM-node.
 > Note: If you want to use a custom configration check out the [configuration guide](guides/configureLook.md).
 
@@ -89,7 +89,7 @@ export class FirstComponent extends Component {
 }
 ```
 
-#### StyleSheet.create(Component, styles)
+#### StyleSheet.create(styles)
 Now that we got the basic Component let's start adding some styles.<br> We use the `StyleSheet.create` helper to generate Component-scoped styles. This heavily improves performance as it prevents resolving the styles multiple times.
 > Note: You also need to import the StyleSheet module from now on!
 
@@ -167,7 +167,6 @@ import React, { Component } from 'react'
 
 const FirstComponent = ({title}) => <div className={styles.box}>{title}</div>
 
-// Always pass the Component followed by your styles
 const styles = StyleSheet.create({
 	box: {
 		color: 'red',
@@ -178,4 +177,51 @@ const styles = StyleSheet.create({
 })
 
 export default look(FirstComponent)
+```
+
+## 5. Pseudo classes
+Look supports every available pseudo class. The syntax is similar to Sass and supports multiple nested pseudo classes as well.
+
+```javascript
+import { StyleSheet } from 'react-look'
+
+const styles = StyleSheet.create({
+	box: {
+		color: 'red',
+		fontSize: 14,
+		padding: 8,
+		border: '1px solid gray',
+		':hover': {
+			color 'blue',
+			// multiple nesting
+			':active': {
+				color: 'gray'
+			}
+		}
+	}
+})
+```
+
+## 6. Media Queries
+You may also use media queries. They can be nested as well.
+> **Tip**: You can even mix media queries and pseudo classes together
+
+```javascript
+import { StyleSheet } from 'react-look'
+
+const styles = StyleSheet.create({
+	box: {
+		color: 'red',
+		fontSize: 14,
+		padding: 8,
+		border: '1px solid gray',
+		'@media (min-width: 300px)': {
+			color 'blue',
+			// => @media (min-width: 300px) and (min-height: 400px)
+ 			'@media (min-height: 400px)': {
+				color: 'gray'
+			}
+		}
+	}
+})
 ```
