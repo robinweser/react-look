@@ -100,12 +100,11 @@ import React, { Component } from 'react'
 class FirstComponent extends Component {
 	render() {
 		// use the 'look' prop to pass styles
-		return <div look={styles.box}>My first Component!</div>
+		return <div className={styles.box}>My first Component!</div>
 	}
 }
 
-// Always pass the Component followed by your styles
-const styles = StyleSheet.create(FirstComponent, {
+const styles = StyleSheet.create({
 	box: {
 		color: 'red',
 		fontSize: 14, // numbers automatically get 'px' added
@@ -123,24 +122,25 @@ You can even have multiple styles assigned to a single node as well as multiple 
 ```javascript
 import look, { StyleSheet } from 'react-look'
 import React, { Component } from 'react'
+// We use this shortcut to write less code
+const c = StyleSheet.combineStyles
 
 class FirstComponent extends Component {
 	render() {
 		return (
-			// Use an array of styles to assign multiple
-			// They overwrite existing properties in the order they're passed
-			<div look={[styles.box, styles.specialBox]}>
-				<title look={styles.title}>My first Component!</title>
+			// Use the combineStyles to combine styles
+			// You can pass in as many styles as you wish
+			<div className={c(styles.box, styles.specialBox)}>
+				<title className={styles.title}>My first Component!</title>
 			</div>
 		)
 	}
 }
 
-// Always pass the Component followed by your styles
-const styles = StyleSheet.create(FirstComponent, {
+const styles = StyleSheet.create({
 	box: {
 		color: 'red',
-		fontSize: 14, // numbers automatically get 'px' added
+		fontSize: 14,
 		padding: 8,
 		border: '1px solid gray'
 	},
@@ -165,10 +165,10 @@ With Look you can easily style even **[Stateless Components](http://facebook.git
 import look, { StyleSheet } from 'react-look'
 import React, { Component } from 'react'
 
-const FirstComponent = ({title}) => <div look={styles.box}>{title}</div>
+const FirstComponent = ({title}) => <div className={styles.box}>{title}</div>
 
 // Always pass the Component followed by your styles
-const styles = StyleSheet.create(FirstComponent, {
+const styles = StyleSheet.create({
 	box: {
 		color: 'red',
 		fontSize: 14,
@@ -176,5 +176,6 @@ const styles = StyleSheet.create(FirstComponent, {
 		border: '1px solid gray'
 	}
 })
+
 export default look(FirstComponent)
 ```
