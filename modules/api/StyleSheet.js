@@ -1,5 +1,5 @@
-import StyleContainer from '../utils/StyleContainer'
 import generateClassName from '../utils/generateClassName'
+import StyleContainer from '../core/container'
 import renderStaticStyles from '../core/renderer'
 
 let scope = 0
@@ -52,6 +52,31 @@ export default {
 
       StyleContainer.addKeyframes(animationName, frames)
       return animationName
+    }
+  },
+
+  /**
+   * Adds a new font family to the global StyleSheet for global usage
+   * @param {string} fontFamily - font-family for global usage
+   * @param {string|Array} files - source files refering to the font files
+   * @param {Object} properties - additional font properties including fontWeight, fontStretch, fontStyle, unicodeRange
+   */
+  fontFace(fontFamily, files, properties) {
+    if (files) {
+      // Generates a style object including all font information
+      const fontFace = {
+        fontFamily: '\'fontFamily}\'',
+        src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`).join(',') : files
+      }
+
+      // Filter the properties to only include valid properties
+      if (properties && properties instanceof Object) {
+        const fontProperties = [ 'fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange' ]
+        Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => fontFace[fontProp] = properties[fontProp])
+      }
+
+      GlobalStyleSheet.addFontFace(fontFace)
+      return fontFamily
     }
   }
 }

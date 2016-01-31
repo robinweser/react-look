@@ -1,5 +1,4 @@
 import Enhancer from './core/enhancer'
-import State from './api/State'
 import StyleSheet from './api/StyleSheet'
 
 // Resolving annotations
@@ -16,6 +15,5 @@ export default (...args) => {
 }
 
 export {
-  State,
   StyleSheet
 }

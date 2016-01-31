@@ -18,7 +18,6 @@ StyleSheet.toCSS({
 })
 
 const config = Presets['react-dom'];
-config.mixins.substr = config.mixins[':substr']
 /*
 config.plugins.push(DevTools.linter)
 
@@ -44,7 +43,5 @@ config.linter = {
   onlyLogHint: true
 }
 */
-
-config.userAgent = navigator.userAgent
 
 render(<App lookConfig={config} />, document.getElementById('app'))

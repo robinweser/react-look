@@ -30,31 +30,6 @@ describe('Enhancing a Component', () => {
     expect(instance.displayName).to.eql(Default.displayName)
   })
 
-  it('should set up initial state', () => {
-    class Default extends Component {
-    }
-    let Enhanced = look(Default);
-    let instance = new Enhanced();
-
-    expect(instance.state).to.have.property('_look')
-  })
-  it('should merge existing state', () => {
-    class Default extends Component {
-      constructor() {
-        super(...arguments)
-        this.state = { foo: 1 }
-      }
-    }
-
-    let Enhanced = look(Default)
-    let instance = new Enhanced()
-
-    expect(instance.state).to.eql({
-      foo: 1,
-      _look: new Map()
-    })
-  })
-
   it('should recieve props', () => {
     class Default extends Component {
       constructor() {
@@ -111,6 +86,6 @@ describe('Enhancing a Component', () => {
     let instance = new Enhanced()
 
     expect(instance.render().props.children[0]).to.eql(element)
-    expect(instance.render().props.children[1].type.name).to.eql('CSSStyleSheet')
+    expect(instance.render().props.children[1].type.name).to.eql('StyleComponent')
   })
 })

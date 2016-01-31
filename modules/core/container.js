@@ -1,4 +1,5 @@
-import prefixer from './prefixer'
+import prefixer from '../utils/prefixer'
+import React, { Component } from 'react'
 import { toCSS } from 'inline-style-transformer'
 
 class StyleContainer {
@@ -50,11 +51,20 @@ class StyleContainer {
     }
   }
 
+  addFontFace(font) {
+    const fontFace = '@font-face {' + cssifyObject(font) + '}'
+    if (this.fonts.has(fontFace)) {
+      this.fonts.add(fontFace)
+      this._emitChange()
+    }
+  }
+
   renderStaticStyles(userAgent) {
     const tempPrefixer = prefixer(userAgent)
     let css = ''
 
     this.selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}\n')
+    this.fonts.forEach(font => css += font + '\n')
     this.keyframes.forEach((frames, name) => css += '@' + tempPrefixer.prefixedKeyframes + ' ' + name + '{' + toCSS(tempPrefixer.prefix(frames)) + '}\n')
     this.mediaQueries.forEach((selectors, query) => {
       css += '@media ' + query + '{\n'
@@ -78,4 +88,34 @@ class StyleContainer {
   }
 }
 
-export default new StyleContainer()
+const globalStyleContainer = new StyleContainer()
+
+export class StyleComponent extends Component {
+  constructor(props) {
+    super(...arguments)
+    const css = globalStyleContainer.renderStaticStyles(props.userAgent) // eslint-disable-line
+    this.state = { css: css }
+
+    this.updateStyles = this.updateStyles.bind(this, props.userAgent)
+  }
+
+  componentDidMount() {
+    this._changeListener = globalStyleContainer.subscribe(this.updateStyles)
+  }
+
+  componentWillUnmount() {
+    this._changeListener.unsubscribe()
+  }
+
+  updateStyles(userAgent) {
+    const css = globalStyleContainer.renderStaticStyles(userAgent) // eslint-disable-line
+    this.setState({ css: css })
+  }
+
+  render() {
+    const innerHTML = { __html: this.state.css }
+    return <style dangerouslySetInnerHTML={innerHTML} />
+  }
+}
+
+export default globalStyleContainer

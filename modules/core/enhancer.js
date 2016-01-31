@@ -1,5 +1,5 @@
 import resolveStyles from './resolver'
-import CSSStyleSheet from '../components/CSSStyleSheet'
+import { StyleComponent } from './container'
 import copyProperties from '../utils/copyProperties'
 import React, { Component, PropTypes } from 'react'
 import assignDeep from 'object-assign-deep'
@@ -21,12 +21,6 @@ export default (CustomComponent, config = {}) => {
     static childContextTypes = { _lookConfig: PropTypes.object };
     static contextTypes = { _lookConfig: PropTypes.object };
     static _isLookEnhanced = true;
-
-    constructor() {
-      super(...arguments)
-      this.state = this.state || {}
-      this.state._look = new Map()
-    }
 
     getChildContext() {
       let newContext = super.getChildContext ? super.getChildContext() : {}
@@ -60,7 +54,7 @@ export default (CustomComponent, config = {}) => {
         return (
           <div>
             {content}
-            <CSSStyleSheet userAgent={composedConfig.userAgent} />
+            <StyleComponent userAgent={composedConfig.userAgent} />
           </div>
         )
       }

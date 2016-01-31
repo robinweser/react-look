@@ -1,5 +1,5 @@
 import { cloneElement, isValidElement, Children } from 'react'
-import StyleContainer from '../utils/StyleContainer'
+import StyleContainer from './container'
 import flattenArray from '../utils/flattenArray'
 import assignStyles from 'assign-styles'
 
@@ -83,13 +83,6 @@ export default function resolveStyles(Component, element, config, parent) {
         newProps.style = assignStyles(newProps.style, element.props.style)
       }
     }
-
-    // Passing the current parent element via props
-    // This is especially useful for mixins e.g. :first-child
-    if (parent) {
-      newProps._parent = parent
-    }
-
 
     // Only actually clone if it is needed
     // If there are styles, children got resolved or props got resolved

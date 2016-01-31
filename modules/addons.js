@@ -11,30 +11,11 @@ import styleLogger from './devTools/styleLogger'
 // Conditions
 import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/condition'
 
-// Pseudo classes
-import { firstChild, lastChild, onlyChild, nthChild, nthLastChild } from './mixins/childIndex'
-import { firstOfType, lastOfType, onlyOfType, nthOfType, nthLastOfType } from './mixins/childTypeIndex'
-import { checked, disabled, enabled, required, optional, readOnly, readWrite, indeterminate } from './mixins/input'
-import { hover, active, focus } from './mixins/userAction'
-import { valid, invalid, inRange, outOfRange } from './mixins/validation'
-import { before, after } from './mixins/beforeAfter'
-import lang from './mixins/lang'
-import empty from './mixins/empty'
-import target from './mixins/target'
-import blank from './mixins/blank'
-import firstLetter from './mixins/firstLetter'
+// Mixins
 import contains from './mixins/contains'
 import substr from './mixins/substr'
-
-// CSS extraction
 import extractCSS from './mixins/extractCSS'
-import pseudoToCSS from './mixins/pseudoToCSS'
-
-// Extending
 import extend from './mixins/extend'
-
-// Queries
-import mediaQuery from './mixins/mediaQuery'
 import platformQuery from './mixins/platformQuery'
 
 // Presets
@@ -61,50 +42,10 @@ export default {
     less,
     equal,
 
-    // Extending
+    // Other
     extend,
-
-    // CSS extraction
     extractCSS,
-    pseudoToCSS,
-
-    // Queries
-    mediaQuery,
     platformQuery,
-
-    // Pseudo classes
-    empty,
-    firstChild,
-    lastChild,
-    onlyChild,
-    nthChild,
-    nthLastChild,
-    firstOfType,
-    lastOfType,
-    onlyOfType,
-    nthOfType,
-    nthLastOfType,
-    before,
-    after,
-    lang,
-    hover,
-    focus,
-    active,
-    valid,
-    invalid,
-    inRange,
-    outOfRange,
-    checked,
-    disabled,
-    enabled,
-    readOnly,
-    readWrite,
-    required,
-    optional,
-    indeterminate,
-    firstLetter,
-    blank,
-    target,
     contains,
     substr
   },
