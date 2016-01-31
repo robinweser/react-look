@@ -21,9 +21,8 @@ export function resolvePlugins(styles, scopeArgs, config) {
  * @param {Object} Component - wrapping React Component providing styles and elements
  * @param {Object} element - previously rendered React element
  * @param {Object} config - configuration containing plugins and plugin-specific configs
- * @param {Object} parent - referencing element's parent
  */
-export default function resolveStyles(Component, element, config, parent) {
+export default function resolveStyles(Component, element, config) {
   if (element && element.props) {
     // early return if element itself is a Look component
     // it will be resolved anyways
@@ -48,7 +47,7 @@ export default function resolveStyles(Component, element, config, parent) {
 
     if (newProps.children) {
       // resolving child styles recursively to make sure they will be rendered correctly
-      newProps.children = resolveChildren(Component, newProps.children, config, element) // eslint-disable-line
+      newProps.children = resolveChildren(Component, newProps.children, config) // eslint-disable-line
     }
 
 
@@ -59,7 +58,6 @@ export default function resolveStyles(Component, element, config, parent) {
         newProps,
         Component,
         element,
-        parent,
         StyleContainer
       }
 
@@ -99,9 +97,8 @@ export default function resolveStyles(Component, element, config, parent) {
  * @param {Object} Component - wrapping React Component providing looks and elements
  * @param {Array|string|number} children - children that get resolved
  * @param {Object} config - configuration containing plugins and plugin-specific configs
- * @param {Object} parent - referencing element's parent
  */
-function resolveChildren(Component, children, config, parent) {
+function resolveChildren(Component, children, config) {
   const childType = typeof children
 
   // directly return primitive children
@@ -109,7 +106,7 @@ function resolveChildren(Component, children, config, parent) {
     return children
   }
   if (children.type) {
-    return resolveStyles(Component, children, config, parent)
+    return resolveStyles(Component, children, config)
   }
 
   // if there are more than one child, iterate over them
@@ -120,7 +117,7 @@ function resolveChildren(Component, children, config, parent) {
     // recursively resolve styles for child elements if it is a valid React Component
     return Children.map(flatChildren, child => {
       if (isValidElement(child)) {
-        return resolveStyles(Component, child, config, parent)
+        return resolveStyles(Component, child, config)
       }
       return child
     })

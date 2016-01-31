@@ -1,5 +1,5 @@
 # Mixin
-The mixin plugin is basically the most important one as it resolves custom properties such as *pseudo classes*, *media queries*, *stateful conditions* and much more.
+The mixin plugin is basically the most important one as it resolves custom properties such as *platform queries*, *stateful conditions* and much more.
 
 Mixins can be nested multiple times to achieve e.g. `:focus:hover`.
 
@@ -14,7 +14,7 @@ Every mixin gets called with 5 different paremeters.
 | property | `string` | exact property used |
 | value | `any` | actuall style value |
 | mixinKey | `string` | mixin reference key (always includes, often equals `property`) |
-| scopeArgs   | `any` | - wrapping React `Component`<br> - rendered `element` <br> -  `newProps` to clone the element <br> - `parent` element *(if existing)* <br> - the `GlobalStyleSheet` which collects & renders global CSS |
+| scopeArgs   | `any` | - wrapping React `Component`<br> - rendered `element` <br> -  `newProps` to clone the element <br> - the `StyleContainer` which collects & renders global CSS |
 | config    | `object`| Contains [configuration settings](guides/configureLook.md) such as plugins, mixins, userAgent or custom config declarations |
 
 ### Output

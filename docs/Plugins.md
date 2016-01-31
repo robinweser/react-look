@@ -16,5 +16,5 @@ Every plugin gets called with a set of parameters which include several informat
 | Parameter | Type | Description |
 | --------- | ---- | ----------- |
 | styles | `object` | the full style object provided with the look property |
-| scopeArgs   | `object` | - wrapping React `Component`<br> - rendered `element` <br> -  `newProps` to clone the element <br> - `parent` element *(if existing)* <br> - the `GlobalStyleSheet` which collects & renders global CSS |
+| scopeArgs   | `object` | - wrapping React `Component`<br> - rendered `element` <br> -  `newProps` to clone the element <br> - the `StyleContainer` which collects & renders global CSS |
 | config    | `object`| Contains [configuration settings](guides/configureLook.md) such as plugins, mixins, userAgent or custom config declarations |

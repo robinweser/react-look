@@ -225,3 +225,5 @@ const styles = StyleSheet.create({
 	}
 })
 ```
+
+## 7. Mixins
