@@ -51,8 +51,8 @@ class StyleContainer {
     }
   }
 
-  addFontFace(font) {
-    const fontFace = '@font-face {' + cssifyObject(font) + '}'
+  addFont(font) {
+    const fontFace = '@font-face {' + toCSS(font) + '}'
     if (this.fonts.has(fontFace)) {
       this.fonts.add(fontFace)
       this._emitChange()

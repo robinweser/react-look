@@ -1,6 +1,7 @@
 import generateClassName from '../utils/generateClassName'
 import StyleContainer from '../core/container'
 import renderStaticStyles from '../core/renderer'
+import getFontFormat from '../utils/getFontFormat'
 
 let scope = 0
 
@@ -61,10 +62,10 @@ export default {
    * @param {string|Array} files - source files refering to the font files
    * @param {Object} properties - additional font properties including fontWeight, fontStretch, fontStyle, unicodeRange
    */
-  fontFace(fontFamily, files, properties) {
+  font(fontFamily, files, properties) {
     if (files) {
       // Generates a style object including all font information
-      const fontFace = {
+      const font = {
         fontFamily: '\'fontFamily}\'',
         src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`).join(',') : files
       }
@@ -72,10 +73,10 @@ export default {
       // Filter the properties to only include valid properties
       if (properties && properties instanceof Object) {
         const fontProperties = [ 'fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange' ]
-        Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => fontFace[fontProp] = properties[fontProp])
+        Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => font[fontProp] = properties[fontProp])
       }
 
-      GlobalStyleSheet.addFontFace(fontFace)
+      StyleContaienr.addFont(font)
       return fontFamily
     }
   }

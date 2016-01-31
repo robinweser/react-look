@@ -1,5 +1,5 @@
-# Look
-Look is the core function which wraps an existing React Component in order to resolve styles
+# look
+`look` is the core function which wraps an existing React Component in order to resolve styles
 
 ## `look(Component [, config])`
 | Parameter | Description |

@@ -6,7 +6,7 @@ A helper to create scoped styles and global CSS styles. This helps to improve pe
 - [combineStyles](#combinestyles-styles)
 - [toCSS](#tocssstyles--scope-useragent)
 - [keyframes](#keyframesframes--name-useragent)
-- [fontFace](#fontfacefontfamily-files--properties)
+- [font](#fontfontfamily-files--properties)
 
 
 ## create(styles [, Component])
@@ -121,7 +121,7 @@ StyleSheet.keyframes({
 })
 ```
 
-## fontFace(fontFamily, files [, properties])
+## font(fontFamily, files [, properties])
 > Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
 
 Adds the `fontFamily` to the global CSSStyleSheet and uses `files` as source for fonts. `files` may either be a string (single) or an array (multiple).<br>
@@ -135,5 +135,5 @@ Adds the `fontFamily` to the global CSSStyleSheet and uses `files` as source for
 const fontStyles = {fontWeight: 400, fontStretch: 'condensed'}
 const files = ['../fonts/Arial.ttf', '../fonts/Arial.svg', '../fonts/Arial.woff']
 
-StyleSheet.fontFace('Arial', files, fontStyles)
+StyleSheet.font('Arial', files, fontStyles)
 ```
