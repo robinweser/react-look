@@ -76,7 +76,7 @@ export default {
         Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => font[fontProp] = properties[fontProp])
       }
 
-      StyleContaienr.addFont(font)
+      StyleContainer.addFont(font)
       return fontFamily
     }
   }
