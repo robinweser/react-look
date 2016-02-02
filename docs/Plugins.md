@@ -6,9 +6,12 @@ Style modifications of any kind are done using plugins. Plugins are triggered di
 | plugin | config | description |
 | ------ | ------ | ------ |
 | [mixin](plugins/Mixin.md) | `mixins` | Define custom properties using a key-value mapping. |
-| [alternativeValue](plugins/AlternativeValue.md) |  | Use an array of values to define alternatives/fallbacks |
+| [fallbackValue](plugins/fallbackValue.md) |  | Use an array of values to define alternatives/fallbacks |
 | [statefulValue](plugins/StatefulValue.md) |  | Use `props`, `state` and `context` values by passing a function instead of a value.  |
 | [prefixer](plugins/Prefixer.md) | `userAgent` | Automatically adds vendor prefixes according your userAgent and caniuse-database.<br> It uses [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer) to do this on-the-go using the userAgent information. |
+
+### Third-party
+Right now there are no third-party plugins available. Build one? Feel free to add it here *(via pull-request)*.
 
 ## API
 Every plugin gets called with a set of parameters which include several information to achieve almost any usecase.

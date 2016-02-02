@@ -38,7 +38,8 @@ This will generate the following CSS *(`.wrg802` is just an example)*
 .wrg802:hover { color: blue }
 .wrg802 { color: red }
 ```
-
+#### LVH(F)A
+It adheres to the LVHA rule which means it orders `:link`, `:visited`, `:hover`, (`:focus`) and `:active` correctly.
 ### Media queries
 Media queries are considered to start with `@media`. They will also get transformed to pure CSS immediately.
 

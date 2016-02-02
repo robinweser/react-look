@@ -15,6 +15,7 @@ The following usage guide should provide enough information to build apps with L
 8. [Vendor prefixes](#8-vendor-prefixes)
 9. [Server-side rendering](#9-server-side-rendering)
 10. [DevTools](#10-dev-tools)
+11. [Debugging](#11-debugging)
 
 ## 1. Installation
 First of all we need to install `react-look` to our project.
@@ -191,7 +192,7 @@ We will use a preset which provides every mixin & plugin available. We will refe
 
 
 ```javascript
-import { Presets } from 'react-look/addons'
+import { Presets } from 'react-look'
 import { render } from 'react-dom'
 import React from 'react'
 
@@ -281,7 +282,7 @@ const styles = StyleSheet.create({
 })
 ```
 ## 7. Fallback values
-Using the `Presets['react-dom']` we already include the [Fallback Value](plugins/FallbackValue.md) plugin that allows multiple fallback values as an array. 
+Using the `Presets['react-dom']` we already include the [Fallback Value](plugins/FallbackValue.md) plugin that allows multiple fallback values as an array.
 ```javascript
 {
 	box: {

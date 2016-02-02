@@ -2,7 +2,6 @@
 > You made it to the documentation! First of all I would like to **thank** you for using Look and pushing it forward. Feel free to star or share if you like it.
 
 The following documentation pages will hopefully solve all your remaining questions and clear out the usage and intention of Look.<br>
-
 If there's still something I forgot please let me know and don't be shy to ask. You may also create an issue so I can update the docs immediately.
 
 ## Table of contents
@@ -16,14 +15,14 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 	* 1.7. [Fallback values](GettingStarted.md#7-fallback-values)
 	* 1.8. [Vendor prefixes](GettingStarted.md#8-vendor-prefixes)
 	* 1.9. [Server-side rendering](GettingStarted.md#9-server-side-rendering)
-	* 1.10. [DevTools](GettingStarted.md#10-dev-tools)
+	* 1.10. [DevTools](GettingStarted.md#10-dev-tools) *(incomplete)*
 2. Registry
 	* **3.1. [Plugins](Plugins.md)**
 		* [Mixin](plugins/Mixin.md)
 		* [Alternative Value](plugins/AlternativeValue.md)
 		* [Stateful Value](plugins/StatefulValue.md)
-		* [Prefixer](plugins/Prefixer.md)
-	* **3.2. [Mixins](Mixins.md)**
+		* [Prefixer](plugins/Prefixer.md) *(incomplete)*
+	* **3.2. [Mixins](Mixins.md)** *(incomplete)*
 		* [Platform queries](Mixins.md#platform-queries)
 		* [Stateful Conditions](Mixins.md#stateful-conditions)
 		* [Extract CSS](Mixins.md#extract-css)
@@ -32,9 +31,9 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 		* [Linter](devTools/linter.md)
 		* [Style Logger](devTools/StyleLogger.md)
 3. [API Reference](api/)
-	* **3.1. [look](api/look.md)**
+	* **3.1. [look](api/look.md)** *(incomplete)*
 	* **3.2. [StyleSheet](api/StyleSheet.md)**
-		* [create](#api/StyleSheet.md#tocssstyles--scope-useragent)
+		* [create](#api/StyleSheet.md#createstyles--component) *(incomplete)*
 		* [combineStyles](#combinestyles-styles)
 		* [toCSS](#tocssstyles--scope-useragent)
 		* [keyframes](#keyframesframes--name-useragent)
@@ -42,9 +41,9 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 4. [Guides](guides/)
 	* 4.1. [Upgrading Look](guides/upgradeLook.md)
 	* 4.2. [Configuring Look](guides/configureLook.md)
-	* 4.3. [Build your own: Mixin](guides/customMixin.md)
-	* 4.4. [Build your own: Plugin](guides/customPlugin.md)
-5. [FAQ](FAQ.md)
-6. [Under The Hood](UnderTheHood.md)
+	* 4.3. [Build your own: Mixin](guides/customMixin.md) *(incomplete)*
+	* 4.4. [Build your own: Plugin](guides/customPlugin.md) *(incomplete)*
+5. [FAQ](FAQ.md) *(incomplete)*
+6. [Under The Hood](UnderTheHood.md) *(incomplete)*
 	* 6.1. [How does Look work?](UnderTheHood.md#how-look-works)
 	* 6.2. [How does StyleSheet.create work?](UnderTheHood.md#how-stylesheet-create-works)

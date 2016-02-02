@@ -8,7 +8,7 @@ e.g. the **Mixin**-Plugin which lets you define custom style properties uses the
 
 ### Custom configuration
 ```javascript
-import { Mixins, Plugins } from 'react-look/addons'
+import { Mixins, Plugins } from 'react-look'
 
 const customConfig = {
 	// a list of used plugins ordered by
@@ -23,9 +23,8 @@ const customConfig = {
 	// e.g. mixin definitions or a userAgent
 	// used by the autoprefixer
 	mixins: {
-		':hover': Mixins.hover,
-		':last-child': Mixins.lastChild,
-		'@media': Mixins.mediaQuery
+		'substr': Mixins.sbustr,
+		'@platform': Mixins.platformQuery
 	},
 	userAgent: 'Mozilla/5.0 ...'
 }
@@ -37,7 +36,7 @@ Right now there are just two presets:
 * `react-native`: Contains only react-native compatible plugins and mixins
 
 ```javascript
-import { Presets } from 'react-look/addons'
+import { Presets } from 'react-look'
 
 const customConfig = Presets['react-dom']
 ```
@@ -62,7 +61,7 @@ import look from './customLook'
 import { StyleSheet } from 'react-look'
 
 const Example = () => <div look={styles.box}>Foo</div>
-const styles = StyleSheet.create(Example, {box: {color: 'red'}})
+const styles = StyleSheet.create(Example, { box: { color: 'red' } })
 
 export default look(Example)
 ```
@@ -87,18 +86,16 @@ render(<App lookConfig={customConfig} />, document.getElementById('app'))
 ## Component-based configuration
 While both examples above will hand the configuration down to all the child Components you may also want to apply some configuration for just a single Component.
 ```javascript
-import look from 'react-look'
-import { Plugins } from 'react-look/addons'
-import { StyleSheet } from 'react-look'
+import look, { StyleSheet, Plugins } from 'react-look'
 
-const Example = () => <div look={styles.box}>Foo</div>
+const Example = () => <div className={styles.box}>Foo</div>
 const styles = StyleSheet.create(Example, {
 	box: {
-		color: ['#ccc', 'rgba(0, 0, 0, 0.5)'],
+		color: ['rgba(0, 0, 0, 0.5)', '#ccc'],
 		fontSize: 12
 	}
 })
 
 // You only need the alternative plugin to resolve an array of values
-export default look(Example, {plugins: [Plugins.alternativeValue]})
+export default look(Example, { plugins: [Plugins.alternativeValue] })
 ```
