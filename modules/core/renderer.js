@@ -105,7 +105,7 @@ export default function renderStaticStyles(styles, scope, selector) {
   }, { })
 
   // Generate a unique className based on the base styles
-  const className = scope + '-' + (selector || 'default') + '-' + generateClassName(baseStyles)
+  const className = scope + '--' + (selector || 'default') + '-' + generateClassName(baseStyles)
 
   // Add the className to the global style container if it has styles
   if (Object.keys(baseStyles).length > 0) {

@@ -3,8 +3,8 @@ import assignStyles from 'assign-styles'
 /*
  * Resolves mixins
  */
-export default function mixin(letStyles, scopeArgs, config) {
-  let styles = assignStyles({ }, letStyles)
+export default function mixin(pluginInterface) {
+  const { styles, config } = pluginInterface
   const { mixins } = config
 
   // if no custom keys are specified at all
@@ -19,8 +19,10 @@ export default function mixin(letStyles, scopeArgs, config) {
     return styles
   }
 
-  Object.keys(styles).forEach(property => {
-    const value = styles[property]; // eslint-disable-line
+  let newStyles = assignStyles({ }, styles)
+
+  Object.keys(newStyles).forEach(property => {
+    const value = newStyles[property]; // eslint-disable-line
 
     let newValue
 
@@ -34,12 +36,12 @@ export default function mixin(letStyles, scopeArgs, config) {
     // only assign if there are new styles
     if (newValue !== undefined) {
       if (newValue instanceof Object) {
-        styles = assignStyles(styles, mixin(newValue, scopeArgs, config))
+        newStyles = assignStyles(newStyles, mixin(newValue, scopeArgs, config))
       }
 
-      delete styles[property]
+      delete newStyles[property]
     }
   })
 
-  return styles
+  return newStyles
 }

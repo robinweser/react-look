@@ -63,13 +63,13 @@ class StyleContainer {
     const tempPrefixer = prefixer(userAgent)
     let css = ''
 
-    this.selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}\n')
+    this.selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}')
     this.fonts.forEach(font => css += font + '\n')
-    this.keyframes.forEach((frames, name) => css += '@' + tempPrefixer.prefixedKeyframes + ' ' + name + '{' + toCSS(tempPrefixer.prefix(frames)) + '}\n')
+    this.keyframes.forEach((frames, name) => css += '@' + tempPrefixer.prefixedKeyframes + ' ' + name + '{' + toCSS(tempPrefixer.prefix(frames)) + '}')
     this.mediaQueries.forEach((selectors, query) => {
-      css += '@media ' + query + '{\n'
-      selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}\n')
-      css += '}\n'
+      css += '@media ' + query + '{'
+      selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}')
+      css += '}'
     })
 
     return css

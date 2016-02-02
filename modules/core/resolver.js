@@ -8,7 +8,8 @@ export function resolvePlugins(styles, scopeArgs, config) {
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
   if (config.plugins && config.plugins instanceof Array) {
-    config.plugins.forEach(plugin => styles = plugin(styles, scopeArgs, config))
+    const pluginInterface = { styles, ...scopeArgs, config }
+    config.plugins.forEach(plugin => styles = plugin(pluginInterface))
   }
 
   return styles

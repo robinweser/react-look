@@ -1,6 +1,8 @@
 import Enhancer from './core/enhancer'
 import StyleSheet from './api/StyleSheet'
 
+import { Plugins, Mixins, DevTools, Presets } from './addons'
+
 // Resolving annotations
 // If not passing arguments it just wraps the Component
 // Otherwise it returns a decorator
@@ -15,5 +17,10 @@ export default (...args) => {
 }
 
 export {
-  StyleSheet
+  StyleSheet,
+
+  Plugins,
+  Mixins,
+  DevTools,
+  Presets
 }

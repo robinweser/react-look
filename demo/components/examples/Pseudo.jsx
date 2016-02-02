@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import look, { StyleSheet } from '../../../modules/look'
-import { Mixins } from '../../../modules/addons'
 
 const Pseudo = () => (
 <div>
