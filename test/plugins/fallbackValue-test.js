@@ -1,17 +1,17 @@
-import alternativeValue from '../../modules/plugins/alternativeValue'
+import fallbackValue from '../../modules/plugins/fallbackValue'
 import { expect } from 'chai'
 
 
 describe('Resolving alternative values', () => {
 
   it('should concat alternative values', () => {
-    expect(alternativeValue({ display: [ '-webkit-flex', 'flex' ] })).to.eql({
-      display: '-webkit-flex;display:flex'
-    })
+    expect(fallbackValue({
+      display: [ '-webkit-flex', 'flex' ]
+    })).to.eql({ display: '-webkit-flex;display:flex' })
   })
 
   it('should use param-case', () => {
-    expect(alternativeValue({
+    expect(fallbackValue({
       alternativeValues: [ 'value1', 'value2' ]
     })).to.eql({
       alternativeValues: 'value1;alternative-values:value2'
@@ -19,7 +19,7 @@ describe('Resolving alternative values', () => {
   })
 
   it('should resolve nested objects', () => {
-    expect(alternativeValue({
+    expect(fallbackValue({
       alternativeValues: {
         property: [ 'value1', 'value2' ]
       }

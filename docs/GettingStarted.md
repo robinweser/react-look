@@ -1,20 +1,15 @@
 # Getting started
 
-Subitems show which part of Look is teached in each chapter.
+The following usage guide should provide enough information to build apps with Look.
 
 1. [Installation](#1-installation)
 2. [First Component](#2-first-component)
-	* [`StyleSheet.create`](#stylesheet-createstyles)
-	* [Multiple styles](#multiple-styles)
 3. [Stateless Components](#3-stateless-components)
 4. [Pseudo classes](#4-pseudo-classes)
 5. [Media queries](#5-media-queries)
 6. [Mixins & Plugins](#6-mixins--plugins)
 	* 6.1. [Configuration](#2-configuration)
-		* `lookConfig`
-		* Presets
 	* 6.2. [look wrapper](#-6-2-look-wrapper)
-		* `look` & [`@look`](#decorator)
 	* 6.3. [Usage](#-6-3-usage)
 7. [Fallback values](#7-fallback-values)
 8. [Vendor prefixes](#8-vendor-prefixes)
@@ -211,7 +206,7 @@ const config = Presets['react-native']
 render(<App lookConfig={config} />, document.getElementById('app'))
 ```
 ### 6.2. look wrapper
-Using mixins and plugins requires your Component to be wrapped with the `look` wrapper.
+Resolving mixins and plugins requires your Component to be wrapped with the `look` wrapper.
 ```javascript
 import look from 'react-look'
 import React, { Component } from 'react'
@@ -235,7 +230,7 @@ import React, { Component } from 'react'
 
 // Note that now you can export directly
 @look
-export class FirstComponent extends Component {
+export default class FirstComponent extends Component {
 	render() {
 		return <div>My first Component!</div>
 	}
@@ -252,7 +247,7 @@ import React, { Component } from 'react'
 
 // Note that now you can export directly
 @look
-export class FirstComponent extends Component {
+export default class FirstComponent extends Component {
 	constructor() {
 		super(...arguments)
 		this.state = { clicks: 0 }
@@ -286,9 +281,43 @@ const styles = StyleSheet.create({
 })
 ```
 ## 7. Fallback values
-
+Using the `Presets['react-dom']` we already include the [Fallback Value](plugins/FallbackValue.md) plugin that allows multiple fallback values as an array. 
+```javascript
+{
+	box: {
+		color: ['rgba(0, 0, 0, 0.5)', '#ccc']
+	}
+}
+```
+which is similar to the following CSS code:
+```CSS
+.box {
+	color: rgba(0, 0, 0, 0.5);
+	color: #ccc;
+}
+```
 ## 8. Vendor prefixes
+`Presets['react-dom']` also automatically includes the [Prefixer](plugins/Prefixer.md) plugin which uses [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer) to add only prefixes that are actually required. It uses data provided by [caniuse.com](caniuse.com) and evaluates the `userAgent` for browser information.
 
 ## 9. Server-side rendering
+Look also fully supports server-side rendering with minimal additional configuration.<br>
+You basically just need to pass the users `userAgent` with the `lookConfig` to be able to prefix correctly. This is most likely done directly within the request. <br>
+e.g. [universal example](../demo/server.js) (`npm run demo:universal`) using an [express](http://expressjs.com/) server:
+```javascript
+const serverConfig = Presets['react-dom']
+
+app.get('/', (req, res) => {
+	// Takes the userAgent directly form the request
+  serverConfig.userAgent = req.headers['user-agent']
+
+  const content = renderToString(
+    <App lookConfig={serverConfig} />
+  )
+
+  res.write(indexHTML.replace('<!-- {{app}} -->', content))
+  res.end()
+})
+```
+
 ## 10. DevTools
 Your **development experience** will be boosted with the special developer tools we provide.<br>

@@ -1,5 +1,5 @@
 // Plugins
-import alternativeValue from '../plugins/alternativeValue'
+import fallbackValue from '../plugins/fallbackValue'
 import statefulValue from '../plugins/statefulValue'
 import mixin from '../plugins/mixin'
 
@@ -15,7 +15,7 @@ export default {
   plugins: [
     statefulValue,
     mixin,
-    alternativeValue
+    fallbackValue
   ],
   mixins: {
     // Conditions

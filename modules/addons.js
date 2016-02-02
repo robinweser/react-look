@@ -1,5 +1,5 @@
 // Plugins
-import alternativeValue from './plugins/alternativeValue'
+import fallbackValue from './plugins/fallbackValue'
 import statefulValue from './plugins/statefulValue'
 import mixin from './plugins/mixin'
 import prefixer from './plugins/prefixer'
@@ -25,7 +25,7 @@ import domPreset from './presets/react-dom'
 export default {
   Plugins: {
     mixin,
-    alternativeValue,
+    fallbackValue,
     statefulValue,
     prefixer
   },
