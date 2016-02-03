@@ -1,5 +1,6 @@
-import prefixer from '../utils/prefixer'
 import React, { Component } from 'react'
+import _ from 'lodash'
+import prefixer from '../utils/prefixer'
 import { toCSS } from 'inline-style-transformer'
 
 class StyleContainer {
@@ -45,7 +46,7 @@ class StyleContainer {
   }
 
   addDynamic(className, styles) {
-    if (Object.keys(styles).length > 0 && !this.dynamics.has(className)) {
+    if (!_.isEmpty(styles) && !this.dynamics.has(className)) {
       this.dynamics.set(className, styles)
       this._emitChange()
     }
@@ -64,7 +65,7 @@ class StyleContainer {
     let css = ''
 
     this.selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}')
-    this.fonts.forEach(font => css += font + '\n')
+    this.fonts.forEach(font => css += font)
     this.keyframes.forEach((frames, name) => css += '@' + tempPrefixer.prefixedKeyframes + ' ' + name + '{' + toCSS(tempPrefixer.prefix(frames)) + '}')
     this.mediaQueries.forEach((selectors, query) => {
       css += '@media ' + query + '{'

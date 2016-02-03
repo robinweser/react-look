@@ -1,5 +1,6 @@
 import generateHashCode from './generateHashCode'
 import sortObject from './sortObject'
+import _ from 'lodash'
 
 let counter = 0
 /**
@@ -9,9 +10,8 @@ let counter = 0
  * @param {Object} styles - style object which will get sorted and hashed
  */
 export default function generateClassName(styles) {
-  if (Object.keys(styles).length > 0) {
-    return generateHashCode(JSON.stringify(sortObject(styles)))
-  } else {
+  if (_.isEmpty(styles)) {
     return ++counter
   }
+  return generateHashCode(JSON.stringify(sortObject(styles)))
 }

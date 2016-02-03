@@ -13,6 +13,6 @@ export default ({ property, value, mixinKey, config: { userAgent } }) => {
       isPlatform = true
     }
   })
-  console.log(value)
+
   return isPlatform ? value : false
 }

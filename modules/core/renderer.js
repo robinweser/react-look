@@ -3,7 +3,7 @@ import generateClassName from '../utils/generateClassName'
 import sortPseudoClasses from '../utils/sortPseudoClasses'
 import isMediaQuery from '../utils/isMediaQuery'
 import isPseudo from '../utils/isPseudo'
-
+import _ from 'lodash'
 /**
  * Extracts all possible dynamic styles out of a style object
  * To be able to render all other (static) styles directly to CSS
@@ -12,9 +12,7 @@ import isPseudo from '../utils/isPseudo'
 export function extractDynamicStyles(styles) {
   return Object.keys(styles).reduce((dynamic, property) => {
     const value = styles[property]; // eslint-disable-line
-    const valueType = typeof value
-
-    if (valueType === 'object' && !Array.isArray(value)) {
+    if (_.isPlainObject(value)) {
       // only consider pseudo classes and media queries
       // that contain inner dynamic styles
       if (isPseudo(property) || isMediaQuery(property)) {
@@ -25,7 +23,7 @@ export function extractDynamicStyles(styles) {
 
         // if the inner styles contain dynamic styles
         // extract them into the output object
-        if (innerDynamicCount > 0) {
+        if (!_.isEmpty(innerDynamic)) {
           dynamic[property] = innerDynamic
         }
 
@@ -42,7 +40,7 @@ export function extractDynamicStyles(styles) {
 
     // function are considered stateful styles and therefore
     // treated as dynamic styles
-    if (valueType === 'function') {
+    if (_.isFunction(value)) {
       dynamic[property] = value
       delete styles[property]
     }
@@ -61,8 +59,9 @@ export function extractDynamicStyles(styles) {
  */
 export function renderSpecialStyles(selector, styles, pseudo = '', media = '') {
   return Object.keys(styles).sort(sortPseudoClasses).reduce((extension, property) => {
-    const value = styles[property]
-    if (typeof value === 'object') {
+    const value = styles[property];
+
+    if (_.isPlainObject(value)) {
       if (isPseudo(property)) {
         const innerStyles = renderSpecialStyles(selector, value, pseudo + property, media)
         // Adds a pseudo class to an existing selector
@@ -97,7 +96,7 @@ export default function renderStaticStyles(styles, scope, selector) {
   // Determines the base styles used to generate the className
   const baseStyles = Object.keys(styles).reduce((base, property) => {
     const value = styles[property]
-    if (typeof value !== 'object' || Array.isArray(value)) {
+    if (!_.isPlainObject(value)) {
       base[property] = value
       delete styles[property]
     }
@@ -108,12 +107,12 @@ export default function renderStaticStyles(styles, scope, selector) {
   const className = scope + '--' + (selector || 'default') + '-' + generateClassName(baseStyles)
 
   // Add the className to the global style container if it has styles
-  if (Object.keys(baseStyles).length > 0) {
+  if (!_.isEmpty(baseStyles)) {
     StyleContainer.add('.' + className, baseStyles)
   }
 
   // Also add the dynamic styles if they exist
-  if (Object.keys(dynamicStyles).length > 0) {
+  if (!_.isEmpty(dynamicStyles)) {
     StyleContainer.addDynamic(className, dynamicStyles)
   }
 

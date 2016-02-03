@@ -5,14 +5,7 @@ import warn from '../utils/warn'
  * Merge multiple style objects by merging those
  * @param {Object|Array} styles - A set of style objects or a single style object
  */
-const mergeStyles = (styles) => {
-  if (styles instanceof Array) {
-    const merged = { }
-    styles.forEach(obj => assignStyles(merged, obj))
-    return merged
-  }
-  return styles
-}
+const mergeStyles = (styles) => assignStyles({ }, ...styles)
 
 /**
  * Extends a given style object
@@ -22,19 +15,12 @@ const mergeStyles = (styles) => {
 export default ({ property, value: options }) => {
   if (options.hasOwnProperty('condition')) {
     if (options.condition) {
-      if (options.hasOwnProperty('styles')) {
-        return resolveStyles(options.styles)
+      if (options.styles) {
+        return mergeStyles(options.styles)
       }
-
       warn('There has no style object been passed. Use `styles` as key.', options)
     }
   } else {
-    if (options.hasOwnProperty('styles')) {
-      return resolveStyles(options.styles)
-    }
-
-    warn('Neither `styles` nor `condition` has been found. Used the whole object as styles instead.', options)
-
-    return resolveStyles(options)
+    return mergeStyles(options.styles ? options.styles : options)
   }
 }

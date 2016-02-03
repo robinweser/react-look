@@ -1,7 +1,7 @@
 import { cloneElement, isValidElement, Children } from 'react'
 import StyleContainer from './container'
-import flattenArray from '../utils/flattenArray'
 import assignStyles from 'assign-styles'
+import _ from 'lodash'
 
 
 export function resolvePlugins(pluginInterface) {
@@ -78,7 +78,7 @@ export default function resolveStyles(Component, element, config) {
       })
 
       // Only apply styles if there are some
-      if (Object.keys(newStyles).length > 0) {
+      if (!_.isEmpty(newStyles)) {
         newProps.style = newStyles
       }
 
@@ -105,20 +105,19 @@ export default function resolveStyles(Component, element, config) {
  * @param {Object} config - configuration containing plugins and plugin-specific configs
  */
 function resolveChildren(Component, children, config) {
-  const childType = typeof children
-
   // directly return primitive children
-  if (childType === 'string' || childType === 'number') {
+  if (_.isString(children) || _.isNumber(children)) {
     return children
   }
+
   if (children.type) {
     return resolveStyles(Component, children, config)
   }
 
   // if there are more than one child, iterate over them
-  if (children instanceof Array) {
+  if (_.isArray(children)) {
     // flattening children prevents deeper nested children
-    const flatChildren = flattenArray(children)
+    const flatChildren = _.flattenDeep(children)
 
     // recursively resolve styles for child elements if it is a valid React Component
     return Children.map(flatChildren, child => {

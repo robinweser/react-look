@@ -1,11 +1,12 @@
 import { createElement } from 'react'
 import getPseudoExpression from '../utils/getPseudoExpression'
+import _ from 'lodash'
 
 // Evaluates if a element contains a given string
 export default ({ property, value, mixinKey, newProps }) => {
   let children = newProps.children
 
-  if ( (typeof children === 'string' || typeof children === 'number') ) {
+  if (_.isString(children) || _.isNumber(children)) {
     const newChildren = [ ]
 
     const matches = children.match(new RegExp(getPseudoExpression(property), 'g'))

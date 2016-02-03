@@ -2,7 +2,7 @@ import resolveStyles from './resolver'
 import { StyleComponent } from './container'
 import copyProperties from '../utils/copyProperties'
 import React, { Component, PropTypes } from 'react'
-import lodash from 'lodash'
+import _ from 'lodash'
 
 const contextType = { _lookConfig: PropTypes.object }
 /**
@@ -29,7 +29,7 @@ export default (CustomComponent, config = {}) => {
 
       // Passes down a lookConfig to its children
       if (this.props.lookConfig) {
-        newContext = lodash.merge(newContext, {
+        newContext = _.merge(newContext, {
           _lookConfig: this.props.lookConfig
         })
       }
@@ -38,14 +38,14 @@ export default (CustomComponent, config = {}) => {
     }
 
     render() {
-      const contextConfig = this.context ? this.context._lookConfig : {}
-      const propsConfig = this.props ? this.props.lookConfig : {}
+      const contextConfig = this.context ? this.context._lookConfig : null
+      const propsConfig = this.props ? this.props.lookConfig : null
 
       const renderedElement = stateless ? CustomComponent(this.props, this.context) : super.render() // eslint-disable-line
 
       // Compose all possible ways to configure Look
-      const elementConfig = renderedElement && renderedElement.props ? renderedElement.props.lookConfig : {}
-      const composedConfig = lodash.merge({}, contextConfig, propsConfig, elementConfig, config)
+      const elementConfig = renderedElement && renderedElement.props ? renderedElement.props.lookConfig : null
+      const composedConfig = _.merge({}, contextConfig, propsConfig, elementConfig, config)
 
       const content = resolveStyles(this, renderedElement, composedConfig)
 

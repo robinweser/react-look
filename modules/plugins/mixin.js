@@ -1,5 +1,5 @@
 import assignStyles from 'assign-styles'
-
+import _ from 'lodash'
 /*
  * Resolves mixins
  */
@@ -7,14 +7,7 @@ export default function mixin({ styles, resolve, config, ...pluginInterface }) {
   const mixins = config.mixins
 
   // if no custom keys are specified at all
-  if (!mixins) {
-    return styles
-  }
-
-  const mixinKeys = Object.keys(mixins)
-
-  // only iterate if ther e is at least one key
-  if (mixinKeys.length <= 0) {
+  if (_.isEmpty(mixins)) {
     return styles
   }
 
@@ -26,7 +19,7 @@ export default function mixin({ styles, resolve, config, ...pluginInterface }) {
     let newValue
 
     // testing every mixin on the current property
-    mixinKeys.forEach(mixinKey => {
+    Object.keys(mixins).forEach(mixinKey => {
       if (property.indexOf(mixinKey) > -1) {
         const mixinInterface = {
           ...pluginInterface,

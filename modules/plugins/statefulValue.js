@@ -1,4 +1,5 @@
 import assignStyles from 'assign-styles'
+import _ from 'lodash'
 
 /**
  * Resolves values that are functions
@@ -7,9 +8,9 @@ import assignStyles from 'assign-styles'
 export default function statefulValue({ styles, Component, resolve, ...pluginInterface }) {
   Object.keys(styles).forEach(property => {
     const value = styles[property]
-    if (value instanceof Function) {
+    if (_.isFunction(value)) {
       styles[property] = value(Component.props, Component.state, Component.context)
-    } else if (value instanceof Object) {
+    } else if (_.isPlainObject(value)) {
       styles[property] = resolve({
         ...pluginInterface,
         styles: assignStyles({ }, value),

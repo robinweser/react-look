@@ -2,6 +2,7 @@ import generateClassName from '../utils/generateClassName'
 import StyleContainer from '../core/container'
 import renderStaticStyles from '../core/renderer'
 import getFontFormat from '../utils/getFontFormat'
+import _ from 'lodash'
 
 let scope = 0
 
@@ -9,14 +10,14 @@ export default {
   /**
    * Generates a styleSheet with an scopeId applied to every selector
    * The scopeId refers to the Component that is responsible for resolving those styles
-   * @param {Object|string} Component - React Component that the styles refer to
    * @param {styles} styles - Style selector or Object with selectors
+   * @param {Object|string?} Component - React Component that the styles refer to
    */
-  create(styles, Component) {
-    let currentScope = Component ? Component.displayName || Component.name || Component : 'c' + ++scope
+  create(styles, Component = 'c') {
+    const currentScope = Component.displayName || Component.name || Component + scope++
 
     // flat style object without selectors
-    if (styles[Object.keys(styles)[0]] instanceof Object === false) {
+    if (!_.isPlainObject(styles[Object.keys(styles)[0]])) {
       return renderStaticStyles(styles, currentScope)
     }
 
@@ -40,10 +41,8 @@ export default {
    * @param {string?} scope - additional scoping selector
    */
   toCSS(styles, scope) {
-    if (styles && styles instanceof Object) {
-      const scopeSelector = scope !== undefined && scope.trim() !== '' ? scope + ' ' : ''
-      Object.keys(styles).forEach(selector => StyleContainer.add(scopeSelector + selector, styles[selector]))
-    }
+    const scopeSelector = scope !== undefined && scope.trim() !== '' ? scope + ' ' : ''
+    Object.keys(styles).forEach(selector => StyleContainer.add(scopeSelector + selector, styles[selector]))
   },
 
   /**
@@ -52,12 +51,10 @@ export default {
    * @param {string?} name - custom animation name
    */
   keyframes(frames, name) {
-    if (frames && frames instanceof Object) {
-      const animationName = name ? name : generateClassName(frames)
+    const animationName = name ? name : generateClassName(frames)
 
-      StyleContainer.addKeyframes(animationName, frames)
-      return animationName
-    }
+    StyleContainer.addKeyframes(animationName, frames)
+    return animationName
   },
 
   /**
@@ -75,7 +72,7 @@ export default {
       }
 
       // Filter the properties to only include valid properties
-      if (properties && properties instanceof Object) {
+      if (properties) {
         const fontProperties = [ 'fontWeight', 'fontStretch', 'fontStyle', 'unicodeRange' ]
         Object.keys(properties).filter(prop => fontProperties.indexOf(prop) > -1).forEach(fontProp => font[fontProp] = properties[fontProp])
       }
