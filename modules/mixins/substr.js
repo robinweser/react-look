@@ -2,7 +2,7 @@ import { createElement } from 'react'
 import getPseudoExpression from '../utils/getPseudoExpression'
 
 // Evaluates if a element contains a given string
-export default (property, styles, mixinKey, { newProps }) => {
+export default ({ property, value, mixinKey, newProps }) => {
   let children = newProps.children
 
   if ( (typeof children === 'string' || typeof children === 'number') ) {
@@ -20,7 +20,7 @@ export default (property, styles, mixinKey, { newProps }) => {
       }
 
       newChildren.push(createElement('span', {
-        style: styles
+        style: value
       }, match))
 
       children = right.join(match)

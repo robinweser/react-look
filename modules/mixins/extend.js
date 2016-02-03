@@ -2,10 +2,10 @@ import assignStyles from 'assign-styles'
 import warn from '../utils/warn'
 
 /**
- * Resolves multiple style objects by merging those
+ * Merge multiple style objects by merging those
  * @param {Object|Array} styles - A set of style objects or a single style object
  */
-const resolveStyles = (styles) => {
+const mergeStyles = (styles) => {
   if (styles instanceof Array) {
     const merged = { }
     styles.forEach(obj => assignStyles(merged, obj))
@@ -19,7 +19,7 @@ const resolveStyles = (styles) => {
  * @param {Object} options - mixin options/input
  * options can be either a style object or include a condition as well as styles
  */
-export default (property, options) => {
+export default ({ property, value: options }) => {
   if (options.hasOwnProperty('condition')) {
     if (options.condition) {
       if (options.hasOwnProperty('styles')) {

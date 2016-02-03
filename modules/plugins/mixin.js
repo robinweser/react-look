@@ -3,9 +3,8 @@ import assignStyles from 'assign-styles'
 /*
  * Resolves mixins
  */
-export default function mixin(pluginInterface) {
-  const { styles, config } = pluginInterface
-  const { mixins } = config
+export default function mixin({ styles, resolve, config, ...pluginInterface }) {
+  const mixins = config.mixins
 
   // if no custom keys are specified at all
   if (!mixins) {
@@ -29,14 +28,26 @@ export default function mixin(pluginInterface) {
     // testing every mixin on the current property
     mixinKeys.forEach(mixinKey => {
       if (property.indexOf(mixinKey) > -1) {
-        newValue = mixins[mixinKey](property, value, mixinKey, scopeArgs, config)
+        const mixinInterface = {
+          ...pluginInterface,
+          property,
+          value,
+          mixinKey,
+          config
+        }
+        newValue = mixins[mixinKey](mixinInterface)
       }
     })
 
     // only assign if there are new styles
     if (newValue !== undefined) {
       if (newValue instanceof Object) {
-        newStyles = assignStyles(newStyles, mixin(newValue, scopeArgs, config))
+        newStyles = assignStyles(newStyles, resolve({
+          ...pluginInterface,
+          styles: newValue,
+          resolve,
+          config
+        }))
       }
 
       delete newStyles[property]

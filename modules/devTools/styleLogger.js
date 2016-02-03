@@ -3,7 +3,7 @@ import { toCSS } from 'inline-style-transformer'
 /**
  * Logs styles according to different settings
  */
-export default (styles, { Component, element, newProps }, { styleLogger }) => { // eslint-disable-line
+export default ({ styles, Component, element, newProps, config: { styleLogger } }) => {
   if (styleLogger) {
     // Logger information
     const { ref, key } = element

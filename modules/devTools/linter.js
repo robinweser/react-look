@@ -1,7 +1,7 @@
 import Linter from 'inline-style-linter'
 import getChildType from '../utils/getChildType'
 
-export default (styles, { Component, element }, { linter }) => { // eslint-disable-line
+export default function linter({ styles, Component, element, config: { linter } }) {
   const warnings = new Linter(linter).lint(styles)
 
   warnings.forEach(warning => {

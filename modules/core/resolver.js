@@ -4,13 +4,12 @@ import flattenArray from '../utils/flattenArray'
 import assignStyles from 'assign-styles'
 
 
-export function resolvePlugins(styles, scopeArgs, config) {
+export function resolvePlugins(pluginInterface) {
+  let { styles, config } = pluginInterface
+
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
-  if (config.plugins && config.plugins instanceof Array) {
-    const pluginInterface = { styles, ...scopeArgs, config }
-    config.plugins.forEach(plugin => styles = plugin(pluginInterface))
-  }
+  config.plugins.forEach(plugin => styles = plugin({ ...pluginInterface, styles }))
 
   return styles
 }
@@ -54,12 +53,14 @@ export default function resolveStyles(Component, element, config) {
 
     if (newProps.className) {
 
-      // scopeArgs are provided to plugins to access special objects
-      const scopeArgs = {
-        newProps,
+      // static arguments that get passed to every plugin
+      const staticPluginArguments = {
+        resolve: resolvePlugins,
+        StyleContainer,
         Component,
+        newProps,
         element,
-        StyleContainer
+        config
       }
 
       let newStyles = {}
@@ -67,8 +68,12 @@ export default function resolveStyles(Component, element, config) {
       newProps.className.split(' ').forEach(className => {
         let dynamicStyles = assignStyles({}, StyleContainer.dynamics.get(className))
 
-        if (dynamicStyles) {
-          assignStyles(newStyles, resolvePlugins(dynamicStyles, scopeArgs, config))
+        // Resolve plugins if there are dynamic styles to resolve
+        // and plugins are provided via config
+        if (dynamicStyles && config.plugins) {
+          // Constructs the pluginInterface
+          const pluginInterface = {...staticPluginArguments, styles: dynamicStyles }
+          assignStyles(newStyles, resolvePlugins(pluginInterface))
         }
       })
 
