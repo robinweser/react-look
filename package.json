@@ -54,6 +54,7 @@
     "inline-style-linter": "^0.2.7",
     "inline-style-prefixer": "^0.6.7",
     "inline-style-transformer": "^1.0.0",
+    "lodash": "^4.2.1",
     "object-assign": "^4.0.1",
     "object-assign-deep": "0.0.4"
   },
@@ -68,6 +69,7 @@
     "babel-eslint": "^4.1.6",
     "babel-loader": "^6.2.1",
     "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-lodash": "^2.0.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-react-display-name": "^6.4.0",
     "babel-preset-es2015": "^6.3.13",

@@ -2,7 +2,9 @@ import resolveStyles from './resolver'
 import { StyleComponent } from './container'
 import copyProperties from '../utils/copyProperties'
 import React, { Component, PropTypes } from 'react'
-import assignDeep from 'object-assign-deep'
+import lodash from 'lodash'
+
+const contextType = { _lookConfig: PropTypes.object }
 /**
  * Main wrapper that maps your styles to a React Component
  * @param {Object} CustomComponent - a valid React Component that gets styles applied
@@ -18,8 +20,8 @@ export default (CustomComponent, config = {}) => {
   class LookComponent extends Extend {
     // Inherit the original displayName for proper use later on
     static displayName = CustomComponent.displayName || CustomComponent.name || 'Component';
-    static childContextTypes = { _lookConfig: PropTypes.object };
-    static contextTypes = { _lookConfig: PropTypes.object };
+    static childContextTypes = {...CustomComponent.childContextTypes, ...contextType };
+    static contextTypes = {...CustomComponent.contextTypes, ...contextType };
     static _isLookEnhanced = true;
 
     getChildContext() {
@@ -27,7 +29,7 @@ export default (CustomComponent, config = {}) => {
 
       // Passes down a lookConfig to its children
       if (this.props.lookConfig) {
-        newContext = assignDeep(newContext, {
+        newContext = lodash.merge(newContext, {
           _lookConfig: this.props.lookConfig
         })
       }
@@ -43,7 +45,7 @@ export default (CustomComponent, config = {}) => {
 
       // Compose all possible ways to configure Look
       const elementConfig = renderedElement && renderedElement.props ? renderedElement.props.lookConfig : {}
-      const composedConfig = assignDeep({}, contextConfig, propsConfig, elementConfig, config)
+      const composedConfig = lodash.merge({}, contextConfig, propsConfig, elementConfig, config)
 
       const content = resolveStyles(this, renderedElement, composedConfig)
 
