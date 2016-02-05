@@ -68,7 +68,7 @@ class StyleContainer {
     this.fonts.forEach(font => css += font)
     this.keyframes.forEach((frames, name) => css += '@' + tempPrefixer.prefixedKeyframes + ' ' + name + '{' + toCSS(tempPrefixer.prefix(frames)) + '}')
     this.mediaQueries.forEach((selectors, query) => {
-      css += '@media ' + query + '{'
+      css += '@media' + query + '{'
       selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}')
       css += '}'
     })

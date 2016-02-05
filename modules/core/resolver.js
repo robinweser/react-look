@@ -1,8 +1,10 @@
 import { cloneElement, isValidElement, Children } from 'react'
 import StyleContainer from './container'
+import renderStaticStyles from './renderer'
 import assignStyles from 'assign-styles'
 import _ from 'lodash'
 
+let dynamicScope = 0
 
 export function resolvePlugins(pluginInterface) {
   let { styles, config } = pluginInterface
@@ -79,12 +81,15 @@ export default function resolveStyles(Component, element, config) {
 
       // Only apply styles if there are some
       if (!_.isEmpty(newStyles)) {
+        // const className = renderStaticStyles(assignStyles({}, newStyles), Component.constructor.displayName, element.type + dynamicScope++)
+        // newProps.className = newProps.className ? newProps.className + ' ' + className : className
+
         newProps.style = newStyles
       }
 
-      // If element already got inlined styles just merge them
+    // if element already got inlined styles just merge them
       if (element.props.style) {
-        newProps.style = assignStyles(newProps.style, element.props.style)
+       newProps.style = assignStyles(newProps.style, element.props.style)
       }
     }
 

@@ -1,28 +1,24 @@
-import generateClassName from '../utils/generateClassName'
 import StyleContainer from '../core/container'
 import renderStaticStyles from '../core/renderer'
 import getFontFormat from '../utils/getFontFormat'
 import _ from 'lodash'
 
-let scope = 0
+let keyframe = 0
 
 export default {
   /**
    * Generates a styleSheet with an scopeId applied to every selector
    * The scopeId refers to the Component that is responsible for resolving those styles
    * @param {styles} styles - Style selector or Object with selectors
-   * @param {Object|string?} Component - React Component that the styles refer to
    */
-  create(styles, Component = 'c') {
-    const currentScope = Component.displayName || Component.name || Component + scope++
-
+  create(styles) {
     // flat style object without selectors
     if (!_.isPlainObject(styles[Object.keys(styles)[0]])) {
-      return renderStaticStyles(styles, currentScope)
+      return renderStaticStyles(styles)
     }
 
     return Object.keys(styles).reduce((classes, selector) => {
-      classes[selector] = renderStaticStyles(styles[selector], currentScope, selector)
+      classes[selector] = renderStaticStyles(styles[selector], selector)
       return classes; // eslint-disable-line
     }, { })
   },
@@ -51,7 +47,7 @@ export default {
    * @param {string?} name - custom animation name
    */
   keyframes(frames, name) {
-    const animationName = name ? name : generateClassName(frames)
+    const animationName = name ? name : 'k' + keyframe++
 
     StyleContainer.addKeyframes(animationName, frames)
     return animationName

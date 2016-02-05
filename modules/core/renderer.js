@@ -1,9 +1,11 @@
 import StyleContainer from './container'
-import generateClassName from '../utils/generateClassName'
 import sortPseudoClasses from '../utils/sortPseudoClasses'
 import isMediaQuery from '../utils/isMediaQuery'
 import isPseudo from '../utils/isPseudo'
 import _ from 'lodash'
+
+let scope = 0
+
 /**
  * Extracts all possible dynamic styles out of a style object
  * To be able to render all other (static) styles directly to CSS
@@ -89,7 +91,7 @@ export function renderSpecialStyles(selector, styles, pseudo = '', media = '') {
  * @param {string} scope - scope selector
  * @param {string} selector - base selector used as className
  */
-export default function renderStaticStyles(styles, scope, selector) {
+export default function renderStaticStyles(styles, selector) {
   // Extracts dynamic parts remaining only static styles
   const dynamicStyles = extractDynamicStyles(styles)
 
@@ -104,7 +106,7 @@ export default function renderStaticStyles(styles, scope, selector) {
   }, { })
 
   // Generate a unique className based on the base styles
-  const className = scope + '--' + (selector || 'default') + '-' + generateClassName(baseStyles)
+  const className = 'c' + (scope++).toString(36)
 
   // Add the className to the global style container if it has styles
   if (!_.isEmpty(baseStyles)) {
