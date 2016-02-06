@@ -21,19 +21,21 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 		* [Mixin](plugins/Mixin.md)
 		* [Alternative Value](plugins/AlternativeValue.md)
 		* [Stateful Value](plugins/StatefulValue.md)
-		* [Prefixer](plugins/Prefixer.md) *(incomplete)*
-	* **3.2. [Mixins](Mixins.md)** *(incomplete)*
+		* [Prefixer](plugins/Prefixer.md)
+	* **3.2. [Mixins](Mixins.md)**
+		* [Contains](Mixins.md#contains)
+		* [Extend](Mixins.md#substr)
+		* [Extract CSS](Mixins.md#extract-css)
 		* [Platform queries](Mixins.md#platform-queries)
 		* [Stateful Conditions](Mixins.md#stateful-conditions)
-		* [Extract CSS](Mixins.md#extract-css)
-		* [Extend](Mixins.md#extend)
+		* [Substr](Mixins.md#extract-css)
 	* **3.3. [DevTools](DevTools.md)**
 		* [Linter](devTools/linter.md)
 		* [Style Logger](devTools/StyleLogger.md)
 3. [API Reference](api/)
-	* **3.1. [look](api/look.md)** *(incomplete)*
+	* **3.1. [look](api/look.md)**
 	* **3.2. [StyleSheet](api/StyleSheet.md)**
-		* [create](#api/StyleSheet.md#createstyles--component) *(incomplete)*
+		* [create](#api/StyleSheet.md#createstyles)
 		* [combineStyles](#combinestyles-styles)
 		* [toCSS](#tocssstyles--scope-useragent)
 		* [keyframes](#keyframesframes--name-useragent)
@@ -41,8 +43,8 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 4. [Guides](guides/)
 	* 4.1. [Upgrading Look](guides/upgradeLook.md)
 	* 4.2. [Configuring Look](guides/configureLook.md)
-	* 4.3. [Build your own: Mixin](guides/customMixin.md) *(incomplete)*
-	* 4.4. [Build your own: Plugin](guides/customPlugin.md) *(incomplete)*
+	* 4.3. [Build your own: Mixin](guides/customMixin.md)
+	* 4.4. [Build your own: Plugin](guides/customPlugin.md)
 5. [FAQ](FAQ.md) *(incomplete)*
 6. [Under The Hood](UnderTheHood.md) *(incomplete)*
 	* 6.1. [How does Look work?](UnderTheHood.md#how-look-works)
