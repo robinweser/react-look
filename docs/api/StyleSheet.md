@@ -2,17 +2,15 @@
 A helper to create scoped styles and global CSS styles. This helps to improve performance by reducing unnecessary style resolving/processing.
 
 ## Methods
-- [create](#createcomponent-styles)
+- [create](#createstyles)
 - [combineStyles](#combinestyles-styles)
 - [toCSS](#tocssstyles--scope-useragent)
 - [keyframes](#keyframesframes--name-useragent)
 - [font](#fontfontfamily-files--properties)
 
 
-## create(styles [, Component])
+## `create(styles)`
 Splits the `styles` into static and dynamic styles, renders the static styles to CSS classes and returns the `className`. Optionally add the Component or alternatively a `string` that's used as the class scope *(makes debugging ways easier)*.
-
-ClassNames are generated using a content hash, so same style objects will lead to the same `className` and therefore will only be added once.
 
 ### Pseudo classes
 Pseudo classes are considered to start with either `:` or `::`. They will automatically get transformed to pure CSS pseudo class selectors.
@@ -32,14 +30,15 @@ const styles = StyleSheet.create({
 	},
 })
 ```
-This will generate the following CSS *(`.wrg802` is just an example)*
+This will generate the following CSS *(`.c1` is just an example)*
 ```CSS
-.wrg802:hover:active { color: gray }
-.wrg802:hover { color: blue }
-.wrg802 { color: red }
+.c1:hover:active { color: gray }
+.c1:hover { color: blue }
+.c1 { color: red }
 ```
 #### LVH(F)A
 It adheres to the LVHA rule which means it orders `:link`, `:visited`, `:hover`, (`:focus`) and `:active` correctly.
+
 ### Media queries
 Media queries are considered to start with `@media`. They will also get transformed to pure CSS immediately.
 
@@ -59,18 +58,18 @@ const styles = StyleSheet.create({
 	},
 })
 ```
-This will generate the following CSS *(`.wrg802` is just an example)*
+This will generate the following CSS *(`.c1` is just an example)*
 ```CSS
-.wrg802 { color: red }
+.c1 { color: red }
 @media (min-height: 300px) {
-	.wrg802 { color: blue }
+	.c1 { color: blue }
 }
 @media (min-height: 300px) and (min-width: 500px) {
-	.wrg802 { color: gray }
+	.c1 { color: gray }
 }
 ```
 
-## combineStyles(...styles)
+## `combineStyles(...styles)`
 Styles can be combined using the `combineStyles` helper. It simply joins two classNames separated with a space.
 ```javascript
 import { StyleSheet } from 'react-look'
@@ -82,10 +81,10 @@ const styles = StyleSheet.create({
 	container: { fontSize: 14 }
 })
 
-c(styles.box, styles.container) // => wrg802 fqvmt1
+c(styles.box, styles.container) // => c1 c2
 ```
 
-## toCSS(styles [, scope])
+## `toCSS(styles [, scope])`
 > Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
 
 Adds all `styles` as a valid CSS string and directly applies those to the global CSSStyleSheet. `scope` will also add a scope selector to add more specificity.
@@ -102,7 +101,7 @@ StyleSheet.toCSS({
 	}
 })
 ```
-## keyframes(frames [, name])
+## `keyframes(frames [, name])`
 > Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
 
 Adds the `frames` as a new keyframe animation to the global CSSStyleSheet and returns the animation name.
@@ -122,7 +121,7 @@ StyleSheet.keyframes({
 })
 ```
 
-## font(fontFamily, files [, properties])
+## `font(fontFamily, files [, properties])`
 > Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
 
 Adds the `fontFamily` to the global CSSStyleSheet and uses `files` as source for fonts. `files` may either be a string (single) or an array (multiple).<br>

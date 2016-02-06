@@ -75,7 +75,10 @@ const styles = StyleSheet.create({
   },
   ios: {
     'ios=true': {
-      backgroundColor: 'rgba(0,0, 255, 0.3)'
+      backgroundColor: 'rgba(0,0, 255, 0.3)',
+      ':hover': {
+        backgroundColor: 'green'
+      }
     }
   },
   android: {
