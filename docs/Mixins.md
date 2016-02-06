@@ -2,10 +2,94 @@
 
 Every mixin gets resolved by the [mixin](plugins/Mixin.md) plugin which therefore must be included in the configuration.
 
+* [Contains](#contains)
+* [Extend](#extend)
+* [Extract CSS](#extract-css)
 * [Platform queries](#platform-queries)
 * [Stateful Conditions](#stateful-conditions)
-* [Extract CSS](#extract-css)
-* [Extend](#extend)
+* [Substr](#substr)
+
+## Contains
+```javascript
+{
+	box: {
+		fontSize: 20,
+		// only resolves if element is a string
+		// and contains at least one number
+		'contains([0-9])': {
+			color: 'blue'
+		}
+	}
+}
+```
+Contains let's you check wether a primitive element *(string or number)* contains a given regex.
+## Extend
+```javascript
+const extendStyles = {
+	backgroundColor: 'red'
+}
+
+{
+	box: {
+		color: 'blue',
+		// single
+		extend: extendStyles
+
+		// multiple (array)
+		extend: [extendStyles, {fontSize: 20}]
+	}
+}
+```
+Lets you extend your styles with other styles. The idea was taken from Sass' `@extend` and works basically all the same.
+
+### Advanced
+
+Extending also supports conditioned extend which is achieved by passing both a `condition` as well a `styles` object.
+```javascript
+{
+	box: {
+		color: 'blue',
+		extend: {
+			// any condition
+			condition: true === true,
+
+			// either a single style object or multiple (array)
+			styles: extendStyles
+		}
+	}
+}
+```
+##### ECMAScript 2015 (ES6): Spread operator
+If you are already using ECMAScript 2015 which I highly recommend, you do not need the extend-plugin except if you need the conditioned one.
+Just use the new spread operator `...`.
+```javascript
+{
+	// preceding to be used as a base
+	box: {
+		...extendStyles,
+		color: 'blue'
+	},
+
+
+	// or subsequent which perhaps overwrites other styles
+	container: {
+		color: 'blue',
+		...etendStyles
+	}
+}
+```
+
+## Extract CSS
+```javascript
+{
+	box: {
+		color: 'blue',
+		// e.g. if you still want to use bootstrap
+		css: 'row col-xs-4'
+	}
+}
+```
+Define CSS classes that get additionally added to the Component without having to add those as `className=''` in addition to the look styles.
 
 ## Platform Queries
 
@@ -96,75 +180,22 @@ There are several states which are quite common to style a component state-speci
 > **Note**: Avoid using stateful conditions with other than style-states since this would destroy semantics.
 
 ### Validation
-Looks takes `Component.props`, `Component.state` and `Component.context` to check if there is a key that matches the condition. e.g. `status=active` gets validated with `Component.props['status'] === 'active'`.
+It takes `Component.props`, `Component.state` and `Component.context` to check if there is a key that matches the condition. e.g. `status=active` gets validated with `Component.props['status'] === 'active'`.
 
 ### Advanced
 You can even use dot-notation to adress deeper nested props and state. e.g. `items.name=foo`.
 
-## Extract CSS
+## Substr
 ```javascript
 {
 	box: {
-		color: 'blue',
-		// e.g. if you still want to use bootstrap
-		css: 'row col-xs-4'
-	}
-}
-```
-Define CSS classes that get additionally added to the Component without having to add those as `className=''` in addition to the look styles.
-
-## Extend
-```javascript
-const extendStyles = {
-	backgroundColor: 'red'
-}
-
-{
-	box: {
-		color: 'blue',
-		// single
-		extend: extendStyles
-
-		// multiple (array)
-		extend: [extendStyles, {fontSize: 20}]
-	}
-}
-```
-Lets you extend your styles with other styles. The idea was taken from Sass' `@extend` and works basically all the same.
-
-### Advanced
-
-Extending also supports conditioned extend which is achieved by passing both a `condition` as well a `styles` object.
-```javascript
-{
-	box: {
-		color: 'blue',
-		extend: {
-			// any condition
-			condition: true === true,
-
-			// either a single style object or multiple (array)
-			styles: extendStyles
+		fontSize: 20,
+		// colors every number blue
+		'substr([0-9])': {
+			color: 'blue'
 		}
 	}
 }
 ```
-##### ECMAScript 2015 (ES6): Spread operator
-If you are already using ECMAScript 2015 which I highly recommend, you do not need the extend-plugin except if you need the conditioned one.
-Just use the new spread operator `...`.
-```javascript
-{
-	// preceding to be used as a base
-	box: {
-		...extendStyles,
-		color: 'blue'
-	},
-
-
-	// or subsequent which perhaps overwrites other styles
-	container: {
-		color: 'blue',
-		...etendStyles
-	}
-}
-```
+Substr it similar to contains as it only works on primitive elements *(string and number)* and takes a regex as parameter.<br>
+It let's you style substrings without splitting the element yourself at all.
