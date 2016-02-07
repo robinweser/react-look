@@ -1,4 +1,5 @@
-import { extractDynamicStyles } from '../../modules/core/renderer'
+import renderStaticStyles, { extractDynamicStyles, renderSpecialStyles } from '../../modules/core/renderer'
+import container from '../../modules/core/container'
 import { expect } from 'chai'
 
 describe('Extracting dynamic styles', () => {
@@ -23,6 +24,26 @@ describe('Extracting dynamic styles', () => {
     expect(extractDynamicStyles(styles)).to.eql({
       color: colorFn
     })
+  })
+
+  it('should remove a selector if containing only dynamic styles', () => {
+    const styles = {
+      ':hover': {
+        color: props => props.color
+      }
+    }
+    extractDynamicStyles(styles)
+    expect(styles).to.eql({ })
+  })
+
+  it('should remove a selector if it is an object but not a pseudo class or media query', () => {
+    const styles = {
+      box: {
+        color: 'red'
+      }
+    }
+    extractDynamicStyles(styles)
+    expect(styles).to.eql({ })
   })
 
   it('should extract nested dynamic style properties', () => {
@@ -162,5 +183,58 @@ describe('Extracting dynamic styles', () => {
         }
       }
     })
+  })
+})
+
+describe('Rendering special styles', () => {
+  it('should add special styles to the style container', () => {
+    const styles = {
+      ':hover': {
+        color: 'red'
+      },
+      '@media (min-height: 300px)': {
+        color: 'blue'
+      },
+      backgroundColor: 'blue'
+    }
+    renderSpecialStyles('class', styles)
+    expect(container.selectors.has('.class:hover')).to.eql(true)
+    expect(container.mediaQueries.has('(min-height: 300px)')).to.eql(true)
+  })
+
+  it('should concatenate media queries within the container', () => {
+    const styles = {
+      '@media (min-height: 300px)': {
+        '@media (max-height: 500px)': {
+          color: 'blue'
+        }
+      }
+    }
+    renderSpecialStyles('class', styles)
+    expect(container.mediaQueries.has('(min-height: 300px)and(max-height: 500px)')).to.eql(true)
+  })
+})
+
+describe('Rendering static styles', () => {
+  it('should return a className', () => {
+    const styles = {
+      ':hover': {
+        color: 'red'
+      },
+      '@media (min-height: 300px)': {
+        color: 'blue'
+      },
+      backgroundColor: 'blue'
+    }
+    const className = renderStaticStyles(styles)
+    expect(className).to.eql('c0')
+  })
+
+  it('should seperate dynamic styles', () => {
+    const dynamicStyle = props => props.color
+    const styles = { color: dynamicStyle }
+    const className = renderStaticStyles(styles)
+    expect(className).to.eql('c1')
+    expect(container.dynamics.get('c1').color).to.eql(dynamicStyle)
   })
 })

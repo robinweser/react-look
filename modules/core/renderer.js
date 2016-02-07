@@ -21,7 +21,6 @@ export function extractDynamicStyles(styles) {
         const valueCount = Object.keys(value).length
 
         const innerDynamic = extractDynamicStyles(value)
-        const innerDynamicCount = Object.keys(innerDynamic).length
 
         // if the inner styles contain dynamic styles
         // extract them into the output object
@@ -31,7 +30,7 @@ export function extractDynamicStyles(styles) {
 
         // Remove the property if all inner styles
         // are actually dynamic styles
-        if (innerDynamicCount === valueCount) {
+        if (Object.keys(innerDynamic).length === valueCount) {
           delete styles[property]
         }
       } else {
@@ -71,7 +70,7 @@ export function renderSpecialStyles(selector, styles, pseudo = '', media = '') {
       }
       if (isMediaQuery(property)) {
         // Concatenate multiple media queries if a media query already exists
-        const newMedia = (media !== '' ? ' and' : '') + property.replace('@media', '')
+        const newMedia = ((media !== '' ? media + 'and' : '') + property.replace('@media', '').trim())
         const innerStyles = renderSpecialStyles(selector, value, pseudo, newMedia)
         // Adds the selector to the media group
         StyleContainer.add('.' + selector + pseudo, innerStyles, newMedia)
@@ -115,7 +114,7 @@ export default function renderStaticStyles(styles) {
 
   // Also add the dynamic styles if they exist
   if (!_.isEmpty(dynamicStyles)) {
-    StyleContainer.addDynamic(className, dynamicStyles)
+    StyleContainer._addDynamic(className, dynamicStyles)
   }
 
   // Renders pseudo classes and media queries to the style container

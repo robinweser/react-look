@@ -3,61 +3,68 @@ import _ from 'lodash'
 import prefixer from '../utils/prefixer'
 import { toCSS } from 'inline-style-transformer'
 
+function addAndEmit(container, group, selector, styles) {
+  if (!group.has(selector)) {
+    if (styles !== undefined) {
+      group.set(selector, styles)
+    } else {
+      group.add(selector)
+    }
+    container._emitChange()
+  }
+}
+/**
+ * A StyleContainer collects className mappings
+ * that can be rendered into a static CSS string
+ */
 class StyleContainer {
   constructor() {
     this.selectors = new Map()
     this.mediaQueries = new Map()
     this.keyframes = new Map()
-    this.fonts = new Map()
+    this.fonts = new Set()
     this.dynamics = new Map()
 
     this._listener = new Set()
   }
 
+  /**
+   * Adds a new selector with styles
+   * it is also used to add media queries
+   * @param {string} selector - selector to reference the styles
+   * @param {Object} styles - styles to be added
+   * @param {string?} media - media query string
+   */
   add(selector, styles, media) {
     if (media && media !== '') {
-      this.addMediaQuery(selector, styles, media)
+      this._addMediaQuery(selector, styles, media)
     } else {
-      if (!this.selectors.has(selector)) {
-        this.selectors.set(selector, styles)
-        this._emitChange()
-      }
+      addAndEmit(this, this.selectors, selector, styles)
     }
   }
 
-  addMediaQuery(selector, styles, media) {
+  addKeyframes(animation, frames) {
+    addAndEmit(this, this.keyframes, animation, frames)
+  }
+
+  addFont(font) {
+    const fontFace = '@font-face {' + toCSS(font) + '}'
+    addAndEmit(this, this.fonts, fontFace)
+  }
+
+  _addDynamic(className, styles) {
+    if (!_.isEmpty(styles)) {
+      addAndEmit(this, this.dynamics, className, styles)
+    }
+  }
+
+  _addMediaQuery(selector, styles, media) {
     if (!this.mediaQueries.has(media)) {
       this.mediaQueries.set(media, new Map())
     }
 
     const mediaQuery = this.mediaQueries.get(media)
-
-    if (!mediaQuery.has(selector)) {
-      mediaQuery.set(selector, styles)
-      this._emitChange()
-    }
-  }
-
-  addKeyframes(animation, frames) {
-    if (!this.keyframes.has(animation)) {
-      this.keyframes.set(animation, frames)
-      this._emitChange()
-    }
-  }
-
-  addDynamic(className, styles) {
-    if (!_.isEmpty(styles) && !this.dynamics.has(className)) {
-      this.dynamics.set(className, styles)
-      this._emitChange()
-    }
-  }
-
-  addFont(font) {
-    const fontFace = '@font-face {' + toCSS(font) + '}'
-    if (this.fonts.has(fontFace)) {
-      this.fonts.add(fontFace)
-      this._emitChange()
-    }
+    addAndEmit(this, mediaQuery, selector, styles)
   }
 
   renderStaticStyles(userAgent) {
@@ -91,6 +98,12 @@ class StyleContainer {
 
 const globalStyleContainer = new StyleContainer()
 
+
+/**
+ * StyleComponent is used to render static CSS markup
+ * into a <style> element so CSS styles are rendered correctly
+ * it listens for changes of the global style container
+ */
 export class StyleComponent extends Component {
   constructor(props) {
     super(...arguments)
