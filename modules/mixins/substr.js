@@ -3,7 +3,7 @@ import getPseudoExpression from '../utils/getPseudoExpression'
 import _ from 'lodash'
 
 // Evaluates if a element contains a given string
-export default ({ property, value, mixinKey, newProps }) => {
+export default ({ property, value, newProps }) => {
   let children = newProps.children
 
   if (_.isString(children) || _.isNumber(children)) {

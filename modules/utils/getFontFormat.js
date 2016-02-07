@@ -7,9 +7,10 @@ const formats = {
 
 // Returns the font format for a specific font source
 export default function getFontFormat(src) {
-  for (let i = 0; i < formats.length; ++i) {
+  return Object.keys(formats).reduce((format, extension) => {
     if (src.indexOf(extension) > -1) {
-      return formats[extension]
+      format = formats[extension]
     }
-  }
+    return format; // eslint-disable-line
+  }, undefined)
 }

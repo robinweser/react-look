@@ -1,10 +1,9 @@
 import { cloneElement, isValidElement, Children } from 'react'
 import StyleContainer from './container'
-import renderStaticStyles from './renderer'
 import assignStyles from 'assign-styles'
 import _ from 'lodash'
 
-let dynamicScope = 0
+// let dynamicScope = 0
 
 export function resolvePlugins(pluginInterface) {
   let { styles, config } = pluginInterface
@@ -74,7 +73,7 @@ export default function resolveStyles(Component, element, config) {
         // and plugins are provided via config
         if (dynamicStyles && config.plugins) {
           // Constructs the pluginInterface
-          const pluginInterface = {...staticPluginArguments, styles: dynamicStyles }
+          const pluginInterface = { ...staticPluginArguments, styles: dynamicStyles }
           assignStyles(newStyles, resolvePlugins(pluginInterface))
         }
       })
@@ -89,7 +88,7 @@ export default function resolveStyles(Component, element, config) {
 
     // if element already got inlined styles just merge them
       if (element.props.style) {
-       newProps.style = assignStyles(newProps.style, element.props.style)
+        newProps.style = assignStyles(newProps.style, element.props.style)
       }
     }
 

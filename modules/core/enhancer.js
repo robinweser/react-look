@@ -20,8 +20,8 @@ export default (CustomComponent, config = {}) => {
   class LookComponent extends Extend {
     // Inherit the original displayName for proper use later on
     static displayName = CustomComponent.displayName || CustomComponent.name || 'Component';
-    static childContextTypes = {...CustomComponent.childContextTypes, ...contextType };
-    static contextTypes = {...CustomComponent.contextTypes, ...contextType };
+    static childContextTypes = { ...CustomComponent.childContextTypes, ...contextType };
+    static contextTypes = { ...CustomComponent.contextTypes, ...contextType };
     static _isLookEnhanced = true;
 
     getChildContext() {

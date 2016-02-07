@@ -61,7 +61,7 @@ export function extractDynamicStyles(styles) {
  */
 export function renderSpecialStyles(selector, styles, pseudo = '', media = '') {
   return Object.keys(styles).sort(sortPseudoClasses).reduce((extension, property) => {
-    const value = styles[property];
+    const value = styles[property]; // eslint-disable-line
 
     if (_.isPlainObject(value)) {
       if (isPseudo(property)) {
@@ -91,7 +91,7 @@ export function renderSpecialStyles(selector, styles, pseudo = '', media = '') {
  * @param {string} scope - scope selector
  * @param {string} selector - base selector used as className
  */
-export default function renderStaticStyles(styles, selector) {
+export default function renderStaticStyles(styles) {
   // Extracts dynamic parts remaining only static styles
   const dynamicStyles = extractDynamicStyles(styles)
 

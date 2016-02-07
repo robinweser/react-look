@@ -9,6 +9,5 @@ describe('Extracting pseudo expressions', () => {
 
   it('should return false if there is no expression included', () => {
     expect(getPseudoExpression(':nth-child')).to.eql(false)
-    expect(getPseudoExpression()).to.eql(false)
   })
 })

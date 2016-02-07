@@ -14,9 +14,4 @@ describe('Evaluating the font format', () => {
   it('should return undefined if wrong source paths are passed', () => {
     expect(getFontFormat('foo.tttf')).to.eql(undefined)
   })
-
-  it('should return false if no string was passed', () => {
-    expect(getFontFormat()).to.eql(false)
-    expect(getFontFormat(12)).to.eql(false)
-  })
 })

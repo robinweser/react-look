@@ -1,30 +1,39 @@
 import fallbackValue from '../../modules/plugins/fallbackValue'
+import { resolvePlugins } from '../../modules/core/resolver'
 import { expect } from 'chai'
 
 
-describe('Resolving alternative values', () => {
+describe('Resolving fallback values', () => {
 
-  it('should concat alternative values', () => {
+  it('should concat fallback values', () => {
     expect(fallbackValue({
-      display: [ '-webkit-flex', 'flex' ]
+      styles: {
+        display: [ '-webkit-flex', 'flex' ]
+      }
     })).to.eql({ display: '-webkit-flex;display:flex' })
   })
 
   it('should use param-case', () => {
     expect(fallbackValue({
-      alternativeValues: [ 'value1', 'value2' ]
-    })).to.eql({
-      alternativeValues: 'value1;alternative-values:value2'
-    })
+      styles: {
+        fallbackValues: [ 'value1', 'value2' ]
+      }
+    })).to.eql({ fallbackValues: 'value1;fallback-values:value2' })
   })
 
   it('should resolve nested objects', () => {
     expect(fallbackValue({
-      alternativeValues: {
-        property: [ 'value1', 'value2' ]
-      }
+      styles: {
+        fallbackValues: {
+          property: [ 'value1', 'value2' ]
+        }
+      },
+      config: {
+        plugins: [ fallbackValue ]
+      },
+      resolve: resolvePlugins
     })).to.eql({
-      alternativeValues: {
+      fallbackValues: {
         property: 'value1;property:value2'
       }
     })

@@ -18,7 +18,7 @@ export default {
     }
 
     return Object.keys(styles).reduce((classes, selector) => {
-      classes[selector] = renderStaticStyles(styles[selector], selector)
+      classes[selector] = renderStaticStyles(styles[selector])
       return classes; // eslint-disable-line
     }, { })
   },
