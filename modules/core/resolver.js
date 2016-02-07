@@ -42,7 +42,7 @@ export default function resolveStyles(Component, element, config) {
       const propElement = newProps[property]
       if (isValidElement(propElement)) {
         newProps[property] = resolveStyles(Component, propElement, config)
-        newProps.hasResolvedProps = true
+        newProps._hasResolvedProps = true
       }
     })
 
@@ -94,7 +94,7 @@ export default function resolveStyles(Component, element, config) {
 
     // Only actually clone if it is needed
     // If there are styles, children got resolved or props got resolved
-    if (newProps.style || newProps.children !== element.props.children || newProps.hasResolvedProps) {
+    if (newProps.style || newProps.children !== element.props.children || newProps._hasResolvedProps) {
       return cloneElement(element, newProps)
     }
   }
