@@ -18,6 +18,7 @@ StyleSheet.toCSS({
 })
 
 const config = Presets['react-dom'];
+// config.plugins.push(DevTools.friendlyClassName)
 /*
 config.plugins.push(DevTools.linter)
 
