@@ -4,8 +4,6 @@ import isMediaQuery from '../utils/isMediaQuery'
 import isPseudo from '../utils/isPseudo'
 import _ from 'lodash'
 
-let scope = 0
-
 /**
  * Extracts all possible dynamic styles out of a style object
  * To be able to render all other (static) styles directly to CSS
@@ -104,8 +102,8 @@ export default function renderStaticStyles(styles) {
     return base; // eslint-disable-line
   }, { })
 
-  // Generate a unique className based on the base styles
-  const className = 'c' + (scope++).toString(36)
+  // Generate a unique className
+  const className = StyleContainer.requestClassName()
 
   // Add the className to the global style container if it has styles
   if (!_.isEmpty(baseStyles)) {

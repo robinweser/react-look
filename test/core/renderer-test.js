@@ -1,5 +1,6 @@
 import renderStaticStyles, { extractDynamicStyles, renderSpecialStyles } from '../../modules/core/renderer'
 import container from '../../modules/core/container'
+import { clearStyleContainer } from '../test-utils'
 import { expect } from 'chai'
 
 describe('Extracting dynamic styles', () => {
@@ -234,7 +235,7 @@ describe('Rendering static styles', () => {
     const dynamicStyle = props => props.color
     const styles = { color: dynamicStyle }
     const className = renderStaticStyles(styles)
-    expect(className).to.eql('c1')
-    expect(container.dynamics.get('c1').color).to.eql(dynamicStyle)
+    expect(className).to.eql('c0')
+    expect(container.dynamics.get('c0').color).to.eql(dynamicStyle)
   })
 })

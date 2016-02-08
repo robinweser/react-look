@@ -27,7 +27,9 @@ describe('Resolving children', () => {
 
     expect(resolved.props.children).to.eql([ 3, 4, 5, 6 ])
   })
+})
 
+describe('Resolving styles', () => {
   it('should return the element if it is enhanced with Look', () => {
     class Comp extends Component {
       render() {
@@ -50,7 +52,7 @@ describe('Resolving children', () => {
 
     const el = <Comp inner={<div></div>}/>
     const resolved = resolveStyles(Comp, el, { })
-    expect(resolved.props._hasResolvedProps).to.eql(true)
+    expect(resolved.props._lookShouldUpdate).to.eql(true)
   })
 
   it('should keep inline styles', () => {

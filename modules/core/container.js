@@ -25,6 +25,7 @@ class StyleContainer {
     this.fonts = new Set()
     this.dynamics = new Map()
 
+    this._className = 0
     this._listener = new Set()
   }
 
@@ -81,6 +82,10 @@ class StyleContainer {
     })
 
     return css
+  }
+
+  requestClassName(prefix = 'c') {
+    return prefix + (this._className++).toString(36)
   }
 
   subscribe(listener) {
