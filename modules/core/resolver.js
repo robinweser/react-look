@@ -94,7 +94,7 @@ export default function resolveStyles(Component, element, config) {
 
     // Only actually clone if it is needed
     // If there are styles, children got resolved or props got resolved
-    if (newProps.style || newProps.children !== element.props.children || newProps._hasResolvedProps) {
+    if (newProps.style || newProps.children !== element.props.children || newProps._hasResolvedProps || newProps._lookShouldUpdate) {
       return cloneElement(element, newProps)
     }
   }

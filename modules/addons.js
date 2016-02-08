@@ -7,6 +7,7 @@ import prefixer from './plugins/prefixer'
 // Dev tools
 import linter from './devTools/linter'
 import styleLogger from './devTools/styleLogger'
+import friendlyClassNames from './devTools/friendlyClassNames'
 
 // Conditions
 import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/condition'
@@ -31,7 +32,8 @@ export default {
   },
   DevTools: {
     styleLogger,
-    linter
+    linter,
+    friendlyClassNames
   },
   Mixins: {
     // Conditions
