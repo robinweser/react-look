@@ -8,7 +8,7 @@ The following usage guide should provide enough information to build apps with L
 4. [Pseudo classes](#4-pseudo-classes)
 5. [Media queries](#5-media-queries)
 6. [Mixins & Plugins](#6-mixins--plugins)
-	* 6.1. [Configuration](#2-configuration)
+	* 6.1. [Configuration & LookRoot](#2-configuration--lookroot)
 	* 6.2. [look wrapper](#-6-2-look-wrapper)
 	* 6.3. [Usage](#-6-3-usage)
 7. [Fallback values](#7-fallback-values)
@@ -186,13 +186,13 @@ const styles = StyleSheet.create({
 For **dynamic styling** we use an advanced set of mixins and plugins. <br>
 But while pseudo classes and media queries just work with the `StyleSheet` API by default, it **requires some configuration** to be able to use plugins, mixins or devTools.
 
-### 6.1. Configuration
-We will use a preset which provides every mixin & plugin available. We will refer to this as the 'global config' as it should affect every Component resolved with Look. Therefore we basically just pass them as a prop of the **root-Component** that gets directly rendered into a DOM-node.
-> Note: If you want to use a custom configration check out the [configuration guide](guides/configureLook.md).
+### 6.1. Configuration & [LookRoot](api/LookRoot.md)
+We will use a preset which provides every mixin & plugin available. We will refer to this as the 'global config' as it should affect every Component resolved with Look. To apply those we need to wrap our whole application into the `LookRoot` Component which uses `context` to spread the configuration to all child Components.
+> Note: If you want to use a custom configuration check out the [configuration guide](guides/configureLook.md).
 
 
 ```javascript
-import { Presets } from 'react-look'
+import { Presets, LookRoot } from 'react-look'
 import { render } from 'react-dom'
 import React from 'react'
 
@@ -201,10 +201,7 @@ const config = Presets['react-dom']
 // For react-native use the react-native preset
 const config = Presets['react-native']
 
-
-// Using the lookConfig prop will cause the configuration
-// to be passed down to every Component using context
-render(<App lookConfig={config} />, document.getElementById('app'))
+render(<LookRoot config={config}><App /></LookRoot>, document.getElementById('app'))
 ```
 ### 6.2. look wrapper
 Resolving mixins and plugins requires your Component to be wrapped with the `look` wrapper.
@@ -256,11 +253,11 @@ export default class FirstComponent extends Component {
 	}
 
 	increment() {
-		this.setState({ clicks:+this.state.clicks++ })
+		this.setState({ clicks: this.state.clicks++ })
 	}
 
 	render() {
-		return <div className={styles.box} onClick={this.increment}>I am growing if you click me</div>
+		return <div className={styles.box} onClick={this.increment}>I am growing on click!</div>
 	}
 }
 
@@ -302,7 +299,7 @@ which is similar to the following CSS code:
 
 ## 9. Server-side rendering
 Look also fully supports server-side rendering with minimal additional configuration.<br>
-You basically just need to pass the users `userAgent` with the `lookConfig` to be able to prefix correctly. This is most likely done directly within the request. <br>
+You basically just need to pass the users `userAgent` with the `LookRoot` config to be able to prefix correctly. This is most likely done directly within the request. <br>
 e.g. [universal example](../demo/server.js) (`npm run demo:universal`) using an [express](http://expressjs.com/) server:
 ```javascript
 const serverConfig = Presets['react-dom']
@@ -321,4 +318,15 @@ app.get('/', (req, res) => {
 ```
 
 ## 10. DevTools
-Your **development experience** will be boosted with the special developer tools we provide.<br>
+DevTools are used to boost **your** developer experience *(also now as DX)*. They come in handy if you want to *e.g.* debug your code or quality-proof it.
+
+Look also provides some devTools which can be easily applied by just adding them to the plugins list, but you should **only use them for development**.
+> Check out [DevTools.md](DevTools.md) for an overview of all devTools.
+
+```javascript
+import { Presets, DevTools } from 'react-look'
+
+const config = Presets['react-dom']
+// a devTool that improves className readability for better debugging
+config.plugins.push(DevTools.friendlyClassName)
+```

@@ -30,6 +30,7 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 		* [Stateful Conditions](Mixins.md#stateful-conditions)
 		* [Substr](Mixins.md#extract-css)
 	* **3.3. [DevTools](DevTools.md)**
+		* [Friendly ClassName](devTools/friendlyClassName.md)
 		* [Linter](devTools/linter.md)
 		* [Style Logger](devTools/StyleLogger.md)
 3. [API Reference](api/)

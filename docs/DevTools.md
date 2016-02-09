@@ -9,5 +9,6 @@ DevTools are **special** plugins that are **not** designed to modify your styles
 ## [Available developer tools](devTools/)
 | plugin | config | description |
 | ------ | ------ | ------ |
+| [friendlyClassName](devTools/friendlyClassName.md) | | Transforms all `className`s into debug-friendly namespaced classNames  |
 | [linter](devTools/Linter.md)| `linter` | Lints your styles following defined rules. Logs warnings if rule violations occured. |
 | [styleLogger](devTools/StyleLogger.md) | `styleLogger` | Logs styles if configured `events` get triggered. |

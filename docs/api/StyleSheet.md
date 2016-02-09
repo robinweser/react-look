@@ -1,6 +1,5 @@
 # StyleSheet
-A helper to create scoped styles and global CSS styles. This helps to improve performance by reducing unnecessary style resolving/processing.
-
+A helper to create scoped styles and global CSS styles.
 ## Methods
 - [create](#createstyles)
 - [combineStyles](#combinestyles-styles)
@@ -85,8 +84,6 @@ c(styles.box, styles.container) // => c1 c2
 ```
 
 ## `toCSS(styles [, scope])`
-> Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
-
 Adds all `styles` as a valid CSS string and directly applies those to the global CSSStyleSheet. `scope` will also add a scope selector to add more specificity.
 
 ```javascript
@@ -102,8 +99,6 @@ StyleSheet.toCSS({
 })
 ```
 ## `keyframes(frames [, name])`
-> Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
-
 Adds the `frames` as a new keyframe animation to the global CSSStyleSheet and returns the animation name.
 `frames` should be an object containing a set of percentage-based styles. or both `from` and `to` values.<br> You may also pass a custom animation `name`.
 
@@ -122,8 +117,6 @@ StyleSheet.keyframes({
 ```
 
 ## `font(fontFamily, files [, properties])`
-> Note: [lookRoot](../FAQ.md#2-global-css-rules) must be set to render these CSS rules
-
 Adds the `fontFamily` to the global CSSStyleSheet and uses `files` as source for fonts. `files` may either be a string (single) or an array (multiple).<br>
 `properties` may contain additional font properties which are:
 * `fontWeight`

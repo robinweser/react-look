@@ -4,7 +4,7 @@ Look itself ships as a higher order function that just resolves basic styles. To
 Basically you will set an array of plugins which will perform in the exact same order as specified.
 Plugins might also require some special settings within your config object.
 e.g. the **Mixin**-Plugin which lets you define custom style properties uses the `mixins` key to define those.
-> Check out the [Look API docs](../api/Look.md) for a complete list of possible config options.
+
 
 ### Custom configuration
 ```javascript
@@ -42,60 +42,24 @@ const customConfig = Presets['react-dom']
 ```
 
 ## Applying configuration
-There are two different ways to apply your configuration globally.
-
-### Custom instance
-```javascript
-import look from 'react-look'
-
-// Basically just a wrapper function
-// calling Look with a specific config object
-export default (Component, config) => {
-	// Use this to allow Component-scoped configs later on
-	const configuration = Object.assign({}, customConfig, config)
-	return look(Component, configuration)
-}
-```
-```javascript
-import look from './customLook'
-import { StyleSheet } from 'react-look'
-
-const Example = () => <div look={styles.box}>Foo</div>
-const styles = StyleSheet.create(Example, { box: { color: 'red' } })
-
-export default look(Example)
-```
-
-### Pass lookConfig as a prop
-Basically you will only do this once on your top-level Component which is the root Component Look renders. The primary use case is server-side rendering where you might want to pass e.g. a *userAgent* from request headers directly.
-```javascript
-import 'react' from 'react'
-import look from 'react-look'
-
-const App = () => <div>/*App content*/</div>
-export default look(App)
-```
-```javascript
-import App from './App'
-import React from 'react'
-import { render } from 'react-dom'
-
-render(<App lookConfig={customConfig} />, document.getElementById('app'))
-```
+To apply configuration globally just [pass them with `LookRoot`](../api/LookRoot.md#usage) at the root of your application.
+This will automatically pass your configuration to every child Component via `context`.
 
 ## Component-based configuration
-While both examples above will hand the configuration down to all the child Components you may also want to apply some configuration for just a single Component.
+Besides passing global configuration, you sometimes might also want to apply some configuration for just a single Component. It will be merged with the global configuration with higher precedence *(so it might overwrite global configuration)*.
+
 ```javascript
-import look, { StyleSheet, Plugins } from 'react-look'
+import look, { StyleSheet } from 'react-look'
 
 const Example = () => <div className={styles.box}>Foo</div>
 const styles = StyleSheet.create(Example, {
 	box: {
-		color: ['rgba(0, 0, 0, 0.5)', '#ccc'],
-		fontSize: 12
+		fontSize: 12,
+		'special': /* do something */
 	}
 })
 
+const specialMixin = input => ({ /* do something */ })
 // You only need the alternative plugin to resolve an array of values
-export default look(Example, { plugins: [Plugins.alternativeValue] })
+export default look(Example, { mixins: { special: specialMixin } })
 ```
