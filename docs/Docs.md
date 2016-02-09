@@ -15,7 +15,7 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 	* 1.7. [Fallback values](GettingStarted.md#7-fallback-values)
 	* 1.8. [Vendor prefixes](GettingStarted.md#8-vendor-prefixes)
 	* 1.9. [Server-side rendering](GettingStarted.md#9-server-side-rendering)
-	* 1.10. [DevTools](GettingStarted.md#10-dev-tools) *(incomplete)*
+	* 1.10. [DevTools](GettingStarted.md#10-dev-tools)
 2. Registry
 	* **3.1. [Plugins](Plugins.md)**
 		* [Mixin](plugins/Mixin.md)
@@ -41,12 +41,14 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 		* [toCSS](#tocssstyles--scope-useragent)
 		* [keyframes](#keyframesframes--name-useragent)
 		* [font](#fontfontfamily-files--properties)
+	* **3.3. [LookRoot](api/LookRoot.md)**
+	* **3.4. [StyleContainer](api/StyleContainer.md)**
 4. [Guides](guides/)
 	* 4.1. [Upgrading Look](guides/upgradeLook.md)
 	* 4.2. [Configuring Look](guides/configureLook.md)
 	* 4.3. [Build your own: Mixin](guides/customMixin.md)
 	* 4.4. [Build your own: Plugin](guides/customPlugin.md)
-5. [FAQ](FAQ.md) *(incomplete)*
-6. [Under The Hood](UnderTheHood.md) *(incomplete)*
-	* 6.1. [How does Look work?](UnderTheHood.md#how-look-works)
-	* 6.2. [How does StyleSheet.create work?](UnderTheHood.md#how-stylesheet-create-works)
+5. [FAQ](FAQ.md)
+6. Under The Hood *(incomplete)*
+	* 6.1. How does Look work?
+	* 6.2. How does StyleSheet.create work?
