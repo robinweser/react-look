@@ -74,18 +74,4 @@ describe('Enhancing a Component', () => {
 
     expect(callMe).to.have.been.calledOnce
   })
-
-  it('should render a CSS StyleSheet if lookRoot is set', () => {
-    const element = <div />
-    class Default extends Component {
-      render() {
-        return element
-      }
-    }
-    let Enhanced = look(Default, { lookRoot: true })
-    let instance = new Enhanced()
-
-    expect(instance.render().props.children[0]).to.eql(element)
-    expect(instance.render().props.children[1].type.name).to.eql('StyleComponent')
-  })
 })

@@ -1,10 +1,13 @@
-import container from '../modules/core/container'
+import StyleContainer from '../modules/api/StyleContainer'
 
 export function clearStyleContainer() {
-  container.selectors.clear()
-  container.mediaQueries.clear()
-  container.keyframes.clear()
-  container.fonts.clear()
-  container.dynamics.clear()
-  container._className = 0
+  StyleContainer.selectors.clear()
+  StyleContainer.mediaQueries.clear()
+  StyleContainer.keyframes.clear()
+  StyleContainer.fonts.clear()
+  StyleContainer.dynamics.clear()
+
+  StyleContainer._className = 0
 }
+
+beforeEach(clearStyleContainer)

@@ -1,4 +1,4 @@
-import StyleContainer from '../core/container'
+import StyleContainer from './StyleContainer'
 import renderStaticStyles from '../core/renderer'
 import getFontFormat from '../utils/getFontFormat'
 import _ from 'lodash'
@@ -63,8 +63,8 @@ export default {
     if (files) {
       // Generates a style object including all font information
       const font = {
-        fontFamily: '\'fontFamily}\'',
-        src: files instanceof Array ? files.map(src => `url('${src}') format('${getFontFormat(src)}')`).join(',') : files
+        fontFamily: `'${fontFamily}'`,
+        src: files.map(src => `url('${src}') format('${getFontFormat(src)}')`).join(',')
       }
 
       // Filter the properties to only include valid properties

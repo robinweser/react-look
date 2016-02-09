@@ -1,5 +1,5 @@
 import renderStaticStyles, { extractDynamicStyles, renderSpecialStyles } from '../../modules/core/renderer'
-import container from '../../modules/core/container'
+import StyleContainer from '../../modules/api/StyleContainer'
 import { clearStyleContainer } from '../test-utils'
 import { expect } from 'chai'
 
@@ -188,7 +188,7 @@ describe('Extracting dynamic styles', () => {
 })
 
 describe('Rendering special styles', () => {
-  it('should add special styles to the style container', () => {
+  it('should add special styles to the style StyleContainer', () => {
     const styles = {
       ':hover': {
         color: 'red'
@@ -199,11 +199,11 @@ describe('Rendering special styles', () => {
       backgroundColor: 'blue'
     }
     renderSpecialStyles('class', styles)
-    expect(container.selectors.has('.class:hover')).to.eql(true)
-    expect(container.mediaQueries.has('(min-height: 300px)')).to.eql(true)
+    expect(StyleContainer.selectors.has('.class:hover')).to.eql(true)
+    expect(StyleContainer.mediaQueries.has('(min-height: 300px)')).to.eql(true)
   })
 
-  it('should concatenate media queries within the container', () => {
+  it('should concatenate media queries within the StyleContainer', () => {
     const styles = {
       '@media (min-height: 300px)': {
         '@media (max-height: 500px)': {
@@ -212,7 +212,7 @@ describe('Rendering special styles', () => {
       }
     }
     renderSpecialStyles('class', styles)
-    expect(container.mediaQueries.has('(min-height: 300px)and(max-height: 500px)')).to.eql(true)
+    expect(StyleContainer.mediaQueries.has('(min-height: 300px)and(max-height: 500px)')).to.eql(true)
   })
 })
 
@@ -236,6 +236,6 @@ describe('Rendering static styles', () => {
     const styles = { color: dynamicStyle }
     const className = renderStaticStyles(styles)
     expect(className).to.eql('c0')
-    expect(container.dynamics.get('c0').color).to.eql(dynamicStyle)
+    expect(StyleContainer.dynamics.get('c0').color).to.eql(dynamicStyle)
   })
 })

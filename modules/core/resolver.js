@@ -1,5 +1,5 @@
 import { cloneElement, isValidElement, Children } from 'react'
-import StyleContainer from './container'
+import StyleContainer from '../api/StyleContainer'
 import assignStyles from 'assign-styles'
 import _ from 'lodash'
 

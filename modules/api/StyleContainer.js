@@ -3,6 +3,13 @@ import _ from 'lodash'
 import prefixer from '../utils/prefixer'
 import { toCSS } from 'inline-style-transformer'
 
+/**
+ * Abstract helper to add new styles to a Map/Set
+ * @param {StyleContainer} container - current style container instance
+ * @param {Map|Set} group - group that styles get added to
+ * @param {string} selector - CSS selector thats used as reference
+ * @param {Object} styles - styles that get added
+ */
 function addAndEmit(container, group, selector, styles) {
   if (!group.has(selector)) {
     if (styles !== undefined) {
@@ -13,6 +20,7 @@ function addAndEmit(container, group, selector, styles) {
     container._emitChange()
   }
 }
+
 /**
  * A StyleContainer collects className mappings
  * that can be rendered into a static CSS string
@@ -33,7 +41,7 @@ class StyleContainer {
    * Adds a new selector with styles
    * it is also used to add media queries
    * @param {string} selector - selector to reference the styles
-   * @param {Object} styles - styles to be added
+   * @param {Object} styles - styles that get added
    * @param {string?} media - media query string
    */
   add(selector, styles, media) {
@@ -44,30 +52,28 @@ class StyleContainer {
     }
   }
 
+  /**
+   * Adds a new keyframe animation
+   * @param {string} animation - named used to reference the animation
+   * @param {Object} frames - animation frames that get added
+   */
   addKeyframes(animation, frames) {
     addAndEmit(this, this.keyframes, animation, frames)
   }
 
+  /**
+   * Adds a new global fontFace
+   * @param {Object} font - information on the font
+   */
   addFont(font) {
     const fontFace = '@font-face {' + toCSS(font) + '}'
     addAndEmit(this, this.fonts, fontFace)
   }
 
-  _addDynamic(className, styles) {
-    if (!_.isEmpty(styles)) {
-      addAndEmit(this, this.dynamics, className, styles)
-    }
-  }
-
-  _addMediaQuery(selector, styles, media) {
-    if (!this.mediaQueries.has(media)) {
-      this.mediaQueries.set(media, new Map())
-    }
-
-    const mediaQuery = this.mediaQueries.get(media)
-    addAndEmit(this, mediaQuery, selector, styles)
-  }
-
+  /**
+   * Renders a single string containing the whole CSS styles
+   * @param {string} userAgent - userAgent used to prefix styles
+   */
   renderStaticStyles(userAgent) {
     const tempPrefixer = prefixer(userAgent)
     let css = ''
@@ -84,10 +90,19 @@ class StyleContainer {
     return css
   }
 
+  /**
+   * Returns a valid unused className
+   * @param {string?} prefix - prefix appended before the className
+   */
   requestClassName(prefix = 'c') {
     return prefix + (this._className++).toString(36)
   }
 
+  /**
+   * Adds an change listener
+   * Returns an instance with an unsubscribe method
+   * @param {Function} listener - event listener
+   */
   subscribe(listener) {
     this._listener.add(listener)
 
@@ -96,45 +111,41 @@ class StyleContainer {
     }
   }
 
+  /**
+   * Change emitter executes every single change listener
+   */
   _emitChange() {
     this._listener.forEach(listener => listener())
   }
+
+  /**
+   * Helper that Adds dynamic styles to be accessed later globally
+   * @param {string} className - className reference
+   * @param {Object} styles - styles that get added
+   */
+  _addDynamic(className, styles) {
+    if (!_.isEmpty(styles)) {
+      addAndEmit(this, this.dynamics, className, styles)
+    }
+  }
+
+  /**
+   * Helper that adds media queries
+   * @param {string} selector - selector to reference the styles
+   * @param {Object} styles - styles that get added
+   * @param {string?} media - media query string
+   */
+  _addMediaQuery(selector, styles, media) {
+    // Add the media if not existing yet
+    if (!this.mediaQueries.has(media)) {
+      this.mediaQueries.set(media, new Map())
+    }
+
+    const mediaQuery = this.mediaQueries.get(media)
+    addAndEmit(this, mediaQuery, selector, styles)
+  }
+
 }
 
-const globalStyleContainer = new StyleContainer()
-
-
-/**
- * StyleComponent is used to render static CSS markup
- * into a <style> element so CSS styles are rendered correctly
- * it listens for changes of the global style container
- */
-export class StyleComponent extends Component {
-  constructor(props) {
-    super(...arguments)
-    const css = globalStyleContainer.renderStaticStyles(props.userAgent) // eslint-disable-line
-    this.state = { css: css }
-
-    this.updateStyles = this.updateStyles.bind(this, props.userAgent)
-  }
-
-  componentDidMount() {
-    this._changeListener = globalStyleContainer.subscribe(this.updateStyles)
-  }
-
-  componentWillUnmount() {
-    this._changeListener.unsubscribe()
-  }
-
-  updateStyles(userAgent) {
-    const css = globalStyleContainer.renderStaticStyles(userAgent) // eslint-disable-line
-    this.setState({ css: css })
-  }
-
-  render() {
-    const innerHTML = { __html: this.state.css }
-    return <style dangerouslySetInnerHTML={innerHTML} />
-  }
-}
-
-export default globalStyleContainer
+// We export a global StyleContainer instance
+export default new StyleContainer()
