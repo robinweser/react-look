@@ -1,5 +1,6 @@
 import Enhancer from './core/enhancer'
 import StyleSheet from './api/StyleSheet'
+import LookRoot from './api/LookRoot'
 
 import { Plugins, Mixins, DevTools, Presets } from './addons'
 
@@ -18,6 +19,7 @@ export default (...args) => {
 
 export {
   StyleSheet,
+  LookRoot,
 
   Plugins,
   Mixins,
