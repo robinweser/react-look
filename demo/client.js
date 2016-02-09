@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Presets, DevTools } from '../modules/addons'
 import { Plugins } from 'inline-style-linter'
-import { StyleSheet } from '../modules/look'
+import { StyleSheet, LookRoot } from '../modules/look'
 
 import App from './app.jsx'
 
@@ -45,4 +45,8 @@ config.linter = {
 }
 */
 
-render(<App lookConfig={config} />, document.getElementById('app'))
+render(
+  <LookRoot config={config}>
+    <App />
+  </LookRoot>,
+  document.getElementById('app'))

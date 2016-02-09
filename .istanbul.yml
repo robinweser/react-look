@@ -1,2 +1,2 @@
 instrumentation:
-  excludes: ['modules/devTools/*']
+  excludes: ['modules/devTools/*', 'utils/warn', 'utils/copyProperties']

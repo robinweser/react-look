@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
 })
 
 // Apply lookRoot: true as this is the top-level Component
-export default look(App, { lookRoot: true })
+export default look(App)
