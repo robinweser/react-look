@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import StyleContainer from './StyleContainer'
-import _ from 'lodash'
 
 const contextType = { _lookConfig: PropTypes.object }
 /**

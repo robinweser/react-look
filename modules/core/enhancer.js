@@ -1,6 +1,6 @@
 import resolveStyles from './resolver'
 import copyProperties from '../utils/copyProperties'
-import React, { Component, PropTypes } from 'react'
+import { Component, PropTypes } from 'react'
 import _ from 'lodash'
 
 const contextType = { _lookConfig: PropTypes.object }

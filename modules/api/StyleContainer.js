@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import _ from 'lodash'
 import prefixer from '../utils/prefixer'
 import { toCSS } from 'inline-style-transformer'
