@@ -58,20 +58,4 @@ describe('Enhancing a Component', () => {
 
     expect(constructorFunc).to.have.been.calledOnce
   })
-
-  it('should call super.render only once', () => {
-    let callMe = sinon.spy()
-
-    class Default extends Component {
-      render() {
-        callMe()
-        return null
-      }
-    }
-    let Enhanced = look(Default)
-    let instance = new Enhanced()
-    instance.render()
-
-    expect(callMe).to.have.been.calledOnce
-  })
 })

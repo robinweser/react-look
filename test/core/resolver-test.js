@@ -67,20 +67,4 @@ describe('Resolving styles', () => {
 
     expect(resolved.props.style).to.eql({ color: 'red' })
   })
-
-  it('should resolve dynamic styles', () => {
-    class Comp extends Component {
-      render() {
-        return <div></div>
-      }
-    }
-
-    Comp = look(Comp)
-
-    const styles = StyleSheet.create({ color: () => 'red' })
-    const el = <div className={styles}>foo</div>
-    const resolved = resolveStyles(Comp, el, domPreset)
-
-    expect(resolved.props.style).to.eql({ color: 'red' })
-  })
 })

@@ -45,16 +45,19 @@ class StyleComponent extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true
     this._changeListener = StyleContainer.subscribe(this.updateStyles)
   }
 
   componentWillUnmount() {
+    this._isMounted = false
     this._changeListener.unsubscribe()
   }
 
   updateStyles(userAgent) {
     const css = StyleContainer.renderStaticStyles(userAgent) // eslint-disable-line
-    this.setState({ css: css })
+    // Delay change listener until Component is mounted
+    setTimeout(() => this._isMounted && this.setState({ css: css }), 0)
   }
 
   render() {

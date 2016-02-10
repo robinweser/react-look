@@ -2,9 +2,9 @@
 A helper to create scoped styles and global CSS styles.
 ## Methods
 - [create](#createstyles)
-- [combineStyles](#combinestyles-styles)
-- [toCSS](#tocssstyles--scope-useragent)
-- [keyframes](#keyframesframes--name-useragent)
+- [combineStyles](#combinestylesstyles)
+- [toCSS](#tocssstyles--scope)
+- [keyframes](#keyframesframes--name)
 - [font](#fontfontfamily-files--properties)
 
 

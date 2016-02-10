@@ -88,7 +88,7 @@ export function renderSpecialStyles(selector, styles, pseudo = '', media = '') {
  * @param {string} scope - scope selector
  * @param {string} selector - base selector used as className
  */
-export default function renderStaticStyles(styles) {
+export default function renderStaticStyles(styles, scope) {
   // Extracts dynamic parts remaining only static styles
   const dynamicStyles = extractDynamicStyles(styles)
 
@@ -103,7 +103,7 @@ export default function renderStaticStyles(styles) {
   }, { })
 
   // Generate a unique className
-  const className = StyleContainer.requestClassName()
+  const className = scope ? scope + StyleContainer.generateClassName(baseStyles) : StyleContainer.requestClassName()
 
   // Add the className to the global style container if it has styles
   if (!_.isEmpty(baseStyles)) {

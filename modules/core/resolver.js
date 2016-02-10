@@ -1,9 +1,9 @@
 import { cloneElement, isValidElement, Children } from 'react'
+import extractCSS from '../mixins/extractCSS'
+import renderStaticStyles from './renderer'
 import StyleContainer from '../api/StyleContainer'
 import assignStyles from 'assign-styles'
 import _ from 'lodash'
-
-// let dynamicScope = 0
 
 export function resolvePlugins(pluginInterface) {
   let { styles, config } = pluginInterface
@@ -64,8 +64,6 @@ export default function resolveStyles(Component, element, config) {
         config
       }
 
-      let newStyles = {}
-
       newProps.className.split(' ').forEach(className => {
         let dynamicStyles = assignStyles({}, StyleContainer.dynamics.get(className))
 
@@ -74,27 +72,21 @@ export default function resolveStyles(Component, element, config) {
         if (dynamicStyles && config.plugins) {
           // Constructs the pluginInterface
           const pluginInterface = { ...staticPluginArguments, styles: dynamicStyles }
-          assignStyles(newStyles, resolvePlugins(pluginInterface))
+          const newStyles = assignStyles({}, resolvePlugins(pluginInterface))
+
+          // Only apply styles if there are some
+          if (!_.isEmpty(newStyles)) {
+            const dynamicClassName = renderStaticStyles(newStyles, className + '-dynamic-')
+            extractCSS({ value: dynamicClassName, newProps })
+            newProps._lookShouldUpdate = true
+          }
         }
       })
-
-      // Only apply styles if there are some
-      if (!_.isEmpty(newStyles)) {
-        // const className = renderStaticStyles(assignStyles({}, newStyles), Component.constructor.displayName, element.type + dynamicScope++)
-        // newProps.className = newProps.className ? newProps.className + ' ' + className : className
-
-        newProps.style = newStyles
-      }
-
-    // if element already got inlined styles just merge them
-      if (element.props.style) {
-        newProps.style = assignStyles(newProps.style, element.props.style)
-      }
     }
 
     // Only actually clone if it is needed
     // If there are styles, children got resolved or props got resolved
-    if (newProps.style || newProps.children !== element.props.children || newProps._lookShouldUpdate) {
+    if (newProps.children !== element.props.children || newProps._lookShouldUpdate) {
       return cloneElement(element, newProps)
     }
   }

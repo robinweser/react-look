@@ -24,11 +24,11 @@ export default (CustomComponent, config = { }) => {
     static _isLookEnhanced = true;
 
     render() {
-      const contextConfig = this.context ? this.context._lookConfig : null
       const renderedElement = stateless ? CustomComponent(this.props, this.context) : super.render() // eslint-disable-line
-
+      const contextConfig = this.context ? this.context._lookConfig : null
+      const elementConfig = renderedElement.props.lookConfig || null
       // Compose all possible ways to configure Look
-      const composedConfig = _.merge({ }, contextConfig, config)
+      const composedConfig = _.merge({ }, contextConfig, config, elementConfig)
       return resolveStyles(this, renderedElement, composedConfig)
     }
   }

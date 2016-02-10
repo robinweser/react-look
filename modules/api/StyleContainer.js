@@ -1,6 +1,8 @@
 import _ from 'lodash'
 import prefixer from '../utils/prefixer'
 import { toCSS } from 'inline-style-transformer'
+import generateHashCode from '../utils/generateHashCode'
+import sortObject from '../utils/sortObject'
 
 /**
  * Abstract helper to add new styles to a Map/Set
@@ -90,9 +92,19 @@ class StyleContainer {
   }
 
   /**
-   * Returns a valid unused className
-   * @param {string?} prefix - prefix appended before the className
+   * Generates a unique hash code for a given style object
+   * if the style properties are the same, the same hash will be returned
+   * no matter how they're sorted
+   * @param {Object} styles - style object which will get sorted and hashed
    */
+  generateClassName(styles) {
+    return generateHashCode(JSON.stringify(sortObject(styles)))
+  }
+
+  /**
+ 	 * Returns a valid unused className
+ 	 * @param {string?} prefix - prefix appended before the className
+ 	 */
   requestClassName(prefix = 'c') {
     return prefix + (this._className++).toString(36)
   }

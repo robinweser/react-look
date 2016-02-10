@@ -63,3 +63,23 @@ const specialMixin = input => ({ /* do something */ })
 // You only need the alternative plugin to resolve an array of values
 export default look(Example, { mixins: { special: specialMixin } })
 ```
+
+## Element-based configuration
+You could even pass configuration for just a single element using the `lookConfig` prop.
+```javascript
+import look, { StyleSheet } from 'react-look'
+
+const Example = () => (
+	<div className={styles.box}>
+		<span lookConfig={{ plugins: undefined }}>No plugins for me!</span>
+	</div>
+)
+const styles = StyleSheet.create(Example, {
+	box: {
+		fontSize: 12,
+		'special': /* do something */
+	}
+})
+
+export default look(Example)
+```
