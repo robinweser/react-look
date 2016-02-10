@@ -1,11 +1,12 @@
 {
   "name": "react-look",
-  "version": "0.7.2",
-  "description": "Advanced & Dynamic Component Styling for React & React Native",
+  "version": "1.0.0",
+  "description": "Advanced & Dynamic Component Styling for React.",
   "main": "lib/look.js",
   "files": [
     "LICENSE",
     "README.md",
+    "Changelog.md",
     "lib/",
     "docs/",
     "dist/"
@@ -16,8 +17,7 @@
   },
   "scripts": {
     "babel": "npm run clean && babel -d lib modules",
-    "bundle": "npm run babel && mkdir dist && npm run bundle:look && npm run bundle:addons",
-    "bundle:addons": "browserify modules/addons.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look-addons.min.js",
+    "bundle": "npm run babel && mkdir dist && npm run bundle:look",
     "bundle:look": "browserify modules/look.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look.min.js",
     "clean": "rimraf lib dist coverage",
     "coverage": "codeclimate-test-reporter < coverage/lcov.info",
@@ -35,8 +35,6 @@
     "layout",
     "react-native",
     "react-component",
-    "ios",
-    "android",
     "component styling",
     "styling",
     "vendor",
@@ -54,9 +52,7 @@
     "inline-style-linter": "^0.2.7",
     "inline-style-prefixer": "^0.6.7",
     "inline-style-transformer": "^1.0.0",
-    "lodash": "^4.2.1",
-    "object-assign": "^4.0.1",
-    "object-assign-deep": "0.0.4"
+    "lodash": "^4.2.1"
   },
   "peerDependencies": {
     "react": "^0.14.3",
