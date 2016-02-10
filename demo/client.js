@@ -17,13 +17,13 @@ StyleSheet.toCSS({
 })
 
 const config = Presets['react-dom'];
-config.plugins.push(Plugins.friendlyClassName)
-config.plugins.push(Plugins.styleLogger)
-config.styleLogger = {
-  onEvent: 'onClick',
-  onlyTopMost: true,
-  noEmpty: true
-}
+// config.plugins.push(Plugins.friendlyClassName)
+// config.plugins.push(Plugins.styleLogger)
+// config.styleLogger = {
+//  onEvent: 'onClick',
+//  onlyTopMost: true,
+//  noEmpty: true
+// }
 
 render(
   <LookRoot config={config}>

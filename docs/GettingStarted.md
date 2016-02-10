@@ -8,14 +8,13 @@ The following usage guide should provide enough information to build apps with L
 4. [Pseudo classes](#4-pseudo-classes)
 5. [Media queries](#5-media-queries)
 6. [Mixins & Plugins](#6-mixins--plugins)
-	* 6.1. [Configuration & LookRoot](#2-configuration--lookroot)
-	* 6.2. [look wrapper](#-6-2-look-wrapper)
-	* 6.3. [Usage](#-6-3-usage)
+	* 6.1. [Configuration & LookRoot](#61-configuration--lookroot)
+	* 6.2. [look wrapper](#62-look-wrapper)
+	* 6.3. [Usage](#63-usage)
 7. [Fallback values](#7-fallback-values)
 8. [Vendor prefixes](#8-vendor-prefixes)
 9. [Server-side rendering](#9-server-side-rendering)
-10. [DevTools](#10-dev-tools)
-11. [Debugging](#11-debugging)
+10. [DevTools](#10-devtools)
 
 ## 1. Installation
 First of all we need to install `react-look` to our project.
@@ -33,7 +32,7 @@ import look from 'react-look'
 const look = require('react-look')
 ```
 
-## 3. First Component
+## 2. First Component
 Now its time to compose your first Component. <br>
 You basically start with a blank `React` Component that renders some markup.
 

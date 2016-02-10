@@ -7,7 +7,7 @@ Style modifications of any kind are done using plugins. Plugins are triggered di
 | plugin | config | description |
 | ------ | ------ | ------ |
 | [mixin](plugins/Mixin.md) | `mixins` | Define custom properties using a key-value mapping. |
-| [fallbackValue](plugins/fallbackValue.md) |  | Use an array of values to define alternatives/fallbacks |
+| [fallbackValue](plugins/FallbackValue.md) |  | Use an array of values to define alternatives/fallbacks |
 | [statefulValue](plugins/StatefulValue.md) |  | Use `props`, `state` and `context` values by passing a function instead of a value.  |
 | [prefixer](plugins/Prefixer.md) | `userAgent` | Automatically adds vendor prefixes according your userAgent and caniuse-database.<br> It uses [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer) to do this on-the-go using the userAgent information. |
 
@@ -19,7 +19,7 @@ DevTools are **special** plugins that are **not** designed to modify your styles
 
 | devTool | config | description |
 | ------ | ------ | ------ |
-| [friendlyClassName](plugins/friendlyClassName.md) | | Transforms all `className`s into debug-friendly namespaced classNames  |
+| [friendlyClassName](plugins/FriendlyClassName.md) | | Transforms all `className`s into debug-friendly namespaced classNames  |
 | [linter](plugins/Linter.md)| `linter` | Lints your styles following defined rules. Logs warnings if rule violations occured. |
 | [styleLogger](plugins/StyleLogger.md) | `styleLogger` | Logs styles if configured `events` get triggered. |
 

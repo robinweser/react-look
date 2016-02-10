@@ -4,7 +4,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import App from './app.jsx'
 import fs from 'fs'
-import { Presets } from '../modules/look'
+import { Presets, LookRoot } from '../modules/look'
 
 const indexHTML = fs.readFileSync(__dirname + '/index.html').toString()
 const app = express()
@@ -20,7 +20,9 @@ app.get('/', (req, res) => {
   serverConfig.userAgent = req.headers['user-agent'];
 
   const appHtml = renderToString(
-    <App lookConfig={serverConfig} />
+    <LookRoot config={serverConfig}>
+      <App />
+    </LookRoot>
   )
 
   res.write(indexHTML.replace('<!-- {{app}} -->', appHtml))
