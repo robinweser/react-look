@@ -9,14 +9,14 @@ You may also pass some `style` to style the `div` which `LookRoot` creates. Othe
 
 ## Usage
 ```javascript
-import { LookRoot, Presets, DevTools } from 'react-look'
+import { LookRoot, Presets, Plugins } from 'react-look'
 import { render } from 'react-dom'
 import React from 'react'
 import App from '../index'
 
 // Generating some configuration
 const composedConfig = Presets['react-dom']
-composedConfig.plugins.push(DevTools.friendlyClassName)
+composedConfig.plugins.push(Plugins.friendlyClassName)
 
 render(
   <LookRoot config={composedConfig} style={wrapperStyles}>

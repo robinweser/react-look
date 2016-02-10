@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Presets, DevTools } from '../modules/addons'
+import { Presets, Plugins } from '../modules/addons'
 import { Plugins } from 'inline-style-linter'
 import { StyleSheet, LookRoot } from '../modules/look'
 
@@ -18,9 +18,10 @@ StyleSheet.toCSS({
 })
 
 const config = Presets['react-dom'];
-// config.plugins.push(DevTools.friendlyClassName)
+config.plugins.push(Plugins.styleLogger)
+config.styleLogger = { onEvent: 'onMouseEnter', onlyTopMost: true }
 /*
-config.plugins.push(DevTools.linter)
+config.plugins.push(Plugins.linter)
 
 config.linter = {
   plugins: [

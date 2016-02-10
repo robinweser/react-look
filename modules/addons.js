@@ -5,9 +5,9 @@ import mixin from './plugins/mixin'
 import prefixer from './plugins/prefixer'
 
 // Dev tools
-import linter from './devTools/linter'
-import styleLogger from './devTools/styleLogger'
-import friendlyClassName from './devTools/friendlyClassName'
+import linter from './plugins/linter'
+import styleLogger from './plugins/styleLogger'
+import friendlyClassName from './plugins/friendlyClassName'
 
 // Conditions
 import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/condition'
@@ -28,9 +28,7 @@ export default {
     mixin,
     fallbackValue,
     statefulValue,
-    prefixer
-  },
-  DevTools: {
+    prefixer,
     styleLogger,
     linter,
     friendlyClassName

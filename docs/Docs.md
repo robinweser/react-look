@@ -22,6 +22,10 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 		* [Alternative Value](plugins/AlternativeValue.md)
 		* [Stateful Value](plugins/StatefulValue.md)
 		* [Prefixer](plugins/Prefixer.md)
+		* **3.1.1 [DevTools](Plugins.md#devtools)**
+			* [Friendly ClassName](plugins/friendlyClassName.md)
+			* [Linter](plugins/linter.md)
+			* [Style Logger](plugins/StyleLogger.md)
 	* **3.2. [Mixins](Mixins.md)**
 		* [Contains](Mixins.md#contains)
 		* [Extend](Mixins.md#substr)
@@ -29,10 +33,6 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 		* [Platform queries](Mixins.md#platform-queries)
 		* [Stateful Conditions](Mixins.md#stateful-conditions)
 		* [Substr](Mixins.md#extract-css)
-	* **3.3. [DevTools](DevTools.md)**
-		* [Friendly ClassName](devTools/friendlyClassName.md)
-		* [Linter](devTools/linter.md)
-		* [Style Logger](devTools/StyleLogger.md)
 3. [API Reference](api/)
 	* **3.1. [look](api/look.md)**
 	* **3.2. [StyleSheet](api/StyleSheet.md)**

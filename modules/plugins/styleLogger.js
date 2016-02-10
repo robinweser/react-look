@@ -16,8 +16,8 @@ export default ({ styles, Component, element, newProps, config: { styleLogger } 
     const elementReference = keyInfo + (keyInfo !== '' && refInfo !== '' ? ';' : '') + refInfo
     const elementInfo = childType + (elementReference !== '' ? '[' + elementReference + ']' : '')
 
-    const loggerPrefix = Component._lookScope + ':' + elementInfo + ''
-    const logStyles = styleLogger.toString ? toCSS(styles) : styles
+    const loggerPrefix = Component.constructor.displayName + ':' + elementInfo + ''
+    const logStyles = styleLogger.toString === true ? toCSS(styles) : styles
 
 
     // logs styles if a given event got triggered

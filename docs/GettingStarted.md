@@ -318,15 +318,15 @@ app.get('/', (req, res) => {
 ```
 
 ## 10. DevTools
-DevTools are used to boost **your** developer experience *(also now as DX)*. They come in handy if you want to *e.g.* debug your code or quality-proof it.
+DevTools are **special** plugins used to boost **your** developer experience *(also now as DX)*. They come in handy if you want to *e.g.* debug your code or quality-proof it.
 
 Look also provides some devTools which can be easily applied by just adding them to the plugins list, but you should **only use them for development**.
-> Check out [DevTools.md](DevTools.md) for an overview of all devTools.
+> Check out [Plugins.md](Plugins.md#devtools) for an overview of all devTools.
 
 ```javascript
-import { Presets, DevTools } from 'react-look'
+import { Presets, Plugins } from 'react-look'
 
 const config = Presets['react-dom']
 // a devTool that improves className readability for better debugging
-config.plugins.push(DevTools.friendlyClassName)
+config.plugins.push(Plugins.friendlyClassName)
 ```
