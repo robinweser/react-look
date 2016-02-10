@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import StyleContainer from './StyleContainer'
-import look from '../core/enhancer'
-import _ from 'lodash'
 
 const contextType = { _lookConfig: PropTypes.object }
 /**
@@ -16,7 +14,7 @@ export default class LookRoot extends Component {
   };
 
   getChildContext() {
-		return { _lookConfig: this.props.config }
+    return { _lookConfig: this.props.config }
   }
 
   render() {
