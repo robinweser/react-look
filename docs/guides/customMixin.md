@@ -5,17 +5,17 @@ A mixin basically it is just a plain function that either returns an object cont
 ## Interface
 As you most likely need some more information to evaluate properly, Look provides an interface that includes lots of informations.
 
-| Property | Type | Description |
-| -------- | ----------- |
-| Component | *object* | React Component wrapped with look |
-| element | *object* | element that gets the styles applied |
-| newProps | *object* | element's new props after enhancing |
-| StyleContainer | [*StyleContainer*](../api/StyleContainer.md) | global CSS container |
-| config | *object* | Look configuration | 
-| styles | *object* | whole style object |
-| mixinKey | *string* | key used to register the mixin |
-| property | *string* | property used in styles |
-| value | *any* | value applied to the property |
+| Property |Type |Description |
+| -------- | ----------- | ---|
+| Component | *object*|React Component wrapped with look |
+|element |*object* |element that gets the styles applied |
+| newProps | *object* |element's new props after enhancing |
+| StyleContainer | [*StyleContainer*](../api/StyleContainer.md) |global CSS container |
+| config | *object* |Look configuration |
+|styles |*object* |whole style object |
+|mixinKey | *string* |key used to register the mixin |
+|property | *string* |property used in styles |
+| value | *any* |value applied to the property |
 
 > The components are the same passed to plugins except mixinKey, property and value.
 
