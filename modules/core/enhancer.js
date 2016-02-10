@@ -25,7 +25,7 @@ export default (CustomComponent, config = { }) => {
 
     render() {
       const renderedElement = stateless ? CustomComponent(this.props, this.context) : super.render() // eslint-disable-line
-      const contextConfig = this.context ? this.context._lookConfig : null
+      const contextConfig = this.context._lookConfig || null
       const elementConfig = renderedElement.props.lookConfig || null
       // Compose all possible ways to configure Look
       const composedConfig = _.merge({ }, contextConfig, config, elementConfig)

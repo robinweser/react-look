@@ -63,5 +63,4 @@ const styles = StyleSheet.create({
   color: 'rgb(82, 67, 203)'
 })
 
-// Apply lookRoot: true as this is the top-level Component
 export default look(App)

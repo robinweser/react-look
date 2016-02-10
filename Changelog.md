@@ -1,12 +1,41 @@
 # Changelog
 
+## 1.0
+### 1.0.0-beta (10.02.16)
+> Note: There will be no more API changes before 1.0 gets released.
+
+#### API Changes
+While those changes might seem huge, it still is quite easy to update.
+* Uses `className` instead of `look`
+* Use [`StyleSheet.combineStyles`](docs/api/StyleSheet.md#combinestylesstyles) instead of an array passed
+* `StyleSheet.create` only accepts styles, no Component anymore
+* Uses [`<LookRoot>`](docs/api/LookRoot.md)-Component in favor of `lookRoot: true`
+* Pass config with `<LookRoot config={config}>` instead of `lookConfig` on root-Component
+* Everything shipped with `react-look/addons` comes with `react-look` directly
+
+##### Improvements
+* Huge performance improvements
+* Now supports **every** pseudo class
+* LVHA-aware pseudo classes
+* Less bandwidth for server-side rendering
+* Improved debugging with [friendlyClassName](docs/plugins/friendlyClassName.md)-plugin
+* New documentation & [Getting Started](docs/GettingStarted.md) guide
+* Now using [lodash](lodash.com) utility methods
+
+##### Bug fixes
+* Third-party `context` gets passed correctly ( [#190](https://github.com/rofrischmann/react-look/issues/190) )
+* Fixed plugin resolving ( [#185](https://github.com/rofrischmann/react-look/issues/185) )
+* Fixed `@font-face` rendering bug
+* Fixed a bug that prevented mixins to resolve correctly
+
+------
 ## 0.7
 ### 0.7.2 (12.01.16)
 * added support for hot module replacement
 * fixed a bug that prevents nested stateful values to resolve correctly
 * upgraded devTools (docs soon)
 
-### 0.7.1 (01.01.16)
+#### 0.7.1 (01.01.16)
 ##### Breaking
 * added a linter plugin based on [inline-style-linter](https://github.com/rofrischmann/inline-style-linter)
 
@@ -52,7 +81,7 @@
 
 
 ## 0.5
-### 0.5.2 (07.11.15)
+#### 0.5.2 (07.11.15)
 - Fixed nested plugin resolving
 - Fixed [media query](docs/Mixins.md#mediaqueries) automatic rerendering
 - Added new [pseudo classes](docs/Mixins.md#pseudoclasses) (`:target`, `:first-letter`, `:contains`, `:substr`, `:blank`)
