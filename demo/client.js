@@ -17,9 +17,10 @@ StyleSheet.toCSS({
 })
 
 const config = Presets['react-dom'];
+config.plugins.push(Plugins.friendlyClassName)
 config.plugins.push(Plugins.styleLogger)
 config.styleLogger = {
-  onEvent: 'onMouseEnter',
+  onEvent: 'onClick',
   onlyTopMost: true,
   noEmpty: true
 }
