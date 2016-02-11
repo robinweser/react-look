@@ -9,7 +9,7 @@
 It intelligently splits static and dynamic styles to maximize reusablility and performance.
 It simplyfies how you are styling your Components.
 
-> **Warning**: This README and the docs reference the 1.0.0 Version. <br>Make sure to test it! `npm install react-look@beta`.
+> **Warning**: This README and the docs reference the 1.0.0 Version. **It does not support React Native by now** (coming soon). <br>Make sure to test it! `npm install react-look@beta`.
 
 # Features
 - ES2015 Classes & `React.createClass`
