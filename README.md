@@ -51,7 +51,7 @@ Make sure to check out the [Getting Started Guide](docs/GettingStarted.md) which
 		* 2.1.1 [DevTools](docs/Plugins.md#devtools)
 	* 2.2. [Mixins](docs/Mixins.md)
 3. [API Reference](docs/api/)
-	* 3.1. [look](docs/api/look.md)
+	* 3.1. [Look](docs/api/Look.md)
 	* 3.2. [StyleSheet](docs/api/StyleSheet.md)
 	* 3.3. [LookRoot](docs/api/LookRoot.md)
 	* 3.4. [StyleContainer](docs/api/StyleContainer.md)
