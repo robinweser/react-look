@@ -1,5 +1,6 @@
 {
   "plugins":[
+    "esformatter-jsx",
     "esformatter-quotes",
     "esformatter-literal-notation",
     "esformatter-parseint",
@@ -20,10 +21,7 @@
     "maxAttrsOnTag":3,
     "firstAttributeOnSameLine":true,
     "alignWithFirstAttribute":false,
-    "spaceInJSXExpressionContainers":" ",
-    "htmlOptions":{
-
-    }
+    "spaceInJSXExpressionContainers":""
   },
   "collapseObjects":{
     "ObjectExpression":{
