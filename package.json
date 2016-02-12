@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "0.7.2",
+  "version": "1.0.0-beta1",
   "description": "Advanced & Dynamic Component Styling for React.",
   "main": "lib/look.js",
   "files": [
