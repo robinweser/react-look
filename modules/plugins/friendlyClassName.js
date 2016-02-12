@@ -1,4 +1,8 @@
-const classNameTemplate = (Component, element, className) => Component.constructor.displayName + '-' + element.type + '--' + className
+import getChildType from '../utils/getChildType'
+
+const classNameTemplate = (Component, element, className) => {
+  return Component.constructor.displayName + '-' + getChildType(element) + '--' + className
+}
 
 const classMapping = new Map()
 
