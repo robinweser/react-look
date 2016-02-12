@@ -1,5 +1,4 @@
-import lodash from 'lodash'
-import { get as getProp } from 'dot-prop'
+import _ from 'lodash'
 
 /**
  * Splits an expression at a given operator and returns both values converted to compare them with ease
@@ -12,12 +11,12 @@ export default (key, operator, Component) => {
     return false
   }
 
-  const matchValues = lodash.assign({ }, Component.props, Component.state)
+  const matchValues = _.assign({ }, Component.props, Component.state)
   const [ property, value ] = key.split(operator)
   const [ baseProp ] = property.split('.')
 
   if (matchValues.hasOwnProperty(baseProp)) {
-    let match = getProp(matchValues, property)
+    let match = _.get(matchValues, property)
 
     match = match === undefined ? 'undefined' : match
 

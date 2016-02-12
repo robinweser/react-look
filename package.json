@@ -1,6 +1,6 @@
 {
   "name": "react-look",
-  "version": "1.0.0",
+  "version": "0.7.2",
   "description": "Advanced & Dynamic Component Styling for React.",
   "main": "lib/look.js",
   "files": [
@@ -48,7 +48,6 @@
   "license": "MIT",
   "dependencies": {
     "assign-styles": "2.0.0",
-    "dot-prop": "^2.2.0",
     "inline-style-linter": "^0.2.7",
     "inline-style-prefixer": "^0.6.7",
     "inline-style-transformer": "^1.0.0",
