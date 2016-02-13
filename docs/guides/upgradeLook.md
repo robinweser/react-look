@@ -74,11 +74,11 @@ ReactDOM.render(<App lookConfig={Presets['react-dom']}/>, document.getElementByI
 * Every module is now available directly from `react-look`. No `react-look/addons` anymore. Also all devTools moved into Plugins.
 
 ```javascript
-// new => Version 1.0+
+// old => Version < 1.0
 import look, { StyleSheet } from 'react-look'
 import { Plugins, Mixins, Presets, DevTools } from 'react-look/addons'
 
-// old => Version < 1.0
+// new => Version 1.0+
 import look, { StyleSheet, LookRoot, Plugins, Mixins, Presets } from 'react-look'
 ```
 
