@@ -1,8 +1,11 @@
 import Enhancer from './core/enhancer'
-import StyleSheet from './api/StyleSheet'
-import LookRoot from './api/LookRoot'
+import StyleSheet from './dom/api/StyleSheet'
+import LookRoot from './dom/api/LookRoot'
 
-import { Plugins, Mixins, DevTools, Presets } from './addons'
+import NativeStyleSheet from './native/api/StyleSheet'
+import NativeLookRoot from './native/api/LookRoot'
+
+import { Plugins, Mixins, Presets } from './addons'
 
 // Resolving annotations
 // If not passing arguments it just wraps the Component
@@ -17,12 +20,17 @@ export default (...args) => {
   }
 }
 
+const Native = {
+  StyleSheet: NativeStyleSheet,
+  LookRoot: NativeLookRoot
+}
+
 export {
   StyleSheet,
   LookRoot,
+  Native,
 
   Plugins,
   Mixins,
-  DevTools,
   Presets
 }
