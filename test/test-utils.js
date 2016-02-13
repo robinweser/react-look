@@ -1,4 +1,4 @@
-import StyleContainer from '../modules/api/StyleContainer'
+import StyleContainer from '../modules/dom/api/StyleContainer'
 
 export function clearStyleContainer() {
   StyleContainer.selectors.clear()

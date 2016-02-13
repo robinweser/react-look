@@ -1,4 +1,4 @@
-import StyleContainer from '../api/StyleContainer'
+import StyleContainer from './api/StyleContainer'
 import sortPseudoClasses from '../utils/sortPseudoClasses'
 import isMediaQuery from '../utils/isMediaQuery'
 import isPseudo from '../utils/isPseudo'

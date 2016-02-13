@@ -18,7 +18,7 @@
   "jsx":{
     "formatJSX":true,
     "attrsOnSameLineAsTag":false,
-    "maxAttrsOnTag":3,
+    "maxAttrsOnTag":5,
     "firstAttributeOnSameLine":true,
     "alignWithFirstAttribute":false,
     "spaceInJSXExpressionContainers":""

@@ -1,5 +1,5 @@
-import renderStaticStyles, { extractDynamicStyles, renderSpecialStyles } from '../../modules/core/renderer'
-import StyleContainer from '../../modules/api/StyleContainer'
+import renderStaticStyles, { extractDynamicStyles, renderSpecialStyles } from '../../modules/dom/renderer'
+import StyleContainer from '../../modules/dom/api/StyleContainer'
 import { clearStyleContainer } from '../test-utils'
 import { expect } from 'chai'
 
