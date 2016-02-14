@@ -11,7 +11,7 @@ class Container extends Component {
           {this.props.children}
         </div>
       </div>
-      )
+    )
   }
 }
 

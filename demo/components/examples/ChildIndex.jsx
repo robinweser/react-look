@@ -26,24 +26,24 @@ class ChildIndex extends Component {
 }
 
 const styles = StyleSheet.create({
-    color: 'darkgray',
-    listStyleType: 'none',
-    ':nth-child(odd)': {
-      backgroundColor: 'lightGray',
-      color: 'blue'
-    },
-    ':last-child': {
-      color: 'red'
-    },
-    ':nth-of-type(3)': {
-      backgroundColor: 'rgba(30, 50, 60, 0.6)'
-    },
-    ':nth-of-type(3n+5)'  :{
-      backgroundColor:'rgba(141, 195, 131, 0.4)'
-    },
-    ':first-child': {
-      color: 'yellow'
-    }
+  color: 'darkgray',
+  listStyleType: 'none',
+  ':nth-child(odd)': {
+    backgroundColor: 'lightGray',
+    color: 'blue'
+  },
+  ':last-child': {
+    color: 'red'
+  },
+  ':nth-of-type(3)': {
+    backgroundColor: 'rgba(30, 50, 60, 0.6)'
+  },
+  ':nth-of-type(3n+5)'  :{
+    backgroundColor:'rgba(141, 195, 131, 0.4)'
+  },
+  ':first-child': {
+    color: 'yellow'
+  }
 })
 
 export default look(ChildIndex)
