@@ -72,7 +72,23 @@ This will generate the following CSS *(`.c1` is just an example)*
 <br>
 <img src="../res/native-badge.png" height=25>
 
-On React Native, `StyleSheet` right now is just a dumb container which returns the exact same styles that come into. It just helps to reuse existing React Native Components.
+On React Native, `StyleSheet.create` right now is just a dumb container which returns the exact same styles that come into. It just helps to reuse existing React Native Components.
+```javascript
+import { Native: { StyleSheet } } from 'react-look'
+
+const styles = StyleSheet.create({
+	box: {
+		color: 'red',
+		'@media (min-height: 300px)': {
+			color: 'blue',
+			// They can also be nested multiple times
+			'@media (min-width: 500px)': {
+				color: 'gray'
+			}
+		}
+	},
+})
+```
 
 ## `combineStyles(...styles)`
 Styles can be combined using the `combineStyles` helper.
