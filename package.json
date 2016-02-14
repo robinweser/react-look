@@ -27,8 +27,8 @@
     "lint": "eslint modules",
     "package": "npm test && npm run bundle",
     "release": "npm run package && npm publish",
-    "test": "mocha --recursive --compilers js:babel-core/register",
-    "test:coverage": "babel-node ./node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha -- --recursive"
+    "test": "mocha --opts test/mocha.opts",
+    "test:coverage": "babel-node ./node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha -- --opts test/mocha.opts"
   },
   "keywords": [
     "react",

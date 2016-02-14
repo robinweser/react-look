@@ -59,7 +59,9 @@ describe('Resolving styles', () => {
     }
 
     const el = <Comp inner={<div></div>} />
-    const resolved = resolveStyles(Comp, el, { })
+    const resolved = resolveStyles(Comp, el, {
+      _resolveStyles: resolveStyles
+    })
     expect(resolved.props._lookShouldUpdate).to.eql(true)
   })
 

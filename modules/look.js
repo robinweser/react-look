@@ -3,7 +3,7 @@ import StyleSheet from './dom/api/StyleSheet'
 import LookRoot from './dom/api/LookRoot'
 
 import NativeStyleSheet from './native/api/StyleSheet'
-import NativeLookRoot from './native/api/LookRoot'
+import { default as NativeLookRoot } from './native/api/LookRoot'
 
 import { Plugins, Mixins, Presets } from './addons'
 
