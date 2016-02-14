@@ -3,9 +3,9 @@ A helper to create scoped styles and global CSS styles.
 ## Methods
 - [create](#createstyles)
 - [combineStyles](#combinestylesstyles)
-- [toCSS](#tocssstyles--scope) <img src="../res/dom-badge.png" height=15 style="margin-top:-2px">
-- [keyframes](#keyframesframes--name) <img src="../res/dom-badge.png" height=15 style="margin-top:-2px">
-- [font](#fontfontfamily-files--properties) <img src="../res/dom-badge.png" height=15 style="margin-top:-2px">
+- [toCSS](#tocssstyles--scope) <img src="../res/dom-badge.png" height=15>
+- [keyframes](#keyframesframes--name) <img src="../res/dom-badge.png" height=15>
+- [font](#fontfontfamily-files--properties) <img src="../res/dom-badge.png" height=15>
 
 
 ## `create(styles)`
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
 c(styles.box, styles.container) // => c1 c2
 ```
 
-## `toCSS(styles [, scope])` <img src="../res/dom-badge.png" height=20 style="margin-top:-2px">
+## `toCSS(styles [, scope])` <img src="../res/dom-badge.png" height=20>
 Adds all `styles` as a valid CSS string and directly applies those to the global CSSStyleSheet. `scope` will also add a scope selector to add more specificity.
 
 ```javascript
@@ -107,7 +107,7 @@ StyleSheet.toCSS({
 	}
 })
 ```
-## `keyframes(frames [, name])` <img src="../res/dom-badge.png" height=20 style="margin-top:-2px">
+## `keyframes(frames [, name])` <img src="../res/dom-badge.png" height=20>
 Adds the `frames` as a new keyframe animation to the global CSSStyleSheet and returns the animation name.
 `frames` should be an object containing a set of percentage-based styles. or both `from` and `to` values.<br> You may also pass a custom animation `name`.
 
@@ -125,7 +125,7 @@ StyleSheet.keyframes({
 })
 ```
 
-## `font(fontFamily, files [, properties])` <img src="../res/dom-badge.png" height=20 style="margin-top:-2px">
+## `font(fontFamily, files [, properties])` <img src="../res/dom-badge.png" height=20>
 Adds the `fontFamily` to the global CSSStyleSheet and uses `files` as source for fonts. `files` may either be a string (single) or an array (multiple).<br>
 `properties` may contain additional font properties which are:
 * `fontWeight`

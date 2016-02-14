@@ -5,15 +5,15 @@ The following usage guide should provide enough information to build apps with L
 1. [Installation](#1-installation)
 2. [First Component](#2-first-component)
 3. [Stateless Components](#3-stateless-components)
-4. [Pseudo classes](#4-pseudo-classes) <img src="res/dom-badge.png" height=15 style="margin-top:-2px">
-5. [Media queries](#5-media-queries) <img src="res/dom-badge.png" height=15 style="margin-top:-2px">
+4. [Pseudo classes](#4-pseudo-classes) <img src="res/dom-badge.png" height=15>
+5. [Media queries](#5-media-queries) <img src="res/dom-badge.png" height=15>
 6. [Mixins & Plugins](#6-mixins--plugins)
 	* 6.1. [Configuration & LookRoot](#61-configuration--lookroot)
 	* 6.2. [look wrapper](#62-look-wrapper)
 	* 6.3. [Usage](#63-usage)
-7. [Fallback values](#7-fallback-values) <img src="res/dom-badge.png" height=15 style="margin-top:-2px">
-8. [Vendor prefixes](#8-vendor-prefixes) <img src="res/dom-badge.png" height=15 style="margin-top:-2px">
-9. [Server-side rendering](#9-server-side-rendering) <img src="res/dom-badge.png" height=15 style="margin-top:-2px">
+7. [Fallback values](#7-fallback-values) <img src="res/dom-badge.png" height=15>
+8. [Vendor prefixes](#8-vendor-prefixes) <img src="res/dom-badge.png" height=15>
+9. [Server-side rendering](#9-server-side-rendering) <img src="res/dom-badge.png" height=15>
 10. [DevTools](#10-devtools)
 
 ## 1. Installation
