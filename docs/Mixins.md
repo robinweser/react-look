@@ -4,8 +4,8 @@ Every mixin gets resolved by the [mixin](plugins/Mixin.md) plugin which therefor
 
 * [Contains](#contains)
 * [Extend](#extend)
-* [Extract CSS](#extract-css)
-* [Platform queries](#platform-queries)
+* [Extract CSS](#extract-css) <img src="res/dom-badge.png" height=15 style="margin-top:-2px">
+* [Platform queries](#platform-queries) <img src="res/dom-badge.png" height=15 style="margin-top:-2px">
 * [Stateful Conditions](#stateful-conditions)
 * [Substr](#substr)
 
@@ -79,7 +79,7 @@ Just use the new spread operator `...`.
 }
 ```
 
-## Extract CSS
+## Extract CSS <img src="res/dom-badge.png" height=20 style="margin-top:-2px">
 ```javascript
 {
 	box: {
@@ -91,7 +91,7 @@ Just use the new spread operator `...`.
 ```
 Define CSS classes that get additionally added to the Component without having to add those as `className=''` in addition to the look styles.
 
-## Platform Queries
+## Platform Queries <img src="res/dom-badge.png" height=20 style="margin-top:-2px">
 
 ```javascript
 {

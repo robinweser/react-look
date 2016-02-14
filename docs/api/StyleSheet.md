@@ -3,12 +3,14 @@ A helper to create scoped styles and global CSS styles.
 ## Methods
 - [create](#createstyles)
 - [combineStyles](#combinestylesstyles)
-- [toCSS](#tocssstyles--scope)
-- [keyframes](#keyframesframes--name)
-- [font](#fontfontfamily-files--properties)
+- [toCSS](#tocssstyles--scope) <img src="../res/dom-badge.png" height=15 style="margin-top:-2px">
+- [keyframes](#keyframesframes--name) <img src="../res/dom-badge.png" height=15 style="margin-top:-2px">
+- [font](#fontfontfamily-files--properties) <img src="../res/dom-badge.png" height=15 style="margin-top:-2px">
 
 
 ## `create(styles)`
+<img src="../res/dom-badge.png" height=25>
+
 Splits the `styles` into static and dynamic styles, renders the static styles to CSS classes and returns the `className`. Optionally add the Component or alternatively a `string` that's used as the class scope *(makes debugging ways easier)*.
 
 ### Pseudo classes
@@ -67,9 +69,16 @@ This will generate the following CSS *(`.c1` is just an example)*
 	.c1 { color: gray }
 }
 ```
+<br>
+<img src="../res/native-badge.png" height=25>
+
+On React Native, `StyleSheet` right now is just a dumb container which returns the exact same styles that come into. It just helps to reuse existing React Native Components.
 
 ## `combineStyles(...styles)`
-Styles can be combined using the `combineStyles` helper. It simply joins two classNames separated with a space.
+Styles can be combined using the `combineStyles` helper.
+
+<img src="../res/dom-badge.png" height=15> It simply joins `className`s separated with a space.<br>
+<img src="../res/native-badge.png" height=15> It simply deep assigns all styles objects.
 ```javascript
 import { StyleSheet } from 'react-look'
 // You will most likely use a shortcut
@@ -83,7 +92,7 @@ const styles = StyleSheet.create({
 c(styles.box, styles.container) // => c1 c2
 ```
 
-## `toCSS(styles [, scope])`
+## `toCSS(styles [, scope])` <img src="../res/dom-badge.png" height=20 style="margin-top:-2px">
 Adds all `styles` as a valid CSS string and directly applies those to the global CSSStyleSheet. `scope` will also add a scope selector to add more specificity.
 
 ```javascript
@@ -98,7 +107,7 @@ StyleSheet.toCSS({
 	}
 })
 ```
-## `keyframes(frames [, name])`
+## `keyframes(frames [, name])` <img src="../res/dom-badge.png" height=20 style="margin-top:-2px">
 Adds the `frames` as a new keyframe animation to the global CSSStyleSheet and returns the animation name.
 `frames` should be an object containing a set of percentage-based styles. or both `from` and `to` values.<br> You may also pass a custom animation `name`.
 
@@ -116,7 +125,7 @@ StyleSheet.keyframes({
 })
 ```
 
-## `font(fontFamily, files [, properties])`
+## `font(fontFamily, files [, properties])` <img src="../res/dom-badge.png" height=20 style="margin-top:-2px">
 Adds the `fontFamily` to the global CSSStyleSheet and uses `files` as source for fonts. `files` may either be a string (single) or an array (multiple).<br>
 `properties` may contain additional font properties which are:
 * `fontWeight`

@@ -1,4 +1,4 @@
-# Friendly className
+# Friendly className <img src="../res/dom-badge.png" height=25>
 
 It will transform your `className`s created with `StyleSheet.create` into readable, debug-friendly & namespaced classNames to be able to debug as easy as possible.
 

@@ -5,28 +5,26 @@
 ![Dependencies](https://david-dm.org/rofrischmann/react-look.svg)
 ![Gzipped Size](https://img.shields.io/badge/gzipped-~17k-brightgreen.svg)
 
-**Look** is a modular, **plugin**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/). <br>
-It intelligently splits static and dynamic styles to maximize reusablility and performance.
-It simplyfies how you are styling your Components.
-
-> **Warning**: This README and the docs reference the 1.0.0 Version. **It does not support React Native by now** (coming soon). <br>Make sure to test it!
+**Look** is a modular, **plugin**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/). <br>
+Platform differences are flagged using either <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px"> or <img src="docs/res/native-badge.png" height=15 style="margin-top:-2px">. If not flagged, it is available for both.
+> **Warning**: The documentation references the 1.0.0-beta. Make sure to test it. For legacy docs check [here](https://github.com/rofrischmann/react-look/tree/9a7261b16f9a06e8cd7e64773d19714fd4181219).
 
 # Features
 - ES2015 Classes & `React.createClass`
 - stateless Components
-- server-side rendering
+- server-side rendering <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
 - [plugin-based](docs/Plugins.md)
 - [developer tools](docs/Plugins.md#developertools)
 - Sass-like nesting
-- [pseudo classes](docs/api/StyleSheet.md#pseudo-classes)
-- [media queries](docs/api/StyleSheet.md#media-queries)
-- [platform queries](docs/Mixins.md#platform-queries)
+- [pseudo classes](docs/api/StyleSheet.md#pseudo-classes) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
+- [media queries](docs/api/StyleSheet.md#media-queries) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
+- [platform queries](docs/Mixins.md#platform-queries) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
 - [conditioned styles](docs/Mixins.md#stateful-conditions)
 - [stateful values](docs/plugins/StatefulVaue.md)
-- [fallback values](docs/plugins/FallbackValue.md)
+- [fallback values](docs/plugins/FallbackValue.md) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
 - [extending](docs/Mixins.md#extend)
-- [vendor prefixing](docs/plugins/Prefixer.md)
-- [CSS](docs/api/StyleSheet.md##tocssstyles--scope-media-id), [font-face ](docs/api/StyleSheet.md#fontfontfamily-files--properties) & [keyframes API](docs/api/StyleSheet.md#keyframesframes--name)
+- [vendor prefixing](docs/plugins/Prefixer.md) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
+- [CSS](docs/api/StyleSheet.md##tocssstyles--scope-media-id), [font-face ](docs/api/StyleSheet.md#fontfontfamily-files--properties) & [keyframes API](docs/api/StyleSheet.md#keyframesframes--name) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
 
 # Documentation
 The documentation contains information on every part of Look including usage guides and API reference.
@@ -39,22 +37,22 @@ Make sure to check out the [Getting Started Guide](docs/GettingStarted.md) which
 	* 1.1. [Installation](docs/GettingStarted.md#1-installation)
 	* 1.2. [First Component](docs/GettingStarted.md#2-first-component)
 	* 1.3. [Stateless Components](docs/GettingStarted.md#3-stateless-components)
-	* 1.4. [Pseudo classes](docs/GettingStarted.md#4-pseudo-classes)
-	* 1.5. [Media queries](docs/GettingStarted.md#5-media-queries)
+	* 1.4. [Pseudo classes](docs/GettingStarted.md#4-pseudo-classes) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
+	* 1.5. [Media queries](docs/GettingStarted.md#5-media-queries) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
 	* 1.6. [Mixins & Plugins](docs/GettingStarted.md#6-mixins--plugins)
-	* 1.7. [Fallback values](docs/GettingStarted.md#7-fallback-values)
-	* 1.8. [Vendor prefixes](docs/GettingStarted.md#8-vendor-prefixes)
-	* 1.9. [Server-side rendering](docs/GettingStarted.md#9-server-side-rendering)
+	* 1.7. [Fallback values](docs/GettingStarted.md#7-fallback-values) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
+	* 1.8. [Vendor prefixes](docs/GettingStarted.md#8-vendor-prefixes) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
+	* 1.9. [Server-side rendering](docs/GettingStarted.md#9-server-side-rendering) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
 	* 1.10. [DevTools](docs/GettingStarted.md#10-devtools)
 2. Registry
 	* 2.1. [Plugins](docs/Plugins.md)
 		* 2.1.1 [DevTools](docs/Plugins.md#devtools)
 	* 2.2. [Mixins](docs/Mixins.md)
 3. [API Reference](docs/api/)
-	* 3.1. [Look](docs/api/Look.md)
+	* 3.1. [look](docs/api/Look.md)
 	* 3.2. [StyleSheet](docs/api/StyleSheet.md)
 	* 3.3. [LookRoot](docs/api/LookRoot.md)
-	* 3.4. [StyleContainer](docs/api/StyleContainer.md)
+	* 3.4. [StyleContainer](docs/api/StyleContainer.md) <img src="docs/res/dom-badge.png" height=15 style="margin-top:-2px">
 4. [Guides](docs/guides/)
 	* 4.1. [Upgrading Look](docs/guides/upgradeLook.md)
 	* 4.2. [Configuring Look](docs/guides/configureLook.md)
@@ -66,9 +64,11 @@ Make sure to check out the [Getting Started Guide](docs/GettingStarted.md) which
 ```sh
 npm install react-look
 ```
-The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries. Use nested objects to define pseudo classes, media queries or conditioned styles. <br>
+The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries.
 
+<img src="docs/res/dom-badge.png" height=25>
 
+Using with `react-dom` Look ships **pseudo class** and **media query** support by default. They're resolved within the `StyleSheet.create` method.
 ```javascript
 import React, { Component, PropTypes } from 'react'
 import look, { StyleSheet } from 'react-look'
@@ -121,7 +121,55 @@ const styles = StyleSheet.create({
 
 export default look(Header)
 ```
+<br>
+<img src="docs/res/native-badge.png" height=25>
 
+Using with `react-native` only a part of the plugins, mixins and devTools is available.
+You also import some stuff differently.
+```javascript
+import React, { View, Text, Component, PropTypes } from 'react-native'
+import look, { Native: { StyleSheet } } from 'react-look'
+
+class Header extends Component {
+  static defaultProps = { size: 24 };
+  static propTypes = { size: PropTypes.number.isRequired };
+  state = { status: 'active' };
+
+  render() {
+    return (
+      // Styles are basically applied using the `style` property
+			// Same way as React Native does by default
+      <View style={styles.header}>
+        <Text style={styles.title}>
+          {this.props.title}
+        </Text>
+      </View>
+    )
+  }
+}
+
+// generates classNames for each selector
+const styles = StyleSheet.create({
+  header: {
+    color: 'red',
+		// You can also use mixins with the same selector.
+		// They'll get split intelligently and evaluated on render
+    'status=active': {             
+      backgroundColor: 'green',
+      'size>=20': {            
+        backgroundColor: 'pink'       
+      }
+    }
+  },
+  title: {
+    fontWeight: 800,
+    // use functions to inject props, state or context values
+    fontSize: (props, state, context) => props.size * state.zoom
+  }
+})
+
+export default look(Header)
+```
 # Demo
 Check out the provided examples for some special use cases. See them in action using the demo. You can easily run the examples on your own within the provided demo by just:
 ```sh
