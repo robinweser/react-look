@@ -1,4 +1,4 @@
-<h1><img src="docs/res/logo.png" width=350></h1>
+<h1><img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/logo.png" width=350></h1>
 
 ![TravisCI](https://travis-ci.org/rofrischmann/react-look.svg?branch=develop) [![Test Coverage](https://codeclimate.com/github/rofrischmann/react-look/badges/coverage.svg)](https://codeclimate.com/github/rofrischmann/react-look/coverage) [![Code Climate](https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg)](https://codeclimate.com/github/rofrischmann/react-look)
 [![npm version](https://badge.fury.io/js/react-look.svg)](http://badge.fury.io/js/react-look)
@@ -6,25 +6,25 @@
 ![Gzipped Size](https://img.shields.io/badge/gzipped-~17k-brightgreen.svg)
 
 **Look** is a modular, **plugin**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/). <br>
-Platform differences are flagged using either <img src="docs/res/dom-badge.png" height=15> or <img src="docs/res/native-badge.png" height=15>. If not flagged, it is available for both.
+Platform differences are flagged using either <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15> or <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>. If not flagged, it is available for both.
 > **Warning**: The documentation references the 1.0.0-beta. Make sure to test it. For legacy docs check [here](https://github.com/rofrischmann/react-look/tree/9a7261b16f9a06e8cd7e64773d19714fd4181219).
 
 # Features
 - ES2015 Classes & `React.createClass`
 - stateless Components
-- server-side rendering <img src="docs/res/dom-badge.png" height=15>
+- server-side rendering <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 - [plugin-based](docs/Plugins.md)
 - [developer tools](docs/Plugins.md#developertools)
 - Sass-like nesting
-- [pseudo classes](docs/api/StyleSheet.md#pseudo-classes) <img src="docs/res/dom-badge.png" height=15>
-- [media queries](docs/api/StyleSheet.md#media-queries) <img src="docs/res/dom-badge.png" height=15>
-- [platform queries](docs/Mixins.md#platform-queries) <img src="docs/res/dom-badge.png" height=15>
+- [pseudo classes](docs/api/StyleSheet.md#pseudo-classes) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+- [media queries](docs/api/StyleSheet.md#media-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+- [platform queries](docs/Mixins.md#platform-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 - [conditioned styles](docs/Mixins.md#stateful-conditions)
 - [stateful values](docs/plugins/StatefulVaue.md)
-- [fallback values](docs/plugins/FallbackValue.md) <img src="docs/res/dom-badge.png" height=15>
+- [fallback values](docs/plugins/FallbackValue.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 - [extending](docs/Mixins.md#extend)
-- [vendor prefixing](docs/plugins/Prefixer.md) <img src="docs/res/dom-badge.png" height=15>
-- [CSS](docs/api/StyleSheet.md##tocssstyles--scope-media-id), [font-face ](docs/api/StyleSheet.md#fontfontfamily-files--properties) & [keyframes API](docs/api/StyleSheet.md#keyframesframes--name) <img src="docs/res/dom-badge.png" height=15>
+- [vendor prefixing](docs/plugins/Prefixer.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+- [CSS](docs/api/StyleSheet.md##tocssstyles--scope-media-id), [font-face ](docs/api/StyleSheet.md#fontfontfamily-files--properties) & [keyframes API](docs/api/StyleSheet.md#keyframesframes--name) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 
 # Documentation
 The documentation contains information on every part of Look including usage guides and API reference.
@@ -37,12 +37,12 @@ Make sure to check out the [Getting Started Guide](docs/GettingStarted.md) which
 	* 1.1. [Installation](docs/GettingStarted.md#1-installation)
 	* 1.2. [First Component](docs/GettingStarted.md#2-first-component)
 	* 1.3. [Stateless Components](docs/GettingStarted.md#3-stateless-components)
-	* 1.4. [Pseudo classes](docs/GettingStarted.md#4-pseudo-classes) <img src="docs/res/dom-badge.png" height=15>
-	* 1.5. [Media queries](docs/GettingStarted.md#5-media-queries) <img src="docs/res/dom-badge.png" height=15>
+	* 1.4. [Pseudo classes](docs/GettingStarted.md#4-pseudo-classes) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+	* 1.5. [Media queries](docs/GettingStarted.md#5-media-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 	* 1.6. [Mixins & Plugins](docs/GettingStarted.md#6-mixins--plugins)
-	* 1.7. [Fallback values](docs/GettingStarted.md#7-fallback-values) <img src="docs/res/dom-badge.png" height=15>
-	* 1.8. [Vendor prefixes](docs/GettingStarted.md#8-vendor-prefixes) <img src="docs/res/dom-badge.png" height=15>
-	* 1.9. [Server-side rendering](docs/GettingStarted.md#9-server-side-rendering) <img src="docs/res/dom-badge.png" height=15>
+	* 1.7. [Fallback values](docs/GettingStarted.md#7-fallback-values) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+	* 1.8. [Vendor prefixes](docs/GettingStarted.md#8-vendor-prefixes) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+	* 1.9. [Server-side rendering](docs/GettingStarted.md#9-server-side-rendering) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 	* 1.10. [DevTools](docs/GettingStarted.md#10-devtools)
 2. Registry
   * 2.1. [Plugins](docs/Plugins.md)
@@ -52,7 +52,7 @@ Make sure to check out the [Getting Started Guide](docs/GettingStarted.md) which
 	* 3.1. [look](docs/api/Look.md)
 	* 3.2. [StyleSheet](docs/api/StyleSheet.md)
 	* 3.3. [LookRoot](docs/api/LookRoot.md)
-	* 3.4. [StyleContainer](docs/api/StyleContainer.md) <img src="docs/res/dom-badge.png" height=15>
+	* 3.4. [StyleContainer](docs/api/StyleContainer.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 4. [Guides](docs/guides/)
   * 4.1. [Upgrading Look](docs/guides/upgradeLook.md)
   * 4.2. [Configuring Look](docs/guides/configureLook.md)
@@ -63,7 +63,7 @@ Make sure to check out the [Getting Started Guide](docs/GettingStarted.md) which
 # Example
 The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries.
 
-<img src="docs/res/dom-badge.png" height=25>
+<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=25>
 ```sh
 npm install react-look
 ```
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
 export default look(Header)
 ```
 <br>
-<img src="docs/res/native-badge.png" height=25>
+<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=25>
 ```sh
 npm install react-look-native
 ```
@@ -174,7 +174,7 @@ export default look(Header)
 # Demo
 Check out the provided examples for some special use cases. See them in action using the demo. You can easily run the examples on your own within the provided demo by just.
 
-<img src="docs/res/dom-badge.png" height=25>
+<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=25>
 ```sh
 git clone --bare https://github.com/rofrischmann/react-look.git
 npm install
@@ -185,7 +185,7 @@ npm run demo
 npm run demo:universal
 ```
 <br>
-<img src="docs/res/native-badge.png" height=25>
+<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=25>
 
 Right now I am working to get a running React Native example ready. Stay tuned.
 
