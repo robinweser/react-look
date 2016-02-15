@@ -172,7 +172,8 @@ const styles = StyleSheet.create({
 export default look(Header)
 ```
 # Demo
-Check out the provided examples for some special use cases. See them in action using the demo. You can easily run the examples on your own within the provided demo by just:
+Check out the provided examples for some special use cases. See them in action using the demo. You can easily run the examples on your own within the provided demo by just.
+
 <img src="docs/res/dom-badge.png" height=25>
 ```sh
 git clone --bare https://github.com/rofrischmann/react-look.git
