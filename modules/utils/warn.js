@@ -5,6 +5,6 @@
  */
 export default (...warning) => {
   if (process.env.NODE_ENV !== 'production') {
-    console.error('Look Warning: ', ...warning)
+    console.error('Look Warning: ', ...warning) // eslint-disable-line
   }
 }
