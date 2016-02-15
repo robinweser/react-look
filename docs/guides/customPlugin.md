@@ -14,6 +14,16 @@ As you most likely need some more information to evaluate properly, Look provide
 | config | *object* | Look configuration |
 | styles | *object* | whole style object |
 
+#### `_lookShouldUpdate`
+Look also provides a special hook which can be used to force element cloning.
+```javascript
+const plugin = ({ styles, newProps }) => {
+	// forces Look to clone the element
+	newProps._lookShouldUpdate = true
+	return styles
+}
+```
+
 ## Example
 Let's say we want to recreate the [prefixer](../plugins/Prefixer.md) which uses [caniuse.com](caniuse.com) data and `userAgent` parsing to detect browser information to prefix styles.
 ```javascript

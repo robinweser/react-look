@@ -23,6 +23,14 @@ As you most likely need some more information to evaluate properly, Look provide
 You might wonder which one to use. They seem to have the same value unless you allow expressions to be passed. <br>
 For example the [substr](../Mixins.md#substr) mixin allowed an regex passed. `substr([a-z])` would return `substr` as **mixinKey** and `substr([a-z])` as **property**.
 
+#### `_lookShouldUpdate`
+Look also provides a special hook which can be used to force element cloning.
+```javascript
+const mixin = ({ newProps }) => {
+	// forces Look to clone the element
+	newProps._lookShouldUpdate = true
+}
+```
 ## Example
 If we want to recreate *e.g.* the [extract CSS](../Mixins.md#extract-css) mixin that let's you include css directly within your styles.
 
