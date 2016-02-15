@@ -91,7 +91,7 @@ We also use the `StyleSheet.create` helper with React Native, but it does (by no
 > Note: It gets imported differently!
 
 ```javascript
-import { Native: { StyleSheet } } from 'react-look'
+import { StyleSheet } from 'react-look/native'
 import React, { View, Component } from 'react-native'
 
 export default class FirstComponent extends Component {
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
 <br>
 <img src="res/native-badge.png" height=25>
 ```javascript
-import { Native: { StyleSheet } } from 'react-look'
+import { StyleSheet } from 'react-look/native'
 import React, { View, Text, Component } from 'react-native'
 // We use this shortcut to write less code
 const c = StyleSheet.combineStyles
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
 <br>
 <img src="res/native-badge.png" height=25>
 ```javascript
-import { Native: { StyleSheet } } from 'react-look'
+import { StyleSheet } from 'react-look/native'
 import React, { View, Component } from 'react-native'
 
 export default ({title}) => <View style={styles.box}>{title}</View>
@@ -297,7 +297,8 @@ render(<LookRoot config={config}><App /></LookRoot>, document.getElementById('ap
 <br>
 <img src="res/native-badge.png" height=25>
 ```javascript
-import { Presets, Native: { LookRoot } } from 'react-look'
+import { Presets } from 'react-look'
+import { LookRoot } from 'react-look/native'
 import React, { AppRegistry }  from 'react-native'
 
 const config = Presets['react-native']
@@ -420,7 +421,8 @@ const styles = StyleSheet.create({
 <br>
 <img src="res/native-badge.png" height=25>
 ```javascript
-import look, { Native: { StyleSheet } } from 'react-look'
+import look from 'react-look'
+import { StyleSheet } from 'react-look/native'
 import React, { View, Component, TouchableHighlight } from 'react-native'
 
 // Note that now you can export directly

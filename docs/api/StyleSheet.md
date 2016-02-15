@@ -74,7 +74,7 @@ This will generate the following CSS *(`.c1` is just an example)*
 
 On React Native, `StyleSheet.create` right now is just a dumb container which returns the exact same styles that come into. It just helps to reuse existing React Native Components.
 ```javascript
-import { Native: { StyleSheet } } from 'react-look'
+import { StyleSheet } from 'react-look/native'
 
 const styles = StyleSheet.create({
 	box: {

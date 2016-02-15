@@ -23,9 +23,6 @@ Thumbs.db
 npm-debug.log
 demo/bundle.js
 /lib
-/look.js
-/dom.js
-/addons.js
-/core.js
+/native.js
 coverage
 addons/

@@ -1,7 +1,7 @@
 {
   "name": "react-look",
   "version": "1.0.0-beta2",
-  "description": "Advanced & Dynamic Component Styling for React.",
+  "description": "Advanced & Dynamic Component Styling for React",
   "main": "lib/look.js",
   "files": [
     "LICENSE",
@@ -9,7 +9,8 @@
     "Changelog.md",
     "lib/",
     "docs/",
-    "dist/"
+    "dist/",
+    "native.js"
   ],
   "repository": {
     "type": "git",
@@ -17,7 +18,7 @@
   },
   "scripts": {
     "babel": "npm run clean && babel -d lib modules",
-    "bundle": "npm run babel && mkdir dist && npm run bundle:look",
+    "bundle": "npm run babel && mkdir dist && npm run bundle:look && node build/buildNative.js",
     "bundle:look": "browserify modules/look.js -t babelify --external react -d -p  [minifyify --no-map] > ./dist/look.min.js",
     "clean": "rimraf lib dist coverage",
     "coverage": "codeclimate-test-reporter < coverage/lcov.info",
@@ -50,7 +51,7 @@
     "inline-style-linter": "^0.2.7",
     "inline-style-prefixer": "^0.6.7",
     "inline-style-transformer": "^1.0.0",
-    "lodash": "^4.2.1",
+    "lodash": "^4.3.0",
     "shallowequal": "^0.2.2"
   },
   "peerDependencies": {

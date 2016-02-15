@@ -69,7 +69,8 @@ export default look(Example, { mixins: { special: specialMixin } })
 <img src="../res/native-badge.png" height=25>
 ```javascript
 import { View, Text } from 'react-native'
-import look, { Native: { StyleSheet } } from 'react-look'
+import look from 'react-look'
+import { StyleSheet } from 'react-look/native'
 
 const Example = () => <View style={styles.box}>Foo</View>
 const styles = StyleSheet.create({
@@ -109,7 +110,8 @@ export default look(Example)
 <img src="../res/native-badge.png" height=25>
 ```javascript
 import { View, Text } from 'react-native'
-import look, { Native: { StyleSheet } } from 'react-look'
+import look from 'react-look'
+import { StyleSheet } from 'react-look/native'
 
 const Example = () => (
 	<View style={styles.box}>

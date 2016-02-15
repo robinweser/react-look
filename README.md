@@ -128,7 +128,8 @@ Using with `react-native` only a part of the plugins, mixins and devTools is ava
 You also import some stuff differently.
 ```javascript
 import React, { View, Text, Component, PropTypes } from 'react-native'
-import look, { Native: { StyleSheet } } from 'react-look'
+import look from 'react-look'
+import { StyleSheet } from 'react-look/native'
 
 class Header extends Component {
   static defaultProps = { size: 24 };

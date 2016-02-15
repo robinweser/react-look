@@ -1,4 +1,5 @@
-import React, { View, PropTypes } from 'react-native'
+import React from 'react'
+import { View, PropTypes } from 'react-native'
 import resolveStyles from '../resolver'
 import _ from 'lodash'
 
@@ -26,6 +27,6 @@ export default class LookRoot extends React.Component {
       <View {...otherProps}>
         {this.props.children}
       </View>
-      )
+    )
   }
 }

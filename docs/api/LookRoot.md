@@ -38,7 +38,8 @@ const wrapperStyles = {
 <br>
 <img src="../res/native-badge.png" height=25>
 ```javascript
-import { Native: { LookRoot }, Presets, Plugins } from 'react-look'
+import { Presets, Plugins } from 'react-look'
+import { LookRoot, StyleSheet } from 'react-look/native'
 import React, { AppRegistry, Component }  from 'react-native'
 import App from './index'
 

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import look, { StyleSheet } from '../../../modules/look'
+import look, { StyleSheet, Native } from '../../../modules/look'
 
-const Media = () => <div className={styles}>Resize your window</div>
+const Media = () => <div className={styles}>
+                      Resize your window
+                    </div>
 
 const styles = StyleSheet.create({
   padding: 40,
