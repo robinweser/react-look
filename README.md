@@ -34,7 +34,6 @@ Make sure to check out the [Getting Started Guide](docs/GettingStarted.md) which
 
 #### Table of contents
 1. [Getting Started](docs/GettingStarted.md)
-<<<<<<< HEAD
 	* 1.1. [Installation](docs/GettingStarted.md#1-installation)
 	* 1.2. [First Component](docs/GettingStarted.md#2-first-component)
 	* 1.3. [Stateless Components](docs/GettingStarted.md#3-stateless-components)
@@ -45,34 +44,15 @@ Make sure to check out the [Getting Started Guide](docs/GettingStarted.md) which
 	* 1.8. [Vendor prefixes](docs/GettingStarted.md#8-vendor-prefixes) <img src="docs/res/dom-badge.png" height=15>
 	* 1.9. [Server-side rendering](docs/GettingStarted.md#9-server-side-rendering) <img src="docs/res/dom-badge.png" height=15>
 	* 1.10. [DevTools](docs/GettingStarted.md#10-devtools)
-=======
-  * 1.1. [Installation](docs/GettingStarted.md#1-installation)
-  * 1.2. [First Component](docs/GettingStarted.md#2-first-component)
-  * 1.3. [Stateless Components](docs/GettingStarted.md#3-stateless-components)
-  * 1.4. [Pseudo classes](docs/GettingStarted.md#4-pseudo-classes)
-  * 1.5. [Media queries](docs/GettingStarted.md#5-media-queries)
-  * 1.6. [Mixins & Plugins](docs/GettingStarted.md#6-mixins--plugins)
-  * 1.7. [Fallback values](docs/GettingStarted.md#7-fallback-values)
-  * 1.8. [Vendor prefixes](docs/GettingStarted.md#8-vendor-prefixes)
-  * 1.9. [Server-side rendering](docs/GettingStarted.md#9-server-side-rendering)
-  * 1.10. [DevTools](docs/GettingStarted.md#10-devtools)
->>>>>>> develop
 2. Registry
   * 2.1. [Plugins](docs/Plugins.md)
     * 2.1.1 [DevTools](docs/Plugins.md#devtools)
   * 2.2. [Mixins](docs/Mixins.md)
 3. [API Reference](docs/api/)
-<<<<<<< HEAD
 	* 3.1. [look](docs/api/Look.md)
 	* 3.2. [StyleSheet](docs/api/StyleSheet.md)
 	* 3.3. [LookRoot](docs/api/LookRoot.md)
 	* 3.4. [StyleContainer](docs/api/StyleContainer.md) <img src="docs/res/dom-badge.png" height=15>
-=======
-  * 3.1. [Look](docs/api/Look.md)
-  * 3.2. [StyleSheet](docs/api/StyleSheet.md)
-  * 3.3. [LookRoot](docs/api/LookRoot.md)
-  * 3.4. [StyleContainer](docs/api/StyleContainer.md)
->>>>>>> develop
 4. [Guides](docs/guides/)
   * 4.1. [Upgrading Look](docs/guides/upgradeLook.md)
   * 4.2. [Configuring Look](docs/guides/configureLook.md)
