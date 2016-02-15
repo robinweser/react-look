@@ -1,5 +1,5 @@
-import look from '../modules/look'
-import React, {Component} from 'react'
+import look from '../modules/dom'
+import React, { Component } from 'react'
 import { expect } from 'chai'
 
 describe('Enhancing with look', () => {
@@ -9,10 +9,11 @@ describe('Enhancing with look', () => {
     expect(look(Comp).displayName).to.eql('Comp')
   })
 
-	it('should also work as a decorator', () => {
-		@look
-		class Comp extends Component {}
+  it('should also work as a decorator', () => {
+    @look
+    class Comp extends Component {
+    }
 
-		expect(Comp.displayName).to.eql('Comp')
-	})
+    expect(Comp.displayName).to.eql('Comp')
+  })
 })

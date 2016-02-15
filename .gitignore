@@ -19,13 +19,9 @@ Thumbs.db
 *.sw?
 *.vi
 
-/node_modules/
+node_modules/
 npm-debug.log
+lib/
 demo/bundle.js
-/lib
-/look.js
-/dom.js
-/addons.js
-/core.js
 coverage
 addons/

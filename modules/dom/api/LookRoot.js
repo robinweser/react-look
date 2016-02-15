@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import StyleContainer from './StyleContainer'
+import resolveStyles from '../resolver'
+import _ from 'lodash'
 
 const contextType = { _lookConfig: PropTypes.object }
 /**
@@ -9,12 +11,13 @@ const contextType = { _lookConfig: PropTypes.object }
 export default class LookRoot extends Component {
   static childContextTypes = contextType;
   static contextTypes = contextType;
-  static defaultProps = {
-    config: {}
-  };
 
   getChildContext() {
-    return { _lookConfig: this.props.config }
+    return {
+      _lookConfig: _.merge({ }, this.props.config, {
+        _resolveStyles: resolveStyles
+      })
+    }
   }
 
   render() {
@@ -57,7 +60,9 @@ class StyleComponent extends Component {
   updateStyles(userAgent) {
     const css = StyleContainer.renderStaticStyles(userAgent) // eslint-disable-line
     // Delay change listener until Component is mounted
-    setTimeout(() => this._isMounted && this.setState({ css: css }), 0)
+    setTimeout(() => {
+      this._isMounted && this.setState({ css: css })
+    }, 0)
   }
 
   render() {

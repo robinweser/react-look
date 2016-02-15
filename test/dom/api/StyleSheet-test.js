@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import StyleSheet from '../../modules/api/StyleSheet'
-import StyleContainer from '../../modules/api/StyleContainer'
+import StyleSheet from '../../../modules/dom/api/StyleSheet'
+import StyleContainer from '../../../modules/dom/api/StyleContainer'
 import { expect } from 'chai'
-import { clearStyleContainer } from '../test-utils'
+import { clearStyleContainer } from '../../test-utils'
 
 describe('Creating a StyleSheet', () => {
   it('should return a className if no selector is passed', () => {

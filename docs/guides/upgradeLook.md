@@ -1,93 +1,131 @@
 # Upgrade guide
 
-## 1.0
+# 1.0
+
+## Packages
+Starting with 1.0.0 Look will be split into two different packages.
+
+* **react-look** <img src="../res/dom-badge.png" height=15><br>
+Used for web development with `react-dom`.
+* **react-look-native**  <img src="../res/native-badge.png" height=15><br>
+Used for native development with `react-native`.
+
+## API Changes
+
 With Version 1.0 Look introduces quite some fatal API changes.
 They're not likely to change a lot in the near future as the API now gets more stable and final.
-* `StyleSheet.create` no longer accepts a Component as first parameter
+### 1. StyleSheet.create
+`StyleSheet.create` no longer accepts a Component as first parameter
 
 ```javascript
-// new => Version 1.0+
+// New Version 1.0+
 const styles = StyleSheet.create({
 	box: { color: 'red' },
 	container: { backgorundColor: 'blue' }
 })
 
-// old => Version < 1.0
+// Old Version < 1.0
 const styles = StyleSheet.create(Button, {
 	box: { color: 'red' },
 	container: { backgorundColor: 'blue' }
 })
 ```
+### 2. className & style
+Use `className` <img src="../res/dom-badge.png" height=15> or `style` <img src="../res/native-badge.png" height=15> instead of `look` to pass your styles.<br>
 
-* Use `className` instead of `look` to pass your styles.
-
-> Note: This change was highly performance boosting
-
+<img src="../res/dom-badge.png" height=25>
 ```javascript
-// new => Version 1.0+
-class Button extends Component {
-	render() {
-		return <div className={styles.box} />
-	}
-}
+// New Version 1.0+
+const Button = () => <div className={styles.box} />
 
-// old => Version < 1.0
-class Button extends Component {
-	render() {
-		return <div look={styles.box} />
-	}
-}
+// Old Version < 1.0
+const Button = () => <div look={styles.box} />
 ```
-
-* Instead of passing `lookRoot: true` as Component-scoped config you now wrap your whole application tree inside the `<LookRoot>`-Component. Also pass your configuration to `<LookRoot>` instead of passing a `lookConfig` prop.
-
+<img src="../res/native-badge.png" height=25>
 ```javascript
-// new => Version 1.0+
-class App extends Component {
-	render() {
-		return <div className={styles.box} />
-	}
-}
+// New Version 1.0+
+const Button = () => <View style={styles.box} />
 
+// Old Version < 1.0
+const Button = () => <View look={styles.box} />
+```
+### 3. LookRoot
+
+Instead of passing `lookRoot: true` as Component-scoped config you now wrap your whole application tree inside the `<LookRoot>`-Component. Also pass your configuration to `<LookRoot>` instead of passing a `lookConfig` prop.
+
+<img src="../res/dom-badge.png" height=25>
+```javascript
+// New Version +1.0
+const App = () => <div className={styles.box} />
 App = look(App)
 
 ReactDOM.render(
-	<LookRoot config={Presets['react-dom']}>
+	<LookRoot config={/* Look config */}>
 		<App />
 	</LookRoot>,
 	document.getElementById('app')
 )
 
-// old => Version < 1.0
-class App extends Component {
-	render() {
-		return <div look={styles.box} />
-	}
-}
-
+// Old Version < 1.0
+const App = () => <div look={styles.box} />
 App = look(App, { lookRoot: true })
 
-ReactDOM.render(<App lookConfig={Presets['react-dom']}/>, document.getElementById('app')
-)
+ReactDOM.render(<App lookConfig={/* Look config */}/>, document.getElementById('app'))
 ```
-
-* Every module is now available directly from `react-look`. No `react-look/addons` anymore. Also all devTools moved into Plugins.
-
+<img src="../res/native-badge.png" height=25>
 ```javascript
+// New Version +1.0
+const App = () => <div className={styles.box} />
+App = look(App)
+
+const Container = () => (
+  <LookRoot config={/* Look config */}>
+    <App />
+  </LookRoot>
+)
+AppRegistry.registerComponent('native', () => Container)
+
+// Old Version < 1.0
+const App = () => <div look={styles.box} />
+App = look(App, { lookRoot: true })
+
+AppRegistry.registerComponent('native', () => <App lookConfig={/* Look config */} />)
+```
+### 4. react-look/addons
+
+Every module is now available directly from `react-look` or `react-look-native`. No `react-look/addons` anymore. Also all devTools moved into Plugins.
+
+<img src="../res/dom-badge.png" height=25>
+```javascript
+<<<<<<< HEAD
+// New Version 1.0+
+import look, { StyleSheet, LookRoot, Plugins, Mixins, Presets } from 'react-look'
+
+// Old Version < 1.0
+=======
 // new => Version 1.0+
 import look, { StyleSheet, LookRoot, Plugins, Mixins, Presets } from 'react-look'
 
 // old => Version < 1.0
+>>>>>>> develop
+import look, { StyleSheet } from 'react-look'
+import { Plugins, Mixins, Presets, DevTools } from 'react-look/addons'
+```
+<img src="../res/native-badge.png" height=25>
+```javascript
+// New Version 1.0+
+import look, { StyleSheet, LookRoot, Plugins, Mixins, Presets } from 'react-look-native'
+
+// Old Version < 1.0
 import look, { StyleSheet } from 'react-look'
 import { Plugins, Mixins, Presets, DevTools } from 'react-look/addons'
 ```
 
-
-## 0.7
+# 0.7
 * `react-look/dom` & `react-look/native` are both deprecated and will be removed soon. [Configure](./configureLook.md) your own Look instance or use a preset.
 * You need to add `lookRoot: true` to your top-level Component's configuration in order to render global CSS rules correctly.
 
-## 0.5
+# 0.5
 Coming from a version below 0.5 needs some code refactoring to get Look working properly.
 
 * Use direct style mapping instead of the string syntax.

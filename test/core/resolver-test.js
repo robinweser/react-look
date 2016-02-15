@@ -1,70 +1,91 @@
 import { expect } from 'chai'
 import React, { Component } from 'react'
-import StyleSheet from '../../modules/api/StyleSheet'
-import resolveStyles from '../../modules/core/resolver'
+import { resolveChildren, isLookEnhanced, resolveProps, resolvePlugins } from '../../modules/core/resolver'
+import resolveStyles from '../../modules/native/resolver'
 import look from '../../modules/core/enhancer'
-import domPreset from '../../modules/presets/react-dom'
+import _ from 'lodash'
 
+const mockComponent = () => {
+  return {
+    state: {},
+    props: {},
+    context: {}
+  }
+}
 
 describe('Resolving children', () => {
   it('should return children if it is a string or number', () => {
-    const Component = {
-      state: { }
-    }
-    const child = 3
-    const element = (<div>{child}</div>)
-    const resolved = resolveStyles(Component, element, { })
+    const element = <div>
+                      3
+                    </div>
+    const newProps = _.assign({ }, element.props)
 
-    expect(resolved.props.children).to.eql(child)
+    resolveChildren(mockComponent(), newProps, {
+      _resolveStyles: resolveStyles
+    })
+
+    expect(newProps.children).to.eql('3')
   })
 
   it('should flatten the children', () => {
-    const Component = {
-      state: { }
-    }
-    const element = (<div>{[ 3, 4, [ 5, 6 ] ]}</div>)
-    const resolved = resolveStyles(Component, element, { })
+    const element = <div>
+                      {[ 3, 4, [ 5, 6 ] ]}
+                    </div>
 
-    expect(resolved.props.children).to.eql([ 3, 4, 5, 6 ])
+    const newProps = _.assign({ }, element.props)
+    resolveChildren(mockComponent(), newProps, {
+      _resolveStyles: resolveStyles
+    })
+
+    expect(newProps.children).to.eql([ 3, 4, 5, 6 ])
   })
 })
 
-describe('Resolving styles', () => {
-  it('should return the element if it is enhanced with Look', () => {
+describe('Validating look enhanced Components', () => {
+  it('should return true if element is enhanced with Look', () => {
     class Comp extends Component {
       render() {
-        return <div>foo</div>
+        return 'foo'
       }
     }
+
     Comp = look(Comp)
-    const el = <Comp />
-    const resolved = resolveStyles(Comp, el, { })
-
-    expect(resolved).to.eql(el)
+    expect(isLookEnhanced(<Comp />)).to.eql(true)
   })
+})
 
+
+describe('Resolving props', () => {
   it('should resolve props containg elements', () => {
-    class Comp extends Component {
-      render() {
-        return <div>foo</div>
-      }
-    }
+    const newProps = { }
+    newProps.inner = <div></div>
 
-    const el = <Comp inner={<div></div>}/>
-    const resolved = resolveStyles(Comp, el, { })
-    expect(resolved.props._lookShouldUpdate).to.eql(true)
+    resolveProps(mockComponent(), newProps, {
+      _resolveStyles: resolveStyles
+    })
+    expect(newProps._lookShouldUpdate).to.eql(true)
   })
+})
 
-  it('should keep inline styles', () => {
-    class Comp extends Component {
-      render() {
-        return <div></div>
+describe('Resolving plugins', () => {
+  it('should iterate every plugin', () => {
+
+    const pluginInterface = {
+      config: {
+        plugins: [
+          int => {
+            int.styles.resolved = true
+            return int.styles
+          }
+        ]
+      },
+      styles: {
+        color: 'blue'
       }
     }
-    Comp = look(Comp)
-    const el = <div className="foo" style={{ color: 'red' }}>foo</div>
-    const resolved = resolveStyles(Comp, el, { })
 
-    expect(resolved.props.style).to.eql({ color: 'red' })
+    const resolved = resolvePlugins(pluginInterface)
+    expect(resolved.color).to.eql('blue')
+    expect(resolved.resolved).to.eql(true)
   })
 })

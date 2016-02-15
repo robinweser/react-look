@@ -1,5 +1,5 @@
-import StyleContainer from '../../modules/api/StyleContainer'
-import StyleSheet from '../../modules/api/StyleSheet'
+import StyleContainer from '../../../modules/dom/api/StyleContainer'
+import StyleSheet from '../../../modules/dom/api/StyleSheet'
 import Chai, { expect } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'

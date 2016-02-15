@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.0
-### 1.0.0-beta (10.02.16)
+### 1.0.0-beta1 (10.02.16)
 > Note: There will be no more API changes before 1.0 gets released.
 
 #### API Changes

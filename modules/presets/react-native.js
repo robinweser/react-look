@@ -1,5 +1,4 @@
 // Plugins
-import fallbackValue from '../plugins/fallbackValue'
 import statefulValue from '../plugins/statefulValue'
 import mixin from '../plugins/mixin'
 
@@ -14,8 +13,7 @@ import extend from '../mixins/extend'
 export default {
   plugins: [
     statefulValue,
-    mixin,
-    fallbackValue
+    mixin
   ],
   mixins: {
     // Conditions

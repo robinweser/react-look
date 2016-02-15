@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import look, { StyleSheet } from '../../../modules/look'
+import look, { StyleSheet } from '../../../modules/dom'
 
 class ChildIndex extends Component {
   static defaultProps = {
@@ -9,10 +9,13 @@ class ChildIndex extends Component {
     items: PropTypes.number.isRequired
   };
   render() {
-    //create a small list of items to demonstrate nth-child, et cetera
-    const arr = new Array(this.props.items+1).join(',').split('').map((item, index) => index + 1)
+    // create a small list of items to demonstrate nth-child, et cetera
+    const arr = new Array(this.props.items + 1).join(',').split('').map((item, index) => index + 1)
     let list = arr.map((text, index) => {
-      return <li className={styles} key={'.' + index}>ListItem {text}</li>
+      return <li className={styles} key={'.' + index}>
+               ListItem&nbsp;
+               {text}
+             </li>
     })
 
     return (
@@ -38,8 +41,13 @@ const styles = StyleSheet.create({
   ':nth-of-type(3)': {
     backgroundColor: 'rgba(30, 50, 60, 0.6)'
   },
+<<<<<<< HEAD
+  ':nth-of-type(3n+5)': {
+    backgroundColor: 'rgba(141, 195, 131, 0.4)'
+=======
   ':nth-of-type(3n+5)'  :{
     backgroundColor:'rgba(141, 195, 131, 0.4)'
+>>>>>>> develop
   },
   ':first-child': {
     color: 'yellow'

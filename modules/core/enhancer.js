@@ -1,4 +1,3 @@
-import resolveStyles from './resolver'
 import copyProperties from '../utils/copyProperties'
 import { Component, PropTypes } from 'react'
 import _ from 'lodash'
@@ -17,10 +16,17 @@ export default (CustomComponent, config = { }) => {
 
 
   class LookComponent extends Extend {
+    constructor(props, context) {
+      super(...arguments)
+
+      // Inject the global style resolver passed down by <LookRoot>
+      this._lookResolver = context._lookConfig._resolveStyles
+    }
+
     // Inherit the original displayName for proper use later on
     static displayName = CustomComponent.displayName || CustomComponent.name || 'Component';
-    static childContextTypes = { ... CustomComponent.childContextTypes, ... contextType };
-    static contextTypes = { ... CustomComponent.contextTypes, ... contextType };
+    static childContextTypes = { ...CustomComponent.childContextTypes, ...contextType };
+    static contextTypes = { ...CustomComponent.contextTypes, ...contextType };
     static _isLookEnhanced = true;
 
     render() {
@@ -29,7 +35,7 @@ export default (CustomComponent, config = { }) => {
       const elementConfig = renderedElement.props.lookConfig || null
       // Compose all possible ways to configure Look
       const composedConfig = _.merge({ }, contextConfig, config, elementConfig)
-      return resolveStyles(this, renderedElement, composedConfig)
+      return this._lookResolver(this, renderedElement, composedConfig)
     }
   }
 

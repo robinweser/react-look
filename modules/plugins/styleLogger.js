@@ -24,7 +24,7 @@ export default ({ styles, Component, element, newProps, config: { styleLogger } 
       if (styleLogger.noEmpty && _.isEmpty(logStyles)) {
         return
       }
-      console.log(loggerPrefix, logStyles)
+      console.log(loggerPrefix, logStyles) // eslint-disable-line
     }
 
     // logs styles if a given event got triggered

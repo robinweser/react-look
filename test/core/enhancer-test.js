@@ -25,7 +25,9 @@ describe('Enhancing a Component', () => {
     class Default extends Component {
     }
     let Enhanced = look(Default)
-    let instance = new Enhanced()
+    let instance = new Enhanced({ }, {
+      _lookConfig: {}
+    })
 
     expect(instance.displayName).to.eql(Default.displayName)
   })
@@ -38,7 +40,9 @@ describe('Enhancing a Component', () => {
     }
 
     let Enhanced = look(Default)
-    let instance = new Enhanced({ bar: 1 })
+    let instance = new Enhanced({ bar: 1 }, {
+      _lookConfig: {}
+    })
 
     expect(instance.props).to.eql({ bar: 1 })
   })
@@ -54,7 +58,9 @@ describe('Enhancing a Component', () => {
     }
 
     let Enhanced = look(Default)
-    let instance = new Enhanced()
+    let instance = new Enhanced({ }, {
+      _lookConfig: {}
+    })
 
     expect(constructorFunc).to.have.been.calledOnce
   })
