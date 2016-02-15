@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import look, { StyleSheet } from '../../../modules/dom'
 
 const Keyframes = () => (
-<div className={styles.container}>
-		<div className={styles.box} />
-	</div>
+  <div className={styles.container}>
+    <div className={styles.box} />
+  </div>
 )
 
 const positionFrames = StyleSheet.keyframes({

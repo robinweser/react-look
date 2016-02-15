@@ -44,7 +44,7 @@ class Platform extends Component {
       <div className={styles.container} lookConfig={config}>
         <div>
           <div className={ c(styles.button, styles.ios)} onClick={this.onClick.bind(this, iOS)}>iOS userAgent</div>
-        <div className={ c(styles.button, styles.android)} onClick={this.onClick.bind(this, android)}>Android userAgent</div>
+          <div className={ c(styles.button, styles.android)} onClick={this.onClick.bind(this, android)}>Android userAgent</div>
         </div>
         <div className={styles.platform}>
           <span>On iOS I am blue</span>
@@ -52,7 +52,7 @@ class Platform extends Component {
           <span>On others I am gray</span>
         </div>
       </div>
-      )
+    )
   }
 }
 const styles = StyleSheet.create({

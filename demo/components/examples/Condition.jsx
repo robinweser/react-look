@@ -41,6 +41,7 @@ class Condition extends Component {
 
     return (
       <div>
+<<<<<<< HEAD
         <div className={c(styles.button, styles.states)} onClick={this.onClick.bind(this)}>
           Click me
           <br /> Active state:
@@ -49,6 +50,10 @@ class Condition extends Component {
         <div className={c(styles.button, styles.clicks)} onClick={this.onClicksCount.bind(this)}>
           {getText(this.state.clicks)}
         </div>
+=======
+        <div className={c(styles.button, styles.states)} onClick={this.onClick.bind(this)}>Click me<br /> Active state: {this.state.mode}</div>
+        <div className={c(styles.button, styles.clicks)} onClick={this.onClicksCount.bind(this)}>{getText(this.state.clicks)}</div>
+>>>>>>> develop
       </div>
     )
   }

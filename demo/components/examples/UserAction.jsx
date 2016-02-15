@@ -10,7 +10,7 @@ class UserAction extends Component {
         <div key="hover" className={ c(styles.button, styles.hoverButton)}>Hover me</div>
         <div key="both" className={ c(styles.button, styles.hoverActiveButton)}>Hover me, then Click me</div>
       </div>
-      )
+    )
   }
 }
 
