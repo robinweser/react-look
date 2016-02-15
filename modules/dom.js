@@ -20,7 +20,6 @@ import extend from './mixins/extend'
 import platformQuery from './mixins/platformQuery'
 
 // Presets
-import nativePreset from './presets/react-native'
 import domPreset from './presets/react-dom'
 
 import Enhancer from './core/enhancer'
