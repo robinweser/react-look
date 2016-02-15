@@ -1,5 +1,7 @@
 # Documentation
-> You made it to the documentation! First of all I would like to **thank** you for using Look and pushing it forward. Feel free to star or share if you like it.
+
+**The docs reference Version 1.0**.<br>
+For legacy documentation please check [this](https://github.com/rofrischmann/react-look/tree/9a7261b16f9a06e8cd7e64773d19714fd4181219).
 
 The following documentation pages will hopefully solve all your remaining questions and clear out the usage and intention of Look.<br>
 If there's still something I forgot please let me know and don't be shy to ask. You may also create an issue so I can update the docs immediately.
@@ -7,8 +9,10 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 As Look is available for both React and React Native there are some differences between those. I used the flags <img src="res/dom-badge.png" height=15> and <img src="res/native-badge.png" height=15>  to mark those.
 If not marked, it can be used for both.
 
-**The docs reference Version 1.0**.<br>
-For legacy documentation please check [this](https://github.com/rofrischmann/react-look/tree/9a7261b16f9a06e8cd7e64773d19714fd4181219).
+#### Packages
+Note that you need to use different packages for both platforms.<br>
+<img src="res/dom-badge.png" height=15> `react-look`<br>
+<img src="res/native-badge.png" height=15> `react-look-native`
 
 ## Table of contents
 1. [Getting Started](GettingStarted.md)

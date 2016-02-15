@@ -74,7 +74,7 @@ This will generate the following CSS *(`.c1` is just an example)*
 
 On React Native, `StyleSheet.create` right now is just a dumb container which returns the exact same styles that come into. It just helps to reuse existing React Native Components.
 ```javascript
-import { StyleSheet } from 'react-look/native'
+import { StyleSheet } from 'react-look-native'
 
 const styles = StyleSheet.create({
 	box: {
@@ -93,8 +93,9 @@ const styles = StyleSheet.create({
 ## `combineStyles(...styles)`
 Styles can be combined using the `combineStyles` helper.
 
-<img src="../res/dom-badge.png" height=15> It simply joins `className`s separated with a space.<br>
-<img src="../res/native-badge.png" height=15> It simply deep assigns all styles objects.
+<img src="../res/dom-badge.png" height=25>
+
+It simply joins `className`s separated with a space.
 ```javascript
 import { StyleSheet } from 'react-look'
 // You will most likely use a shortcut
@@ -106,6 +107,22 @@ const styles = StyleSheet.create({
 })
 
 c(styles.box, styles.container) // => c1 c2
+```
+<br>
+<img src="../res/native-badge.png" height=25>
+
+It simply deep assigns all styles objects.
+```javascript
+import { StyleSheet } from 'react-look-native'
+// You will most likely use a shortcut
+const c = StyleSheet.combineStyles
+
+const styles = StyleSheet.create({
+	box: { color: 'red' },
+	container: { fontSize: 14 }
+})
+
+c(styles.box, styles.container) // => {color: 'red', fontSize: 14}
 ```
 
 ## `toCSS(styles [, scope])` <img src="../res/dom-badge.png" height=20>

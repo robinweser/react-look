@@ -61,13 +61,12 @@ Make sure to check out the [Getting Started Guide](docs/GettingStarted.md) which
 5. [FAQ](docs/FAQ.md)
 
 # Example
-```sh
-npm install react-look
-```
 The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries.
 
 <img src="docs/res/dom-badge.png" height=25>
-
+```sh
+npm install react-look
+```
 Using with `react-dom` Look ships **pseudo class** and **media query** support by default. They're resolved within the `StyleSheet.create` method.
 ```javascript
 import React, { Component, PropTypes } from 'react'
@@ -123,13 +122,14 @@ export default look(Header)
 ```
 <br>
 <img src="docs/res/native-badge.png" height=25>
-
+```sh
+npm install react-look-native
+```
 Using with `react-native` only a part of the plugins, mixins and devTools is available.
 You also import some stuff differently.
 ```javascript
 import React, { View, Text, Component, PropTypes } from 'react-native'
-import look from 'react-look'
-import { StyleSheet } from 'react-look/native'
+import look, { StyleSheet } from 'react-look-native'
 
 class Header extends Component {
   static defaultProps = { size: 24 };
@@ -173,6 +173,7 @@ export default look(Header)
 ```
 # Demo
 Check out the provided examples for some special use cases. See them in action using the demo. You can easily run the examples on your own within the provided demo by just:
+<img src="docs/res/dom-badge.png" height=25>
 ```sh
 git clone --bare https://github.com/rofrischmann/react-look.git
 npm install
@@ -182,6 +183,10 @@ npm run demo
 # run this as a universal demo
 npm run demo:universal
 ```
+<br>
+<img src="docs/res/native-badge.png" height=25>
+
+Right now I am working to get a running React Native example ready. Stay tuned.
 
 # License
 **Look** is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>

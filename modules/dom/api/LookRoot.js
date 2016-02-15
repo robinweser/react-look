@@ -28,7 +28,7 @@ export default class LookRoot extends Component {
         {this.props.children}
         <StyleComponent userAgent={config.userAgent} />
       </div>
-      )
+    )
   }
 }
 

@@ -6,7 +6,7 @@ Plugins might also require some special settings within your config object.
 e.g. the **Mixin**-Plugin which lets you define custom style properties uses the `mixins` key to define those.
 
 
-### Custom configuration
+### Example
 ```javascript
 import { Mixins, Plugins } from 'react-look'
 
@@ -33,15 +33,18 @@ const customConfig = {
 ### Presets
 Right now there are just two presets:
 
-<img src="../res/dom-badge.png" height=15> `react-dom`: Contains every DOM-specific plugin and mixin available<br>
-<img src="../res/native-badge.png" height=15> `react-native`: Contains only react-native compatible plugins and mixins
-
+<img src="../res/dom-badge.png" height=25> `react-dom`
+Contains every DOM-specific plugin and mixin available<br>
 ```javascript
 import { Presets } from 'react-look'
-
 const customConfig = Presets['react-dom']
 ```
-
+<img src="../res/native-badge.png" height=25> `react-native`
+Contains only react-native compatible plugins and mixins
+```javascript
+import { Presets } from 'react-look-native'
+const customConfig = Presets['react-native']
+```
 ## Applying configuration
 To apply configuration globally just [pass them with `LookRoot`](../api/LookRoot.md#usage) at the root of your application.
 This will automatically pass your configuration to every child Component via `context`.
@@ -69,8 +72,7 @@ export default look(Example, { mixins: { special: specialMixin } })
 <img src="../res/native-badge.png" height=25>
 ```javascript
 import { View, Text } from 'react-native'
-import look from 'react-look'
-import { StyleSheet } from 'react-look/native'
+import look, { StyleSheet } from 'react-look-native'
 
 const Example = () => <View style={styles.box}>Foo</View>
 const styles = StyleSheet.create({
@@ -110,8 +112,7 @@ export default look(Example)
 <img src="../res/native-badge.png" height=25>
 ```javascript
 import { View, Text } from 'react-native'
-import look from 'react-look'
-import { StyleSheet } from 'react-look/native'
+import look, { StyleSheet } from 'react-look-native'
 
 const Example = () => (
 	<View style={styles.box}>
