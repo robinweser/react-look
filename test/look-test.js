@@ -1,4 +1,4 @@
-import look from '../modules/look'
+import look from '../modules/dom'
 import React, { Component } from 'react'
 import { expect } from 'chai'
 

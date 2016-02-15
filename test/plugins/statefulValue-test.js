@@ -1,5 +1,5 @@
 import statefulValue from '../../modules/plugins/statefulValue'
-import Look, { StyleSheet } from '../../modules/look'
+import Look, { StyleSheet } from '../../modules/dom'
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import { expect } from 'chai'

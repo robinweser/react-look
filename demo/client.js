@@ -1,7 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Presets, Plugins } from '../modules/addons'
-import { StyleSheet, LookRoot } from '../modules/look'
+import { StyleSheet, LookRoot, Presets, Plugins } from '../modules/dom'
 
 import App from './app.jsx'
 

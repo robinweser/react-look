@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import look, { StyleSheet, Native } from '../../../modules/look'
+import look, { StyleSheet, Native } from '../../../modules/dom'
 
 const Media = () => <div className={styles}>
                       Resize your window
