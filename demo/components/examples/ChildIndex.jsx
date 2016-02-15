@@ -41,13 +41,8 @@ const styles = StyleSheet.create({
   ':nth-of-type(3)': {
     backgroundColor: 'rgba(30, 50, 60, 0.6)'
   },
-<<<<<<< HEAD
   ':nth-of-type(3n+5)': {
     backgroundColor: 'rgba(141, 195, 131, 0.4)'
-=======
-  ':nth-of-type(3n+5)'  :{
-    backgroundColor:'rgba(141, 195, 131, 0.4)'
->>>>>>> develop
   },
   ':first-child': {
     color: 'yellow'

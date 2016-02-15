@@ -1,8 +1,19 @@
 # Changelog
 
 ## 1.0
+### 1.0.0-beta2 (15.02.16)
+#### Packages
+Look was split into 2 different packages as it now fully supports React Native again.
+* **react-look**<br>
+Used for web Component styling with `react-dom`
+* **react-look-native**<br>
+Used for native Component styling with `react-native`
+
+##### Bux fixes
+* Fixed `friendlyClassName` to also transform custom Components
+
+
 ### 1.0.0-beta1 (10.02.16)
-> Note: There will be no more API changes before 1.0 gets released.
 
 #### API Changes
 While those changes might seem huge, it still is quite easy to update.
