@@ -17,13 +17,20 @@ The following usage guide should provide enough information to build apps with L
 10. [DevTools](#10-devtools)
 
 ## 1. Installation
-First of all we need to install `react-look` to our project.
+First of all we need to install Look to our project.
+
+<img src="res/dom-badge.png" height=25>
 ```sh
 npm install react-look --save
+```
+<img src="res/native-badge.png" height=25>
+```sh
+npm install react-look-native --save
 ```
 
 Now we are able to import Look into our code. We can either use the new ECMAScript 2015 `import` syntax or the CommonJS `require` syntax. *(The examples will use the `import`-syntax)*
 
+<img src="res/dom-badge.png" height=25>
 ```javascript
 // ECMAScript 2015
 import look from 'react-look'
@@ -31,7 +38,14 @@ import look from 'react-look'
 // CommonJS
 const look = require('react-look')
 ```
+<img src="res/native-badge.png" height=25>
+```javascript
+// ECMAScript 2015
+import look from 'react-look-native'
 
+// CommonJS
+const look = require('react-look-native')
+```
 ## 2. First Component
 Now its time to compose your first Component. <br>
 You basically start with a blank `React` Component that renders some markup.
