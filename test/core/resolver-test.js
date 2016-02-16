@@ -1,16 +1,12 @@
 import { expect } from 'chai'
 import React, { Component } from 'react'
 import { resolveChildren, isLookEnhanced, resolveProps, resolvePlugins } from '../../modules/core/resolver'
-import resolveStyles from '../../modules/native/resolver'
+import resolveStyles from '../../modules/core/native/resolver'
 import look from '../../modules/core/enhancer'
 import _ from 'lodash'
 
 const mockComponent = () => {
-  return {
-    state: {},
-    props: {},
-    context: {}
-  }
+  return { state: { }, props: { }, context: { } }
 }
 
 describe('Resolving children', () => {

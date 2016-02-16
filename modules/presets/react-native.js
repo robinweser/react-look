@@ -7,7 +7,7 @@ import { equal, unEqual, greater, less, greaterThan, lessThan } from '../mixins/
 
 // Other
 import contains from '../mixins/contains'
-import substr from '../mixins/substr'
+import substr from '../mixins/native/substr'
 import extend from '../mixins/extend'
 
 export default {
