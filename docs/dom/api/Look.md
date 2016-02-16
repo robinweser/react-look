@@ -6,4 +6,4 @@ Optionally pass some configuration which will get merged with the global configu
 | Parameter | Description |
 | --------- | ----------- |
 | Component | Valid React Component you want to enhance with styles |
-| config    | An object containing all [configuration settings](../guides/configureLook.md) |
+| config    | An object containing all [configuration settings](../../guides/configureLook.md) |

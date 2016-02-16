@@ -97,17 +97,10 @@ Every module is now available directly from `react-look` or `react-look-native`.
 
 <img src="../res/dom-badge.png" height=25>
 ```javascript
-<<<<<<< HEAD
 // New Version 1.0+
 import look, { StyleSheet, LookRoot, Plugins, Mixins, Presets } from 'react-look'
 
 // Old Version < 1.0
-=======
-// new => Version 1.0+
-import look, { StyleSheet, LookRoot, Plugins, Mixins, Presets } from 'react-look'
-
-// old => Version < 1.0
->>>>>>> develop
 import look, { StyleSheet } from 'react-look'
 import { Plugins, Mixins, Presets, DevTools } from 'react-look/addons'
 ```

@@ -101,10 +101,6 @@
 		},
 		"plugins": ["react"]
 	},
-	"jshintConfig": {
-		"esnext": true,
-		"asi": true
-	},
 	"esformatter": {
 		"plugins": [
       "esformatter-jsx",
