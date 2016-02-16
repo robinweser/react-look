@@ -10,6 +10,10 @@ import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/c
 import contains from './mixins/contains'
 import extend from './mixins/extend'
 import substr from './mixins/native/substr'
+import empty from './mixins/native/empty'
+import blank from './mixins/native/blank'
+import { before, after } from './mixins/native/beforeAfter'
+import firstLetter from './mixins/native/firstLetter'
 
 // Presets
 import nativePreset from './presets/react-native'
@@ -50,7 +54,12 @@ const Mixins = {
   // Other
   extend,
   contains,
-  substr
+  substr,
+  blank,
+  empty,
+  before,
+  after,
+  firstLetter
 }
 
 const Presets = {

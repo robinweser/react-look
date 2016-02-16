@@ -19,7 +19,7 @@ Thumbs.db
 *.sw?
 *.vi
 
-**/README.md
+packages/**/README.md
 node_modules/
 npm-debug.log
 lib/

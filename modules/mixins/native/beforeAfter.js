@@ -30,11 +30,11 @@ const initChildren = props => {
  * Adds a element before/after current element
  */
 export default {
-  before: ({ property, value, mixinKey, newProps }) => {
+  before: ({ value, newProps }) => {
     initChildren(newProps)
     newProps.children.unshift(createPseudoElement(value))
   },
-  after: ({ property, styles, mixinKey, newProps }) => {
+  after: ({ value, newProps }) => {
     initChildren(newProps)
     newProps.children.push(createPseudoElement(value))
   }
