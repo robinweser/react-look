@@ -20,7 +20,7 @@ Platform differences are flagged using either <img src="https://raw.githubuserco
 - [media queries](docs/dom/api/StyleSheet.md#media-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 - [platform queries](docs/Mixins.md#platform-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 - [conditioned styles](docs/Mixins.md#stateful-conditions)
-- [stateful values](docs/plugins/StatefulVaue.md)
+- [stateful values](docs/plugins/StatefulValue.md)
 - [fallback values](docs/plugins/FallbackValue.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 - [extending](docs/Mixins.md#extend)
 - [vendor prefixing](docs/plugins/Prefixer.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
@@ -61,7 +61,6 @@ Make sure to check out the the relevant Getting Started guide which provides a f
 	* 4.2. How does StyleSheet.create work?
 
 <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=25>
-
 1. [Getting Started](docs/dom/GettingStarted.md)
 	* 1.1. [Installation](docs/dom/GettingStarted.md#1-installation)
 	* 1.2. [First Component](docs/dom/GettingStarted.md#2-first-component)
@@ -85,7 +84,6 @@ Make sure to check out the the relevant Getting Started guide which provides a f
 	* **2.4. [StyleContainer](docs/dom/api/StyleContainer.md)**
 
 <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=25>
-
 1. [Getting Started](docs/native/GettingStarted.md)
 	* 1.1. [Installation](docs/native/GettingStarted.md#1-installation)
 	* 1.2. [First Component](docs/native/GettingStarted.md#2-first-component)
