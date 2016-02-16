@@ -61,6 +61,7 @@ Make sure to check out the the relevant Getting Started guide which provides a f
 	* 4.2. How does StyleSheet.create work?
 
 <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=25>
+
 1. [Getting Started](docs/dom/GettingStarted.md)
 	* 1.1. [Installation](docs/dom/GettingStarted.md#1-installation)
 	* 1.2. [First Component](docs/dom/GettingStarted.md#2-first-component)
@@ -84,6 +85,7 @@ Make sure to check out the the relevant Getting Started guide which provides a f
 	* **2.4. [StyleContainer](docs/dom/api/StyleContainer.md)**
 
 <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=25>
+
 1. [Getting Started](docs/native/GettingStarted.md)
 	* 1.1. [Installation](docs/native/GettingStarted.md#1-installation)
 	* 1.2. [First Component](docs/native/GettingStarted.md#2-first-component)
