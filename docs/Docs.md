@@ -44,6 +44,7 @@ Note that you need to use different packages for both platforms.<br>
 	* 4.2. How does StyleSheet.create work?
 
 <img src="res/dom-badge.png" height=25>
+
 1. [Getting Started](dom/GettingStarted.md)
 	* 1.1. [Installation](dom/GettingStarted.md#1-installation)
 	* 1.2. [First Component](dom/GettingStarted.md#2-first-component)
@@ -67,6 +68,7 @@ Note that you need to use different packages for both platforms.<br>
 	* **2.4. [StyleContainer](dom/api/StyleContainer.md)**
 
 <img src="res/native-badge.png" height=25>
+
 1. [Getting Started](native/GettingStarted.md)
 	* 1.1. [Installation](native/GettingStarted.md#1-installation)
 	* 1.2. [First Component](native/GettingStarted.md#2-first-component)
