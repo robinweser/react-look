@@ -44,12 +44,16 @@ Make sure to check out the the relevant Getting Started guide which provides a f
 			* [Linter](docs/plugins/Linter.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 			* [Style Logger](docs/plugins/StyleLogger.md)
 	* **1.2 [Mixins](docs/Mixins.md)**
-		* [Contains](docs/Mixins.md#contains)
-		* [Extend](docs/Mixins.md#extend)
-		* [Extract CSS](docs/Mixins.md#extract-css) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
-		* [Platform queries](docs/Mixins.md#platform-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
-		* [Stateful Conditions](docs/Mixins.md#stateful-conditions)
-		* [Substr](docs/Mixins.md#substr)
+    * [Before / After](docs/Mixins.md#before-after) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
+    * [Blank](docs/Mixins.md#blank) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
+    * [Contains](docs/Mixins.md#contains)
+    * [Empty](docs/Mixins.md#empty) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
+    * [Extend](docs/Mixins.md#extend)
+    * [Extract CSS](docs/Mixins.md#extract-css) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+    * [First Letter](docs/Mixins.md#first-letter) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
+    * [Platform queries](docs/Mixins.md#platform-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+* [Stateful Conditions](docs/Mixins.md#stateful-conditions)
+* [Substr](docs/Mixins.md#substr)
 2. [Guides](docs/guides/)
 	* 2.1. [Upgrading Look](docs/guides/upgradeLook.md)
 	* 2.2. [Configuring Look](docs/guides/configureLook.md)
@@ -61,6 +65,7 @@ Make sure to check out the the relevant Getting Started guide which provides a f
 	* 4.2. How does StyleSheet.create work?
 
 <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=25>
+
 1. [Getting Started](docs/dom/GettingStarted.md)
 	* 1.1. [Installation](docs/dom/GettingStarted.md#1-installation)
 	* 1.2. [First Component](docs/dom/GettingStarted.md#2-first-component)
@@ -84,6 +89,7 @@ Make sure to check out the the relevant Getting Started guide which provides a f
 	* **2.4. [StyleContainer](docs/dom/api/StyleContainer.md)**
 
 <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=25>
+
 1. [Getting Started](docs/native/GettingStarted.md)
 	* 1.1. [Installation](docs/native/GettingStarted.md#1-installation)
 	* 1.2. [First Component](docs/native/GettingStarted.md#2-first-component)
