@@ -2,12 +2,47 @@
 
 Every mixin gets resolved by the [mixin](plugins/Mixin.md) plugin which therefore must be included in the configuration.
 
+* [Before / After](#before-after) <img src="res/native-badge.png" height=15>
+* [Blank](#blank) <img src="res/native-badge.png" height=15>
 * [Contains](#contains)
+* [Empty](#empty) <img src="res/native-badge.png" height=15>
 * [Extend](#extend)
 * [Extract CSS](#extract-css) <img src="res/dom-badge.png" height=15>
-* [Platform queries](#platform-queries) <img src="res/dom-badge.png" height=15>
+* [First Letter](#first-letter ) <img src="res/native-badge.png" height=15>
+* [Platform Queries](#platform-queries) <img src="res/dom-badge.png" height=15>
 * [Stateful Conditions](#stateful-conditions)
 * [Substr](#substr)
+
+## Before / After <img src="res/native-badge.png" height=20>
+```javascript
+{
+  box: {
+    fontSize: 20,
+    before: {
+      content: 'I appear before'
+    },
+    after: {
+      // This text will also appear in red
+      content: 'I appear after'
+    }
+  }
+}
+```
+Behaves basically just like `:before` & `:after` pseudo classes from CSS. Let's you add content before / after the applied element.
+
+## Blank <img src="res/native-badge.png" height=20>
+```javascript
+{
+  box: {
+    fontSize: 20,
+    blank: {
+      // Adds padding if the element is empty or includes whitespace
+      padding: 20
+    }
+  }
+}
+```
+Behaves like the `:blank` pseudo class known from CSS. Works as [Empty](#empty), but also adds styles if the element contains whitespaces.
 
 ## Contains
 ```javascript
@@ -23,6 +58,21 @@ Every mixin gets resolved by the [mixin](plugins/Mixin.md) plugin which therefor
 }
 ```
 Contains let's you check wether a primitive element *(string or number)* contains a given regex.
+
+## Empty <img src="res/native-badge.png" height=20>
+```javascript
+{
+  box: {
+    fontSize: 20,
+    empty: {
+      // Adds padding if the element is empty (no children)
+      padding: 20
+    }
+  }
+}
+```
+Behaves like the `:empty` pseudo class known from CSS. Only adds styles if the element is empty / got no children.
+
 ## Extend
 ```javascript
 const extendStyles = {
@@ -90,6 +140,20 @@ Just use the new spread operator `...`.
 }
 ```
 Define CSS classes that get additionally added to the Component without having to add those as `className=''` in addition to the look styles.
+
+## First Letter <img src="res/native-badge.png" height=20>
+```javascript
+{
+  box: {
+    fontSize: 20,
+    firstLetter: {
+      // Colors the first letter red
+      color: 'red'
+    }
+  }
+}
+```
+Behaves like the `:first-letter` pseudo class known from CSS. Will only style the first letter of an element's child. Only works on `string` and `number`.
 
 ## Platform Queries <img src="res/dom-badge.png" height=20>
 
