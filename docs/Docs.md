@@ -27,12 +27,16 @@ Note that you need to use different packages for both platforms.<br>
 			* [Linter](plugins/Linter.md) <img src="res/dom-badge.png" height=15>
 			* [Style Logger](plugins/StyleLogger.md)
 	* **1.2 [Mixins](Mixins.md)**
-		* [Contains](Mixins.md#contains)
-		* [Extend](Mixins.md#extend)
-		* [Extract CSS](Mixins.md#extract-css) <img src="res/dom-badge.png" height=15>
-		* [Platform queries](Mixins.md#platform-queries) <img src="res/dom-badge.png" height=15>
-		* [Stateful Conditions](Mixins.md#stateful-conditions)
-		* [Substr](Mixins.md#substr)
+      * [Before / After](Mixins.md#before-after) <img src="res/native-badge.png" height=15>
+      * [Blank](Mixins.md#blank) <img src="res/native-badge.png" height=15>
+      * [Contains](Mixins.md#contains)
+      * [Empty](Mixins.md#empty) <img src="res/native-badge.png" height=15>
+      * [Extend](Mixins.md#extend)
+      * [Extract CSS](Mixins.md#extract-css) <img src="res/dom-badge.png" height=15>
+      * [First Letter](Mixins.md#first-letter) <img src="res/native-badge.png" height=15>
+      * [Platform Queries](Mixins.md#platform-queries) <img src="res/dom-badge.png" height=15>
+      * [Stateful Conditions](Mixins.md#stateful-conditions)
+      * [Substr](Mixins.md#substr)
 2. [Guides](guides/)
 	* 2.1. [Upgrading Look](guides/upgradeLook.md)
 	* 2.2. [Configuring Look](guides/configureLook.md)
