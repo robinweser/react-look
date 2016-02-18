@@ -1,0 +1,2 @@
+instrumentation:
+  excludes: ['modules/plugins/styleLogger.js', 'modules/plugins/linter.js', 'modules/plugins/friendlyClassName.js', 'modules/utils/warn.js', 'modules/utils/copyProperties.js']

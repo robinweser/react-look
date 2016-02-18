@@ -1,91 +1,131 @@
-# Look
+<h1><img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/logo.png" width=350></h1>
 
+![TravisCI](https://travis-ci.org/rofrischmann/react-look.svg?branch=develop) [![Test Coverage](https://codeclimate.com/github/rofrischmann/react-look/badges/coverage.svg)](https://codeclimate.com/github/rofrischmann/react-look/coverage) [![Code Climate](https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg)](https://codeclimate.com/github/rofrischmann/react-look)
+[![npm version](https://badge.fury.io/js/react-look.svg)](http://badge.fury.io/js/react-look)
+![Dependencies](https://david-dm.org/rofrischmann/react-look.svg)
+![Gzipped Size](https://img.shields.io/badge/gzipped-~17k-brightgreen.svg)
+
+**Look** is a modular, **plugin**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/). <br>
+Platform differences are flagged using either <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15> or <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>. If not flagged, it is available for both.
+> **Warning**: The documentation references the 1.0.0-beta. Make sure to test it. For legacy docs check [here](https://github.com/rofrischmann/react-look/tree/9a7261b16f9a06e8cd7e64773d19714fd4181219).
+
+# Features
+- ES2015 Classes & `React.createClass`
+- stateless Components
+- server-side rendering <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+- [plugin-based](docs/Plugins.md)
+- [developer tools](docs/Plugins.md#developertools)
+- Sass-like nesting
+- [pseudo classes](docs/dom/api/StyleSheet.md#pseudo-classes) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+- [media queries](docs/dom/api/StyleSheet.md#media-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+- [platform queries](docs/Mixins.md#platform-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+- [conditioned styles](docs/Mixins.md#stateful-conditions)
+- [stateful values](docs/plugins/StatefulValue.md)
+- [fallback values](docs/plugins/FallbackValue.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+- [extending](docs/Mixins.md#extend)
+- [vendor prefixing](docs/plugins/Prefixer.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+- [CSS](docs/dom/api/StyleSheet.md##tocssstyles--scope-media-id), [font-face ](docs/dom/api/StyleSheet.md#fontfontfamily-files--properties) & [keyframes API](docs/dom/api/StyleSheet.md#keyframesframes--name) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+
+# [Documentation](docs)
+The documentation contains information on every part of Look including usage guides and API reference.
+
+**New to Look?**<br>docs/
+Make sure to check out the the relevant Getting Started guide which provides a full guide on how to use Look. From installation, over configuration and up to even developer tooling.
+
+#### Table of contents
+1. Registry
+	* **1.1. [Plugins](docs/Plugins.md)**
+		* [Fallback Value](docs/plugins/FallbackValue.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+		* [Mixin](docs/plugins/Mixin.md)
+		* [Prefixer](docs/plugins/Prefixer.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+		* [Stateful Value](docs/plugins/StatefulValue.md)
+		* **1.1.1 [DevTools](docs/Plugins.md#developertools)**
+			* [Friendly ClassName](docs/plugins/FriendlyClassName.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+			* [Linter](docs/plugins/Linter.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+			* [Style Logger](docs/plugins/StyleLogger.md)
+	* **1.2 [Mixins](docs/Mixins.md)**
+    * [Before / After](docs/Mixins.md#before-after) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
+    * [Blank](docs/Mixins.md#blank) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
+    * [Contains](docs/Mixins.md#contains)
+    * [Empty](docs/Mixins.md#empty) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
+    * [Extend](docs/Mixins.md#extend)
+    * [Extract CSS](docs/Mixins.md#extract-css) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+    * [First Letter](docs/Mixins.md#first-letter) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
+    * [Platform queries](docs/Mixins.md#platform-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
+* [Stateful Conditions](docs/Mixins.md#stateful-conditions)
+* [Substr](docs/Mixins.md#substr)
+2. [Guides](docs/guides/)
+	* 2.1. [Upgrading Look](docs/guides/upgradeLook.md)
+	* 2.2. [Configuring Look](docs/guides/configureLook.md)
+	* 2.3. [Build your own: Mixin](docs/guides/customMixin.md)
+	* 2.4. [Build your own: Plugin](docs/guides/customPlugin.md)
+3. [FAQ](docs/FAQ.md)
+4. Under The Hood *(incomplete)*
+	* 4.1. How does Look work?
+	* 4.2. How does StyleSheet.create work?
+
+<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=25>
+
+1. [Getting Started](docs/dom/GettingStarted.md)
+	* 1.1. [Installation](docs/dom/GettingStarted.md#1-installation)
+	* 1.2. [First Component](docs/dom/GettingStarted.md#2-first-component)
+	* 1.3. [Stateless Components](docs/dom/GettingStarted.md#3-stateless-components)
+	* 1.4. [Pseudo classes](docs/dom/GettingStarted.md#4-pseudo-classes)
+	* 1.5. [Media queries](docs/dom/GettingStarted.md#5-media-queries)
+	* 1.6. [Mixins & Plugins](dom/GettingStarted.md#6-mixins--plugins)
+	* 1.7. [Fallback values](docs/dom/GettingStarted.md#7-fallback-values)
+	* 1.8. [Vendor prefixes](docs/dom/GettingStarted.md#8-vendor-prefixes)
+	* 1.9. [Server-side rendering](docs/dom/GettingStarted.md#9-server-side-rendering)
+	* 1.10. [DevTools](docs/dom/GettingStarted.md#10-devtools)
+2. [API Reference](docs/dom/api/)
+	* **2.1. [look](docs/dom/api/Look.md)**
+	* **2.2. [StyleSheet](docs/dom/api/StyleSheet.md)**
+		* [create](docs/dom/api/StyleSheet.md#createstyles)
+		* [combineStyles](docs/dom/api/StyleSheet.md#combinestylesstyles)
+		* [toCSS](docs/dom/api/StyleSheet.md#tocssstyles--scope)
+		* [keyframes](docs/dom/api/StyleSheet.md#keyframesframes--name)
+		* [font](docs/dom/api/StyleSheet.md#fontfontfamily-files--properties)
+	* **2.3. [LookRoot](docs/dom/api/LookRoot.md)**
+	* **2.4. [StyleContainer](docs/dom/api/StyleContainer.md)**
+
+<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=25>
+
+1. [Getting Started](docs/native/GettingStarted.md)
+	* 1.1. [Installation](docs/native/GettingStarted.md#1-installation)
+	* 1.2. [First Component](docs/native/GettingStarted.md#2-first-component)
+	* 1.3. [Stateless Components](docs/native/GettingStarted.md#3-stateless-components)
+	* 1.4. [Mixins & Plugins](docs/native/GettingStarted.md#4-mixins--plugins)
+	* 1.5. [DevTools](docs/native/GettingStarted.md#5-devtools)
+2. [API Reference](docs/native/api/)
+	* **2.1. [look](docs/native/api/Look.md)**
+	* **2.2. [StyleSheet](docs/native/api/StyleSheet.md)**
+		* [create](docs/native/api/StyleSheet.md#createstyles)
+		* [combineStyles](docs/native/api/StyleSheet.md#combinestylesstyles)
+	* **2.3. [LookRoot](docs/native/api/LookRoot.md)**
+
+
+# Example
+The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries.
+
+<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=25>
 ```sh
 npm install react-look
 ```
-
-**Look** is a **feature-rich** styling library for [React.js](https://facebook.github.io/react/) that supports lots of CSS features as well as **stateful** styles. It extends your inline styles and still remains hackable and processable since it is based on [Dynamic Style Sheets](https://github.com/dynamicstylesheets).
-
-> It got inspired by [Cristopher Chedeau (@vjeux)](https://twitter.com/vjeux)'s presentation [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) as well as [Radium](http://projects.formidablelabs.com/radium/) and [ReactCSS](http://reactcss.com).
-
-# Features
-Look is as far as I know the **feature richest** styling library for React. Supporting [27 pseudo-classes](docs/supportedPseudos.md) and **stateful styles** which is an awesome shortcut if you need some styles depending on your current `state` and/or `props`.
-- ES6 classes
-- _(nested)_ media-queries
-- _(nested)_ pseudo-classes
-- _(nested)_ stateful styles (condition based)
-- processors (prefixing, flexbox support, ...)
-- dynamic style manipulation
-
-### [Supported pseudo-classes](docs/supportedPseudos.md)
-_(Check here to get detail information on supported pseudo-classes)_
-
-# Benefit
-Using inline styles instead of static CSS files has a lot of positive side-effects. The most important one is **dynamic behavior**.<br>Remember you're using JavaScript now. Your styles no longer belong to a static file but are mapped to an Object that can be manipulated in any given way.
-
-### Component-scoped
-It encourages you to define your styles scoped to your Component which helps to improve your app structure and keeps together all Component-relevant data.<br>It also avoids specificity or namespacing conflicts and eliminates dead code this it get's never applied to your DOM actively.
-
-### Separation of Concerns
-Look tries to keep your `render` function clean of validations such as `this.state.checked && styles.checked` which often gets encouraged by other styling library. This keeps some kind of component-based separation of concerns as long as your state **only** exists to change styles.
-
-> **Warning:** Avoid using stateful conditions with data-sensitive states as this would mix logic and styles.
-
-# Usage
-
+Using with `react-dom` Look ships **pseudo class** and **media query** support by default. They're resolved within the `StyleSheet.create` method.
 ```javascript
-import React from 'react';
-import Look from 'react-look';
-import {Processors} from 'dynamic-style-sheets';
-let {Prefixer, Flexbox} = Processors;
+import React, { Component, PropTypes } from 'react'
+import look, { StyleSheet } from 'react-look'
 
-function custom(value){
-  return value * 2 + 10
-}
-
-let sheet = new Look({
-  header : {
-    padding: custom(5),               // use benefit of javascript
-    transition: '200ms all linear',
-    '@media (min-height: 800px)' : {  // media queries
-      fontSize: 13,
-      ':hover' : {                    // pseudo-classes
-        fontSize: 15,
-        ':checked' : {                // also nested
-          color: 'red'
-        }
-      }
-    },
-    'status=active' : {               // conditioned styles
-      backgroundColor: 'green',
-      'theme=pink' : {
-        backgroundColor: 'pink'       // nested conditions
-      }
-    }
-  },
-  title : {
-    fontWeight: 800
-  }
-})
-
-sheet.process([Prefixer, Flexbox])    // process your styles to add vendor prefixes and global flexbox support
-```
-
-## Component
-
-```javascript
-class Header extends React.Component {
-  constructor() {
-    super(...arguments);
-    this.state = {
-      status: 'active'
-    }
-  }
+class Header extends Component {
+  static defaultProps = { size: 24 };
+  static propTypes = { size: PropTypes.number.isRequired };
+  state = { status: 'active' };
 
   render() {
     return (
-      <header look="header">            //Just use the `look` prop to apply styles
-        <h1 look="title">
+      // Styles are basically applied using the `className` property
+      <header className={styles.header}>
+        <h1 className={styles.title}>
           {this.props.title}
         </h1>
       </header>
@@ -93,35 +133,117 @@ class Header extends React.Component {
   }
 }
 
-  export default Look.applyTo(Header);  //Your styles get applied here
+// generates classNames for each selector
+const styles = StyleSheet.create({
+  header: {
+    transition: '200ms all linear',
+    // Use media queries or pseudo classes
+    // using nested style objects. Those get transformed
+    // on the fly and can be nested endlessly.
+    '@media (min-height: 800px)': {
+      fontSize: 13,
+      ':hover': {
+        fontSize: 15
+      }
+    },
+    // You can also use mixins with the same selector.
+    // They'll get split intelligently and evaluated on render
+    'status=active': {
+      backgroundColor: 'green',
+      'size>=20': {
+        backgroundColor: 'pink'
+      }
+    }
+  },
+  title: {
+    fontWeight: 800,
+    // use functions to inject props, state or context values
+    fontSize: (props, state, context) => props.size * state.zoom
+  }
+})
+
+export default look(Header)
 ```
+<br>
+<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=25>
+```sh
+npm install react-look-native
+```
+Using with `react-native` only a part of the plugins, mixins and devTools is available.
+You also import some stuff differently.
+```javascript
+import React, { View, Text, Component, PropTypes } from 'react-native'
+import look, { StyleSheet } from 'react-look-native'
 
-# Under the hood
-## Dynamic Style Sheets
-Under the hood Look is based on **[Dynamic Style Sheets](https://github.com/dynamicstylesheets)** which is an lightweight interface for style object manipulation. It also ships an interface for dynamic CSS sheet interaction that automatically diffs changes to your DOM which might be used in an early stage to add unsupported CSS-features.  _(Check the organisation for more information)_.
+class Header extends Component {
+  static defaultProps = { size: 24 };
+  static propTypes = { size: PropTypes.number.isRequired };
+  state = { status: 'active' };
 
-### Processors
-DSS (Dynamic Style Sheets) inlcude a processor interface that let's you apply any valid processor e.g. [Vendor Prefixing](https://github.com/dynamicstylesheets/DSS-Prefixer). See this frequently updated  [list](https://github.com/dynamicstylesheets/Dynamic-Style-Sheets#available-processors) for all available processors I've done so far.
+  render() {
+    return (
+      // Styles are basically applied using the `style` property
+			// Same way as React Native does by default
+      <View style={styles.header}>
+        <Text style={styles.title}>
+          {this.props.title}
+        </Text>
+      </View>
+    )
+  }
+}
 
-**Power up your styles for your own custom needs!**
+// generates classNames for each selector
+const styles = StyleSheet.create({
+  header: {
+    color: 'red',
+		// You can also use mixins with the same selector.
+		// They'll get split intelligently and evaluated on render
+    'status=active': {             
+      backgroundColor: 'green',
+      'size>=20': {            
+        backgroundColor: 'pink'       
+      }
+    }
+  },
+  title: {
+    fontWeight: 800,
+    // use functions to inject props, state or context values
+    fontSize: (props, state, context) => props.size * state.zoom
+  }
+})
 
-## Life cycle
-Similar to Radium, Look wraps the `render` function and modifies applied styles while iterating recursive over all children. It adds missing event listeners to match `:hover`, `:active`, `:focus` and `:valid`, `:invalid`. Those action states get saved within your wrapping component *(You can adress those with the [State API](docs/api/State.md))*.<br> It also counts (type-specific) indexes to validate index-specific pseudo-classes such as `:nth-child` or `` `:nth-type-of``.
-![Life cycle](docs/res/lifecycle.png)
+export default look(Header)
+```
+# Demo
+Check out the provided examples for some special use cases. See them in action using the demo. You can easily run the examples on your own within the provided demo by just.
 
-# Roadmap
-- [ ] **use-case examples**
-- [ ] Global (Sheet extension) for global CSS styles
+<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=25>
+```sh
+git clone --bare https://github.com/rofrischmann/react-look.git
+npm install
+npm run babel
+# run this as a client-side only demo
+npm run demo
+# run this as a universal demo
+npm run demo:universal
+```
+<br>
+<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=25>
 
-## [react-look-tools (coming soon)](https://github.com/rofrischmann/react-look-tools)
-- `@keyframe`, `linear-gradient` support
-- **extend functionality**
-- separate input validation
--  special pseudos (:placeholder, :webkit-scrollbar)
--  **dev tools for better DX (inspired by [Dan Abramov](https://github.com/gaearon))**
+Right now I am working to get a running React Native example ready. Stay tuned.
 
 # License
-**Look** (react-look) is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>Created with ♥ by [@rofrischmann](http://rofrischmann.de) at [Unverschämt](http://unverschaemt.net).
+**Look** is licensed under the [MIT License](http://opensource.org/licenses/MIT).<br>
+Documentation is licensed under [Creative Common License](http://creativecommons.org/licenses/by/4.0/).<br>
+Created with ♥ by [@rofrischmann](http://rofrischmann.de).
 
-# Contributing / Bugs
-Got any issues or need a great feature that is not (yet) supported?<br>Feel free to create an issue/request and I will handle that as fast as possible.
+# Contributing
+I would love to see people getting involved.<br>
+If you have a feature request please create an issue. Also if you're even improving Look by any kind please don't be shy and send a pull request to let everyone benefit.
+
+### Issues
+If you're having any issue please let me know as fast as possible to find a solution a hopefully fix the issue. Try to add as much information as possible such as your environment, exact case, the line of actions to reproduce the issue.
+
+### Pull Requests
+If you are creating a pull request, try to use commit messages that are self-explanatory. Also always add some **tests** unless it's totally senseless (add a reason why it's senseless) and test your code before you commit so Travis won't throw errors.
