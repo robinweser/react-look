@@ -1,6 +1,10 @@
 # Changelog
 
 ## 1.0
+### 1.0.0-beta3 (18.02.16)
+##### Features
+* 5 new React Native mixins: `blank`, `empty`, `firstLetter`, `before` and `after`
+
 ### 1.0.0-beta2 (15.02.16)
 #### Packages
 Look was split into 2 different packages as it now fully supports React Native again.
