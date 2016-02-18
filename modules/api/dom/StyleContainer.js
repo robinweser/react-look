@@ -33,6 +33,7 @@ class StyleContainer {
     this.keyframes = new Map()
     this.fonts = new Set()
     this.dynamics = new Map()
+    this.statics = new Set()
 
     this._className = 0
     this._listener = new Set()
@@ -51,6 +52,14 @@ class StyleContainer {
     } else {
       addAndEmit(this, this.selectors, selector, styles)
     }
+  }
+
+  /**
+   * Adds a static css string
+   * @param {string} styles - as css string
+   */
+  addStatic(styles) {
+    addAndEmit(this, this.statics, styles)
   }
 
   /**
@@ -87,6 +96,7 @@ class StyleContainer {
       selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}')
       css += '}'
     })
+    this.statics.forEach(staticCss => css += staticCss)
 
     return css
   }
