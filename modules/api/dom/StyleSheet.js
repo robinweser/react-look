@@ -36,9 +36,18 @@ export default {
    * @param {Object} styles - a set of style objects
    * @param {string?} scope - additional scoping selector
    */
+  addCSS(styles, scope) {
+    if (typeof styles === 'string') {
+      StyleContainer.addStatic(styles)
+    } else {
+      const scopeSelector = scope !== undefined && scope.trim() !== '' ? scope + ' ' : ''
+      Object.keys(styles).forEach(selector => StyleContainer.add(scopeSelector + selector, styles[selector]))
+    }
+  },
+
   toCSS(styles, scope) {
-    const scopeSelector = scope !== undefined && scope.trim() !== '' ? scope + ' ' : ''
-    Object.keys(styles).forEach(selector => StyleContainer.add(scopeSelector + selector, styles[selector]))
+    console.warn('`StyleSheet.toCSS` is deprecated! Please use `StyleSheet.addCSS` instead!')
+    this.addCSS(styles, scope)
   },
 
   /**
