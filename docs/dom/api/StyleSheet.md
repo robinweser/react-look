@@ -3,7 +3,7 @@ A helper to create scoped styles and global CSS styles.
 ## Methods
 - [create](#createstyles)
 - [combineStyles](#combinestylesstyles)
-- [toCSS](#tocssstyles--scope) ***DEPRECATED!***
+- [toCSS](#tocssstyles--scope) <img src="../../res/deprecated-badge.png" height=15>
 - [addCSS](#addcssstyles--scope)
 - [keyframes](#keyframesframes--name)
 - [font](#fontfontfamily-files--properties)
@@ -85,8 +85,7 @@ const styles = StyleSheet.create({
 
 c(styles.box, styles.container) // => c1 c2
 ```
-## `toCSS(styles [, scope])`
-***DEPRECATED!***
+## `toCSS(styles [, scope])` <img src="../../res/deprecated-badge.png" height=20>
 Please use [addCSS](#addcssstyles--scope). This function has been renamed.
 ## `addCSS(styles [, scope])`
 Adds all `styles` as a valid CSS string and directly applies those to the global CSSStyleSheet. `scope` will also add a scope selector to add more specificity.
@@ -105,6 +104,7 @@ StyleSheet.addCSS({
 ```
 
 This also accepts a css `string`. When using it with a `string`, the scope will be ignored!
+> Note: This should only be used for third-party or legacy CSS and used on your own risk.
 
 ```javascript
 StyleSheet.addCSS("#myId { color: red } .myClass { color: green }")

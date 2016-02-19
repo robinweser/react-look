@@ -65,7 +65,8 @@ Note that you need to use different packages for both platforms.<br>
 	* **2.2. [StyleSheet](dom/api/StyleSheet.md)**
 		* [create](dom/api/StyleSheet.md#createstyles)
 		* [combineStyles](dom/api/StyleSheet.md#combinestylesstyles)
-		* [toCSS](dom/api/StyleSheet.md#tocssstyles--scope)
+		* [toCSS](dom/api/StyleSheet.md#tocssstyles--scope) <img src="res/deprecated-badge.png" height=15>
+		* [addCSS](dom/api/StyleSheet.md#addcssstyles--scope)
 		* [keyframes](dom/api/StyleSheet.md#keyframesframes--name)
 		* [font](dom/api/StyleSheet.md#fontfontfamily-files--properties)
 	* **2.3. [LookRoot](dom/api/LookRoot.md)**
