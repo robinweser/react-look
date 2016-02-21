@@ -46,7 +46,7 @@ export default {
   },
 
   toCSS(styles, scope) {
-    console.warn('`StyleSheet.toCSS` is deprecated! Please use `StyleSheet.addCSS` instead!')
+    console.warn('`StyleSheet.toCSS` is deprecated! Please use `StyleSheet.addCSS` instead!') // eslint-disable-line
     this.addCSS(styles, scope)
   },
 

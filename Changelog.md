@@ -1,6 +1,13 @@
 # Changelog
 
 ## 1.0
+### 1.0.0-beta4 (21.02.16)
+#### API Changes
+* `StyleSheet.toCSS` got deprecated. It was renamed to `StyleSheet.addCSS`
+
+##### Improvements
+* `StyleSheet.addCSS` support static CSS strings (for third-party & legacy support) ( [#209](https://github.com/rofrischmann/react-look/pull/209) )
+
 ### 1.0.0-beta3 (18.02.16)
 ##### Features
 * 5 new React Native mixins: `blank`, `empty`, `firstLetter`, `before` and `after`
