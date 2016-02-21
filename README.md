@@ -194,7 +194,7 @@ class Header extends Component {
   }
 }
 
-// generates classNames for each selector
+// generates objects for each selector
 const styles = StyleSheet.create({
   header: {
     color: 'red',
