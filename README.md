@@ -80,12 +80,12 @@ Make sure to check out the the relevant Getting Started guide which provides a f
 2. [API Reference](docs/dom/api/)
 	* **2.1. [look](docs/dom/api/Look.md)**
 	* **2.2. [StyleSheet](docs/dom/api/StyleSheet.md)**
-  * [create](docs/dom/api/StyleSheet.md#createstyles)
-  * [combineStyles](docs/dom/api/StyleSheet.md#combinestylesstyles)
-  * [toCSS](docs/dom/api/StyleSheet.md#tocssstyles--scope) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/deprecated-badge.png" height=15>
-  * [addCSS](docs/dom/api/StyleSheet.md#addcssstyles--scope)
-  * [keyframes](docs/dom/api/StyleSheet.md#keyframesframes--name)
-  * [font](docs/dom/api/StyleSheet.md#fontfontfamily-files--properties)
+		* [create](docs/dom/api/StyleSheet.md#createstyles)
+		* [combineStyles](docs/dom/api/StyleSheet.md#combinestylesstyles)
+		* [toCSS](docs/dom/api/StyleSheet.md#tocssstyles--scope) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/deprecated-badge.png" height=15>
+		* [addCSS](docs/dom/api/StyleSheet.md#addcssstyles--scope)
+		* [keyframes](docs/dom/api/StyleSheet.md#keyframesframes--name)
+		* [font](docs/dom/api/StyleSheet.md#fontfontfamily-files--properties)
 	* **2.3. [LookRoot](docs/dom/api/LookRoot.md)**
 	* **2.4. [StyleContainer](docs/dom/api/StyleContainer.md)**
 
