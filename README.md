@@ -184,7 +184,7 @@ class Header extends Component {
   render() {
     return (
       // Styles are basically applied using the `style` property
-			// Same way as React Native does by default
+      // Same way as React Native does by default
       <View style={styles.header}>
         <Text style={styles.title}>
           {this.props.title}
@@ -198,8 +198,8 @@ class Header extends Component {
 const styles = StyleSheet.create({
   header: {
     color: 'red',
-		// You can also use mixins with the same selector.
-		// They'll get split intelligently and evaluated on render
+    // You can also use mixins with the same selector.
+    // They'll get split intelligently and evaluated on render
     'status=active': {             
       backgroundColor: 'green',
       'size>=20': {            
