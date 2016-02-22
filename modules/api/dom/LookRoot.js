@@ -59,14 +59,21 @@ class StyleComponent extends Component {
 
   updateStyles(userAgent) {
     const css = StyleContainer.renderStaticStyles(userAgent) // eslint-disable-line
-    // Delay change listener until Component is mounted
-    setTimeout(() => {
-      this._isMounted && this.setState({ css: css })
-    }, 0)
+    if (!this._isMounted) {
+      // If not mounted, just push state change as it does not render multiple times
+      this.setState({ css: css })
+    } else {
+      // After the element got mounted we manually change the CSS
+      // because calling setState within the current render is invalid
+      // Helps to directly change the styles to fix #202
+      // https://github.com/rofrischmann/react-look/issues/202
+      // TODO: Compare innerHMTL vs. insertRule according performance
+      this.refs.sheet.innerHTML = css
+    }
   }
 
   render() {
     const innerHTML = { __html: this.state.css }
-    return <style dangerouslySetInnerHTML={innerHTML} />
+    return <style ref="sheet" dangerouslySetInnerHTML={innerHTML} />
   }
 }
