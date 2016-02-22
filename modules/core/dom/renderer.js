@@ -39,7 +39,7 @@ export function extractDynamicStyles(styles) {
 
     // function are considered stateful styles and therefore
     // treated as dynamic styles
-    if (_.isFunction(value)) {
+    if (_.isFunction(value) || _.isBoolean(value)) {
       dynamic[property] = value
       delete styles[property]
     }

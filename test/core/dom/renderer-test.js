@@ -38,6 +38,12 @@ describe('Extracting dynamic styles', () => {
     expect(styles).to.eql({ })
   })
 
+  it('should also treat boolean values as dynamic', () => {
+    const styles = { box: { color: true } }
+    extractDynamicStyles(styles)
+    expect(styles).to.eql({ })
+  })
+
   it('should extract nested dynamic style properties', () => {
     const colorFn = props => props.color
     const styles = {

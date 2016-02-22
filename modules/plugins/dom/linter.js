@@ -7,9 +7,9 @@ export default function linter({ styles, Component, element, config: { linter } 
   warnings.forEach(warning => {
     if (!linter.mute) {
       if (linter && linter.onlyLogHint) {
-        console.warn(`${Component._lookScope}<${getChildType(element)}>: ` + warning.hint) // eslint-disable-line
+        console.warn(`${Component.constructor.displayName}<${getChildType(element)}>: ` + warning.hint) // eslint-disable-line
       } else {
-        console.warn(`${Component._lookScope}<${getChildType(element)}>: ` + warning.hint, warning) // eslint-disable-line
+        console.warn(`${Component.constructor.displayName}<${getChildType(element)}>: ` + warning.hint, warning) // eslint-disable-line
       }
     }
   })
