@@ -4,9 +4,9 @@
 export default function useLowercaseLook({ source }, { jscodeshift }) {
   // Node types & node builder
   const { ImportDeclaration, ImportDefaultSpecifier, CallExpression } = jscodeshift
-  const { importDefaultSpecifier, callExpression, identifier } = jschodeshift
+  const { importDefaultSpecifier, callExpression, identifier } = jscodeshift
 
-  let usedDefaultImport = 'Look'
+  let usedDefaultImport
 
   source = jscodeshift(source)
     .find(ImportDeclaration)
@@ -18,12 +18,14 @@ export default function useLowercaseLook({ source }, { jscodeshift }) {
     .replaceWith(() => importDefaultSpecifier(identifier('look')))
     .toSource()
 
-  source = jscodeshift(source)
-    .find(CallExpression)
-    // filter only usedDefaultImport calls
-    .filter(el => el.node.callee.type === 'Identifier' && el.node.callee.name === usedDefaultImport)
-    .replaceWith(() => callExpression(identifier('look'), el.node.arguments))
-    .toSource()
+  if (usedDefaultImport) {
+    source = jscodeshift(source)
+      .find(CallExpression)
+      // filter only usedDefaultImport calls
+      .filter(el => el.node.callee.type === 'Identifier' && el.node.callee.name === usedDefaultImport)
+      .replaceWith(el => callExpression(identifier('look'), el.node.arguments))
+      .toSource()
+  }
 
   return source
 }

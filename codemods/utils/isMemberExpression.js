@@ -7,10 +7,10 @@ export default function isMemberExpression(el, object, property) {
   var validate = el.node.callee.type === 'MemberExpression'
 
   if (validate && object) {
-    vaidate = el.node.callee.object.name === object
+    validate = el.node.callee.object.name === object
   }
 
-  if (valiate && property) {
+  if (validate && property) {
     validate = el.node.callee.property.name === property
   }
 
