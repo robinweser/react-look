@@ -4,10 +4,10 @@
 
 
 ### props
-| Property | Description |
-| ---  | ----------- |
-| config | global Look configuration, will automatically be spread to all child Components using `context`. |
-| style | styles the wrapping `View` which `LookRoot` creates.
+| Property | Description |
+| ---  | ----------- |
+| config | global Look configuration, will automatically be spread to all child Components using `context`  |
+| style | styles the wrapping `View` which `LookRoot` creates.
 
 ## Usage
 ```javascript
