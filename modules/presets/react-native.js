@@ -1,6 +1,6 @@
 // Plugins
 import statefulValue from '../plugins/statefulValue'
-import statefulSelector from '../plugins/statefulSelector'
+import statefulSelector from '../plugins/native/statefulSelector'
 import mixin from '../plugins/mixin'
 
 // Conditions
