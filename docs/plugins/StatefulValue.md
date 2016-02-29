@@ -5,8 +5,8 @@ You most likely will have some styles that depend on `props`, `state` or `contex
 ```javascript
 {
 	box: {
-		color: 'blue',
-		fontSize: (props, state, context) => props.size * state.zoom
+	  color: 'blue',
+	  fontSize: (props, state, context) => props.size * state.zoom
 	}
 }
 ```
