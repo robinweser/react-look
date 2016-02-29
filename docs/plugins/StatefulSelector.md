@@ -4,7 +4,7 @@ If you almost only have dynamic styles, you most likely feel a bit repeating usi
 
 ```javascript
 {
-	box: (props, state, context) => ({
+  box: (props, state, context) => ({
 		color: context.theme.color,
 		fontSize: props.size * state.zoom
   })
