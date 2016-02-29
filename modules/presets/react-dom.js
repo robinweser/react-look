@@ -1,8 +1,7 @@
 // Plugins
 import mixin from '../plugins/mixin'
 import statefulValue from '../plugins/statefulValue'
-import statefulSelector from '../plugins/dom/statefulSelector'
-import prefixer from '../plugins/dom/prefixer'
+import staticPrefixer from '../plugins/dom/staticPrefixer'
 import fallbackValue from '../plugins/dom/fallbackValue'
 
 // CSS extraction
@@ -23,7 +22,7 @@ export default {
     statefulSelector,
     mixin,
     fallbackValue,
-    prefixer
+    staticPrefixer
   ],
   mixins: {
     // Conditions
