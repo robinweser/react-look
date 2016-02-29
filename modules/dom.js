@@ -2,6 +2,7 @@
 import prefixer from './plugins/dom/prefixer'
 import fallbackValue from './plugins/dom/fallbackValue'
 import statefulValue from './plugins/statefulValue'
+import statefulSelector from './plugins/dom/statefulSelector'
 import mixin from './plugins/mixin'
 
 // Dev tools
@@ -42,6 +43,7 @@ const Plugins = {
   mixin,
   fallbackValue,
   statefulValue,
+  statefulSelector,
   prefixer,
   styleLogger,
   linter,
