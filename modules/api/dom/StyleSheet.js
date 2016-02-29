@@ -13,7 +13,8 @@ export default {
    */
   create(styles) {
     // flat style object without selectors
-    if (!_.isPlainObject(styles[Object.keys(styles)[0]])) {
+    const firstKey = styles[Object.keys(styles)[0]]
+    if (!_.isPlainObject(firstKey) && !_.isFunction(firstKey)) {
       return renderStaticStyles(styles)
     }
 

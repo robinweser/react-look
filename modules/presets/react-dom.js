@@ -19,6 +19,7 @@ import extend from '../mixins/extend'
 export default {
   plugins: [
     statefulValue,
+    statefulSelector,
     mixin,
     fallbackValue,
     staticPrefixer

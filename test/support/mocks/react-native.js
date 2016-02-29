@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 
 const RN = React;
 
@@ -28,3 +28,6 @@ RN.TouchableHighlight = createComponent("TouchableHighlight");
 RN.ScrollView = createComponent("ScrollView");
 
 export default RN;
+export {
+  Component
+}

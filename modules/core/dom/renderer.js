@@ -10,6 +10,11 @@ import _ from 'lodash'
  * @param {Object} styles - pure style object which gets parsed
  */
 export function extractDynamicStyles(styles) {
+  // early return stateful selectors
+  if (_.isFunction(styles)) {
+    return { _statefulSelector: styles }
+  }
+
   return Object.keys(styles).reduce((dynamic, property) => {
     const value = styles[property]; // eslint-disable-line
     if (_.isPlainObject(value)) {
@@ -111,7 +116,7 @@ export default function renderStaticStyles(styles, scope) {
   }
 
   // Also add the dynamic styles if they exist
-  if (!_.isEmpty(dynamicStyles)) {
+  if (!_.isEmpty(dynamicStyles) || _.isFunction(dynamicStyles)) {
     StyleContainer._addDynamic(className, dynamicStyles)
   }
 

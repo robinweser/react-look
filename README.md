@@ -2,12 +2,10 @@
 
 ![TravisCI](https://travis-ci.org/rofrischmann/react-look.svg?branch=develop) [![Test Coverage](https://codeclimate.com/github/rofrischmann/react-look/badges/coverage.svg)](https://codeclimate.com/github/rofrischmann/react-look/coverage) [![Code Climate](https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg)](https://codeclimate.com/github/rofrischmann/react-look)
 [![npm version](https://badge.fury.io/js/react-look.svg)](http://badge.fury.io/js/react-look)
-![Dependencies](https://david-dm.org/rofrischmann/react-look.svg)
-![Gzipped Size](https://img.shields.io/badge/gzipped-~17k-brightgreen.svg)
 
 **Look** is a modular, **plugin**-based and **feature-rich** styling library for [React](https://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/). <br>
 Platform differences are flagged using either <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15> or <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>. If not flagged, it is available for both.
-> **Warning**: The documentation references the 1.0.0-beta. Make sure to test it. For legacy docs check [here](https://github.com/rofrischmann/react-look/tree/9a7261b16f9a06e8cd7e64773d19714fd4181219).
+> **Warning**: The documentation references the 1.0.0-beta. For legacy docs check [here](https://github.com/rofrischmann/react-look/tree/9a7261b16f9a06e8cd7e64773d19714fd4181219).
 
 # Features
 - ES2015 Classes & `React.createClass`
@@ -20,92 +18,23 @@ Platform differences are flagged using either <img src="https://raw.githubuserco
 - [media queries](docs/dom/api/StyleSheet.md#media-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 - [platform queries](docs/Mixins.md#platform-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 - [conditioned styles](docs/Mixins.md#stateful-conditions)
-- [stateful values](docs/plugins/StatefulValue.md)
+- [stateful values](docs/plugins/StatefulValue.md) & [selectors](docs/plugins/StatefulSelector.md)
 - [fallback values](docs/plugins/FallbackValue.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 - [extending](docs/Mixins.md#extend)
 - [vendor prefixing](docs/plugins/Prefixer.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 - [CSS](docs/dom/api/StyleSheet.md##addcssstyles--scope-media-id), [font-face ](docs/dom/api/StyleSheet.md#fontfontfamily-files--properties) & [keyframes API](docs/dom/api/StyleSheet.md#keyframesframes--name) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
 
-# [Documentation](docs)
+# [Documentation](docs/Docs.md)
 The documentation contains information on every part of Look including usage guides and API reference.
 
-**New to Look?**<br>docs/
+**New to Look?**<br>
 Make sure to check out the the relevant Getting Started guide which provides a full guide on how to use Look. From installation, over configuration and up to even developer tooling.
 
-#### Table of contents
-1. Registry
-	* **1.1. [Plugins](docs/Plugins.md)**
-		* [Fallback Value](docs/plugins/FallbackValue.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
-		* [Mixin](docs/plugins/Mixin.md)
-		* [Prefixer](docs/plugins/Prefixer.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
-		* [Stateful Value](docs/plugins/StatefulValue.md)
-		* **1.1.1 [DevTools](docs/Plugins.md#developertools)**
-			* [Friendly ClassName](docs/plugins/FriendlyClassName.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
-			* [Linter](docs/plugins/Linter.md) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
-			* [Style Logger](docs/plugins/StyleLogger.md)
-	* **1.2 [Mixins](docs/Mixins.md)**
-    * [Before / After](docs/Mixins.md#before-after) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
-    * [Blank](docs/Mixins.md#blank) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
-    * [Contains](docs/Mixins.md#contains)
-    * [Empty](docs/Mixins.md#empty) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
-    * [Extend](docs/Mixins.md#extend)
-    * [Extract CSS](docs/Mixins.md#extract-css) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
-    * [First Letter](docs/Mixins.md#first-letter) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=15>
-    * [Platform queries](docs/Mixins.md#platform-queries) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
-* [Stateful Conditions](docs/Mixins.md#stateful-conditions)
-* [Substr](docs/Mixins.md#substr)
-2. [Guides](docs/guides/)
-	* 2.1. [Upgrading Look](docs/guides/upgradeLook.md)
-	* 2.2. [Configuring Look](docs/guides/configureLook.md)
-	* 2.3. [Build your own: Mixin](docs/guides/customMixin.md)
-	* 2.4. [Build your own: Plugin](docs/guides/customPlugin.md)
-3. [FAQ](docs/FAQ.md)
-4. Under The Hood *(incomplete)*
-	* 4.1. How does Look work?
-	* 4.2. How does StyleSheet.create work?
+#### [Getting Started - React](docs/dom/GettingStarted.md)<br> [Getting Started - React Native](docs/native/GettingStarted.md)
 
-<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=25>
+# Example Component
+> This is only an example Component and won't run out of the box without wrapping your App. See the Getting Started guide on how to setup Look correctly.
 
-1. [Getting Started](docs/dom/GettingStarted.md)
-	* 1.1. [Installation](docs/dom/GettingStarted.md#1-installation)
-	* 1.2. [First Component](docs/dom/GettingStarted.md#2-first-component)
-	* 1.3. [Stateless Components](docs/dom/GettingStarted.md#3-stateless-components)
-	* 1.4. [Pseudo classes](docs/dom/GettingStarted.md#4-pseudo-classes)
-	* 1.5. [Media queries](docs/dom/GettingStarted.md#5-media-queries)
-	* 1.6. [Mixins & Plugins](dom/GettingStarted.md#6-mixins--plugins)
-	* 1.7. [Fallback values](docs/dom/GettingStarted.md#7-fallback-values)
-	* 1.8. [Vendor prefixes](docs/dom/GettingStarted.md#8-vendor-prefixes)
-	* 1.9. [Server-side rendering](docs/dom/GettingStarted.md#9-server-side-rendering)
-	* 1.10. [DevTools](docs/dom/GettingStarted.md#10-devtools)
-2. [API Reference](docs/dom/api/)
-	* **2.1. [look](docs/dom/api/Look.md)**
-	* **2.2. [StyleSheet](docs/dom/api/StyleSheet.md)**
-		* [create](docs/dom/api/StyleSheet.md#createstyles)
-		* [combineStyles](docs/dom/api/StyleSheet.md#combinestylesstyles)
-		* [toCSS](docs/dom/api/StyleSheet.md#tocssstyles--scope) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/deprecated-badge.png" height=15>
-		* [addCSS](docs/dom/api/StyleSheet.md#addcssstyles--scope)
-		* [keyframes](docs/dom/api/StyleSheet.md#keyframesframes--name)
-		* [font](docs/dom/api/StyleSheet.md#fontfontfamily-files--properties)
-	* **2.3. [LookRoot](docs/dom/api/LookRoot.md)**
-	* **2.4. [StyleContainer](docs/dom/api/StyleContainer.md)**
-
-<img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/native-badge.png" height=25>
-
-1. [Getting Started](docs/native/GettingStarted.md)
-	* 1.1. [Installation](docs/native/GettingStarted.md#1-installation)
-	* 1.2. [First Component](docs/native/GettingStarted.md#2-first-component)
-	* 1.3. [Stateless Components](docs/native/GettingStarted.md#3-stateless-components)
-	* 1.4. [Mixins & Plugins](docs/native/GettingStarted.md#4-mixins--plugins)
-	* 1.5. [DevTools](docs/native/GettingStarted.md#5-devtools)
-2. [API Reference](docs/native/api/)
-	* **2.1. [look](docs/native/api/Look.md)**
-	* **2.2. [StyleSheet](docs/native/api/StyleSheet.md)**
-		* [create](docs/native/api/StyleSheet.md#createstyles)
-		* [combineStyles](docs/native/api/StyleSheet.md#combinestylesstyles)
-	* **2.3. [LookRoot](docs/native/api/LookRoot.md)**
-
-
-# Example
 The syntax is quite similar to [Sass](http://sass-lang.com) and other React styling libraries.
 
 <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=25>
