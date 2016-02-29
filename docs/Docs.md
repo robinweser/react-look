@@ -22,6 +22,7 @@ Note that you need to use different packages for both platforms.<br>
 		* [Mixin](plugins/Mixin.md)
 		* [Prefixer](plugins/Prefixer.md) <img src="res/dom-badge.png" height=15>
 		* [Stateful Value](plugins/StatefulValue.md)
+    * [Stateful Selector](plugins/StatefulSelector.md)
 		* **1.1.1 [DevTools](Plugins.md#developertools)**
 			* [Friendly ClassName](plugins/FriendlyClassName.md) <img src="res/dom-badge.png" height=15>
 			* [Linter](plugins/Linter.md) <img src="res/dom-badge.png" height=15>
