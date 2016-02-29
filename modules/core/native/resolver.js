@@ -44,10 +44,10 @@ export default function resolveStyles(Component, element, config) {
         // Constructs the pluginInterface
         const pluginInterface = {
           ...staticPluginArguments,
-          styles: newProps.style
+          styles: _.merge({ }, newProps.style)
         }
 
-        const newStyles = _.merge({ }, resolvePlugins(pluginInterface))
+        const newStyles = resolvePlugins(pluginInterface)
 
         // shallow check the new styles
         // we only need to actually update if the styles changed
