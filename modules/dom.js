@@ -1,5 +1,6 @@
 // Plugins
 import prefixer from './plugins/dom/prefixer'
+import staticPrefixer from './plugins/dom/staticPrefixer'
 import fallbackValue from './plugins/dom/fallbackValue'
 import statefulValue from './plugins/statefulValue'
 import mixin from './plugins/mixin'
@@ -43,6 +44,7 @@ const Plugins = {
   fallbackValue,
   statefulValue,
   prefixer,
+  staticPrefixer,
   styleLogger,
   linter,
   friendlyClassName
