@@ -1,7 +1,7 @@
 // Plugins
 import mixin from '../plugins/mixin'
 import statefulValue from '../plugins/statefulValue'
-import statefulSelector from '../plugins/statefulSelector'
+import statefulSelector from '../plugins/dom/statefulSelector'
 import staticPrefixer from '../plugins/dom/staticPrefixer'
 import fallbackValue from '../plugins/dom/fallbackValue'
 
