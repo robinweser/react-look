@@ -51,7 +51,7 @@ export default function resolveStyles(Component, element, config) {
 
         // shallow check the new styles
         // we only need to actually update if the styles changed
-        if (shallowEqual(newProps.style, newStyles)) {
+        if (!shallowEqual(newProps.style, newStyles)) {
           newProps.style = newStyles
           newProps._lookShouldUpdate = true
         }
