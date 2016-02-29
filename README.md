@@ -29,7 +29,7 @@ Platform differences are flagged using either <img src="https://raw.githubuserco
 # [Documentation](docs)
 The documentation contains information on every part of Look including usage guides and API reference.
 
-**New to Look?**<br>docs/
+**New to Look?**<br>
 Make sure to check out the the relevant Getting Started guide which provides a full guide on how to use Look. From installation, over configuration and up to even developer tooling.
 
 #### Table of contents

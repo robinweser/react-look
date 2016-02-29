@@ -20,15 +20,16 @@ export default class LookRoot extends Component {
     }
   }
 
+  componentDidMount() {
+    const { config } = this.props
+    this.styleContainer = new StyleComponent(config.userAgent, config.styleElementId)
+    this.styleContainer.render()
+  }
+
   render() {
     const { config, ...otherProps } = this.props
 
-    return (
-      <div {...otherProps}>
-        {this.props.children}
-        <StyleComponent userAgent={config.userAgent} />
-      </div>
-    )
+    return this.props.children
   }
 }
 
@@ -38,42 +39,39 @@ export default class LookRoot extends Component {
  * into a <style> element so CSS styles are rendered correctly
  * it listens for changes of the global style container
  */
-class StyleComponent extends Component {
-  constructor(props) {
-    super(...arguments)
-    const css = StyleContainer.renderStaticStyles(props.userAgent) // eslint-disable-line
-    this.state = { css: css }
+class StyleComponent {
+  constructor(userAgent, styleElementId) {
+    this.styles = StyleContainer.renderStaticStyles(userAgent) // eslint-disable-line
+    this.updateStyles = this.updateStyles.bind(this, userAgent)
 
-    this.updateStyles = this.updateStyles.bind(this, props.userAgent)
-  }
-
-  componentDidMount() {
-    this._isMounted = true
     this._changeListener = StyleContainer.subscribe(this.updateStyles)
+    this.el = this.createStyleElement(styleElementId)
   }
 
-  componentWillUnmount() {
-    this._isMounted = false
-    this._changeListener.unsubscribe()
+  createStyleElement(styleElementId) {
+    // if a custom style element is provided
+    // we can use that one instead of creating our own
+    if (styleElementId) {
+      return document.getElementById(styleElementId)
+    }
+
+    const style = document.createElement('style')
+    style.id = '_react-look-stylesheet'
+    document.head.appendChild(style)
+
+    return style
   }
 
   updateStyles(userAgent) {
-    const css = StyleContainer.renderStaticStyles(userAgent) // eslint-disable-line
-    if (!this._isMounted) {
-      // If not mounted, just push state change as it does not render multiple times
-      this.setState({ css: css })
-    } else {
-      // After the element got mounted we manually change the CSS
-      // because calling setState within the current render is invalid
-      // Helps to directly change the styles to fix #202
-      // https://github.com/rofrischmann/react-look/issues/202
-      // TODO: Compare innerHMTL vs. insertRule according performance
-      this.refs.sheet.innerHTML = css
+    const newStyles = StyleContainer.renderStaticStyles(userAgent)
+    // only render if something changed
+    if (this.styles !== newStyles) {
+      this.styles = newStyles
+      this.render()
     }
   }
 
   render() {
-    const innerHTML = { __html: this.state.css }
-    return <style ref="sheet" dangerouslySetInnerHTML={innerHTML} />
+    this.el.innerHTML = this.styles
   }
 }

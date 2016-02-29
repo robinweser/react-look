@@ -7,7 +7,6 @@
 | Property | Description |
 | ---  | ----------- |
 | config | global Look configuration, will automatically be spread to all child Components using `context`. |
-| style | styles the wrapping `View` which `LookRoot` creates.
 
 ## Usage
 ```javascript
@@ -18,16 +17,9 @@ import App from './index'
 const composedConfig = Presets['react-native']
 
 const Container = () => (
-  <LookRoot config={composedConfig} style={wrapperStyles}>
+  <LookRoot config={composedConfig}>
     <App />
   </LookRoot>
 )
 AppRegistry.registerComponent('native', () => Container)
-
-// Basically use the same as you style body, #app
-// or any other outer wrapper
-const wrapperStyles = {
-  width: '100%',
-  height: '100%'
-}
 ```
