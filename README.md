@@ -8,6 +8,8 @@ Platform differences are flagged using either <img src="https://raw.githubuserco
 > **Warning**: The documentation references the 1.0.0-beta. For legacy docs check [here](https://github.com/rofrischmann/react-look/tree/9a7261b16f9a06e8cd7e64773d19714fd4181219).
 
 # Features
+
+[![Join the chat at https://gitter.im/rofrischmann/react-look](https://badges.gitter.im/rofrischmann/react-look.svg)](https://gitter.im/rofrischmann/react-look?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 - ES2015 Classes & `React.createClass`
 - stateless Components
 - server-side rendering <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/dom-badge.png" height=15>
