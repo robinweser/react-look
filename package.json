@@ -12,6 +12,7 @@
     "demo": "webpack-dev-server --config demo/webpack.config.js --no-info --content-base demo/",
     "demo:universal": "concurrent --kill-others \"npm run demo\" \"babel-node demo/server.js\"",
     "start": "node build/devServer.js",
+    "start:native": "cd demo-native && npm start",
     "lint": "eslint modules",
     "package": "npm test && npm run bundle",
     "release": "npm run package && npm run release:dom && npm run release:native",
