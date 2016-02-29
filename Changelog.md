@@ -1,6 +1,17 @@
 # Changelog
 
 ## 1.0
+### 1.0.0-beta5 (29.02.16)
+##### Improvements
+* improved rendering performance <img src="docs/res/dom-badge.png" height=15>
+* removed additional wrapper within `<LookRoot>` ( [#217](https://github.com/rofrischmann/react-look/issues/217) )
+* added [Stateful Selectors](docs/plugins/StatefulSelector.md)-plugin to create selectors as a function of `props`, `state` and `context`
+* added [Static Prefixer](docs/plugins/StaticPrefixer.md)-plugin to use [inline-style-prefix-all](https://github.com/rofrischmann/inline-style-prefix-all) by default <img src="docs/res/dom-badge.png" height=15>
+
+##### Bug Fixes
+* Fixed a bug that cascaded dynamic values ( [#218](https://github.com/rofrischmann/react-look/issues/218) ) <img src="docs/res/native-badge.png" height=15>
+* added missing dependency ( [#214](https://github.com/rofrischmann/react-look/issues/214) ) <img src="docs/res/native-badge.png" height=15>
+
 ### 1.0.0-beta4 (21.02.16)
 #### API Changes
 * `StyleSheet.toCSS` got deprecated. It was renamed to `StyleSheet.addCSS`
