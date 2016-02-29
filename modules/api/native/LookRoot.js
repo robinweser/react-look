@@ -21,12 +21,6 @@ export default class LookRoot extends React.Component {
   }
 
   render() {
-    const { config, ...otherProps } = this.props
-
-    return (
-      <View {...otherProps}>
-        {this.props.children}
-      </View>
-    )
+    return this.props.children
   }
 }
