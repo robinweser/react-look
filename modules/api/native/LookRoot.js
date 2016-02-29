@@ -1,5 +1,4 @@
-import React from 'react'
-import { View, PropTypes } from 'react-native'
+import { Component, PropTypes } from 'react-native'
 import resolveStyles from '../../core/native/resolver'
 import _ from 'lodash'
 
@@ -8,7 +7,7 @@ const contextType = { _lookConfig: PropTypes.object }
  * Root wrapper that wraps your whole application
  * It renders the global CSS styles and passes the config down
  */
-export default class LookRoot extends React.Component {
+export default class LookRoot extends Component {
   static childContextTypes = contextType;
   static contextTypes = contextType;
 

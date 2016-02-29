@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import { Component, PropTypes } from 'react'
 import StyleContainer from './StyleContainer'
 import resolveStyles from '../../core/dom/resolver'
 import _ from 'lodash'
