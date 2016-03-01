@@ -1,10 +1,8 @@
-# Getting started <img src="../res/dom-badge.png" height=25>
-
-This Getting Started guide targets `react-look` which is used together with `react-dom`.<br> For `react-look-native` go to the [Getting Started - React Native](../native/GettingStarted.md).
+# Getting started
 
 1. [Installation](#1-installation)
 2. [First Component](#2-first-component)
-3. [Stateless Components](#3-stateless-components)
+3. [Stateless Function Components](#3-stateless-function-components)
 4. [Pseudo classes](#4-pseudo-classes)
 5. [Media queries](#5-media-queries)
 6. [Mixins & Plugins](#6-mixins--plugins)
@@ -111,9 +109,8 @@ const styles = StyleSheet.create({
 })
 ```
 
-## 3. Stateless Components
+## 3. Stateless Function Components
 With Look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14.
-> Note: This will destroy the performance benefit as Look transforms those to Stateful Components again, but it is less code to type.
 
 ```javascript
 import { StyleSheet } from 'react-look'

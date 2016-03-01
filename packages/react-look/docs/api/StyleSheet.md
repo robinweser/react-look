@@ -3,7 +3,7 @@ A helper to create scoped styles and global CSS styles.
 ## Methods
 - [create](#createstyles)
 - [combineStyles](#combinestylesstyles)
-- [toCSS](#tocssstyles--scope) <img src="../../res/deprecated-badge.png" height=15>
+- [toCSS](#tocssstyles--scope) <img src="../../../../res/deprecated-badge.png" height=15>
 - [addCSS](#addcssstyles--scope)
 - [keyframes](#keyframesframes--name)
 - [font](#fontfontfamily-files--properties)

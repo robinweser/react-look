@@ -1,5 +1,4 @@
-# Linter <img src="../res/dom-badge.png" height=25>
-
+# Linter
 Look uses [inline-style-linter](https://github.com/rofrischmann/inline-style-linter) for runtime style linting.
 It is a modular & plugin-based and brings a lot of configuration options.
 

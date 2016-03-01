@@ -3,7 +3,7 @@ The FAQ should help people with common tasks. Look allows you to do a lot of thi
 
 ## Table of content
 1. [Can I still use CSS syntax?](#1-css-syntax)
-2. [Can I use a custom `<style>`-element](#2-custom-style-element) <img src="res/dom-badge.png" height=15>
+2. [Can I use a custom `<style>`-element](#2-custom-style-element)
 
 ## 1. CSS Syntax
 Some of you might prefer the good old CSS syntax with dash-cased property names and string-by-default values.
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 })
 ```
 
-## 2. Custom style element <img src="res/dom-badge.png" height=20>
+## 2. Custom style element
 By default Look creates a new `<style>`-element with `_react-look-stylesheet` as `id`. You could also provide your own `<style>`-element by passing its `id` with the config.
 
 ### Usage

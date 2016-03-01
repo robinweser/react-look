@@ -1,4 +1,4 @@
-# Fallback values <img src="../res/dom-badge.png" height=25>
+# Fallback values
 
 Sometimes you want to provide alternative values also know as *fallback values*. <br>
 For example in Internet Explorer 8 there is no `rgba` compatibility for colors which means just passing *e.g. `color: rgba(0, 0, 0, 0.5)`* would not be applied correctly.

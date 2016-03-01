@@ -10,7 +10,7 @@ As you most likely need some more information to evaluate properly, Look provide
 | Component | *object* | React Component wrapped with look |
 | element | *object* | element that gets the styles applied |
 | newProps | *object* | element's new props after enhancing |
-| StyleContainer <img src="../res/dom-badge.png" height=15> | [*StyleContainer*](../dom/api/StyleContainer.md) | global CSS container |
+| StyleContainer | [*StyleContainer*](../api/StyleContainer.md) | global CSS container |
 | config | *object* | Look configuration |
 | styles | *object* | whole style object |
 
