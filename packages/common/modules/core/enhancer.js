@@ -14,7 +14,6 @@ export default (CustomComponent, config = { }) => {
   const stateless = !CustomComponent.prototype.setState
   const Extend = stateless ? Component : CustomComponent
 
-
   class LookComponent extends Extend {
     constructor(props, context) {
       super(...arguments)

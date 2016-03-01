@@ -1,5 +1,4 @@
 import assignStyles from 'assign-styles'
-import warn from '../utils/warn'
 
 /**
  * Merge multiple style objects by merging those
@@ -19,11 +18,8 @@ const mergeStyles = styles => {
  */
 export default ({ value: options }) => {
   if (options.hasOwnProperty('condition')) {
-    if (options.condition) {
-      if (options.styles) {
-        return mergeStyles(options.styles)
-      }
-      warn('There has no style object been passed. Use `styles` as key.', options)
+    if (options.condition && options.styles) {
+      return mergeStyles(options.styles)
     }
   } else {
     return mergeStyles(options.styles ? options.styles : options)
