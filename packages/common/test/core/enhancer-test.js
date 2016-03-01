@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import look from '../../modules/core/enhancer'
-import Chai, { expect } from 'chai'
+import look from '../../core/enhancer'
+import Chai from 'chai'
 import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
 import sinon from 'sinon'
@@ -25,9 +25,7 @@ describe('Enhancing a Component', () => {
     class Default extends Component {
     }
     let Enhanced = look(Default)
-    let instance = new Enhanced({ }, {
-      _lookConfig: {}
-    })
+    let instance = new Enhanced({ }, { _lookConfig: { } })
 
     expect(instance.displayName).to.eql(Default.displayName)
   })
@@ -40,9 +38,7 @@ describe('Enhancing a Component', () => {
     }
 
     let Enhanced = look(Default)
-    let instance = new Enhanced({ bar: 1 }, {
-      _lookConfig: {}
-    })
+    let instance = new Enhanced({ bar: 1 }, { _lookConfig: { } })
 
     expect(instance.props).to.eql({ bar: 1 })
   })
@@ -58,9 +54,7 @@ describe('Enhancing a Component', () => {
     }
 
     let Enhanced = look(Default)
-    let instance = new Enhanced({ }, {
-      _lookConfig: {}
-    })
+    let instance = new Enhanced({ }, { _lookConfig: { } })
 
     expect(constructorFunc).to.have.been.calledOnce
   })

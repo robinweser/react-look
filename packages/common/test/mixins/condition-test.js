@@ -1,5 +1,4 @@
-import { expect } from 'chai'
-import { equal, unEqual, greater, less, greaterThan, lessThan } from '../../modules/mixins/condition'
+import { equal, unEqual, greater, less, greaterThan, lessThan } from '../../mixins/condition'
 
 describe('Evaluating conditions', () => {
   const Component = {

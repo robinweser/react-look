@@ -1,19 +1,24 @@
-import getChildType from '../../modules/utils/getChildType'
+import getChildType from '../../utils/getChildType'
 import React from 'react'
-import { expect } from 'chai'
 
 describe('Evaluating child type', () => {
 
-  const Nested = ({children}) => <div>{children}</div>
+  const Nested = ({ children }) => <div>
+                                     {children}
+                                   </div>
 
   it('should return correct child type for default tags', () => {
-    const test = new Nested({children: <li>test</li>})
+    const test = new Nested({
+      children: <li>test</li>
+    })
 
     expect(getChildType(test.props.children)).to.eql('li')
   })
 
   it('should return correct child type for custom components', () => {
-    const test = new Nested({children: <Nested />})
+    const test = new Nested({
+      children: <Nested />
+    })
 
     expect(getChildType(test.props.children)).to.eql('Nested')
   })
@@ -24,7 +29,9 @@ describe('Evaluating child type', () => {
         return <div>foo</div>
       }
     }
-    const test = new Nested({children: <Test />})
+    const test = new Nested({
+      children: <Test />
+    })
 
     expect(getChildType(test.props.children)).to.eql('Test')
   })

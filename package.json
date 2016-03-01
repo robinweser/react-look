@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "version": "1.0.0-beta5",
+  "author": "Robin Frischmann <robin@rofrischmann.de>",
+  "license": "MIT",
+  "repository": "https://github.com/rofrischmann/react-look",
+  "scripts": {
+    "prepare": "babel-node scripts/preparePackages.js",
+    "release": "npm run package && npm run release:dom && npm run release:native",
+    "release:dom": "cd packages/react-look && npm release",
+    "release:native": "cd packages/react-look-native && npm release"
+  },
+  "devDependencies": {
+    "fs-extra": "^0.26.5"
+  }
+}

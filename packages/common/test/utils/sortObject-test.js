@@ -1,10 +1,19 @@
-import sortObject from '../../modules/utils/sortObject'
-import { expect } from 'chai'
+import sortObject from '../../utils/sortObject'
 
 describe('Sorting objects', () => {
   it('should sort object keys in alphabetic order', () => {
-    const input = { a: 3, x: 5, b: 4, d: 2 }
-    const output = { a: 3, b: 4, d: 2, x: 5 }
+    const input = {
+      a: 3,
+      x: 5,
+      b: 4,
+      d: 2
+    }
+    const output = {
+      a: 3,
+      b: 4,
+      d: 2,
+      x: 5
+    }
     expect(sortObject(input)).to.eql(output)
 
     const input2 = { ac: 3, ax: 5, ab: 4 }

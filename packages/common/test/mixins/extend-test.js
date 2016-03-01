@@ -1,5 +1,4 @@
-import extend from '../../modules/mixins/extend'
-import { expect } from 'chai'
+import extend from '../../mixins/extend'
 
 describe('Extending styles', () => {
 

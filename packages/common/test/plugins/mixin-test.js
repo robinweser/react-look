@@ -1,15 +1,11 @@
-import mixin from '../../modules/plugins/mixin'
-import { resolvePlugins } from '../../modules/core/resolver'
-import { expect } from 'chai'
+import mixin from '../../plugins/mixin'
+import { resolvePlugins } from '../../core/resolver'
 
 
 describe('Resolving mixins', () => {
 
   it('should return styles if no mixins are passed', () => {
-    expect(mixin({
-      config: {},
-      styles: {}
-    })).to.eql({ })
+    expect(mixin({ config: { }, styles: { } })).to.eql({ })
   })
 
   it('should return styles if mixins is empty', () => {

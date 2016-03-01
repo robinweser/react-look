@@ -1,5 +1,4 @@
-import getPseudoExpression from '../../modules/utils/getPseudoExpression'
-import { expect } from 'chai'
+import getPseudoExpression from '../../utils/getPseudoExpression'
 
 describe('Extracting pseudo expressions', () => {
 
