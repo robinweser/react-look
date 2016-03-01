@@ -1,10 +1,8 @@
-import fallbackValue from '../../../modules/plugins/dom/fallbackValue'
-import { resolvePlugins } from '../../../modules/core/resolver'
-import { expect } from 'chai'
+import fallbackValue from '../../modules/plugins/fallbackValue'
+import { resolvePlugins } from '../../../common/core/resolver'
 
 
 describe('Resolving fallback values', () => {
-
   it('should concat fallback values', () => {
     expect(fallbackValue({
       styles: {

@@ -1,10 +1,11 @@
-import StyleContainer from '../../../modules/api/dom/StyleContainer'
-import StyleSheet from '../../../modules/api/dom/StyleSheet'
-import Chai, { expect } from 'chai'
+import Chai from 'chai'
+import jsdom from 'jsdom'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import jsdom from 'jsdom'
 Chai.use(sinonChai)
+
+import StyleContainer from '../../modules/api/StyleContainer'
+import StyleSheet from '../../modules/api/StyleSheet'
 
 describe('Rendering static styles', () => {
   it('should return a single string containing the whole css', () => {

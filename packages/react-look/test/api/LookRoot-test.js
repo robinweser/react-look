@@ -1,6 +1,5 @@
-import LookRoot from '../../../modules/api/dom/LookRoot'
 import React, { Component } from 'react'
-import { expect } from 'chai'
+import LookRoot from '../../modules/api/LookRoot'
 
 describe('Wrapping an application with LookRoot', () => {
   it('should pass down configuration', () => {

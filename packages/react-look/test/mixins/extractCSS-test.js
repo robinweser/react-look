@@ -1,5 +1,4 @@
-import extractCSS from '../../../modules/mixins/dom/extractCSS'
-import { expect } from 'chai'
+import extractCSS from '../../modules/mixins/extractCSS'
 
 describe('Extracting classNames', () => {
 

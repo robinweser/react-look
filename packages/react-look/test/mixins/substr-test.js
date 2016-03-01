@@ -1,5 +1,4 @@
-import substr from '../../../modules/mixins/dom/substr'
-import { expect } from 'chai'
+import substr from '../../modules/mixins/substr'
 
 describe('Styling substrings', () => {
 

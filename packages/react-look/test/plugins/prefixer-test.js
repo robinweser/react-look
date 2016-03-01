@@ -1,6 +1,4 @@
-import prefixer from '../../../modules/plugins/dom/prefixer'
-import { expect } from 'chai'
-
+import prefixer from '../../modules/plugins/prefixer'
 
 describe('Resolving prefixer plugin', () => {
 

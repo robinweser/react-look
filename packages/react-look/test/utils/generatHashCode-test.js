@@ -1,5 +1,4 @@
 import generateHashCode from '../../modules/utils/generateHashCode'
-import { expect } from 'chai'
 
 describe('Generating hash codes', () => {
 

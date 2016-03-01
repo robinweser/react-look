@@ -1,5 +1,4 @@
-import platformQuery from '../../../modules/mixins/dom/platformQuery'
-import { expect } from 'chai'
+import platformQuery from '../../modules/mixins/platformQuery'
 
 describe('Resolving platform queries', () => {
   it('should return true', () => {

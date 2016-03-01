@@ -1,6 +1,5 @@
-import renderStaticStyles, { extractDynamicStyles, renderSpecialStyles } from '../../../modules/core/dom/renderer'
-import StyleContainer from '../../../modules/api/dom/StyleContainer'
-import { expect } from 'chai'
+import renderStaticStyles, { extractDynamicStyles, renderSpecialStyles } from '../../modules/core/renderer'
+import StyleContainer from '../../modules/api/StyleContainer'
 
 describe('Extracting dynamic styles', () => {
   it('should be empty if no dynamic styles are used', () => {
