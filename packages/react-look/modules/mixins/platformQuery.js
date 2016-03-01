@@ -1,4 +1,4 @@
-import prefixer from '../../utils/prefixer'
+import prefixer from '../utils/prefixer'
 
 // Allows the use of platform queries supported by browser information
 // provided by the inline-style-prefixer

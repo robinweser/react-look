@@ -1,6 +1,7 @@
-import camelToDashCase from '../../utils/camelToDashCase'
 import assignStyles from 'assign-styles'
 import _ from 'lodash'
+
+import camelToDashCase from '../utils/camelToDashCase'
 
 /**
  * Resolves alternative values provided as an Array

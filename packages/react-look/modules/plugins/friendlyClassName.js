@@ -1,4 +1,4 @@
-import getChildType from '../../utils/getChildType'
+import getChildType from '../../../common/utils/getChildType'
 
 const classNameTemplate = (Component, element, className) => {
   return Component.constructor.displayName + '-' + getChildType(element) + '--' + className

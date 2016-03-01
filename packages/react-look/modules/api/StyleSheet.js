@@ -1,7 +1,8 @@
-import StyleContainer from './StyleContainer'
-import renderStaticStyles from '../../core/dom/renderer'
-import getFontFormat from '../../utils/getFontFormat'
 import _ from 'lodash'
+
+import StyleContainer from './StyleContainer'
+import renderStaticStyles from '../core/renderer'
+import getFontFormat from '../utils/getFontFormat'
 
 let keyframe = 0
 

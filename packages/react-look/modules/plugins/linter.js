@@ -1,5 +1,6 @@
 import Linter from 'inline-style-linter'
-import getChildType from '../../utils/getChildType'
+
+import getChildType from '../../../common/utils/getChildType'
 
 export default function linter({ styles, Component, element, config: { linter } }) {
   const warnings = new Linter(linter).lint(styles)

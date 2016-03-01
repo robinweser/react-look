@@ -1,4 +1,4 @@
-import prefixer from '../../utils/prefixer'
+import prefixer from '../utils/prefixer'
 
 /*
  * Adds vendor-prefixes to properties in need of

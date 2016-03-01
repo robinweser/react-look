@@ -1,8 +1,9 @@
 import _ from 'lodash'
-import prefixer from '../../utils/prefixer'
 import { toCSS } from 'inline-style-transformer'
-import generateHashCode from '../../utils/generateHashCode'
-import sortObject from '../../utils/sortObject'
+
+import generateHashCode from '../utils/generateHashCode'
+import sortObject from '../../../common/utils/sortObject'
+import prefixer from '../utils/prefixer'
 
 /**
  * Abstract helper to add new styles to a Map/Set

@@ -1,11 +1,11 @@
-import { cloneElement } from 'react'
-import { resolvePlugins, resolveChildren, resolveProps, isLookEnhanced } from '../resolver'
-import extractCSS from '../../mixins/dom/extractCSS'
-import renderStaticStyles from './renderer'
-import StyleContainer from '../../api/dom/StyleContainer'
 import assignStyles from 'assign-styles'
 import _ from 'lodash'
+import { cloneElement } from 'react'
 
+import { resolvePlugins, resolveChildren, resolveProps, isLookEnhanced } from '../../../common/core/resolver'
+import renderStaticStyles from './renderer'
+import extractCSS from '../mixins/extractCSS'
+import StyleContainer from '../api/StyleContainer'
 
 /**
  * Resolves provided styles into style objects

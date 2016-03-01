@@ -1,7 +1,8 @@
-import { Component, PropTypes } from 'react'
-import StyleContainer from './StyleContainer'
-import resolveStyles from '../../core/dom/resolver'
 import _ from 'lodash'
+import { Component, PropTypes } from 'react'
+
+import StyleContainer from './StyleContainer'
+import resolveStyles from '../core/resolver'
 
 const contextType = { _lookConfig: PropTypes.object }
 /**
