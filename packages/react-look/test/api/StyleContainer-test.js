@@ -1,5 +1,4 @@
 import Chai from 'chai'
-import jsdom from 'jsdom'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 Chai.use(sinonChai)
