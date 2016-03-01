@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { StyleSheet, LookRoot, Presets, Plugins } from '../modules/dom'
+import { StyleSheet, LookRoot, Presets, Plugins } from '../modules'
 
 import App from './app.jsx'
 

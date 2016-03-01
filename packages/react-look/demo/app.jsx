@@ -1,5 +1,5 @@
 import React from 'react'
-import look, { StyleSheet, Presets } from '../modules/dom'
+import look, { StyleSheet, Presets } from '../modules'
 import Container from './components/layout/Container.jsx'
 import UserAction from './components/examples/UserAction.jsx'
 import ChildIndex from './components/examples/ChildIndex.jsx'
