@@ -14,30 +14,24 @@ const customConfig = {
 	// a list of used plugins ordered by
 	// execution order
 	plugins: [
-		Plugins.mixin,
-		Plugins.fallbackValue,
-		Plugins.prefixer
+		Plugins.mixin
 	],
 
 	// any special setting used by plugins
-	// e.g. mixin definitions or a userAgent
-	// used by the autoprefixer
 	mixins: {
-		'substr': Mixins.sbustr,
-		'@platform': Mixins.platformQuery
-	},
-	userAgent: 'Mozilla/5.0 ...'
+		'substr': Mixins.sbustr
+	}
 }
 ```
 
 ### Presets
 Right now there's just one global preset:
 
-`react-dom`
-Contains every DOM-specific plugin and mixin available<br>
+`react-native`
+Contains only react-native compatible plugins and mixins
 ```javascript
-import { Presets } from 'react-look'
-const customConfig = Presets['react-dom']
+import { Presets } from 'react-look-native'
+const customConfig = Presets['react-native']
 ```
 ## Applying configuration
 To apply configuration globally just [pass them with `LookRoot`](../api/LookRoot.md#usage) at the root of your application.
@@ -45,11 +39,11 @@ This will automatically pass your configuration to every child Component via `co
 
 ## Component-based configuration
 Besides passing global configuration, you sometimes might also want to apply some configuration for just a single Component. It will be merged with the global configuration with higher precedence *(so it might overwrite global configuration)*.
-
 ```javascript
-import look, { StyleSheet } from 'react-look'
+import { Text } from 'react-native'
+import look, { StyleSheet } from 'react-look-native'
 
-const Example = () => <div className={styles.box}>Foo</div>
+const Example = () => <Text style={styles.box}>Foo</Text>
 const styles = StyleSheet.create({
 	box: {
 		fontSize: 12,
@@ -61,16 +55,18 @@ const specialMixin = input => ({ /* do something */ })
 // You only need the alternative plugin to resolve an array of values
 export default look(Example, { mixins: { special: specialMixin } })
 ```
+
 ## Element-based configuration
 You could even pass configuration for just a single element using the `lookConfig` prop.
 
 ```javascript
-import look, { StyleSheet } from 'react-look'
+import { View, Text } from 'react-native'
+import look, { StyleSheet } from 'react-look-native'
 
 const Example = () => (
-	<div className={styles.box}>
-		<span lookConfig={{ plugins: undefined }}>No plugins for me!</span>
-	</div>
+	<View style={styles.box}>
+		<Text lookConfig={{ plugins: undefined }}>No plugins for me!</Text>
+	</View>
 )
 const styles = StyleSheet.create({
 	box: {
