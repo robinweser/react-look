@@ -1,2 +1,3 @@
---compilers js:test/support/compiler.js
+--compilers js:packages/react-look-native/test/compiler.js
 --recursive
+--require test/setup.js
