@@ -9,14 +9,16 @@ describe('Creating a StyleSheet', () => {
   })
 
   it('should return a map of className if multiple selectors are passed', () => {
-    expect(StyleSheet.create({
+    const input = {
       box: {
         color: 'red'
       },
       StyleContainer: {
         color: 'blue'
       }
-    })).to.eql({ box: 'c0', StyleContainer: 'c1' })
+    }
+    const output = { box: 'c0', StyleContainer: 'c1' }
+    expect(StyleSheet.create(input)).to.eql(output)
   })
 })
 
@@ -32,17 +34,29 @@ describe('Creating keyframes', () => {
 
 describe('Generating global CSS', () => {
   it('should add CSS directly to the style StyleContainer', () => {
-    StyleSheet.toCSS({ '*': { color: 'red' } })
+    StyleSheet.addCSS({ '*': { color: 'red' } })
     expect(StyleContainer.selectors.get('*')).to.eql({
       color: 'red'
     })
   })
 
   it('should add a scope selector if one is passed', () => {
-    StyleSheet.toCSS({ '.inner': { color: 'red' } }, '.box')
+    StyleSheet.addCSS({ '.inner': { color: 'red' } }, '.box')
     expect(StyleContainer.selectors.get('.box .inner')).to.eql({
       color: 'red'
     })
+  })
+
+  it('should treat strings as static css', () => {
+    const css = 'h1 { color: blue }'
+    StyleSheet.addCSS(css)
+    expect(StyleContainer.statics.has(css)).to.eql(true)
+  })
+
+  it('toCSS should just call addCSS', () => {
+    const css = 'h1 { color: blue }'
+    StyleSheet.toCSS(css)
+    expect(StyleContainer.statics.has(css)).to.eql(true)
   })
 })
 

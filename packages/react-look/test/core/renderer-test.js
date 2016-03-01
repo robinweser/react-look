@@ -2,27 +2,36 @@ import renderStaticStyles, { extractDynamicStyles, renderSpecialStyles } from '.
 import StyleContainer from '../../modules/api/StyleContainer'
 
 describe('Extracting dynamic styles', () => {
+  it('should return a scoped stateful selector if a function is passed', () => {
+    const input = props => ({
+      backgroundColor: 'red',
+      width: 12,
+      display: [ '-webkit-flex', 'flex' ]
+    })
+    const output = { _statefulSelector: input }
+    expect(extractDynamicStyles(input)).to.eql(output)
+  })
+
   it('should be empty if no dynamic styles are used', () => {
-    const styles = {
+    const input = {
       backgroundColor: 'red',
       width: 12,
       display: [ '-webkit-flex', 'flex' ]
     }
-    expect(extractDynamicStyles(styles)).to.eql({ })
+    expect(extractDynamicStyles(input)).to.eql({ })
   })
 
   it('should extract flat dynamic style properties', () => {
     const colorFn = props => props.color
 
-    const styles = {
+    const input = {
       backgroundColor: 'red',
       width: 12,
       display: [ '-webkit-flex', 'flex' ],
       color: colorFn
     }
-    expect(extractDynamicStyles(styles)).to.eql({
-      color: colorFn
-    })
+    const output = { color: colorFn }
+    expect(extractDynamicStyles(input)).to.eql(output)
   })
 
   it('should remove a selector if containing only dynamic styles', () => {
@@ -45,7 +54,7 @@ describe('Extracting dynamic styles', () => {
 
   it('should extract nested dynamic style properties', () => {
     const colorFn = props => props.color
-    const styles = {
+    const input = {
       backgroundColor: 'red',
       width: 12,
       display: [ '-webkit-flex', 'flex' ],
@@ -54,18 +63,15 @@ describe('Extracting dynamic styles', () => {
         color: colorFn
       }
     }
-    expect(extractDynamicStyles(styles)).to.eql({
-      ':hover': {
-        color: colorFn
-      }
-    })
+    const output = { ':hover': { color: colorFn } }
+    expect(extractDynamicStyles(input)).to.eql(output)
   })
 
   it('should extract both nested and flat dynamic style properties', () => {
     const colorFn = props => props.color
     const colorFnState = (props, state) => state.color
 
-    const styles = {
+    const input = {
       backgroundColor: 'red',
       width: 12,
       display: [ '-webkit-flex', 'flex' ],
@@ -76,12 +82,13 @@ describe('Extracting dynamic styles', () => {
       }
     }
 
-    expect(extractDynamicStyles(styles)).to.eql({
+    const output = {
       color: colorFnState,
       ':hover': {
         color: colorFn
       }
-    })
+    }
+    expect(extractDynamicStyles(input)).to.eql(output)
   })
 
   it('should extract complex style objects', () => {
@@ -89,7 +96,7 @@ describe('Extracting dynamic styles', () => {
     const colorFnState = (props, state) => state.color
     const fontSizeFn = props => props.size
 
-    const styles = {
+    const input = {
       backgroundColor: 'red',
       width: 12,
       display: [ 'webkit-flex', 'flex' ],
@@ -130,7 +137,7 @@ describe('Extracting dynamic styles', () => {
       }
     }
 
-    expect(extractDynamicStyles(styles)).to.eql({
+    const output = {
       color: colorFn,
       ':focus': {
         ':hover': {
@@ -145,8 +152,8 @@ describe('Extracting dynamic styles', () => {
           }
         }
       }
-    })
-    expect(styles).to.eql({
+    }
+    const outStyles = {
       backgroundColor: 'red',
       width: 12,
       display: [ 'webkit-flex', 'flex' ],
@@ -179,7 +186,9 @@ describe('Extracting dynamic styles', () => {
           display: [ 'webkit-flex', 'flex' ]
         }
       }
-    })
+    }
+    expect(extractDynamicStyles(input)).to.eql(output)
+    expect(input).to.eql(outStyles)
   })
 })
 

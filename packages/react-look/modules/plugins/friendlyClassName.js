@@ -11,9 +11,6 @@ export default function friendlyClassNames({ StyleContainer, Component, element,
   if (!newProps._hasFriendlyClassNames && newProps.className) {
     newProps.className = newProps.className.split(' ').reduce((className, cls) => {
       cls = cls.trim()
-      if (cls === '') {
-        return className
-      }
       // If the className has already been resolved
       // just use the former new className
       if (classMapping.has(cls)) {

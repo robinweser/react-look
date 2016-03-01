@@ -21,6 +21,26 @@ describe('Rendering static styles', () => {
   })
 })
 
+describe('Adding a static css string', () => {
+  it('should add it to the statics set', () => {
+    const css = '.h1 { color: red }'
+    StyleContainer.addStatic(css)
+    expect(StyleContainer.statics.has(css)).to.eql(true)
+  })
+})
+
+describe('Generating a className', () => {
+  it('should return a content hash which is unique to a given set of styles', () => {
+    const stylesA = { color: 'red', backgroundColor: 'blue' }
+    const stylesB = { backgroundColor: 'blue', color: 'red' }
+    const stylesC = { backgroundColor: 'blue', color: 'blue' }
+
+    expect(StyleContainer.generateClassName(stylesA)).to.eql(StyleContainer.generateClassName(stylesB))
+    expect(StyleContainer.generateClassName(stylesB)).to.not.eql(StyleContainer.generateClassName(stylesC))
+    expect(StyleContainer.generateClassName(stylesA)).to.not.eql(StyleContainer.generateClassName(stylesC))
+  })
+})
+
 describe('Subscribing to the style StyleContainer', () => {
   it('should add a listener', () => {
     const subscriber = sinon.spy()

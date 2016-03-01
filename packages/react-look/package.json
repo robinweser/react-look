@@ -41,7 +41,7 @@
     "assign-styles": "2.0.0",
     "inline-style-linter": "^0.2.7",
     "inline-style-prefix-all": "^1.0.1",
-    "inline-style-prefixer": "^1.0.0",
+    "inline-style-prefixer": "^1.0.1",
     "inline-style-transformer": "^1.0.0",
     "lodash": "^4.2.1"
   },
