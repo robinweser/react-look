@@ -1,26 +1,21 @@
-import React, { Component, createElement } from "react";
+import React, { Component, createElement, cloneElement, PropTypes } from "react"
 
-const RN = React;
+class View extends Component {
+  render() {
+    return <div {...this.props}>{this.props.children}</div>
+  }
+}
 
-export const PropTypes = React.PropTypes;
+class Text extends Component {
+  render() {
+    return <div {...this.props}>{this.props.children}</div>
+  }
+}
 
-const createComponent = (type) => {
-  return React.createClass({
-    displayName: type,
-    propTypes: {
-      children: React.PropTypes.node
-    },
-    render() {
-      return <div {...this.props}>{this.props.children}</div>
-    }
-  })
-};
-
-RN.View = createComponent("View");
-RN.Text = createComponent("Text");
-
-export default RN;
+export default React
 export {
   Component,
-  createElement
+  createElement,
+  cloneElement,
+  PropTypes
 }
