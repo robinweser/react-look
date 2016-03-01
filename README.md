@@ -2,7 +2,7 @@
 <p align="center">
 Advanced & Dynamic Component Styling for <a href="https://facebook.github.io/react/">React</a> and <a href="https://facebook.github.io/react-native/">React Native</a>.
 <br>
-<img alt="Gitter" src="https://img.shields.io/gitter/room/rofrischmann/react-look.svg">
+<a href=" https://gitter.im/rofrischmann/react-look"><img alt="Gitter" src="https://img.shields.io/gitter/room/rofrischmann/react-look.svg"></a>
 <img alt="TravisCI" src="https://travis-ci.org/rofrischmann/react-look.svg?branch=develop"> 
 <a href="https://codeclimate.com/github/rofrischmann/react-look/coverage"><img alt="Test Coverage" src="https://codeclimate.com/github/rofrischmann/react-look/badges/coverage.svg"></a> 
 <a href="https://codeclimate.com/github/rofrischmann/react-look"><img alt="Code Climate" src="https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg"></a>
@@ -23,5 +23,5 @@ While the core modules and styling mechanism of both packages are totally differ
 
 
 # Support
-If you have any questions, feel free to ask them on Gitter, Stack Overflow or Twitter.
+If you have any questions, feel free to ask them on <a href=" https://gitter.im/rofrischmann/react-look">Gitter</a>, Stack Overflow or <a href="https://twitter.com/rofrischmann">Twitter</a>.
 I will not answer usage questions as issues but close them directly.
