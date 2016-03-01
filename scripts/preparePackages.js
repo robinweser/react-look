@@ -35,27 +35,9 @@ function updateVersion(pkg) {
   })
 }
 
-// Copies Babel transformed code modules into a given pkg folder
-function copyModules(pkg) {
-  fs.copy(__dirname + '/../lib/', __dirname + '/../packages/' + pkg + '/lib/', err => {
-    errorOnFail(err)
-    console.log('Package modules for ' + pkg + ' have successfully been prepared.')
-  })
-}
-
-// Copies README into a pgk subfolder
-function copyREADME(pkg) {
-  fs.copy(__dirname + '/../README.md', __dirname + '/../packages/' + pkg + '/README.md', err => {
-    errorOnFail(err)
-    console.log('README was successfully copied into the ' + pkg + ' package.')
-  })
-}
-
 // Helper to run all preperation scripts
 function preparePackage(pkg) {
-  copyModules(pkg)
   updateVersion(pkg)
-  copyREADME(pkg)
 }
 
 preparePackage('react-look')

@@ -23,6 +23,7 @@ module.exports = {
       loader: 'babel-loader',
       include: [
         path.resolve(__dirname, '../modules'),
+        path.resolve(__dirname, '../../common'),
         path.resolve(__dirname, '../demo')
       ]
     }, {
