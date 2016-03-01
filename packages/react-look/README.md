@@ -1,6 +1,6 @@
 <p align="center"><img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/logo.png" width=320></p>
 <p align="center">
-Modular & Dynamic Component Styling for  [React](https://facebook.github.io/react/).
+Advanced & Dynamic Component Styling for [React](https://facebook.github.io/react/).
 <br>
 ![npm version](https://badge.fury.io/js/react-look.svg)
 ![react version](https://img.shields.io/badge/react--dom-%5E0.14.0-brightgreen.svg)
