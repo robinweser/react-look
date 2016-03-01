@@ -1,12 +1,13 @@
-<p align="center"><img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/logo.png" width=320></p>
+<p align="center"><img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/logo.png" width=320></p>
 <p align="center">
-Advanced & Dynamic Component Styling for [React](https://facebook.github.io/react/).
+Advanced & Dynamic Component Styling for <a href="https://facebook.github.io/react/">React</a>.
 <br>
-![npm version](https://badge.fury.io/js/react-look.svg)
-![react version](https://img.shields.io/badge/react--dom-%5E0.14.0-brightgreen.svg)
+
+<img alt="npm version" src="https://badge.fury.io/js/react-look.svg">
+<img alt="react version" src="https://img.shields.io/badge/react--dom-%5E0.14.0-brightgreen.svg">
 </p>
 <p align="center">
-Also available for [React Native](../react-look-native/).
+Also available for <a href="../react-look-native/">React Native</a>.
 </p>
 
 # Features
@@ -51,7 +52,7 @@ Make sure to check out the the Getting Started guide which provides a full guide
 	* **2.2. [StyleSheet](docs/api/StyleSheet.md)**
 		* [create](docs/api/StyleSheet.md#createstyles)
 		* [combineStyles](docs/api/StyleSheet.md#combinestylesstyles)
-		* [toCSS](docs/api/StyleSheet.md#tocssstyles--scope) <img src="../../res/deprecated-badge.png" height=15>
+		* [toCSS](docs/api/StyleSheet.md#tocssstyles--scope) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/deprecated-badge.png" height=15>
 		* [addCSS](docs/api/StyleSheet.md#addcssstyles--scope)
 		* [keyframes](docs/api/StyleSheet.md#keyframesframes--name)
 		* [font](docs/api/StyleSheet.md#fontfontfamily-files--properties)
