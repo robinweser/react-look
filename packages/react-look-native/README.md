@@ -1,12 +1,14 @@
-<p align="center"><img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/docs/res/logo.png" width=320></p>
+
+
+<p align="center"><img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/logo.png" width=320></p>
 <p align="center">
-Advanced & Dynamic Component Styling for  [React Native](https://facebook.github.io/react-native/).
+Advanced & Dynamic Component Styling for <a href="https://facebook.github.io/react-native/">React Native</a>.
 <br>
-![npm version](https://badge.fury.io/js/react-look-native.svg)
-![react version](https://img.shields.io/badge/react--native-%5E0.18.0-brightgreen.svg)
+<img alt="npm version" src="https://badge.fury.io/js/react-look-native.svg">
+<img alt="react version" src="https://img.shields.io/badge/react--native-%5E0.18.0-brightgreen.svg">
 </p>
 <p align="center">
-Also available for [React](../react-look/).
+Also available for <a href="../react-look/">React</a>.
 </p>
 
 # Features
