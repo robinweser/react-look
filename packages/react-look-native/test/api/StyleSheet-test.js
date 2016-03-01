@@ -1,5 +1,4 @@
-import StyleSheet from '../../../modules/api/native/StyleSheet'
-import { expect } from 'chai'
+import StyleSheet from '../../modules/api/StyleSheet'
 
 describe('Creating a StyleSheet', () => {
   it('should just return styles', () => {

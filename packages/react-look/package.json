@@ -10,8 +10,14 @@
     "docs/"
   ],
   "scripts": {
-    "start": "node scripts/devServer.js",
+    "babel": "npm run clean && babel -d lib modules",
+    "clean": "rimraf lib coverage",
+    "demo": "webpack-dev-server --config demo/webpack.config.js --no-info --content-base demo/",
+    "demo:universal": "concurrent --kill-others \"npm run demo\" \"babel-node demo/server.js\"",
     "lint": "eslint modules",
+    "package": "npm test && npm run babel",
+    "release": "npm run package && npm publish",
+    "start": "node scripts/devServer.js",
     "test": "istanbul cover _mocha test -- --opts test/mocha.opts"
   },
   "repository": "https://github.com/rofrischmann/react-look",

@@ -162,6 +162,7 @@ Check out the provided examples for some special use cases. See them in action u
 
 ```sh
 git clone --bare https://github.com/rofrischmann/react-look.git
+cd packages/react-look
 npm install
 npm run babel
 # run this as a client-side only demo

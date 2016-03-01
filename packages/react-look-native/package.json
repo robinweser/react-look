@@ -1,40 +1,121 @@
 {
-    "name": "react-look-native",
-    "version": "1.0.0-beta5",
-    "description": "Advanced & Dynamic Component Styling for React Native",
-    "main": "lib/native.js",
-    "files": [
-        "README.md",
-        "LICENSE",
-        "lib/",
-        "docs/",
-        "dist/"
+  "name": "react-look-native",
+  "version": "1.0.0-beta5",
+  "description": "Advanced & Dynamic Component Styling for React Native",
+  "main": "lib/index.js",
+  "files": [
+    "README.md",
+    "LICENSE",
+    "lib/",
+    "docs/"
+  ],
+  "scripts": {
+    "babel": "npm run clean && babel -d lib modules",
+    "clean": "rimraf lib coverage",
+    "lint": "eslint modules",
+    "package": "npm test && npm run babel",
+    "release": "npm run package && npm publish",
+    "test": "istanbul cover _mocha test -- --opts test/mocha.opts"
+  },
+  "repository": "https://github.com/rofrischmann/react-look",
+  "author": "Robin Frischmann <robin@rofrischmann.de>",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "layout",
+    "react-native",
+    "react-component",
+    "component styling",
+    "styling",
+    "vendor prefix",
+    "stylesheet",
+    "dynamic styling",
+    "media query",
+    "inline styles",
+    "stateful styles",
+    "cssinjs"
+  ],
+  "dependencies": {
+    "assign-styles": "2.0.0",
+    "inline-style-transformer": "^1.0.0",
+    "lodash": "^4.2.1",
+    "shallowequal": "^0.2.2"
+  },
+  "peerDependencies": {
+    "react-native": "^0.18.0"
+  },
+  "devDependencies": {
+    "assign-styles": "^2.0.0",
+    "babel": "^6.3.26",
+    "babel-cli": "^6.4.0",
+    "babel-core": "^6.4.0",
+    "babel-eslint": "^4.1.6",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-lodash": "^2.0.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-react-display-name": "^6.4.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-react-hmre": "^1.0.1",
+    "babel-preset-stage-0": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "chai": "^3.4.1",
+    "codeclimate-test-reporter": "^0.1.1",
+    "color": "^0.11.1",
+    "concurrently": "^1.0.0",
+    "cross-env": "^1.0.7",
+    "esformatter": "^0.9.0",
+    "esformatter-braces": "^1.2.1",
+    "esformatter-collapse-objects": "^0.5.1",
+    "esformatter-dot-notation": "^1.3.1",
+    "esformatter-jsx": "^4.1.2",
+    "esformatter-literal-notation": "^1.0.1",
+    "esformatter-parseint": "^1.0.3",
+    "esformatter-quote-props": "^1.0.2",
+    "esformatter-quotes": "^1.0.3",
+    "esformatter-remove-trailing-commas": "^1.0.1",
+    "esformatter-spaced-lined-comment": "^2.0.1",
+    "esformatter-var-each": "^2.1.0",
+    "eslint": "^1.10.3",
+    "eslint-config-rackt": "^1.1.1",
+    "eslint-plugin-react": "^3.15.0",
+    "express": "^4.13.3",
+    "express-http-proxy": "^0.6.0",
+    "fs-extra": "^0.26.5",
+    "inline-style-linter": "^0.2.8",
+    "inline-style-prefix-all": "^1.0.1",
+    "inline-style-prefixer": "^0.6.7",
+    "inline-style-transformer": "^1.0.0",
+    "istanbul": "^1.0.0-alpha.2",
+    "jsdom": "^7.2.2",
+    "json-loader": "^0.5.4",
+    "lodash": "^4.3.0",
+    "minifyify": "^7.1.0",
+    "mocha": "^2.3.4",
+    "path": "^0.12.7",
+    "react": "^0.14.6",
+    "react-addons-test-utils": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-native": "^0.19.0",
+    "rimraf": "^2.5.0",
+    "shallowequal": "^0.2.2",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0",
+    "webpack": "^1.12.11",
+    "webpack-dev-middleware": "^1.5.0",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.6.0"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015",
+      "stage-0"
     ],
-    "repository": "https://github.com/rofrischmann/react-look",
-    "author": "Robin Frischmann <robin@rofrischmann.de>",
-    "license": "MIT",
-    "keywords": [
-        "react",
-        "layout",
-        "react-native",
-        "react-component",
-        "component styling",
-        "styling",
-        "vendor prefix",
-        "stylesheet",
-        "dynamic styling",
-        "media query",
-        "inline styles",
-        "stateful styles",
-        "cssinjs"
-    ],
-    "dependencies": {
-        "assign-styles": "2.0.0",
-        "inline-style-transformer": "^1.0.0",
-        "lodash": "^4.2.1",
-        "shallowequal": "^0.2.2"
-    },
-    "peerDependencies": {
-        "react-native": "^0.19.0"
-    }
+    "plugins": [
+      "add-module-exports"
+    ]
+  }
 }
