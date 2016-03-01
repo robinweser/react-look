@@ -8,7 +8,6 @@
     "test": "istanbul cover _mocha -- packages/common/test packages/react-look/test packages/react-look-native/test --opts test/mocha.opts",
     "lint": "eslint packages/common/modules packages/react-look/modules packages/react-look-native/modules",
     "coverage": "codeclimate-test-reporter < coverage/lcov.info",
-
     "prepare": "babel-node scripts/preparePackages.js",
     "release": "npm run prepare && npm run release:dom && npm run release:native",
     "release:dom": "cd packages/react-look && npm release",
@@ -36,6 +35,8 @@
     "istanbul": "^1.0.0-alpha.2",
     "mocha": "^2.4.5",
     "react": "^0.14.7",
+    "react-native": "^0.20.0",
+    "shallowequal": "^0.2.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0"
   },
