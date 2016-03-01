@@ -1,4 +1,4 @@
-import getChildType from '../../utils/getChildType'
+import getChildType from '../../modules/utils/getChildType'
 import React from 'react'
 
 describe('Evaluating child type', () => {

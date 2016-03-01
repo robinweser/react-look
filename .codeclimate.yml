@@ -6,3 +6,4 @@ languages:
 exclude_paths:
 - "scripts/*"
 - "codemods/*"
+- "packages/react-look/scripts/*"

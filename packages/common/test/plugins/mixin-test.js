@@ -1,5 +1,5 @@
-import mixin from '../../plugins/mixin'
-import { resolvePlugins } from '../../core/resolver'
+import mixin from '../../modules/plugins/mixin'
+import { resolvePlugins } from '../../modules/core/resolver'
 
 
 describe('Resolving mixins', () => {

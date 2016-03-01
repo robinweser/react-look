@@ -5,12 +5,49 @@
   "license": "MIT",
   "repository": "https://github.com/rofrischmann/react-look",
   "scripts": {
+    "test": "istanbul cover _mocha -- packages/common/test packages/react-look/test --opts test/mocha.opts",
+    "lint": "eslint packages/common/modules packages/react-look/modules",
+    "coverage": "codeclimate-test-reporter < coverage/lcov.info",
+
     "prepare": "babel-node scripts/preparePackages.js",
-    "release": "npm run package && npm run release:dom && npm run release:native",
+    "release": "npm run prepare && npm run release:dom && npm run release:native",
     "release:dom": "cd packages/react-look && npm release",
     "release:native": "cd packages/react-look-native && npm release"
   },
   "devDependencies": {
-    "fs-extra": "^0.26.5"
+    "assign-styles": "^2.0.0",
+    "babel-core": "^6.6.0",
+    "babel-eslint": "^5.0.0",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-lodash": "^2.1.0",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "chai": "^3.5.0",
+    "codeclimate-test-reporter": "^0.3.1",
+    "eslint": "^2.2.0",
+    "eslint-config-rackt": "^1.1.1",
+    "eslint-plugin-react": "^4.1.0",
+    "fs-extra": "^0.26.5",
+    "inline-style-linter": "^0.2.8",
+    "inline-style-prefix-all": "^1.0.1",
+    "inline-style-prefixer": "^1.0.1",
+    "inline-style-transformer": "^1.0.0",
+    "istanbul": "^1.0.0-alpha.2",
+    "mocha": "^2.4.5",
+    "react": "^0.14.7",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015",
+      "stage-0"
+    ],
+    "plugins": [
+      "lodash",
+      "add-module-exports"
+    ]
   }
 }

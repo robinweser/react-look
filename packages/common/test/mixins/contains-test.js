@@ -1,4 +1,4 @@
-import contains from '../../mixins/contains'
+import contains from '../../modules/mixins/contains'
 
 describe('Evaluating :contains pseudo', () => {
 

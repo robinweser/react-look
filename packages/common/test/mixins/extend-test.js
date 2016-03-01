@@ -1,4 +1,4 @@
-import extend from '../../mixins/extend'
+import extend from '../../modules/mixins/extend'
 
 describe('Extending styles', () => {
 

@@ -1,4 +1,4 @@
-import statefulValue from '../../plugins/statefulValue'
+import statefulValue from '../../modules/plugins/statefulValue'
 
 describe('Resolving stateful values', () => {
 

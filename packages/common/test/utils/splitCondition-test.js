@@ -1,4 +1,4 @@
-import splitCondition from '../../utils/splitCondition'
+import splitCondition from '../../modules/utils/splitCondition'
 
 describe('Splitting conditions', () => {
 

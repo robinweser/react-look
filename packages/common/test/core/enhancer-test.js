@@ -1,24 +1,9 @@
 import React, { Component } from 'react'
-import look from '../../core/enhancer'
+import look from '../../modules/core/enhancer'
 import Chai from 'chai'
-import ReactDOM from 'react-dom'
-import TestUtils from 'react-addons-test-utils'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import jsdom from 'jsdom'
 Chai.use(sinonChai)
-
-// setup the simplest document possible
-var doc = jsdom.jsdom('<!doctype html><html><body></body></html>')
-
-// get the window object out of the document
-var win = doc.defaultView
-
-// set globals for mocha that make access to document and window feel
-// natural in the test environment
-global.document = doc
-global.window = win
-
 
 describe('Enhancing a Component', () => {
   it('should use the same displayName', () => {

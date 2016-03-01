@@ -1,7 +1,7 @@
 import { createElement } from 'react'
 import _ from 'lodash'
 
-import getPseudoExpression from '../../../common/utils/getPseudoExpression'
+import getPseudoExpression from '../../../common/modules/utils/getPseudoExpression'
 
 // Evaluates if a element contains a given string
 export default ({ property, value, newProps }) => {

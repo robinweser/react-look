@@ -2,19 +2,19 @@
 import prefixer from './plugins/prefixer'
 import staticPrefixer from './plugins/staticPrefixer'
 import fallbackValue from './plugins/fallbackValue'
-import statefulValue from '../../common/plugins/statefulValue'
+import statefulValue from '../../common/modules/plugins/statefulValue'
 import statefulSelector from './plugins/statefulSelector'
-import mixin from '../../common/plugins/mixin'
+import mixin from '../../common/modules/plugins/mixin'
 
 // Dev tools
-import styleLogger from '../../common/plugins/styleLogger'
+import styleLogger from '../../common/modules/plugins/styleLogger'
 import linter from './plugins/linter'
 import friendlyClassName from './plugins/friendlyClassName'
 
 // Mixins
-import { equal, unEqual, greater, less, greaterThan, lessThan } from '../../common/mixins/condition'
-import contains from '../../common/mixins/contains'
-import extend from '../../common/mixins/extend'
+import { equal, unEqual, greater, less, greaterThan, lessThan } from '../../common/modules/mixins/condition'
+import contains from '../../common/modules/mixins/contains'
+import extend from '../../common/modules/mixins/extend'
 import substr from './mixins/substr'
 import extractCSS from './mixins/extractCSS'
 import platformQuery from './mixins/platformQuery'
@@ -22,7 +22,7 @@ import platformQuery from './mixins/platformQuery'
 // Presets
 import domPreset from './presets/react-dom'
 
-import Enhancer from '../../common/core/enhancer'
+import Enhancer from '../../common/modules/core/enhancer'
 import StyleSheet from './api/StyleSheet'
 import LookRoot from './api/LookRoot'
 

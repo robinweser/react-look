@@ -1,5 +1,5 @@
 import fallbackValue from '../../modules/plugins/fallbackValue'
-import { resolvePlugins } from '../../../common/core/resolver'
+import { resolvePlugins } from '../../../common/modules/core/resolver'
 
 
 describe('Resolving fallback values', () => {

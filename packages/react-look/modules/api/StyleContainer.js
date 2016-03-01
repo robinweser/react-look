@@ -2,7 +2,7 @@ import _ from 'lodash'
 import { toCSS } from 'inline-style-transformer'
 
 import generateHashCode from '../utils/generateHashCode'
-import sortObject from '../../../common/utils/sortObject'
+import sortObject from '../../../common/modules/utils/sortObject'
 import prefixer from '../utils/prefixer'
 
 /**

@@ -1,4 +1,4 @@
-import sortObject from '../../utils/sortObject'
+import sortObject from '../../modules/utils/sortObject'
 
 describe('Sorting objects', () => {
   it('should sort object keys in alphabetic order', () => {

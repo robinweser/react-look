@@ -13,6 +13,14 @@ const errorOnFail = err => {
   }
 }
 
+// Copies LICENSE into a pgk subfolder
+function copyLICENSE(pkg) {
+  fs.copy(__dirname + '/../LICENSE', __dirname + '/../packages/' + pkg + '/LICENSE', err => {
+    errorOnFail(err)
+    console.log('LICENSE was successfully copied into the ' + pkg + ' package.')
+  })
+}
+
 // Updates the package.json version of a given pkg with the global
 // package.json version
 function updateVersion(pkg) {
@@ -38,6 +46,7 @@ function updateVersion(pkg) {
 // Helper to run all preperation scripts
 function preparePackage(pkg) {
   updateVersion(pkg)
+  copyLICENSE(pkg)
 }
 
 preparePackage('react-look')

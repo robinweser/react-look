@@ -1,4 +1,4 @@
-import getPseudoExpression from '../../utils/getPseudoExpression'
+import getPseudoExpression from '../../modules/utils/getPseudoExpression'
 
 describe('Extracting pseudo expressions', () => {
 
