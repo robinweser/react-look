@@ -34,5 +34,14 @@ export default {
   mockPluginInterfaceWithConfig(styles, config) {
     const resolve = config._resolveStyles
     return { styles: styles, config: config, resolve: resolve }
+  },
+
+  mockMixinInterface(property, value, mixinKey, newProps) {
+    return {
+      property: property,
+      value: value,
+      mixinKey: mixinKey,
+      newProps: newProps
+    }
   }
 }

@@ -7,7 +7,7 @@ Chai.use(sinonChai)
 import resolveStyles from '../../modules/core/resolver'
 import look from '../../../common/modules/core/enhancer'
 
-describe('Resolving styles', () => {
+describe('Resolving react-dom styles', () => {
   it('should return the element if it is not a React element', () => {
     expect(resolveStyles({ }, true, { })).to.eql(true)
   })
