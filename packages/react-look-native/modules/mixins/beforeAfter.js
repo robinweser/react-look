@@ -1,4 +1,4 @@
-import { createElement, View } from 'react-native'
+import { createElement, Text } from 'react-native'
 
 /**
  * Creates a new pseudo element
@@ -13,7 +13,7 @@ const createPseudoElement = styles => {
     delete styles.content
   }
 
-  return createElement(View, { style: styles }, children)
+  return createElement(Text, { style: styles }, children)
 }
 
 const initChildren = props => {

@@ -1,4 +1,4 @@
-import { createElement, View } from 'react'
+import { createElement, Text } from 'react-native'
 
 // Styles the first letter of an element
 export default ({ value, newProps }) => {
@@ -9,7 +9,7 @@ export default ({ value, newProps }) => {
   }
 
   if (typeof children === 'string' && children.length > 0) {
-    const firstLetterElement = createElement(View, { style: value }, children.substr(0, 1))
+    const firstLetterElement = createElement(Text, { style: value }, children.substr(0, 1))
     newProps.children = [ firstLetterElement, children.substr(1, children.length - 1) ]
   }
   return false

@@ -1,6 +1,7 @@
-import { createElement, View } from 'react-native'
-import getPseudoExpression from '../../utils/getPseudoExpression'
+import { createElement, Text } from 'react-native'
 import _ from 'lodash'
+
+import getPseudoExpression from '../../../common/modules/utils/getPseudoExpression'
 
 // Evaluates if a element contains a given string
 export default ({ property, value, newProps }) => {
@@ -20,7 +21,7 @@ export default ({ property, value, newProps }) => {
         newChildren.push(left)
       }
 
-      newChildren.push(createElement(View, { style: value }, match))
+      newChildren.push(createElement(Text, { style: value }, match))
 
       children = right.join(match)
     })

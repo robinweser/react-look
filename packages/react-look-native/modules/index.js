@@ -1,27 +1,27 @@
 // Plugins
-import statefulValue from './plugins/statefulValue'
-import statefulSelector from './plugins/native/statefulSelector'
-import mixin from './plugins/mixin'
+import mixin from '../../common/modules/plugins/mixin'
+import statefulValue from '../../common/modules/plugins/statefulValue'
+import statefulSelector from './plugins/statefulSelector'
 
 // Dev tools
-import styleLogger from './plugins/styleLogger'
+import styleLogger from '../../common/modules/plugins/styleLogger'
 
 // Mixins
-import { equal, unEqual, greater, less, greaterThan, lessThan } from './mixins/condition'
-import contains from './mixins/contains'
-import extend from './mixins/extend'
-import substr from './mixins/native/substr'
-import empty from './mixins/native/empty'
-import blank from './mixins/native/blank'
-import { before, after } from './mixins/native/beforeAfter'
-import firstLetter from './mixins/native/firstLetter'
+import { equal, unEqual, greater, less, greaterThan, lessThan } from '../../common/modules/mixins/condition'
+import contains from '../../common/modules/mixins/contains'
+import extend from '../../common/modules/mixins/extend'
+import substr from './mixins/substr'
+import empty from './mixins/empty'
+import blank from './mixins/blank'
+import { before, after } from './mixins/beforeAfter'
+import firstLetter from './mixins/firstLetter'
 
 // Presets
 import nativePreset from './presets/react-native'
 
-import Enhancer from './core/enhancer'
-import StyleSheet from './api/native/StyleSheet'
-import LookRoot from './api/native/LookRoot'
+import Enhancer from '../../common/modules/core/enhancer'
+import StyleSheet from './api/StyleSheet'
+import LookRoot from './api/LookRoot'
 
 // Resolving annotations
 // If not passing arguments it just wraps the Component
