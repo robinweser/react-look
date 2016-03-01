@@ -60,22 +60,22 @@ Make sure to check out the the Getting Started guide which provides a full guide
 	* **2.4. [StyleContainer](docs/api/StyleContainer.md)**
 3. Registry
 	* **3.1. [Plugins](docs/Plugins.md)**
-      * [Fallback Value](docs/plugins/FallbackValue.md)
-      * [Mixin](docs/plugins/Mixin.md)
-      * [Prefixer](docs/plugins/Prefixer.md)
-      * [Stateful Value](docs/plugins/StatefulValue.md)
-      * [Stateful Selector](docs/plugins/StatefulSelector.md)
-  * **3.1.1 [DevTools](docs/Plugins.md#developertools)**
-        * [Friendly ClassName](docs/plugins/FriendlyClassName.md)
-        * [Linter](docs/plugins/Linter.md)
-        * [Style Logger](docs/plugins/StyleLogger.md)
+		* [Fallback Value](docs/plugins/FallbackValue.md)
+		* [Mixin](docs/plugins/Mixin.md)
+		* [Prefixer](docs/plugins/Prefixer.md)
+		* [Stateful Value](docs/plugins/StatefulValue.md)
+		* [Stateful Selector](docs/plugins/StatefulSelector.md)
+		* **3.1.1 [DevTools](docs/Plugins.md#developertools)**
+			* [Friendly ClassName](docs/plugins/FriendlyClassName.md)
+			* [Linter](docs/plugins/Linter.md)
+			* [Style Logger](docs/plugins/StyleLogger.md)
 	* **3.2 [Mixins](docs/Mixins.md)**
-      * [Contains](docs/Mixins.md#contains)
-      * [Extend](docs/Mixins.md#extend)
-      * [Extract CSS](docs/Mixins.md#extract-css)
-      * [Platform Queries](docs/Mixins.md#platform-queries)
-      * [Stateful Conditions](docs/Mixins.md#stateful-conditions)
-      * [Substr](docs/Mixins.md#substr)
+		* [Contains](docs/Mixins.md#contains)
+		* [Extend](docs/Mixins.md#extend)
+		* [Extract CSS](docs/Mixins.md#extract-css)
+		* [Platform Queries](docs/Mixins.md#platform-queries)
+		* [Stateful Conditions](docs/Mixins.md#stateful-conditions)
+		* [Substr](docs/Mixins.md#substr)
 4. [Guides](docs/guides/)
 	* 4.1. [Upgrading Look](docs/guides/upgradeLook.md)
 	* 4.2. [Configuring Look](docs/guides/configureLook.md)
