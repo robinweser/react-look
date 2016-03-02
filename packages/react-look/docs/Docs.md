@@ -29,7 +29,7 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 		* [keyframes](api/StyleSheet.md#keyframesframes--name)
 		* [font](api/StyleSheet.md#fontfontfamily-files--properties)
 	* **2.3. [LookRoot](api/LookRoot.md)**
-	* **2.4. [StyleContainer](api/StyleContainer.md)**
+	* **2.4. [StyleContainer](api/StyleContainer.md)** <img src="../../../res/private-badge.png" height=15>
 3. Registry
 	* **3.1. [Plugins](Plugins.md)**
       * [Fallback Value](plugins/FallbackValue.md)

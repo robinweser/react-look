@@ -85,3 +85,15 @@ describe('Creating a new fontFace', () => {
     expect(StyleContainer.fonts.has(fontFace)).to.eql(true)
   })
 })
+
+describe('Exporting to String', () => {
+  it('should return all static styles as a single CSS string', () => {
+    const styles = StyleSheet.create({
+      color: 'red',
+      backgroundColor: 'blue'
+    })
+    const css = StyleSheet.renderToString()
+
+    expect(css).to.eql('.c0{color:red;background-color:blue}')
+  })
+})

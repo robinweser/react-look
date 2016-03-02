@@ -5,6 +5,7 @@ A helper to create scoped styles and global CSS styles.
 - [combineStyles](#combinestylesstyles)
 - [toCSS](#tocssstyles--scope) <img src="../../../../res/deprecated-badge.png" height=15>
 - [addCSS](#addcssstyles--scope)
+- [renderToString](#rendertostring--useragent)
 - [keyframes](#keyframesframes--name)
 - [font](#fontfontfamily-files--properties)
 
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
 
 c(styles.box, styles.container) // => c1 c2
 ```
-## `toCSS(styles [, scope])` <img src="../../res/deprecated-badge.png" height=20>
+## `toCSS(styles [, scope])` <img src="../../../../res/deprecated-badge.png" height=20>
 Please use [addCSS](#addcssstyles--scope). This function has been renamed.
 ## `addCSS(styles [, scope])`
 Adds all `styles` as a valid CSS string and directly applies those to the global CSSStyleSheet. `scope` will also add a scope selector to add more specificity.
@@ -109,6 +110,29 @@ This also accepts a css `string`. When using it with a `string`, the scope will 
 ```javascript
 StyleSheet.addCSS("#myId { color: red } .myClass { color: green }")
 ```
+## `renderToString([userAgent])`
+Similar to `react-dom/server`'s `renderToString` it returns a static string containing all static styles in form of a CSS string.
+Optionally pass a `userAgent` which is used to prefix styles before rendering.
+```javascript
+// add some static css
+StyleSheet.addCSS({
+  '.box': {
+    color: 'red',
+    backgroundColor: 'blue'
+  }
+})
+
+// generate some other styles
+StyleSheet.create({
+  foo: {color: 'blue'}
+})
+
+// Will output a minified static CSS string
+const css = StyleSheet.renderToString()
+console.log(css)
+// => .box{color:red;background-color:blue}.c0{color:blue}
+```
+
 ## `keyframes(frames [, name])`
 Adds the `frames` as a new keyframe animation to the global CSSStyleSheet and returns the animation name.
 `frames` should be an object containing a set of percentage-based styles. or both `from` and `to` values.<br> You may also pass a custom animation `name`.

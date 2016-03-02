@@ -57,7 +57,7 @@ Make sure to check out the the Getting Started guide which provides a full guide
 		* [keyframes](docs/api/StyleSheet.md#keyframesframes--name)
 		* [font](docs/api/StyleSheet.md#fontfontfamily-files--properties)
 	* **2.3. [LookRoot](docs/api/LookRoot.md)**
-	* **2.4. [StyleContainer](docs/api/StyleContainer.md)**
+	* **2.4. [StyleContainer](docs/api/StyleContainer.md)** <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/private-badge.png" height=15>
 3. Registry
 	* **3.1. [Plugins](docs/Plugins.md)**
 		* [Fallback Value](docs/plugins/FallbackValue.md)

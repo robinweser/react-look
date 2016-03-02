@@ -53,6 +53,14 @@ export default {
   },
 
   /**
+   * Renders all static styles into a single CSS string
+   * @param {string?} userAgent - userAgent used to prefix styles
+   */
+  renderToString(userAgent) {
+    return StyleContainer.renderStaticStyles(userAgent)
+  },
+
+  /**
    * Adds keyframe animations to the global StyleSheet and returns the animation name
    * @param {Object} frames - keyframes that get inserted
    * @param {string?} name - custom animation name

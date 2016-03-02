@@ -1,4 +1,6 @@
 # StyleContainer
+> <img src="../../../../res/private-badge.png" height=15> StyleContainer is a private instance which is only available within plugins and mixins. It is not exported.
+
 StyleContainer is the Component that collects all your static CSS styles within a `className => styles` mapping.
 It is passed down to every plugin and mixin and can be used to dynamically add more styles on demand.
 

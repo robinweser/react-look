@@ -89,6 +89,7 @@ class StyleContainer {
     const tempPrefixer = prefixer(userAgent)
     let css = ''
 
+    this.statics.forEach(staticStyles => css += staticStyles)
     this.selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}')
     this.fonts.forEach(font => css += font)
     this.keyframes.forEach((frames, name) => css += '@' + tempPrefixer.prefixedKeyframes + ' ' + name + '{' + toCSS(tempPrefixer.prefix(frames)) + '}')
@@ -97,7 +98,6 @@ class StyleContainer {
       selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}')
       css += '}'
     })
-    this.statics.forEach(staticCss => css += staticCss)
 
     return css
   }
