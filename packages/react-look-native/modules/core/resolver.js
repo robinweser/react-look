@@ -1,6 +1,5 @@
 import { cloneElement } from 'react-native'
 import { resolvePlugins, resolveChildren, resolveProps, isLookEnhanced } from '../../../common/modules/core/resolver'
-import shallowEqual from 'shallowequal'
 import _ from 'lodash'
 
 /**
@@ -29,29 +28,36 @@ export default function resolveStyles(Component, element, config) {
     // Resolving those should lead to a flat style object
     if (newProps.style) {
 
-      // static arguments that get passed to every plugin
-      const staticPluginArguments = {
-        resolve: resolvePlugins,
-        Component,
-        newProps,
-        element,
-        config
-      }
-
       // Resolve plugins if there are dynamic styles to resolve
       // and plugins are provided via config
-      if (newProps.style && config.plugins) {
-        // Constructs the pluginInterface
-        const pluginInterface = {
-          ...staticPluginArguments,
-          styles: _.merge({ }, newProps.style)
+      if (newProps.style._selector && config.plugins) {
+
+        // static arguments that get passed to every plugin
+        const staticPluginArguments = {
+          resolve: resolvePlugins,
+          Component,
+          newProps,
+          element,
+          config
         }
 
-        const newStyles = resolvePlugins(pluginInterface)
+        let newStyles = { }
+
+        newProps.style._selector.forEach(selector => {
+          const staticStyles = StyleContainer.get(selector)
+          const dynamicStyles = StyleContainer._getDynamic(selector)
+
+          // Constructs the pluginInterface
+          const pluginInterface = {
+            ...staticPluginArguments,
+            styles: _.merge({ }, dynamicStyles)
+          }
+          _.merge(newStyles, staticStyles, resolvePlugins(pluginInterface))
+        })
 
         // shallow check the new styles
         // we only need to actually update if the styles changed
-        if (!shallowEqual(newProps.style, newStyles)) {
+        if (!_.isEmpty(newStyles)) {
           newProps.style = newStyles
           newProps._lookShouldUpdate = true
         }
