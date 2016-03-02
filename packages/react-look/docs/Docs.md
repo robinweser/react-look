@@ -26,6 +26,7 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 		* [combineStyles](api/StyleSheet.md#combinestylesstyles)
 		* [toCSS](api/StyleSheet.md#tocssstyles--scope) <img src="../../../res/deprecated-badge.png" height=15>
 		* [addCSS](api/StyleSheet.md#addcssstyles--scope)
+		* [renderToString](api/StyleSheet.md#rendertostring--useragent)
 		* [keyframes](api/StyleSheet.md#keyframesframes--name)
 		* [font](api/StyleSheet.md#fontfontfamily-files--properties)
 	* **2.3. [LookRoot](api/LookRoot.md)**
