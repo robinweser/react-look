@@ -43,5 +43,23 @@ export default {
       mixinKey: mixinKey,
       newProps: newProps
     }
+  },
+
+  mockPluginInterfaceWithComponentElementNewProps(styles) {
+    return {
+      styles: styles,
+      Component: {
+        constructor: {
+          displayName: 'Comp'
+        }
+      },
+      element: {
+        type: 'div',
+        key: null,
+        ref: null
+      },
+      newProps: {},
+      config: {}
+    }
   }
 }
