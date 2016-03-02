@@ -25,7 +25,7 @@ export function resolvePlugins(pluginInterface) {
  * @param {Object} element - React element to be validated
  */
 export function isLookEnhanced(element) {
-  return element.type && element.type._isLookEnhanced
+  return element._isLookEnhanced || element.type && element.type._isLookEnhanced ? true : false
 }
 
 /**

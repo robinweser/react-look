@@ -1,36 +1,30 @@
 import mixin from '../../modules/plugins/mixin'
 import { resolvePlugins } from '../../modules/core/resolver'
 
-
 describe('Resolving mixins', () => {
-
   it('should return styles if no mixins are passed', () => {
-    expect(mixin({ config: { }, styles: { } })).to.eql({ })
+    const pluginInterface = TestUtils.mockPluginInterfaceWithPlugin({ }, () => true)
+    expect(mixin(pluginInterface)).to.eql({ })
   })
 
   it('should return styles if mixins is empty', () => {
-    expect(mixin({
-      config: {
-        mixins: { }
-      },
-      styles: {}
-    })).to.eql({ })
+    const pluginInterface = TestUtils.mockPluginInterfaceWithPlugin({ }, () => true)
+    pluginInterface.config.mixins = { }
+    expect(mixin(pluginInterface)).to.eql({ })
   })
 
   it('should correctly resolve', () => {
-    const styles = { color: 'red', testMixin: 'blue' }
-    const config = {
-      mixins: {
-        testMixin(p, v, k, s, c) {
-          return { fontSize: 14 }
-        }
-      },
-      plugins: [ mixin ]
-    }
+    const input = { color: 'red', testMixin: 'blue' }
+    const output = { color: 'red', fontSize: 14 }
 
-    expect(mixin({ styles, config, resolve: resolvePlugins })).to.eql({
-      color: 'red',
-      fontSize: 14
+    const pluginInterface = TestUtils.mockPluginInterfaceWithConfig(input, {
+      mixins: {
+        testMixin: () => ({ fontSize: 14 })
+      },
+      plugins: [ mixin ],
+      _resolveStyles: resolvePlugins
     })
+
+    expect(mixin(pluginInterface)).to.eql(output)
   })
 })

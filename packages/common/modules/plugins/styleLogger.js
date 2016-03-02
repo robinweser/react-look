@@ -36,7 +36,7 @@ export default ({ styles, Component, element, newProps, config: { styleLogger } 
       // Iterate every event and add event listeners
       styleLogger.onEvent.forEach(event => {
         const existingEvent = newProps[event]
-        newProps[styleLogger.onEvent] = (e) => {
+        newProps[event] = (e) => {
           if (existingEvent) {
             existingEvent()
           }
