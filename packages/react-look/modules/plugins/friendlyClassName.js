@@ -1,4 +1,5 @@
-import getChildType from '../../../common/modules/utils/getChildType'
+import { Utils } from 'react-look-core'
+const { getChildType } = Utils
 
 const classNameTemplate = (Component, element, className) => {
   return Component.constructor.displayName + '-' + getChildType(element) + '--' + className

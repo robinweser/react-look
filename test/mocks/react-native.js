@@ -17,5 +17,8 @@ export {
   Component,
   createElement,
   cloneElement,
-  PropTypes
+  PropTypes,
+
+  View,
+  Text
 }

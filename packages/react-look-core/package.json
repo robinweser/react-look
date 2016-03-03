@@ -1,0 +1,17 @@
+{
+  "name": "react-look-core",
+  "version": "1.0.0-beta5",
+  "description": "Core modules for react-look",
+  "main": "lib/index.js",
+  "files": [
+    "README.md",
+    "LICENSE",
+    "lib/",
+    "docs/"
+  ],
+  "dependencies": {
+    "assign-styles": "2.0.0",
+    "inline-style-transformer": "^1.0.0",
+    "lodash": "^4.2.1"
+  }
+}

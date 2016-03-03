@@ -1,6 +1,7 @@
 import { Component, PropTypes } from 'react-native'
-import resolveStyles from '../core/resolver'
 import _ from 'lodash'
+
+import resolveStyles from '../core/resolver'
 
 const contextType = { _lookConfig: PropTypes.object }
 

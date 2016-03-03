@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { createElement, Text } from 'react-native'
 
 /**
@@ -13,17 +14,17 @@ const createPseudoElement = styles => {
     delete styles.content
   }
 
-  return createElement(Text, { style: styles }, children)
+  // If a primitive is passed, just return it
+  // otherwise create a new element
+  if (!_.isEmpty(styles)) {
+    return createElement(Text, { style: styles }, children)
+  } else {
+    return children
+  }
 }
 
 const initChildren = props => {
-  if (!props.children) {
-    props.children = [ ]
-  }
-
-  if (props.children instanceof Array !== true) {
-    props.children = [ props.children ]
-  }
+  props.children = props.children ? [ ].concat(props.children) : []
 }
 
 /**

@@ -41,7 +41,7 @@ describe('Generating a className', () => {
   })
 })
 
-describe('Subscribing to the style StyleContainer', () => {
+describe('Subscribing to the StyleContainer', () => {
   it('should add a listener', () => {
     const subscriber = sinon.spy()
     StyleContainer.subscribe(subscriber)

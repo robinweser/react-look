@@ -1,6 +1,9 @@
 import { cloneElement } from 'react-native'
-import { resolvePlugins, resolveChildren, resolveProps, isLookEnhanced } from '../../../common/modules/core/resolver'
 import _ from 'lodash'
+
+import { resolver } from 'react-look-core'
+const { resolvePlugins, resolveChildren, resolveProps, isLookEnhanced } = resolver
+import StyleContainer from '../api/StyleContainer'
 
 /**
  * Resolves provided styles into style objects

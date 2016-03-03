@@ -1,8 +1,9 @@
 import _ from 'lodash'
 import { toCSS } from 'inline-style-transformer'
+import { Utils } from 'react-look-core'
+const { sortObject } = Utils
 
 import generateHashCode from '../utils/generateHashCode'
-import sortObject from '../../../common/modules/utils/sortObject'
 import prefixer from '../utils/prefixer'
 
 /**

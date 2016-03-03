@@ -6,8 +6,8 @@ import _ from 'lodash'
  */
 class StyleContainer {
   constructor() {
-    this.styles = new Map()
-    this._dynamic = new Map()
+    this.selectors = new Map()
+    this.dynamics = new Map()
 
     this._selector = 0
     this._listener = new Set()
@@ -19,8 +19,8 @@ class StyleContainer {
    * @param {Object} styles - styles that get added
    */
   add(selector, styles) {
-    if (!this.styles.has(selector) && !_.isEmpty(styles)) {
-      this.styles.set(selector, styles)
+    if (!this.selectors.has(selector) && !_.isEmpty(styles)) {
+      this.selectors.set(selector, styles)
       this._emitChange()
     }
   }
@@ -30,7 +30,7 @@ class StyleContainer {
    * @param {string} selector - selector to reference the styles
    */
   get(selector) {
-    return this.styles.get(selector)
+    return this.selectors.get(selector)
   }
 
   /**
@@ -67,8 +67,8 @@ class StyleContainer {
    * @param {Object} styles - styles that get added
    */
   _addDynamic(selector, styles) {
-    if (!this._dynamic.has(selector) && !_.isEmpty(styles)) {
-      this._dynamic.set(selector, styles)
+    if (!this.dynamics.has(selector) && !_.isEmpty(styles)) {
+      this.dynamics.set(selector, styles)
       this._emitChange()
     }
   }
@@ -78,7 +78,7 @@ class StyleContainer {
    * @param {string} selector - selector to reference the styles
    */
   _getDynamic(selector) {
-    return this._dynamic.get(selector)
+    return this.dynamics.get(selector)
   }
 }
 

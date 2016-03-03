@@ -1,7 +1,6 @@
 import extractCSS from '../../modules/mixins/extractCSS'
 
 describe('Extracting classNames', () => {
-
   it('should extract CSS to classNames', () => {
     let newProps = { }
     extractCSS({

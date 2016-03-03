@@ -6,10 +6,10 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    __dirname + '/../demo/client.js'
+    __dirname + '/../packages/react-look/demo/client.js'
   ],
   output: {
-    path: path.join(__dirname, '/../demo'),
+    path: path.join(__dirname, '/../packages/react-look/demo'),
     filename: 'app.js',
     publicPath: '/'
   },
@@ -22,9 +22,8 @@ module.exports = {
       test: /\.jsx?$/,
       loader: 'babel-loader',
       include: [
-        path.resolve(__dirname, '../modules'),
-        path.resolve(__dirname, '../../common'),
-        path.resolve(__dirname, '../demo')
+        path.resolve(__dirname, '../packages/react-look/modules'),
+        path.resolve(__dirname, '../packages/react-look/demo')
       ]
     }, {
       test: /\.json?$/,

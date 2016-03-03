@@ -1,10 +1,8 @@
 import substr from '../../modules/mixins/substr'
 
 describe('Styling substrings', () => {
-
   it('should split children at substrings and add styles', () => {
     const numbers = { children: 'foo12bar' }
-
 
     substr({
       property: ':substr([0-9])',

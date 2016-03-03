@@ -1,14 +1,8 @@
-// Plugins
-import mixin from '../../../common/modules/plugins/mixin'
-import statefulValue from '../../../common/modules/plugins/statefulValue'
-import statefulSelector from '../plugins/statefulSelector'
+import { Mixins, Plugins } from 'react-look-core'
+const { mixin, statefulValue, statefulSelector } = Plugins
+const { condition, contains, extend } = Mixins
+const { equal, unEqual, greater, less, greaterThan, lessThan } = condition
 
-// Conditions
-import { equal, unEqual, greater, less, greaterThan, lessThan } from '../../../common/modules/mixins/condition'
-
-// Other
-import contains from '../../../common/modules/mixins/contains'
-import extend from '../../../common/modules/mixins/extend'
 import substr from '../mixins/substr'
 import empty from '../mixins/empty'
 import blank from '../mixins/blank'

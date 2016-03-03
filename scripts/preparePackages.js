@@ -32,12 +32,23 @@ function updateVersion(pkg) {
       errorOnFail(err)
 
       const packageJSON = JSON.parse(data)
+      // Check if this version has already been released
+      if (packageJSON.version === globalVersion) {
+        errorOnFail('Version ' + globalVersion + ' has already been released.')
+      }
+
       packageJSON.version = globalVersion
+
+      // Update react-look-core dependency version
+      if (pkg !== 'react-look-core') {
+        packageJSON.dependencies['react-look-core'] = '^' + globalVersion
+      }
+
       const newPackageJSON = JSON.stringify(packageJSON, null, 4)
 
       fs.writeFile(__dirname + '/../packages/' + pkg + '/package.json', newPackageJSON, err => {
         errorOnFail(err)
-        console.log('Successfully updated ' + pkg + ' version to ' + globalVersion + '.')
+        console.log('Successfully updated ' + pkg + ' version and react-look-core dependency version to ' + globalVersion + '.')
       })
     })
   })
@@ -49,5 +60,6 @@ function preparePackage(pkg) {
   copyLICENSE(pkg)
 }
 
+preparePackage('react-look-core')
 preparePackage('react-look')
 preparePackage('react-look-native')

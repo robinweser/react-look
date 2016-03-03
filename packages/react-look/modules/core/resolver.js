@@ -1,8 +1,9 @@
 import assignStyles from 'assign-styles'
 import _ from 'lodash'
 import { cloneElement } from 'react'
+import { resolver } from 'react-look-core'
+const { resolvePlugins, resolveChildren, resolveProps, isLookEnhanced } = resolver
 
-import { resolvePlugins, resolveChildren, resolveProps, isLookEnhanced } from '../../../common/modules/core/resolver'
 import renderStaticStyles from './renderer'
 import extractCSS from '../mixins/extractCSS'
 import StyleContainer from '../api/StyleContainer'

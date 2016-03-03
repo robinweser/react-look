@@ -1,6 +1,6 @@
 import Linter from 'inline-style-linter'
-
-import getChildType from '../../../common/modules/utils/getChildType'
+import { Utils } from 'react-look-core'
+const { getChildType } = Utils
 
 export default function linter({ styles, Component, element, config: { linter } }) {
   const warnings = new Linter(linter).lint(styles)

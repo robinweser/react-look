@@ -1,7 +1,8 @@
 import { createElement, Text } from 'react-native'
 import _ from 'lodash'
 
-import getPseudoExpression from '../../../common/modules/utils/getPseudoExpression'
+import { Utils } from 'react-look-core'
+const { getPseudoExpression } = Utils
 
 // Evaluates if a element contains a given string
 export default ({ property, value, newProps }) => {

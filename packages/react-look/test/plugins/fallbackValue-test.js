@@ -1,5 +1,6 @@
 import fallbackValue from '../../modules/plugins/fallbackValue'
-import { resolvePlugins } from '../../../common/modules/core/resolver'
+import { resolver } from 'react-look-core'
+const { resolvePlugins } = resolver
 
 
 describe('Resolving fallback values', () => {

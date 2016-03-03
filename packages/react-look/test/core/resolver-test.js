@@ -5,7 +5,7 @@ import sinonChai from 'sinon-chai'
 Chai.use(sinonChai)
 
 import resolveStyles from '../../modules/core/resolver'
-import look from '../../../common/modules/core/enhancer'
+import look from '../../modules'
 
 describe('Resolving react-dom styles', () => {
   it('should return the element if it is not a React element', () => {

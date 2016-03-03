@@ -12,6 +12,7 @@ export default {
 
     return Object.keys(styles).reduce((selectors, selector) => {
       selectors[selector] = generateScopedStyles(styles[selector])
+      return selectors
     }, { })
   },
 

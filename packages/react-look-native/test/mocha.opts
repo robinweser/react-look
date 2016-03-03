@@ -1,3 +1,0 @@
---compilers js:test/compiler.js
---recursive
---require test/setup.js
