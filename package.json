@@ -5,7 +5,9 @@
   "license": "MIT",
   "repository": "https://github.com/rofrischmann/react-look",
   "scripts": {
-    "clean": "rimraf coverage",
+    "clean": "rimraf coverage dist",
+    "umd": "NODE_ENV=development webpack packages/react-look/modules/index.js dist/react-look.js",
+    "umd:min": "NODE_ENV=production webpack packages/react-look/modules/index.js dist/react-look.min.js",
     "build": "./scripts/buildPackages.sh",
     "coverage": "codeclimate-test-reporter < coverage/lcov.info",
     "lint": "./scripts/lintPackages.sh",
