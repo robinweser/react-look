@@ -3,9 +3,9 @@
   Please read the guide-line at the bottom.
 ----------------------------------------->
 
-**Version**: 1.0.0 (beta5)<br>
-**Environment**: React / React Native / Both<br>
-**Type**: Bug / Feature Request<br>
+**Version**: 1.0.0 (beta5)
+**Environment**: React / React Native / Both
+**Type**: Bug / Feature Request
 
 -------------------
 #### Description
