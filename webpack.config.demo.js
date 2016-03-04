@@ -3,8 +3,9 @@ var webpack = require('webpack');
 
 module.exports = {
   cache: true,
+  devtool: 'cheap-module-eval-source-map',
   entry: {
-    app: './demo/client.js'
+    app: __dirname + '/packages/react-look/demo/client.js'
   },
   output: {
     path: path.join(__dirname),
