@@ -35,13 +35,15 @@ const customConfig = {
 }
 ```
 ### Common config keys
+
 | key | default | description |
-|-----|--|------------|
-|plugins|`[]` |An array of plugins to transform your styles |
+|-----|-------|------------|
+|plugins|`[]`|An array of plugins to transform your styles |
 |mixins|`{}`|Mixin definitions to add new style properties|
 |prefixer|[Prefixer](../api/Prefixer.md)|Adding vendor-prefixes with a valid prefixer instance|
 |userAgent|`navigator.userAgent`|used to validate [platform queries](../Mixins.md#platformqueries)
 |styleElementId|`_react-look-stylesheet`| The `id` of a special `<style>`-tag to add all the CSS styles
+
 ### Presets
 Right now there's just one global preset:
 
