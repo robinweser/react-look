@@ -63,7 +63,6 @@ Make sure to check out the the Getting Started guide which provides a full guide
 	* **3.1. [Plugins](docs/Plugins.md)**
 		* [Fallback Value](docs/plugins/FallbackValue.md)
 		* [Mixin](docs/plugins/Mixin.md)
-		* [Prefixer](docs/plugins/Prefixer.md)
 		* [Stateful Value](docs/plugins/StatefulValue.md)
 		* [Stateful Selector](docs/plugins/StatefulSelector.md)
 		* **3.1.1 [DevTools](docs/Plugins.md#developertools)**
