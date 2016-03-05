@@ -6,7 +6,7 @@ Chai.use(sinonChai)
 
 import look from '../../modules/core/enhancer'
 
-describe('Enhancing a Component', () => {
+describe('Enhancing an ES6 class Component', () => {
   it('should use the same displayName', () => {
     class Default extends Component {
       render() {
@@ -93,15 +93,36 @@ describe('Enhancing a Component', () => {
   })
 })
 
-describe('Enhancing a stateless function Component', () => {
-  it('should use "Component" as displayName', () => {
+describe('Enhancing a stateless functional Component', () => {
+  it('should use "LookStateless" as default displayName', () => {
     const Enhanced = look(() => <div></div>)
-    expect(Enhanced.displayName).to.eql('Component')
+    expect(Enhanced.name).to.eql('LookStateless')
   })
 
-  it('should use the same displayName', () => {
-    const Default = () => <div></div>
-    const Enhanced = look(Default)
-    expect(Enhanced.displayName).to.eql('Default')
+  it('should inherit contextTypes and childContextTypes', () => {
+    const Comp = () => <div></div>
+    Comp.contextTypes = { foo: 'bar' }
+    Comp.childContextTypes = { bar: 'foo' }
+    const Enhanced = look(Comp)
+
+    expect(Enhanced.contextTypes.foo).to.eql('bar')
+    expect(Enhanced.childContextTypes.bar).to.eql('foo')
+  })
+
+  it('should inherit add _lookConfig context types', () => {
+    const Comp = () => <div></div>
+    const Enhanced = look(Comp)
+
+    expect(Enhanced.contextTypes._lookConfig).to.exist
+    expect(Enhanced.childContextTypes._lookConfig).to.exist
+  })
+
+  it('should basically render the same markup', () => {
+    const Comp = (props, context) => <div></div>
+    const renderedElement = Comp()
+
+    const Enhanced = look(Comp)
+    const config = TestUtils.mockConfigWithResolver({ }, () => true)
+    expect(Enhanced({ }, { _lookConfig: config })).to.eql(renderedElement)
   })
 })
