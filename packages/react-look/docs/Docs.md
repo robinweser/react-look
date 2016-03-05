@@ -49,8 +49,8 @@ If there's still something I forgot please let me know and don't be shy to ask. 
       * [Stateful Conditions](Mixins.md#stateful-conditions)
       * [Substr](Mixins.md#substr)
   * **3.3. [Prefixer](Prefixer.md)**
-      * [StaticPrefixer](prefixer/StaticPrefixer.md)
-      * [DynamicPrefixer](prefixer/DynamicPrefixer.md)
+      * [Static Prefixer](prefixer/StaticPrefixer.md)
+      * [Dynamic Prefixer](prefixer/DynamicPrefixer.md)
 4. [Guides](guides/)
 	* 4.1. [Upgrading Look](guides/upgradeLook.md)
 	* 4.2. [Configuring Look](guides/configureLook.md)
