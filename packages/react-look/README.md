@@ -85,7 +85,7 @@ Make sure to check out the the Getting Started guide which provides a full guide
 	* 4.2. [Configuring Look](docs/guides/configureLook.md)
 	* 4.3. [Build your own: Mixin](docs/guides/customMixin.md)
 	* 4.4. [Build your own: Plugin](docs/guides/customPlugin.md)
-	* 4.5. [Build your own: Prefixer(docs/guides/customPrefixer.md)
+	* 4.5. [Build your own: Prefixer](docs/guides/customPrefixer.md)
 5. [FAQ](docs/FAQ.md)
 
 # Example
