@@ -11,4 +11,4 @@ A prefixer basically adds vendor-prefixes to your styles. Right now there are ju
 
 ### Build your own
 Still want to use another prefixer or even got a better idea how to do prefixing better?
-> Check out the [Build your own - Prefixer](../guides/customPrefixer.md) tutorial!
+> Check out the [Build your own - Prefixer](guides/customPrefixer.md) tutorial!
