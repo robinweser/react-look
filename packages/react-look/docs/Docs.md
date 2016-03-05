@@ -32,16 +32,16 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 	* **2.3. [LookRoot](api/LookRoot.md)**
 	* **2.4. [StyleContainer](api/StyleContainer.md)** <img src="../../../res/private-badge.png" height=15>
 3. Registry
-	* **3.1. [Plugins](Plugins.md)**
+  * **3.1. [Plugins](Plugins.md)**
       * [Fallback Value](plugins/FallbackValue.md)
       * [Mixin](plugins/Mixin.md)
       * [Stateful Value](plugins/StatefulValue.md)
       * [Stateful Selector](plugins/StatefulSelector.md)
-  * **3.1.1 [DevTools](Plugins.md#developertools)**
+      * **3.1.1 [DevTools](Plugins.md#developertools)**
         * [Friendly ClassName](plugins/FriendlyClassName.md)
         * [Linter](plugins/Linter.md)
         * [Style Logger](plugins/StyleLogger.md)
-	* **3.2 [Mixins](Mixins.md)**
+  * **3.2 [Mixins](Mixins.md)**
       * [Contains](Mixins.md#contains)
       * [Extend](Mixins.md#extend)
       * [Extract CSS](Mixins.md#extract-css)
