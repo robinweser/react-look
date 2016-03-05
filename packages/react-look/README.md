@@ -78,8 +78,8 @@ Make sure to check out the the Getting Started guide which provides a full guide
 		* [Stateful Conditions](docs/Mixins.md#stateful-conditions)
 		* [Substr](docs/Mixins.md#substr)
 	* **3.3. [Prefixer](docs/Prefixer.md)**
-		* [StaticPrefixer](docs/prefixer/StaticPrefixer.md)
-		* [DynamicPrefixer](docs/prefixer/DynamicPrefixer.md)
+		* [Static Prefixer](docs/prefixer/StaticPrefixer.md)
+		* [Dynamic Prefixer](docs/prefixer/DynamicPrefixer.md)
 4. [Guides](docs/guides/)
 	* 4.1. [Upgrading Look](docs/guides/upgradeLook.md)
 	* 4.2. [Configuring Look](docs/guides/configureLook.md)
