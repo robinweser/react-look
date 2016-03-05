@@ -5,7 +5,7 @@ A helper to create scoped styles and global CSS styles.
 - [combineStyles](#combinestylesstyles)
 - [toCSS](#tocssstyles--scope) <img src="../../../../res/deprecated-badge.png" height=15>
 - [addCSS](#addcssstyles--scope)
-- [renderToString](#rendertostring--prefixer)
+- [renderToString](#rendertostringprefixer)
 - [keyframes](#keyframesframes--name)
 - [font](#fontfontfamily-files--properties)
 
