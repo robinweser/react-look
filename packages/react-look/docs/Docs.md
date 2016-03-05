@@ -48,7 +48,7 @@ If there's still something I forgot please let me know and don't be shy to ask. 
       * [Platform Queries](Mixins.md#platform-queries)
       * [Stateful Conditions](Mixins.md#stateful-conditions)
       * [Substr](Mixins.md#substr)
-	* **3.3. [Prefixer](Prefixer.md)**
+  * **3.3. [Prefixer](Prefixer.md)**
       * [StaticPrefixer](prefixer/StaticPrefixer.md)
       * [DynamicPrefixer](prefixer/DynamicPrefixer.md)
 4. [Guides](guides/)
@@ -56,6 +56,7 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 	* 4.2. [Configuring Look](guides/configureLook.md)
 	* 4.3. [Build your own: Mixin](guides/customMixin.md)
 	* 4.4. [Build your own: Plugin](guides/customPlugin.md)
+	* 4.5. [Build your own: Prefixer](guides/customPrefixer.md)
 5. [FAQ](FAQ.md)
 6. Under The Hood *(incomplete)*
 	* 6.1. How does Look work?
