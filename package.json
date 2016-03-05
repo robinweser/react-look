@@ -13,6 +13,7 @@
     "lint": "./scripts/lintPackages.sh",
     "prepare": "babel-node scripts/preparePackages.js",
     "prerelease": "npm run clean && npm run lint && npm test",
+    "install:core": "./scripts/installLocalCorePackage.sh",
     "release": "npm run prerelease && ./scripts/releasePackages.sh",
     "test": "istanbul cover _mocha -- packages/react-look-core/test packages/react-look/test packages/react-look-native/test --opts test/mocha.opts",
     "umd": "NODE_ENV=development webpack packages/react-look/modules/index.js dist/react-look.js",

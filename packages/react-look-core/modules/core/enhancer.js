@@ -9,17 +9,38 @@ const contextType = { _lookConfig: PropTypes.object }
  * @param {Object} config - additional processors that modify the styles
  */
 export default (CustomComponent, config = { }) => {
-  // Detecting stateless components
-  // Sets the base Component which should be extended
-  const stateless = !CustomComponent.prototype.setState
-  const Extend = stateless ? Component : CustomComponent
+  // Enhancing stateless functional Components
+  // Depending on availability of setState
+  if (!CustomComponent.prototype.setState) {
+    const LookStateless = (props, context) => {
+      const renderedElement = CustomComponent(props, context)
+      const contextConfig = context._lookConfig || null
+      const elementConfig = renderedElement.props.lookConfig || null
+      // Compose all possible ways to configure Look
+      const composedConfig = _.merge({ }, contextConfig, config, elementConfig)
+      // Mocking the Component to use the same consistent interface
+      // for all plugins, mixins and to improve developer experience
+      const Component = { props, context }
+      // Passing the displayName to improve developer experience
+      Component.constructor = {
+        displayName: CustomComponent.name || 'Component'
+      }
+      return context._lookConfig._resolveStyles(Component, renderedElement, composedConfig)
+    }
+    // Passing contextTypes to be able to reference context
+    LookStateless.contextTypes = _.merge({ }, CustomComponent.contextTypes, contextType)
+    LookStateless.childContextTypes = _.merge({ }, CustomComponent.childContextTypes, contextType)
 
-  class LookComponent extends Extend {
-    constructor(props, context) {
+    // Flag as Look-enhanced Component
+    LookStateless._isLookEnhanced = true
+    return LookStateless
+  }
+
+  // Enhancing ES2015 classes
+  // This will let you use state and do some render optimizations
+  class LookComponent extends CustomComponent {
+    constructor() {
       super(...arguments)
-
-      // Inject the global style resolver passed down by <LookRoot>
-      this._lookResolver = context._lookConfig._resolveStyles
     }
 
     // Inherit the original displayName for proper use later on
@@ -29,12 +50,12 @@ export default (CustomComponent, config = { }) => {
     static _isLookEnhanced = true;
 
     render() {
-      const renderedElement = stateless ? CustomComponent(this.props, this.context) : super.render() // eslint-disable-line
+      const renderedElement = super.render() // eslint-disable-line
       const contextConfig = this.context._lookConfig || null
       const elementConfig = renderedElement.props.lookConfig || null
       // Compose all possible ways to configure Look
       const composedConfig = _.merge({ }, contextConfig, config, elementConfig)
-      return this._lookResolver(this, renderedElement, composedConfig)
+      return this.context._lookConfig._resolveStyles(this, renderedElement, composedConfig)
     }
   }
 
