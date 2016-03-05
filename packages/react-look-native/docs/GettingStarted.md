@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
 
 ## 3. Stateless Function Components
 With Look you can easily style even **[Stateless Components](http://facebook.github.io/react/blog/2015/09/10/react-v0.14-rc1.html#stateless-function-components)** which have been introduced with React 0.14.
-> Note: This will destroy the performance benefit as Look transforms those to Stateful Components again, but it is less code to type.
 
 ```javascript
 import { StyleSheet } from 'react-look-native'

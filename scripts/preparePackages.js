@@ -32,11 +32,6 @@ function updateVersion(pkg) {
       errorOnFail(err)
 
       const packageJSON = JSON.parse(data)
-      // Check if this version has already been released
-      if (packageJSON.version === globalVersion) {
-        errorOnFail('Version ' + globalVersion + ' has already been released.')
-      }
-
       packageJSON.version = globalVersion
 
       // Update react-look-core dependency version

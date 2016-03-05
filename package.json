@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "1.0.0-beta5",
+  "version": "1.0.0-beta6",
   "author": "Robin Frischmann <robin@rofrischmann.de>",
   "license": "MIT",
   "repository": "https://github.com/rofrischmann/react-look",
@@ -12,7 +12,7 @@
     "demo:universal": "concurrent --kill-others \"npm run demo\" \"babel-node packages/react-look/demo/server.js\"",
     "lint": "./scripts/lintPackages.sh",
     "prepare": "babel-node scripts/preparePackages.js",
-    "prerelease": "npm run clean && npm run lint && npm test",
+    "prerelease": "npm run clean && npm run lint && npm test && npm run build && npm run prepare",
     "install:core": "./scripts/installLocalCorePackage.sh",
     "release": "npm run prerelease && ./scripts/releasePackages.sh",
     "test": "istanbul cover _mocha -- packages/react-look-core/test packages/react-look/test packages/react-look-native/test --opts test/mocha.opts",

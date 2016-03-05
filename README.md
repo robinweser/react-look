@@ -3,8 +3,8 @@
 Advanced & Dynamic Component Styling for <a href="https://facebook.github.io/react/">React</a> and <a href="https://facebook.github.io/react-native/">React Native</a>.
 <br>
 <a href="https://gitter.im/rofrischmann/react-look"><img alt="Gitter" src="https://img.shields.io/gitter/room/rofrischmann/react-look.svg"></a>
-<img alt="TravisCI" src="https://travis-ci.org/rofrischmann/react-look.svg?branch=develop"> 
-<a href="https://codeclimate.com/github/rofrischmann/react-look/coverage"><img alt="Test Coverage" src="https://codeclimate.com/github/rofrischmann/react-look/badges/coverage.svg"></a> 
+<img alt="TravisCI" src="https://travis-ci.org/rofrischmann/react-look.svg?branch=develop">
+<a href="https://codeclimate.com/github/rofrischmann/react-look/coverage"><img alt="Test Coverage" src="https://codeclimate.com/github/rofrischmann/react-look/badges/coverage.svg"></a>
 <a href="https://codeclimate.com/github/rofrischmann/react-look"><img alt="Code Climate" src="https://codeclimate.com/github/rofrischmann/react-look/badges/gpa.svg"></a>
 </p>
 
