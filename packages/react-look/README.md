@@ -24,7 +24,7 @@ Also available for <a href="../react-look-native/">React Native</a>.
 - [stateful values](docs/plugins/StatefulValue.md) & [selectors](docs/plugins/StatefulSelector.md)
 - [fallback values](docs/plugins/FallbackValue.md)
 - [extending](docs/Mixins.md#extend)
-- [vendor prefixing](docs/plugins/Prefixer.md)
+- [vendor prefixing](docs/Prefixer.md)
 - [CSS](docs/dom/api/StyleSheet.md##addcssstyles--scope-media-id), [font-face ](docs/dom/api/StyleSheet.md#fontfontfamily-files--properties) & [keyframes API](docs/dom/api/StyleSheet.md#keyframesframes--name)
 
 # [Documentation](docs/Docs.md)
@@ -77,6 +77,9 @@ Make sure to check out the the Getting Started guide which provides a full guide
 		* [Platform Queries](docs/Mixins.md#platform-queries)
 		* [Stateful Conditions](docs/Mixins.md#stateful-conditions)
 		* [Substr](docs/Mixins.md#substr)
+	* **3.3. [Prefixer](Prefixer.md)**
+		* [StaticPrefixer](prefixer/StaticPrefixer.md)
+		* [DynamicPrefixer](prefixer/DynamicPrefixer.md)
 4. [Guides](docs/guides/)
 	* 4.1. [Upgrading Look](docs/guides/upgradeLook.md)
 	* 4.2. [Configuring Look](docs/guides/configureLook.md)

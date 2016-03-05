@@ -108,7 +108,7 @@ Define CSS classes that get additionally added to the Component without having t
 	}
 }
 ```
-Platform queries are only supported if a valid userAgent is provided. By default the media query plugin uses the `navigator.userAgent`. You may pass a custom userAgent within the `config` object.
+Platform queries are only supported if a valid userAgent is provided. By default the platform query plugin uses the `navigator.userAgent`. You may pass a custom userAgent within the `config` object.
 
 ### Validation
 Platform queries are based on the browser information provided by every instance of [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer) as `prefixer._browserInfo` which is actually detected by [bowser](https://github.com/ded/bowser). You can query any `flag` bowser sets, but there's no guarantee that they get set properly.

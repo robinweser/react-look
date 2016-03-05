@@ -16,6 +16,8 @@ StyleSheet.toCSS({
 })
 
 const config = Presets['react-dom'];
+config.styleElementId = '_look'
+
 // config.plugins.push(Plugins.friendlyClassName)
 // config.plugins.push(Plugins.styleLogger)
 // config.styleLogger = {

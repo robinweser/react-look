@@ -3,20 +3,21 @@ const { mixin, statefulValue, statefulSelector } = Plugins
 const { condition, contains, extend } = Mixins
 const { equal, unEqual, greater, less, greaterThan, lessThan } = condition
 
-import staticPrefixer from '../plugins/staticPrefixer'
 import fallbackValue from '../plugins/fallbackValue'
 
 import extractCSS from '../mixins/extractCSS'
 import platformQuery from '../mixins/platformQuery'
 import substr from '../mixins/substr'
 
+import StaticPrefixer from '../prefixer/StaticPrefixer'
+
 export default {
+  prefixer: new StaticPrefixer(),
   plugins: [
     statefulValue,
     statefulSelector,
     mixin,
-    fallbackValue,
-    staticPrefixer
+    fallbackValue
   ],
   mixins: {
     // Conditions

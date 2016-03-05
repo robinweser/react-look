@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import { Component, PropTypes } from 'react'
 
+import Prefixer from './Prefixer'
 import StyleContainer from './StyleContainer'
 import resolveStyles from '../core/resolver'
 
@@ -13,23 +14,28 @@ export default class LookRoot extends Component {
   static childContextTypes = contextType;
   static contextTypes = contextType;
 
-  getChildContext() {
-    return {
-      _lookConfig: _.merge({ }, this.props.config, {
-        _resolveStyles: resolveStyles
-      })
+  constructor(props) {
+    super(...arguments)
+    this.config = _.merge({ }, props.config, {
+      _resolveStyles: resolveStyles
+    })
+
+    const { prefixer } = this.config
+    if (!prefixer || !prefixer._isLookPrefixer) {
+      this.config.prefixer = new Prefixer()
     }
   }
 
+  getChildContext() {
+    return { _lookConfig: this.config }
+  }
+
   componentDidMount() {
-    const { config } = this.props
-    this.styleContainer = new StyleComponent(config.userAgent, config.styleElementId)
-    this.styleContainer.render()
+    const { styleElementId, prefixer } = this.config
+    new StyleComponent(styleElementId, prefixer).render()
   }
 
   render() {
-    const { config, ...otherProps } = this.props
-
     return this.props.children
   }
 }
@@ -41,9 +47,9 @@ export default class LookRoot extends Component {
  * it listens for changes of the global style container
  */
 class StyleComponent {
-  constructor(userAgent, styleElementId) {
-    this.styles = StyleContainer.renderStaticStyles(userAgent) // eslint-disable-line
-    this.updateStyles = this.updateStyles.bind(this, userAgent)
+  constructor(styleElementId, prefixer) {
+    this.styles = StyleContainer.renderStaticStyles(prefixer) // eslint-disable-line
+    this.updateStyles = this.updateStyles.bind(this, prefixer)
 
     this._changeListener = StyleContainer.subscribe(this.updateStyles)
     this.el = this.createStyleElement(styleElementId)
@@ -63,8 +69,8 @@ class StyleComponent {
     return style
   }
 
-  updateStyles(userAgent) {
-    const newStyles = StyleContainer.renderStaticStyles(userAgent)
+  updateStyles(prefixer) {
+    const newStyles = StyleContainer.renderStaticStyles(prefixer)
     // only render if something changed
     if (this.styles !== newStyles) {
       this.styles = newStyles
@@ -73,6 +79,6 @@ class StyleComponent {
   }
 
   render() {
-    this.el.innerHTML = this.styles
+    this.el.innerText = this.styles
   }
 }

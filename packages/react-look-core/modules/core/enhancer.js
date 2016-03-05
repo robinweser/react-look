@@ -1,5 +1,5 @@
 import copyProperties from '../utils/copyProperties'
-import { Component, PropTypes } from 'react'
+import { PropTypes } from 'react'
 import _ from 'lodash'
 
 const contextType = { _lookConfig: PropTypes.object }

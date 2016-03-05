@@ -4,7 +4,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import App from './app.jsx'
 import fs from 'fs'
-import { Presets, LookRoot } from '../modules'
+import { Presets, LookRoot, StyleSheet } from '../modules'
 
 const indexHTML = fs.readFileSync(__dirname + '/index.html').toString()
 const app = express()
@@ -25,7 +25,9 @@ app.get('/', (req, res) => {
     </LookRoot>
   )
 
-  res.write(indexHTML.replace('<!-- {{app}} -->', appHtml))
+  const appCSS = StyleSheet.renderToString(serverConfig.prefixer)
+
+  res.write(indexHTML.replace('<!-- {{app}} -->', appHtml).replace('<!-- {{css}} -->', appCSS))
   res.end()
 })
 

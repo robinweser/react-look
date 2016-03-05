@@ -20,7 +20,7 @@ Contains all other (dynamic) styles mapped to a specific selector
 * [add](#addselector-styles--media)
 * [addKeyframes](#addkeyframesanimation-frames)
 * [addFont](#addfontfont)
-* [renderStaticStyles](#renderstaticstylesuseragent)
+* [renderStaticStyles](#renderstaticstylesprefixer)
 * [generateClassName](#generateclassnamestyles)
 * [requestClassName](#requestclassname--prefix)
 * [subscribe](#subscribelistener)
@@ -31,8 +31,8 @@ Adds a `selector => styles` mapping to the **selectors**. Optionally accepts a v
 Adds a `animation => frames` mapping to the **keyframes**.
 ### `addFont(font)`
 Adds a static `font`-face string to the **fonts**.
-### `renderStaticStyles(userAgent)`
-Renders the whole mappings into a single static CSS string. It takes a `userAgent` used to prefix the styles and the `@keyrames` prefix.
+### `renderStaticStyles(prefixer)`
+Renders the whole mappings into a single static CSS string. It optionally takes a `prefixer` (which must inherit [Prefixer](./Prefixer.md)) used to prefix the styles and the `@keyrames` prefix.
 ### `generateClassName(styles)`
 Sorts your `styles`, stringifies them and generates a hash code which is returned as a `className`. This prevents dublication.
 ### `requestClassName([prefix])`
