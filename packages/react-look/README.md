@@ -54,7 +54,7 @@ Make sure to check out the the Getting Started guide which provides a full guide
 		* [combineStyles](docs/api/StyleSheet.md#combinestylesstyles)
 		* [toCSS](docs/api/StyleSheet.md#tocssstyles--scope) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/deprecated-badge.png" height=15>
 		* [addCSS](docs/api/StyleSheet.md#addcssstyles--scope)
-		* [renderToString](docs/api/StyleSheet.md#rendertostring--prefixer)
+		* [renderToString](docs/api/StyleSheet.md#rendertostringprefixer)
 		* [keyframes](docs/api/StyleSheet.md#keyframesframes--name)
 		* [font](docs/api/StyleSheet.md#fontfontfamily-files--properties)
 	* **2.3. [LookRoot](docs/api/LookRoot.md)**
