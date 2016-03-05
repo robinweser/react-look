@@ -35,7 +35,6 @@ If there's still something I forgot please let me know and don't be shy to ask. 
 	* **3.1. [Plugins](Plugins.md)**
       * [Fallback Value](plugins/FallbackValue.md)
       * [Mixin](plugins/Mixin.md)
-      * [Prefixer](plugins/Prefixer.md)
       * [Stateful Value](plugins/StatefulValue.md)
       * [Stateful Selector](plugins/StatefulSelector.md)
   * **3.1.1 [DevTools](Plugins.md#developertools)**
@@ -49,6 +48,9 @@ If there's still something I forgot please let me know and don't be shy to ask. 
       * [Platform Queries](Mixins.md#platform-queries)
       * [Stateful Conditions](Mixins.md#stateful-conditions)
       * [Substr](Mixins.md#substr)
+	* **3.3. [Prefixer](Prefixer.md)**
+      * [StaticPrefixer](prefixer/StaticPrefixer.md)
+      * [DynamicPrefixer](prefixer/DynamicPrefixer.md)
 4. [Guides](guides/)
 	* 4.1. [Upgrading Look](guides/upgradeLook.md)
 	* 4.2. [Configuring Look](guides/configureLook.md)

@@ -4,8 +4,6 @@ const { condition, contains, extend } = CoreMixins
 const { equal, unEqual, greater, less, greaterThan, lessThan } = condition
 
 // Plugins
-import prefixer from './plugins/prefixer'
-import staticPrefixer from './plugins/staticPrefixer'
 import fallbackValue from './plugins/fallbackValue'
 
 // Dev tools
@@ -20,6 +18,12 @@ import platformQuery from './mixins/platformQuery'
 // Presets
 import domPreset from './presets/react-dom'
 
+// Prefixer
+import DynamicPrefixer from './prefixer/DynamicPrefixer'
+import StaticPrefixer from './prefixer/StaticPrefixer'
+
+// API
+import Prefixer from './api/Prefixer'
 import StyleSheet from './api/StyleSheet'
 import LookRoot from './api/LookRoot'
 
@@ -42,8 +46,6 @@ const Plugins = {
   fallbackValue,
   statefulValue,
   statefulSelector,
-  prefixer,
-  staticPrefixer,
   styleLogger,
   linter,
   friendlyClassName
@@ -73,6 +75,10 @@ const Presets = {
 export {
   StyleSheet,
   LookRoot,
+  Prefixer,
+
+  DynamicPrefixer,
+  StaticPrefixer,
 
   Plugins,
   Mixins,

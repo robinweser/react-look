@@ -5,7 +5,7 @@ A helper to create scoped styles and global CSS styles.
 - [combineStyles](#combinestylesstyles)
 - [toCSS](#tocssstyles--scope) <img src="../../../../res/deprecated-badge.png" height=15>
 - [addCSS](#addcssstyles--scope)
-- [renderToString](#rendertostring--useragent)
+- [renderToString](#rendertostring--prefixer)
 - [keyframes](#keyframesframes--name)
 - [font](#fontfontfamily-files--properties)
 
@@ -110,9 +110,9 @@ This also accepts a css `string`. When using it with a `string`, the scope will 
 ```javascript
 StyleSheet.addCSS("#myId { color: red } .myClass { color: green }")
 ```
-## `renderToString([userAgent])`
+## `renderToString([prefixer])`
 Similar to `react-dom/server`'s `renderToString` it returns a static string containing all static styles in form of a CSS string.
-Optionally pass a `userAgent` which is used to prefix styles before rendering.
+Optionally pass `prefixer` (which must inherit [Prefixer](./Prefixer.md)) to prefix your styles and `@keyframes`.
 ```javascript
 // add some static css
 StyleSheet.addCSS({

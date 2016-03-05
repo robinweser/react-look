@@ -57,7 +57,8 @@ export default function resolveStyles(Component, element, config) {
 
           // Only apply styles if there are some
           if (!_.isEmpty(newStyles)) {
-            const dynamicClassName = renderStaticStyles(newStyles, className + '-dynamic-')
+            const prefixedNewStyles = config.prefixer.prefix(newStyles)
+            const dynamicClassName = renderStaticStyles(prefixedNewStyles, className + '-dynamic-')
             extractCSS({ value: dynamicClassName, newProps })
             newProps._lookShouldUpdate = true
           }

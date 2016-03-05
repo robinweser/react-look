@@ -23,17 +23,3 @@ const plugin = ({ styles, newProps }) => {
 	return styles
 }
 ```
-
-## Example
-Let's say we want to recreate the [prefixer](../plugins/Prefixer.md) which uses [caniuse.com](caniuse.com) data and `userAgent` parsing to detect browser information to prefix styles.
-```javascript
-import Prefixer from 'inline-style-prefixer'
-
-// first we create a new prefixer instance
-// if no userAgent is passed it uses navigator.userAgent
-const plugin = ({ styles, config }) => {
-	const prefixer = new Prefixer(config.userAgent)
-
-	return prefixer.prefix(styles)
-}
-```

@@ -301,24 +301,57 @@ which is similar to the following CSS code:
 }
 ```
 ## 8. Vendor prefixes
-`Presets['react-dom']` also automatically includes the [Prefixer](../plugins/Prefixer.md) plugin which uses [inline-style-prefixer](https://github.com/rofrischmann/inline-style-prefixer) to add only prefixes that are actually required. It uses data provided by [caniuse.com](caniuse.com) and evaluates the `userAgent` for browser information.
+`Presets['react-dom']` also automatically includes the [StaticPrefixer](../prefixer/StaticPrefixer.md) which uses [inline-style-prefix-all](https://github.com/rofrischmann/inline-style-prefix-all) to add all vendor-prefixes automatically.
 
+You could also use the [DynamicPrefixer](../prefixer/DynamicPrefixer.md) to add only prefixes that are actually required. It uses data provided by [caniuse.com](caniuse.com) and evaluates the `userAgent` for browser information.
+
+In generally to add a prefixer you will need to use the `prefixer` key of your config object and create a new prefixer instance.
+```javascript
+import { DynamicPrefixer, Presets } from 'react-look'
+
+const config = Presets['react-dom']
+config.prefixer = new DynamicPrefixer({userAgent: navigator.userAgent})
+```
 ## 9. Server-side rendering
 Look also fully supports server-side rendering with minimal additional configuration.<br>
-You basically just need to pass the users `userAgent` with the `LookRoot` config to be able to prefix correctly. This is most likely done directly within the request. <br>
-e.g. [universal example](../../demo/server.js) (`npm run demo:universal`) using an [express](http://expressjs.com/) server:
+You basically prerender your static HTML string as well as your static CSS styles. This is most likely done directly within the request.<br>
+e.g. [universal example](../../demo/server.js) (`npm run demo:universal`) using an [express](http://expressjs.com/) server.
+##### index.html
+```HTML
+<html>
+  <head>
+    <style id="_look"><!-- {{css}} --></style>
+  </head>
+
+  <body>
+    <div id="app"><!-- {{html}} --></div>
+  </body>
+</html>
+```
+
+##### server.js
 ```javascript
+import { Presets, StyleSheet, LookRoot } from 'react-look'
 const serverConfig = Presets['react-dom']
 
 app.get('/', (req, res) => {
 	// Takes the userAgent directly form the request
   serverConfig.userAgent = req.headers['user-agent']
+  // We also want to use the same <style>-tag for dynamic styles
+  serverConfig.styleElementId = '_look'
 
-  const content = renderToString(
-    <App lookConfig={serverConfig} />
+  // Renders the HTML markup into a string
+  const appHTML = renderToString(
+    <LookRoot config={serverConfig}>
+      <App />
+    </LookRoot>
   )
+  // Renders the static CSS styles into a string
+  // Uses the preset prefixer to add vendor-prefixes to it
+  const appCSS = StyleSheet.renderToString(serverConfig.prefixer)
 
-  res.write(indexHTML.replace('<!-- {{app}} -->', content))
+  // Replace html, css placeholder from your index.html
+  res.write(indexHTML.replace('<!-- {{html}} -->', appHTML).replace('<-- {{css}} -->'))
   res.end()
 })
 ```

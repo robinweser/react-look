@@ -3,26 +3,9 @@ import { toCSS } from 'inline-style-transformer'
 import { Utils } from 'react-look-core'
 const { sortObject } = Utils
 
+import Prefixer from './Prefixer'
 import generateHashCode from '../utils/generateHashCode'
-import prefixer from '../utils/prefixer'
 
-/**
- * Abstract helper to add new styles to a Map/Set
- * @param {StyleContainer} container - current style container instance
- * @param {Map|Set} group - group that styles get added to
- * @param {string} selector - CSS selector thats used as reference
- * @param {Object} styles - styles that get added
- */
-function addAndEmit(container, group, selector, styles) {
-  if (!group.has(selector)) {
-    if (styles !== undefined) {
-      group.set(selector, styles)
-    } else {
-      group.add(selector)
-    }
-    container._emitChange()
-  }
-}
 
 /**
  * A StyleContainer collects className mappings
@@ -52,16 +35,8 @@ class StyleContainer {
     if (media && media !== '') {
       this._addMediaQuery(selector, styles, media)
     } else {
-      addAndEmit(this, this.selectors, selector, styles)
+      this._addAndEmit(this.selectors, selector, styles)
     }
-  }
-
-  /**
-   * Adds a static css string
-   * @param {string} styles - as css string
-   */
-  addStatic(styles) {
-    addAndEmit(this, this.statics, styles)
   }
 
   /**
@@ -70,7 +45,7 @@ class StyleContainer {
    * @param {Object} frames - animation frames that get added
    */
   addKeyframes(animation, frames) {
-    addAndEmit(this, this.keyframes, animation, frames)
+    this._addAndEmit(this.keyframes, animation, frames)
   }
 
   /**
@@ -79,25 +54,37 @@ class StyleContainer {
    */
   addFont(font) {
     const fontFace = '@font-face {' + toCSS(font) + '}'
-    addAndEmit(this, this.fonts, fontFace)
+    this._addAndEmit(this.fonts, fontFace)
+  }
+
+  /**
+   * Adds a static css string
+   * @param {string} styles - as css string
+   */
+  addStatic(styles) {
+    this._addAndEmit(this.statics, styles)
   }
 
   /**
    * Renders a single string containing the whole CSS styles
-   * @param {string} userAgent - userAgent used to prefix styles
+   * @param {Prefixer} prefixer - valid Look Prefixer to prefix styles
    */
-  renderStaticStyles(userAgent) {
-    const tempPrefixer = prefixer(userAgent)
+  renderStaticStyles(prefixer = new Prefixer()) {
     let css = ''
 
-    this.statics.forEach(staticStyles => css += staticStyles)
-    this.selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}')
     this.fonts.forEach(font => css += font)
-    this.keyframes.forEach((frames, name) => css += '@' + tempPrefixer.prefixedKeyframes + ' ' + name + '{' + toCSS(tempPrefixer.prefix(frames)) + '}')
+    this.statics.forEach(staticStyles => css += staticStyles)
+    this.selectors.forEach((styles, selector) => css += selector + this._renderCSS(prefixer, styles))
     this.mediaQueries.forEach((selectors, query) => {
       css += '@media' + query + '{'
-      selectors.forEach((styles, selector) => css += selector + '{' + toCSS(tempPrefixer.prefix(styles)) + '}')
+      selectors.forEach((styles, selector) => css += selector + this._renderCSS(prefixer, styles))
       css += '}'
+    })
+    this.keyframes.forEach((frames, name) => {
+      css += prefixer.getKeyframesPrefix().reduce((keyframes, prefix) => {
+        keyframes += '@' + prefix + 'keyframes ' + name + this._renderCSS(prefixer, frames)
+        return keyframes
+      }, '')
     })
 
     return css
@@ -148,7 +135,7 @@ class StyleContainer {
    */
   _addDynamic(className, styles) {
     if (!_.isEmpty(styles)) {
-      addAndEmit(this, this.dynamics, className, styles)
+      this._addAndEmit(this.dynamics, className, styles)
     }
   }
 
@@ -165,10 +152,29 @@ class StyleContainer {
     }
 
     const mediaQuery = this.mediaQueries.get(media)
-    addAndEmit(this, mediaQuery, selector, styles)
+    this._addAndEmit(mediaQuery, selector, styles)
   }
 
+  /**
+   * Abstract helper to add new styles to a Map/Set
+   * @param {Map|Set} group - group that styles get added to
+   * @param {string} selector - CSS selector thats used as reference
+   * @param {Object} styles - styles that get added
+   */
+  _addAndEmit(group, selector, styles) {
+    if (!group.has(selector)) {
+      if (styles !== undefined) {
+        group.set(selector, styles)
+      } else {
+        group.add(selector)
+      }
+      this._emitChange()
+    }
+  }
+
+  _renderCSS(prefixer, styles) {
+    return '{' + toCSS(prefixer.prefix(_.merge({ }, styles))) + '}'
+  }
 }
 
-// We export a global StyleContainer instance
 export default new StyleContainer()

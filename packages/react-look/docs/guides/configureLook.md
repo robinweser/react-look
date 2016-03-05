@@ -1,5 +1,5 @@
 # Configuring Look
-Look itself ships as a higher order function that just resolves basic styles. To be able to use plugins, mixins and devTools you need to pass some configuration.
+Look itself ships as a higher order function that just resolves basic styles. To be able to use plugins, mixins, prefixer and devTools you need to pass some configuration.
 
 Basically you will set an array of plugins which will perform in the exact same order as specified.
 Plugins might also require some special settings within your config object.
@@ -8,16 +8,19 @@ e.g. the **Mixin**-Plugin which lets you define custom style properties uses the
 
 ### Example
 ```javascript
-import { Mixins, Plugins } from 'react-look'
+import { Mixins, Plugins, StaticPrefixer } from 'react-look'
 
 const customConfig = {
 	// a list of used plugins ordered by
 	// execution order
 	plugins: [
 		Plugins.mixin,
-		Plugins.fallbackValue,
-		Plugins.prefixer
+		Plugins.fallbackValue
 	],
+
+  // special prefixer key to pass an instance
+  // of a valid style prefixer
+  prefixer: new StaticPrefixer(),
 
 	// any special setting used by plugins
 	// e.g. mixin definitions or a userAgent
@@ -26,10 +29,19 @@ const customConfig = {
 		'substr': Mixins.sbustr,
 		'@platform': Mixins.platformQuery
 	},
+
+  // to you @platform you need to pass a userAgent
 	userAgent: 'Mozilla/5.0 ...'
 }
 ```
-
+### Common config keys
+| key | default | description |
+|-----|--|------------|
+|plugins|`[]` |An array of plugins to transform your styles |
+|mixins|`{}`|Mixin definitions to add new style properties|
+|prefixer|[Prefixer](../api/Prefixer.md)|Adding vendor-prefixes with a valid prefixer instance|
+|userAgent|`navigator.userAgent`|used to validate [platform queries](../Mixins.md#platformqueries)
+|styleElementId|`_react-look-stylesheet`| The `id` of a special `<style>`-tag to add all the CSS styles
 ### Presets
 Right now there's just one global preset:
 
