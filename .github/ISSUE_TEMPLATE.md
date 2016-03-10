@@ -33,7 +33,10 @@ Please try to add as much detail as possible.
   FEATURE REQUEST ONLY
   ====================
 -->
-**Proposal (Code Example)** 
+#### Proposal
+Any information on how this might be achieved.
+
+**Code Example**:
 ```javascript
 // your proposal here
 ```
