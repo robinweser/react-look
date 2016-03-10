@@ -1,15 +1,15 @@
-<!----------------------------------------
+<!------------------------------------------
   Thanks for contributing!
-  Please read the guide-line at the bottom.
------------------------------------------>
+  Please read the guide-lines at the bottom.
+------------------------------------------->
 
 **Version**: 1.0.0 (beta5)
 **Environment**: React / React Native / Both
-**Type**: Bug / Feature Request
+**Type**: Bug / Feature / Infrastructure / Docs / General
 
 -------------------
 #### Description
-Your bug report / feature request here.
+Please try to add as much detail as possible.
 
 <!-- 
   BUG REPORT ONLY 
