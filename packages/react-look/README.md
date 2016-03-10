@@ -167,6 +167,7 @@ Check out the provided examples for some special use cases. See them in action u
 
 ```sh
 git clone --bare https://github.com/rofrischmann/react-look.git
+cd react-look
 npm install
 # run this to actually prepare the modules
 npm run build
