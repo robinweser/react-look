@@ -11,13 +11,17 @@ Advanced & Dynamic Component Styling for <a href="https://facebook.github.io/rea
 # Packages
 Wondering where all the content was going to? Look was restructured into single packages as support for React Native was added. Having single packages and some common files that are shared by both helps to keep the code & documentation clean while still having the ability to manage issues/feature requests for both packages in a single repository.
 
-### [react-look](packages/react-look)
+## [react-look](packages/react-look)
 This package targets `react-dom`. Working with the web this is the package you need to use. It supports both client-side and server-side rendering. It uses CSS under the hood which allows us to use pseudo classes and media queries by default.
 
-### [react-look-native](packages/react-look-native)
+##### [react-look-test-utils](packages/react-look-test-utils)
+This package contains several test utilities for react-look. It does not provide any React Native tests right now.
+
+## [react-look-native](packages/react-look-native)
 This package targets `react-native`. With no CSS support this package uses a different way to achieve the benefits of dynamic Component styling.
 
-## Universal API
+
+# Universal API
 While the core modules and styling mechanism of both packages are totally different, we still try to achieve an universal API. Both use the exact same API except for the package-names.
 >If you've already learned to use one, you can use the other one without additional effort.
 

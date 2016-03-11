@@ -5,9 +5,11 @@
 Advanced & Dynamic Component Styling for <a href="https://facebook.github.io/react-native/">React Native</a>.
 <br>
 <img alt="npm version" src="https://badge.fury.io/js/react-look-native.svg">
+<img alt="npm downloads" src="https://img.shields.io/npm/dm/react-look-native.svg">
 <img alt="react version" src="https://img.shields.io/badge/react--native-%5E0.18.0-brightgreen.svg">
 </p>
 <p align="center">
+<a href="./docs/Docs.md">Docs</a> • <a href="./docs/GettingStarted.md">Getting Started</a><br>
 Also available for <a href="../react-look/">React</a>.
 </p>
 
