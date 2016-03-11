@@ -7,7 +7,8 @@
         "README.md",
         "LICENSE",
         "lib/",
-        "docs/"
+        "docs/",
+        "dist/"
     ],
     "repository": "https://github.com/rofrischmann/react-look",
     "author": "Robin Frischmann <robin@rofrischmann.de>",
