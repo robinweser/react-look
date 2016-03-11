@@ -33,6 +33,11 @@ var conf = {
       commonjs2: 'inline-style-linter',
       commonjs: 'inline-style-linter',
       amd: 'inline-style-linter'
+    },
+    'inline-style-prefixer': {
+      commonjs2: 'inline-style-prefixer',
+      commonjs: 'inline-style-prefixer',
+      amd: 'inline-style-prefixer'
     }
   },
   output: {
