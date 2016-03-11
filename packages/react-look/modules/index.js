@@ -28,8 +28,8 @@ import StyleSheet from './api/StyleSheet'
 import LookRoot from './api/LookRoot'
 
 // Private API
-import StyleContainer from './api/StyleContainer'
-import resolver from './core/resolver'
+import _StyleContainer from './api/StyleContainer'
+import _resolver from './core/resolver'
 
 // Resolving annotations
 // If not passing arguments it just wraps the Component

@@ -28,6 +28,11 @@ var conf = {
       commonjs2: 'react',
       commonjs: 'react',
       amd: 'react'
+    },
+    'inline-style-linter': {
+      commonjs2: 'inline-style-linter',
+      commonjs: 'inline-style-linter',
+      amd: 'inline-style-linter'
     }
   },
   output: {

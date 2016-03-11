@@ -25,5 +25,3 @@ npm-debug.log
 lib/
 demo/bundle.js
 coverage
-addons/
-dist/
