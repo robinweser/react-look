@@ -39,6 +39,11 @@ function updateVersion(pkg) {
         packageJSON.dependencies['react-look-core'] = '^' + globalVersion
       }
 
+      // Update react-look dependency version
+      if (pkg === 'react-look-test-utils') {
+        packageJSON.dependencies['react-look'] = '^' + globalVersion
+      }
+
       const newPackageJSON = JSON.stringify(packageJSON, null, 4)
 
       fs.writeFile(__dirname + '/../packages/' + pkg + '/package.json', newPackageJSON, err => {
@@ -58,3 +63,4 @@ function preparePackage(pkg) {
 preparePackage('react-look-core')
 preparePackage('react-look')
 preparePackage('react-look-native')
+preparePackage('react-look-test-utils')

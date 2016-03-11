@@ -27,6 +27,10 @@ import Prefixer from './api/Prefixer'
 import StyleSheet from './api/StyleSheet'
 import LookRoot from './api/LookRoot'
 
+// Private API
+import StyleContainer from './api/StyleContainer'
+import resolver from './core/resolver'
+
 // Resolving annotations
 // If not passing arguments it just wraps the Component
 // Otherwise it returns a decorator
@@ -76,6 +80,10 @@ export {
   StyleSheet,
   LookRoot,
   Prefixer,
+
+  // private export for testing only
+  _StyleContainer,
+  _resolver,
 
   DynamicPrefixer,
   StaticPrefixer,
