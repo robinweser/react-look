@@ -6,6 +6,7 @@ Advanced & Dynamic Component Styling for <a href="https://facebook.github.io/rea
 <img alt="npm version" src="https://badge.fury.io/js/react-look.svg">
 <img alt="npm downloads" src="https://img.shields.io/npm/dm/react-look.svg">
 <img alt="react version" src="https://img.shields.io/badge/react--dom-%5E0.14.0-brightgreen.svg">
+<img alt="gzipped size" src="https://img.shields.io/badge/gzipped-~17kb-brightgreen.svg">
 </p>
 <p align="center">
 <a href="./docs/Docs.md">Docs</a> • <a href="./docs/GettingStarted.md">Getting Started</a> • <a href="#example">Example</a><br>

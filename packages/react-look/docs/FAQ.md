@@ -3,7 +3,8 @@ The FAQ should help people with common tasks. Look allows you to do a lot of thi
 
 ## Table of content
 1. [Can I still use CSS syntax?](#1-css-syntax)
-2. [Can I use a custom `<style>`-element](#2-custom-style-element)
+2. [Can I use a custom `<style>`-element?](#2-custom-style-element)
+3. [How to get a smaller production bundle?](#3-small-production-bundle-size)
 
 ## 1. CSS Syntax
 Some of you might prefer the good old CSS syntax with dash-cased property names and string-by-default values.
@@ -45,3 +46,8 @@ render(
   document.getElementById('app')
 )
 ```
+
+## 3. Small production bundle size
+You might have noticed that the [README](../) shows Look only sizes ~17kb in total *(gzipped)* but your production build actually contains a lot more bytes.
+
+Look exports every plugin, including devTools and two prefixer. Especially the [Linter](plugins/Linter.md) and the [Dynamic Prefixer](prefixer/DynamicPrefixer.md) add up almost 100kb of file size. If you're not using them (you shouldn't use devTools in production anyways) try to exclude them from your build.
