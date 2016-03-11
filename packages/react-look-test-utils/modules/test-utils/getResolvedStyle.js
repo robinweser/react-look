@@ -13,14 +13,14 @@ const addResolver = config => _.merge({ }, config, {
  * @param {Object} config - configuration containing plugins and plugin-specific configs
  */
 export default function getResolvedStyle(element, Component = { }, config = { }) {
-  const newElement = resolveStyles(Component, element, addResolver(config))
+  const newElement = _resolver(Component, element, addResolver(config))
 
   if (newElement.props && newElement.props.className) {
-    return newProps.className.split(' ').reduce((styles, className) => {
-      const staticStyles = StyleContainer.selectors.get(className)
+    return element.props.className.split(' ').reduce((styles, className) => {
+      const staticStyles = _StyleContainer.selectors.get(className)
       let mediaStyles = { }
 
-      StyleContainer.mediaQueries.forEach((selectors, query) => {
+      _StyleContainer.mediaQueries.forEach(selectors => {
         mediaStyles = assignStyles(mediaStyles, selectors.get(className))
       })
 

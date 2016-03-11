@@ -7,11 +7,11 @@ import assignStyles from 'assign-styles'
  */
 export default function getStaticStyle(element) {
   if (element.props && element.props.className) {
-    return newProps.className.split(' ').reduce((styles, className) => {
-      const staticStyles = StyleContainer.selectors.get(className)
+    return element.props.className.split(' ').reduce((styles, className) => {
+      const staticStyles = _StyleContainer.selectors.get(className)
       let mediaStyles = { }
 
-      StyleContainer.mediaQueries.forEach((selectors, query) => {
+      _StyleContainer.mediaQueries.forEach(selectors => {
         mediaStyles = assignStyles(mediaStyles, selectors.get(className))
       })
 
