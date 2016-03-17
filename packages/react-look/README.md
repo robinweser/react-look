@@ -1,8 +1,5 @@
-<p align="center"><img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/logo.png" width=320></p>
+<h1 align="center">react-look</h1>
 <p align="center">
-Advanced & Dynamic Component Styling for <a href="https://facebook.github.io/react/">React</a>.
-<br>
-
 <img alt="npm version" src="https://badge.fury.io/js/react-look.svg">
 <img alt="npm downloads" src="https://img.shields.io/npm/dm/react-look.svg">
 <img alt="react version" src="https://img.shields.io/badge/react--dom-%5E0.14.0-brightgreen.svg">
@@ -10,7 +7,7 @@ Advanced & Dynamic Component Styling for <a href="https://facebook.github.io/rea
 </p>
 <p align="center">
 <a href="./docs/Docs.md">Docs</a> • <a href="./docs/GettingStarted.md">Getting Started</a> • <a href="#example">Example</a><br>
-Also available for <a href="../react-look-native/">React Native</a>.
+Also available for <a href="../react-look-native/">React Native</a>
 </p>
 
 # Features

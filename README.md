@@ -14,8 +14,8 @@ Wondering where all the content was going to? Look was restructured into single 
 ## [react-look](packages/react-look)
 This package targets `react-dom`. Working with the web this is the package you need to use. It supports both client-side and server-side rendering. It uses CSS under the hood which allows us to use pseudo classes and media queries by default.
 
-##### [react-look-test-utils](packages/react-look-test-utils)
-This package contains several test utilities for react-look. It does not provide any React Native tests right now.
+#### [react-look-test-utils](packages/react-look-test-utils)
+This package contains several test utilities for react-look.
 
 ## [react-look-native](packages/react-look-native)
 This package targets `react-native`. With no CSS support this package uses a different way to achieve the benefits of dynamic Component styling.

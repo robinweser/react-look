@@ -1,6 +1,5 @@
-<p align="center"><img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/logo.png" width=320></p>
+<h1 align="center">react-look-core</h1>
 
-# react-look-core
 This package contains core modules used by both react-look packages.
 > It is not considered to be used independently.
 
