@@ -22,6 +22,6 @@ export default function getStaticStyle(element, mediaConfig, pseudoClass) {
     const mediaStyles = getMediaStyle(element, mediaConfig)
     const pseudoStyles = getPseudoStyle(element, pseudoClass)
 
-    return assignStyles({ }, selectorStyles, mediaStyles)
+    return assignStyles({ }, selectorStyles, mediaStyles, pseudoStyles)
   }
 }

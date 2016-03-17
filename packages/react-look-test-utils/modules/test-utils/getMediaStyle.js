@@ -1,6 +1,6 @@
 import { _StyleContainer } from 'react-look'
 import assignStyles from 'assign-styles'
-var matchMediaMock = require('match-media-mock').create()
+const matchMediaMock = require('match-media-mock').create()
 
 /**
  * Returns all static styles applied to an element

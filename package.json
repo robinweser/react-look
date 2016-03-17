@@ -16,7 +16,8 @@
     "release": "npm run prerelease && ./scripts/releasePackages.sh",
     "test": "istanbul cover _mocha -- packages/react-look-core/test packages/react-look/test packages/react-look-native/test packages/react-look-test-utils/test --opts test/mocha.opts",
     "umd": "NODE_ENV=development webpack packages/react-look/modules/index.js packages/react-look/dist/react-look.js",
-    "umd:min": "NODE_ENV=production webpack packages/react-look/modules/index.js packages/react-look/dist/react-look.min.js"
+    "umd:min": "NODE_ENV=production webpack packages/react-look/modules/index.js packages/react-look/dist/react-look.min.js",
+    "validate": "npm run lint && npm test"
   },
   "devDependencies": {
     "assign-styles": "^2.0.0",

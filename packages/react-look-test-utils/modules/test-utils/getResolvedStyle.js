@@ -1,5 +1,4 @@
-import { _StyleContainer, _resolver } from 'react-look'
-import assignStyles from 'assign-styles'
+import { _resolver } from 'react-look'
 import _ from 'lodash'
 
 import getStaticStyle from './getStaticStyle'
