@@ -2,6 +2,8 @@ import { _StyleContainer, _resolver } from 'react-look'
 import assignStyles from 'assign-styles'
 import _ from 'lodash'
 
+import getStaticStyle from './getStaticStyle'
+
 const addResolver = config => _.merge({ }, config, {
   _resolveStyles: _resolver
 })
@@ -11,26 +13,21 @@ const addResolver = config => _.merge({ }, config, {
  * @param {Object} element - React element to extract styles from
  * @param {Object} Component - wrapping React Component providing styles and elements
  * @param {Object} config - configuration containing plugins and plugin-specific configs
+ * @param {Object} mediaConfig - media environment configuration
+ * @param {string|string[]} pseudoClass - environment configuration including media and pseudo config
  */
-export default function getResolvedStyle(element, Component = { }, config = { }) {
+export default function getResolvedStyle(element, Component, config, mediaConfig, pseudoClass) {
+  // resolve styles to generate new classNames for dynamic styles
   const newElement = _resolver(Component, element, addResolver(config))
 
   if (newElement.props && newElement.props.className) {
-    return element.props.className.split(' ').reduce((styles, className) => {
-      const staticStyles = _StyleContainer.selectors.get(className)
-      let mediaStyles = { }
+    let styles = getStaticStyle(newElement, mediaConfig, pseudoClass)
 
-      _StyleContainer.mediaQueries.forEach(selectors => {
-        mediaStyles = assignStyles(mediaStyles, selectors.get(className))
-      })
+    // prefix styles if a prefixer is provided
+    if (config.prefixer) {
+      styles = config.prefixer.prefix(styles)
+    }
 
-      styles = assignStyles(styles, staticStyles, mediaStyles)
-
-      if (config.prefixer) {
-        styles = config.prefixer.prefix(styles)
-      }
-
-      return styles
-    }, { })
+    return styles
   }
 }
