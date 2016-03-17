@@ -4,6 +4,7 @@ import StyleContainer from '../api/StyleContainer'
 import sortPseudoClasses from '../utils/sortPseudoClasses'
 import isMediaQuery from '../utils/isMediaQuery'
 import isPseudo from '../utils/isPseudo'
+import isDynamicArray from '../utils/isDynamicArray'
 
 /**
  * Extracts all possible dynamic styles out of a style object
@@ -45,7 +46,7 @@ export function extractDynamicStyles(styles) {
 
     // function are considered stateful styles and therefore
     // treated as dynamic styles
-    if (_.isFunction(value) || _.isBoolean(value)) {
+    if (_.isFunction(value) || _.isBoolean(value) || (_.isArray(value) && isDynamicArray(value))) {
       dynamic[property] = value
       delete styles[property]
     }

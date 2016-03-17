@@ -16,7 +16,7 @@ export function extractDynamicStyles(styles) {
     const value = styles[property]; // eslint-disable-line
     // plain objects, functions and booleans are considered
     // dynamic styles which get extracted
-    if (_.isPlainObject(value) || _.isFunction(value) || _.isBoolean(value)) {
+    if (!_.isString(value) && !_.isNumber(value)) {
       dynamic[property] = value
       delete styles[property]
     }

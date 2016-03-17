@@ -34,6 +34,19 @@ describe('Extracting dynamic styles', () => {
     expect(extractDynamicStyles(input)).to.eql(output)
   })
 
+  it('should validate array values', () => {
+    const dynamicArray = [ {color: 'blue'}, 12 ]
+
+    const input = {
+      backgroundColor: 'red',
+      width: 12,
+      extend: dynamicArray
+    }
+    expect(extractDynamicStyles(input)).to.eql({
+      extend: dynamicArray
+    })
+  })
+
   it('should remove a selector if containing only dynamic styles', () => {
     const styles = { ':hover': { color: props => props.color } }
     extractDynamicStyles(styles)
