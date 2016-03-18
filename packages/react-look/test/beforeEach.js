@@ -11,4 +11,11 @@ export function clearStyleContainer() {
   StyleContainer._className = 0
 }
 
+export function clearDOM() {
+  var jsdom = require('jsdom').jsdom
+  global.document = jsdom()
+  global.window = document.defaultView
+}
+
+beforeEach(clearDOM)
 beforeEach(clearStyleContainer)
