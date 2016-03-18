@@ -1,11 +1,11 @@
-import getDynamicStyle from './test-utils/getDynamicStyle'
-import getElementStyle from './test-utils/getElementStyle'
+import getMediaStyle from './test-utils/getMediaStyle'
+import getPseudoStyle from './test-utils/getPseudoStyle'
 import getStaticStyle from './test-utils/getStaticStyle'
 import getResolvedStyle from './test-utils/getResolvedStyle'
 
 export default {
-  getDynamicStyle,
-  getElementStyle,
+  getPseudoStyle,
+  getMediaStyle,
   getStaticStyle,
   getResolvedStyle
 }

@@ -41,7 +41,7 @@ function updateVersion(pkg) {
 
       // Update react-look dependency version
       if (pkg === 'react-look-test-utils') {
-        packageJSON.dependencies['react-look'] = '^' + globalVersion
+        packageJSON.peerDependencies['react-look'] = '^' + globalVersion
       }
 
       const newPackageJSON = JSON.stringify(packageJSON, null, 4)

@@ -1,6 +1,6 @@
 {
     "name": "react-look-test-utils",
-    "version": "1.0.0-beta6",
+    "version": "1.0.0-beta8",
     "description": "Test utilities for react-look",
     "main": "lib/index.js",
     "files": [
@@ -25,6 +25,6 @@
         "match-media-mock": "^0.1.0"
     },
     "peerDependencies": {
-        "react-look": "^1.0.0-beta6"
+        "react-look": "^1.0.0-beta7"
     }
 }

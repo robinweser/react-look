@@ -7,6 +7,7 @@ const addResolver = config => _.merge({ }, config, {
   _resolveStyles: _resolver
 })
 
+
 /**
  * Resolves element styles and returns an object containing those
  * @param {Object} element - React element to extract styles from

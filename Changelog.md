@@ -1,6 +1,11 @@
 # Changelog
 
 ## 1.0
+### 1.0.0-beta7 (18.03.16)
+
+* introducing [react-look-test-utils](https://github.com/rofrischmann/react-look/tree/develop/packages/react-look-test-utils)
+* fixed a bug preventing dynamic array values to render ( [#243](https://github.com/rofrischmann/react-look/issues/243) )
+
 ### 1.0.0-beta6 (05.03.16)
 #### API Changes
 * Added `StyleSheet.renderToString` to prerender your CSS for server-side rendering <img src="res/dom-badge.png" height=15>
