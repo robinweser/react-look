@@ -1,7 +1,7 @@
 import { Utils } from 'react-look-core'
 const { getChildType } = Utils
 
-const classNameTemplate = (Component, element, className) => {
+const classNameTemplate = (className, Component, element) => {
   return Component.constructor.displayName + '-' + getChildType(element) + '--' + className
 }
 
@@ -17,7 +17,7 @@ export default function friendlyClassNames({ StyleContainer, Component, element,
       if (classMapping.has(cls)) {
         className += className + className !== '' ? ' ' : '' + classMapping.get(cls)
       } else {
-        const newClass = classNameTemplate(Component, element, cls)
+        const newClass = classNameTemplate(cls, Component, element)
         let isLookClass = false
 
         // immutable selectors to iterate without changes
