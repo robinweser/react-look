@@ -351,7 +351,7 @@ app.get('/', (req, res) => {
   const appCSS = StyleSheet.renderToString(serverConfig.prefixer)
 
   // Replace html, css placeholder from your index.html
-  res.write(indexHTML.replace('<!-- {{html}} -->', appHTML).replace('<-- {{css}} -->'))
+  res.write(indexHTML.replace('<!-- {{html}} -->', appHTML).replace('<-- {{css}} -->', appCSS))
   res.end()
 })
 ```
