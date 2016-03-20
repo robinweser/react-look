@@ -7,7 +7,7 @@ const classNameTemplate = (className, Component, element) => {
 
 const classMapping = new Map()
 
-export default function friendlyClassNames({ StyleContainer, Component, element, newProps, styles }) {
+export default function friendlyClassNames({ StyleContainer, Component, element, newProps, styles, config }) {
   // Only transform if not already transformed and a className exists
   if (!newProps._hasFriendlyClassNames && newProps.className) {
     newProps.className = newProps.className.split(' ').reduce((className, cls) => {
@@ -17,7 +17,12 @@ export default function friendlyClassNames({ StyleContainer, Component, element,
       if (classMapping.has(cls)) {
         className += className + className !== '' ? ' ' : '' + classMapping.get(cls)
       } else {
-        const newClass = classNameTemplate(cls, Component, element)
+        let newClass
+        if (config && config.friendlyClassNameTemplate) {
+          newClass = config.friendlyClassNameTemplate(cls, Component, element)
+        } else {
+          newClass = classNameTemplate(cls, Component, element)
+        }
         let isLookClass = false
 
         // immutable selectors to iterate without changes
