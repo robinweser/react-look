@@ -5,7 +5,7 @@ import StyleSheet from '../../modules/api/StyleSheet'
 import StyleContainer from '../../modules/api/StyleContainer'
 
 describe('Transforming classNames to friendly class names', () => {
-  it('should use the Component-tag-className pattern', () => {
+  it('should use the className-Component-element pattern', () => {
 
     const styles = StyleSheet.create({
       box: {
