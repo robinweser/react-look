@@ -18,7 +18,6 @@ export default function friendlyClassNames({ StyleContainer, Component, element,
         className += className + className !== '' ? ' ' : '' + classMapping.get(cls)
       } else {
         let newClass
-        // checking if config is undefined to avoid breaking existing test
         if (config && config.friendlyClassNameTemplate) {
           newClass = config.friendlyClassNameTemplate(cls, Component, element)
         } else {
