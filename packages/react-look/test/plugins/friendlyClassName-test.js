@@ -23,6 +23,7 @@ describe('Transforming classNames to friendly class names', () => {
       Component,
       element,
       newProps,
+      config: {}
       styles: {}
     }
 
