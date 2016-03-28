@@ -13,6 +13,7 @@ As you most likely need some more information to evaluate properly, Look provide
 | StyleContainer | [*StyleContainer*](../api/StyleContainer.md) | global CSS container |
 | config | *object* | Look configuration |
 | styles | *object* | whole style object |
+| dynamicStylesNotNull | *boolean* | `true` when the current element has dynamic styles |
 
 #### `_lookShouldUpdate`
 Look also provides a special hook which can be used to force element cloning.
@@ -21,5 +22,25 @@ const plugin = ({ styles, newProps }) => {
 	// forces Look to clone the element
 	newProps._lookShouldUpdate = true
 	return styles
+}
+
+lookConfig = {
+  plugins: [plugin]
+}
+```
+
+## Force mode
+Can be used to get every resolving progress. (Normally you only them when dynamic styles are included)
+
+> Be very careful when using this!
+
+```javascript
+lookConfig = {
+  plugins: [
+    {
+      mode: 'force',
+      plugin: plugin
+    }
+  ]
 }
 ```
