@@ -11,10 +11,32 @@ export function resolvePlugins(pluginInterface) {
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
   config.plugins.forEach(plugin => {
-    styles = plugin({
-      ...pluginInterface,
-      styles
-    })
+    // If the plugin is a function it gets called when there are dynamic styles to resolve
+    if (plugin instanceof Function) {
+      if (pluginInterface.dynamicStylesNotNull) {
+        styles = plugin({
+          ...pluginInterface,
+          styles
+        })
+      }
+    } else {
+      // The plugin could also be an object containing `mode` and `plugin`
+      // Force mode calls the plugin every time when this function is called
+      if (plugin.mode === 'force') {
+        styles = plugin.plugin({
+          ...pluginInterface,
+          styles
+        })
+        return
+      }
+      // Default/fallback mode: Same as if the plugin would be a function
+      if (pluginInterface.dynamicStylesNotNull) {
+        styles = plugin.plugin({
+          ...pluginInterface,
+          styles
+        })
+      }
+    }
   })
 
   return styles

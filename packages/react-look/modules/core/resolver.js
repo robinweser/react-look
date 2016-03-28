@@ -47,11 +47,12 @@ export default function resolveStyles(Component, element, config) {
         const dynamicStyles = StyleContainer.dynamics.get(className)
         // Resolve plugins if there are dynamic styles to resolve
         // and plugins are provided via config
-        if (dynamicStyles && config.plugins) {
+        if (config.plugins) {
           // Constructs the pluginInterface
           const pluginInterface = {
             ...staticPluginArguments,
-            styles: assignStyles({ }, dynamicStyles)
+            styles: assignStyles({ }, dynamicStyles || {}),
+            dynamicStylesNotNull: dynamicStyles != null
           }
           const newStyles = resolvePlugins(pluginInterface)
 
