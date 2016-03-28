@@ -6,10 +6,20 @@ export default {
     }
   },
 
-  mockPlugin(pluginSpy) {
-    return ({ styles }) => {
-      pluginSpy()
-      return styles
+  mockPlugin(pluginSpy, mode) {
+    if (mode == null) {
+      return ({ styles }) => {
+        pluginSpy()
+        return styles
+      }
+    } else {
+      return {
+        mode: mode,
+        plugin: ({ styles }) => {
+          pluginSpy()
+          return styles
+        }
+      }
     }
   },
 
@@ -20,18 +30,18 @@ export default {
     }
   },
 
-  mockConfigWithPlugin(pluginSpy) {
-    return { plugins: [ this.mockPlugin(pluginSpy) ] }
+  mockConfigWithPlugin(pluginSpy, mode) {
+    return { plugins: [ this.mockPlugin(pluginSpy, mode) ] }
   },
 
-  mockPluginInterfaceWithPlugin(styles, pluginSpy) {
+  mockPluginInterfaceWithPlugin(styles, pluginSpy, mode) {
     return {
       styles: styles,
-      config: this.mockConfigWithPlugin(pluginSpy)
+      config: this.mockConfigWithPlugin(pluginSpy, mode)
     }
   },
 
-  mockPluginInterfaceWithConfig(styles, config) {
+  mockPluginInterfaceWithConfig(styles, config, mode) {
     const resolve = config._resolveStyles
     return { styles: styles, config: config, resolve: resolve }
   },

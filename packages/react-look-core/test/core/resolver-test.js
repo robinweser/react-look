@@ -48,6 +48,50 @@ describe('Resolving plugins', () => {
     expect(output).to.eql(styles)
     expect(pluginSpy).to.have.been.calledOnce
   })
+  it('should pipe styles through plugins when dynamic styles are available and forceModePossible is true', () => {
+    const styles = { color: 'red' }
+    const pluginSpy = sinon.spy()
+
+    let pluginInterface = TestUtils.mockPluginInterfaceWithPlugin(styles, pluginSpy)
+    pluginInterface.dynamicStylesNotNull = true
+    const output = resolvePlugins(pluginInterface, true)
+
+    expect(output).to.eql(styles)
+    expect(pluginSpy).to.have.been.calledOnce
+  })
+  it('should not pipe styles through plugins when dynamic styles are not available and forceModePossible is true', () => {
+    const styles = { color: 'red' }
+    const pluginSpy = sinon.spy()
+
+    let pluginInterface = TestUtils.mockPluginInterfaceWithPlugin(styles, pluginSpy)
+    pluginInterface.dynamicStylesNotNull = false
+    const output = resolvePlugins(pluginInterface, true)
+
+    expect(output).to.eql(styles)
+    expect(pluginSpy).to.have.been.calledNever
+  })
+  it('should pipe styles through plugins when dynamic styles are not available and forceModePossible is true and the plugin is in force mode', () => {
+    const styles = { color: 'red' }
+    const pluginSpy = sinon.spy()
+
+    let pluginInterface = TestUtils.mockPluginInterfaceWithPlugin(styles, pluginSpy, 'force')
+    pluginInterface.dynamicStylesNotNull = false
+    const output = resolvePlugins(pluginInterface, true)
+
+    expect(output).to.eql(styles)
+    expect(pluginSpy).to.have.been.calledOnce
+  })
+  it('should pipe styles through plugins which are objects when dynamic styles are available', () => {
+    const styles = { color: 'red' }
+    const pluginSpy = sinon.spy()
+
+    const pluginInterface = TestUtils.mockPluginInterfaceWithPlugin(styles, pluginSpy, 'default')
+    pluginInterface.dynamicStylesNotNull = true
+    const output = resolvePlugins(pluginInterface, true)
+
+    expect(output).to.eql(styles)
+    expect(pluginSpy).to.have.been.calledOnce
+  })
 })
 
 describe('Resolving children', () => {
