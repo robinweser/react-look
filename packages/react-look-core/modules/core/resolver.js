@@ -5,15 +5,15 @@ import _ from 'lodash'
  * Resolves all plugins provided by the configuration
  * @param {Object} pluginInterface - interface containing all configurations to resolve
  */
-export function resolvePlugins(pluginInterface) {
+export function resolvePlugins(pluginInterface, forceModePossible = false) {
   let { styles, config } = pluginInterface
 
   // Triggers plugin resolving
   // Uses the exact plugin lineup defined within Config
   config.plugins.forEach(plugin => {
     // If the plugin is a function it gets called when there are dynamic styles to resolve
-    if (plugin instanceof Function) {
-      if (pluginInterface.dynamicStylesNotNull) {
+    if (forceModePossible !== true || plugin instanceof Function) {
+      if (pluginInterface.dynamicStylesNotNull === true || forceModePossible !== true) {
         styles = plugin({
           ...pluginInterface,
           styles
