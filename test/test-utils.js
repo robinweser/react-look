@@ -1,13 +1,65 @@
-import StyleContainer from '../modules/api/dom/StyleContainer'
+export default {
+  mockResolver(config, resolveSpy) {
+    return (Component, element, config) => {
+      resolveSpy()
+      return element
+    }
+  },
 
-export function clearStyleContainer() {
-  StyleContainer.selectors.clear()
-  StyleContainer.mediaQueries.clear()
-  StyleContainer.keyframes.clear()
-  StyleContainer.fonts.clear()
-  StyleContainer.dynamics.clear()
+  mockPlugin(pluginSpy) {
+    return ({ styles }) => {
+      pluginSpy()
+      return styles
+    }
+  },
 
-  StyleContainer._className = 0
+  mockConfigWithResolver(config, resolveSpy) {
+    return {
+      ...config,
+      _resolveStyles: this.mockResolver(config, resolveSpy)
+    }
+  },
+
+  mockConfigWithPlugin(pluginSpy) {
+    return { plugins: [ this.mockPlugin(pluginSpy) ] }
+  },
+
+  mockPluginInterfaceWithPlugin(styles, pluginSpy) {
+    return {
+      styles: styles,
+      config: this.mockConfigWithPlugin(pluginSpy)
+    }
+  },
+
+  mockPluginInterfaceWithConfig(styles, config) {
+    const resolve = config._resolveStyles
+    return { styles: styles, config: config, resolve: resolve }
+  },
+
+  mockMixinInterface(property, value, mixinKey, newProps) {
+    return {
+      property: property,
+      value: value,
+      mixinKey: mixinKey,
+      newProps: newProps
+    }
+  },
+
+  mockPluginInterfaceWithComponentElementNewProps(styles) {
+    return {
+      styles: styles,
+      Component: {
+        constructor: {
+          displayName: 'Comp'
+        }
+      },
+      element: {
+        type: 'div',
+        key: null,
+        ref: null
+      },
+      newProps: {},
+      config: {}
+    }
+  }
 }
-
-beforeEach(clearStyleContainer)

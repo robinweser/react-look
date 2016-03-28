@@ -4,4 +4,7 @@ languages:
   PHP: true
   Python: true
 exclude_paths:
-- "build/*"
+- "scripts/*"
+- "codemods/*"
+- "packages/react-look/scripts/*"
+- "packages/react-look/dist/*"

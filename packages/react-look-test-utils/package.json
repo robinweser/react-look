@@ -1,0 +1,30 @@
+{
+    "name": "react-look-test-utils",
+    "version": "1.0.0-beta8",
+    "description": "Test utilities for react-look",
+    "main": "lib/index.js",
+    "files": [
+        "README.md",
+        "LICENSE",
+        "lib/"
+    ],
+    "repository": "https://github.com/rofrischmann/react-look",
+    "author": "Robin Frischmann <robin@rofrischmann.de>",
+    "license": "MIT",
+    "keywords": [
+        "react",
+        "react-component",
+        "component testing",
+        "testing",
+        "utils",
+        "cssinjs"
+    ],
+    "dependencies": {
+        "assign-styles": "2.0.0",
+        "lodash": "^4.2.1",
+        "match-media-mock": "^0.1.0"
+    },
+    "peerDependencies": {
+        "react-look": "^1.0.0-beta7"
+    }
+}

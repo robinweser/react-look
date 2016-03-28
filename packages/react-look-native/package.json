@@ -1,14 +1,13 @@
 {
     "name": "react-look-native",
-    "version": "1.0.0-beta3",
+    "version": "1.0.0-beta7",
     "description": "Advanced & Dynamic Component Styling for React Native",
-    "main": "lib/native.js",
+    "main": "lib/index.js",
     "files": [
         "README.md",
         "LICENSE",
         "lib/",
-        "docs/",
-        "dist/"
+        "docs/"
     ],
     "repository": "https://github.com/rofrischmann/react-look",
     "author": "Robin Frischmann <robin@rofrischmann.de>",
@@ -29,11 +28,10 @@
         "cssinjs"
     ],
     "dependencies": {
-        "assign-styles": "2.0.0",
-        "inline-style-transformer": "^1.0.0",
+        "react-look-core": "^1.0.0-beta7",
         "lodash": "^4.2.1"
     },
     "peerDependencies": {
-        "react-native": "^0.19.0"
+        "react-native": "^0.18.0"
     }
 }

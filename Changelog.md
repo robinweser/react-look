@@ -1,6 +1,46 @@
 # Changelog
 
 ## 1.0
+### 1.0.0-beta7 (18.03.16)
+
+* introducing [react-look-test-utils](https://github.com/rofrischmann/react-look/tree/develop/packages/react-look-test-utils)
+* fixed a bug preventing dynamic array values to render ( [#243](https://github.com/rofrischmann/react-look/issues/243) )
+
+### 1.0.0-beta6 (05.03.16)
+#### API Changes
+* Added `StyleSheet.renderToString` to prerender your CSS for server-side rendering <img src="res/dom-badge.png" height=15>
+* Vendor-prefixer no longer are simple plugins but got their own config key `config.prefixer` <img src="res/dom-badge.png" height=15>
+* Providing two build-in Prefixer classes <img src="res/dom-badge.png" height=15>
+  * [StaticPrefixer](packages/react-look/docs/prefixer/StaticPrefixer.md)
+  * [DynamicPrefixer](packages/react-look/docs/prefixer/DynamicPrefixer.md)
+
+##### Improvements
+* Support for stateless functional Components without ES2015 classes under the hood
+* Now uses its own `StyleContainer` to cache and resolve static and dynamic styles on React Native <img src="res/native-badge.png" height=15>
+* Now providing UMD builds <img src="res/dom-badge.png" height=15>
+* Stateful Selector now can be combined
+
+##### Bug fixes
+* Fixed a bug preventing multiple dynamic selectors issue on React Native <img src="res/native-badge.png" height=15>
+
+### 1.0.0-beta5 (29.02.16)
+##### Improvements
+* improved rendering performance <img src="res/dom-badge.png" height=15>
+* removed additional wrapper within `<LookRoot>` ( [#217](https://github.com/rofrischmann/react-look/issues/217) )
+* added [Stateful Selectors](packages/react-look-core/docs/plugins/StatefulSelector.md)-plugin to create selectors as a function of `props`, `state` and `context`
+* added Static Prefixer-plugin to use [inline-style-prefix-all](https://github.com/rofrischmann/inline-style-prefix-all) by default <img src="res/dom-badge.png" height=15>
+
+##### Bug Fixes
+* Fixed a bug that cascaded dynamic values ( [#218](https://github.com/rofrischmann/react-look/issues/218) ) <img src="res/native-badge.png" height=15>
+* added missing dependency ( [#214](https://github.com/rofrischmann/react-look/issues/214) ) <img src="res/native-badge.png" height=15>
+
+### 1.0.0-beta4 (21.02.16)
+#### API Changes
+* `StyleSheet.toCSS` got deprecated. It was renamed to `StyleSheet.addCSS`
+
+##### Improvements
+* `StyleSheet.addCSS` support static CSS strings (for third-party & legacy support) ( [#209](https://github.com/rofrischmann/react-look/pull/209) )
+
 ### 1.0.0-beta3 (18.02.16)
 ##### Features
 * 5 new React Native mixins: `blank`, `empty`, `firstLetter`, `before` and `after`

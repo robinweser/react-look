@@ -19,10 +19,9 @@ Thumbs.db
 *.sw?
 *.vi
 
-packages/**/README.md
+**/LICENSE
 node_modules/
 npm-debug.log
 lib/
 demo/bundle.js
 coverage
-addons/

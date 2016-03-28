@@ -1,8 +1,8 @@
 {
     "name": "react-look",
-    "version": "1.0.0-beta3",
+    "version": "1.0.0-beta7",
     "description": "Advanced & Dynamic Component Styling for React",
-    "main": "lib/dom.js",
+    "main": "lib/index.js",
     "files": [
         "README.md",
         "LICENSE",
@@ -28,9 +28,11 @@
         "cssinjs"
     ],
     "dependencies": {
+        "react-look-core": "^1.0.0-beta7",
         "assign-styles": "2.0.0",
+        "inline-style-prefix-all": "^1.0.1",
         "inline-style-linter": "^0.2.7",
-        "inline-style-prefixer": "^0.6.7",
+        "inline-style-prefixer": "^1.0.1",
         "inline-style-transformer": "^1.0.0",
         "lodash": "^4.2.1"
     },

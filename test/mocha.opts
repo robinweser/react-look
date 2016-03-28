@@ -1,2 +1,2 @@
---compilers js:test/support/compiler.js
 --recursive
+--require test/test-setup.js

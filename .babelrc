@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "react",
+    "es2015",
+    "stage-0"
+  ],
+  "plugins": [
+    "lodash",
+    "add-module-exports"
+  ]
+}
