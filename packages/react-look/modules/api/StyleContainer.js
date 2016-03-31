@@ -21,6 +21,7 @@ class StyleContainer {
     this.statics = new Set()
 
     this._className = 0
+    this._defaultClassPrefix = 'c'
     this._listener = new Set()
   }
 
@@ -104,7 +105,7 @@ class StyleContainer {
  	 * Returns a valid unused className
  	 * @param {string?} prefix - prefix appended before the className
  	 */
-  requestClassName(prefix = 'c') {
+  requestClassName(prefix = this._defaultClassPrefix) {
     return prefix + (this._className++).toString(36)
   }
 
