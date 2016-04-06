@@ -1,3 +1,3 @@
 for package in packages/*; do
-  cd "$package" && npm publish
+  cd "$package" && npm publish && cd ..
 done
