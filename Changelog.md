@@ -3,8 +3,9 @@
 ## 1.0
 
 ### 1.0.0-beta8 (06.04.16)
-* [Force mode](https://github.com/dustin-H/react-look/blob/develop/packages/react-look/docs/guides/customPlugin.md#force-mode) for Plugins 
-* Classname prefix is now an attribute from [StyleContainer](https://github.com/rofrischmann/react-look/blob/develop/packages/react-look/modules/api/StyleContainer.js) (`_defaultClassPrefix`)
+* [Force mode](https://github.com/dustin-H/react-look/blob/develop/packages/react-look/docs/guides/customPlugin.md#force-mode) for plugins <img src="res/dom-badge.png" height=15>
+* `className` prefix is now an attribute of [StyleContainer](https://github.com/rofrischmann/react-look/blob/develop/packages/react-look/modules/api/StyleContainer.js) (`_defaultClassPrefix`) <img src="res/dom-badge.png" height=15>
+* friendlyClassName-plugin allows custom `className`-template ( [#241](https://github.com/rofrischmann/react-look/issues/241) )
 
 ### 1.0.0-beta7 (18.03.16)
 
