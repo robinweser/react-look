@@ -17,15 +17,15 @@ Also available for <a href="../react-look-native/">React Native</a>
 - [plugin-based](docs/Plugins.md)
 - [developer tools](docs/Plugins.md#developertools)
 - Sass-like nesting
-- [pseudo classes](docs/dom/api/StyleSheet.md#pseudo-classes)
-- [media queries](docs/dom/api/StyleSheet.md#media-queries)
+- [pseudo classes](docs/api/StyleSheet.md#pseudo-classes)
+- [media queries](docs/api/StyleSheet.md#media-queries)
 - [platform queries](docs/Mixins.md#platform-queries)
 - [conditioned styles](docs/Mixins.md#stateful-conditions)
 - [stateful values](docs/plugins/StatefulValue.md) & [selectors](docs/plugins/StatefulSelector.md)
 - [fallback values](docs/plugins/FallbackValue.md)
 - [extending](docs/Mixins.md#extend)
 - [vendor prefixing](docs/Prefixer.md)
-- [CSS](docs/dom/api/StyleSheet.md##addcssstyles--scope-media-id), [font-face ](docs/dom/api/StyleSheet.md#fontfontfamily-files--properties) & [keyframes API](docs/dom/api/StyleSheet.md#keyframesframes--name)
+- [CSS](docs/api/StyleSheet.md#addcssstyles--scope), [font-face ](docs/api/StyleSheet.md#fontfontfamily-files--properties) & [keyframes API](docs/api/StyleSheet.md#keyframesframes--name)
 
 # [Documentation](docs/Docs.md)
 The documentation contains information on every part of Look including usage guides and API reference.
