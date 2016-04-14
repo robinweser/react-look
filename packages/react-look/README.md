@@ -37,54 +37,54 @@ Make sure to check out the the Getting Started guide which provides a full guide
 ## Table of contents
 
 1. [Getting Started](docs/GettingStarted.md)
-  * 1.1. [Installation](docs/GettingStarted.md#1-installation)
-  * 1.2. [First Component](docs/GettingStarted.md#2-first-component)
-  * 1.3. [Stateless Components](docs/GettingStarted.md#3-stateless-components)
-  * 1.4. [Pseudo classes](docs/GettingStarted.md#4-pseudo-classes)
-  * 1.5. [Media queries](docs/GettingStarted.md#5-media-queries)
-  * 1.6. [Mixins & Plugins](docs/GettingStarted.md#6-mixins--plugins)
-  * 1.7. [Fallback values](docs/GettingStarted.md#7-fallback-values)
-  * 1.8. [Vendor prefixes](docs/GettingStarted.md#8-vendor-prefixes)
-  * 1.9. [Server-side rendering](docs/GettingStarted.md#9-server-side-rendering)
-  * 1.10. [DevTools](docs/GettingStarted.md#10-devtools)
+	* 1.1. [Installation](docs/GettingStarted.md#1-installation)
+	* 1.2. [First Component](docs/GettingStarted.md#2-first-component)
+	* 1.3. [Stateless Components](docs/GettingStarted.md#3-stateless-components)
+	* 1.4. [Pseudo classes](docs/GettingStarted.md#4-pseudo-classes)
+	* 1.5. [Media queries](docs/GettingStarted.md#5-media-queries)
+	* 1.6. [Mixins & Plugins](docs/GettingStarted.md#6-mixins--plugins)
+	* 1.7. [Fallback values](docs/GettingStarted.md#7-fallback-values)
+	* 1.8. [Vendor prefixes](docs/GettingStarted.md#8-vendor-prefixes)
+	* 1.9. [Server-side rendering](docs/GettingStarted.md#9-server-side-rendering)
+	* 1.10. [DevTools](docs/GettingStarted.md#10-devtools)
 2. [API Reference](docs/api/)
-  * **2.1. [look](docs/api/Look.md)**
-  * **2.2. [StyleSheet](docs/api/StyleSheet.md)**
-    * [create](docs/api/StyleSheet.md#createstyles)
-    * [combineStyles](docs/api/StyleSheet.md#combinestylesstyles)
-    * [toCSS](docs/api/StyleSheet.md#tocssstyles--scope) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/deprecated-badge.png" height=15>
-    * [addCSS](docs/api/StyleSheet.md#addcssstyles--scope)
-    * [renderToString](docs/api/StyleSheet.md#rendertostringprefixer)
-    * [keyframes](docs/api/StyleSheet.md#keyframesframes--name)
-    * [font](docs/api/StyleSheet.md#fontfontfamily-files--properties)
-  * **2.3. [LookRoot](docs/api/LookRoot.md)**
-  * **2.4. [StyleContainer](docs/api/StyleContainer.md)** <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/private-badge.png" height=15>
+	* **2.1. [look](docs/api/Look.md)**
+	* **2.2. [StyleSheet](docs/api/StyleSheet.md)**
+		* [create](docs/api/StyleSheet.md#createstyles)
+		* [combineStyles](docs/api/StyleSheet.md#combinestylesstyles)
+		* [toCSS](docs/api/StyleSheet.md#tocssstyles--scope) <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/deprecated-badge.png" height=15>
+		* [addCSS](docs/api/StyleSheet.md#addcssstyles--scope)
+		* [renderToString](docs/api/StyleSheet.md#rendertostringprefixer)
+		* [keyframes](docs/api/StyleSheet.md#keyframesframes--name)
+		* [font](docs/api/StyleSheet.md#fontfontfamily-files--properties)
+	* **2.3. [LookRoot](docs/api/LookRoot.md)**
+	* **2.4. [StyleContainer](docs/api/StyleContainer.md)** <img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/private-badge.png" height=15>
 3. Registry
-  * **3.1. [Plugins](docs/Plugins.md)**
-    * [Fallback Value](docs/plugins/FallbackValue.md)
-    * [Mixin](docs/plugins/Mixin.md)
-    * [Stateful Value](docs/plugins/StatefulValue.md)
-    * [Stateful Selector](docs/plugins/StatefulSelector.md)
-    * **3.1.1 [DevTools](docs/Plugins.md#developertools)**
-      * [Friendly ClassName](docs/plugins/FriendlyClassName.md)
-      * [Linter](docs/plugins/Linter.md)
-      * [Style Logger](docs/plugins/StyleLogger.md)
-  * **3.2 [Mixins](docs/Mixins.md)**
-    * [Contains](docs/Mixins.md#contains)
-    * [Extend](docs/Mixins.md#extend)
-    * [Extract CSS](docs/Mixins.md#extract-css)
-    * [Platform Queries](docs/Mixins.md#platform-queries)
-    * [Stateful Conditions](docs/Mixins.md#stateful-conditions)
-    * [Substr](docs/Mixins.md#substr)
-  * **3.3. [Prefixer](docs/Prefixer.md)**
-    * [Static Prefixer](docs/prefixer/StaticPrefixer.md)
-    * [Dynamic Prefixer](docs/prefixer/DynamicPrefixer.md)
+	* **3.1. [Plugins](docs/Plugins.md)**
+		* [Fallback Value](docs/plugins/FallbackValue.md)
+		* [Mixin](docs/plugins/Mixin.md)
+		* [Stateful Value](docs/plugins/StatefulValue.md)
+		* [Stateful Selector](docs/plugins/StatefulSelector.md)
+		* **3.1.1 [DevTools](docs/Plugins.md#developertools)**
+			* [Friendly ClassName](docs/plugins/FriendlyClassName.md)
+			* [Linter](docs/plugins/Linter.md)
+			* [Style Logger](docs/plugins/StyleLogger.md)
+	* **3.2 [Mixins](docs/Mixins.md)**
+		* [Contains](docs/Mixins.md#contains)
+		* [Extend](docs/Mixins.md#extend)
+		* [Extract CSS](docs/Mixins.md#extract-css)
+		* [Platform Queries](docs/Mixins.md#platform-queries)
+		* [Stateful Conditions](docs/Mixins.md#stateful-conditions)
+		* [Substr](docs/Mixins.md#substr)
+	* **3.3. [Prefixer](docs/Prefixer.md)**
+		* [Static Prefixer](docs/prefixer/StaticPrefixer.md)
+		* [Dynamic Prefixer](docs/prefixer/DynamicPrefixer.md)
 4. [Guides](docs/guides/)
-  * 4.1. [Upgrading Look](docs/guides/upgradeLook.md)
-  * 4.2. [Configuring Look](docs/guides/configureLook.md)
-  * 4.3. [Build your own: Mixin](docs/guides/customMixin.md)
-  * 4.4. [Build your own: Plugin](docs/guides/customPlugin.md)
-  * 4.5. [Build your own: Prefixer](docs/guides/customPrefixer.md)
+	* 4.1. [Upgrading Look](docs/guides/upgradeLook.md)
+	* 4.2. [Configuring Look](docs/guides/configureLook.md)
+	* 4.3. [Build your own: Mixin](docs/guides/customMixin.md)
+	* 4.4. [Build your own: Plugin](docs/guides/customPlugin.md)
+	* 4.5. [Build your own: Prefixer](docs/guides/customPrefixer.md)
 5. [FAQ](docs/FAQ.md)
 
 # Example
