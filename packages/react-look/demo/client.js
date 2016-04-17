@@ -4,7 +4,7 @@ import { StyleSheet, LookRoot, Presets, Plugins } from '../modules'
 
 import App from './app.jsx'
 
-StyleSheet.toCSS({
+StyleSheet.addCSS({
   '*': {
     padding: 0,
     margin: 0,
@@ -15,7 +15,7 @@ StyleSheet.toCSS({
   }
 })
 
-const config = Presets['react-dom'];
+const config = Presets['react-dom']
 config.styleElementId = '_look'
 
 // config.plugins.push(Plugins.friendlyClassName)
