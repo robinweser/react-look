@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
 		padding: 8,
 		border: '1px solid gray',
 		':hover': {
-			color 'blue',
+			color: 'blue',
 			// multiple nesting
 			':active': {
 				color: 'gray'
