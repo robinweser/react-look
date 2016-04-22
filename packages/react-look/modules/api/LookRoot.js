@@ -55,17 +55,15 @@ class StyleComponent {
     this.el = this.createStyleElement(styleElementId)
   }
 
-  createStyleElement(styleElementId) {
-    // if a custom style element is provided
-    // we can use that one instead of creating our own
-    if (styleElementId) {
-      return document.getElementById(styleElementId)
+  createStyleElement(styleElementId = '_react-look-stylesheet') {
+    let style = document.getElementById(styleElementId)
+  
+    if (!style) {
+      style = document.createElement('style')
+      style.id = styleElementId
+      document.head.appendChild(style)
     }
-
-    const style = document.createElement('style')
-    style.id = '_react-look-stylesheet'
-    document.head.appendChild(style)
-
+  
     return style
   }
 
