@@ -3,8 +3,8 @@
 `<LookRoot>` is a React Component used to wrap your whole application to pass down configuration and to render CSS styles. It is similar to *e.g.* Redux's `<Provider>`.<br>
 
 ### props
-| Property | Description |
-| ---  | ----------- |
+| Property | Description |
+| ---  | ----------- |
 | config | global Look configuration, will automatically be spread to all child Components using `context`. |
 
 ## Usage
