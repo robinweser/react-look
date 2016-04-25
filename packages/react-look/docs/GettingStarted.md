@@ -305,7 +305,7 @@ which is similar to the following CSS code:
 
 You could also use the [DynamicPrefixer](../prefixer/DynamicPrefixer.md) to add only prefixes that are actually required. It uses data provided by [caniuse.com](caniuse.com) and evaluates the `userAgent` for browser information.
 
-In generally to add a prefixer you will need to use the `prefixer` key of your config object and create a new prefixer instance.
+In general, to add a prefixer you will need to use the `prefixer` key of your config object and create a new prefixer instance.
 ```javascript
 import { DynamicPrefixer, Presets } from 'react-look'
 
@@ -315,7 +315,7 @@ config.prefixer = new DynamicPrefixer({userAgent: navigator.userAgent})
 ## 9. Server-side rendering
 Look also fully supports server-side rendering with minimal additional configuration.<br>
 You basically prerender your static HTML string as well as your static CSS styles. This is most likely done directly within the request.<br>
-e.g. [universal example](../../demo/server.js) (`npm run demo:universal`) using an [express](http://expressjs.com/) server.
+e.g. [universal example](https://github.com/rofrischmann/react-look/blob/develop/packages/react-look/demo/server.js) (`npm run demo:universal`) using an [express](http://expressjs.com/) server.
 ##### index.html
 ```HTML
 <html>
@@ -357,7 +357,7 @@ app.get('/', (req, res) => {
 ```
 
 ## 10. DevTools
-DevTools are **special** plugins used to boost **your** developer experience *(also now as DX)*. They come in handy if you want to *e.g.* debug your code or quality-proof it.
+DevTools are **special** plugins used to boost **your** developer experience *(also known as DX)*. They come in handy if you want to *e.g.* debug your code or quality-proof it.
 
 Look also provides some devTools which can be easily applied by just adding them to the plugins list, but you should **only use them for development**.
 > Check out [Plugins.md](../Plugins.md#devtools) for an overview of all devTools.
