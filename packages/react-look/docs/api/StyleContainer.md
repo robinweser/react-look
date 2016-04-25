@@ -34,8 +34,8 @@ Adds a static `font`-face string to the **fonts**.
 ### `renderStaticStyles(prefixer)`
 Renders the whole mappings into a single static CSS string. It optionally takes a `prefixer` (which must inherit [Prefixer](./Prefixer.md)) used to prefix the styles and the `@keyrames` prefix.
 ### `generateClassName(styles)`
-Sorts your `styles`, stringifies them and generates a hash code which is returned as a `className`. This prevents dublication.
+Sorts your `styles`, stringifies them, and generates a hash code which is returned as a `className`. This prevents duplicates.
 ### `requestClassName([prefix])`
-Returns an unused `className` which is build of a `prefix` *(default is `c`)* and an intern counter that gets incremented every call.
+Returns an unused `className` which is comprised of a `prefix` *(default is `c`)* and an internal incrementing counter.
 ### `subscribe(listener)`
 You can subscribe to style changes by passing a `listener` which then will be called.
