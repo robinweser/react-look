@@ -36,10 +36,11 @@ describe('Adding a static css string with spaces and comments', () => {
      *  Banner
      */
     .h1 { 
-      color: red; 
+      color: red;
+      margin: 10px 10px 10px 10px;
     }`
     StyleContainer.addStatic(css)
-    expect(StyleContainer.statics.has(css.replace(/\s/g, ''))).to.eql(true)
+    expect(StyleContainer.statics.has(css.replace(/\s+/g, ''))).to.eql(true)
   })
 })
 
