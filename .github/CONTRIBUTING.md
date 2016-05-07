@@ -44,3 +44,7 @@ If you found a new bug or got a feature request feel free to file a new issue. F
 
 ## Sending Pull Requests
 If you are creating a pull request, try to use commit messages that are self-explanatory. Be sure to meet all guide-lines from above. If you're pushing a Work in Progress, please flag it and optionally add a description if something needs to be discussed.
+
+#### Failing Travis CI build
+If you encounter a failing Travis CI build do not get worried. As long as your tests passed before sending the PR this is most likely an issue with CodeClimate which somehow is only able to run successfully if I myself do commits.<br>
+If this is the only error your PR is fine and open to be merged.
