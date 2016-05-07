@@ -230,7 +230,7 @@ describe('Rendering special styles', () => {
       }
     }
     renderSpecialStyles('class', styles)
-    expect(StyleContainer.mediaQueries.has('(min-height: 300px)and(max-height: 500px)')).to.eql(true)
+    expect(StyleContainer.mediaQueries.has('(min-height: 300px) and (max-height: 500px)')).to.eql(true)
   })
 })
 

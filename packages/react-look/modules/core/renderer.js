@@ -75,7 +75,7 @@ export function renderSpecialStyles(selector, styles, pseudo = '', media = '') {
       }
       if (isMediaQuery(property)) {
         // Concatenate multiple media queries if a media query already exists
-        const newMedia = ((media !== '' ? media + 'and' : '') + property.replace('@media', '').trim())
+        const newMedia = ((media !== '' ? media + ' and ' : '') + property.replace('@media', '').trim())
         const innerStyles = renderSpecialStyles(selector, value, pseudo, newMedia)
         // Adds the selector to the media group
         StyleContainer.add('.' + selector + pseudo, innerStyles, newMedia)

@@ -77,7 +77,7 @@ class StyleContainer {
     this.statics.forEach(staticStyles => css += staticStyles)
     this.selectors.forEach((styles, selector) => css += selector + this._renderCSS(prefixer, styles))
     this.mediaQueries.forEach((selectors, query) => {
-      css += '@media' + query + '{'
+      css += '@media ' + query + '{'
       selectors.forEach((styles, selector) => css += selector + this._renderCSS(prefixer, styles))
       css += '}'
     })

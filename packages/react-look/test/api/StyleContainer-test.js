@@ -16,7 +16,7 @@ describe('Rendering static styles', () => {
         }
       }
     })
-    const css = '.c0{color:red}@media(min-height: 300px){.c0{color:blue}}'
+    const css = '.c0{color:red}@media (min-height: 300px){.c0{color:blue}}'
     expect(StyleContainer.renderStaticStyles()).to.eql(css)
   })
 })
