@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "1.0.0-beta8",
+  "version": "1.0.0-beta9",
   "author": "Robin Frischmann <robin@rofrischmann.de>",
   "license": "MIT",
   "repository": "https://github.com/rofrischmann/react-look",
