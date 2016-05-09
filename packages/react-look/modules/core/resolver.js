@@ -50,7 +50,7 @@ export default function resolveStyles(Component, element, config) {
           // Constructs the pluginInterface
           const pluginInterface = {
             ...staticPluginArguments,
-            styles: assignStyles({ }, dynamicStyles || {}),
+            styles: assignStyles({ }, dynamicStyles || { }),
             dynamicStylesNotNull: dynamicStyles != null
           }
           // Calling resolvePlugins with forceModePossible = true

@@ -59,7 +59,7 @@
     "express-http-proxy": "^0.6.0",
     "fs-extra": "^0.26.5",
     "inline-style-linter": "^0.2.8",
-    "inline-style-prefix-all": "1.0.5",
+    "inline-style-prefix-all": "^2.0.2",
     "inline-style-prefixer": "^1.0.1",
     "inline-style-transformer": "^1.0.0",
     "istanbul": "^1.0.0-alpha.2",
