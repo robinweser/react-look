@@ -2,6 +2,12 @@
 
 ## 1.0
 
+### 1.0.0-beta9 (09.05.16)
+* Official support for React version 15+
+* Only create `<style>` if it does not already exist ( [#265](https://github.com/rofrischmann/react-look/pull/265) ) <img src="res/dom-badge.png" height=15>
+* multi-line support for `StyleSheet.addCSS` ( [#278](https://github.com/rofrischmann/react-look/pull/278) ) <img src="res/dom-badge.png" height=15>
+* Supports media styles without parenthesis e.g. `@media screen` <img src="res/dom-badge.png" height=15>
+
 ### 1.0.0-beta8 (06.04.16)
 * [Force mode](https://github.com/dustin-H/react-look/blob/develop/packages/react-look/docs/guides/customPlugin.md#force-mode) for plugins <img src="res/dom-badge.png" height=15>
 * `className` prefix is now an attribute of [StyleContainer](https://github.com/rofrischmann/react-look/blob/develop/packages/react-look/modules/api/StyleContainer.js) (`_defaultClassPrefix`) <img src="res/dom-badge.png" height=15>

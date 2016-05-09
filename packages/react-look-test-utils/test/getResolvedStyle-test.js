@@ -96,7 +96,7 @@ describe('Calling getResolvedStyle', () => {
                             </div>
 
     expect(getResolvedStyle(element, <Comp />, Presets['react-dom'])).to.eql({
-      width: '-webkit-calc(30px);width:-moz-calc(30px);width:calc(30px)'
+      width: [ '-webkit-calc(30px)', '-moz-calc(30px)', 'calc(30px)' ]
     })
   })
 })

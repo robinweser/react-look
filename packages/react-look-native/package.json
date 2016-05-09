@@ -1,6 +1,6 @@
 {
     "name": "react-look-native",
-    "version": "1.0.0-beta8",
+    "version": "1.0.0-beta9",
     "description": "Advanced & Dynamic Component Styling for React Native",
     "main": "lib/index.js",
     "files": [
@@ -28,7 +28,7 @@
         "cssinjs"
     ],
     "dependencies": {
-        "react-look-core": "^1.0.0-beta8",
+        "react-look-core": "^1.0.0-beta9",
         "lodash": "^4.2.1"
     },
     "peerDependencies": {
