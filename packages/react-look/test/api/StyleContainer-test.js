@@ -25,7 +25,7 @@ describe('Adding a static css string', () => {
   it('should add it to the statics set', () => {
     const css = '.h1 { color: red }'
     StyleContainer.addStatic(css)
-    expect(StyleContainer.statics.has('.h1{color:red}')).to.eql(true)
+    expect(StyleContainer.statics.has('.h1 { color: red }')).to.eql(true)
   })
 })
 
@@ -35,12 +35,13 @@ describe('Adding a static css string with spaces and comments', () => {
     /*!
      *  Banner
      */
-    .h1 { 
+    .h1 {
       color: red;
       margin: 10px 10px 10px 10px;
     }`
     StyleContainer.addStatic(css)
-    expect(StyleContainer.statics.has(css.replace(/\s+/g, ''))).to.eql(true)
+    expect(StyleContainer.statics.has('/*!*Banner*/.h1 {color: red;margin: 10px 10px 10px 10px;}'))
+      .to.eql(true)
   })
 })
 
