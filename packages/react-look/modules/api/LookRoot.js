@@ -77,6 +77,10 @@ class StyleComponent {
   }
 
   render() {
-    this.el.innerText = this.styles
+    if ('textContent' in this.el) {
+      this.el.textContent = this.styles
+    } else {
+      this.el.innerText = this.styles
+    }
   }
 }
