@@ -63,7 +63,7 @@ class StyleContainer {
    * @param {string} styles - as css string
    */
   addStatic(styles) {
-    this._addAndEmit(this.statics, styles.replace(/\s+/g, ''))
+    this._addAndEmit(this.statics, styles.replace(/\s{2,}/g, ''))
   }
 
   /**

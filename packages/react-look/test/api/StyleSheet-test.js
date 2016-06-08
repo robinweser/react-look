@@ -50,13 +50,13 @@ describe('Generating global CSS', () => {
   it('should treat strings as static css', () => {
     const css = 'h1 { color: blue }'
     StyleSheet.addCSS(css)
-    expect(StyleContainer.statics.has('h1{color:blue}')).to.eql(true)
+    expect(StyleContainer.statics.has('h1 { color: blue }')).to.eql(true)
   })
 
   it('toCSS should just call addCSS', () => {
     const css = 'h1 { color: blue }'
     StyleSheet.toCSS(css)
-    expect(StyleContainer.statics.has('h1{color:blue}')).to.eql(true)
+    expect(StyleContainer.statics.has('h1 { color: blue }')).to.eql(true)
   })
 })
 
