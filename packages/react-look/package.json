@@ -33,7 +33,7 @@
         "inline-style-prefix-all": "^2.0.2",
         "inline-style-linter": "^0.2.7",
         "inline-style-prefixer": "^1.0.1",
-        "inline-style-transformer": "^1.0.0",
+        "inline-style-transformer": "^1.1.1",
         "lodash": "^4.2.1"
     },
     "peerDependencies": {
