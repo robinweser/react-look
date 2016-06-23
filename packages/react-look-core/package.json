@@ -1,6 +1,6 @@
 {
     "name": "react-look-core",
-    "version": "1.0.0-beta9",
+    "version": "1.0.1",
     "description": "Core modules for react-look",
     "main": "lib/index.js",
     "files": [

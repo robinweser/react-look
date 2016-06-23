@@ -1,6 +1,6 @@
 {
     "name": "react-look",
-    "version": "1.0.0-beta9",
+    "version": "1.0.1",
     "description": "Advanced & Dynamic Component Styling for React",
     "main": "lib/index.js",
     "files": [
@@ -28,7 +28,7 @@
         "cssinjs"
     ],
     "dependencies": {
-        "react-look-core": "^1.0.0-beta9",
+        "react-look-core": "^1.0.1",
         "assign-styles": "2.0.0",
         "inline-style-prefix-all": "^2.0.2",
         "inline-style-linter": "^0.2.7",
