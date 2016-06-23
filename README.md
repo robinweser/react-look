@@ -1,3 +1,5 @@
+> **Disclaimer**: Look reached 1.0.0 just recently, but I am not longer able to fully maintain it myself (Want to help maintain it? Contact Me!). I would really like to say thank you for all PRs, Issues and Help during the last year. <br> With all the gained experience I was able to create a whole new library named [Fela](https://github.com/rofrischmann/fela). I recommend using Fela for new projects as it is capable of everything Look does except doing it much simpler and faster.
+
 <p align="center"><img src="https://raw.githubusercontent.com/rofrischmann/react-look/develop/res/logo.png" width=400></p>
 <p align="center">
 Advanced & Dynamic Component Styling for <a href="https://facebook.github.io/react/">React</a> and <a href="https://facebook.github.io/react-native/">React Native</a>.
