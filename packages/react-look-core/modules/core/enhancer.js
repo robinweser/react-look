@@ -27,6 +27,9 @@ export default (CustomComponent, config = { }) => {
       }
       return context._lookConfig._resolveStyles(Component, renderedElement, composedConfig)
     }
+    // Transfer static props of stateless components:
+    copyProperties(CustomComponent, LookStateless)
+
     // Passing contextTypes to be able to reference context
     LookStateless.contextTypes = _.merge({ }, CustomComponent.contextTypes, contextType)
     LookStateless.childContextTypes = _.merge({ }, CustomComponent.childContextTypes, contextType)
