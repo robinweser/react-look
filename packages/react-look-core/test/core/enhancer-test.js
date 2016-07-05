@@ -109,6 +109,14 @@ describe('Enhancing a stateless functional Component', () => {
     expect(Enhanced.childContextTypes.bar).to.eql('foo')
   })
 
+    it('should preserve defaultProps', () => {
+      const Comp = () => <div></div>
+      Comp.defaultProps = { foo: 'bar' }
+      const Enhanced = look(Comp)
+
+      expect(Enhanced.defaultProps.foo).to.eql('bar')
+    })
+
   it('should inherit add _lookConfig context types', () => {
     const Comp = () => <div></div>
     const Enhanced = look(Comp)
