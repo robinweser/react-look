@@ -32,6 +32,6 @@
         "lodash": "^4.2.1"
     },
     "peerDependencies": {
-        "react-native": "^0.18.0"
+        "react-native": "^0.26.0"
     }
 }

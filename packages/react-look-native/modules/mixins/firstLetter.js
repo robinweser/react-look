@@ -1,4 +1,5 @@
-import { createElement, Text } from 'react-native'
+import { createElement } from 'react'
+import { Text } from 'react-native'
 
 // Styles the first letter of an element
 export default ({ value, newProps }) => {

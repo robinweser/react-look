@@ -32,7 +32,8 @@ Now its time to compose your first Component. <br>
 You basically start with a blank `React` Component that renders some markup.
 
 ```javascript
-import React, { View, Component } from 'react-native'
+import React, { Component } from 'react'
+import { View } from 'react-native'
 
 export default class FirstComponent extends Component {
 	render() {
@@ -47,7 +48,8 @@ We use the `StyleSheet.create` helper with React Native, but it does (by now) on
 
 ```javascript
 import { StyleSheet } from 'react-look-native'
-import React, { View, Component } from 'react-native'
+import React, { Component } from 'react'
+import { View } from 'react-native'
 
 export default class FirstComponent extends Component {
 	render() {
@@ -70,7 +72,8 @@ You can even have multiple styles assigned to a single node as well as multiple 
 
 ```javascript
 import { StyleSheet } from 'react-look-native'
-import React, { View, Text, Component } from 'react-native'
+import React, { Component } from 'react'
+import { View, Text } from 'react-native'
 // We use this shortcut to write less code
 const c = StyleSheet.combineStyles
 
@@ -108,7 +111,8 @@ With Look you can easily style even **[Stateless Components](http://facebook.git
 
 ```javascript
 import { StyleSheet } from 'react-look-native'
-import React, { View, Component } from 'react-native'
+import React, { Component } from 'react'
+import { View } from 'react-native'
 
 export default ({title}) => <View style={styles.box}>{title}</View>
 
@@ -132,7 +136,8 @@ We will use a preset which provides every mixin & plugin available. We will refe
 
 ```javascript
 import { Presets, LookRoot } from 'react-look-native'
-import React, { AppRegistry }  from 'react-native'
+import React from 'react'
+import { AppRegistry }  from 'react-native'
 
 const config = Presets['react-native']
 
@@ -144,7 +149,8 @@ Resolving mixins and plugins requires your Component to be wrapped with the `loo
 
 ```javascript
 import look from 'react-look-native'
-import React, { View, Component } from 'react-native'
+import React, { Component } from 'react'
+import { View } from 'react-native'
 
 class FirstComponent extends Component {
 	render() {
@@ -161,7 +167,8 @@ Though I do not recommend this as they neither are part of the ECMAScript 2015 s
 
 ```javascript
 import look from 'react-look-native'
-import React, { View, Component } from 'react-native'
+import React, { Component } from 'react'
+import { View } from 'react-native'
 
 @look
 export default class FirstComponent extends Component {
@@ -177,7 +184,8 @@ Now as you got all the configuration and wrapping done, simply start using mixin
 
 ```javascript
 import look, { StyleSheet } from 'react-look-native'
-import React, { View, Component, TouchableHighlight } from 'react-native'
+import React, { Component } from 'react'
+import { View, TouchableHighlight } from 'react-native'
 
 // Note that now you can export directly
 @look

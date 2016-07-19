@@ -71,7 +71,8 @@ The syntax is quite similar to [Sass](http://sass-lang.com) and other React styl
 npm install react-look-native --save
 ```
 ```javascript
-import React, { View, Text, Component, PropTypes } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { View, Text } from 'react-native'
 import look, { StyleSheet } from 'react-look-native'
 
 class Header extends Component {
@@ -117,7 +118,8 @@ export default look(Header)
 Finally you only need to wrap your application with LookRoot.
 ```javascript
 import { Presets,  LookRoot } from 'react-look-native'
-import React, { AppRegistry, Component }  from 'react-native'
+import React, { Component } from 'react'
+import { AppRegistry }  from 'react-native'
 import Header from './Header'
 
 // A simple basic app just showing the Header with "Hello World"

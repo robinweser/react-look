@@ -1,4 +1,4 @@
-import { Component, PropTypes } from 'react-native'
+import { Component, PropTypes } from 'react'
 import _ from 'lodash'
 
 import resolveStyles from '../core/resolver'
