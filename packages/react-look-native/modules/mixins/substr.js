@@ -1,4 +1,5 @@
-import { createElement, Text } from 'react-native'
+import { createElement } from 'react'
+import { Text } from 'react-native'
 import _ from 'lodash'
 
 import { Utils } from 'react-look-core'

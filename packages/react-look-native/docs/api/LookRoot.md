@@ -10,8 +10,9 @@
 
 ## Usage
 ```javascript
+import React, { Component } from 'react'
 import { Presets, Plugins, LookRoot } from 'react-look-native'
-import React, { AppRegistry, Component }  from 'react-native'
+import { AppRegistry }  from 'react-native'
 import App from './index'
 
 const composedConfig = Presets['react-native']

@@ -75,7 +75,7 @@
     "react-look": "^1.0.0-beta9",
     "react-look-core": "^1.0.0-beta9",
     "react-look-test-utils": "^1.0.0-beta9",
-    "react-native": "^0.20.0",
+    "react-native": "^0.26.0",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "webpack": "^1.12.11",

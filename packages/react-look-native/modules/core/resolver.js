@@ -1,4 +1,4 @@
-import { cloneElement } from 'react-native'
+import { cloneElement } from 'react'
 import _ from 'lodash'
 
 import { resolver } from 'react-look-core'

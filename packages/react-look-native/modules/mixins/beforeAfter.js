@@ -1,5 +1,6 @@
 import _ from 'lodash'
-import { createElement, Text } from 'react-native'
+import { createElement } from 'react'
+import { Text } from 'react-native'
 
 /**
  * Creates a new pseudo element
