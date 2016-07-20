@@ -1,6 +1,16 @@
 import _ from 'lodash'
-
 import renderStaticStyles from '../core/renderer'
+import { PropTypes } from 'react'
+import TextStylePropTypes from 'react-native/Libraries/Text/TextStylePropTypes'
+import ViewStylePropTypes from 'react-native/Libraries/Components/View/ViewStylePropTypes'
+import StyleSheetValidation from 'react-native/Libraries/StyleSheet/StyleSheetValidation'
+
+TextStylePropTypes._selector = PropTypes.array
+ViewStylePropTypes._selector = PropTypes.array
+
+StyleSheetValidation.addValidStylePropTypes({
+  _selector: PropTypes.array
+})
 
 export default {
   create(styles) {
