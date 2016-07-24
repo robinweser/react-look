@@ -32,7 +32,6 @@ export default (CustomComponent, config = { }) => {
 
     // Passing contextTypes to be able to reference context
     LookStateless.contextTypes = _.merge({ }, CustomComponent.contextTypes, contextType)
-    LookStateless.childContextTypes = _.merge({ }, CustomComponent.childContextTypes, contextType)
 
     // Flag as Look-enhanced Component
     LookStateless._isLookEnhanced = true
