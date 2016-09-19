@@ -14,6 +14,8 @@ import generateHashCode from '../utils/generateHashCode'
 class StyleContainer {
   constructor() {
     this.selectors = new Map()
+    this.selectorCache = new Map()
+
     this.mediaQueries = new Map()
     this.keyframes = new Map()
     this.fonts = new Set()
@@ -75,7 +77,19 @@ class StyleContainer {
 
     this.fonts.forEach(font => css += font)
     this.statics.forEach(staticStyles => css += staticStyles)
-    this.selectors.forEach((styles, selector) => css += selector + this._renderCSS(prefixer, styles))
+
+    this.selectors.forEach((styles, selector) => {
+      let res
+      if (this.selectorCache.has(selector)) {
+        res = this.selectorCache.get(selector)
+      } else {
+        res = this._renderCSS(prefixer, styles)
+        this.selectorCache.set(selector, res)
+      }
+
+      css += selector + res
+    })
+
     this.mediaQueries.forEach((selectors, query) => {
       css += '@media ' + query + '{'
       selectors.forEach((styles, selector) => css += selector + this._renderCSS(prefixer, styles))
